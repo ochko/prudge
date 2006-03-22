@@ -1,144 +1,60 @@
-== Welcome to Rails
+Welcome to the acl_system plugin for rails. This plugin is designed to give you a 
+flexible declarative way of protecting your various controller actions using roles.
+It's made to site on top of any authentication framework that follows a few conventions.
+You will need to have a current_user method that returns the currently logged in user. 
+And you will need to make your User or Account model(or whatever you named it) have a
+has_and_belongs_to_many :roles. So you need a model called Role that has a title attribute.
+Once these two things are satisfied you can use this plugin.
 
-Rails is a web-application and persistence framework that includes everything
-needed to create database-backed web-applications according to the
-Model-View-Control pattern of separation. This pattern splits the view (also
-called the presentation) into "dumb" templates that are primarily responsible
-for inserting pre-built data in between HTML tags. The model contains the
-"smart" domain objects (such as Account, Product, Person, Post) that holds all
-the business logic and knows how to persist themselves to a database. The
-controller handles the incoming requests (such as Save New Account, Update
-Product, Show Post) by manipulating the model and directing data to the view.
+So lets take a look at the sugar you get from using this plugin. Keep in mind that the
+!blacklist part isn’t really necessary here. I was just showing it as an example of how
+flexible the permissions string logic parser is. 
 
-There is also a helper method that can be used in the view or controller. In the view its 
-handy for conditional menus or stuff like that. 
+class PostController < ApplicationController
+  before_filter :login_required, :except => [:list, :index]
+  access_control [:new, :create, :update, :edit] => '(admin | user | moderator)',
+                 :delete => 'admin & (!moderator & !blacklist)' 
 
-<% restrict_to "(admin | moderator) & !blacklist" do %>
-  <%= link_to "Admin & Moderator only link", :action =>'foo' %>
-<% end %>
+Of course you can define them all seperately if they differ at all.
 
-So the gist of it is that in the access_control controller macro, you can assign 
-permission logic strings to actions in your controller. You supply a hash of 
-:action => ‘permissions string” pairs. Any action not in the list is left open to 
-any user. Any action with a logic string gets evaluated on each request to see if
- the current user has the right role to access the action. The plugin has a small 
-recursive descent parser that evaluates the permission logic strings against the 
-current_user.roles.
+class PostController < ApplicationController
+  before_filter :login_required, :except => [:list, :index]
+  access_control :new => '(admin | user | moderator) & !blacklist',
+                 :create => 'admin & !blacklist',
+                 :edit => '(admin | moderator) & !blacklist',
+                 :update => '(admin | moderator) & !blacklist',
+                 :delete => 'admin & (!moderator | !blacklist)' 
 
-The way this works is that you have your User model and a Role model. User <= habtm => Role.
- So when an action that is access_control’ed gets requested the permission logic string 
-gets evaluated against the current_user.roles . So a prerequisite of using this plugin
- is that you add a Role model with a title attribute that has_and_belongs_to_many User
- models. And you need to have a current_user method defined somewhere in your controllers 
-or user system. Luckily the acts_as_authenticated plugin has the current_user defined already. 
+And you can also use :DEFAULT if you have a lot of actions that need the same permissions.
 
-So here is the schema of this application including the Post model and the User and Role 
-model plus the habtm join table: 
+class PostController < ApplicationController
+  before_filter :login_required, :except => [:list, :index]
+  access_control :DEFAULT => '!guest' 
+                [:new, :create, :update, :edit] => '(admin | user | moderator)',
+                 :delete => 'admin & (!moderator & !blacklist)'
 
-ActiveRecord::Schema.define(:version => 3) do
-  create_table "posts", :force => true do |t|
-    t.column "title", :string, :limit => 40
-    t.column "body", :text
+There are two callback methods you can use to define your own success and failure behaviors.
+If you define permission_granted and/or permission_denied  as protected methods in your controller you
+can redirect or render and error page or whatever else you might want to do if access is allowed
+or denied.
+
+class PostController < ApplicationController
+  before_filter :login_required, :except => [:list, :index]
+  access_control :DEFAULT => '!guest' 
+                [:new, :create, :update, :edit] => '(admin | user | moderator)',
+                 :delete => 'admin & (!moderator & !blacklist)'
+
+  # the rest of your controller here
+
+  protected
+
+  def permission_denied
+    flash[:notice] = "You don't have privileges to access this action"
+    return redirect_to :action => 'denied'
   end
-  create_table "roles", :force => true do |t|
-    t.column "title", :string
+
+  def permission_granted
+    flash[:notice] = "Welcome to the secure area of foo.com!"
   end
-  create_table "roles_users", :id => false, :force => true do |t|
-    t.column "role_id", :integer
-    t.column "user_id", :integer
-  end
-  create_table "users", :force => true do |t|
-    t.column "login", :string, :limit => 40
-    t.column "email", :string, :limit => 100
-    t.column "crypted_password", :string, :limit => 40 
-    t.column "salt", :string, :limit => 40
-    t.column "created_at", :datetime
-    t.column "updated_at", :datetime
-  end
-  
-So the controller will accept the action, run the first line, then present you
-with a IRB prompt in the breakpointer window. Here you can do things like:
 
-Executing breakpoint "Breaking out from the list" at .../webrick_server.rb:16 in 'breakpoint'
-
-  >> @posts.inspect
-  => "[#<Post:0x14a6be8 @attributes={\"title\"=>nil, \"body\"=>nil, \"id\"=>\"1\"}>, 
-       #<Post:0x14a6620 @attributes={\"title\"=>\"Rails you know!\", \"body\"=>\"Only ten..\", \"id\"=>\"2\"}>]"
-  >> @posts.first.title = "hello from a breakpoint"
-  => "hello from a breakpoint"
-
-...and even better is that you can examine how your runtime objects actually work:
-
-  >> f = @posts.first 
-  => #<Post:0x13630c4 @attributes={"title"=>nil, "body"=>nil, "id"=>"1"}>
-  >> f.
-  Display all 152 possibilities? (y or n)
-
-Finally, when you're ready to resume execution, you press CTRL-D
-
-
-== Console
-
-You can interact with the domain model by starting the console through script/console. 
-Here you'll have all parts of the application configured, just like it is when the
-application is running. You can inspect domain models, change values, and save to the
-database. Starting the script without arguments will launch it in the development environment.
-Passing an argument will specify a different environment, like <tt>script/console production</tt>.
-
-To reload your controllers and models after launching the console run <tt>reload!</tt>
-
-
-
-== Description of contents
-
-app
-  Holds all the code that's specific to this particular application.
-
-app/controllers
-  Holds controllers that should be named like weblog_controller.rb for
-  automated URL mapping. All controllers should descend from
-  ActionController::Base.
-
-app/models
-  Holds models that should be named like post.rb.
-  Most models will descend from ActiveRecord::Base.
-  
-app/views
-  Holds the template files for the view that should be named like
-  weblog/index.rhtml for the WeblogController#index action. All views use eRuby
-  syntax. This directory can also be used to keep stylesheets, images, and so on
-  that can be symlinked to public.
-  
-app/helpers
-  Holds view helpers that should be named like weblog_helper.rb.
-
-app/apis
-  Holds API classes for web services.
-
-config
-  Configuration files for the Rails environment, the routing map, the database, and other dependencies.
-
-components
-  Self-contained mini-applications that can bundle together controllers, models, and views.
-
-db
-  Contains the database schema in schema.rb.  db/migrate contains all
-  the sequence of Migrations for your schema.
-
-lib
-  Application specific libraries. Basically, any kind of custom code that doesn't
-  belong under controllers, models, or helpers. This directory is in the load path.
-    
-public
-  The directory available for the web server. Contains subdirectories for images, stylesheets,
-  and javascripts. Also contains the dispatchers and the default HTML files.
-
-script
-  Helper scripts for automation and generation.
-
-test
-  Unit and functional tests along with fixtures.
-
-vendor
-  External libraries that the application depends on. Also includes the plugins subdirectory.
-  This directory is in the load path.
+end
