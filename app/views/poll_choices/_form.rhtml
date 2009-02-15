@@ -1,0 +1,13 @@
+<%= error_messages_for 'poll_choice' %>
+
+<!--[form:poll_choice]-->
+<p><label for="poll_choice_poll_id">Асуулт</label><br/>
+<%= select("poll_choice", "poll_id", Poll.find(:all).collect {|p| [ p.question, p.id ] })  %></p>
+
+<p><label for="poll_choice_answer">Хариулт</label><br/>
+<%= text_field 'poll_choice', 'answer'  %></p>
+
+<p><label for="poll_choice_counter">Тоолуур</label><br/>
+<%= text_field 'poll_choice', 'counter'  %></p>
+<!--[eoform:poll_choice]-->
+

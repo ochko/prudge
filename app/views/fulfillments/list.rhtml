@@ -1,0 +1,25 @@
+<h2>Ажлын гүйцэтгэлүүд</h2>
+
+<table>
+  <tr>
+    <th>Ажил</th>
+    <th>Үнэлгээ</th>
+    <th>Гүйцэтгэгч</th>
+    <th>Огноо</th>
+    <th>Төлбөр</th>
+  </tr>
+
+<% for fulfillment in @fulfillments %>
+  <tr>
+    <td><%=h fulfillment.subject %></td>
+    <td><%= fulfillment.price %></td>
+    <td><%= fulfillment.login %></td>
+    <td><%= fulfillment.created_at %></td>
+    <td><%= fulfillment.earnings %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @fulfillment_pages.current.previous } if @fulfillment_pages.current.previous %>
+<%= link_to 'Next page', { :page => @fulfillment_pages.current.next } if @fulfillment_pages.current.next %>
+

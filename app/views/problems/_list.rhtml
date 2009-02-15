@@ -1,0 +1,30 @@
+<% if @problems.size > 0 %>
+  <table width="100%">
+    <tr>
+      <th>ID</th>
+      <th>Нэр</th>
+      <th>Оноо</th>
+      <th>Хязгаар</th>
+      <th>Дэвшүүлсэн</th>
+      <th>Огноо</th>
+      <th>Нийт бодолт</th>
+      <th>Зөв бодолт</th>
+    </tr>
+
+    <% for problem in @problems %>
+      <tr>
+        <td><%= problem.id %></td>
+        <td><%= link_to problem.name, :controller=>'problems',
+                :action => 'show', :id => problem %></td>
+        <td><%= problem.point %></td>
+        <td><%= problem.time %> сек/<%= problem.memory %> кб</td>
+        <td><%= problem.user.login %></td>
+        <td class='small'><%= problem.created_at.to_s(:date_only) %></td>
+        <td><%= problem.solutions.size %></td>
+        <td><%= problem.correct_solutions.size %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  Бодлого алга!
+<% end %>

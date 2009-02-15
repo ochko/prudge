@@ -1,0 +1,42 @@
+<h1>Бодлогууд</h1>
+<% view_cache Problem, Solution, :tag => @order do %>
+  <% if @problems.size > 0 %>
+    <%= will_paginate @problems, :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+    <table width="100%">
+      <tr>
+        <th>ID</th>
+        <th><%= link_to 'Нэр', :order=> ((@order =~/name/) ? order_reverse(@order) : :name_asc) %></th>
+        <th><%= link_to 'Оноо', :order=> ((@order =~/point/) ? @order : :point_desc) %></th>
+        <th>Хязгаар</th>
+        <th><%= link_to 'Дэвшүүлсэн', :order=> ((@order =~/login/) ? @order : :login_asc) %></th>
+        <th><%= link_to 'Огноо', :order=> ((@order =~/created/) ? @order : :created_at_desc) %></th>
+        <th><%= link_to 'Нийт бодолт', :order=> ((@order =~/count/) ? @order : :solution_count_desc) %></th>
+        <th><%= link_to 'Зөв бодолт', :order=> ((@order =~/correct/) ? order_reverse(@order) : :correct_count_asc) %></th>
+      </tr>
+
+      <% for problem in @problems %>
+        <tr>
+ 	  <% tag_str = "<td>" %>
+          <% for s in @my_solutions %>
+            <% if s.problem_id == problem.id %>
+               <% tag_str = "<td class='solved'>" %>
+               <% break %>
+            <% end %>
+           <% end %> 
+          <td><%= problem.id %></td>
+          <%= tag_str %><%= link_to problem.name, :controller=>'problems',
+                  :action => 'show', :id => problem %></td>
+          <%= tag_str %><%= problem.point %></td>
+          <%= tag_str %><%= problem.time %> сек/<%= problem.memory %> кб</td>
+          <%= tag_str %><%= problem.login %></td>
+          <%= tag_str %><%= problem.created_at.to_s(:date_only) %></td>
+          <%= tag_str %><%= problem.solution_count %></td>
+          <%= tag_str %><%= problem.correct_count %></td>
+        </tr>
+      <% end %>
+    </table>
+    <%= will_paginate @problems, :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+  <% else %>
+    Бодлого алга!
+  <% end %>
+<% end %>

@@ -1,0 +1,19 @@
+<table id='test_list'>
+  <tr>
+    <th>Ж/Т</th>
+    <th>Оролт</th>
+    <th>Гаралт</th>
+  </tr>
+
+<% for problem_test in @problem_tests %>
+  <tr>
+    <%= render :partial => 'list_item',
+               :locals=>{:problem_test =>problem_test} %>
+
+    <td class='top'>
+      <%= link_to image_tag('edit.png'), :action => 'edit', :id => problem_test %><br />
+      <%= link_to image_tag('delete.png'), { :action => 'destroy', :id => problem_test }, :confirm => 'Are you sure?', :method => :post %>
+    </td>
+  </tr>
+<% end %>
+</table>

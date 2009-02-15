@@ -1,0 +1,114 @@
+<h2>Гүйцэтгэл</h2>
+<table width="100%">
+  <tr>
+    <td>
+      <p><label for="fulfillment_task">Ажил : </label>
+        <%= link_to @task.subject, :controller=>'tasks',
+                    :action=>'show', :id=> @task %></p>
+
+    </td>
+    <td>
+      <p><label for="fulfillment_user">Гүйцэтгэсэн : </label>
+        <%= link_to @fulfillment.user.login, :controller=>'account',
+                    :action=>'show', :id=> @fulfillment.user_id %></p>
+
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <fieldset>
+        <legend>Гүйцэтгэлийн товч тайлбар</legend>
+        <%= @fulfillment.outline %>
+      </fieldset>
+    </td>
+  </tr>
+<!-- Хавсралтууд  -->
+  <% if @fulfillment.has_permission?(current_user) %>
+  <tr>
+    <td class="smallink" colspan="2">
+      <%= link_to 'Засвар', :action => 'edit', :id => @fulfillment %> |
+      <%= link_to 'Устгах', { :action => 'destroy', :id => @fulfillment }, :confirm => 'Are you sure?', :method => :post %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <fieldset>
+        <legend>Хавсралт</legend>
+        <%= render :partial => 'attachment/form_list' %>
+      </fieldset>
+    </td>
+  </tr>
+  <% if @fulfillment.earnings > 0 %>
+  <tr>
+    <td colspan="2">
+      <fieldset>
+        <legend>Гүйцэтгэлийг хүлээж авсан байна</legend>
+        <%= @fulfillment.comment %>
+        <p><label for="fulfillment_earnings">Төлбөр : </label>
+        <u class="earnings"><%= @fulfillment.earnings %></u></p>
+      </fieldset>
+    </td>
+  </tr>
+  <% end %>
+  <% else %>
+  <tr>
+    <td colspan="2">
+      <fieldset>
+        <legend>Хавсралт</legend>
+        <%= render :partial => 'attachment/list' %>
+      </fieldset>
+    </td>
+  </tr>
+
+  <% if @task.current_state == :closed %>
+  <% if @fulfillment.earnings > 0 %>
+  <tr>
+    <td colspan="2">
+      <fieldset>
+        <legend>Гүйцэтгэлийг хүлээж авсан байна</legend>
+        <%= @fulfillment.comment %>
+        <p><label for="fulfillment_earnings">Төлбөр : </label>
+        <u class="earnings"><%= @fulfillment.earnings %></u>
+        <%= payment_status_show(@fulfillment.payd) %></p>
+      </fieldset>
+    </td>
+  </tr>
+  <% end %>
+  <% else %>
+
+  <% if @fulfillment.earnings > 0 %>
+  <tr id="accept_form">
+  <% else %>
+  <tr>
+    <td class="smallink" colspan="2">
+      <a href="" onclick="Element.show('accept_form'); return false;">
+        Хүлээж авах
+      </a>
+    </td>
+  </tr>
+  <tr id="accept_form" style="display: none;">
+  <% end %>
+    <% form_tag :action => 'accept', :id => @fulfillment do %>
+    <td width="50%">
+      <label for="fulfillment_comment">Гүйцэтгэлд өгөх коммент</label><br/>
+      <%= textile_editor 'fulfillment', 'comment', 'cols'=>60, 'rows'=>5  %>
+      <%= textile_editor_initialize %>
+    </td>
+    <td class="top">
+      <label for="fulfillment_earnings">Төлбөрийн хэмжээ</label><br/>
+      <%= text_field 'fulfillment', 'earnings', 'size' => 10 %><br/>
+      <%= submit_tag 'Хадгал' %>
+    </td>
+    <% end %>
+  </tr>
+  <% end %>
+  <% end %>
+</table>
+<%= render :partial=>'comments/show',
+           :locals=>{:topic_id   => @fulfillment.id,
+                     :topic_type => 'Fulfillment',
+                     :button_text=> 'Ярилцах' } %>
+
+
+
+

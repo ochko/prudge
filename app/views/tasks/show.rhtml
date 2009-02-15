@@ -1,0 +1,98 @@
+<h2><%= status_image @task.status %> <%= @task.subject  %> </h2>
+<table class="slim" width="100%">
+  <tr>
+    <td colspan="4">
+      <label for="task_subject">Технологи : </label>
+      <%= @task.technology  %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="task_price">Захиалагч : </label>
+      <%= @task.subscriber.login  %>
+    </td>
+    <td>
+      <label for="task_price">Хөлс : </label>
+      <%= @task.price  %>
+    </td>
+    <td>
+      <label for="task_deadline">Эцсийн хугацаа : </label>
+      <%= @task.deadline  %>
+    </td>
+    <td>
+
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      <div class="tabber">
+        <div class="tabbertab" title="Тойм">
+          <%= @task.outline  %>
+        </div>
+        <div class="tabbertab" title="Шаардлага">
+          <%= @task.requirements  %>
+        </div>
+        <div class="tabbertab" title="Хүлээж авах зүйлс">
+          <%= @task.deliverables  %>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <% if @task.has_permission?(current_user) %>
+  <tr>
+    <td class="smallink" colspan="4">
+      <%= link_to 'Хаах', { :action => 'close', :id => @task }, :confirm => 'Are you sure?', :method => :post %> |
+      <%= link_to 'Засвар', :action => 'edit', :id => @task %> |
+      <%= link_to 'Устгах', { :action => 'destroy', :id => @task }, :confirm => 'Are you sure?', :method => :post %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      <fieldset>
+        <legend>Хавсралт</legend>
+        <%= render :partial => 'attachment/form_list' %>
+      </fieldset>
+    </td>
+  </tr>
+  <% elsif @task.available_to(current_user.id) %>
+  <tr>
+    <td class="smallink" colspan="4">
+      <%= link_to 'Гүйцэтгэлийг илгээх',
+                  :controller=>'fulfillments', :action => 'new',
+                  :task_id => @task %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      <fieldset>
+        <legend>Хавсралт</legend>
+        <%= render :partial => 'attachment/list' %>
+      </fieldset>
+    </td>
+  </tr>
+  <% elsif @task.subscriber_id != current_user.id %>
+  <tr>
+    <td class="smallink" colspan="4">
+      <%= link_to 'Гүйцэтгэлийг үзэх',
+                  :controller=>'fulfillments', :action => 'my',
+                  :task_id => @task %>
+    </td>
+  </tr>
+  <% end %>
+  <tr>
+    <td colspan="4">
+      <fieldset>
+        <legend>Гүйцэтгэгчид</legend>
+        <% if @task.subscriber_id == current_user.id %>
+        <%= render :partial=>'fulfillments/list_subs' %>
+        <% else %>
+        <%= render :partial=>'fulfillments/list_user' %>
+        <% end %>
+      </fieldset>
+    </td>
+  </tr>
+</table>
+<%= render :partial=>'comments/show',
+           :locals=>{:topic_id   => @task.id,
+                     :topic_type => 'Task',
+                     :button_text=> 'Ажлын талаар ярилцах' } %>

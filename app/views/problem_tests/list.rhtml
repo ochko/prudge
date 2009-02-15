@@ -1,0 +1,6 @@
+<h2>Бодлогын тэстүүд</h2>
+
+<%= render :partial => 'list'%>
+
+<%= link_to 'Previous page', { :page => @problem_test_pages.current.previous } if @problem_test_pages.current.previous %>
+<%= link_to 'Next page', { :page => @problem_test_pages.current.next } if @problem_test_pages.current.next %>

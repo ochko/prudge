@@ -1,0 +1,15 @@
+<h2>Бодлого шалгах тэст</h2>
+
+<% form_tag :action => 'create' do %>
+  <%= render :partial => 'form' %>
+  <center>
+  <%= submit_to_remote "Save", "Нэм",
+      :update=>'test_list',
+      :url=>{:action=>'create'}%>
+  </center>
+<% end %>
+
+<%= render :partial => 'list'%>
+
+<%= link_to 'Буцах', :controller=>'problems',
+                     :action => 'show', :id=>@problem_test.problem_id %>

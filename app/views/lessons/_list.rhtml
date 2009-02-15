@@ -1,0 +1,23 @@
+<% if @lessons.size > 0 %>
+  <% for lesson in @lessons %>
+    <div class="post">
+      <%= render :partial => "ratings/rate", :locals => { :asset => lesson } %>
+      <%= link_to(content_tag(:h2, lesson.title), :action=>'show', :id=>lesson) %>
+      <div class="entry">
+        <p><%= white_list truncate(lesson.text, 200) %></p>
+      </div>
+      <div class="read"><%= link_to 'үргэлжлүүлэн унших...',:action=>'show', :id=>lesson %></div>
+      <div class="info">
+        Бичсэн: <%= link_to lesson.author.login,
+                      :action=>'show', :controller=>'account',
+                      :id=>lesson.author_id %>,
+        Шинэчилсэн: <%=distance_of_time_in_words_to_now lesson.updated_at %>,
+        Зүүлт: <%= tag_links lesson.tags %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+Хичээл алга!
+<%= link_to 'Энд', :action=>'new' %>
+дарж шинэ хичээл оруулна уу?
+<% end %>

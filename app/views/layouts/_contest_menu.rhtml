@@ -1,0 +1,13 @@
+<ul>
+  <h2>Тэмцээн</h2>
+  <li class="first"><%=link_to 'Тэмцээнүүд', :controller => 'contests', :action => 'list' %></li>
+
+  <% restrict_to "Judge" do %>
+  <li><%=link_to 'Зарлах', :controller => 'contests', :action => 'new' %></li>
+  <% end %>
+
+  <li><%=link_to 'Төрлүүд', :controller => 'contest_types', :action => 'list' %></li>
+  <li><%=link_to 'Шагнал', :controller => 'prizes', :action => 'list' %></li>
+  <li><%=link_to 'Ивээн тэтгэгчид', :controller => 'sponsors', :action => 'list' %></li>
+  <li class="last"><%=link_to 'Өнгөрсөн тэмцээнүүд', :controller => 'contests', :action => 'past' %></li>
+</ul>

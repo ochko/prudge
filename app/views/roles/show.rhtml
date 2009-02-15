@@ -1,0 +1,26 @@
+<% for column in Role.content_columns %>
+  <p>
+    <b><%= column.human_name %>:</b><%= h @role.send(column.name) %>
+  </p>
+<% end %>
+<h3>Users in this role</h3>
+<table>
+  <tr>
+    <th>Login</th>
+    <th>Email</th>
+  </tr>
+
+  <% for user in @users %>
+    <tr>
+      <td><%= h user.login %></td>
+      <td><%= h user.email %></td>
+
+      <td><%= link_to 'Show', :controller => 'account', :action => 'index', :id => user %></td>
+      <td><%= link_to 'Remove', { :action => 'remove_user', :user_id => user, :role_id => @role.id }, :confirm => 'Are you sure?', :method => :post %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Edit', :action => 'edit', :id => @role %>
+|
+<%= link_to 'Back', :action => 'list' %>

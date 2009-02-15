@@ -1,0 +1,31 @@
+<h2>Програмчлалын хэлүүд</h2>
+
+<table>
+  <tr>
+    <th>Нэр</th>
+    <th>Тайлбар</th>
+    <th colspan="3">Холбоотой зүйлс</th>
+  </tr>
+<% view_cache Language do -%>
+<% for language in @languages %>
+  <tr>
+    <td><%=h language.name %></td>
+    <td><%=h language.description %></td>
+    <td><%= link_to 'Хичээл', :controller=>'lessons', :action=>'search',
+                    :field=>'tags', :query=>language.name %> :: </td>
+    <td><%= link_to 'Хуудас', :controller=>'pages', :action=>'search',
+                    :field=>'tags', :query=>language.name %> :: </td>
+    <td><%= link_to 'Ажил', :controller=>'tasks', :action=>'search',
+                    :field=>'technology', :query=>language.name %></td>
+    <% restrict_to 'Admin' do  %>
+    <td><%= link_to image_tag('edit.png'), :action => 'edit', :id => language %></td>
+    <td><%= link_to image_tag('delete.png'), { :action => 'destroy', :id => language }, :confirm => 'Are you sure?', :method => :post %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+<% end %>
+<br />
+<% restrict_to 'Admin' do  %>
+<%= link_to 'Шинээр програмчлалын хэл нэмэх', :action => 'new' %>
+<% end %>

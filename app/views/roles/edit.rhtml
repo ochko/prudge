@@ -1,0 +1,9 @@
+<h2>Дүрийг засварлах</h2>
+
+<% form_tag :action => 'update', :id => @role do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Хадгал' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @role %> |
+<%= link_to 'Back', :action => 'list' %>

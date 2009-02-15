@@ -1,0 +1,32 @@
+<h2><%= @title %></h2>
+<% if @contests.size > 0 %>
+<table width="100%">
+  <tr>
+    <th>Хугацаа</th>
+    <th>Нэр</th>
+    <th>Төрөл/Түвшин</th>
+    <th>Ивээн тэтгэгч/Шагнал</th>
+  </tr>
+
+<% for contest in @contests %>
+  <tr class="rank_<%= contest.category %>">
+    <td><b><%= contest.start.to_s %><br />
+        <%= contest.end.to_s %></b></td>
+    <td><%= link_to contest.name, :action => 'show', :id => contest %></td>
+    <td><%= contest.type_name %><br/ >(<%= contest.category.capitalize %>)</td>
+    <td><%= link_to contest.sponsor.name, :controller =>'sponsors', :action=>'show', :id => contest.sponsor_id %>
+      (<%= link_to contest.prize.name, :controller => 'prizes', :action => 'show', :id => contest.prize_id %>)
+    </td>
+    <% restrict_to 'Admin' do  %>
+    <td><%= link_to image_tag('edit.png'), :action => 'edit', :id => contest %></td>
+    <td><%= link_to image_tag('delete.png'), { :action => 'destroy', :id => contest }, :confirm => 'Are you sure?', :method => :post %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+<% else %>
+Тэмцээн байхгүй байна.
+<%= link_to 'Бодлогуудын архиваас ', :controller=>'problems', :action=>'list' %>
+бодлого бодож болно.
+<% end %>
+

@@ -1,0 +1,8 @@
+<h2>Оноолтыг засварлах</h2>
+
+<% form_tag :action => 'update', :id => @role_user do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Хадгал' %>
+<% end %>
+
+<%= link_to 'Оноолтууд', :action => 'list' %>

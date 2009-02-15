@@ -1,0 +1,30 @@
+<table width='100%'>
+  <tr>
+    <th></th>
+    <th>Бодлого</th>
+    <th>Хэрэглэгч</th>
+    <th>Хэл</th>
+    <th width='1%'>Шалга сан</th>
+    <th>Үүсгэсэн</th>
+    <th>Өөрчилсөн</th>
+  </tr>
+
+<% for solution in @solutions %>
+  <tr>
+    <td><%= link_to show_correctness(solution.correct),
+            :action => 'show', :id => solution %></td>
+    <td><%= link_to solution.pname,
+            :controller=> 'problems',
+            :action=>'show', :id=> solution.problem_id %></td>
+    <td><%= link_to solution.ulogin,
+            :controller=>'account',
+            :action=>'show', :id=> solution.user_id %></td>
+    <td><%= solution.lname %></td>
+    <td><%= show_correctness(solution.checked) %></td>
+    <td class='small' nowrap><%= solution.created_at %></td>
+    <td class='small' nowrap><%= solution.updated_at %></td>
+
+    <td><%= link_to image_tag('delete.png'),  { :action => 'destroy', :id => solution }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>

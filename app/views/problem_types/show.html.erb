@@ -1,0 +1,9 @@
+<h1><%= @problem_type.name %> төрлийн бодлогууд</h1>
+
+<%= render :partial => 'problems/search' %>
+
+<% restrict_to 'Admin' do %>
+<%= link_to 'Destroy', @problem_type, :confirm => 'Are you sure?', :method => :delete %> |
+<%= link_to 'Edit', edit_problem_type_path(@problem_type) %> |
+<%= link_to 'Back', problem_types_path %>
+<% end %>

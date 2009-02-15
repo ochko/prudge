@@ -1,0 +1,9 @@
+<h2>Гүйцэтгэлийг засах</h2>
+
+<% form_tag :action => 'update', :id => @fulfillment do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Хадгал' %>
+<% end %>
+
+<%= link_to 'Болих', :action => 'show', :id => @fulfillment %> |
+

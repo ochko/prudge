@@ -1,0 +1,163 @@
+<table class="slim" width="100%">
+  <tr>
+    <td class="top">
+      <% view_cache Solution, Problem, User => :id do %>
+        <h1>Хэрэглэгчийн мэдээлэл</h1>
+        <table width="580">
+          <tr>
+            <td>
+              <%= show_photo @user %>
+            </td>
+            <td>
+              <div class='small'>
+                ID: <%= @user.login %><br />
+                <%= medal_list(@standings) %><br />
+                Оноо: <%= "%.2f" % @user.points if !@user.points.nil? %><br />
+                Хугацаа: <%= sec2milisec @user.avg if !@user.avg.nil? %><br />
+                Түвшин: <%= rank_name(@user.points, @total).capitalize %><br />
+              </div>
+            </td>
+            <td>
+              <div class='small'>
+                Сургууль эсвэл байгууллага:
+                <% if logged_in? and current_user.id == @user.id %>
+                <%= in_place_editor_field :user, 'school_name' %>
+                <% else %>
+                <%= white_list @user.school_name %>
+                <% end %>
+                <br />
+                Өөрийн тухай товч танилцуулга: <br />
+                <% if logged_in? and current_user.id == @user.id %>
+                <%= in_place_editor_field :user, 'self_intro' %>
+                <% else %>
+                <%= white_list @user.self_intro %>
+                <% end %> <br />
+                <% restrict_to 'Accountant' do %>
+                Мэйл: <%= mail_to @user.email %>
+                <br />
+                <% end %>
+              </div>
+            <td>
+          </tr>
+        </table>
+
+    </td>
+  <tr>
+  <tr>
+    <td class="top">
+      <table width="100%">
+        <% if @contests.size > 0 %>
+        <tr>
+          <td>
+
+              <h3>Оролцсон тэмцээн</h3>
+              <table width="100%">
+                <tr>
+                  <th>Байр</th>
+                  <th>Нэр</th>
+                  <th>Огноо</th>
+                  <th>Төрөл</th>
+                  <th>Ивээн тэтгэгч</th>
+                </tr>
+                <% for c in @contests%>
+                <tr>
+                  <td><%= standing(@standings[c.id]) %></td>
+                  <td><%= link_to c.name, :controller=>'contests', :action=>'show', :id=>c.id %></td>
+                  <td><%= c.start %></td>
+                  <td><%= c.type_name %></td>
+                  <td><%= c.sponsor_name %></td>
+                </tr>
+                <% end %>
+              </table>
+
+          </td>
+        </tr>
+        <% end %>
+        <% if @lessons.size > 0 %>
+        <tr>
+          <td>
+              <h3>Бичсэн хичээл</h3>
+              <table width="100%">
+                <tr>
+                  <th>Гарчиг</th>
+                  <th>Огноо</th>
+                  <th>Үнэлгээ</th>
+                </tr>
+                <% for l in @lessons %>
+                <tr>
+                  <td><%= link_to l.title, :controller=> 'lessons',
+                    :action=>'show', :id=>l.id %></td>
+                  <td><%= l.updated_at %></td>
+                  <td><%= l.rating %></td>
+                </tr>
+                <% end %>
+              </table>
+          </td>
+        </tr>
+        <% end %>
+        <% if @problems.size > 0 %>
+        <tr>
+          <td>
+
+              <h3>Дэвшүүлсэн бодлого</h3>
+              <table width="100%">
+                <tr>
+                  <th>Нэр</th>
+                  <th>Огноо</th>
+                  <th>Оноо</th>
+                  <th>Хугацаа</th>
+                  <th>Санах ой</th>
+                </tr>
+                <% for p in @problems%>
+                <tr>
+                  <td><%= link_to p.name, :controller=> 'problems',
+                    :action=>'show', :id=>p.id %></td>
+                  <td><%= p.created_at %></td>
+                  <td><%= p.point %></td>
+                  <td><%= p.time %></td>
+                  <td><%= p.memory %></td>
+                </tr>
+                <% end %>
+              </table>
+          </td>
+        </tr>
+        <% end %>
+        <% if @solutions.size > 0 %>
+        <tr>
+          <td>
+              <h3>Бодолтууд</h3>
+              <table width="100%">
+                <tr>
+                  <th width="1%"></th>
+                  <th>Бодлого</th>
+                  <th>Оноо</th>
+                  <th>Хэл</th>
+                  <th>Бодсон</th>
+                  <th>Шинэчилсэн</th>
+                  <th>Хувь</th>
+                  <th>Хугацаа</th>
+                </tr>
+                <% for s in @solutions%>
+                <tr>
+                  <td><%= link_to show_correctness(s.correct),
+                          :controller=>'solutions', :action=>'show',
+                    :id => s.id %></td>
+                  <td><%= link_to s.problem.name, :controller=>'problems',
+                    :action=>'show', :id=>s.problem_id %></td>
+                  <td><%= s.problem.point %></td>
+                  <td><%= s.language.name %></td>
+                  <td class='small'><%= s.created_at.to_s(:date_time24) %></td>
+                  <td class='small'><%= s.updated_at.to_s(:date_time24) %></td>
+                  <td><%= "%0.0f" % (s.percent*100) %></td>
+                  <td><%= sec2milisec s.avg_time %></td>
+                </tr>
+                <% end %>
+              </table>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+     <% end %>
+    </td>
+  </tr>
+</table>

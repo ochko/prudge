@@ -1,0 +1,17 @@
+<h1>Сүүлд нэмэгдсэн бичээсүүд</h1>
+<%= will_paginate @comments, :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+<table>
+  <tr>
+    <th width="120">Хэрэглэгч</th>
+    <th>Бичлэг</th>
+    <th></th>
+  </tr>
+  <% for c in @comments %>
+  <tr id="comment_<%=c.id%>">
+    <td class="small"><%= link_to c.user.login, :controller=>'account', :action=>'show', :id=>c.user_id %> <br /> <%= c.created_at %></td>
+    <td class="small"><%=h truncate(c.text,100) %></td>
+    <td><%= link_to image_tag('further.png'), :action => 'show', :id => c.topic_id, :type => c.topic_type.downcase.pluralize %></td>
+  </tr>
+  <% end %>
+</table>
+<%= will_paginate @comments, :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>

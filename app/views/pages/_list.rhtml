@@ -1,0 +1,17 @@
+<table>
+  <tr>
+    <th>Хуудас</th>
+    <th>Гарчиг</th>
+    <th>Зүүлт</th>
+    <th>Огноо</th>
+  </tr>
+
+<% for page in @pages %>
+  <tr>
+    <td><%= show_category page.category %></td>
+    <td><%= link_to page.title, :action => 'show', :id => page %></td>
+    <td><%= page_tag_link page.tags %></td>
+    <td><%=h page.created_at %></td>
+  </tr>
+<% end %>
+</table>

@@ -1,0 +1,10 @@
+<h2>Хуудсууд</h2>
+
+<%= render :partial=>'list' %>
+
+<%= link_to 'Previous page', { :page => @page_pages.current.previous } if @page_pages.current.previous %>
+<%= link_to 'Next page', { :page => @page_pages.current.next } if @page_pages.current.next %>
+<% restrict_to 'Admin' do %>
+<br />
+<%= link_to 'Шинэ хуудас', :action => 'new' %>
+<% end %>

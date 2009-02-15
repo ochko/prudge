@@ -1,0 +1,97 @@
+<fieldset>
+  <legend>Даалгавар: <%= @lesson.title %></legend>
+  <% if @problems.size > 0 %>
+  <table width="100%">
+    <tr>
+      <th>ID</th>
+      <th>Нэр</th>
+      <th>Оноо</th>
+      <th>Хугацааны хязгаар</th>
+      <th>Санах ойн хязгаар</th>
+      <th>Дэвшүүлсэн</th>
+      <th>Огноо</th>
+      <th>Нийт бодолт</th>
+      <th>Зөв бодолт</th>
+    </tr>
+
+    <% for problem in @problems %>
+    <tr>
+      <td><%= problem.id %></td>
+      <td><%= link_to problem.name, :controller=>'problems',
+        :action => 'show', :id => problem %></td>
+      <td><%= problem.point %></td>
+      <td><%= problem.time %> сек</td>
+      <td><%= problem.memory %> кб</td>
+      <td><%= problem.login %></td>
+      <td class='small'><%= problem.created_at.to_s(:date_only) %></td>
+      <td><%= problem.solution_count %></td>
+      <td><%= problem.correct_solutions %></td>
+    </tr>
+    <% end %>
+  </table>
+  <% else %>
+  Даалгавар алга!
+  <% end %>
+</fieldset>
+
+<fieldset>
+  <legend>Оролцогчид</legend>
+  <% if @users.size > 0 %>
+  <table class='slim' width='100%'>
+    <tr>
+      <td class='top'>
+        <table>
+          <tr><th>No</th><th width="120">Нэр</th><th>Оноо</th><th>Time</th></tr>
+          <% num = 0
+             point = 0
+             avg = 0
+             for user in @users
+             if point != user.point
+             point = user.point
+             num += 1
+             elsif (user.avg.to_f > avg.to_f + 0.1)
+          point = user.point
+          num += 1
+          end
+          avg = user.avg
+          %>
+          <tr>
+            <td><%= num %>
+            </td>
+            <td class='small'>
+              <%= link_to user.login, :controller=>'account',
+              :action=>'show', :id=>user.id %></td>
+            <td class='small'><%= ("%.2f" % user.point) if user.point %></td>
+            <td class='small'><%= sec2milisec(user.avg) if user.avg %></td>
+            <td class='small'>
+              <%= link_to_remote image_tag('detail.png'), :url=>{:controller=>'groups',
+                  :action=>'participant', :user=>user.id, :lesson=>@lesson.id},
+                  :before => "Element.hide('solved'); Element.show('spinner');",
+                  :success => "Element.hide('spinner'); Element.show('solved');",
+                  :update=>'solved' %>
+            </td>
+          </tr>
+          <% end %>
+        </table>
+      </td>
+      <td class='top' width="100%">
+        <%= image_tag("spinner.gif",
+              :align => 'absmiddle',
+              :border=> 0,
+              :id => "spinner",
+              :style=>"display: none;" ) %>
+        <table class='slim'>
+          <tr>
+            <td id='solved'>
+              <%= render :partial=> 'solved' %>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <% else %>
+  Бодсон хүн алга!
+  <% end %>
+</fieldset>
+

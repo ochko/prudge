@@ -1,0 +1,14 @@
+<h2>Курсууд</h2>
+
+<table>
+
+<% for course in @courses %>
+  <tr>
+    <td>
+      <h3><%= link_to course.name, :action => 'show', :id => course %></h3>
+      <p><%= course.description %></p>
+    </td>
+  </tr>
+<% end %>
+</table>
+

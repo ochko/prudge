@@ -1,0 +1,67 @@
+<h2><%= @title %></h2>
+<table width="100%">
+  <tr>
+    <td class="top">
+      <fieldset>
+        <legend>Бодолт</legend>
+        <table width="100%">
+          <%= render :partial=>'problem'%>
+          <tr>
+            <td class="smallinkl">
+              <%= link_to '<-- Тэмцээн рүү', :controller=>'contests',
+                    :action=>'show', :id=>@solution.problem.contest %>
+            </td>
+            <td class="smallink">
+              <%= link_to 'Устгах', {:action => 'delete', :id => @solution},
+                          :confirm => 'Энэ бодолтыг нээрээ устгах уу?', :method => :post %>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+    </td>
+    <td class="top" width="50%">
+      <fieldset>
+        <legend>Үр дүн</legend>
+        <table>
+          <tr>
+            <td width="1%">
+              <% form_remote_tag :url=>{:action => 'check', :id => @solution},
+              :html=>{:id=>'check_form'},
+              :before => "Form.disable('check_form'); Element.show('progress_bar');",
+              :complete => "Element.hide('progress_bar'); Form.enable('check_form');",
+              :update => "result" do %>
+              <%= submit_tag"Шалгах" %>
+              <% end %>
+            </td>
+            <td>
+              <%= image_tag("progress-bar.gif",
+                  :align => 'absmiddle',
+              :border=> 0,
+              :id => "progress_bar",
+              :style=>"display: none;" ) %>
+
+            </td>
+            <td width="1%">
+              <% form_tag :controller=>'results', :action=>'list' do %>
+              <%= hidden_field_tag 'field', 'solution' %>
+              <%= hidden_field_tag 'query', @solution.id %>
+              <%= submit_tag "Нягтлах" %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td id='result' colspan="3" width="100%">
+              <% if @solution.checked %>
+              <%= render :partial => 'results/list' %>
+              <% end %>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+    </td>
+  </tr>
+</table>
+<%= render :partial=>'comments/show',
+           :locals=>{:topic_id   => @solution.id,
+                     :topic_type => 'Solution',
+                     :button_text=> 'Бодолтыг хэлэлцэх' } %>

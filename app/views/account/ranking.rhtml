@@ -1,0 +1,40 @@
+<h1>Хэрэглэгчдийн жагсаалт</h1>
+<% view_cache Solution, Problem, User, :tag => (params[:page] || 1) do -%>
+<%= will_paginate @users, :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+<table width="100%">
+  <tr>
+    <td class="rank_advanced">Advanced: <b><%= @total*0.6 %>-<%= @total %></b></td>
+    <td> </td>
+    <td class="rank_intermediate">Intermediate: <b><%= @total*0.3 %>-<%= @total*0.6 %></b></td>
+    <td> </td>
+    <td class="rank_beginner">Beginner: <b><%= @total*0.05 %>-<%= @total*0.3 %></b></td>
+    <td> </td>
+    <td class="rank_challenger">Challenger: <b>0.0-<%= @total*0.05 %></b></td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <th width='1%'>Ранк</th>
+    <th>ID</th>
+    <th>Сургууль/ <br /> Байгууллага</th>
+    <th width='60'>Нийт <br /> оноо</th>
+    <th width='1%'>Дундаж хугацаа</th>
+    <th width='1%'>Бодсон бодлого</th>
+    <th>Сүүлд бодсон</th>
+  </tr>
+<% no = (((params[:page] || 1).to_i) - 1 ) * 100
+   for user in @users
+   no += 1%>
+  <tr class="rank_<%= rank_name(user.points, @total) %>">
+    <td><%= no %></td>
+    <td><%= link_to user.login, :action=> 'show', :id => user.id %></td>
+    <td><%= white_list(truncate(user.school_name,35)) %></td>
+    <td><%= "%.2f" % user.points if !user.points.nil? %></td>
+    <td><%= sec2milisec user.avg if !user.avg.nil? %></td>
+    <td><%= user.solution_count %></td>
+    <td class='small'><%= user.last_access %></td>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate @users, :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+<% end %>

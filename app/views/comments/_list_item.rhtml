@@ -1,0 +1,5 @@
+<li>
+  <%= link_to(comment.user.login, :controller=>:account, :action=>:show, :id=>comment.user_id) %><a name=<%= comment.id %>></a>,
+  <%= comment.created_at.to_s(:date_time24) %>
+  <div class="comment-content"><%= white_list comment.text %></div>
+</li>

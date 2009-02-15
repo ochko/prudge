@@ -1,0 +1,9 @@
+<h2>Хуудсыг засварлах</h2>
+
+<% form_tag :action => 'update', :id => @page do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Хадгал' %>
+<% end %>
+
+<%= link_to 'Харуул', :action => 'show', :id => @page %> |
+<%= link_to 'Буцаад хуудсууд руу', :action => 'list' %>

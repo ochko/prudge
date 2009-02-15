@@ -1,0 +1,3 @@
+page.replace "fulfillment_#{@fulfillment.id}",
+    :partial=>'pay', :locals=>{:f=>@fulfillment}
+page.visual_effect :highlight, "fulfillment_#{@fulfillment.id}"

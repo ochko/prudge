@@ -1,0 +1,9 @@
+<h2>Тэмцээний төрөл засах</h2>
+
+<% form_tag :action => 'update', :id => @contest_type do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Хадгал' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @contest_type %> |
+<%= link_to 'Back', :action => 'list' %>

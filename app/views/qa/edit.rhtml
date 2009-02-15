@@ -1,0 +1,9 @@
+<h2>Асуулт хариултыг засварлах</h2>
+
+<% form_tag :action => 'update', :id => @question_answer do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Хадгал' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @question_answer %> |
+<%= link_to 'Back', :action => 'list' %>

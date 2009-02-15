@@ -1,0 +1,24 @@
+<h1>
+  <%= link_to @topic.name,
+      :controller=>@type,
+      :action=>'show',
+      :id=>@topic %>
+</h1>
+<div class="post">
+  <div class="entry">
+    <%= white_list @topic.description %>
+  </div>
+
+  <% if @type.eql?('topic') %>
+    <% restrict_to 'Admin' do %>
+    <div class="info">
+      <%= link_to 'Засварлах', :action => 'edit', :id => @topic %> |
+      <%= link_to 'Устгах', { :action => 'destroy', :id => @topic },
+          :confirm => 'Are you sure?', :method => :post %>
+    </div>
+  <% end %>
+<% end %>
+</div>
+<%= will_paginate @comments, :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+<%= render :partial => 'comments/form_list' %>
+<%= will_paginate @comments, :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>

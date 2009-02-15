@@ -1,0 +1,9 @@
+<% for column in Prize.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @prize.send(column.name) %>
+</p>
+<% end %>
+<% restrict_to 'Admin' do  %>
+<%= link_to 'Edit', :action => 'edit', :id => @prize %> |
+<% end %>
+<%= link_to 'Жагсаалт', :action => 'list' %>

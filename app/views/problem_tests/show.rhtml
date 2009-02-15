@@ -1,0 +1,30 @@
+<h2>Бодлогын тэст</h2>
+
+<table>
+  <tr>
+    <td colspan="2">
+      <p>
+      <label for="problem_test_problem">Бодлого : </label>
+      <%= link_to @problem_test.problem.name, :controller=>'problems',
+      :action => 'show', :id=> @problem_test.problem_id %>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td><b>Оролт:</b></td>
+    <td><%= fitted_textarea @problem_test.input %></td>
+  </tr>
+  <tr>
+    <td><b>Гаралт:</b></td>
+    <td><%= fitted_textarea @problem_test.output %></td>
+  </tr>
+  <tr>
+    <td><b>Жинхэнэ тэст:</b></td>
+    <td><%= true_false @problem_test.hidden %></td>
+  </tr>
+</table>
+
+<%= link_to 'Засвар', :action => 'edit', :id => @problem_test %> |
+<%= link_to 'Буцах',  :action => 'new', :problem_id=> @problem_test.problem_id %>
+
+

@@ -1,0 +1,31 @@
+<h2><%= @title %></h2>
+
+<% if @tasks.size > 0 %>
+<table>
+  <tr>
+    <th></th>
+    <th>Нэр</th>
+    <th>Технологи</th>
+    <th>Үнэлгээ</th>
+    <th>Хугацаа</th>
+    <th>Захиалагч</th>
+    <th>Төлбөр</th>
+    <th>Үлдэгдэл</th>
+  </tr>
+
+<% for task in @tasks %>
+  <tr>
+    <td><%= status_image task.status %></td>
+    <td><%= link_to task.subject, :action => 'show', :id => task %></td>
+    <td><%= task_tag_link task.technology %></td>
+    <td><%=h task.price %></td>
+    <td><%=h task.deadline %></td>
+    <td><%=h task.login %></td>
+    <td><%=h task.earnings %></td>
+    <td><%=h task.remainder %></td>
+  </tr>
+<% end %>
+</table>
+<% else %>
+Ажил олдсонгүй!
+<% end %>

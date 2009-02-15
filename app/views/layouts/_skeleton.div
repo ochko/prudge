@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title><%= title %></title>
+    <%= stylesheet_link_tag 'style' %>
+    <%= stylesheet_link_tag 'tabber' %>
+    <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag "prototype" %>
+    <%= javascript_include_tag "tabber" %>
+    <link rel="icon" href="/images/coder.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/images/coder.ico" type="image/x-icon" />
+  </head>
+
+  <body>
+    <table width="800" align="center">
+      <tr>
+        <td>
+          <div id="header">
+            <%= image_tag('logo.png') %>
+          </div>
+
+          <div id="metanav" class="nav">
+            <ul>
+              <% if !logged_in?  %>
+              <li class="first"><%= link_to 'login', :controller => 'account', :action => 'login' %></li>
+              <li><%= link_to 'Signup', :controller => 'account', :action => 'signup' %></li>
+              <% else %>
+              <li class="first">logged in as <%=h current_user.login %></li>
+              <li class="last"><%= link_to 'Logout', :controller => 'account', :action => 'logout' %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+              <% end %>
+            </ul>
+          </div>
+
+          <div id="mainnav" class="nav">
+            <ul>
+              <li<% if controller.controller_name == "home" %>
+                    class="active"
+                    <% end %>>
+                <%= link_to 'Эхлэл', :controller =>'home', :action=>'welcome' %></li>
+              <li<% if controller.controller_name == "contests" %>
+                    class="active"
+                    <% end %>>
+                <%= link_to 'Тэмцээн', :controller =>'contests', :action=>'index' %></li>
+              <li<% if controller.controller_name == "account" %>
+                    class="active"
+                    <% end %>>
+                <%= link_to 'Хэрэглэгчид', :controller =>'account', :action=>'ranking' %></li>
+              <li<% if controller.controller_name == "problems" %>
+                    class="active"
+                    <% end %>>
+                <%= link_to 'Бодлогууд', :controller =>'problems', :action=> 'index' %></li>
+              <li<% if controller.controller_name == "discussions" %>
+                    class="active"
+                    <% end %>>
+              <li<% if controller.controller_name == "lessons" %>
+                    class="active"
+                    <% end %>>
+                <%= link_to 'Хичээл', :controller => 'lessons', :action=> 'index' %></li>
+              <li<% if controller.controller_name == "topics" %>
+                    class="active"
+                    <% end %>>
+                <%= link_to 'Хэлэлцүүлэг', :controller =>'topics', :action=> 'index' %></li>
+              <li <% if controller.controller_name == "tasks" %>
+                    class="active"
+                    <% end %>>
+                <%= link_to 'Ажил', :controller => 'tasks', :action=> 'index' %></li>
+            </ul>
+          </div>
+
+          <div id="main">
+            <div id="ctxtnav" class="nav">
+              <%= render :partial => context_menu %>
+            </div>
+
+            <div id="content">
+              <p style="color: green"><%= flash[:notice] %></p>
+              <%= yield  %>
+            </div>
+
+            <div id="sidebar">
+              <%= show_banner %>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,137 @@
+<h2><%=h @problem.name %></h2>
+<table width="100%">
+  <tr>
+    <td>
+      <label>Оноо:</label> <%=h @problem.point %>
+    </td>
+    <td>
+      <% form_tag :controller=>'solutions', :action => 'new' do %>
+      <%= hidden_field 'solution', 'problem_id', :value=>@problem.id %>
+      <%= submit_tag "Бодох" %>
+      <% end %>
+    </td>
+    <td>
+      <% if @problem.user_id == current_user.id %>
+      <% form_tag :controller=>'problem_tests', :action => 'new' do %>
+      <%= hidden_field_tag 'problem_id', @problem.id %>
+      <%= submit_tag " Тэст Оруулах" %>
+      <% end %>
+      <% else %>
+      <% restrict_to 'Judge' do %>
+      <% form_tag :controller=>'problem_tests', :action => 'new' do %>
+      <%= hidden_field_tag 'problem_id', @problem.id %>
+      <%= submit_tag " Тэст Оруулах" %>
+      <% end %>
+      <% end %>
+      <% end %>
+    </td>
+    <td>
+      <%= link_to 'Шилдэг бодолт', {:controller=>'solutions',
+                  :action=>'best', :problem_id=>@problem.id},
+                  :class=>'small' %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label>Хугацаа:</label> <%=h @problem.time %> сек
+    </td>
+    <td class='small'>
+      <label>Дэвшүүлсэн:</label>
+      <%= link_to @problem.user.login, :controller=>'account',
+                  :action=>'show', :id=>@problem.user.id %>
+    </td>
+    <td>
+      <label>Тэстийн тоо:</label>
+      <%= @problem.problem_tests.size %>
+
+    </td>
+    <td class='small'>
+      <%= link_to_remote 'Нийт бодолт', :url=>{:controller=>'solutions',
+                  :action=>'tryed', :problem_id=>@problem.id},
+                  :before => "Element.hide('solved'); Element.show('spinner');",
+                  :success => "Element.hide('spinner'); Element.show('solved');",
+                  :update=>'solved' %>
+      <%= @solution_count %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label>Санах ой:</label> <%=h @problem.memory %> кб
+    </td>
+    <td class='small'>
+      <label>Он сар өдөр:</label>
+      <%= @problem.created_at %>
+    </td>
+    <td class='small'>
+    </td>
+    <td class='small'>
+      <%= link_to_remote 'Зөв бодолт', :url=>{:controller=>'solutions',
+                  :action=>'completed', :problem_id=>@problem.id},
+                  :before => "Element.hide('solved'); Element.show('spinner')",
+                  :success => "Element.hide('spinner'); Element.show('solved');",
+                  :update=>'solved' %>
+      <%= @solution_correct %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      <%= image_tag("spinner.gif",
+              :align => 'absmiddle',
+              :border=> 0,
+              :id => "spinner",
+              :style=>"display: none;" ) %>
+      <div id='solved' style="display: none;"></div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      <fieldset>
+        <div style="width: 600px; overflow: auto">
+          <%=white_list @problem.text %>
+        </div>
+      </fieldset>
+      <label>Эх сурвалж:</label> <%=h @problem.source %><br />
+      <label>Төрөл: <%= link_to @problem.problem_type.name, @problem.problem_type %></label><br />
+        <% if @problem.languages.size == 0 %>
+        <label>Бүх хэл дээр бодож болно</label>
+        <% else %>
+        <label>Хэлүүд:
+        <% for l in @problem.languages %>
+        <%= l.name %>
+        <% end %>
+        </label>
+        <% end %>
+        <br />
+    </td>
+  </tr>
+  <% if @touchable %>
+  <tr>
+    <td class="smallink" colspan="4">
+      <%= link_to 'Засварлах', :action => 'edit', :id => @problem %> |
+      <%= link_to 'Устгах', { :action => 'destroy', :id => @problem },
+                  :confirm => 'Are you sure?', :method => :post %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      <fieldset>
+        <legend>Хавсралт</legend>
+        <%= render :partial => 'attachment/form_list' %>
+      </fieldset>
+    </td>
+  </tr>
+  <% elsif @attachments.size > 0 %>
+  <tr>
+    <td colspan="4">
+      <fieldset>
+        <legend>Хавсралт</legend>
+        <%= render :partial => 'attachment/list' %>
+      </fieldset>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<%= render :partial=>'comments/show',
+           :locals=>{:topic_id   => @problem.id,
+                     :topic_type => 'Problem',
+                     :button_text=> 'Санал гомдол' } %>

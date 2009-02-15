@@ -1,0 +1,27 @@
+<h2>Ивээн тэтгэгчид</h2>
+
+<table>
+  <tr>
+    <th>Нэр</th>
+    <th>Танилцуулга</th>
+  </tr>
+
+<% for sponsor in @sponsors %>
+  <tr>
+    <td class="top"><%= sponsor_link sponsor %></td>
+    <td><%=h sponsor.description %></td>
+    <% restrict_to 'Admin' do  %>
+    <td><%= link_to image_tag('edit.png'), :action => 'edit', :id => sponsor %></td>
+    <td><%= link_to image_tag('delete.png'), { :action => 'destroy', :id => sponsor }, :confirm => 'Are you sure?', :method => :post %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @sponsor_pages.current.previous } if @sponsor_pages.current.previous %>
+<%= link_to 'Next page', { :page => @sponsor_pages.current.next } if @sponsor_pages.current.next %>
+
+<br />
+<% restrict_to 'Admin' do  %>
+<%= link_to 'Шинэ ивээн тэтгэгч оруулах', :action => 'new' %>
+<% end %>

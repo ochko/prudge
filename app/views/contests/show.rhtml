@@ -1,0 +1,143 @@
+<div class="problem">
+  <h1><%=h @contest.name %></h1>
+  <table width="580">
+    <tr>
+      <td class="top" width="300">
+        <table width="100%" class="slim">
+          <tr>
+            <td><label>Тэмцээний Төрөл:</label></td>
+            <td> <%= contest_type_link @contest.contest_type %></td>
+          </tr>
+          <tr>
+            <td><label>Түвшин:</label></td>
+            <td> <%= @contest.category.capitalize %></td>
+          </tr>
+          <tr>
+            <td><label>Шагнал:</label></td>
+            <td> <%= prize_link @contest.prize %></td>
+          </tr>
+          <tr>
+            <td><label>Ивээн тэтгэгч:</label></td>
+            <td> <%= sponsor_link @contest.sponsor %></td>
+          </tr>
+          <tr>
+            <td><label>Эхлэх цаг:</label></td><td> <%=h @contest.start.to_s(:date_time24) %></td>
+          </tr>
+          <tr>
+            <td><label>Дуусах цаг:</label></td>
+            <td><%=h @contest.end.to_s(:date_time24) %></td>
+          </tr>
+          <tr>
+            <% if Time.now() < @contest.start %>
+            <td>Тэмцээн эхлэхэд </td>
+            <td>
+              <label>
+                <%= distance_of_time_in_words_to_now @contest.start %>
+              </label>
+              үлдлээ...
+            </td>
+            <% elsif Time.now() > @contest.start and
+                         Time.now() < @contest.end  %>
+            <td>Тэмцээн дуусахад </td>
+            <td>
+              <b>
+                <%= distance_of_time_in_words_to_now @contest.end %>
+              </b>
+              үлдлээ...
+            </td>
+            <% else %>
+            <td colspan="2"><label>Тэмцээн дууссан</label></td>
+            <% end %>
+          </tr>
+        </table>
+
+      </td>
+      <td class="top"><%= @contest.description %></td>
+    </tr>
+    <% restrict_to 'Admin' do  %>
+    <tr>
+      <td colspan="3" class="smallink">
+        <%= link_to 'Edit', :action => 'edit', :id => @contest %>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <% end %>
+  </table>
+
+<% if @contest.start < Time.now() %>
+
+  <h2>Бодлого</h2>
+  <%= render :partial => 'problems/list' %>
+
+  <h2>Оролцогчид</h2>
+  <% if @users.size > 0 %>
+  <table class='slim' width='100%'>
+    <tr>
+      <td class='top'>
+        <table>
+          <tr><th>No</th><th width="120">Нэр</th><th>Оноо</th><th>Time</th></tr>
+          <% num = 0
+             point = 0
+             avg = 0
+             for user in @users
+             if point != user.point
+             point = user.point
+             num += 1
+             elsif (user.avg.to_f > avg.to_f + 0.1)
+          point = user.point
+          num += 1
+          end
+          avg = user.avg
+          %>
+          <tr>
+            <td><%= show_place(num) %>
+            </td>
+            <td class='small'>
+              <%= link_to user.login, :controller=>'account',
+              :action=>'show', :id=>user.id %></td>
+            <td class='small'><%= "%.2f" % user.point %></td>
+            <td class='small'><%= sec2milisec user.avg %></td>
+            <td class='small'>
+              <%= link_to_remote image_tag('detail.png'), :url=>{:controller=>'contests',
+                  :action=>'participant', :user=>user.id, :contest=>@contest.id},
+                  :before => "Element.hide('solved'); Element.show('spinner');",
+                  :success => "Element.hide('spinner'); Element.show('solved');",
+                  :update=>'solved' %>
+            </td>
+          </tr>
+          <% end %>
+        </table>
+      </td>
+      <td class='top' width="100%">
+        <%= image_tag("spinner.gif",
+              :align => 'absmiddle',
+              :border=> 0,
+              :id => "spinner",
+              :style=>"display: none;" ) %>
+        <table class='slim'>
+          <tr>
+            <td id='solved'>
+              <%= render :partial=> 'solved' %>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <% else %>
+  Оролцогчид алга!
+  <% end %>
+
+<% else %>
+<% restrict_to 'Admin' do  %>
+
+  <h3>Бодлого</h3>
+  <%= render :partial => 'problems/list' %>
+
+<% end %>
+<% end %>
+<%= render :partial=>'comments/show',
+           :locals=>{:topic_id   => @contest.id,
+                     :topic_type => 'Contest',
+                     :button_text=> 'Тэмцээний хэлэлцүүлэг' } %>
+</div>

@@ -1,0 +1,9 @@
+<h2>Шагналыг өөрчлөх</h2>
+
+<% form_tag :action => 'update', :id => @prize do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Хадгал' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @prize %> |
+<%= link_to 'Back', :action => 'list' %>

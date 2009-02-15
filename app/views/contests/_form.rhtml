@@ -1,0 +1,86 @@
+<%= error_messages_for 'contest' %>
+
+<!--[form:contest]-->
+<table>
+  <tr>
+    <td class="top">
+      <label for="contest_name">Нэр</label><br/>
+      <%= text_field 'contest', 'name', 'size'=>'45'  %>
+    </td>
+    <td>
+      <label for="contest_type_id">Тэмцээний төрөл</label><br/>
+        <select name="contest[type_id]">
+          <% @types.each do |t| %>
+          <option value="<%= t.id %>"
+                  <%= ' selected' if t.id == @contest.type_id %>>
+            <%= t.name %>
+          </option>
+          <% end %>
+      </select>
+    </td>
+    <td>
+      <label for="contest_type_id">Түвшин</label><br/>
+        <select name="contest[category]">
+          <option value="none"<%= ' selected' if 'none' == @contest.category %>>
+            Бүгд
+          </option>
+          <option value="challenger"<%= ' selected' if 'challenger' == @contest.category %>>
+            Challenger
+          </option>
+          <option value="beginner"<%= ' selected' if 'beginner' == @contest.category %>>
+            Beginner
+          </option>
+          <option value="intermediate"<%= ' selected' if 'intermediate' == @contest.category %>>
+            Intermediate
+          </option>
+          <option value="advanced"<%= ' selected' if 'advanced' == @contest.category %>>
+            Advanced
+          </option>
+
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="contest_start">Эхлэх цаг</label><br/>
+      <%= datetime_select 'contest', 'start', :use_month_numbers => true  %>
+      </td>
+    <td colspan="2">
+      <label for="contest_end">Дуусах цаг</label><br/>
+      <%= datetime_select 'contest', 'end', :use_month_numbers => true  %>
+      </td>
+    </tr>
+  <tr>
+    <td>
+      <label for="contest_prize_id">Шагнал</label><br />
+        <select name="contest[prize_id]">
+          <% @prizes.each do |p| %>
+          <option value="<%= p.id %>"
+                  <%= ' selected' if p.id == @contest.prize_id %>>
+            <%= p.name %>
+          </option>
+          <% end %>
+      </select>
+        </td>
+    <td colspan="2">
+      <label for="contest_sponsor_id">Ивээн тэтгэгч</label><br/>
+      <select name="contest[sponsor_id]">
+          <% @sponsors.each do |s| %>
+          <option value="<%= s.id %>"
+                  <%= ' selected' if s.id == @contest.sponsor_id %>>
+            <%= s.name %>
+          </option>
+          <% end %>
+      </select>
+    </td>
+    <tr>
+      <tr>
+    <td colspan="3">
+      <p><label for="contest_description">Тайлбар</label><br/>
+        <%= textile_editor 'contest', 'description', 'cols' => 86, 'rows' => 12  %></p>
+
+    </td>
+  </tr>
+</table>
+<!--[eoform:contest]-->
+<%= textile_editor_initialize %>

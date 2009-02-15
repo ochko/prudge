@@ -1,0 +1,27 @@
+<% form_for :attachment,
+   :url => { :controller=>'attachment',
+             :action => 'create', :format => 'js'},
+   :html => { :multipart => true,
+              :target => 'upload_frame' } do |form| %>
+<label for="uploaded_data">Файл: </label>
+<%= form.file_field  :uploaded_data, 'size'=>16 %>
+<label for="notes">Тайлбар: </label>
+<%= form.text_field  :notes, 'size'=>28 %>
+<%= form.hidden_field  :attachable_id %>
+<%= form.hidden_field  :attachable_type %>
+<%= submit_tag 'OK' %>
+<table id="attachments" width="100%">
+  <tr>
+    <th width="170">Нэр</th>
+    <th>Тайлбар</th>
+    <th width="1%">Хэмжээ</th>
+  </tr>
+  <% for a in @attachments %>
+  <%= render :partial => 'attachment/list_item',
+  :locals => {:attachment=> a} %>
+  <% end %>
+</table>
+<iframe id='upload_frame' name="upload_frame"
+        style="width:1px;height:1px;border:0px;display:none"
+        src="about:blank"></iframe>
+<% end %>

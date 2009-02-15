@@ -1,0 +1,34 @@
+<h2>Тестийн үр дүн</h2>
+<table>
+  <tr>
+    <td>Бодлого:</td><td> <%=h @result.solution.problem.name %></td>
+  </tr>
+  <tr>
+    <td>Хэрэглэгч:</td><td> <%=h @result.solution.user.login %></td>
+  </tr>
+  <tr>
+    <td>Ажиллагаа:</td><td> <%= translate_message(@result.status) %></td>
+  </tr>
+  <tr>
+    <td>Хугацаа:</td><td> <%=h @result.time %></td>
+  </tr>
+  <tr>
+    <td>Санах ой:</td><td> <%=h @result.memory %></td>
+  </tr>
+  <tr>
+    <td>Оролт:</td><td> <%= fitted_textarea(@result.test.input,12,72,5,72) %></td>
+  </tr>
+  <tr>
+    <td>Гаралт:</td><td><%= fitted_textarea(@result.output,12,72,5,72) %></td>
+  </tr>
+  <tr>
+    <td>Үр дүн:</td><td><%= show_correctness @result.matched %></td>
+  </tr>
+  <% if !@result.matched %>
+  <tr>
+    <td>Хариу:</td><td><%= fitted_textarea(@result.test.output, 12, 72, 5,72) %></td>
+  </tr>
+  <% end %>
+</table>
+<%= link_to 'Бодолт руу', :controller=>'solutions',
+                     :action=>'show', :id=>@result.solution  %>

@@ -1,0 +1,30 @@
+<%= error_messages_for 'problem_test' %>
+
+<!--[form:problem_test]-->
+<table>
+  <tr>
+    <td>
+      <label for="problem_test_problem">Бодлого : </label>
+      <%= link_to @problem_test.problem.name, :controller=>'problems',
+      :action => 'show', :id=> @problem_test.problem_id %>
+      <%= hidden_field 'problem_test', 'problem_id' %>
+    </td>
+    <td>
+      <label for="problem_test_hidden">Жинхэнэ тэст эсэх : </label>
+      <%= select("problem_test", "hidden", {"Тийм"=>"true", "Үгүй"=>"false"}) %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="problem_test_input">Оролт</label><br/>
+      <%= text_area 'problem_test', 'input', 'cols' => 45, 'rows'=>11, 'class'=>'test'  %>
+    </td>
+    <td>
+      <label for="problem_test_output">Гаралт</label><br/>
+      <%= text_area 'problem_test', 'output', 'cols' => 45, 'rows'=>11, 'class'=>'test'  %>
+    </td>
+  </tr>
+</table>
+<!--[eoform:problem_test]-->
+
+

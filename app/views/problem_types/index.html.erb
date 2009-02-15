@@ -1,0 +1,11 @@
+<h1>Бодлогын төрлүүд</h1>
+
+<ul>
+<% for problem_type in @problem_types %>
+  <li><%=h problem_type.name %></li>
+<% end %>
+</ul>
+
+<br />
+
+<%= link_to 'Шинэ төрөл нэмэх', new_problem_type_path %>

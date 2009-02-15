@@ -1,0 +1,27 @@
+<h2>Тэмцээний төрлүүд</h2>
+
+<table>
+  <tr>
+    <th>Төрөл</th>
+    <th>Тайлбар</th>
+  </tr>
+
+<% for contest_type in @contest_types %>
+  <tr>
+    <td><%= contest_type_link contest_type %></td>
+    <td><%=h contest_type.description %></td>
+    <% restrict_to 'Admin' do  %>
+    <td><%= link_to image_tag('edit.png'), :action => 'edit', :id => contest_type %></td>
+    <td><%= link_to image_tag('delete.png'), { :action => 'destroy', :id => contest_type }, :confirm => 'Are you sure?', :method => :post %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @contest_type_pages.current.previous } if @contest_type_pages.current.previous %>
+<%= link_to 'Next page', { :page => @contest_type_pages.current.next } if @contest_type_pages.current.next %>
+
+<br />
+<% restrict_to 'Admin' do  %>
+<%= link_to 'Шинэ төрөл нэмэх', :action => 'new' %>
+<% end %>

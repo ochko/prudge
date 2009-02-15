@@ -1,0 +1,13 @@
+<fieldset>
+  <legend>Даалгавар: <%= @lesson.title %></legend>
+  <% form_remote_tag :url => {:controller=>'lessons',
+  :action => 'add_homework', :id=>@lesson},
+  :update => 'homeworks' do %>
+  <%= text_field_with_auto_complete :problem, :name, {}, :skip_style => true %>
+  <%= submit_tag 'нэм' %>
+  <% end %>
+
+  <div id='homeworks'>
+    <%= render :partial => 'lessons/problems' %>
+  </div>
+</fieldset>

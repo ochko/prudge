@@ -1,0 +1,55 @@
+<table width="100%">
+  <tr>
+    <th>Тэст</th>
+    <th>Ажиллагаа</th>
+    <th>Хугацаа</th>
+    <th>Санах ой</th>
+    <th>Хариу</th>
+  </tr>
+<% number = 1
+   correct = 0 %>
+<% for result in @results
+   correctness = result.matched
+   correct += 1 unless !correctness %>
+  <tr>
+    <td>
+      <%= number %>
+      <%= test_purpose(result) %>
+    </td>
+    <td class='small'><%= translate_message(result.status) %></td>
+    <td><%= sec2milisec result.time %>с</td>
+    <td><%=h result.memory %> кб</td>
+    <td><%= show_correctness(correctness) %></td>
+  </tr>
+<% number += 1
+   end
+%>
+  <tr>
+    <td colspan="5" align="center">
+      <hr class='slim' />
+      <%= show_percent_word @results.size, correct %>
+    </td>
+  </tr>
+  <% if @solution.correct and current_user.id == @solution.user_id %>
+  <tr>
+    <td colspan="5" align="center" id="show_link">
+      <%= link_to_remote 'Бусад зөв бодолтууд',
+                  :url=>{:controller=>'solutions',
+                  :action=>'other', :problem_id=>@solution.problem_id, :solution_id =>@solution.id},
+                  :before => "Element.hide('solved'); Element.hide('show_link'); Element.show('spinner')",
+                  :success => "Element.hide('spinner'); Element.show('solved');",
+                  :update=>'solved' %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="5" align="center">
+      <%= image_tag("spinner.gif",
+              :align => 'absmiddle',
+              :border=> 0,
+              :id => "spinner",
+              :style=>"display: none;" ) %>
+      <div id='solved' style="display: none;"></div>
+    </td>
+  </tr>
+  <% end %>
+</table>

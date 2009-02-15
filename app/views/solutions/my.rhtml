@@ -1,0 +1,29 @@
+<h2>Миний бодолтууд</h2>
+
+<table>
+  <tr>
+    <th></th>
+    <th>Бодлого</th>
+    <th>Хэл</th>
+    <th>Анх хадгалсан</th>
+    <th>Өөрчилсөн</th>
+  </tr>
+
+<% for solution in @solutions %>
+  <tr>
+    <td><%= link_to show_correctness(solution.correct),
+            :action => 'show', :id => solution %></td>
+    <td><%= link_to solution.problem.name,
+            :controller=> 'problems',
+            :action=>'show', :id=> solution.problem_id %></td>
+    <td><%= solution.language.name %></td>
+    <td><%=h solution.created_at.to_s(:date_time24) %></td>
+    <td><%=h solution.updated_at.to_s(:date_time24) %></td>
+
+    <td><%= link_to 'Засвар', :action => 'edit', :id => solution %></td>
+    <td><%= link_to 'Устгах', {:action => 'destroy', :id => solution},
+                    :confirm => 'Энэ бодолтыг нээрээ устгах уу?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+

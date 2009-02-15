@@ -1,0 +1,20 @@
+<h1>Бүртгүүлэх</h1>
+<%= error_messages_for :user %>
+<% form_for :user do |f| -%>
+<p><label for="login">Login</label><br/>
+<%= f.text_field :login %></p>
+
+<p><label for="email">Email: (Бүртгэлийг тань идэвхжүүлэхэд хэрэглэх тул анхааралтай зөв оруулаарай)</label><br/>
+<%= f.text_field :email %> </p>
+
+<p><label for="password">Нууц үгээ сонго</label><br/>
+<%= f.password_field :password %></p>
+
+<p><label for="password_confirmation">Нууц үгээ давт</label><br/>
+<%= f.password_field :password_confirmation %></p>
+
+<p><label for="school_name">Сургууль: (Сурдаггүй бол төгссөн сургуулиа бичиж болно)</label><br/>
+<%= text_field_with_auto_complete :user, :school_name, {}, :skip_style => true %></p>
+
+<p><%= submit_tag 'Sign up' %></p>
+<% end -%>

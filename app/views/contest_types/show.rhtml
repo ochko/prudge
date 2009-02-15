@@ -1,0 +1,11 @@
+<p>
+  <b>Нэр:</b> <%=h @contest_type.name %>
+</p>
+<p>
+  <b>Тайлбар:</b> <%=h @contest_type.description %>
+</p>
+
+<% restrict_to 'Admin' do  %>
+<%= link_to 'Edit', :action => 'edit', :id => @contest_type %> |
+<% end %>
+<%= link_to 'Жагсаалт', :action => 'list' %>

@@ -1,0 +1,34 @@
+          <tr>
+            <td><label>Бодлого:</label></td><td> <%= link_to @problem.name,
+                                             :controller=>'problems', :action=>'show',
+                                             :id=>@problem.id %></td>
+          </tr>
+          <tr>
+            <td><label>Оноо : </label></td><td> <%= @problem.point %></td>
+          </tr>
+          <tr>
+            <td><label>Хугацаа : </label></td><td> <%= @problem.time %> сек</td>
+          </tr>
+          <tr>
+            <td><label>Санах ой : </label></td><td> <%= @problem.memory %> кб</td>
+          </tr>
+          <tr>
+            <td><label>Тэстийн тоо : </label></td><td> <%= @problem.problem_tests.size %></td>
+          </tr>
+          <tr><td colspan='2'><hr class='slim' /></td></tr>
+          <tr>
+            <td><label>Бодсон : </label></td><td> <%=h @solution.user.login %></td>
+          </tr>
+          <tr>
+            <td><label>Хэл:</label></td><td> <%= @solution.language.name %></td>
+          </tr>
+          <tr>
+            <td><label>Анх хадгалсан:</label></td><td> <%= @solution.created_at.to_s(:date_time24) %></td>
+          </tr>
+          <tr>
+            <td><label>Өөрчлөлт хийсэн:</label></td><td> <%= @solution.updated_at.to_s(:date_time24) %></td>
+          </tr>
+          <tr>
+            <td><label>Файлын нэр:</label></td><td> <%= file_link @solution %></td>
+          </tr>
+

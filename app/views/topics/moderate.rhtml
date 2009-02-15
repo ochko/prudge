@@ -1,0 +1,18 @@
+<table>
+  <tr>
+    <th>Огноо</th>
+    <th>Хэрэглэгч</th>
+    <th>Бичлэг</th>
+  </tr>
+  <% for c in @comments %>
+  <tr id="comment_<%=c.id%>">
+    <td class="small"><%= c.created_at %></td>
+    <td><%= link_to c.user_id, :controller=>'account', :action=>'show', :id=>c.user_id %></td>
+    <td class="small"><%=h truncate(c.text,70) %></td>
+    <td><%= link_to_remote image_tag('delete.png'), :url=>{:controller=>'comments', :action => 'destroy', :id => c }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @comment_pages.current.previous } if @comment_pages.current.previous %>
+<%= link_to 'Next page', { :page => @comment_pages.current.next } if @comment_pages.current.next %>

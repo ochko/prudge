@@ -1,0 +1,17 @@
+        <table>
+          <tr>
+            <th>Гүйцэтгэгч</th>
+            <th>Огноо</th>
+            <th>Төлбөр</th>
+          </tr>
+          <% for fulfillment in @fulfillments %>
+          <tr>
+            <td><%= link_to fulfillment.login,
+                            :controller=>'fulfillments',
+                            :action=>'show',
+                            :id=>fulfillment.id %></td>
+            <td><%= fulfillment.created_at %></td>
+            <td><%= fulfillment.earnings %></td>
+          </tr>
+          <% end %>
+        </table>

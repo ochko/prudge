@@ -1,0 +1,22 @@
+<h3><%= @group.name %> -д элсэх хүсэлтүүд</h3>
+
+<% if @requesters.size > 0 %>
+<table>
+  <% for r in @requesters %>
+  <tr>
+    <td>
+      <%= r.login %>
+    </td>
+    <td>
+      <%= link_to(image_tag('ok.png'), :controller=>'groups',
+      :action=>'allow', :group_id=>@group, :user_id=> r) %>
+      <%= link_to(image_tag('ng.png'), :controller=>'groups',
+      :action=>'deny', :group_id=>@group, :user_id=> r) %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<% else %>
+Элсэх хүсэлт ирээгүй байна
+<% end %>
+

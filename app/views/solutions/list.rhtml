@@ -1,0 +1,30 @@
+<h2>Бодолтууд</h2>
+<form id="searchform" name="searchform" action="" style="display:inline;">
+
+<select name="field">
+    <option value="user">Хэрэглэгч</option>
+    <option value="lang">Хэл</option>
+    <option value="prob">Бодлого</option>
+    <option value="file">Файлын нэр</option>
+</select>
+<label for="query"> = </label>
+<%= text_field_tag("query", params['query'], :size => 30 ) %>
+</form>
+
+<%= image_tag("spinner.gif",
+              :align => 'absmiddle',
+              :border=> 0,
+              :id => "spinner",
+              :style=>"display: none;" ) %>
+</p>
+
+<%= observe_form 'searchform',  :frequency => 3,
+         :update => 'table',
+         :before => "Element.show('spinner')",
+         :success => "Element.hide('spinner')",
+         :url => {:action => 'list'} %>
+
+<div id="table">
+<%= render :partial => 'list' %>
+</div>
+

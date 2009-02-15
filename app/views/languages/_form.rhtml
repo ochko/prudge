@@ -1,0 +1,23 @@
+<%= error_messages_for 'language' %>
+
+<!--[form:language]-->
+<p><label for="language_name">Нэр</label><br/>
+<%= text_field 'language', 'name'  %></p>
+
+<p><label for="language_description">Тайлбар</label><br/>
+<%= text_area 'language', 'description', 'cols'=>60, 'rows'=>4  %></p>
+
+<p><label for="language_compiler">Compiler</label><br/>
+<%= text_field 'language', 'compiler'  %></p>
+
+<p><label for="language_runner">Ажиллуулагч</label><br/>
+<%= text_field 'language', 'runner'  %></p>
+
+<p><label for="language_mem_req">Нэмэлт санах ой</label><br/>
+<%= text_field 'language', 'mem_req', 'size'=>5  %> килобайт</p>
+
+<p><label for="language_time_req">Нэмэлт хугацаа</label><br/>
+<%= text_field 'language', 'time_req', 'size'=>5  %> секунд</p>
+
+<!--[eoform:language]-->
+

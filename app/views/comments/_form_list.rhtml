@@ -1,0 +1,40 @@
+<h2><%= @box_title %></h2>
+<%= error_messages_for 'comment' %>
+<ul id="commentlist">
+  <% for c in @comments %>
+    <%= render :partial => 'comments/list_item',
+        :locals => {:comment=> c} %>
+  <% end %>
+</ul>
+<% if logged_in? %>
+  <a href="" onclick="Element.show('reply_form'); Element.hide(this); return false;" title="Үзүүлэх">
+    Хариу бичих
+  </a>
+  <div id="commentform">
+    <% form_remote_tag :url=>{:controller=>'comments', :action => 'create'},
+       :html=>{:id=>'reply_form', :style=>"display: none;"},
+       :before => "Element.show('create_spinner'); ",
+       :loading => "Form.disable('reply_form'); ",
+       :success => "Element.hide('create_spinner'); Form.enable('reply_form'); Field.clear('comment_text');",
+       :update => 'commentlist',
+       :position=> 'bottom' do %>
+
+    <%= hidden_field 'comment', 'topic_id' %>
+    <%= hidden_field 'comment', 'topic_type' %>
+
+    <label for="comment_text">Хариу:</label><br/>
+    <%= text_area 'comment', 'text', 'cols'=>60, 'rows'=>'6' %>
+
+    <%= submit_tag "Явуул" %>
+    <%= image_tag("spinner.gif",
+                  :align => 'absmiddle',
+                  :border=> 0,
+                  :id => "create_spinner",
+                  :style=>"display: none;" ) %>
+<% end %>
+</div>
+  <% else %>
+  Та хэлэлцүүлэгт оролцохыг хүсвэл
+  <%= link_to 'логин', :controller=>'account', :action=>'login' %>
+  хийнэ үү?
+  <% end %>

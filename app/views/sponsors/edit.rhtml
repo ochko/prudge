@@ -1,0 +1,9 @@
+<h2>Ивээн тэтгэгчийг засварлах</h2>
+
+<% form_tag :action => 'update', :id => @sponsor do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Хадгал' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @sponsor %> |
+<%= link_to 'Back', :action => 'list' %>

@@ -1,0 +1,26 @@
+<div class="rss-context">
+  <%= link_to(image_tag('rss-black.png'), :action=>:feed, :format=>:rss) %>
+</div>
+<ul>
+  <h2>Хэлэлцүүлэг</h2>
+  <li class="first"><%=link_to 'Сүүлд нэмэгдсэн', :controller => 'topics',
+    :action => 'last' %></li>
+  <li><%=link_to 'Сэдвүүд', :controller => 'topics',
+    :action => 'list' %></li>
+  <li><%=link_to 'Тэмцээний', :controller => 'topics',
+    :action => 'list', :type=>'contests' %></li>
+  <li><%=link_to 'Бодлогын', :controller => 'topics',
+    :action => 'list', :type=>'problems' %></li>
+  <li><%=link_to 'Хичээлийн', :controller => 'topics',
+    :action => 'list', :type=>'lessons' %></li>
+  <li><%=link_to 'Ажлын', :controller => 'topics',
+    :action => 'list', :type=>'tasks' %></li>
+  <% restrict_to 'Admin' do %>
+  <li><%=link_to 'Шинэ сэдэв нэмэх', :controller => 'topics',
+    :action => 'new' %></li>
+  <li><%=link_to 'Хянах', :controller => 'topics',
+    :action => 'moderate' %></li>
+  <% end %>
+  <li class="last"><%=link_to 'Хайх', :controller => 'topics',
+    :action => 'search' %></li>
+</ul>

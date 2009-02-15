@@ -1,0 +1,10 @@
+<%= error_messages_for 'comment' %>
+
+<!--[form:comment]-->
+<%= hidden_field 'comment', 'topic_id' %>
+<%= hidden_field 'comment', 'topic_type' %>
+
+<p><label for="comment_text">Бичлэг</label><br/>
+<%= text_area 'comment', 'text', 'cols'=>60, 'rows'=>'6' %></p>
+<!--[eoform:comment]-->
+

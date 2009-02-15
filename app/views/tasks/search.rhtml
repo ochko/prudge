@@ -1,0 +1,35 @@
+<h2>Ажил хайх</h2>
+<form id="searchform" name="searchform" action="" style="display:inline;">
+
+<select name="field">
+    <option value="pricemore">Үнэ нь багадаа</option>
+    <option value="priceless">Үнэ нь ихдээ</option>
+    <option value="technology">Технологи</option>
+    <option value="subject">Нэр</option>
+    <option value="subscriber">Захиалагч</option>
+    <option value="outline">Агуулга</option>
+</select>
+<label for="query"> = </label>
+<%= text_field_tag("query", params['query'], :size => 30 ) %>
+</form>
+
+<%= image_tag("spinner.gif",
+              :align => 'absmiddle',
+              :border=> 0,
+              :id => "spinner",
+              :style=>"display: none;" ) %>
+</p>
+
+<%= observe_form 'searchform',  :frequency => 3,
+         :update => 'table',
+         :before => "Element.show('spinner')",
+         :success => "Element.hide('spinner')",
+         :url => {:action => 'search'} %>
+
+<div id="table">
+<%= render :partial => 'list' %>
+</div>
+
+
+
+

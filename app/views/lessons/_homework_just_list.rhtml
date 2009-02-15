@@ -1,0 +1,30 @@
+<fieldset>
+  <legend>Даалгавар: <%= @lesson.title %></legend>
+  <div id='homeworks'>
+    <% if @problems.size > 0 %>
+    <table width="100%">
+      <tr>
+        <th>ID</th>
+        <th>Нэр</th>
+        <th>Оноо</th>
+        <th>Хугацааны хязгаар</th>
+        <th>Санах ойн хязгаар</th>
+        <th>Огноо</th>
+      </tr>
+      <% for problem in @problems %>
+      <tr>
+        <td><%= problem.id %></td>
+        <td><%= link_to problem.name, :controller=>'problems',
+          :action => 'show', :id => problem %></td>
+        <td><%= problem.point %></td>
+        <td><%= problem.time %> сек</td>
+        <td><%= problem.memory %> кб</td>
+        <td><%= problem.created_at.to_s(:date_only) %></td>
+      </tr>
+      <% end %>
+    </table>
+    <% else %>
+    Даалгавар алга!
+    <% end %>
+  </div>
+</fieldset>

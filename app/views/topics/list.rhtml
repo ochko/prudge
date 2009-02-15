@@ -1,0 +1,18 @@
+<h2><%= @page_title %></h2>
+
+<table>
+  <tr>
+    <th></th>
+    <th>Сэдэв</th>
+    <th>Илгээсэн тоо</th>
+    <th>Шинэчлэгдсэн</th>
+  </tr>
+<% for topic in @topics %>
+  <tr>
+    <td><%= topic.id %></td>
+    <td><%= link_to topic.name, :action => 'show', :id => topic, :type=>@type %></td>
+    <td><%= topic.post_count %></td>
+    <td><%= topic.last_time %></td>
+  </tr>
+<% end %>
+</table>

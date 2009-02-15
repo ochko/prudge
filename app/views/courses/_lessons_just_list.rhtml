@@ -1,0 +1,14 @@
+<table width='100%'>
+  <% for lesson in @lessons %>
+  <tr bgcolor="<%= cycle('#ccc', '#eee') %>">
+    <td>
+      <%= link_to_remote(image_tag('detail.png'), :update=>'problems',
+                         :url=>{:controller=>'lessons', :action=>'list_homeworks', :lesson=>lesson}) %>
+    </td>
+    <td>
+      <%= link_to lesson.title,
+          :controller=>:lessons, :action=>:show, :id=>lesson %>
+    </td>
+  </tr>
+  <% end %>
+</table>

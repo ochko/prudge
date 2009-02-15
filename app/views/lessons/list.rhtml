@@ -1,0 +1,6 @@
+<h1>Хичээлүүд</h1>
+<% view_cache Lesson, :tag=> (params[:page] || '1') do -%>
+  <%= will_paginate @lessons, :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+  <%= render :partial => 'list' %>
+  <%= will_paginate @lessons, :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+<% end -%>

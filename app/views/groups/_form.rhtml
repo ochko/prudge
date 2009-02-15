@@ -1,0 +1,20 @@
+<%= error_messages_for 'course' %>
+
+<!--[form:course]-->
+<p><label for="course_name">Курс</label><br/>
+<%= select("group", "course_id",
+    Course.find(:all).collect {|c| [ c.name, c.id ] },
+    { :include_blank => true })  %></p>
+
+<p><label for="course_name">Нэр</label><br/>
+<%= text_field 'group', 'name', 'size'=>70  %></p>
+
+<p><label for="course_description">Тодорхойлолт</label><br/>
+<%= text_area 'group', 'description', 'cols'=>70, 'rows'=>14 %></p>
+
+<p><label for="course_name">Бүртгэл</label><br/>
+<%= select("group", "isopen",
+    [ ['Нээлттэй', 1], [ 'Хаалттай', 0 ] ]) %></p>
+
+<!--[eoform:course]-->
+

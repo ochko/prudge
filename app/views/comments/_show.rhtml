@@ -1,0 +1,21 @@
+<p>
+  <div align='right'>
+    <% form_remote_tag :url=>{:controller=>'comments', :action => 'form'},
+    :before => "Element.show('spinner_form')",
+    :success => "Element.hide('spinner_form')",
+    :update=>'comment_list' do %>
+    <%= image_tag("spinner.gif",
+        :align => 'absmiddle',
+        :border=> 0,
+        :id => "spinner_form",
+        :style=>"display: none;" ) %>
+
+    <%= hidden_field 'comment', 'topic_id', :value=>topic_id %>
+    <%= hidden_field 'comment', 'topic_type', :value=>topic_type %>
+
+    <%= submit_tag button_text, :onclick=>"Element.hide(this)" %>
+    <% end %>
+  </div>
+  <div id='comment_list'>
+  </div>
+</p>

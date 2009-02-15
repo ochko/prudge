@@ -1,0 +1,23 @@
+<ul>
+  <h2>Ажил</h2>
+  <li class="first"><%=link_to 'Ажлууд', :controller => 'tasks',
+    :action => 'list' %></li>
+  <% restrict_to '!Accountant' do  %>
+  <li><%=link_to 'Миний ажлууд', :controller => 'tasks',
+    :action => 'my' %></li>
+  <% end %>
+  <% restrict_to 'Subscriber' do  %>
+  <li><%=link_to 'Шинэ ажил', :controller => 'tasks',
+    :action => 'new' %></li>
+  <% end %>
+  <% restrict_to 'Accountant' do  %>
+  <li><%=link_to 'Бүх гүйцэтгэлүүд', :controller => 'fulfillments',
+    :action => 'list' %></li>
+  <li><%=link_to 'Төлбөртэй гүйцэтгэлүүд', :controller => 'fulfillments',
+    :action => 'payments' %></li>
+  <li><%=link_to 'Баннерууд', :controller => 'banners',
+    :action => 'list' %></li>
+  <% end %>
+  <li class="last"><%=link_to 'Хайх', :controller => 'tasks',
+    :action => 'search' %></li>
+</ul>

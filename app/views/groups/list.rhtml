@@ -1,0 +1,15 @@
+<h2>Ангиуд</h2>
+
+<table>
+
+<% for group in @groups %>
+  <tr>
+    <td>
+      <h3><%= link_to group.name, :action => 'show', :id => group %></h3>
+      <div class='small'><%= group.created_at %>-д нээгдсэн. Бүртгэл <%= group.is_open %></div>
+      <p><%=h group.description %></p>
+    </td>
+  </tr>
+<% end %>
+</table>
+

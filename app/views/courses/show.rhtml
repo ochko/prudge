@@ -1,0 +1,83 @@
+<h2><%= @course.name %></h2>
+<table width='100%'>
+  <tr>
+    <td colspan='2'>
+      <%=h @course.description %>
+    </td>
+  </tr>
+  <tr>
+    <td class='smallink' width='150' align='left'>
+      <b>Багш:</b> <%=h @course.teacher.login %>
+    </td>
+    <td class='smallink'>
+      <% restrict_to "Teacher" do %>
+      <%= link_to 'Анги үүсгэх', :controller=>'groups', :action => 'new', :course=> @course %> |
+      <a href="" onclick="Element.show('lesson_chooser'); return false;">
+        Хичээл нэмэх
+      </a> |
+      <%= link_to 'Хичээл үүсгэх', :controller=>'lessons', :action => 'new' %> |
+      <%= link_to 'Засварлах', :action => 'edit', :id => @course %> |
+      <%= link_to('Устгах', { :action => 'destroy', :id => @course },
+      :confirm => 'Үнэхээр устгах уу?', :method => :post) %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+
+<table width='100%'>
+  <tr>
+    <td width='100%' valign='top'>
+      <fieldset>
+        <legend>Хичээлүүд</legend>
+        <div id='lesson_chooser' style="display: none;" width="100%">
+          <% form_remote_tag :url => {
+          :action => 'add_lesson', :id=>@course},
+          :update => 'course_lessons' do %>
+          <%= text_field_with_auto_complete :lesson, :title, {}, :skip_style => true %>
+          <%= submit_tag 'нэм' %>
+          <% end %>
+        </div>
+        <div id='course_lessons'>
+          <% if @course.teacher_id == current_user.id %>
+          <%= render :partial => 'lessons' %>
+          <% else %>
+          <%= render :partial => 'lessons_just_list' %>
+          <% end %>
+        </div>
+      </fieldset>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div id='problems' style="height: 350px; width: 100%; overflow: auto">
+
+      </div>
+    </td>
+  </tr>
+</table>
+<% if @groups.size > 0 %>
+<h3>Ангиуд</h3>
+<table>
+<tr>
+  <th>Нэр</th>
+  <th>Тайлбар</th>
+  <th>Оролцогчид</th>
+  <th>Эхэлсэн</th>
+</tr>
+<% for g in @groups %>
+<tr>
+  <td>
+    <%= link_to g.name, :controller=>'groups', :action=>'show', :id=>g %>
+  </td>
+  <td>
+    <%= g.description %>
+  </td>
+  <td>
+    <%= g.members.size %>
+  </td>
+  <td>
+    <%= g.created_at.to_s(:date_only) %>
+  </td>
+<% end %>
+</table>
+<% end %>

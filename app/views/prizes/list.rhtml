@@ -1,0 +1,27 @@
+<h2>Шагналууд</h2>
+
+<table>
+  <tr>
+    <th>Нэр</th>
+    <th>Тайлар</th>
+  </tr>
+
+<% for prize in @prizes %>
+  <tr>
+    <td><%= prize_link prize %></td>
+    <td><%=h prize.description %></td>
+    <% restrict_to 'Admin' do  %>
+    <td><%= link_to image_tag('edit.png'), :action => 'edit', :id => prize %></td>
+    <td><%= link_to image_tag('delete.png'), { :action => 'destroy', :id => prize }, :confirm => 'Are you sure?', :method => :post %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @prize_pages.current.previous } if @prize_pages.current.previous %>
+<%= link_to 'Next page', { :page => @prize_pages.current.next } if @prize_pages.current.next %>
+
+<br />
+<% restrict_to 'Admin' do  %>
+<%= link_to 'Шинэ төрлийн шагнал', :action => 'new' %>
+<% end %>

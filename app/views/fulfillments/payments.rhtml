@@ -1,0 +1,19 @@
+<h2>Ажлын гүйцэтгэлийн төлбөр</h2>
+
+<table>
+  <tr>
+    <th>Ажил</th>
+    <th>Үнэлгээ</th>
+    <th>Гүйцэтгэгч</th>
+    <th>Огноо</th>
+    <th>Төлбөр</th>
+  </tr>
+
+<% for fulfillment in @fulfillments %>
+  <%= render :partial=>'pay', :locals=>{:f => fulfillment} %>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @fulfillment_pages.current.previous } if @fulfillment_pages.current.previous %>
+<%= link_to 'Next page', { :page => @fulfillment_pages.current.next } if @fulfillment_pages.current.next %>
+

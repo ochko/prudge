@@ -1,0 +1,43 @@
+<%= error_messages_for 'task' %>
+
+<!--[form:task]-->
+<table class="slim" width="50%">
+  <tr>
+    <td>
+      <label for="task_subject">Нэр</label><br/>
+        <%= text_field 'task', 'subject', 'size'=>60  %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="task_technology">Технологи</label><br/>
+        <%= text_field 'task', 'technology', 'size'=>60  %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="tabber">
+        <div class="tabbertab" title="Тойм">
+          <%= textile_editor 'task', 'outline', 'cols' => 82, 'rows' => 25  %>
+        </div>
+        <div class="tabbertab" title="Шаардлага">
+          <%= textile_editor 'task', 'requirements', 'cols' => 82, 'rows' => 25  %>
+        </div>
+        <div class="tabbertab" title="Хүлээж авах зүйлс">
+          <%= textile_editor 'task', 'deliverables', 'cols' => 82, 'rows' => 25  %>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td width='1%'>
+      <label for="task_price">Хөлс : </label>
+        <%= text_field 'task', 'price', 'size'=>7  %>
+      <label for="task_deadline"> Эцсийн хугацаа : </label>
+        <%= datetime_select 'task', 'deadline',
+            :use_month_numbers => true %>
+    </td>
+  </tr>
+</table>
+<!--[eoform:task]-->
+<%= textile_editor_initialize %>

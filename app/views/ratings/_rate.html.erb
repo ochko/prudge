@@ -1,0 +1,20 @@
+<% @convert = %w[one two three four five] %>
+<div class="rating-right star-ratings-container">
+<div id="star-ratings-block-<%= asset.id %>" class="star-ratings-block">
+  <%= number_with_precision(asset.rating, 1) %>/5 Од (<%= asset.ratings.size %> санал)<br />
+    <ul class='star-rating'>
+      <li class='current-rating' style='width:<%= (asset.rating * 30).to_i -%>px;'>
+        Currently <%= number_with_precision(asset.rating, 1) %>/5 Stars.
+      </li>
+      <% 1.upto(5) do |x| -%>
+        <li>
+          <%= link_to_remote( "#{x}",
+            { :url => { :controller => "ratings", :action => "rate",
+            :id => asset.id, :rating => x, :rateable_type => asset.class.to_s } },
+            { :class => "#{@convert[x-1]}-stars", :name => "#{pluralize(x,'star')} out of 5",
+            :title => "Rate this a #{x} out of 5" } ) %>
+        </li>
+      <% end -%>
+    </ul>
+</div>
+</div>

@@ -1,0 +1,19 @@
+<h1>Тусламж</h1>
+<% view_cache Page, :tag=> (params[:page] || 1) do %>
+  <% for help in @helps%>
+    <div class='post'>
+      <h1><%= image_tag('help.png') %> <%=h help.title%></h1>
+      <div class="entry">
+        <%= help.content %>
+      </div>
+      <div class="info">
+        Бичсэн <%= help.created_at %>, Зүүлт: <%= page_tag_link help.tags%>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<% restrict_to 'Admin' do %>
+<br />
+<%= link_to 'Шинэ тусламж', :controller=>'pages', :action => 'new' %>
+<% end %>

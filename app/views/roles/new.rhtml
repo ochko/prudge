@@ -1,0 +1,8 @@
+<h2>Шинэ дүр</h2>
+
+<% form_tag :action => 'create' do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag "Үүсгэ" %>
+<% end %>
+
+<%= link_to 'Дүрүүд', :action => 'list' %>

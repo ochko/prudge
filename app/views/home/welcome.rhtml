@@ -1,0 +1,19 @@
+<% view_cache Page, :tag=> (params[:page] || 1) do %>
+<% for n in @news%>
+  <div class='post'>
+    <h1><%= image_tag('txt.png') %> <%=h n.title%></h1>
+    <div class="entry">
+      <%= n.content %>
+    </div>
+    <p class='info'>
+      Бичсэн: <%= n.created_at %>, Зүүлт: <%= page_tag_link n.tags%>
+    </p>
+  </div>
+<% end %>
+<%= will_paginate @news %>
+<% end %>
+
+<% restrict_to 'Admin' do %>
+<br />
+<%= link_to 'Шинэ мэдээ', :controller=>'pages', :action => 'new' %>
+<% end %>

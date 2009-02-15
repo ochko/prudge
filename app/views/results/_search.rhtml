@@ -1,0 +1,24 @@
+<table>
+  <tr>
+    <th></th>
+    <th>Бодлого</th>
+    <th>Хэрэглэгч</th>
+    <th>Ажиллагаа</th>
+    <th>Хугацаа</th>
+    <th>Санах ой</th>
+    <th>Үр дүн</th>
+  </tr>
+
+<% for result in @results %>
+  <tr>
+    <td><%= link_to show_correctness(result.matched), :action => 'show', :id => result %></td>
+    <td><%= result.name %></td>
+    <td><%= result.login %></td>
+    <td><%= translate_message(result.status) %></td>
+    <td><%= result.time %></td>
+    <td><%= result.memory %></td>
+    <td><%=h head_of(result.output, 10) %></td>
+    <td><%= link_to image_tag('delete.png'), { :action => 'destroy', :id => result }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>

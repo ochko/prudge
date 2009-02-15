@@ -1,0 +1,9 @@
+<% for column in Sponsor.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @sponsor.send(column.name) %>
+</p>
+<% end %>
+<% restrict_to 'Admin' do  %>
+<%= link_to 'Edit', :action => 'edit', :id => @sponsor %> |
+<% end %>
+<%= link_to 'Жагсаалт', :action => 'list' %>

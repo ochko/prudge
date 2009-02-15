@@ -1,0 +1,13 @@
+log/
+tmp/
+judge/
+public/banners/
+public/attacments/
+public/photos/
+public/uploads/
+doc/api
+doc/app
+config/database.yml
+config/server.pem
+db/*.sqlite3
+

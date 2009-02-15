@@ -1,0 +1,18 @@
+<h2>Шинэ баннэр</h2>
+
+<% form_for :banner, :url => { :action => 'create' }, :html => { :multipart => true } do |form| -%>
+<p>
+  <label for="uploaded_data">Зургаа сонго:</label>
+  <br/><%= form.file_field  :uploaded_data %>
+</p>
+<p>
+  <label for="banner_address">URL:</label><br/>
+  <%= form.text_field :address, 'size'=> 40  %>
+</p>
+<p>
+  <label for="banner_contact">Холбоо барих</label><br/>
+  <%= text_area 'banner', 'contact', 'cols'=> 50, 'rows'=> 12 %>
+</p>
+<%= submit_tag "Оруул" %>
+<% end -%>
+

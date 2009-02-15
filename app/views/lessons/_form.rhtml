@@ -1,0 +1,32 @@
+<%= error_messages_for 'lesson' %>
+
+<!--[form:lesson]-->
+<table class='slim' width="100%">
+  <tr>
+    <td>
+      <label for="lesson_title">Гарчиг</label>
+    </td>
+    <td>
+      <%= text_field 'lesson', 'title', 'size'=>60  %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan=2>
+      <%= fckeditor_textarea('lesson',
+                           'text',
+                           :toolbarSet => 'Simple',
+                           :height => '500') %>
+
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="lesson_tags">Зүүлт</label>
+    </td>
+    <td>
+      <%= text_field 'lesson', 'tags', 'size'=>50  %>
+    </td>
+  </tr>
+</table>
+<!--[eoform:lesson]-->
+

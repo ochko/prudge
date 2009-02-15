@@ -1,0 +1,25 @@
+<h2>Дүр болон хэрэглэгчдийн оноолт</h2>
+
+<table>
+  <tr>
+    <th>Дүр</th>
+    <th>Хэрэглэгч</th>
+  </tr>
+
+<% for role_user in @role_users %>
+  <tr>
+    <td><%=h role_user.role.title %></td>
+    <td><%=h role_user.user.login %></td>
+
+    <td><%= link_to image_tag('edit.png'), :action => 'edit', :id => role_user %></td>
+    <td><%= link_to image_tag('delete.png'), { :action => 'destroy', :id => role_user }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @role_user_pages.current.previous } if @role_user_pages.current.previous %>
+<%= link_to 'Next page', { :page => @role_user_pages.current.next } if @role_user_pages.current.next %>
+
+<br />
+
+<%= link_to 'Шинэ оноолт хийх', :action => 'new' %>

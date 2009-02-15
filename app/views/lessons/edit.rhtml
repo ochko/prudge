@@ -1,0 +1,27 @@
+<h2>Хичээлийг засварлах</h2>
+
+<% form_tag :action => 'update', :id => @lesson do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Хадгал' %>
+<% end %>
+<table>
+  <tr>
+    <td>
+      <fieldset>
+        <legend>Файл хавсаргах</legend>
+        <%= render :partial => 'attachment/form_list' %>
+      </fieldset>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <fieldset>
+        <legend>Даалгаварт бодох бодлого</legend>
+        <%= render :partial => 'homework' %>
+      </fieldset>
+    </td>
+  </tr>
+</table>
+
+<%= link_to 'Show', :action => 'show', :id => @lesson %> |
+<%= link_to 'Back', :action => 'list' %>

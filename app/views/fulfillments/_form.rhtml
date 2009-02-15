@@ -1,0 +1,12 @@
+<%= error_messages_for 'fulfillment' %>
+
+<!--[form:fulfillment]-->
+<p><label for="fulfillment_task">Ажил : </label>
+<%= link_to @task.subject, :controller=>'tasks',
+            :action=>'show', :id=> @task %></p>
+
+<p><label for="fulfillment_outline">Гүйцэтгэлийн товч тайлбар</label><br/>
+<%= textile_editor 'fulfillment', 'outline', 'cols'=>82  %></p>
+<%= hidden_field 'fulfillment', 'task_id' %>
+<!--[eoform:fulfillment]-->
+<%= textile_editor_initialize %>

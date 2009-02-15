@@ -1,0 +1,9 @@
+<h2>Ангийг засварлах</h2>
+
+<% form_tag :action => 'update', :id => @group do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Хадгал' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @course %> |
+<%= link_to 'Back', :action => 'list' %>

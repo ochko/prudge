@@ -1,0 +1,15 @@
+<h2>Бодолтыг засварлах</h2>
+
+<% form_for :solution,
+   :url => { :controller=>'solutions',
+             :action => 'update',
+             :id => @solution},
+   :html => { :multipart => true} do |form| %>
+  <%= render :partial => 'form', :locals=>{:form => form} %>
+  <p>
+  <%= submit_tag 'Хадгал' %>
+  </p>
+<% end %>
+
+<%= link_to 'Бодолтыг харах', :action => 'show', :id => @solution %> |
+<%= link_to 'Буцах', :action => 'my' %>

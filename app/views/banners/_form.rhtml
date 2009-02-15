@@ -1,0 +1,41 @@
+<%= error_messages_for 'banner' %>
+
+<!--[form:banner]-->
+<table width='90%'>
+  <tr>
+    <td class='top' rowspan='4'>
+      <%= image_tag(@banner.public_filename()) %>
+    </td>
+  </tr>
+  <tr>
+    <td class='top'>
+      <label for="banner_enabled">Харуулах</label><br/>
+      <select id="banner_enabled" name="banner[enabled]">
+        <option value="false">Үгүй</option>
+        <option value="true" selected>Тийм</option>
+      </select>
+    </td>
+    <td class='top'>
+      <label for="banner_erembe">Эрэмбэ</label><br/>
+      <%= text_field 'banner', 'erembe', 'size'=> 3  %>
+    </td>
+    <td class='top'>
+      <label for="banner_clicks">Дарсан</label><br/>
+      <%= text_field 'banner', 'clicks', 'size'=> 6  %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan='3' class='top'>
+      <label for="banner_address">Хаяг</label><br/>
+      <%= text_field 'banner', 'address', 'size'=> 40  %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan='3' class='top'>
+      <label for="banner_contact">Холбоо барих</label><br/>
+      <%= text_area 'banner', 'contact', 'cols'=> 50, 'rows'=> 12 %>
+    </td>
+  </tr>
+</table>
+<!--[eoform:banner]-->
+

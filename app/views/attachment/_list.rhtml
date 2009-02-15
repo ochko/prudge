@@ -1,0 +1,17 @@
+<table id="attachments" width="100%">
+  <tr>
+    <th width="170">Нэр</th>
+    <th>Тайлбар</th>
+    <th width="1%">Хэмжээ</th>
+  </tr>
+  <% for attachment in @attachments %>
+  <tr id="attachment_<%= attachment.id %>">
+    <td><%= link_to shorten(attachment.filename, 20),
+            :controller=>'attachment',
+            :action=>'download',
+            :id => attachment.id %></td>
+    <td><%=h attachment.notes %></td>
+    <td><%= bytize attachment.size %></td>
+  </tr>
+  <% end %>
+</table>

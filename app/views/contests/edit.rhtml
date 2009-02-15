@@ -1,0 +1,9 @@
+<h2>Тэмцээнийг засварлах</h2>
+
+<% form_tag :action => 'update', :id => @contest do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Хадгал' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @contest %> |
+<%= link_to 'Back', :action => 'list' %>

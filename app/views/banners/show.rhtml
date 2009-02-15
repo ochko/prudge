@@ -1,0 +1,84 @@
+<h2>Баннэр</h2>
+<table width='95%'>
+  <tr>
+    <th>
+    </th>
+    <th>
+      160x
+    </th>
+    <th>
+      100x
+    </th>
+    <th>
+      40x
+    </th>
+  </tr>
+  <tr>
+    <td class='top'>
+      <table>
+        <tr>
+          <td><b>Линк:</b></td><td><%= link_to @banner.address, @banner.address %></td>
+        </tr>
+        <tr>
+          <td><b>Байрлал:</b></td><td><%= @banner.erembe %></td>
+        </tr>
+        <tr>
+          <td><b>Харуулах:</b></td>
+          <td><%= show_correctness(@banner.enabled) %></td>
+        </tr>
+        <% if !@banner.enabled? %>
+        <tr><td colspan='2'>
+            Та баннераа харагдуулахыг хүсвэл
+            <%= link_to('энд', :controller=>'home', :action=>'aboutus') %>
+            дарж холбоо барина уу?
+        </td></tr>
+        <% end %>
+        <tr>
+          <td><b>Дарсан:</b></td><td><%= @banner.clicks %></td>
+        </tr>
+      </table>
+
+      <fieldset>
+        <legend>Файл</legend>
+        <table class='slim'>
+          <tr>
+            <td><b>Хэмжээ:</b></td><td><%= @banner.size %> байт</td>
+          </tr>
+          <tr>
+            <td><b>Төрөл:</b></td><td><%= @banner.content_type %></td>
+          </tr>
+          <tr>
+            <td><b>Өндөр:</b></td><td><%= @banner.height %> цэг</td>
+          </tr>
+          <tr>
+            <td><b>Өргөн:</b></td><td><%= @banner.width %> цэг</td>
+          </tr>
+          <tr>
+            <td><b>Нэр:</b></td><td><%= link_to @banner.filename,
+                                        @banner.public_filename() %></td>
+          </tr>
+        </table>
+      </fieldset>
+
+      <fieldset>
+        <legend>Холбоо барих</legend>
+        <%= @banner.contact %>
+      </fieldset>
+    </td>
+    <td class='top' align='center'>
+      <%= image_tag(@banner.public_filename()) %>
+    </td>
+    <td class='top' align='center'>
+      <%= image_tag(@banner.public_filename(:thumb)) %>
+    </td>
+    <td class='top' align='center'>
+      <%= image_tag(@banner.public_filename(:tiny)) %>
+    </td>
+  </tr>
+</table>
+<% restrict_to 'Admin' do %>
+<%= link_to 'Засварлах', :action => 'edit', :id => @banner %> |
+<%= link_to 'Устгах', { :action => 'destroy', :id => @banner }, :confirm => 'Are you sure?', :method => :post %> |
+<%= link_to 'Баннерууд', :action => 'list' %>
+<% end %>
+

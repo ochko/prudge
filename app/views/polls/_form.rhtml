@@ -1,0 +1,10 @@
+<%= error_messages_for 'poll' %>
+
+<!--[form:poll]-->
+<p><label for="poll_active">Active</label><br/>
+<select id="poll_active" name="poll[active]"><option value="false" selected>False</option><option value="true">True</option></select></p>
+
+<p><label for="poll_question">Question</label><br/>
+<%= text_field 'poll', 'question'  %></p>
+<!--[eoform:poll]-->
+

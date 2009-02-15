@@ -1,0 +1,14 @@
+<h2>Бодолт оруулах</h2>
+
+<% form_for :solution,
+   :url => { :controller=>'solutions',
+             :action => 'create'},
+   :html => { :multipart => true} do |form| %>
+
+  <%= render :partial => 'form', :locals=>{:form => form} %>
+
+  <%= submit_tag "Илгээ" %>
+<% end %>
+
+<%= link_to 'Буцах', :controller=>'problems',
+                    :action => 'show', :id=> @solution.problem_id %>

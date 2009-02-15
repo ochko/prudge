@@ -1,0 +1,9 @@
+<h1>Editing poll_choice</h1>
+
+<% form_tag :action => 'update', :id => @poll_choice do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @poll_choice %> |
+<%= link_to 'Back', :action => 'list' %>

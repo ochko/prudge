@@ -1,0 +1,32 @@
+<fieldset>
+  <legend><%= list_title %></legend>
+  <table width="100%" style="border-collapse: collapse; margin: -0.8em 0 0 0">
+    <tr>
+      <th class="white"width="1%"></th>
+      <th class="white">Хэрэглэгч</th>
+      <th class="white">Хэл</th>
+      <th class="white">Бодсон</th>
+      <th class="white">Шинэчилсэн</th>
+      <th class="white">Хувь</th>
+      <th class="white">Хугацаа</th>
+      <td width="100" style="text-align: right;">
+        <a href='#' onclick="Element.hide('solved')" title="Хаах">
+          <%= image_tag('close.png') %>
+        </a>
+      </td>
+    </tr>
+    <% for s in @solutions%>
+    <tr>
+      <td><%= link_to show_correctness(s.correct),
+              :controller=>'solutions', :action=>'show',
+        :id => s.id %></td>
+      <td><%= s.user_login %></td>
+      <td><%= s.language_name %></td>
+      <td class='small'><%= s.created_at.to_s(:date_time24) %></td>
+      <td class='small'><%= s.updated_at.to_s(:date_time24) %></td>
+      <td><%= "%0.0f" % (s.percent*100) %></td>
+      <td><%= sec2milisec s.avg_time %></td>
+    </tr>
+    <% end %>
+  </table>
+</fieldset>

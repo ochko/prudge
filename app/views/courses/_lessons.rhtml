@@ -1,0 +1,20 @@
+<table width='100%'>
+  <% for lesson in @lessons %>
+  <tr bgcolor="<%= cycle('#ccc', '#eee') %>">
+    <td>
+      <%= link_to_remote(image_tag('detail.png'), :update=>'problems',
+                         :url=>{:controller=>'lessons', :action=>'get_homeworks', :lesson=>lesson}) %>
+    </td>
+    <td>
+      <%= link_to lesson.title,
+          :controller=>:lessons, :action=>:show, :id=>lesson %>
+    </td>
+    <td>
+      <%= link_to_remote(image_tag('ng.png'), :update=>'course_lessons',
+                         :url=>{:controller=>'courses', :action=>'remove_lesson', :id=>@course, :lesson=>lesson},
+                         :confirm => 'Хичээлийг хасах уу?', :method => :post) %>
+    </td>
+
+  </tr>
+  <% end %>
+</table>

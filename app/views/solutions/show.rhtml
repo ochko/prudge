@@ -1,0 +1,52 @@
+<h2><%= @title %></h2>
+<table width="100%">
+  <tr>
+    <td class="top">
+      <fieldset>
+        <legend>Бодолт</legend>
+        <table width="100%">
+          <%= render :partial=>'problem'%>
+          <tr>
+            <td class="smallinkl">
+              <%= link_to '<-- Тэмцээн рүү', :controller=>'contests',
+                    :action=>'show', :id=>@solution.problem.contest %>
+            </td>
+            <td class="smallink">
+              <% if @solution.user_id == current_user.id %>
+              <%= link_to 'Засвар', :action => 'edit', :id => @solution %> |
+              <%= link_to 'Устгах', {:action => 'destroy', :id => @solution},
+                          :confirm => 'Энэ бодолтыг нээрээ устгах уу?', :method => :post %>
+              <% end %>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+    </td>
+    <td class="top" width="50%">
+      <fieldset>
+        <legend>Үр дүн</legend>
+        <div id='result'>
+          <% if @solution.checked %>
+          <%= render :partial => 'results/list' %>
+          <% elsif current_user.id == @solution.user_id %>
+          <% form_tag :action => 'check', :id => @solution do %>
+          <%= submit_to_remote "check", "Шалгах", :update => "result",
+                 :url => { :action => "check", :id => @solution },
+                 :html=>{:id=>'check_button'},
+                 :before => "Element.hide('check_button'); Element.show('progress_bar');" %>
+          <%= image_tag("progress-bar.gif",
+              :align => 'absmiddle',
+              :border=> 0,
+              :id => "progress_bar",
+              :style=>"display: none;" ) %>
+          <% end %>
+          <% end %>
+        </div>
+      </fieldset>
+    </td>
+  </tr>
+</table>
+<%= render :partial=>'comments/show',
+           :locals=>{:topic_id   => @solution.id,
+                     :topic_type => 'Solution',
+                     :button_text=> 'Тусламж дэмжлэгэ' } %>

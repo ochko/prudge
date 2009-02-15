@@ -1,0 +1,61 @@
+<h2><%= @group.name %> Анги</h2>
+<table width='100%'>
+  <tr>
+    <td colspan='2'>
+      <label><%=h @group.description %></label><br />
+      <%=h @course.name %> : <%=h @course.description %>
+    </td>
+  </tr>
+  <tr>
+    <td class='smallink' width='150' align='left'>
+      <b>Багш:</b> <%=h @course.teacher.login %>
+    </td>
+    <td class='smallink'>
+      <%= link_to('Элсэх', :action => 'enroll', :id => @group) if @group.isopen %>
+      <% restrict_to "Teacher" do %>
+      | <%= link_to "Элсэх хүсэлт(#{@requesters.size})", :action=>'requests', :id => @group %>
+      | <%= link_to 'Засварлах', :action => 'edit', :id => @course %>
+      | <%= link_to('Устгах', { :action => 'destroy', :id => @course },
+      :confirm => 'Үнэхээр устгах уу?', :method => :post) %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+
+<table width='100%'>
+  <tr>
+    <td valign='top'>
+      <fieldset>
+        <legend>Хичээлүүд</legend>
+        <table width='100%'>
+          <% for lesson in @lessons %>
+          <tr bgcolor="<%= cycle('#ccc', '#eee') %>">
+            <td>
+              <%= link_to_remote(image_tag('detail.png'), :update=>'problems',
+              :url=>{:action=>'get_homeworks', :lesson=>lesson, :group=>@group}) %>
+            </td>
+            <td>
+              <%= link_to lesson.title,
+                  :controller=>:lessons, :action=>:show, :id=>lesson %>
+            </td>
+
+          </tr>
+          <% end %>
+          <tr>
+            <td>
+              <%= link_to_remote(image_tag('detail-all.png'), :update=>'problems',
+              :url=>{:action=>'get_allhomeworks', :group=>@group}) %>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div id='problems'>
+
+      </div>
+    </td>
+  </tr>
+</table>

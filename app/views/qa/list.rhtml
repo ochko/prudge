@@ -1,0 +1,33 @@
+<h1>Асуултууд</h1>
+<ul>
+  <% for qa in @question_answers %>
+    <li>
+      <a href="#<%= qa.id %>"><%= qa.question %></a>
+    </li>
+  <% end %>
+</ul>
+Таны сонирхсон асуулт эдгээр дотор байхгүй бол
+<%= link_to 'энд', :action => 'new' %> дарж асууна уу?
+
+<h1>Хариултууд</h1>
+<% for question_answer in @question_answers %>
+  <div class='post'>
+    <a name="<%= question_answer.id %>"></a>
+    <h2><%=h question_answer.question %></h2>
+    <div class="entry">
+      <%= question_answer.answer %>
+      <% if question_answer.answer.nil? %>
+        (Хариулт хүлээгдэж байна)
+      <% end %>
+    </div>
+    <div class="info">
+      Асуусан: <%= question_answer.created_at %>, Хариулсан: <%= question_answer.updated_at %>
+      <% restrict_to 'Admin' do %>
+      | <%= link_to image_tag('edit.png'), :action => 'edit', :id => question_answer %>
+      | <%= link_to image_tag('delete.png'), { :action => 'destroy', :id => question_answer },
+            :confirm => 'Are you sure?', :method => :post %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+

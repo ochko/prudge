@@ -1,0 +1,23 @@
+<h2>Дэвшигдсэн бодлогууд</h2>
+<table width="100%">
+  <tr>
+    <th>Нэр</th>
+    <th>Оноо</th>
+    <th>Хугацааны хязгаар</th>
+    <th>Санах ойн хязгаар</th>
+    <th>Дэвшүүлсэн</th>
+    <th>Огноо</th>
+  </tr>
+
+<% for problem in @problems %>
+  <tr>
+    <td><%= link_to problem.name, :controller=>'problems',
+      :action => 'show', :id => problem %></td>
+    <td><%=h problem.point %></td>
+    <td><%=h problem.time %> секунд</td>
+    <td><%=h problem.memory %> килобайт</td>
+    <td><%=h problem.user.login %></td>
+    <td><%=h problem.created_at %></td>
+  </tr>
+<% end %>
+</table>

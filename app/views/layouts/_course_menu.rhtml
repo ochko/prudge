@@ -1,0 +1,11 @@
+<ul>
+  <h2>Курс</h2>
+  <li class="first"><%=link_to 'Манай анги', :controller => 'groups', :action => 'my' %></li>
+  <li><%=link_to 'Ангиуд', :controller => 'groups', :action => 'list' %></li>
+  <% restrict_to "Teacher" do %>
+  <li><%=link_to 'Анги үүсгэх', :controller => 'groups', :action => 'new' %></li>
+  <li><%=link_to 'Курс үүсгэх', :controller => 'courses', :action => 'new' %></li>
+  <% end %>
+  <li class="last"><%=link_to 'Курсууд', :controller => 'courses', :action => 'list' %></li>
+
+</ul>

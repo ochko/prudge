@@ -1,0 +1,16 @@
+<table>
+  <tr>
+    <th>Бичсэн</th>
+    <th>Агуулга</th>
+    <th>Хаана</th>
+  </tr>
+
+<% for c in @comments %>
+  <tr>
+    <td><%= link_to c.user_login, :controller=>'account',:action => 'show', :id => c.user_id %></td>
+    <td><%= c.text %></td>
+    <td><%= link_to c.topic_type,
+            :action=>'show', :id=> c.topic_id, :type=>  c.topic_type.pluralize.downcase %></td>
+  </tr>
+<% end %>
+</table>

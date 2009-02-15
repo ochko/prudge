@@ -1,0 +1,31 @@
+<%= error_messages_for 'role_user' %>
+
+<!--[form:role_user]-->
+<table>
+  <tr>
+    <td>
+      <p><b>Дүр:</b><br>
+        <select name="role_user[role_id]">
+          <% @roles.each do |role| %>
+          <option value="<%= role.id %>"
+                  <%= ' selected' if role.id == @role_user.role_id %>>
+            <%= role.title %>
+          </option>
+          <% end %>
+      </select></p>
+    </td>
+    <td>
+      <p><b>Хэрэглэгч:</b><br>
+        <select name="role_user[user_id]">
+          <% @users.each do |user| %>
+          <option value="<%= user.id %>"
+                  <%= ' selected' if user.id == @role_user.user_id %>>
+            <%= user.login %>
+          </option>
+          <% end %>
+      </select></p>
+    </td>
+  </tr>
+</table>
+<!--[eoform:role_user]-->
+

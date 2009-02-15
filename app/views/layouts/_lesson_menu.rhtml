@@ -1,0 +1,12 @@
+<div class="rss-context">
+  <%= link_to(image_tag('rss-black.png'), :action=>:feed, :format=>:rss) %>
+</div>
+<ul>
+  <h2>Хичээл</h2>
+  <li class="first"><%=link_to 'Жагсаалт', :controller => 'lessons',
+    :action => 'list' %></li>
+  <li><%=link_to 'Хайх', :controller => 'lessons',
+    :action => 'search' %></li>
+   <li class="last"><%=link_to 'Шинэ хичээл нэмэх', :controller => 'lessons',
+    :action => 'new' %></li>
+</ul>

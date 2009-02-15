@@ -1,0 +1,6 @@
+<h2><%= @title %></h2>
+
+<%= render :partial => 'list' %>
+
+<%= link_to 'Previous page', { :page => @task_pages.current.previous } if @task_pages.current.previous %>
+<%= link_to 'Next page', { :page => @task_pages.current.next } if @task_pages.current.next %>

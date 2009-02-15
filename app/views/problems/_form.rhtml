@@ -1,0 +1,84 @@
+<%= error_messages_for 'problem' %>
+
+<!--[form:problem]-->
+<table width="10%">
+  <tr>
+    <td>
+      <label for="problem_name">Нэр : </label>
+    </td>
+    <td>
+      <%= text_field 'problem', 'name', 'size' => 40  %>
+    </td>
+    <td>
+
+    </td>
+    <td>
+    </td>
+      <td rowspan='3' class='bottom'>
+      <label for="problem_languages">Хэл: </label><br />
+      <%= select_tag "languages[]",
+              options_from_collection_for_select(
+                Language.find(:all),
+                "id",
+                "name",
+                @problem.languages.collect{|l| l.id}),
+              :multiple => true,
+              :size => 4 %>
+    </td>
+
+  </tr>
+  <tr>
+    <% if !@problem.contest.nil? and @problem.contest.end < Time.now %>
+         <td><label for="problem_contest_id">Тэмцээн: </label></td>
+         <td><%= @problem.contest.name %></td>
+    <% else %>
+      <% restrict_to "Judge" do %>
+      <td><label for="problem_contest_id">Тэмцээн: </label></td>
+      <td>
+        <%= select("problem", "contest_id", @pending_contests,
+          { :include_blank => true }) %>
+      <% end %>
+      </td>
+    <% end %>
+    <td>
+      <label for="problem_time">Хугацаа: </label>
+    </td>
+    <td width='1%'><%= text_field 'problem', 'time', 'size' => 4  %>
+    </td>
+  </tr>
+  <tr>
+    <td><label for="problem_point">Оноо: </label></td>
+    <td>  <%= text_field 'problem', 'point', 'size' => 4  %>
+    </td>
+    <td>
+      <label for="problem_memory">Санах ой: </label>
+    </td>
+    <td>
+      <%= text_field 'problem', 'memory', 'size' => 4  %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="5">
+      <label for="problem_text">Бодлого</label><br/>
+      <%= fckeditor_textarea('problem',
+                           'text',
+                           :toolbarSet => 'Simple',
+                           :height => '500') %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="5" align='right'>
+      <label for="problem_type">Төрөл: </label>
+      <%= select_tag 'problem[problem_type_id]',
+          options_from_collection_for_select(
+                ProblemType.find(:all),
+                "id",
+                "name",
+                @problem.problem_type_id)  %>
+      <label for="problem_source">Эх сурвалж: </label>
+      <%= text_field 'problem', 'source', :size => 20  %>
+    </td>
+  </tr>
+</table>
+<!--[eoform:problem]-->
+

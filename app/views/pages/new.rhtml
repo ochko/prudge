@@ -1,0 +1,14 @@
+<h2>Хуудас үүсгэх</h2>
+
+<% form_tag :action => 'create' do %>
+  <label for="page_category">Төрөл</label><br/>
+    <select name="page[category]">
+          <option value="news">Мэдээ</option>
+          <option value="help">Тусламж</option>
+          <option value="rule">Дүрэм</option>
+    </select>
+  <%= render :partial => 'form' %>
+  <%= submit_tag "Үүсгэ" %>
+<% end %>
+
+<%= link_to 'Буцаад хуудсууд руу', :action => 'list' %>

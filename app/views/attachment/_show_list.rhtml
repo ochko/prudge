@@ -1,0 +1,7 @@
+  <tr id="attachment_<%= attachment.id %>">
+    <td><%= link_to shorten(attachment.filename, 20),
+            attachment.public_filename,
+            :title=>attachment.notes %></td>
+    <td><%= bytize attachment.size %></td>
+  </tr>
+

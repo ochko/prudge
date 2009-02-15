@@ -1,0 +1,20 @@
+<h2>Асуулт Хариулт</h2>
+
+<p>
+  <b><%=h @question_answer.question %></b>
+</p>
+<p>
+  <%= @question_answer.answer %>
+</p>
+<p>
+  <b>Асуусан:</b> <%=h @question_answer.created_at %>
+</p>
+<p>
+  <b>Шинэчилсэн:</b> <%=h @question_answer.updated_at %>
+</p>
+
+
+<% restrict_to 'Admin' do %>
+<%= link_to 'Засвар', :action => 'edit', :id => @question_answer %> |
+<% end %>
+<%= link_to 'Буцаад жагсаалт руу', :action => 'list' %>

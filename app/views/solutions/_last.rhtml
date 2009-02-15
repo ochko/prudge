@@ -1,0 +1,10 @@
+<ul>
+  <% for s in @solutions %>
+    <li>
+    <%= link_to(s.user.login, :controller=>'account', :action=>'show', :id=>s.user_id) %>,
+    <%= s.updated_at.to_s(:shortest) %>-д
+    <br />
+    <%= link_to(truncate(s.problem.name, 35), {:controller=>'problems', :action=>'show', :id=> s.problem_id}, :class=>"problem-#{ok_or_ng(s.correct)}") %>
+    </li>
+  <% end %>
+</ul>

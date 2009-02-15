@@ -1,0 +1,34 @@
+= WithAction
+
+A respond_to style helper for doing different actions based on which request parameters are passed. Specifically, it is helpful if you want to use multiple form buttons on a page, such as "Save", "Save and Continue Editing", and "Cancel".  with_action executes different blocks based on what the presence of request parameters.
+
+  def create
+    with_action do |a|
+      a.cancel { redirect_to articles_path }
+      a.any do
+        @article = Article.new(params[:article])
+        if @article.save
+          a.save { redirect_to article_path(@article) }
+          a.edit { redirect_to article_path(@article) }
+          a.approve do
+            @article.approve!
+            redirect_to article_path(@article)
+          end
+        else
+          render :action => 'new'
+        end
+      end
+    end
+  end
+  
+A block is invoked if a parameter with the same name exists and is not blank.  Here is an example of a form to submit to this action:
+
+  <%= submit_tag 'Save', :name => 'save' %>
+  <%= submit_tag 'Save & Continue Editing', :name => 'edit' %>
+  <%= submit_tag 'Save & Approve', :name => 'approve' %>
+  <%= submit_tag 'Cancel', :name => 'cancel' %>
+
+If an @any@ block is present and no parameter that matches one of the other blocks, it is called by default, otherwise the first block will be called. The @any@ block is the only one that can have nesting and be called multiple times.
+
+
+(c) Copyright 2007 Brandon Keepers (brandon@opensoul.org)

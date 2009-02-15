@@ -1,0 +1,37 @@
+<h2>Баннэрууд</h2>
+
+<table>
+  <tr>
+    <th></th>
+    <th>Харуулах</th>
+    <th>Хаяг</th>
+    <th>Эрэмбэ</th>
+    <th>Дарсан</th>
+    <th>Зураг</th>
+    <th>Файл</th>
+  </tr>
+
+<% for banner in @banners %>
+  <tr>
+    <td><%= link_to image_tag(banner.public_filename(:tiny)),
+            :action => 'show', :id => banner %></td>
+    <td><%= show_correctness(banner.enabled) %></td>
+    <td class='small'><%= link_to truncate(banner.address,25),banner.address %></td>
+    <td><%= banner.erembe %></td>
+    <td><%= banner.clicks %></td>
+    <td class='small'><%= banner.content_type %><br />
+      <%= banner.height %>x<%= banner.width %></td>
+    <td class='small'><%= truncate(banner.filename, 12) %><br /><%= banner.size %>байт</td>
+    <% restrict_to 'Admin' do %>
+    <td><%= link_to image_tag('delete.png'), { :action => 'destroy', :id => banner }, :confirm => 'Are you sure?', :method => :post %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @banner_pages.current.previous } if @banner_pages.current.previous %>
+<%= link_to 'Next page', { :page => @banner_pages.current.next } if @banner_pages.current.next %>
+
+<br />
+
+<%= link_to 'Шинэ баннэр', :action => 'new' %>

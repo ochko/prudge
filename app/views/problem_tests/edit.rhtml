@@ -1,0 +1,10 @@
+<h2>Бодлого шалгах тэстийг засварлах</h2>
+
+<% form_tag :action => 'update', :id => @problem_test do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Хадгал' %>
+<% end %>
+
+<%= link_to 'Харах', :action => 'show', :id => @problem_test %> |
+<%= link_to 'Буцах', :controller=>'problem_tests',
+      :action => 'new', :problem_id=> @problem_test.problem_id %>

@@ -1,0 +1,32 @@
+<fieldset>
+  <legend>Бусад зөв бодолтууд</legend>
+  <table width="100%" style="border-collapse: collapse; margin: -0.8em 0 0 0">
+    <tr>
+      <th class="white"></th>
+      <th class="white">Хэрэглэгч</th>
+      <th class="white">Хэл</th>
+      <th class="white">Хугацаа</th>
+      <td width="100" style="text-align: right;">
+        <a href='#' onclick="Element.hide('solved'); Element.show('show_link');" title="Хаах">
+          <%= image_tag('close.png') %>
+        </a>
+      </td>
+    </tr>
+
+    <% for s in @solutions%>
+    <tr>
+      <% if @in_contest %>
+      <td><%= link_to image_tag('show-source.png'),
+              {:controller=>'solutions', :action=>'source', :other_id=>s.id, :my_id => @solution.id},
+              :confirm => 'Бусдын бодолтыг харсан тохиолдолд өөрийнхөө бодолтыг өөрчлөх эрхгүй болно. Бодолтыг үнэхээр хармаар байна уу?' %></td>
+      <% else %>
+      <td><%= link_to image_tag('show-source.png'),
+              {:controller=>'solutions', :action=>'source', :other_id=>s.id, :my_id => @solution.id} %></td>
+      <% end %>
+      <td><%= s.user_login %></td>
+      <td><%= s.language_name %></td>
+      <td><%= sec2milisec s.avg_time %></td>
+    </tr>
+    <% end %>
+  </table>
+</fieldset>

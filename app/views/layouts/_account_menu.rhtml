@@ -1,0 +1,12 @@
+<ul>
+  <h2>Хэрэглэгч</h2>
+  <% if logged_in? %>
+  <li class="first"><%=link_to 'Миний хуудас', :controller => 'account', :action => 'my' %></li>
+  <% restrict_to "Admin" do %>
+  <li><%=link_to 'Дүрүүд', :controller => 'roles', :action => 'list' %></li>
+  <li><%=link_to 'Дүр оноох', :controller => 'role_users', :action => 'new' %></li>
+  <li><%=link_to 'Санал асуулга', :controller => 'polls', :action => 'list' %></li>
+  <% end %>
+  <li class="last"><%=link_to 'Нууц үг солих', :controller => 'account', :action => 'change_password' %></li>
+  <% end %>
+</ul>

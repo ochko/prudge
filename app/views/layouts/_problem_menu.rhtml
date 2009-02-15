@@ -1,0 +1,32 @@
+<div class="rss-context">
+  <%= link_to(image_tag('rss-black.png'), :action=>:feed, :format=>:rss) %>
+</div>
+<ul>
+  <h2>Бодлого</h2>
+  <li class="first"><%=link_to 'Жагсаалт', :controller => 'problems',
+    :action => 'list' %></li>
+  <% if logged_in? %>
+  <li><%=link_to 'Миний бодолтууд', :controller => 'solutions',
+    :action => 'my' %></li>
+  <% restrict_to 'Judge' do  %>
+  <li><%=link_to 'Дэвшигдсэн бодлогууд', :controller => 'problems',
+    :action => 'nominated' %></li>
+  <li><%=link_to 'Бодолтууд', :controller => 'solutions',
+    :action => 'list' %></li>
+  <li><%=link_to 'Үр дүнг шалгах', :controller => 'results',
+    :action => 'list' %></li>
+  <% end %>
+  <li><%=link_to 'Бодлого санал болгох', :controller => 'problems',
+    :action => 'new' %></li>
+  <% end %>
+  <li class="last"><%=link_to 'Хайх', :controller => 'problems',
+    :action => 'search' %></li>
+</ul>
+<% view_cache ProblemType, :ignore=>:all, :tag=>'type_menu' do %>
+<ul>
+  <h2>Төрлүүд</h2>
+  <% for t in ProblemType.all %>
+    <li><%= link_to t.name, t %></li>
+  <% end %>
+</ul>
+<% end %>

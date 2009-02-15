@@ -1,0 +1,31 @@
+<% if @problems.size > 0 %>
+<table width="100%">
+  <tr>
+    <th>ID</th>
+    <th>Нэр</th>
+    <th>Оноо</th>
+    <th>Хугацааны хязгаар</th>
+    <th>Санах ойн хязгаар</th>
+    <th>Огноо</th>
+    <th></th>
+  </tr>
+<% for problem in @problems %>
+  <tr>
+    <td><%= problem.id %></td>
+    <td><%= link_to problem.name, :controller=>'problems',
+      :action => 'show', :id => problem %></td>
+    <td><%= problem.point %></td>
+    <td><%= problem.time %> сек</td>
+    <td><%= problem.memory %> кб</td>
+    <td><%= problem.created_at.to_s(:date_only) %></td>
+    <td><%= link_to_remote(image_tag('ng.png'),
+            :update=>'homeworks',
+            :url=>{:controller=>'lessons', :action=>'remove_homework',
+            :id=>@lesson, :problem => problem},
+            :confirm => 'Гэрийн даалгавараас хасах уу?', :method => :post) %></td>
+  </tr>
+<% end %>
+</table>
+<% else %>
+Даалгавар алга!
+<% end %>

@@ -1,0 +1,15 @@
+<h1>Шинэ бодлогын төрөл</h1>
+
+<% form_for(@problem_type) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', problem_types_path %>

@@ -1,0 +1,13 @@
+<ul>
+  <h2>Тавтай морил</h2>
+  <li><%=link_to 'Нүүр хуудас', :controller => 'home', :action => 'welcome' %></li>
+  <li><%=link_to 'Тусламж', :controller => 'home', :action => 'help' %></li>
+  <li><%=link_to 'Бидний тухай', :controller => 'home', :action => 'aboutus' %></li>
+  <li><%=link_to 'Програмчлалын хэлүүд', :controller => 'languages', :action => 'list' %></li>
+  <li><%=link_to 'Асуулт&Хариулт', :controller => 'qa', :action => 'index' %>
+    <% restrict_to 'Admin' do %>
+    (<%=link_to 'Хариу', :controller => 'qa', :action => 'list' %>)
+    <% end %>
+  </li>
+  <li  class="last"><%=link_to 'Бидний зарчим', :controller => 'home', :action => 'rules' %></li>
+</ul>

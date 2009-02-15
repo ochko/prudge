@@ -1,0 +1,32 @@
+<% if @user %>
+<fieldset>
+  <legend>Оролцогч <%= @user.login %> энэ хичээлд</legend>
+  <table>
+    <tr>
+      <th width="1%"></th>
+      <th>Бодлого</th>
+      <th>Оноо</th>
+      <th>Хэл</th>
+      <th>Бодсон/Зассан</th>
+      <th>Хувь</th>
+      <th>Time</th>
+    </tr>
+    <% for s in @solutions%>
+    <tr>
+      <td><%= link_to show_correctness(s.correct),
+              :controller=>'solutions', :action=>'show',
+        :id => s.id %></td>
+      <td class='small'><%= link_to s.problem_name, :controller=>'problems',
+        :action=>'show', :id=>s.problem_id %></td>
+      <td class='small'><%= s.problem_point %></td>
+      <td class='small'><%= s.language_name %></td>
+      <td class='small'>
+        <%= s.created_at.to_s(:date_time24) %> <br />
+        <%= s.updated_at.to_s(:date_time24) %></td>
+      <td class='small'><%= "%0.0f" % (s.percent*100) %></td>
+      <td class='small'><%= sec2milisec s.avg_time %></td>
+    </tr>
+    <% end %>
+  </table>
+</fieldset>
+<% end %>

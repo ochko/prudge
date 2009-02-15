@@ -1,0 +1,13 @@
+mysql:
+  :adapter: mysql
+  :host: localhost
+  :username: root
+  :password: 
+  :database: taggable
+
+postgres:
+  :adapter: postgresql
+  :host: 192.168.0.24
+  :username: taggable
+  :password:
+  :database: taggable

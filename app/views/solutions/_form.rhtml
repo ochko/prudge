@@ -1,0 +1,43 @@
+<%= error_messages_for 'solution' %>
+<!--[form:solution]-->
+<table>
+  <tr>
+    <td>
+      <p>
+        <label for="solution_problem">Бодлого : </label>
+      </p>
+    </td>
+    <td>
+      <p>
+        <%= link_to @solution.problem.name, :controller=>'problems',
+        :action => 'show', :id=> @solution.problem_id %>
+        <%= form.hidden_field :problem_id %>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        <label for="solution_problem">Хэл : </label>
+      </p>
+    </td>
+    <td>
+      <p>
+        <%= form.select :language_id, @languages %>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        <label for="solution_code">Код:</label>
+      </p>
+    </td>
+    <td>
+      <p>
+        <%= form.file_field :uploaded_data %>
+      </p>
+    </td>
+  </tr>
+</table>
+<!--[eoform:solution]-->

@@ -1,0 +1,11 @@
+<h2>Асуулт асуух</h2>
+
+<% form_tag :action => 'create' do %>
+<p>
+  <%= text_area 'question_answer', 'question', 'cols'=> 82, 'rows'=>4  %>
+</p>
+
+  <%= submit_tag "Асуу" %>
+<% end %>
+
+<%= link_to 'Асуулт хариултууд', :action => 'list' %>

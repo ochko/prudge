@@ -1,0 +1,42 @@
+<div class="post">
+  <%= render :partial => "ratings/rate", :locals => { :asset => @lesson } %>
+  <h1><%=h @lesson.title %></h1>
+  <div class="info">
+    Бичсэн: <%= link_to @lesson.author.login,
+                :action=>'show', :controller=>'account',
+                :id=>@lesson.author_id %>,
+    Шинэчилсэн: <%=distance_of_time_in_words_to_now @lesson.updated_at %>
+  </div>
+
+  <div class="entry">
+    <%= white_list @lesson.text %>
+  </div>
+
+  <% if @problems.size > 0%>
+    <div class="info">
+      Гэрийн даалгавар:
+      <%= @problems.collect{ |p| link_to(p.name, :controller=>'problems', :action=>'show', :id=>p.id) }.join(', ') %>
+    </div>
+  <% end %>
+  <div class="info">
+    Зүүлт: <%= tag_links @lesson.tags %>
+    <% if logged_in? %>
+      <% if @lesson.author_id == current_user.id %>
+        <%= link_to 'Засварлах', :action => 'edit', :id => @lesson %> |
+        <%= link_to 'Устгах', { :action => 'destroy', :id => @lesson },
+            :confirm => 'Are you sure?', :method => :post %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <% if @attachments.size > 0 %>
+    <fieldset>
+      <legend>Хавсралт</legend>
+      <%= render :partial => 'attachment/list' %>
+    </fieldset>
+  <% end %>
+</div>
+<%= render :partial=>'comments/show',
+           :locals=>{:topic_id   => @lesson.id,
+                     :topic_type => 'Lesson',
+                     :button_text=> 'Хичээлийн тухай хэлэлцүүлэг' } %>

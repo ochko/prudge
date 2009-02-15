@@ -1,0 +1,30 @@
+<% form_remote_tag :url=>{:controller=>'polls', :action => 'answer'},
+                     :html=>{:id=>'poll_form', :style=>"poll"},
+                     :before => "Element.show('poll_spinner')",
+                     :success => "Element.hide('poll_spinner')",
+                     :update => 'poll_form' do %>
+<%= hidden_field 'poll', 'id' %>
+<table class='poll'>
+  <tr>
+    <td width='100%'>
+      <table width='100%'>
+        <tr><th colspan="2"><%= @poll.question %></th></tr>
+        <% for c in @poll.choices %>
+        <tr>
+          <td width='1%'><%= radio_button('poll_choice', 'id', c.id) %></td>
+          <td align="left"><%= c.answer %></td>
+        </tr>
+        <% end %>
+        <tr><td colspan="2">
+            <%= submit_tag "Үр дүн" %>
+            <%= image_tag("spinner.gif",
+                :align => 'absmiddle',
+            :border=> 0,
+            :id => "poll_spinner",
+            :style=>"display: none;" ) %>
+        </td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<% end %>

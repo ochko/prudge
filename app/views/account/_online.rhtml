@@ -1,0 +1,5 @@
+<ul>
+<% for u in @onlines -%>
+  <li><%= link_to(u.login, :controller=>'account', :action=>'show', :id=>u.id) %></li>
+<% end %>
+</ul>

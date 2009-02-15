@@ -1,0 +1,27 @@
+<h1>Listing comments</h1>
+
+<table>
+  <tr>
+  <% for column in Comment.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for comment in @comments %>
+  <tr>
+  <% for column in Comment.content_columns %>
+    <td><%=h comment.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => comment %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => comment %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => comment }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @comment_pages.current.previous } if @comment_pages.current.previous %>
+<%= link_to 'Next page', { :page => @comment_pages.current.next } if @comment_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New comment', :action => 'new' %>

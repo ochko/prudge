@@ -1,0 +1,8 @@
+<h2>Шинэ тэмцээн зарлах</h2>
+
+<% form_tag :action => 'create' do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag "Зарла" %>
+<% end %>
+
+<%= link_to 'Back', :action => 'list' %>
