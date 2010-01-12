@@ -5,6 +5,12 @@
 == Хэрхэн ажиллуулах
 
 Энэ сайтыг Ruby on Rails фрэймворк дээр хийсэн. Иймд RoR апликэшнийг хэрхэн ажиллуулахыг мэдэж байх хэрэгтэй.
+ - memcached суусан байх ёстой. (Суулгах apt-get get install memcached)
+ - rails тохирох хувилбар нь суусан байх ёстой. (gem install -v 2.1.1 rails)
+ - mysql суусан байх ёстой. (gem install mysql)
+ - config/database.yml файлд тохиргоо хийнэ.
+ - rake db:schema:load db/schema.rb
+ - ruby script/server -e production (эсвэл test, development байсан ч болно)
 
 == Хөгжүүлэлтэд оролцох
 
