@@ -1,0 +1,40 @@
+table.syntax {
+  border-collapse: collapse;
+  background-color: #f0f0f0;
+  border: 1px solid #aaa;
+  padding: 0px;
+  width: 95%;
+  margin: auto;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  -webkit-box-shadow: 5px 5px 5px #eee; }
+  table.syntax tr.alt td.source {
+    background-color: #f6f6f6; }
+  table.syntax td {
+    padding-left: 0.4em;
+    padding-right: 0.4em; }
+    table.syntax td.source {
+      word-wrap: break-word; }
+    table.syntax td.number {
+      border-right: 1px solid #aaa;
+      text-align: right;
+      width: 2.5em;
+      color: #555;
+      background-color: #e0e0e0; }
+  table.syntax .toolbar {
+    float: right; }
+    table.syntax .toolbar a {
+      margin-left: 1em;
+      margin-right: 1em; }
+
+#syntax-raw {
+  padding: 0px;
+  margin: 0px; }
+  #syntax-raw pre {
+    padding: 1em;
+    margin: 0px;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px; }
