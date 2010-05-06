@@ -10,5 +10,5 @@ class Contest < ActiveRecord::Base
            :dependent => :destroy
 
   validates_presence_of :name
-  acts_as_textiled :description
+
 end

@@ -1,5 +1,5 @@
 <h1>Хэрэглэгчдийн жагсаалт</h1>
-<% view_cache Solution, Problem, User, :tag => (params[:page] || 1) do -%>
+
 <%= will_paginate @users, :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
 <table width="100%">
   <tr>
@@ -37,4 +37,4 @@
 <% end %>
 </table>
 <%= will_paginate @users, :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
-<% end %>
+

@@ -92,33 +92,6 @@ module ApplicationHelper
             :id=>l.id)
   end
 
-  def fitted_textarea(text, rowmax=8, colmax=82, rowmin=2, colmin=36, cl='test')
-    if text.nil?
-      return ''
-    end
-    lines = text.split(/\n/)
-    rows = lines.size
-    for l in lines
-      rows += l.chars.size/colmax;
-    end
-    if rows < rowmin
-      rows = rowmin
-    end
-    if rows > rowmax
-      rows = rowmax
-    end
-    cols = colmin
-    for l in lines
-      if l.length > cols
-        cols = l.length
-      end
-    end
-    if cols > colmax
-      cols = colmax
-    end
-    "<textarea class='#{cl}' readonly cols='#{cols}' rows='#{rows}'>#{text}</textarea>"
-  end
-
   def page_tag_link(tags)
     if tags.nil?
       return ''
@@ -361,24 +334,9 @@ module ApplicationHelper
   end
 
   def who_is_online
-    @whos_online = Array.new()
-    onlines = CGI::Session::ActiveRecordStore::Session.
-      find( :all,
-            :conditions => [ 'updated_at > ?',
-                             Time.now() - 20.minutes ])
-    onlines.each do |online|
-      id = online.data[:user]
-      @whos_online << id if id
-    end
-
-    if @whos_online.size > 0
     @onlines = User.find(:all,
-                         :conditions => "id IN (#{@whos_online.join(',')})"
-                         )
+                         :conditions => ["updated_at > ?", Time.now])
     render :partial => 'account/online'
-    else
-      render :text => 'No online users'
-    end
   end
 
 end

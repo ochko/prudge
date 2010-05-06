@@ -22,11 +22,11 @@
   <li class="last"><%=link_to 'Хайх', :controller => 'problems',
     :action => 'search' %></li>
 </ul>
-<% view_cache ProblemType, :ignore=>:all, :tag=>'type_menu' do %>
+
 <ul>
   <h2>Төрлүүд</h2>
   <% for t in ProblemType.all %>
     <li><%= link_to t.name, t %></li>
   <% end %>
 </ul>
-<% end %>
+

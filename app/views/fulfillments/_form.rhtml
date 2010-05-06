@@ -6,7 +6,7 @@
             :action=>'show', :id=> @task %></p>
 
 <p><label for="fulfillment_outline">Гүйцэтгэлийн товч тайлбар</label><br/>
-<%= textile_editor 'fulfillment', 'outline', 'cols'=>82  %></p>
+<%= text_area 'fulfillment', 'outline', 'cols'=>82  %></p>
 <%= hidden_field 'fulfillment', 'task_id' %>
 <!--[eoform:fulfillment]-->
-<%= textile_editor_initialize %>
+

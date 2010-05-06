@@ -1,5 +1,5 @@
 <h1>Бодлогууд</h1>
-<% view_cache Problem, Solution, :tag => @order do %>
+
   <% if @problems.size > 0 %>
     <%= will_paginate @problems, :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
     <table width="100%">
@@ -39,4 +39,4 @@
   <% else %>
     Бодлого алга!
   <% end %>
-<% end %>
+

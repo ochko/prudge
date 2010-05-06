@@ -12,11 +12,11 @@
   </tr>
   <tr>
     <td><b>Оролт:</b></td>
-    <td><%= fitted_textarea @problem_test.input %></td>
+    <td><%= text_area_tag 'input', @problem_test.input %></td>
   </tr>
   <tr>
     <td><b>Гаралт:</b></td>
-    <td><%= fitted_textarea @problem_test.output %></td>
+    <td><%= text_area_tag 'output', @problem_test.output %></td>
   </tr>
   <tr>
     <td><b>Жинхэнэ тэст:</b></td>

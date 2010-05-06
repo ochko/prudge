@@ -16,17 +16,17 @@
     <td>Санах ой:</td><td> <%=h @result.memory %></td>
   </tr>
   <tr>
-    <td>Оролт:</td><td> <%= fitted_textarea(@result.test.input,12,72,5,72) %></td>
+    <td>Оролт:</td><td> <%= text_area(@result.test.input,12,72,5,72) %></td>
   </tr>
   <tr>
-    <td>Гаралт:</td><td><%= fitted_textarea(@result.output,12,72,5,72) %></td>
+    <td>Гаралт:</td><td><%= text_area(@result.output,12,72,5,72) %></td>
   </tr>
   <tr>
     <td>Үр дүн:</td><td><%= show_correctness @result.matched %></td>
   </tr>
   <% if !@result.matched %>
   <tr>
-    <td>Хариу:</td><td><%= fitted_textarea(@result.test.output, 12, 72, 5,72) %></td>
+    <td>Хариу:</td><td><%= text_area(@result.test.output, 12, 72, 5,72) %></td>
   </tr>
   <% end %>
 </table>

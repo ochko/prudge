@@ -11,10 +11,7 @@
   <tr>
     <td>
       <label for="page_content">Агуулга</label><br/>
-      <%= fckeditor_textarea('page',
-                           'content',
-                           :toolbarSet => 'Simple',
-                           :height => '500') %>
+      <%= text_area('page', 'content') %>
     </td>
   </tr>
   <tr>

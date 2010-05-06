@@ -91,8 +91,7 @@
     <% form_tag :action => 'accept', :id => @fulfillment do %>
     <td width="50%">
       <label for="fulfillment_comment">Гүйцэтгэлд өгөх коммент</label><br/>
-      <%= textile_editor 'fulfillment', 'comment', 'cols'=>60, 'rows'=>5  %>
-      <%= textile_editor_initialize %>
+      <%= text_area 'fulfillment', 'comment', 'cols'=>60, 'rows'=>5  %>
     </td>
     <td class="top">
       <label for="fulfillment_earnings">Төлбөрийн хэмжээ</label><br/>

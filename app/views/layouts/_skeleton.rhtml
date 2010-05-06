@@ -91,13 +91,11 @@
             </form>
             <!-- SiteSearch Google -->
             <h2>Онлайн хэрэглэгчид</h2>
-            <% view_cache :ignore=>:all, :tag=>'online', :ttl=>20.minutes do %>
-              <%= who_is_online %>
-            <% end %>
+            <%= who_is_online %>
+
             <h2>Сүүлийн бодолтууд</h2>
-            <% view_cache Solution, :ignore=>:all, :tag=>'last' do %>
             <%= show_last %>
-            <% end %>
+
             <h2>RSS</h2>
             <ul>
               <li><%= link_to 'Бодлого', {:controller=>:problems,:action=>:feed, :format=>:rss}, :class=>'rss' %></li>

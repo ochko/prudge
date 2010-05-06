@@ -60,10 +60,7 @@
   <tr>
     <td colspan="5">
       <label for="problem_text">Бодлого</label><br/>
-      <%= fckeditor_textarea('problem',
-                           'text',
-                           :toolbarSet => 'Simple',
-                           :height => '500') %>
+      <%= text_area('problem', 'text') %>
     </td>
   </tr>
   <tr>
