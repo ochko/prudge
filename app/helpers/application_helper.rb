@@ -50,27 +50,6 @@ module ApplicationHelper
     end
   end
 
-  def contest_type_link(type)
-    link_to(type.name,
-            :controller=> 'contest_types',
-            :action=>'show',
-            :id=>type.id)
-  end
-
-  def prize_link(prize)
-    link_to(prize.name,
-            :controller=>'prizes',
-            :action=>'show',
-            :id=>prize.id)
-  end
-
-  def sponsor_link(sponsor)
-    link_to(sponsor.name,
-            :controller=>'sponsors',
-            :action=>'show',
-            :id=>sponsor.id)
-  end
-
   def contest_link(contest)
     link_to(contest.name,
             :controller=>'contests',
@@ -115,21 +94,6 @@ module ApplicationHelper
     links = ''
     for tag in tags.split(' ')
       links += link_to(tag, { :controller=> 'lessons',
-                       :action=>'search',
-                       :field=>'tags', :query=>tag}, :class=>'tag')
-      links += ' '
-    end
-    return links
-  end
-
-  def task_tag_link(tags)
-    if tags.nil?
-      return ''
-    end
-
-    links = ''
-    for tag in tags.split(' ')
-      links += link_to(tag, { :controller=> 'tasks',
                        :action=>'search',
                        :field=>'tags', :query=>tag}, :class=>'tag')
       links += ' '
@@ -249,44 +213,12 @@ module ApplicationHelper
     return list
   end
 
-  def show_banner
-    banners = Banner.find(:all, :conditions => "parent_id is null and enabled is true",
-                          :order=> "erembe")
-    list =''
-    for b in banners
-      list += "<p>%s</p>" % link_to(image_tag(b.public_filename),
-                      :controller=>'banners',
-                      :action=>'click', :id=>b)
-    end
-    return list
-  end
-
-  def show_poll
-    @poll = Poll.find(:first, :conditions=>'active = true')
-    if !@poll.nil?
-      @total = PollChoice.sum(:counter, :conditions=>["poll_id = ?", @poll.id])
-      if @poll.nil?
-        return
-      else
-        if session['polled']
-          if @total > 0
-            render :partial => 'polls/result'
-          else
-            render :partial => 'polls/poll'
-          end
-        else
-          render :partial => 'polls/poll'
-        end
-      end
-    end
-  end
-
   def show_last
     @solutions = Solution.
       find(:all,
            :include => [:user, :problem],
            :limit => 10,
-           :order => 'solutions.updated_at desc')
+           :order => 'solutions.source_updated_at desc')
 
     render :partial => 'solutions/last'
   end

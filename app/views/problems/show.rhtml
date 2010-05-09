@@ -91,7 +91,6 @@
         </div>
       </fieldset>
       <label>Эх сурвалж:</label> <%=h @problem.source %><br />
-      <label>Төрөл: <%= link_to @problem.problem_type.name, @problem.problem_type %></label><br />
         <% if @problem.languages.size == 0 %>
         <label>Бүх хэл дээр бодож болно</label>
         <% else %>

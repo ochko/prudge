@@ -62,7 +62,6 @@ class ProblemsController < ApplicationController
     conditions = case params['field']
     when "name" then ["p.name LIKE ? AND c.start < NOW()", "%#{params[:query]}%"]
     when "text" then ["p.text LIKE ? AND c.start < NOW()", "%#{params[:query]}%"]
-    when "type" then ["p.problem_type_id = ? AND c.start < NOW()", params[:query]]
     else ["c.start < NOW()"]
     end
 
@@ -89,7 +88,7 @@ class ProblemsController < ApplicationController
   end
 
   def show
-    @problem = Problem.find(params[:id], :include => [:problem_type, :languages])
+    @problem = Problem.find(params[:id], :include => [:languages])
     if @problem.available_to(current_user)
       prepare_relations
       @solution_count = Solution.

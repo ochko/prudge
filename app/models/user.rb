@@ -6,31 +6,39 @@ class User < ActiveRecord::Base
   #attr_protected :activated_at
   has_many :role_users
   has_many :roles, :through => :role_users
-  has_many :solutions,
-           :conditions => ['isbest = ?', true],
-           :include => [:problem, :language]
+  has_many :solutions
   has_many :duplicate_solutions, :class_name=> 'Solution',
            :include => [:problem, :language]
-  has_many :contests,
-           :finder_sql =>
-    'SELECT distinct(c.id ), c.name, c.start, c.end, '+
-    'c.type_id, c.prize_id, c.sponsor_id, t.name as type_name, '+
-    'z.name as prize_name, o.name as sponsor_name '+
-    'FROM solutions s '+
-    'join problems p on s.problem_id = p.id '+
-    'join contests c on p.contest_id = c.id '+
-    'join prizes z on c.prize_id = z.id '+
-    'join sponsors o on c.sponsor_id = o.id '+
-    'join contest_types t on c.type_id = t.id '+
-    'where s.user_id = #{id} and s.created_at < c.end '+
-    'order by c.start desc'
+
+  has_many :contests, :through => :solutions, 
+           :uniq => true, :order => 'start'
+
   has_many :problems
   has_one :photo
-  has_many :fulfillments
-  has_many :courses, :foreign_key=>'teacher_id'
-  has_many :memberships
-  has_many :groups, :through => :memberships
+
   has_many :lessons, :foreign_key => 'author_id'
+
+  def collect_caches!
+    effectives = solutions.best.effective
+    unless effectives.empty?
+      update_attributes(:solutions_count => solutions.best.count,
+                        :points => effectives.sum(:point),
+                        :average => effectives.sum(:time)/effectives.count,
+                        :uploaded_at => solutions.best.maximum(:uploaded_at))
+    else
+      update_attributes(:solutions_count => solutions.best.count,
+                        :points => 0.0,
+                        :average => 0.0)
+    end
+  end
+
+  def solutions_dir
+    "#{Solution::SOLUTIONS_PATH}/#{self.id}"
+  end
+
+  def exe_dir
+    "#{solutions_dir}/exe"
+  end
 
   validates_presence_of     :login, :email
   validates_presence_of     :password,                   :if => :password_required?

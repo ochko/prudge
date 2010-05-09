@@ -1,11 +1,9 @@
 class Lesson < ActiveRecord::Base
   belongs_to :author, :class_name=>'User', :foreign_key => 'author_id'
 
-  acts_as_rateable
-
   has_many :attachments,
            :as => 'attachable',
-           :class_name => 'Attachment',
+           :class_name => 'ActiveRecord::Attachment',
            :foreign_key => 'attachable_id',
            :dependent => :destroy
 

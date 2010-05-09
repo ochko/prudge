@@ -67,7 +67,6 @@ class LessonsController < ApplicationController
 
   def new
     @lesson = Lesson.new
-    @courses = related_courses
   end
 
   def create
@@ -85,7 +84,6 @@ class LessonsController < ApplicationController
   def edit
     @lesson = Lesson.find(params[:id])
     return unless validate_ownership?
-    @courses = related_courses
     @problems = @lesson.problems
     prepare_relations
   end
@@ -172,10 +170,6 @@ class LessonsController < ApplicationController
       new({:attachable_id => @lesson.id,
            :attachable_type => 'Lesson' })
     @attachments = @lesson.attachments
-  end
-
-  def related_courses
-    current_user.courses.collect{ |c| [c.name, c.id] }
   end
 
 end

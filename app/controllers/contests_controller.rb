@@ -24,12 +24,8 @@ class ContestsController < ApplicationController
 
   def list
     @contests = Contest.
-      find_by_sql('select c.*, t.name as type_name, ' +
-                  'p.name as prize, s.name as sponsor ' +
+      find_by_sql('select c.*, ' +
                   'from contests c ' +
-                  'join contest_types t on c.type_id = t.id ' +
-                  'join prizes p on c.prize_id = p.id ' +
-                  'join sponsors s on c.sponsor_id = s.id ' +
                   'where c.end > NOW() ' +
                   'order by c.start ASC')
     @title = 'Тэмцээнүүд'
@@ -37,12 +33,8 @@ class ContestsController < ApplicationController
 
   def past
     @contests = Contest.
-      find_by_sql('select c.*, t.name as type_name, ' +
-                  'p.name as prize, s.name as sponsor ' +
+      find_by_sql('select c.*, ' +
                   'from contests c ' +
-                  'join contest_types t on c.type_id = t.id ' +
-                  'join prizes p on c.prize_id = p.id ' +
-                  'join sponsors s on c.sponsor_id = s.id ' +
                   'where c.end < NOW() ' +
                   'order by c.start DESC')
     @title = 'Өнгөрсөн тэмцээнүүд'
@@ -106,9 +98,7 @@ class ContestsController < ApplicationController
 
   protected
   def get_lists
-    @types = ContestType.find(:all)
-    @prizes = Prize.find(:all)
-    @sponsors = Sponsor.find(:all)
+
   end
 
   private

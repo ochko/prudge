@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class AccountController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   #include AuthenticatedSystem
@@ -92,13 +93,12 @@ class AccountController < ApplicationController
   end
 
   def show
-    behavior_cache Solution, Problem, User => :id do
-    @total = Problem.sum('point', :conditions=> "contest_id is not null")
+    @total = Problem.sum('level', :conditions=> "contest_id is not null")
     @user = User.
       find_by_sql(["SELECT u.*, count(s.id) as solution_count, "+
-                  "sum(p.point*s.percent) as points, "+
-                  "avg(s.avg_time) as avg, "+
-                  "max(s.created_at) as last_access, "+
+                  "sum(p.level*s.percent) as points, "+
+                  "avg(s.time) as avg, "+
+                  "max(s.source_updated_at) as last_access, "+
                   "count(distinct(p.contest_id)) as contest_count "+
                   "FROM users u "+
                   "left join  solutions  s "+

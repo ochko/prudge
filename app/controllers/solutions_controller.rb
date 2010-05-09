@@ -4,12 +4,7 @@ class SolutionsController < ApplicationController
 
   access_control [:delete,
                   :inspect,
-                  :list] => 'Judge',
-                 [:check_best_of_all] => 'Admin'
-
-  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :my }
+                  :list] => 'Judge'
 
   def list
     conditions = case params['field']
@@ -286,11 +281,6 @@ class SolutionsController < ApplicationController
     end
 
     do_check
-  end
-
-  def check_best_of_all
-    Solution.all.each{ |s| s.check_best}
-    redirect_to :controller=>:account, :action=>:ranking
   end
 
   private

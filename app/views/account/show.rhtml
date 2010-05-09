@@ -56,16 +56,12 @@
                   <th>Байр</th>
                   <th>Нэр</th>
                   <th>Огноо</th>
-                  <th>Төрөл</th>
-                  <th>Ивээн тэтгэгч</th>
                 </tr>
                 <% for c in @contests%>
                 <tr>
                   <td><%= standing(@standings[c.id]) %></td>
                   <td><%= link_to c.name, :controller=>'contests', :action=>'show', :id=>c.id %></td>
                   <td><%= c.start %></td>
-                  <td><%= c.type_name %></td>
-                  <td><%= c.sponsor_name %></td>
                 </tr>
                 <% end %>
               </table>
@@ -88,7 +84,6 @@
                   <td><%= link_to l.title, :controller=> 'lessons',
                     :action=>'show', :id=>l.id %></td>
                   <td><%= l.updated_at %></td>
-                  <td><%= l.rating %></td>
                 </tr>
                 <% end %>
               </table>

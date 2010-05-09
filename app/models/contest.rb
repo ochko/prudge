@@ -1,7 +1,4 @@
 class Contest < ActiveRecord::Base
-  belongs_to :contest_type, :foreign_key => 'type_id'
-  belongs_to :prize
-  belongs_to :sponsor
   has_many :problems
   has_many :comments,
            :as => 'topic',

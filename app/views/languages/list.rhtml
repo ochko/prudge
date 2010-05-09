@@ -15,8 +15,6 @@
                     :field=>'tags', :query=>language.name %> :: </td>
     <td><%= link_to 'Хуудас', :controller=>'pages', :action=>'search',
                     :field=>'tags', :query=>language.name %> :: </td>
-    <td><%= link_to 'Ажил', :controller=>'tasks', :action=>'search',
-                    :field=>'technology', :query=>language.name %></td>
     <% restrict_to 'Admin' do  %>
     <td><%= link_to image_tag('edit.png'), :action => 'edit', :id => language %></td>
     <td><%= link_to image_tag('delete.png'), { :action => 'destroy', :id => language }, :confirm => 'Are you sure?', :method => :post %></td>

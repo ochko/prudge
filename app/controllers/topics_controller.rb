@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class TopicsController < ApplicationController
   before_filter :login_required,
                 :except => [:index, :list, :search, :show]
@@ -8,6 +9,7 @@ class TopicsController < ApplicationController
                   :destroy,
                   :update,
                   :moderate] => 'Admin'
+
   def index
     last
     render :action => 'last'
@@ -111,17 +113,6 @@ class TopicsController < ApplicationController
              :group=>'t.id')
       @type = 'lessons'
       @page_title ='Хичээлийн хэлэлцүүлгүүд'
-    elsif params[:type].eql?('tasks')
-      @topics = Topic.
-        find(:all,
-             :from=>'tasks t',
-             :joins=>'LEFT JOIN comments c ON t.id = c.topic_id',
-             :select=>'t.id, t.subject as name, count(c.id) as post_count, '+
-                    'max(c.created_at) as last_time',
-             :conditions => 'topic_type = "Task"',
-             :group=>'t.id')
-      @type = 'tasks'
-      @page_title ='Ажлын талаархи хэлэлцүүлгүүд'
     end
   end
 
@@ -155,13 +146,6 @@ class TopicsController < ApplicationController
              'lessons.text as description')
       topic_class = 'Lesson'
       @type = 'lessons'
-    elsif params[:type].eql?('tasks')
-      @topic = Task.
-        find(params[:id],
-             :select=>'tasks.id, tasks.subject as name, '+
-             'tasks.outline as description')
-      topic_class = 'Task'
-      @type = 'tasks'
     elsif params[:type].eql?('topics')
       @topic = Topic.
         find(params[:id],

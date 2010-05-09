@@ -13,8 +13,6 @@
     :action => 'list', :type=>'problems' %></li>
   <li><%=link_to 'Хичээлийн', :controller => 'topics',
     :action => 'list', :type=>'lessons' %></li>
-  <li><%=link_to 'Ажлын', :controller => 'topics',
-    :action => 'list', :type=>'tasks' %></li>
   <% restrict_to 'Admin' do %>
   <li><%=link_to 'Шинэ сэдэв нэмэх', :controller => 'topics',
     :action => 'new' %></li>

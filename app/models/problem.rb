@@ -1,9 +1,10 @@
 class Problem < ActiveRecord::Base
   belongs_to :contest
   belongs_to :user
-  belongs_to :problem_type
+
   has_many :solutions
-  has_many :problem_tests, :order => 'hidden, id',
+  has_many :tests, :class_name => 'ProblemTest', 
+           :order => 'hidden, id',
            :dependent => :destroy
   has_many :attachments,
            :as => 'attachable',
@@ -19,6 +20,10 @@ class Problem < ActiveRecord::Base
   has_many :languages, :through => :problem_languages
 
   validates_presence_of :name, :text
+
+  def test_touched!
+    solutions.each { |solution| solution.invalidate!}
+  end
 
   def correct_solutions
     solutions.select{ |s| s.correct }

@@ -50,9 +50,8 @@
           <li><%= link_to 'Хэрэглэгчид', :controller =>'account', :action=>'ranking' %></li>
           <li><%= link_to 'Бодлогууд', :controller =>'problems', :action=> 'index' %></li>
           <li><%= link_to 'Хичээл', :controller => 'lessons', :action=> 'index' %></li>
-          <li><%= link_to 'Курс', :controller => 'courses', :action=> 'index' %></li>
           <li><%= link_to 'Хэлэлцүүлэг', :controller =>'topics', :action=> 'index' %></li>
-          <li><%= link_to 'Ажил', :controller => 'tasks', :action=> 'index' %></li>
+
         </ul>
         <div class="clearer">
           <span/>
@@ -70,26 +69,7 @@
             <%= render :partial=>context_menu %>
           </div>
           <div class="footer">
-            <h2>Хайлт:</h2>
-            <!-- SiteSearch Google -->
-            <form method="get" action="http://www.google.mn/custom" target="google_window">
-              <table border="0">
-                <tr><td nowrap="nowrap" valign="top" align="left" height="32">
-                    <input type="hidden" name="domains" value="coder.mn"></input>
-                    <input class="googinp" type="text" name="q" size="16" maxlength="100" value="" id="sbi"></input>
-                    <input type="hidden" name="sitesearch" value="coder.mn" checked id="ss1"></input>
-                    <input type="submit" class="googbtn" name="sa" value="" id="sbb"></input>
-                    <input type="hidden" name="client" value="pub-8413374070755748"></input>
-                    <input type="hidden" name="forid" value="1"></input>
-                    <input type="hidden" name="ie" value="UTF-8"></input>
-                    <input type="hidden" name="oe" value="UTF-8"></input>
-                    <input type="hidden" name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;LH:50;LW:151;L:http://coder.mn/banners/0000/0269/banner-small.png;S:http://coder.mn;FORID:1"></input>
-                    <input type="hidden" name="hl" value="en"></input>
-                  </td>
-                </tr>
-              </table>
-            </form>
-            <!-- SiteSearch Google -->
+
             <h2>Онлайн хэрэглэгчид</h2>
             <%= who_is_online %>
 

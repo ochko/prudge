@@ -65,13 +65,6 @@
   </tr>
   <tr>
     <td colspan="5" align='right'>
-      <label for="problem_type">Төрөл: </label>
-      <%= select_tag 'problem[problem_type_id]',
-          options_from_collection_for_select(
-                ProblemType.find(:all),
-                "id",
-                "name",
-                @problem.problem_type_id)  %>
       <label for="problem_source">Эх сурвалж: </label>
       <%= text_field 'problem', 'source', :size => 20  %>
     </td>

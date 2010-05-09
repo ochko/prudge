@@ -1,11 +1,10 @@
 <div class="post">
-  <%= render :partial => "ratings/rate", :locals => { :asset => @lesson } %>
   <h1><%=h @lesson.title %></h1>
   <div class="info">
     Бичсэн: <%= link_to @lesson.author.login,
                 :action=>'show', :controller=>'account',
                 :id=>@lesson.author_id %>,
-    Шинэчилсэн: <%=distance_of_time_in_words_to_now @lesson.updated_at %>
+    Шинэчилсэн: <%= @lesson.updated_at %>
   </div>
 
   <div class="entry">

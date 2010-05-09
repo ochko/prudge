@@ -5,20 +5,8 @@
       <td class="top" width="300">
         <table width="100%" class="slim">
           <tr>
-            <td><label>Тэмцээний Төрөл:</label></td>
-            <td> <%= contest_type_link @contest.contest_type %></td>
-          </tr>
-          <tr>
             <td><label>Түвшин:</label></td>
             <td> <%= @contest.category.capitalize %></td>
-          </tr>
-          <tr>
-            <td><label>Шагнал:</label></td>
-            <td> <%= prize_link @contest.prize %></td>
-          </tr>
-          <tr>
-            <td><label>Ивээн тэтгэгч:</label></td>
-            <td> <%= sponsor_link @contest.sponsor %></td>
           </tr>
           <tr>
             <td><label>Эхлэх цаг:</label></td><td> <%=h @contest.start.to_s(:date_time24) %></td>
