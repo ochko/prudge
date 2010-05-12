@@ -1,0 +1,26 @@
+<h2>Өөрийн мэдээллийг засварлах</h2>
+
+<div class="user-form">
+<% form_for @user, :url => me_path do |f| %>
+  <%= f.error_messages %>
+  <%= f.label :login, "Нэвтрэх нэр" %>
+  <%= f.text_field :login %>
+  
+  <%= f.label :email, "И-мэйл" %>
+  <%= f.text_field :email %>
+  
+  <% if @user.openid_identifier.blank? %>
+  <%= f.label :password, "Нууц үг солих" %>
+  <%= f.password_field :password %>
+  
+  <%= f.label :password_confirmation, "Нууц үгийг давт" %>
+  <%= f.password_field :password_confirmation %>
+  
+  <% end %>
+  <%= f.label :openid_identifier, "OpenID URL"%>  
+  <%= f.text_field :openid_identifier %>
+  <br/>
+
+  <%= f.submit "Хадгал", :class => 'small awesome' %>
+<% end %>
+</div>

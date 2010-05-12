@@ -1,0 +1,34 @@
+<h2>Бүртгүүлэх</h2>
+
+<div class="user-form">
+<% form_for @user, :url => me_path do |f| %>
+  <%= f.error_messages %>
+  <%= f.label :login, "Нэвтрэх нэр" %>
+  <%= f.text_field :login %>
+
+  <%= f.label :email, "И-мэйл" %>
+  <%= f.text_field :email %>
+  
+  <div id="passwords" <%= 'style="display:none;"' unless @user.openid_identifier.blank? %> >
+  
+  <%= f.label :password, "Нууц үг", :style=>"display:inline" %>
+  (<%= link_to_function "Оронд нь OpenID хэрэглэе", '$("#passwords").hide();$("#openid").show();' %>)
+  <%= f.password_field :password %>
+
+  <%= f.label :password_confirmation, "Нууц үгийг давт" %>
+  <%= f.password_field :password_confirmation %>  
+  </div>
+
+  <div id="openid" <%= 'style="display:none;"' if @user.openid_identifier.blank? %> >
+  <%= f.label :openid_identifier, "OpenID URL", :style=>"display:inline" %>
+  (<%= link_to "OpenID тай больё", "http://openid.net", :target =>'_blank' %>)
+  <%= f.text_field :openid_identifier %>
+  </div>
+
+  
+  <%= link_to 'Хэрэглэх нөхцлийг', '/static/terms', :target => '_blank' %>
+  <%= f.check_box  :terms_of_service  %> <b>зөвшөөрөв</b>
+  
+  <%= f.submit "Бүртгэ", :class=>"small yellow awesome" %>
+<% end %>
+</div>

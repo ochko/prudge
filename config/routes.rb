@@ -1,27 +1,22 @@
 ActionController::Routing::Routes.draw do |map|
-  # The priority is based upon order of creation: first created -> highest priority.
+  map.resources :users
+  map.resources :password_resets
+  map.resource :user_session
 
-  # Sample of regular route:
-  # map.connect 'products/:id', :controller => 'catalog', :action => 'view'
-  # Keep in mind you can assign values other than :controller and :action
+  map.resources :contests
+  map.resources :problems
+  map.resources :lessons
+  map.resources :topics
 
-  # Sample of named route:
-  # map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
-  # This route can be invoked with purchase_url(:id => product.id)
+  map.root :controller => 'contests', :action => 'last'
+  map.signup 'signup', :controller => 'users', :action => 'new'
+  map.login 'login', :controller => 'user_sessions', :action => 'new'
+  map.logout 'logout', :controller => 'user_sessions', :action => 'destroy'
+  map.forgot_password 'forgot_password', :controller => 'password_resets', :action => 'new'
+  map.account 'account', :controller => 'users', :action => 'account'
+  map.home 'home', :controller => 'home'
+  map.last 'last', :controller => 'solutions', :action => 'last'
 
-  # You can have the root of your site routed by hooking up ''
-  # -- just remember to delete public/index.html.
-  # map.connect '', :controller => "welcome"
-
-  map.connect '/', :controller => "home", :action => 'welcome'
-
-  map.user_change_password 'users/:id/change_password', :controller => 'account', :action => 'change_password'
-  # Allow downloading Web Service WSDL as a file with an extension
-  # instead of a file named 'wsdl'
-
-  #map.connect ':controller/service.wsdl', :action => 'wsdl'
-
-  # Install the default route as the lowest priority.
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 end

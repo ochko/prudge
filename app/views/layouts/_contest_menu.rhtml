@@ -1,10 +1,20 @@
-<ul>
-  <h2>Тэмцээн</h2>
-  <li class="first"><%=link_to 'Тэмцээнүүд', :controller => 'contests', :action => 'list' %></li>
-
-  <% restrict_to "Judge" do %>
-  <li><%=link_to 'Зарлах', :controller => 'contests', :action => 'new' %></li>
-  <% end %>
-
-  <li class="last"><%=link_to 'Өнгөрсөн тэмцээнүүд', :controller => 'contests', :action => 'past' %></li>
-</ul>
+<div id="main-menu">
+  <ul>
+    <li><%= link_to 'Эхлэл', :controller =>'home' %></li>
+    <li><%= link_to 'Тэмцээн', contests_path, :class=>'current' %></li>
+    <li><%= link_to 'Хэрэглэгчид', users_path %></li>
+    <li><%= link_to 'Бодлогууд', problems_path %></li>
+    <li><%= link_to 'Хичээл', lessons_path %></li>
+    <li><%= link_to 'Хэлэлцүүлэг', topics_path %></li>
+  </ul>
+</div>
+<div id="sub-menu">
+  <ul>
+    <li><%=link_to 'Өнгөрсөн тэмцээнүүд', contests_path  %></li>
+    <li><%=link_to 'Сүүлийн бодолтууд', last_path  %></li>
+    
+    <% if judge? %>
+    <li><%=link_to 'Тэмцээн зарлах', new_contest_path %></li>
+    <% end %>
+  </ul>  
+</div>

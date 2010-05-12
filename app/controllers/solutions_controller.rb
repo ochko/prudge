@@ -1,10 +1,10 @@
 class SolutionsController < ApplicationController
-  before_filter :login_required,
-                :except=> [:tryed, :completed, :best]
+  before_filter :require_user,
+                :except=> [:tryed, :completed, :best, :last]
 
-  access_control [:delete,
-                  :inspect,
-                  :list] => 'Judge'
+  before_filter :require_judge, :only => [:delete, :inspect, :list]
+
+  layout 'contests'
 
   def list
     conditions = case params['field']
@@ -32,6 +32,13 @@ class SolutionsController < ApplicationController
     end
   end
 
+  def last
+    @solutions = Solution.
+      find(:all,
+           :include => [:user, :problem],
+           :limit => 30,
+           :order => 'solutions.uploaded_at desc')
+  end
   def my
     @solutions = Solution.
       find_by_sql(["SELECT s.* FROM solutions s "+
@@ -48,7 +55,7 @@ class SolutionsController < ApplicationController
     @problem = @solution.problem
     @results = @solution.results.sort{ |x,y| x.test.hidden.to_s <=> y.test.hidden.to_s}
     @title = 'Бодолт'
-    if is_judge?
+    if judge?
       render :action => 'inspect'
     end
   end
@@ -264,7 +271,7 @@ class SolutionsController < ApplicationController
 
   def check
     @solution = Solution.find(params[:id])
-    if !is_judge?
+    if !judge?
       if @solution.checked
         render :text => 'Шалгачихсан'
         return
@@ -280,7 +287,7 @@ class SolutionsController < ApplicationController
       return
     end
 
-    do_check
+    @solution.check!
   end
 
   private

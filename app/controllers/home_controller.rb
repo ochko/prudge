@@ -1,17 +1,10 @@
 class HomeController < ApplicationController
 
   def index
-    welcome
-    render :action => 'welcome'
-  end
-
-  def welcome
-    behavior_cache Page, :tag => (params[:page] || 1) do
-      @news = Page.
-        paginate(:page => params[:page], :per_page => 5,
-                 :conditions=>["category = ?", 'news'],
-                 :order => "created_at desc")
-    end
+    @news = Page.
+      paginate(:page => params[:page], :per_page => 5,
+               :conditions=>["category = ?", 'news'],
+               :order => "created_at desc")
   end
 
   def aboutus
@@ -23,7 +16,6 @@ class HomeController < ApplicationController
         paginate(:page => params[:page], :per_page => 5,
                  :conditions=>["category = ?", 'help'],
                  :order => "created_at desc")
-    end
   end
 
   def rules

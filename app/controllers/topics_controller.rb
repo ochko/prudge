@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 class TopicsController < ApplicationController
-  before_filter :login_required,
-                :except => [:index, :list, :search, :show]
+  before_filter :require_user, :except => [:index, :list, :search, :show]
 
-  access_control [:new,
-                  :create,
-                  :edit,
-                  :destroy,
-                  :update,
-                  :moderate] => 'Admin'
+  before_filter :require_admin, :only => [:new,
+                                          :create,
+                                          :edit,
+                                          :destroy,
+                                          :update,
+                                          :moderate]
+  layout 'discussions'
 
   def index
     last

@@ -11,8 +11,8 @@ class Solution < ActiveRecord::Base
   has_many :tests, :through => :problem, :order => 'hidden, id'
 
   has_attached_file :source, 
-  :url => "/judge/solutions/:user/:problem/:id.code",
-  :path => ":rails_root/judge/solutions/:user/:problem/:id.code"
+    :url => "/judge/solutions/:user/:problem/:id.code",
+    :path => ":rails_root/judge/solutions/:user/:problem/:id.code"
 
   # TODO: Delete after migration
   #has_attachment :path_prefix => 'judge/src'
@@ -29,6 +29,8 @@ class Solution < ActiveRecord::Base
 
   named_scope :effective, :conditions => { :invalidated => false }
   named_scope :best, :conditions => { :isbest => true }
+  named_scope :correct, :conditions => { :correct => true }
+  named_scope :for_user, lambda { |user| { :conditions => ['user_id =?', user.id], :include => [:language, :problem], :order => 'created_at desc' } }
 
   after_save { |s| s.user.collect_caches! }
   after_destroy { |s| s.user.collect_caches! }

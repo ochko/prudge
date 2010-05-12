@@ -1,22 +1,16 @@
+# -*- coding: utf-8 -*-
 class ProblemsController < ApplicationController
-  before_filter :login_required,
+  before_filter :require_user,
                 :except => [:index, :list, :search, :show, :text, :feed]
 
-  access_control [:destroy,
-                  :nominated] => 'Judge'
+  before_filter :require_judge, :only => [:destroy, :nominated]
 
   def index
     list
     render :action => 'list'
   end
 
-  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list }
-
   def list
-
-  #  @my_solutions = Solution.find(:all :conditions => ["user_id IS "+current_user.id] 
     @order = params[:order] || "created_at_desc"
     @order.gsub!(/\d/,'')
     order_sql = ''
@@ -28,9 +22,10 @@ class ProblemsController < ApplicationController
     end
     page = params[:page] || '1'
     @order << page
-    behavior_cache Problem, Solution, :tag => @order  do
-      @my_solutions = Solution.find_by_sql(["SELECT * from solutions WHERE correct=1 and user_id=?",current_user.id])
-      @problems = Problem.
+    @my_solutions = []
+    @my_solutions = Solution.find_by_sql(["SELECT * from solutions WHERE correct=1 and user_id=?", current_user.id]) if current_user
+ 
+    @problems = Problem.
         paginate(:page => params[:page], :per_page => 30,
              :select => "problems.*, u.login as login, count(s.id) as solution_count, "+
              "sum(s.correct) as correct_count",

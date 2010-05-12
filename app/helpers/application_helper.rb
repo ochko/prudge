@@ -1,5 +1,16 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  def admin?
+    current_user && current_user.admin
+  end
+
+  def judge?
+    current_user && current_user.judge
+  end
+
+  def logged_in?
+    current_user
+  end
   def merged_name(first, last)
     if !last.nil?
       return first + '.' + last[0,2]
@@ -30,11 +41,7 @@ module ApplicationHelper
     else
       image_tag('ng.png')
     end
-  end
-
-  def ok_or_ng(correct)
-    (correct) ? 'ok' : 'ng'
-  end
+  end    
 
   def show_percent_word(all, some)
     if all == some
@@ -205,22 +212,10 @@ module ApplicationHelper
           medal_color = s
           list += '<br />'
         end
-        list += link_to(standing(s),
-                        :controller => 'contests',
-                        :action=> 'show', :id=>c)
+        list += link_to(standing(s),c)
       end
     }
     return list
-  end
-
-  def show_last
-    @solutions = Solution.
-      find(:all,
-           :include => [:user, :problem],
-           :limit => 10,
-           :order => 'solutions.source_updated_at desc')
-
-    render :partial => 'solutions/last'
   end
 
   def rank_name(points, total)
@@ -263,12 +258,6 @@ module ApplicationHelper
     when 525960..1051919 then '1 жил'
     else                      "#{(distance_in_minutes / 525960).round} жил"
     end
-  end
-
-  def who_is_online
-    @onlines = User.find(:all,
-                         :conditions => ["updated_at > ?", Time.now])
-    render :partial => 'account/online'
   end
 
 end

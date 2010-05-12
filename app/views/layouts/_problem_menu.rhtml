@@ -1,25 +1,33 @@
-<div class="rss-context">
-  <%= link_to(image_tag('rss-black.png'), :action=>:feed, :format=>:rss) %>
+<div id="main-menu">
+  <ul>
+    <li><%= link_to 'Эхлэл', :controller =>'home' %></li>
+    <li><%= link_to 'Тэмцээн', contests_path %></li>
+    <li><%= link_to 'Хэрэглэгчид', users_path %></li>
+    <li><%= link_to 'Бодлогууд', problems_path, :class=>'current' %></li>
+    <li><%= link_to 'Хичээл', lessons_path %></li>
+    <li><%= link_to 'Хэлэлцүүлэг', topics_path %></li>
+  </ul>
 </div>
-<ul>
-  <h2>Бодлого</h2>
-  <li class="first"><%=link_to 'Жагсаалт', :controller => 'problems',
-    :action => 'list' %></li>
-  <% if logged_in? %>
-  <li><%=link_to 'Миний бодолтууд', :controller => 'solutions',
-    :action => 'my' %></li>
-  <% restrict_to 'Judge' do  %>
-  <li><%=link_to 'Дэвшигдсэн бодлогууд', :controller => 'problems',
-    :action => 'nominated' %></li>
-  <li><%=link_to 'Бодолтууд', :controller => 'solutions',
-    :action => 'list' %></li>
-  <li><%=link_to 'Үр дүнг шалгах', :controller => 'results',
-    :action => 'list' %></li>
-  <% end %>
-  <li><%=link_to 'Бодлого санал болгох', :controller => 'problems',
-    :action => 'new' %></li>
-  <% end %>
-  <li class="last"><%=link_to 'Хайх', :controller => 'problems',
-    :action => 'search' %></li>
-</ul>
-
+<div id="sub-menu">
+  <ul>
+    <li class="first"><%=link_to 'Жагсаалт', :controller => 'problems',
+      :action => 'list' %></li>
+    <% if logged_in? %>
+    <li><%=link_to 'Миний бодолтууд', :controller => 'solutions',
+      :action => 'my' %></li>
+    <% if judge? %>
+    <li><%=link_to 'Дэвшигдсэн бодлогууд', :controller => 'problems',
+      :action => 'nominated' %></li>
+    <li><%=link_to 'Бодолтууд', :controller => 'solutions',
+      :action => 'list' %></li>
+    <li><%=link_to 'Үр дүнг шалгах', :controller => 'results',
+      :action => 'list' %></li>
+    <% end %>
+    <li><%=link_to 'Бодлого санал болгох', :controller => 'problems',
+      :action => 'new' %></li>
+    <% end %>
+    <li class="last"><%=link_to 'Хайх', :controller => 'problems',
+      :action => 'search' %></li>
+    <li><%= link_to(image_tag('rss.png')+'RSS', :action=>:feed, :format=>:rss) %></li>
+  </ul>
+</div>

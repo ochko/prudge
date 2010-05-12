@@ -6,7 +6,7 @@
         <table width="100%" class="slim">
           <tr>
             <td><label>Түвшин:</label></td>
-            <td> <%= @contest.category.capitalize %></td>
+            <td> <%= @contest.level_name %></td>
           </tr>
           <tr>
             <td><label>Эхлэх цаг:</label></td><td> <%=h @contest.start.to_s(:date_time24) %></td>
@@ -42,12 +42,13 @@
       </td>
       <td class="top"><%= @contest.description %></td>
     </tr>
-    <% restrict_to 'Admin' do  %>
+    <% if admin?  %>
     <tr>
       <td colspan="3" class="smallink">
         <%= link_to 'Edit', :action => 'edit', :id => @contest %>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </td>
+      <td><%= link_to image_tag('delete.png'), { :action => 'destroy', :id => @contest }, :confirm => 'Are you sure?', :method => :post %></td>
     </tr>
     <% end %>
   </table>
@@ -55,31 +56,39 @@
 <% if @contest.start < Time.now() %>
 
   <h2>Бодлого</h2>
-  <%= render :partial => 'problems/list' %>
+  <table width="100%">
+    <tr>
+      <th>ID</th>
+      <th>Нэр</th>
+      <th>Түвшин</th>
+      <th>Хязгаар</th>
+      <th>Дэвшүүлсэн</th>
+      <th>Бодолт</th>
+    </tr>
+
+    <% for solution in @contest.grouped_solutions %>
+      <tr>
+        <td><%= solution.problem_id %></td>
+        <td><%= link_to solution.problem.name, solution.problem %></td>
+        <td><%= Contest::LEVEL_NAMES[solution.problem.level] %></td>
+        <td><%= solution.problem.time %> сек /
+	  <%= solution.problem.memory %> кб</td>
+        <td><%= solution.problem.user.login %></td>
+        <td><%= solution.tried %> / <%= solution.solved %></td>
+      </tr>
+    <% end %>
+  </table>
 
   <h2>Оролцогчид</h2>
-  <% if @users.size > 0 %>
+  <% if @contest.users.size > 0 %>
   <table class='slim' width='100%'>
     <tr>
       <td class='top'>
         <table>
           <tr><th>No</th><th width="120">Нэр</th><th>Оноо</th><th>Time</th></tr>
-          <% num = 0
-             point = 0
-             avg = 0
-             for user in @users
-             if point != user.point
-             point = user.point
-             num += 1
-             elsif (user.avg.to_f > avg.to_f + 0.1)
-          point = user.point
-          num += 1
-          end
-          avg = user.avg
-          %>
+          <% @numbers.zip(@standings) do |num, user| %>
           <tr>
-            <td><%= show_place(num) %>
-            </td>
+            <td><%= show_place(num) %></td>
             <td class='small'>
               <%= link_to user.login, :controller=>'account',
               :action=>'show', :id=>user.id %></td>
@@ -105,7 +114,7 @@
         <table class='slim'>
           <tr>
             <td id='solved'>
-              <%= render :partial=> 'solved' %>
+              
             </td>
           </tr>
         </table>

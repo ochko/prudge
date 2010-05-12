@@ -26,7 +26,7 @@ class Problem < ActiveRecord::Base
   end
 
   def correct_solutions
-    solutions.select{ |s| s.correct }
+    solutions.correct
   end
 
   def has_permission?(user)
@@ -74,6 +74,7 @@ class Problem < ActiveRecord::Base
 
     return false
   end
+
   def update_languages(languages)
     problem_languages.each{ |l| l.destroy }
     if !languages.nil?

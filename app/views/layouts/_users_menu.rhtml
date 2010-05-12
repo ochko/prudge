@@ -1,0 +1,24 @@
+<div id="main-menu">
+  <ul>
+    <li><%= link_to 'Эхлэл', home_path %></li>
+    <li><%= link_to 'Тэмцээн', contests_path %></li>
+    <li><%= link_to 'Хэрэглэгчид', users_path, :class=>'current' %></li>
+    <li><%= link_to 'Бодлогууд', problems_path %></li>
+    <li><%= link_to 'Хичээл', lessons_path %></li>
+    <li><%= link_to 'Хэлэлцүүлэг', topics_path %></li>
+  </ul>
+</div>
+<div id="sub-menu">
+  <ul>
+    <li><%=link_to 'Нүүр хуудас', :controller => 'home', :action => 'welcome' %></li>
+    <li><%=link_to 'Тусламж', :controller => 'home', :action => 'help' %></li>
+    <li><%=link_to 'Бидний тухай', :controller => 'home', :action => 'aboutus' %></li>
+    <li><%=link_to 'Програмчлалын хэлүүд', :controller => 'languages', :action => 'list' %></li>
+    <li><%=link_to 'Асуулт', :controller => 'qa', :action => 'index' %>
+      <% if admin? %>
+      (<%=link_to 'Хариу', :controller => 'qa', :action => 'list' %>)
+      <% end %>
+    </li>
+    <li  class="last"><%=link_to 'Бидний зарчим', :controller => 'home', :action => 'rules' %></li>
+  </ul>
+</div>

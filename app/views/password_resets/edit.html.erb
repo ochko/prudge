@@ -1,0 +1,14 @@
+<h2>Нууц үгээ солих</h2>
+<hr />
+<div class='user-form'>
+  <% form_for @user, :url => password_reset_path, :method => :put do |f| %>
+  <%= f.error_messages %>
+  <%= f.label :password, 'Нууц үг' %><br />
+  <%= f.password_field :password %><br />
+  <br />
+  <%= f.label :password_confirmation, 'Нууц үгээ давт' %><br />
+  <%= f.password_field :password_confirmation %><br />
+  <br />
+  <%= f.submit "Нууц үгийг шинэчлээд Логин хий", :class=>"small yellow awesome" %>
+  <% end %>
+</div>

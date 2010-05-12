@@ -26,7 +26,7 @@
           <td><%= problem.id %></td>
           <%= tag_str %><%= link_to problem.name, :controller=>'problems',
                   :action => 'show', :id => problem %></td>
-          <%= tag_str %><%= problem.point %></td>
+          <%= tag_str %><%= problem.level %></td>
           <%= tag_str %><%= problem.time %> сек/<%= problem.memory %> кб</td>
           <%= tag_str %><%= problem.login %></td>
           <%= tag_str %><%= problem.created_at.to_s(:date_only) %></td>

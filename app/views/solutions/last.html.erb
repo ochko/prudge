@@ -1,0 +1,10 @@
+<h1>Сүүлийн бодолтууд</h1>
+<table>
+  <% @solutions.each do |s| %>
+    <tr>
+      <td><%= link_to s.user.login, s.user, :class=> (s.correct ? 'ok' : 'ng') %> </td>
+      <td><%=l s.uploaded_at %></td>
+      <td><%= link_to s.problem.name, s.problem %></td>
+    </tr>
+  <% end %>
+</table>

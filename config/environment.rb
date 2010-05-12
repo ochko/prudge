@@ -9,6 +9,12 @@ Rails::Initializer.run do |config|
 
   # Skip frameworks you're not going to use (only works if using vendor/rails)
   # config.frameworks -= [ :action_web_service, :action_mailer ]
+  config.gem "bluecloth"
+  config.gem "authlogic"
+  config.gem "authlogic-oid", :lib => "authlogic_openid"
+  config.gem "ruby-openid", :lib => "openid"
+  config.gem 'gravtastic', :version => '>= 2.1.0'
+  config.gem 'thinking-sphinx', :lib => 'thinking_sphinx'
 
   config.cache_store = :mem_cache_store, '127.0.0.1:11211', { :namespace => 'coder' }
 
@@ -17,7 +23,6 @@ Rails::Initializer.run do |config|
   # Make Active Record use UTC-base instead of local time
   # config.active_record.default_timezone = :utc
 
-  config.active_record.observers = :user_observer
   config.action_controller.session = {
     :session_key => '_coder_session',
     :secret      => '4dfcafege5e3f536df7a3fa4db76f5a8070d9d508864b876cabe7d79a773f5bf11088849b897a8c98a38c6ce6he9f92ba79b386dadd2be5e1efefe8f83f4c7m'
