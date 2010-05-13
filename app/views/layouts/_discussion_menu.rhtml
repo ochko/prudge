@@ -26,7 +26,7 @@
     <li><%=link_to 'Хянах', :controller => 'topics',
       :action => 'moderate' %></li>
     <% end %>
-    <li><%=link_to 'Хайх', :controller => 'topics',
+    <li><%=link_to image_tag('search.png')+'Хайх', :controller => 'topics',
       :action => 'search' %></li>
     <li><%= link_to(image_tag('rss.png')+'RSS', :action=>:feed, :format=>:rss) %></li>
   </ul>

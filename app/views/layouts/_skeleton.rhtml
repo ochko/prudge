@@ -6,9 +6,11 @@
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <title>Coder.mn::<%= yield :title %></title>
     <%= stylesheet_link_tag 'screen' %>
+    <%= stylesheet_link_tag 'jquery-ui' %>
     <%= stylesheet_link_tag 'application' %>
 
     <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag 'jquery-ui' %>
     <%= javascript_include_tag "http://www.google-analytics.com/ga.js" %>
 
     <link rel="icon" href="/images/coder.ico" type="image/x-icon" />
@@ -29,6 +31,7 @@
 	  <%= image_tag current_user.gravatar_url(:size => 20) %> 
           <%= current_user.login %>
 	  <%= link_to 'Миний хуудас', account_path %> |
+	  <%= image_tag('settings.png') %><%= link_to('Тохиргоо', edit_user_path(current_user)) %> |
           <%= link_to 'Гарах', logout_path %>
           <% end %>
         </div>

@@ -51,7 +51,6 @@ class UsersController < ApplicationController
                         "order by points DESC, avg ASC" ,
                         :page => params[:page], :per_page=>100,
                         :total_entries => User.count_by_sql('select count(*) from users'))
-      @total = Problem.sum('level', :conditions=> "contest_id is not null")
 
   end
 

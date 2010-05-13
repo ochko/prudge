@@ -7,6 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :problems
   map.resources :lessons
   map.resources :topics
+  map.resources :solutions
 
   map.root :controller => 'contests', :action => 'last'
   map.signup 'signup', :controller => 'users', :action => 'new'

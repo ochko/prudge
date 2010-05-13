@@ -1,6 +1,8 @@
 <h1>Хичээлүүд</h1>
 
-  <%= will_paginate @lessons, :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+  <%= will_paginate @lessons, :class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+
   <%= render :partial => 'list' %>
-  <%= will_paginate @lessons, :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+
+  <%= will_paginate @lessons, :class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
 

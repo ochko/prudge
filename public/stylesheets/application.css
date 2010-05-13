@@ -9,7 +9,7 @@ body, p, ol, ul, td {
 a { color: #4080C0; text-decoration:none;}
 a:hover, a:focus {text-decoration:underline;}
 
-h1 { font-size: 1.8em; }
+h1 { font-size: 1.8em; text-align:center;}
 h2 { font-size: 1.6em; }
 h3 { font-size: 1.4em; }
 
@@ -17,7 +17,7 @@ h3 { font-size: 1.4em; }
     margin:0 auto;
     width:800px;
 }
-
+#content {min-height: 500px;}
 #logo {
     padding: 5px 0;
 }
@@ -98,7 +98,9 @@ h3 { font-size: 1.4em; }
     padding: 0 10px;
 }
 #sub-menu img {
-    vertical-align: text-top;
+    vertical-align: baseline;
+    margin-bottom: -1px;
+    padding-right:2px;
 }
 
 #bottom {
@@ -136,7 +138,12 @@ h3 { font-size: 1.4em; }
     background: url(/images/ng.png) no-repeat bottom left;
     padding-left:16px;
 }
-
+dt {
+    margin-top:1em;
+}
+dt img {
+    vertical-align: text-top;
+}
 .fieldWithErrors {
     display:inline;
 }
@@ -173,3 +180,121 @@ h3 { font-size: 1.4em; }
     list-style: square;
 }
 
+.apple_pagination {
+    margin:0.5em 0;
+    background: #F5F5F5;
+    border: 1px solid #E5E5E5;
+    -moz-border-radius: 8px; 
+    -webkit-border-radius: 8px;
+    text-align: center;
+    padding: 0.5em; }
+.apple_pagination a, .apple_pagination span {
+    padding: .3em .4em; 
+}
+.apple_pagination span.disabled {
+    color: #AAA; }
+.apple_pagination span.current {
+    font-weight: bold;
+    border: 1px solid #999;
+    -moz-border-radius: 10px; 
+    -webkit-border-radius: 10px;
+}
+.apple_pagination a {
+    text-decoration: none;
+    color: black; }
+.apple_pagination a:hover, .apple_pagination a:focus {
+    text-decoration: underline; }
+
+table {
+    border-spacing: 0px 0px;
+    border: 1px solid #d8d8d8;
+}
+
+table th {
+    background-color: #eee;
+    color: #999;
+    font-weight: normal;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+table td {
+    background: #f8f8f8 url(/images/row-back.png) repeat-x 0px 100%;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+th.level-legend {
+    text-align:right;
+}
+th.level-legend span {
+    margin:0 1em;
+}
+
+.rank_4 { background: url(/images/rank_4.png) no-repeat 0 0; }
+.rank_3 { background: url(/images/rank_3.png) no-repeat 0 0; }
+.rank_2 { background: url(/images/rank_2.png) no-repeat 0 0; }
+.rank_1 { background: url(/images/rank_1.png) no-repeat 0 0; }
+.rank_4, .rank_3, .rank_2, .rank_1 {padding:3px 0 4px 22px; }
+
+#portrait{ float:left; padding: 0 1em 0 0.5em;}
+
+#user-statistic { font-size: 1.2em; margin:0.5em 0; float:right;}
+#user-statistic img { vertical-align: baseline;}
+
+#medals {margin: 0 0 1em 0;}
+#medals a img { padding: 1px 2px; }
+
+.user-form {border: 4px solid #909090; width:260px; margin:20px auto; padding:30px; background-color:#e5ecf9;}
+.user-form input[type="text"], .user-form input[type="password"] {
+    max-width:250px;margin-bottom:15px; border:1px solid #909090;}
+.user-form label {display:block;}
+input#user_openid_identifier, input#user_session_openid_identifier {
+    background: url(/images/openid-bg.gif) no-repeat;
+    background-color: #FFF;
+    background-position: 1px center;
+    padding-left: 19px;
+}
+input#user_login, input#user_session_login {
+    background: url(/images/user-bg.jpg) no-repeat;
+    background-color: #FFF;
+    background-position: 0 50%;
+    padding-left: 19px;
+} 
+input#user_email, input#user_session_email {
+    background: url(/images/email-bg.gif) no-repeat;
+    background-color: #FFF;
+    background-position: 1px center;
+    padding-left: 19px;
+} 
+input#user_school {
+    background: url(/images/globe.png) no-repeat;
+    background-color: #FFF;
+    background-position: 1px center;
+    padding-left: 19px;
+} 
+input#user_password, input#user_password_confirmation, input#user_session_password {
+    background: url(/images/pass-bg.png) no-repeat;
+    background-color: #FFF;
+    background-position: 2px center;
+    padding-left: 19px;
+} 
+
+#forgot-link {
+    background: url(/images/forgot.png) no-repeat;
+    background-position: 0 center;
+    padding: 2px 0 0 19px;
+}
+
+#openid-link {
+    background: url(/images/openid-bg.gif) no-repeat;
+    background-position: 0 center;
+    padding-left: 19px;
+}
+
+#tabs{border:none; background:inherit;}
+#tabs ul{border-top:none;border-right:none;border-left:none; background:inherit; border-radius:0;}
+#tabs div {padding:0;}
+#tabs table { border: 1px solid #aaa; border-top:none;}
+#tabs td a { color: #4080C0; }
+.center {text-align:center;}
+.solution-meta{display:block; font-size:0.9em; padding-left:1em;}
+#solved-problems td, #participant-of td {padding: 2px 6px 1px 4px;}

@@ -218,18 +218,6 @@ module ApplicationHelper
     return list
   end
 
-  def rank_name(points, total)
-    if points.to_i > total*0.6
-      return 'advanced'
-    elsif points.to_i > total*0.3
-      return 'intermediate'
-    elsif points.to_i > total*0.05
-      return 'beginner'
-    else
-      return 'challenger'
-    end
-  end
-
   def hugatsaa_zawsar(from_time, to_time = Time.now, include_seconds = true)
     from_time = from_time.to_time if from_time.respond_to?(:to_time)
     to_time = to_time.to_time if to_time.respond_to?(:to_time)

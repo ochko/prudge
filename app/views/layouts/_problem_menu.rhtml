@@ -26,7 +26,7 @@
     <li><%=link_to 'Бодлого санал болгох', :controller => 'problems',
       :action => 'new' %></li>
     <% end %>
-    <li class="last"><%=link_to 'Хайх', :controller => 'problems',
+    <li class="last"><%=link_to image_tag('search.png')+'Хайх', :controller => 'problems',
       :action => 'search' %></li>
     <li><%= link_to(image_tag('rss.png')+'RSS', :action=>:feed, :format=>:rss) %></li>
   </ul>

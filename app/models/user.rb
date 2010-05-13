@@ -35,5 +35,13 @@ class User < ActiveRecord::Base
 
   def admin?() self.admin == true  end
   def judge?() self.judge == true  end
+  
+  def level
+    level = points.to_i/50
+    level > 4 ? 4 : level
+  end
 
+  def level_name
+    Contest::LEVEL_NAMES[level]
+  end
 end

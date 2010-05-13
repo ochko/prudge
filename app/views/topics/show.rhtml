@@ -19,6 +19,6 @@
   <% end %>
 <% end %>
 </div>
-<%= will_paginate @comments, :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+<%= will_paginate @comments, :class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
 <%= render :partial => 'comments/form_list' %>
-<%= will_paginate @comments, :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+<%= will_paginate @comments, :class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
