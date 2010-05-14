@@ -11,8 +11,10 @@
 <div id="sub-menu">
   <ul>
     <li><%=link_to 'Тусламж', help_path %></li>
-    <li><%=link_to 'Бидний тухай', about_path %></li>
-    <li><%=link_to 'Програмчлалын хэлүүд', languages_path %></li>
+    <li><%=link_to 'Бидний тухай', about_path %></li>    
     <li><%=link_to 'Бидний зарчим', rules_path  %></li>
+    <% if admin? %>
+    <li><%=link_to 'Програмчлалын хэлүүд', languages_path %></li>
+    <% end %>
   </ul>
 </div>

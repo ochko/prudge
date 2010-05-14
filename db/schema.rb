@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100512192437) do
+ActiveRecord::Schema.define(:version => 20100514184823) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "attachable_id"
@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(:version => 20100512192437) do
     t.datetime "updated_at", :null => false
     t.string   "title",      :null => false
     t.text     "text",       :null => false
-    t.string   "tags",       :null => false
   end
 
   add_index "lessons", ["author_id"], :name => "index_lessons_on_author_id"
@@ -90,7 +89,6 @@ ActiveRecord::Schema.define(:version => 20100512192437) do
     t.string   "category",   :limit => 15, :null => false
     t.string   "title",                    :null => false
     t.text     "content",                  :null => false
-    t.string   "tags",                     :null => false
     t.datetime "created_at",               :null => false
     t.integer  "user_id",                  :null => false
   end

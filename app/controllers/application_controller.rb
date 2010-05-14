@@ -8,12 +8,6 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user, :current_user?
 
   protected
-  def normalize_tags(tagged)
-    tags = tagged.tags
-    tags.sub!(',',' ')
-    tags.strip!
-    tagged.update_attribute('tags', ' ' + tags + ' ')
-  end
 
   private
   def current_user_session

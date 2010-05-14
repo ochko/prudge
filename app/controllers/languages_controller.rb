@@ -1,8 +1,6 @@
 class LanguagesController < ApplicationController
-  before_filter :require_user,
-                :except => [:index, :list, :show]
-  before_filter :require_admin,
-                :only =>[:new, :create, :edit, :destroy, :update]
+  before_filter :require_admin
+
   def index
     list
     render :action => 'list'

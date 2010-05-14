@@ -16,7 +16,6 @@
     </div>
   <% end %>
   <div class="info">
-    Зүүлт: <%= lesson_tag_link @lesson.tags %>
     <% if logged_in? %>
       <% if @lesson.author_id == current_user.id %>
         <%= link_to 'Засварлах', :action => 'edit', :id => @lesson %> |
@@ -25,13 +24,6 @@
       <% end %>
     <% end %>
   </div>
-
-  <% if @attachments.size > 0 %>
-    <fieldset>
-      <legend>Хавсралт</legend>
-      <%= render :partial => 'attachment/list' %>
-    </fieldset>
-  <% end %>
 </div>
 <%= render :partial=>'comments/show',
            :locals=>{:topic_id   => @lesson.id,

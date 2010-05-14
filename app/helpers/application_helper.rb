@@ -78,22 +78,6 @@ module ApplicationHelper
             :id=>l.id)
   end
 
-  def page_tag_link(tags)
-    return '' if tags.nil?
-    tags.split(' ').collect {|tag| 
-      link_to(tag, pages_path(:field=>'tags', :query=>tag), 
-              :class=>'tag') 
-    }.join(' ')
-  end
-
-  def lesson_tag_link(tags)
-    return '' if tags.nil?
-    tags.split(' ').collect {|tag| 
-      link_to(tag, lessons_path(:field=>'tags', :query=>tag), 
-              :class=>'tag') 
-    }.join(' ')
-  end
-
   def shorten(str, len)
     if str.length > len
       return str[0,len] + '...'

@@ -6,20 +6,8 @@ class LessonsController < ApplicationController
   auto_complete_for :problem, :name
 
   def index
-    if params[:query]
-      conditions = case params['field']
-                   when "title" then ["title LIKE ?", "%#{params[:query]}%"]
-                   when "text" then ["text LIKE ?", "%#{params[:query]}%"]
-                   when "tags" then ["tags LIKE ?", "% #{params[:query]} %"]
-                   else ["l.title <> ''"]
-                   end
-      @lessons = Lesson.paginate(:page=>params[:page], :include => :author,
-                                 :order => "updated_at desc",
-                                 :conditions => conditions)
-    else
-      @lessons = Lesson.paginate(:page=>params[:page], :include =>[:author],
-                                 :order => "created_at desc")
-    end
+    @lessons = Lesson.paginate(:page=>params[:page], :include =>[:author],
+                               :order => "created_at desc")
     render(:layout => false) if request.xml_http_request?
   end
 
@@ -37,8 +25,6 @@ class LessonsController < ApplicationController
 
   def show
     @lesson = Lesson.find(params[:id])
-    @attachments = @lesson.attachments
-
     @problems = @lesson.problems
   end
 
@@ -50,7 +36,6 @@ class LessonsController < ApplicationController
     @lesson = Lesson.new(params[:lesson])
     @lesson.author_id = current_user.id
     if @lesson.save
-      normalize_tags(@lesson)
       flash[:notice] = 'Lesson was successfully created.'
       redirect_to :action => 'list'
     else
@@ -62,14 +47,12 @@ class LessonsController < ApplicationController
     @lesson = Lesson.find(params[:id])
     return unless validate_ownership?
     @problems = @lesson.problems
-    prepare_relations
   end
 
   def update
     @lesson = Lesson.find(params[:id])
     return unless validate_ownership?
     if @lesson.update_attributes(params[:lesson])
-      normalize_tags(@lesson)
       flash[:notice] = 'Lesson was successfully updated.'
       redirect_to :action => 'show', :id => @lesson
     else
@@ -140,13 +123,6 @@ class LessonsController < ApplicationController
       end
       return false
     end
-  end
-
-  def prepare_relations
-    @attachment = Attachment.
-      new({:attachable_id => @lesson.id,
-           :attachable_type => 'Lesson' })
-    @attachments = @lesson.attachments
   end
 
 end

@@ -1,4 +1,3 @@
-
 <% for n in @news%>
   <div class='post'>
     <h1><%= image_tag('txt.png') %> <%=h n.title%></h1>
@@ -6,7 +5,7 @@
       <%= n.content %>
     </div>
     <p class='info'>
-      Бичсэн: <%= n.created_at %>, Зүүлт: <%= page_tag_link n.tags%>
+      Бичсэн: <%= n.created_at %>
     </p>
   </div>
 <% end %>
@@ -14,6 +13,5 @@
 
 
 <% if admin? %>
-<br />
 <%= link_to 'Шинэ мэдээ', :controller=>'pages', :action => 'new' %>
 <% end %>

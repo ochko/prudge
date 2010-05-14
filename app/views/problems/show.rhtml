@@ -111,23 +111,6 @@
                   :confirm => 'Are you sure?', :method => :post %>
     </td>
   </tr>
-  <tr>
-    <td colspan="4">
-      <fieldset>
-        <legend>Хавсралт</legend>
-        <%= render :partial => 'attachment/form_list' %>
-      </fieldset>
-    </td>
-  </tr>
-  <% elsif @attachments.size > 0 %>
-  <tr>
-    <td colspan="4">
-      <fieldset>
-        <legend>Хавсралт</legend>
-        <%= render :partial => 'attachment/list' %>
-      </fieldset>
-    </td>
-  </tr>
   <% end %>
 </table>
 <%= render :partial=>'comments/show',

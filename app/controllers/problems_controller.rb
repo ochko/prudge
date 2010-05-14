@@ -85,7 +85,6 @@ class ProblemsController < ApplicationController
   def show
     @problem = Problem.find(params[:id], :include => [:languages])
     if @problem.available_to(current_user)
-      prepare_relations
       @solution_count = Solution.
         count_by_sql(["SELECT count(*) FROM solutions s where problem_id = ?",
                       @problem.id])
@@ -162,13 +161,6 @@ class ProblemsController < ApplicationController
       Contest.find(:all, :conditions =>
                    ["end >= NOW()"]).collect {|c| [ c.name, c.id ] }
     end
-  end
-
-  def prepare_relations
-    @attachment = Attachment.
-      new({:attachable_id => @problem.id,
-           :attachable_type => 'Problem' })
-    @attachments = @problem.attachments
   end
 
 end

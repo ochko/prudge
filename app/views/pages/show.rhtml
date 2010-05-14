@@ -7,10 +7,8 @@
 <p>
   <%= @page.content %>
 </p>
-<p>
-  <b class="tag">Зүүлт:</b><%= page_tag_link @page.tags %>
-</p>
-<% restrict_to 'Admin' do %>
+
+<% if admin? %>
 <%= link_to 'Засварлах', :action => 'edit', :id => @page %> |
 <%= link_to 'Устгах', { :action => 'destroy', :id => @page }, :confirm => 'Are you sure?', :method => :post %>
 <% end %>

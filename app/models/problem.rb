@@ -6,11 +6,6 @@ class Problem < ActiveRecord::Base
   has_many :tests, :class_name => 'ProblemTest', 
            :order => 'hidden, id',
            :dependent => :destroy
-  has_many :attachments,
-           :as => 'attachable',
-           :class_name => 'Attachment',
-           :foreign_key => 'attachable_id',
-           :dependent => :destroy
   has_many :comments,
            :as => 'topic',
            :class_name => 'Comment',

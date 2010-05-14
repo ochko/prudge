@@ -2,7 +2,6 @@
   <tr>
     <th>Хуудас</th>
     <th>Гарчиг</th>
-    <th>Зүүлт</th>
     <th>Огноо</th>
   </tr>
 
@@ -10,7 +9,6 @@
   <tr>
     <td><%= show_category page.category %></td>
     <td><%= link_to page.title, page %></td>
-    <td><%= page_tag_link page.tags %></td>
     <td><%=l page.created_at %></td>
   </tr>
 <% end %>
