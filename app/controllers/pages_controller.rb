@@ -1,47 +1,24 @@
 class PagesController < ApplicationController
-  before_filter :login_required,
+  before_filter :require_user,
                 :except =>[:search, :show]
-
-  access_control [:index,
-                  :list,
-                  :new,
-                  :create,
-                  :edit,
-                  :destroy,
-                  :update] => 'Judge'
+  before_filter :require_judge,
+                :only => [:index, :list, :new, :create, :edit, :destroy, :update]
                               
   def index
-    list
-    render :action => 'list'
-  end
-
-  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list }
-
-  def list
-    @page_pages, @pages = paginate :pages, :per_page => 20
-  end
-
-  def search
-    conditions = case params['field']
-    when "title" then ["title LIKE ?", "%#{params[:query]}%"]
-    when "content" then ["content LIKE ?", "%#{params[:query]}%"]
-    when "tags" then ["tags LIKE ?", "% #{params[:query]} %"]
-    else ["title <> ''"]
-    end
-
-    @page_pages, @pages = paginate :pages,
-           :order => "created_at desc",
-           :conditions => conditions,
-           :per_page=>20
-
-    if request.xml_http_request?
-      render :partial => 'list', :layout => false
+    if params[:query]
+      conditions = case params['field']
+       when "title" then ["title LIKE ?", "%#{params[:query]}%"]
+       when "content" then ["content LIKE ?", "%#{params[:query]}%"]
+       when "tags" then ["tags LIKE ?", "% #{params[:query]} %"]
+       else ["title <> ''"]
+       end
+      @pages = Page.paginate(:order => "created_at desc",
+                             :conditions => conditions,
+                             :per_page=>20, :page => params[:page])
     else
-      render :action =>'list'
+      @pages = Page.paginate :page=>params[:page], :per_page => 20
     end
-
+    render(:layout => false) if request.xml_http_request?
   end
 
   def show

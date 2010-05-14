@@ -53,9 +53,9 @@ class ContestsController < ApplicationController
   end
 
   def participant
-    user = User.find(params[:user])
+    @user = User.find(params[:user])
     contest = Contest.find(params[:contest])
-    @solutions = contest.solutions.for_user(user)
+    @solutions = contest.solutions.for_user(@user)
     render :partial=>'solved'
   end
 

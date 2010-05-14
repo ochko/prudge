@@ -2,17 +2,17 @@
 
 <%= will_paginate @users, :class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
 
-<table>
+<table id="all-rank">
   <tr>
-    <th colspan="6" class="level-legend">
+    <th colspan="7" class="level-legend">
       <%= levels_legend :span %>
-    <th>
+    </th>
   </tr>
   <tr>
-    <th width='1%'>Ранк</th>
-    <th>ID</th>
-    <th>Сургууль/ <br /> Байгууллага</th>
-    <th width='60'>Нийт <br /> оноо</th>
+    <th width='1%'></th>
+    <th></th>
+    <th>Сургууль/Байгууллага</th>
+    <th width='60'>Нийт оноо</th>
     <th width='1%'>Дундаж хугацаа</th>
     <th width='1%'>Бодсон бодлого</th>
     <th>Сүүлд бодсон</th>
@@ -21,7 +21,7 @@
    for user in @users
    no += 1%>
   <tr>
-    <td><%= no %></td>
+    <td class="ranking"><%= no %></td>
     <td><%= link_to user.login, user, :class=>"rank_#{user.level}" %></td>
     <td><%= white_list(truncate(user.school,35)) %></td>
     <td><%= "%.2f" % user.points if !user.points.nil? %></td>

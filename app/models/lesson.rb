@@ -18,6 +18,8 @@ class Lesson < ActiveRecord::Base
 
   validates_presence_of     :title, :text
 
+  def self.per_page() 5 end
+
   def has_permission?(user)
     return false if user == :false or user.nil?
     if self.author_id == user.id
@@ -28,5 +30,10 @@ class Lesson < ActiveRecord::Base
 
   def available_to(user)
     return true
+  end
+  
+  define_index do
+    indexes title
+    indexes text
   end
 end

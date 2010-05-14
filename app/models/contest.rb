@@ -1,9 +1,9 @@
 class Contest < ActiveRecord::Base
   LEVEL_NAMES = { 0 => 'Бүгд', 
     1 => 'Сонирхогч', 
-    2 => 'Анхан', 
-    3 => 'Дунд', 
-    4 => 'Дээд' }
+    2 => 'Анхан шат', 
+    3 => 'Дунд шат', 
+    4 => 'Дээд шат' }
 
   LEVEL_POINTS = { 0 => 0, 
     1 => 50, 
@@ -54,6 +54,10 @@ class Contest < ActiveRecord::Base
 
   def finished?
     self.end < Time.now
+  end
+  
+  def started?
+    self.start < Time.now
   end
 
   def level_name

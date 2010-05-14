@@ -8,6 +8,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :lessons
   map.resources :topics
   map.resources :solutions
+  map.resources :languages
+  map.resources :pages, :member => [:search]
 
   map.root :controller => 'contests', :action => 'last'
   map.signup 'signup', :controller => 'users', :action => 'new'
@@ -16,6 +18,9 @@ ActionController::Routing::Routes.draw do |map|
   map.forgot_password 'forgot_password', :controller => 'password_resets', :action => 'new'
   map.account 'account', :controller => 'users', :action => 'account'
   map.home 'home', :controller => 'home'
+  map.help 'help', :controller => 'home', :action => 'help'
+  map.about 'about', :controller => 'home', :action => 'about'
+  map.rules 'rules', :controller => 'home', :action => 'rules'
   map.last 'last', :controller => 'solutions', :action => 'last'
 
   map.connect ':controller/:action/:id'

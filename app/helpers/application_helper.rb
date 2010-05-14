@@ -79,33 +79,19 @@ module ApplicationHelper
   end
 
   def page_tag_link(tags)
-    if tags.nil?
-      return ''
-    end
-
-    links = ''
-    for tag in tags.split(' ')
-      links += link_to(tag, { :controller=> 'pages',
-                       :action=>'search',
-                         :field=>'tags', :query=>tag}, :class=>'tag')
-      links += ' '
-    end
-    return links
+    return '' if tags.nil?
+    tags.split(' ').collect {|tag| 
+      link_to(tag, pages_path(:field=>'tags', :query=>tag), 
+              :class=>'tag') 
+    }.join(' ')
   end
 
   def lesson_tag_link(tags)
-    if tags.nil?
-      return ''
-    end
-
-    links = ''
-    for tag in tags.split(' ')
-      links += link_to(tag, { :controller=> 'lessons',
-                       :action=>'search',
-                       :field=>'tags', :query=>tag}, :class=>'tag')
-      links += ' '
-    end
-    return links
+    return '' if tags.nil?
+    tags.split(' ').collect {|tag| 
+      link_to(tag, lessons_path(:field=>'tags', :query=>tag), 
+              :class=>'tag') 
+    }.join(' ')
   end
 
   def shorten(str, len)

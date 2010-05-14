@@ -1,26 +1,26 @@
+# -*- coding: utf-8 -*-
 class LessonsController < ApplicationController
-  before_filter :login_required,
+  before_filter :require_user,
                 :except => [:index, :list, :search, :show, :get_homeworks, :feed]
 
   auto_complete_for :problem, :name
 
   def index
-    list
-    render :action => 'list'
-  end
-
-  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list }
-
-  def list
-    behavior_cache Lesson, :tag=> (params[:page] || '1') do
-      @lessons = Lesson.
-        paginate(:page=>params[:page],
-                 :per_page => 5,
-                 :include =>[:author],
-                 :order => "created_at desc")
+    if params[:query]
+      conditions = case params['field']
+                   when "title" then ["title LIKE ?", "%#{params[:query]}%"]
+                   when "text" then ["text LIKE ?", "%#{params[:query]}%"]
+                   when "tags" then ["tags LIKE ?", "% #{params[:query]} %"]
+                   else ["l.title <> ''"]
+                   end
+      @lessons = Lesson.paginate(:page=>params[:page], :include => :author,
+                                 :order => "updated_at desc",
+                                 :conditions => conditions)
+    else
+      @lessons = Lesson.paginate(:page=>params[:page], :include =>[:author],
+                                 :order => "created_at desc")
     end
+    render(:layout => false) if request.xml_http_request?
   end
 
   def feed
@@ -33,29 +33,6 @@ class LessonsController < ApplicationController
       format.rss
       format.atom
     end
-  end
-
-  def search
-    conditions = case params['field']
-    when "title" then ["l.title LIKE ?", "%#{params[:query]}%"]
-    when "text" then ["l.text LIKE ?", "%#{params[:query]}%"]
-    when "tags" then ["l.tags LIKE ?", "% #{params[:query]} %"]
-    when "author" then ["u.login LIKE ?", "%#{params[:query]}%"]
-    else ["l.title <> ''"]
-    end
-
-    @lessons = Lesson.
-      find(:all,
-           :from => "lessons l",
-           :select => "l.*, u.login as author_login",
-           :joins => "join users u on l.author_id = u.id",
-           :order => "updated_at desc",
-           :conditions => conditions)
-
-    if request.xml_http_request?
-        render :partial => "list", :layout => false
-    end
-
   end
 
   def show

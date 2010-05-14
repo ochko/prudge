@@ -1,4 +1,4 @@
-class Add < ActiveRecord::Migration
+class AddUserRoles < ActiveRecord::Migration
   def self.up
     %w[admin judge].each do |role|
       add_column :users, role, :boolean, :default => false

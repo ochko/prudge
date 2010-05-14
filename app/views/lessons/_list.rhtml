@@ -7,11 +7,9 @@
       </div>
       <div class="read"><%= link_to 'үргэлжлүүлэн унших...',:action=>'show', :id=>lesson %></div>
       <div class="info">
-        Бичсэн: <%= link_to lesson.author.login,
-                      :action=>'show', :controller=>'account',
-                      :id=>lesson.author_id %>,
-        Шинэчилсэн: <%= lesson.updated_at %>,
-        Зүүлт: <%= tag_links lesson.tags %>
+        Бичсэн: <%= link_to lesson.author.login, lesson.author %>,
+        Шинэчилсэн: <%=l lesson.updated_at %>,
+        Зүүлт: <%= lesson_tag_link lesson.tags %>
       </div>
     </div>
   <% end %>

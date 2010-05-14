@@ -41,8 +41,17 @@
       </div>
       <div id="main" class="span-20">
         <div id="content">
-          <div id="notice"><%= flash[:notice] %></div>
-          <%= yield %>
+	  <% if flash[:notice] %>
+          <div class="notice" id="notice">
+	    <span id="notice-close" style="float:right">
+	      <%= link_to_function image_tag('close.png'), "$('#notice').fadeOut()" %>
+	    </span>
+	    <%= flash[:notice] %>
+	  </div>
+          <% end %>
+	  
+	  <%= yield %>
+	  
         </div>
       </div>
     </div>

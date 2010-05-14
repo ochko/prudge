@@ -210,10 +210,6 @@ ActiveRecord::Schema.define(:version => 20100512192437) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "school"
-    t.integer  "solutions_count",                   :default => 0
-    t.float    "points",                            :default => 0.0
-    t.float    "average",                           :default => 0.0
-    t.datetime "uploaded_at"
     t.boolean  "admin",                             :default => false
     t.boolean  "judge",                             :default => false
     t.string   "openid_identifier"
@@ -222,6 +218,10 @@ ActiveRecord::Schema.define(:version => 20100512192437) do
     t.string   "perishable_token",                                     :null => false
     t.string   "password_salt"
     t.datetime "last_request_at"
+    t.integer  "solutions_count",                   :default => 0
+    t.float    "points",                            :default => 0.0
+    t.float    "average",                           :default => 0.0
+    t.datetime "uploaded_at"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login"

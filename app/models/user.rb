@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   def judge?() self.judge == true  end
   
   def level
-    level = points.to_i/50
+    level = points.to_i/50 + 1
     level > 4 ? 4 : level
   end
 

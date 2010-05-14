@@ -1,72 +1,35 @@
-<div class="problem">
-  <h1><%=h @contest.name %></h1>
-  <table width="580">
-    <tr>
-      <td class="top" width="300">
-        <table width="100%" class="slim">
-          <tr>
-            <td><label>Түвшин:</label></td>
-            <td> <%= @contest.level_name %></td>
-          </tr>
-          <tr>
-            <td><label>Эхлэх цаг:</label></td><td> <%=h @contest.start.to_s(:date_time24) %></td>
-          </tr>
-          <tr>
-            <td><label>Дуусах цаг:</label></td>
-            <td><%=h @contest.end.to_s(:date_time24) %></td>
-          </tr>
-          <tr>
-            <% if Time.now() < @contest.start %>
-            <td>Тэмцээн эхлэхэд </td>
-            <td>
-              <label>
-                <%= distance_of_time_in_words_to_now @contest.start %>
-              </label>
-              үлдлээ...
-            </td>
-            <% elsif Time.now() > @contest.start and
-                         Time.now() < @contest.end  %>
-            <td>Тэмцээн дуусахад </td>
-            <td>
-              <b>
-                <%= distance_of_time_in_words_to_now @contest.end %>
-              </b>
-              үлдлээ...
-            </td>
-            <% else %>
-            <td colspan="2"><label>Тэмцээн дууссан</label></td>
-            <% end %>
-          </tr>
-        </table>
+<h2 class="rank_<%=@contest.level%>" title="<%= @contest.level_name %> түвшний тэмцээн"><%=h @contest.name %>
+  (<%= show_status @contest -%>)
+  <% if admin? -%>
+    <%= link_to image_tag('edit.png'), edit_contest_path(@contest), :title =>'Засвар' %>
+    <%= link_to image_tag('delete.png'), { :action => 'destroy', :id => @contest }, :confirm => 'Are you sure?', :method => :post, :title => 'Устгах' %>
+    <% end -%>
+</h2>
+<div id="contest-time">
+  <%=l @contest.start %> &raquo; 
+  <%=l @contest.end %>
+</div>
+<div id="contest-description">
+  <%= @contest.description %>
+</div>
 
-      </td>
-      <td class="top"><%= @contest.description %></td>
-    </tr>
-    <% if admin?  %>
-    <tr>
-      <td colspan="3" class="smallink">
-        <%= link_to 'Edit', :action => 'edit', :id => @contest %>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </td>
-      <td><%= link_to image_tag('delete.png'), { :action => 'destroy', :id => @contest }, :confirm => 'Are you sure?', :method => :post %></td>
-    </tr>
-    <% end %>
-  </table>
-
-<% if @contest.start < Time.now() %>
-
-  <h2>Бодлого</h2>
-  <table width="100%">
-    <tr>
-      <th>ID</th>
-      <th>Нэр</th>
-      <th>Түвшин</th>
-      <th>Хязгаар</th>
-      <th>Дэвшүүлсэн</th>
-      <th>Бодолт</th>
-    </tr>
-
-    <% for solution in @contest.grouped_solutions %>
+<div id="tabs" class="span-20"> 
+  <ul>
+    <li><a href="#included-problems"><span>Бодлогууд</span></a></li>
+    <li><a href="#participant-of"><span>Оролцогчид</span></a></li>
+  </ul> 
+  <div id="included-problems"> 
+    <% if @contest.started? %>
+    <table width="100%">
+      <tr>
+	<th>ID</th>
+	<th>Нэр</th>
+	<th>Түвшин</th>
+	<th>Хязгаар</th>
+	<th>Дэвшүүлсэн</th>
+	<th>Бодолт</th>
+      </tr>
+      <% for solution in @contest.grouped_solutions %>
       <tr>
         <td><%= solution.problem_id %></td>
         <td><%= link_to solution.problem.name, solution.problem %></td>
@@ -76,65 +39,58 @@
         <td><%= solution.problem.user.login %></td>
         <td><%= solution.tried %> / <%= solution.solved %></td>
       </tr>
+      <% end %>
+    </table>
+    <% elsif admin? %>
+    <%= render :partial => 'problems/list' %>
     <% end %>
-  </table>
+  </div>
+  <div id="participant-of"> 
+    <% if @contest.users.size > 0 %>
+    <table class="two-columns">
+      <tr>
+	<td class="left-column">
+	  <table id="list-of-participants">
+	    <tr>
+	      <th></th>
+	      <th>Нэр</th>
+	      <th><img src="/images/points.png" title="Нийлбэр оноо"/></th>
+	      <th><img src="/images/average.png" title="Дундаж хугацаа"/></th>
+	      <th></th>
+	    </tr>
+	    <% @numbers.zip(@standings) do |num, user| %>
+	    <tr>
+              <td class="ranking"><%= show_place(num) %></td>
+              <td class='small'>
+		<%= link_to user.login, :controller=>'account',
+		:action=>'show', :id=>user.id %></td>
+              <td class='small'><%= "%.2f" % user.point %></td>
+              <td class='small'><%= sec2milisec user.avg %></td>
+              <td class='small'>
+		<%= link_to_remote image_tag('arrow-r.png'), :url=>{:controller=>'contests',
+		:action=>'participant', :user=>user.id, :contest=>@contest.id},
+		:before => "$('#solved').hide(); $('#spinner').show();",
+		:success => "$('#spinner').hide(); $('#solved').show();",
+		:update=>'solved' %>
+              </td>
+	    </tr>
+	    <% end %>
+	  </table>
+	</td>
+	<td class="right-column">
+	  <div id='solved'> </div>
+	  <div id='spinner'> <%= image_tag "spinner.gif" %> </div>
+	</td>
+      </tr>
+    </table>
+    <% else %>
+    Оролцогчид алга!
+    <% end %>
+  </div>
+</div>
 
-  <h2>Оролцогчид</h2>
-  <% if @contest.users.size > 0 %>
-  <table class='slim' width='100%'>
-    <tr>
-      <td class='top'>
-        <table>
-          <tr><th>No</th><th width="120">Нэр</th><th>Оноо</th><th>Time</th></tr>
-          <% @numbers.zip(@standings) do |num, user| %>
-          <tr>
-            <td><%= show_place(num) %></td>
-            <td class='small'>
-              <%= link_to user.login, :controller=>'account',
-              :action=>'show', :id=>user.id %></td>
-            <td class='small'><%= "%.2f" % user.point %></td>
-            <td class='small'><%= sec2milisec user.avg %></td>
-            <td class='small'>
-              <%= link_to_remote image_tag('detail.png'), :url=>{:controller=>'contests',
-                  :action=>'participant', :user=>user.id, :contest=>@contest.id},
-                  :before => "Element.hide('solved'); Element.show('spinner');",
-                  :success => "Element.hide('spinner'); Element.show('solved');",
-                  :update=>'solved' %>
-            </td>
-          </tr>
-          <% end %>
-        </table>
-      </td>
-      <td class='top' width="100%">
-        <%= image_tag("spinner.gif",
-              :align => 'absmiddle',
-              :border=> 0,
-              :id => "spinner",
-              :style=>"display: none;" ) %>
-        <table class='slim'>
-          <tr>
-            <td id='solved'>
-              
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-  <% else %>
-  Оролцогчид алга!
-  <% end %>
-
-<% else %>
-<% restrict_to 'Admin' do  %>
-
-  <h3>Бодлого</h3>
-  <%= render :partial => 'problems/list' %>
-
-<% end %>
-<% end %>
 <%= render :partial=>'comments/show',
            :locals=>{:topic_id   => @contest.id,
                      :topic_type => 'Contest',
                      :button_text=> 'Тэмцээний хэлэлцүүлэг' } %>
-</div>
+

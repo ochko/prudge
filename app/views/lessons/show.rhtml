@@ -1,10 +1,8 @@
 <div class="post">
   <h1><%=h @lesson.title %></h1>
   <div class="info">
-    Бичсэн: <%= link_to @lesson.author.login,
-                :action=>'show', :controller=>'account',
-                :id=>@lesson.author_id %>,
-    Шинэчилсэн: <%= @lesson.updated_at %>
+    Бичсэн: <%= link_to @lesson.author.login, @lesson.author %>,
+    Шинэчилсэн: <%=l @lesson.updated_at %>
   </div>
 
   <div class="entry">
@@ -18,7 +16,7 @@
     </div>
   <% end %>
   <div class="info">
-    Зүүлт: <%= tag_links @lesson.tags %>
+    Зүүлт: <%= lesson_tag_link @lesson.tags %>
     <% if logged_in? %>
       <% if @lesson.author_id == current_user.id %>
         <%= link_to 'Засварлах', :action => 'edit', :id => @lesson %> |

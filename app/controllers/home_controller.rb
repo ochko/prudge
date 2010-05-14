@@ -7,7 +7,7 @@ class HomeController < ApplicationController
                :order => "created_at desc")
   end
 
-  def aboutus
+  def about
   end
 
   def help
@@ -19,19 +19,14 @@ class HomeController < ApplicationController
   end
 
   def rules
-    behavior_cache Page, :tag => (params[:page] || 1) do
-      @rules = Page.
-        paginate(:page => params[:page], :per_page => 5,
-                 :conditions=>["category = ?", 'rule'],
-                 :order => "created_at asc")
-    end
+    @rules = Page.
+      paginate(:page => params[:page], :per_page => 5,
+               :conditions=>["category = ?", 'rule'],
+               :order => "created_at asc")
   end
-  def international_rules
+  def international
   end
   def asian
   end
-  def state
-  end
-  def mongolian
-  end
+
 end

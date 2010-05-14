@@ -15,16 +15,12 @@
     <% if logged_in? %>
     <li><%=link_to 'Миний бодолтууд', :controller => 'solutions',
       :action => 'my' %></li>
+    <li><%=link_to 'Бодлого санал болгох', :controller => 'problems',
+      :action => 'new' %></li>
+    <% end %>
     <% if judge? %>
     <li><%=link_to 'Дэвшигдсэн бодлогууд', :controller => 'problems',
       :action => 'nominated' %></li>
-    <li><%=link_to 'Бодолтууд', :controller => 'solutions',
-      :action => 'list' %></li>
-    <li><%=link_to 'Үр дүнг шалгах', :controller => 'results',
-      :action => 'list' %></li>
-    <% end %>
-    <li><%=link_to 'Бодлого санал болгох', :controller => 'problems',
-      :action => 'new' %></li>
     <% end %>
     <li class="last"><%=link_to image_tag('search.png')+'Хайх', :controller => 'problems',
       :action => 'search' %></li>

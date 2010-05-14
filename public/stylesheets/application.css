@@ -211,7 +211,7 @@ table {
 }
 
 table th {
-    background-color: #eee;
+    background-color: #f6f6f6;
     color: #999;
     font-weight: normal;
     border-bottom: 1px solid #d8d8d8;
@@ -223,24 +223,27 @@ table td {
 }
 
 th.level-legend {
-    text-align:right;
+    text-align:center;
 }
 th.level-legend span {
     margin:0 1em;
 }
 
-.rank_4 { background: url(/images/rank_4.png) no-repeat 0 0; }
-.rank_3 { background: url(/images/rank_3.png) no-repeat 0 0; }
-.rank_2 { background: url(/images/rank_2.png) no-repeat 0 0; }
-.rank_1 { background: url(/images/rank_1.png) no-repeat 0 0; }
-.rank_4, .rank_3, .rank_2, .rank_1 {padding:3px 0 4px 22px; }
+.rank_4 { background: url(/images/rank_4.png) no-repeat 0px 0px; }
+.rank_3 { background: url(/images/rank_3.png) no-repeat 0px 0px; }
+.rank_2 { background: url(/images/rank_2.png) no-repeat 0px 0px; }
+.rank_1 { background: url(/images/rank_1.png) no-repeat 0px 0px; }
+.rank_4, .rank_3, .rank_2, .rank_1, rank_0 {
+    padding:1px 0px 4px 23px; 
+}
+
 
 #portrait{ float:left; padding: 0 1em 0 0.5em;}
 
 #user-statistic { font-size: 1.2em; margin:0.5em 0; float:right;}
 #user-statistic img { vertical-align: baseline;}
 
-#medals {margin: 0 0 1em 0;}
+#medals {margin: 0 0 10px 0; min-height:85px;}
 #medals a img { padding: 1px 2px; }
 
 .user-form {border: 4px solid #909090; width:260px; margin:20px auto; padding:30px; background-color:#e5ecf9;}
@@ -296,5 +299,57 @@ input#user_password, input#user_password_confirmation, input#user_session_passwo
 #tabs table { border: 1px solid #aaa; border-top:none;}
 #tabs td a { color: #4080C0; }
 .center {text-align:center;}
-.solution-meta{display:block; font-size:0.9em; padding-left:1em;}
-#solved-problems td, #participant-of td {padding: 2px 6px 1px 4px;}
+.solution-meta{display:block; font-size:0.9em;}
+
+#contest-time {
+    font-size:1.1em;
+    margin: -5px 1em 1em 0;
+    padding: 0 13px;
+    background: url(/images/clock.png) no-repeat 0 3px;
+}
+#contest-description{margin:1em 0;}
+
+.two-columns{border:none; padding:0; margin:0;}
+    
+.two-columns .left-column {
+    width:40%;
+    padding:0; 
+    margin:0; 
+    vertical-align:top;
+    border-left:none; 
+    border-right:1px solid #999;
+}
+.two-columns .right-column {
+    padding:0; 
+    margin:0; 
+    vertical-align:top;
+}
+#tabs #list-of-participants, #solved #participant-solutions {
+    border:none;
+    border-collapse:collapse;
+    margin:0;
+    padding:0
+}
+#list-of-participants td{
+    border-left:none;
+    border-right:none;}
+#tabs #spinner{
+    margin:2em 0;
+    text-align:center;
+    vertical-align:middle;
+    display:none;
+}
+th.big-title {
+    color:#666;
+    font-weight:bold;
+    font-size:1.1em;
+    text-align:center;
+    border-bottom:none;
+}
+td.ranking {
+    width:30px;
+    text-align:center;
+    font-weight:bold;
+}
+
+
