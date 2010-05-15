@@ -1,80 +1,48 @@
-<h2><%=h @problem.name %></h2>
-<table width="100%">
-  <tr>
-    <td>
-      <label>Оноо:</label> <%=h @problem.point %>
-    </td>
-    <td>
-      <% form_tag :controller=>'solutions', :action => 'new' do %>
-      <%= hidden_field 'solution', 'problem_id', :value=>@problem.id %>
-      <%= submit_tag "Бодох" %>
-      <% end %>
-    </td>
-    <td>
-      <% if @problem.user_id == current_user.id %>
-      <% form_tag :controller=>'problem_tests', :action => 'new' do %>
-      <%= hidden_field_tag 'problem_id', @problem.id %>
-      <%= submit_tag " Тэст Оруулах" %>
-      <% end %>
-      <% else %>
-      <% restrict_to 'Judge' do %>
-      <% form_tag :controller=>'problem_tests', :action => 'new' do %>
-      <%= hidden_field_tag 'problem_id', @problem.id %>
-      <%= submit_tag " Тэст Оруулах" %>
-      <% end %>
-      <% end %>
-      <% end %>
-    </td>
-    <td>
-      <%= link_to 'Шилдэг бодолт', {:controller=>'solutions',
-                  :action=>'best', :problem_id=>@problem.id},
-                  :class=>'small' %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <label>Хугацаа:</label> <%=h @problem.time %> сек
-    </td>
-    <td class='small'>
-      <label>Дэвшүүлсэн:</label>
-      <%= link_to @problem.user.login, :controller=>'account',
-                  :action=>'show', :id=>@problem.user.id %>
-    </td>
-    <td>
-      <label>Тэстийн тоо:</label>
-      <%= @problem.problem_tests.size %>
+<h2>
+  <span class="problem-name"><%=h @problem.name %></span>
+  <span class="req-level" title="Оноо"><%= @problem.level %></span>
+  <span class="req-time" title="Хугацааны хязгаар"><%= @problem.time %></span>
+  <span class="req-memory" title="Санах ойн хязгаар"><%= @problem.memory %></span>  
+  
+  <% form_tag '/solutions/new', :id => 'new-solution-form' do %>
+  <%= hidden_field 'solution', 'problem_id', :value=>@problem.id %>
+  <%= submit_tag "Бодох" %>
+  <% end %>
 
-    </td>
-    <td class='small'>
-      <%= link_to_remote 'Нийт бодолт', :url=>{:controller=>'solutions',
-                  :action=>'tryed', :problem_id=>@problem.id},
-                  :before => "Element.hide('solved'); Element.show('spinner');",
-                  :success => "Element.hide('spinner'); Element.show('solved');",
-                  :update=>'solved' %>
-      <%= @solution_count %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <label>Санах ой:</label> <%=h @problem.memory %> кб
-    </td>
-    <td class='small'>
-      <label>Он сар өдөр:</label>
-      <%= @problem.created_at %>
-    </td>
-    <td class='small'>
-    </td>
-    <td class='small'>
-      <%= link_to_remote 'Зөв бодолт', :url=>{:controller=>'solutions',
-                  :action=>'completed', :problem_id=>@problem.id},
-                  :before => "Element.hide('solved'); Element.show('spinner')",
-                  :success => "Element.hide('spinner'); Element.show('solved');",
-                  :update=>'solved' %>
-      <%= @solution_correct %>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="4">
+  <% if @problem.test_addable? current_user %>
+  <% form_tag '/problem_tests/new', :id=>'new-test-form' do %>
+  <%= hidden_field_tag 'problem_id', @problem.id %>
+  <%= submit_tag "Нэмэх" %>
+  <% end %>
+  <% end %>
+
+  <span class="req-test" title="Тэстийн тоо"><%= @problem.tests.size %></span>
+</h2>
+<div class="problem-meta">
+  <label>Дэвшүүлсэн:</label>
+  <%= link_to @problem.user.login, :controller=>'account',
+  :action=>'show', :id=>@problem.user.id %>,
+  <%=l @problem.created_at %>
+
+  <%= link_to 'Шилдэг бодолт', {:controller=>'solutions',
+  :action=>'best', :problem_id=>@problem.id},
+  :class=>'small' %>
+
+  <%= link_to_remote 'Нийт бодолт', :url=>{:controller=>'solutions',
+  :action=>'tryed', :problem_id=>@problem.id},
+  :before => "Element.hide('solved'); Element.show('spinner');",
+  :success => "Element.hide('spinner'); Element.show('solved');",
+  :update=>'solved' %>
+  <%= @solution_count %>
+
+  <%= link_to_remote 'Зөв бодолт', :url=>{:controller=>'solutions',
+  :action=>'completed', :problem_id=>@problem.id},
+  :before => "Element.hide('solved'); Element.show('spinner')",
+  :success => "Element.hide('spinner'); Element.show('solved');",
+  :update=>'solved' %>
+  <%= @solution_correct %>
+</div>
+
       <%= image_tag("spinner.gif",
               :align => 'absmiddle',
               :border=> 0,

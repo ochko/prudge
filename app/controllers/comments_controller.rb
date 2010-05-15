@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  before_filter :login_required
-  access_control [:destroy] => 'Admin'
+  before_filter :require_user
+  before_filter :require_admin, :only => :destroy
 
   def form
     @comment = Comment.new(params[:comment])

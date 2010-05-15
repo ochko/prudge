@@ -24,7 +24,7 @@ class Contest < ActiveRecord::Base
            :class_name => 'Comment',
            :foreign_key => 'topic_id',
            :dependent => :destroy
-  
+  named_scope :pending, :conditions => "end >= NOW()"
 
   validates_presence_of :name, :start, :end
 

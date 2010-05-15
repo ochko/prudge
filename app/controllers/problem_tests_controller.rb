@@ -1,5 +1,5 @@
 class ProblemTestsController < ApplicationController
-  before_filter :login_required
+  before_filter :require_user
 
   def show
     @problem_test = ProblemTest.find(params[:id])
@@ -14,7 +14,7 @@ class ProblemTestsController < ApplicationController
     @problem_test = ProblemTest.new
     @problem_test.problem_id = params[:problem_id]
     if is_touchable(@problem_test)
-      @problem_tests = @problem_test.problem.problem_tests
+      @problem_tests = @problem_test.problem.tests
     else
       flash[:notice] = 'Тэст оруулж болохгүй.'
       redirect_to :controller=>'problems' ,:action => 'show',
@@ -28,7 +28,7 @@ class ProblemTestsController < ApplicationController
       if @problem_test.save
         flash[:notice] = 'ProblemTest was successfully created.'
         if request.xml_http_request?
-          @problem_tests = @problem_test.problem.problem_tests
+          @problem_tests = @problem_test.problem.tests
           render :partial => 'list'
         else
           redirect_to :controller=>'problems',
@@ -84,26 +84,14 @@ class ProblemTestsController < ApplicationController
 
   protected
   def is_touchable(test)
-    restrict_to "Judge" do
-      return true
-    end
-
-    if test.problem.user_id == current_user.id
-      return true
-    end
-
+    return true if current_user.judge?
+    return true if test.problem.owned_by?(current_user)
     return false
   end
 
   def is_viewable(test)
-    if test.problem.user_id == current_user.id
-      return true
-    end
-
-    restrict_to "Judge" do
-      return true
-    end
-
+    return true if test.problem.owned_by?(current_user)
+    return true if current_user.judge?
     return false
   end
 

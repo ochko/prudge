@@ -9,7 +9,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :topics
   map.resources :solutions
   map.resources :languages
-  map.resources :pages, :member => [:search]
+  map.resources :pages
+  map.resources :problem_tests
 
   map.root :controller => 'contests', :action => 'last'
   map.signup 'signup', :controller => 'users', :action => 'new'

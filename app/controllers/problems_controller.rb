@@ -101,16 +101,15 @@ class ProblemsController < ApplicationController
 
   def new
     @problem = Problem.new
-    @pending_contests = pending_contests
   end
 
   def create
-    @problem = Problem.new(params[:problem])
-    @problem.user_id = current_user.id
+    params[:problem].delete('contest_id') unless judge?
+    @problem = current_user.problems.build(params[:problem])
     if @problem.save
       @problem.add_languages(params[:languages])
-      flash[:notice] = 'Бодлогыг үүсгэлээ. Тэстүүдийг оруулна уу?'
-      redirect_to :action => 'show', :id => @problem
+      flash[:notice] = 'Бодлогыг хадгалав. Тэстүүдийг нь оруулна уу?'
+      redirect_to @problem
     else
       render :action => 'new'
     end
@@ -118,29 +117,26 @@ class ProblemsController < ApplicationController
 
   def edit
     @problem = Problem.find(params[:id])
-    if @problem.has_permission?(current_user)
-      @pending_contests = pending_contests
-    else
+    unless @problem.has_permission?(current_user)
       flash[:notice] = 'Энэ бодлогыг одоо засаж болохгүй!'
       redirect_to :action => 'list'
-      return
     end
   end
 
   def update
     @problem = Problem.find(params[:id])
     if @problem.has_permission?(current_user)
+      params[:problem].delete('contest_id') unless judge?
       if @problem.update_attributes(params[:problem])
         @problem.update_languages(params[:languages])
-        flash[:notice] = 'Problem was successfully updated.'
-        redirect_to :action => 'show', :id => @problem
+        flash[:notice] = 'Бодлогыг шинэчиллээ.'
+        redirect_to @problem
       else
         render :action => 'edit'
       end
     else
       flash[:notice] = 'Энэ бодлогыг одоо засаж болохгүй!'
-      redirect_to :action => 'list'
-      return
+      redirect_to :action => :index
     end
   end
 
@@ -148,18 +144,10 @@ class ProblemsController < ApplicationController
     @problem = Problem.find(params[:id])
     if @problem.solutions.size == 0
       @problem.destroy
-      redirect_to :action => 'list'
+      redirect_to :action => :index
     else
-      flash[:notice] = 'Энэ бодлогын хувьд бодолтууд байгаа учраас устгахгүй.'
-      redirect_to :action => 'show', :id => @problem
-    end
-  end
-
-  private
-  def pending_contests
-    restrict_to 'Judge' do
-      Contest.find(:all, :conditions =>
-                   ["end >= NOW()"]).collect {|c| [ c.name, c.id ] }
+      flash[:notice] = 'Энэ бодлогод бодолтууд байгаа учраас устгахгүй.'
+      redirect_to @problem
     end
   end
 

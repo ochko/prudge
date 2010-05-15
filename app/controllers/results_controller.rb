@@ -1,8 +1,7 @@
 class ResultsController < ApplicationController
-  before_filter :login_required
+  before_filter :require_user
+  before_filter :require_judge, :only =>  [:list, :destroy] 
 
-  access_control [:list,
-                  :destroy] => 'Judge'
   layout 'problems'
 
   def list

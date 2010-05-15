@@ -16,6 +16,10 @@ class Problem < ActiveRecord::Base
 
   validates_presence_of :name, :text
 
+  def owned_by?(someone)
+    self.user_id == someone.id
+  end
+
   def test_touched!
     solutions.each { |solution| solution.invalidate!}
   end
@@ -25,48 +29,26 @@ class Problem < ActiveRecord::Base
   end
 
   def has_permission?(user)
-    return false if user == :false or user.nil?
-
-    if user.
-        roles.map{ |role| role.title.downcase}.
-        include?('judge')
-      return true
-    end
-
-    if !self.contest.nil?
-      return false
-    end
-
-    if self.user_id != user.id
-      return false
-    end
-
+    return false unless user
+    return true if user.judge?
+    return false unless self.contest.nil?
+    return false if self.user_id != user.id
     return true
   end
 
   def available_to(user)
-    id = 0
-    if user != :false and !user.nil?
-      id = user.id
-      if user.
-          roles.map{ |role| role.title.downcase}.
-          include?('judge')
-        return true
-      end
-    end
+    return false unless user
+    return true if user.judge?
+    return true if self.user_id == user.id
+    return false if self.contest.nil?
+    return true if self.contest.started?
+    return false
+  end
 
-    if self.user_id == id
-      return true
-    end
-
-    if self.contest.nil?
-      return false
-    end
-
-    if self.contest.start < Time.now()
-      return true
-    end
-
+  def test_addable?(user)
+    return false unless user
+    return true if user.judge?
+    return true if self.user_id == user.id
     return false
   end
 

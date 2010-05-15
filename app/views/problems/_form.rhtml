@@ -32,12 +32,11 @@
          <td><label for="problem_contest_id">Тэмцээн: </label></td>
          <td><%= @problem.contest.name %></td>
     <% else %>
-      <% restrict_to "Judge" do %>
+      <% if judge? -%>
       <td><label for="problem_contest_id">Тэмцээн: </label></td>
       <td>
-        <%= select("problem", "contest_id", @pending_contests,
-          { :include_blank => true }) %>
-      <% end %>
+        <%= select("problem", "contest_id", Contest.pending.collect {|c| [ c.name, c.id ] }, { :include_blank => true }) %>
+      <% end -%>
       </td>
     <% end %>
     <td>
@@ -48,7 +47,7 @@
   </tr>
   <tr>
     <td><label for="problem_point">Оноо: </label></td>
-    <td>  <%= text_field 'problem', 'point', 'size' => 4  %>
+    <td>  <%= text_field 'problem', 'level', 'size' => 4  %>
     </td>
     <td>
       <label for="problem_memory">Санах ой: </label>

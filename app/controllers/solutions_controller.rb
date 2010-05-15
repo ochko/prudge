@@ -282,7 +282,7 @@ class SolutionsController < ApplicationController
         return
       end
     end
-    if @solution.problem.problem_tests.size == 0
+    if @solution.problem.tests.size == 0
       render :text => 'Шалгах тэст байхгүй байна.'
       return
     end
@@ -313,7 +313,7 @@ class SolutionsController < ApplicationController
                 " 2>#{test_dir}/compile.err")
 
         problem =@solution.problem
-        @tests = problem.problem_tests
+        @tests = problem.tests
         real_tests_number = 0
         @tests.each{ |t| real_tests_number+=1 if t.hidden }
         Result.destroy_all("solution_id = #{@solution.id}")

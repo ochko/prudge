@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   helper :all
   protect_from_forgery
   filter_parameter_logging :password, :password_confirmation
-  helper_method :current_user_session, :current_user, :current_user?
+  helper_method :current_user_session, :current_user, :current_user?, :admin?, :judge?
 
   protected
 
@@ -51,7 +51,15 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
-  
+
+  def admin?
+    current_user && current_user.admin
+  end
+
+  def judge?
+    current_user && current_user.judge
+  end
+
   def require_no_user
     if current_user
       store_location

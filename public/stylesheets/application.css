@@ -351,5 +351,32 @@ td.ranking {
     text-align:center;
     font-weight:bold;
 }
-
-
+span.req-level {
+    background: url(/images/points.png) no-repeat center left;
+    padding-left:14px;
+    font-size:0.8em;
+    margin-left:2em;
+}
+span.req-time {
+    background: url(/images/average.png) no-repeat center left;
+    padding-left:14px;
+    font-size:0.8em;
+    
+}
+span.req-memory {
+    background: url(/images/memory.png) no-repeat center left;
+    padding-left:16px;
+    font-size:0.8em;
+    
+}
+span.req-test {
+    background: url(/images/test.png) no-repeat center left;
+    padding-left:19px;
+    font-size:0.8em;
+    float:right;
+    margin:4px 3px 1px;
+}
+span.problem-name{}
+#new-solution-form{float:right;}
+#new-test-form{float:right; margin-right:1em;}
+#new-test-form a img{vertical-align:baseline;}
