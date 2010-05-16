@@ -37,11 +37,24 @@ class User < ActiveRecord::Base
   def judge?() self.judge == true  end
   
   def level
-    level = points.to_i/50 + 1
-    level > 4 ? 4 : level
+    Contest::LEVEL_POINTS.keys.sort.each do |l|
+      return l if points < Contest::LEVEL_POINTS[l]
+    end
   end
 
   def level_name
     Contest::LEVEL_NAMES[level]
+  end
+
+  def last_submission_of(problem)
+    Solution.find(:first, :conditions => 
+                  ["problem_id = ? AND user_id = ?", problem.id, self.id],
+                  :order => 'created_at DESC')
+  end
+  
+  def solved(problem)
+    Solution.find(:all, :conditions => 
+                  ["problem_id = ? AND user_id = ? AND correct = ?",
+                   problem.id, self.id, true])
   end
 end

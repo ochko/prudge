@@ -3,84 +3,43 @@
   <span class="req-level" title="Оноо"><%= @problem.level %></span>
   <span class="req-time" title="Хугацааны хязгаар"><%= @problem.time %></span>
   <span class="req-memory" title="Санах ойн хязгаар"><%= @problem.memory %></span>  
-  
-  <% form_tag '/solutions/new', :id => 'new-solution-form' do %>
-  <%= hidden_field 'solution', 'problem_id', :value=>@problem.id %>
-  <%= submit_tag "Бодох" %>
-  <% end %>
-
-  <% if @problem.test_addable? current_user %>
-  <% form_tag '/problem_tests/new', :id=>'new-test-form' do %>
-  <%= hidden_field_tag 'problem_id', @problem.id %>
-  <%= submit_tag "Нэмэх" %>
-  <% end %>
-  <% end %>
-
   <span class="req-test" title="Тэстийн тоо"><%= @problem.tests.size %></span>
+
+  <% form_tag '/solutions/new', :id => 'new-solution-form' do %>
+  <%= hidden_field_tag 'problem', @problem.id %>
+  <%= submit_tag "Бодох", :class => "medium green awesome" %>
+  <% end %>
 </h2>
-<div class="problem-meta">
-  <label>Дэвшүүлсэн:</label>
-  <%= link_to @problem.user.login, :controller=>'account',
-  :action=>'show', :id=>@problem.user.id %>,
-  <%=l @problem.created_at %>
+<div id="problem-meta" class="span-20">
+  <%= link_to @problem.user.login, @problem.user -%>,
+  <%=l @problem.created_at -%>
+  <%= content_tag(:span, ', Эх сурвалж: ' + h(@problem.source),
+      :class => 'problem-source') if !@problem.source.empty? -%>
 
-  <%= link_to 'Шилдэг бодолт', {:controller=>'solutions',
-  :action=>'best', :problem_id=>@problem.id},
-  :class=>'small' %>
-
-  <%= link_to_remote 'Нийт бодолт', :url=>{:controller=>'solutions',
-  :action=>'tryed', :problem_id=>@problem.id},
-  :before => "Element.hide('solved'); Element.show('spinner');",
-  :success => "Element.hide('spinner'); Element.show('solved');",
-  :update=>'solved' %>
-  <%= @solution_count %>
-
-  <%= link_to_remote 'Зөв бодолт', :url=>{:controller=>'solutions',
-  :action=>'completed', :problem_id=>@problem.id},
-  :before => "Element.hide('solved'); Element.show('spinner')",
-  :success => "Element.hide('spinner'); Element.show('solved');",
-  :update=>'solved' %>
-  <%= @solution_correct %>
+  <div id="problem-actions">
+    <% if @problem.test_addable? current_user %>
+    <%= link_to 'Тэст нэмэх', new_problem_test_path(:problem_id => @problem.id), :class => "medium grey awesome" %>
+    <% end %>
+    <% if @problem.has_permission?(current_user) %>
+    <%= link_to 'Засварлах', edit_problem_path(@problem), :class => "medium grey awesome" %>
+    <%= link_to 'Устгах', @problem, :confirm => 'Are you sure?', :method => :delete, :class => "medium grey awesome" %>
+    <% end %>
+  </div>
+</div>
+<div id="problem-tabs" class="span-20"> 
+  <ul>
+    <li><a href="#problem-text"><span>Бодлого</span></a></li>
+    <li><%= link_to content_tag(:span, 'Шилдэг бодолт'), {:controller=>'solutions', :action=>'best', :problem_id=>@problem.id, :name => "best-solution"} %> </li>
+    <li><%= link_to content_tag(:span, "Нийт бодолт (#{@problem.solutions_count})"), {:controller=>'solutions', :action=>'submited', :problem_id=>@problem.id, :name => "all-solutions"} %> </li>
+    <li><%= link_to content_tag(:span, "Зөв бодолт (#{@problem.corrects_count})"), {:controller=>'solutions', :action=>'solved', :problem_id=>@problem.id, :name => "correct-solutions"} %> </li>   
+  </ul>
+  <div id="problem-text"> 
+    <table><tr><td><%=white_list @problem.text %></td></tr></table> </div>
+  <div id="best-solution"> </div>
+  <div id="all-solutions"> </div>
+  <div id="correct-solutions"> </div>
 </div>
 
-      <%= image_tag("spinner.gif",
-              :align => 'absmiddle',
-              :border=> 0,
-              :id => "spinner",
-              :style=>"display: none;" ) %>
-      <div id='solved' style="display: none;"></div>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="4">
-      <fieldset>
-        <div style="width: 600px; overflow: auto">
-          <%=white_list @problem.text %>
-        </div>
-      </fieldset>
-      <label>Эх сурвалж:</label> <%=h @problem.source %><br />
-        <% if @problem.languages.size == 0 %>
-        <label>Бүх хэл дээр бодож болно</label>
-        <% else %>
-        <label>Хэлүүд:
-        <% for l in @problem.languages %>
-        <%= l.name %>
-        <% end %>
-        </label>
-        <% end %>
-        <br />
-    </td>
-  </tr>
-  <% if @touchable %>
-  <tr>
-    <td class="smallink" colspan="4">
-      <%= link_to 'Засварлах', :action => 'edit', :id => @problem %> |
-      <%= link_to 'Устгах', { :action => 'destroy', :id => @problem },
-                  :confirm => 'Are you sure?', :method => :post %>
-    </td>
-  </tr>
-  <% end %>
-</table>
 <%= render :partial=>'comments/show',
            :locals=>{:topic_id   => @problem.id,
                      :topic_type => 'Problem',

@@ -4,7 +4,7 @@
 <div id="user-statistic">
   <img src="/images/points.png" title="Нийт оноо" />
   <%= "%.2f" % @user.points if !@user.points.nil? %>
-  <img src="/images/average.png" title="Дундаж хугацаа" />
+  <img src="/images/clock.png" title="Дундаж хугацаа" />
   <%= sec2milisec @user.average if !@user.average.nil? %><br />
 </div>
 <div id="medals" class="span-20">
@@ -29,7 +29,7 @@
       </tr>
       <% @standings.each do |c,s| %>
       <tr>
-        <td><%= standing(s) %></td>
+        <td class="ranking"><%= standing(s) %></td>
         <td><%= link_to c.name, c %></td>
         <td><%=l c.start %></td>
       </tr>
@@ -57,6 +57,7 @@
   <div id="composed-problem"> 
     <table width="100%">
       <tr>
+	<th width="1%"></th>
         <th>Нэр</th>
         <th class="center"><img src="/images/points.png" title="Оноо"/></th>
         <th class="center"><img src="/images/average.png" title="Хугацаа" /></th>
@@ -65,6 +66,7 @@
       </tr>
       <% for p in @problems%>
       <tr>
+	<td><%= p.id %></td>
         <td><%= link_to p.name, p %></td>
         <td class="center"><%= p.level %></td>
         <td class="center"><%= p.time %>сек</td>
@@ -84,10 +86,12 @@
         <th class="center"><img src="/images/points.png" title="Оноо"/></th>
 	<th class="center"><img src="/images/ok.png" title="Хувь" /></th>
         <th class="center"><img src="/images/average.png" title="Хугацаа" /></th>
+	<th></th>
+	<th></th>
       </tr>
       <% for s in @solutions%>
       <tr>
-        <td><%= link_to show_correctness(s.correct), s %></td>
+        <td><%= show_correctness(s.correct) %></td>
         <td><%= link_to s.problem.name, s.problem %>
 	  <span class="solution-meta">
 	  <%= s.language.name %> хэл дээр
@@ -98,7 +102,8 @@
         <td class="center"><%= s.problem.level %></td>
 	<td class="center"><%= "%0.0f" % (s.percent*100) %></td>
         <td class="center"><%= sec2milisec s.time %></td>
-
+	<td><%= link_to image_tag('detail.png'), s, :title => "Тэстүүдийг харах" %></td>
+	<td><%= link_to image_tag('view.png'), view_solution_path(s), :title => "Бодолтыг татах" %></td>
       </tr>
       <% end %>
     </table>

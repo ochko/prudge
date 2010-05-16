@@ -7,9 +7,9 @@ class Contest < ActiveRecord::Base
 
   LEVEL_POINTS = { 0 => 0, 
     1 => 50, 
-    2 => 100, 
-    3 => 150, 
-    4 => 250 }
+    2 => 150, 
+    3 => 300, 
+    4 => 1000 }
 
   has_many :problems
   has_many :solutions
@@ -50,6 +50,10 @@ class Contest < ActiveRecord::Base
       standers << user
     end
     [numbers, standers]
+  end
+
+  def open?
+    self.level == 0
   end
 
   def finished?

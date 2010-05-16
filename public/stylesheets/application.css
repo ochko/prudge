@@ -179,7 +179,44 @@ dt img {
     font-size: 12px;
     list-style: square;
 }
+.awesome, .awesome:visited, .awesome:link {
+    background: #333 url(overlay.png) repeat-x; 
+    display: inline-block; 
+    padding: 5px 10px 6px; 
+    color: #fff; 
+    text-decoration: none;
+    -moz-border-radius: 5px; 
+    -webkit-border-radius: 5px;
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+    border-bottom: 1px solid rgba(0,0,0,0.25);
+    position: relative;
+    cursor: pointer;
+}
+ 
+.awesome:hover{ background-color: #111; color: #fff; }
+.awesome:active{ top: 1px; }
+.small.awesome, .small.awesome:visited, .small.awesome:link { font-size: 11px; padding: 4px 10px 6px }
+.awesome, .awesome:visited,
+.medium.awesome, .medium.awesome:visited, .medium.awesome:link { font-size: 13px; font-weight: bold; line-height: 1; text-shadow: 0 -1px 1px rgba(0,0,0,0.25); padding: 5px 10px 6px;}
+.large.awesome, .large.awesome:visited, .large.awesome:link { font-size: 14px; padding: 8px 14px 9px; }
 
+.green.awesome, .green.awesome:visited{ background-color: #91bd09; }
+.green.awesome:hover{ background-color: #749a02; }
+.blue.awesome, .blue.awesome:visited{ background-color: #3D9BB9; }
+.blue.awesome:hover{ background-color: #007d9a; }
+.red.awesome, .red.awesome:visited{ background-color: #e33100; }
+.red.awesome:hover{ background-color: #872300; }
+.magenta.awesome, .magenta.awesome:visited{ background-color: #a9014b; }
+.magenta.awesome:hover{ background-color: #630030; }
+.orange.awesome, .orange.awesome:visited{ background-color: #ff5c00; }
+.orange.awesome:hover{ background-color: #d45500; }
+.yellow.awesome, .yellow.awesome:visited{ background-color: #ffb515; }
+.yellow.awesome:hover{ background-color: #fc9200; }
+.grey.awesome, .grey.awesome:visited{ background-color: #999; }
+.grey.awesome:hover{ background-color: #666; }
+input[type=submit].awesome, input[type=button].awesome {border:0;} 
 .apple_pagination {
     margin:0.5em 0;
     background: #F5F5F5;
@@ -293,19 +330,20 @@ input#user_password, input#user_password_confirmation, input#user_session_passwo
     padding-left: 19px;
 }
 
-#tabs{border:none; background:inherit;}
-#tabs ul{border-top:none;border-right:none;border-left:none; background:inherit; border-radius:0;}
-#tabs div {padding:0;}
-#tabs table { border: 1px solid #aaa; border-top:none;}
-#tabs td a { color: #4080C0; }
+#tabs, #problem-tabs {border:none; background:inherit;}
+#tabs ul, #problem-tabs ul{border-top:none;border-right:none;border-left:none; background:inherit; border-radius:0;}
+#tabs div, #problem-tabs div {padding:0;}
+#tabs table, #problem-tabs table { border: 1px solid #aaa; border-top:none;}
+#tabs td a, #problem-tabs td a { color: #4080C0; }
 .center {text-align:center;}
 .solution-meta{display:block; font-size:0.9em;}
-
-#contest-time {
+#contest-meta {margin: -5px 0 1em 0; 
+	       padding-bottom: 0.3em; 
+	       border-bottom:3px solid #ddd;}
+span.contest-time {
     font-size:1.1em;
-    margin: -5px 1em 1em 0;
     padding: 0 13px;
-    background: url(/images/clock.png) no-repeat 0 3px;
+    background: url(/images/clock-w.png) no-repeat 0 3px;
 }
 #contest-description{margin:1em 0;}
 
@@ -346,22 +384,40 @@ th.big-title {
     text-align:center;
     border-bottom:none;
 }
+th.small-title {
+    font-size:0.8em;
+    text-align:center;
+    border-bottom:none;
+    padding:0;
+}
 td.ranking {
     width:30px;
     text-align:center;
     font-weight:bold;
 }
+td.numbering {
+    width:45px;
+    text-align:center;
+    font-weight:bold;
+}
+td.status {
+    width: 1%;
+    text-align:center;
+}
 span.req-level {
     background: url(/images/points.png) no-repeat center left;
     padding-left:14px;
     font-size:0.8em;
-    margin-left:2em;
+    margin-left:1em;
 }
 span.req-time {
-    background: url(/images/average.png) no-repeat center left;
+    background: url(/images/clock.png) no-repeat center left;
     padding-left:14px;
     font-size:0.8em;
-    
+}
+span.average-time {
+    background: url(/images/average.png) no-repeat center left;
+    padding-left:14px;
 }
 span.req-memory {
     background: url(/images/memory.png) no-repeat center left;
@@ -373,10 +429,66 @@ span.req-test {
     background: url(/images/test.png) no-repeat center left;
     padding-left:19px;
     font-size:0.8em;
-    float:right;
-    margin:4px 3px 1px;
 }
-span.problem-name{}
+span.view-solution{
+    background: url(/images/view-w.png) no-repeat center left;
+    padding-left:24px;
+}
+span.attachment{
+    background: url(/images/attach-back.png) no-repeat center left;
+    padding-left:17px;
+    margin-left:10px;
+}
+span.result-match{
+    padding-right: 1em;
+}
+span.result-match img{
+    vertical-align:baseline;
+}
+span.go-up{
+    float:right;
+    background: url(/images/arrow-ur.png) no-repeat center right;
+    padding-right:18px;
+}
+span.test-input{
+    background: url(/images/input.png) no-repeat 0 40%;
+    padding:3px 0 3px 15px;
+    font-weight:bold;
+}
+span.test-output{
+    background: url(/images/output.png) no-repeat 100% 40%;
+    padding:3px 15px 3px 0;
+    font-weight:bold;
+}
+span.orig-output{
+    background: url(/images/matching.png) no-repeat 100% 40%;
+    padding:3px 15px 3px 0;
+    font-weight:bold;
+}
+span.right-button{
+    float:right;
+}
 #new-solution-form{float:right;}
-#new-test-form{float:right; margin-right:1em;}
-#new-test-form a img{vertical-align:baseline;}
+
+#problem-meta{padding: 0.5em 0; margin-bottom: 0.5em;}
+#problem-actions{display:inline; padding-left:2em; }
+#problem tabs {margin: 1em 0; padding 0.5em 0;}
+
+.best-meta{text-align:center; color: #666;}
+#solution-info {margin-bottom: 1em;}
+#solution-actions a{ margin-left: 1em;}
+#result{text-align:center; min-height:200px; vertical-align:middle;}
+#result-meta{padding: .5em 0;}
+.border-hor {border-top:1px solid #ddd; border-bottom:1px solid #ddd;}
+div.scroll {overflow:auto;}
+#results-table tr > td:first-child {
+    color: #999;
+    background: #f6f6f6;
+}
+#results-table td{
+    text-align:center;
+    border-right: 1px solid #ddd;
+}
+#result {
+    text-align:center;
+}

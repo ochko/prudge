@@ -1,13 +1,15 @@
 <h2 class="rank_<%=@contest.level%>" title="<%= @contest.level_name %> түвшний тэмцээн"><%=h @contest.name %>
-  (<%= show_status @contest -%>)
   <% if admin? -%>
-    <%= link_to image_tag('edit.png'), edit_contest_path(@contest), :title =>'Засвар' %>
-    <%= link_to image_tag('delete.png'), { :action => 'destroy', :id => @contest }, :confirm => 'Are you sure?', :method => :post, :title => 'Устгах' %>
-    <% end -%>
+  <%= link_to image_tag('edit.png'), edit_contest_path(@contest), :title =>'Засвар' %>
+  <%= link_to image_tag('delete.png'), { :action => 'destroy', :id => @contest }, :confirm => 'Are you sure?', :method => :post, :title => 'Устгах' %>
+  <% end -%>
 </h2>
-<div id="contest-time">
+<div id="contest-meta">
+  <span class="contest-time">
   <%=l @contest.start %> &raquo; 
   <%=l @contest.end %>
+  (<%= show_status @contest -%>)
+  </span>
 </div>
 <div id="contest-description">
   <%= @contest.description %>
@@ -55,7 +57,7 @@
 	      <th></th>
 	      <th>Нэр</th>
 	      <th><img src="/images/points.png" title="Нийлбэр оноо"/></th>
-	      <th><img src="/images/average.png" title="Дундаж хугацаа"/></th>
+	      <th><img src="/images/clock.png" title="Дундаж хугацаа"/></th>
 	      <th></th>
 	    </tr>
 	    <% @numbers.zip(@standings) do |num, user| %>

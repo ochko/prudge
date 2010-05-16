@@ -1,34 +1,29 @@
-<h2>Тестийн үр дүн</h2>
-<table>
-  <tr>
-    <td>Бодлого:</td><td> <%=h @result.solution.problem.name %></td>
-  </tr>
-  <tr>
-    <td>Хэрэглэгч:</td><td> <%=h @result.solution.user.login %></td>
-  </tr>
-  <tr>
-    <td>Ажиллагаа:</td><td> <%= translate_message(@result.status) %></td>
-  </tr>
-  <tr>
-    <td>Хугацаа:</td><td> <%=h @result.time %></td>
-  </tr>
-  <tr>
-    <td>Санах ой:</td><td> <%=h @result.memory %></td>
-  </tr>
-  <tr>
-    <td>Оролт:</td><td> <%= text_area(@result.test.input,12,72,5,72) %></td>
-  </tr>
-  <tr>
-    <td>Гаралт:</td><td><%= text_area(@result.output,12,72,5,72) %></td>
-  </tr>
-  <tr>
-    <td>Үр дүн:</td><td><%= show_correctness @result.matched %></td>
-  </tr>
-  <% if !@result.matched %>
-  <tr>
-    <td>Хариу:</td><td><%= text_area(@result.test.output, 12, 72, 5,72) %></td>
-  </tr>
-  <% end %>
-</table>
-<%= link_to 'Бодолт руу', :controller=>'solutions',
-                     :action=>'show', :id=>@result.solution  %>
+<%= render :partial => 'problems/problem', :object => @result.solution.problem %>
+
+<h1>Тестийн үр дүн:
+  <span class="result-match"><%= show_correctness @result.matched %></span>
+  <span class="req-time" title="Ажилласан хугацаа"><%= @result.time %></span>
+  <span class="req-memory" title="Ашигласан санах ой"><%= @result.memory %></span>
+</h1>
+<div id="result-meta" class="border-hor">
+  <label>Бодсон:</label> <%= link_to h(@result.solution.user.login), @result.solution.user %>,
+  <%=l @result.solution.uploaded_at %>,
+  <span class="result-run">Ажиллагаа: <strong><%= translate_message(@result.status) %></strong></span>
+
+  <span class="go-up"><%= link_to 'Бодолт руу', @result.solution  %></span>
+</div>
+
+<div class="span-6 border prepend-1 prepend-top scroll">
+  <span class="test-input">Оролт</span>
+  <pre><%= @result.test.input %></pre>
+</div>
+<div class="span-6 border prepend-top scroll">
+  <span class="test-output">Гаралт</span>
+  <pre><%= @result.output %></pre>
+</div>
+<% if !@result.matched %>
+<div class="span-6 prepend-top scroll">
+  <span class="orig-output">Зөв Хариу</span>
+  <pre><%= @result.test.output %></pre>
+</div>
+<% end %>

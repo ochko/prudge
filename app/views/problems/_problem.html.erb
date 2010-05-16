@@ -1,0 +1,14 @@
+<h2>
+  <span class="problem-name"><%=h problem.name %></span>
+  <span class="req-level" title="Оноо"><%= problem.level %></span>
+  <span class="req-time" title="Хугацааны хязгаар"><%= problem.time %></span>
+  <span class="req-memory" title="Санах ойн хязгаар"><%= problem.memory %></span>  
+  <span class="req-test" title="Тэстийн тоо"><%= problem.tests.size %></span>
+</h2>
+<div id="problem-meta" class="span-20 border-hor">
+  <label>Дэвшүүлсэн:</label> <%= link_to problem.user.login, problem.user -%>,
+  <%=l problem.created_at -%>
+  <%= content_tag(:span, ', Эх сурвалж: ' + h(problem.source),
+      :class => 'problem-source') if !problem.source.empty? -%>
+  <span class="go-up"><%= link_to 'Бодлого руу', problem  %></span>
+</div>

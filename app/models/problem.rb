@@ -11,8 +11,6 @@ class Problem < ActiveRecord::Base
            :class_name => 'Comment',
            :foreign_key => 'topic_id',
            :dependent => :destroy
-  has_many :problem_languages
-  has_many :languages, :through => :problem_languages
 
   validates_presence_of :name, :text
 
@@ -26,6 +24,18 @@ class Problem < ActiveRecord::Base
 
   def correct_solutions
     solutions.correct
+  end
+
+  def best_solution
+    self.solutions.correct(:order => 'time ASC').first
+  end
+
+  def corrects_count
+    Solution.count_by_sql(["SELECT count(id) FROM solutions where problem_id = ? AND correct = true", self.id])
+  end
+
+  def solutions_count
+    solutions.count
   end
 
   def has_permission?(user)
@@ -52,22 +62,4 @@ class Problem < ActiveRecord::Base
     return false
   end
 
-  def update_languages(languages)
-    problem_languages.each{ |l| l.destroy }
-    if !languages.nil?
-    languages.each{ |l_id|
-      ProblemLanguage.new({ "problem_id" => id,
-                            "language_id" => l_id }).
-      save}
-    end
-  end
-
-  def add_languages(languages)
-    if !languages.nil?
-      languages.each{ |l_id|
-        ProblemLanguage.new({ "problem_id" => id,
-                              "language_id" => l_id }).
-        save}
-    end
-  end
 end

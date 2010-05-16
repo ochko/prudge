@@ -7,10 +7,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :problems
   map.resources :lessons
   map.resources :topics
-  map.resources :solutions
+  map.resources :solutions, :member =>[:best, :submited, :solved, :view]
   map.resources :languages
   map.resources :pages
   map.resources :problem_tests
+  map.resources :results
 
   map.root :controller => 'contests', :action => 'last'
   map.signup 'signup', :controller => 'users', :action => 'new'

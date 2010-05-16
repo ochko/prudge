@@ -14,4 +14,21 @@ module ResultsHelper
     end
   end
 
+  def inverted_table(results)
+    matrix = []
+    matrix << ['Тэст', '', 'Ажиллагаа', 'Хугацаа', 'Санах ой', 'Хариу']
+    results.each_with_index do |result, index|
+      matrix << [index+1, 
+                 test_purpose(result), 
+                 translate_message(result.status), 
+                 sec2milisec(result.time), 
+                 result.memory, 
+                 show_correctness(result.matched)]
+    end
+    content = '<table id="results-table">'
+    matrix.transpose.each do |row|
+      content << '<tr><td>' << row.join('</td><td>') << '</td></tr>'
+    end
+    content << '</table>'
+  end
 end

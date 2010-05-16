@@ -4,7 +4,7 @@
                                              :id=>@problem.id %></td>
           </tr>
           <tr>
-            <td><label>Оноо : </label></td><td> <%= @problem.point %></td>
+            <td><label>Оноо : </label></td><td> <%= @problem.level %></td>
           </tr>
           <tr>
             <td><label>Хугацаа : </label></td><td> <%= @problem.time %> сек</td>
@@ -13,7 +13,7 @@
             <td><label>Санах ой : </label></td><td> <%= @problem.memory %> кб</td>
           </tr>
           <tr>
-            <td><label>Тэстийн тоо : </label></td><td> <%= @problem.problem_tests.size %></td>
+            <td><label>Тэстийн тоо : </label></td><td> <%= @problem.tests.size %></td>
           </tr>
           <tr><td colspan='2'><hr class='slim' /></td></tr>
           <tr>
@@ -26,7 +26,7 @@
             <td><label>Анх хадгалсан:</label></td><td> <%= @solution.created_at.to_s(:date_time24) %></td>
           </tr>
           <tr>
-            <td><label>Өөрчлөлт хийсэн:</label></td><td> <%= @solution.updated_at.to_s(:date_time24) %></td>
+            <td><label>Өөрчлөлт хийсэн:</label></td><td> <%= @solution.uploaded_at %></td>
           </tr>
           <tr>
             <td><label>Файлын нэр:</label></td><td> <%= file_link @solution %></td>

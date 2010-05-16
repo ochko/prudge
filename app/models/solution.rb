@@ -7,12 +7,12 @@ class Solution < ActiveRecord::Base
   belongs_to :problem
   belongs_to :user
   belongs_to :language
-  has_many :results, :dependent => :destroy
+  has_many :results, :order => 'hidden', :dependent => :destroy
   has_many :tests, :through => :problem, :order => 'hidden, id'
 
   has_attached_file :source, 
-    :url => "/judge/solutions/:user/:problem/:id.code",
-    :path => ":rails_root/judge/solutions/:user/:problem/:id.code"
+    :url => "/judge/solutions/:user/:problem/:basename.:extension",
+    :path => ":rails_root/judge/solutions/:user/:problem/:basename.:extension"
 
   # TODO: Delete after migration
   #has_attachment :path_prefix => 'judge/src'
@@ -43,12 +43,35 @@ class Solution < ActiveRecord::Base
   def error_path()  "#{user.exe_dir}/#{self.problem_id}.error"  end
   def usage_path()  "#{user.exe_dir}/#{self.problem_id}.usage"  end
 
+  def owned_by?(someone)
+    self.user_id == someone.id
+  end
+
   def invalidate!
     update_attributes(:invalidated => true)
   end
 
+  def lock!
+    self.update_attribute(:locked, true)
+  end
+
+  def locked?
+    locked
+  end
+
+  def freezed?
+    self.contest && self.contest.finished?
+  end
+
+  def apply_contest
+    self.contest = nil
+    if self.problem.contest && !self.problem.contest.finished?
+      self.contest = self.problem.contest
+    end
+  end
+
   def check!
-    return unless compile
+    return false unless compile
     cleanup!
     self.tests.each do |test|
       break unless execute(test)
@@ -78,15 +101,19 @@ class Solution < ActiveRecord::Base
     system(cmd)
   end
 
+  def junk
+    IO.readlines(error_path).join('<br/>').gsub(SOLUTIONS_PATH,'')
+  end
+
   def cleanup!
-    self.results.clear
-    update_attributes(:checked => false,
-                      :invalidated => false,
-                      :correct => false,
-                      :percent => 0.0,
-                      :time => 5000.0,
-                      :isbest => false,
-                      :point => 0.0) unless self.locked
+      self.results.clear
+      self.update_attributes(:checked => false,
+                             :invalidated => false,
+                             :correct => false,
+                             :percent => 0.0,
+                             :time => 5000.0,
+                             :isbest => false,
+                             :point => 0.0) 
   end
 
   def summarize_results!
@@ -95,11 +122,11 @@ class Solution < ActiveRecord::Base
                                         self.problem.tests.real.size),
                            :percent => (self.results.correct.real.size / 
                                         self.problem.tests.real.size),
-                           :time => (self.results.correct.sum('time') / 
-                                     self.results.correct.size),
+                           :time => (self.results.sum('time') / 
+                                     self.results.size),
                            :point => (self.results.correct.real.size / 
                                       self.problem.tests.real.size) * 
-                           self.problem.level)
+                           self.problem.level) unless self.results.empty?
   end
 
   def nominate_for_best!

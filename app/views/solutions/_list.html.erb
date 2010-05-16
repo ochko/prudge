@@ -1,0 +1,27 @@
+<table width="100%">
+  <tr>
+    <th width="1%"></th>
+    <th>Хэрэглэгч</th>
+    <th>Хэл</th>
+    <th>Бодсон</th>
+    <th>Шинэчилсэн</th>
+    <th>Хувь</th>
+    <th>Хугацаа</th>
+    <th width="1%"></th>
+    <th width="1%"></th>
+  </tr>
+  <% for s in @solutions%>
+  <tr>
+    <td class="status"><%= show_correctness(s.correct) %></td>
+    <td><%= s.user.login %></td>
+    <td><%= s.language.name %></td>
+    <td class='small'><%=l s.created_at %></td>
+    <td class='small'><%=l s.uploaded_at %></td>
+    <td><%= "%0.0f" % (s.percent*100) %></td>
+    <td><%= sec2milisec s.time %></td>
+    <td><%= link_to image_tag('detail.png'), s, :title => "Тэстүүдийг харах" %></td>
+    <td><%= link_to image_tag('view.png'), view_solution_path(s), :title => "Бодолтыг татах" %></td>
+  </tr>
+  <% end %>
+</table>
+

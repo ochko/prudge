@@ -17,11 +17,9 @@
     <th width='1%'>Бодсон бодлого</th>
     <th>Сүүлд бодсон</th>
   </tr>
-<% no = (((params[:page] || 1).to_i) - 1 ) * 100
-   for user in @users
-   no += 1%>
+<% @users.each_with_index do |user, i| %>
   <tr>
-    <td class="ranking"><%= no %></td>
+    <td class="ranking"><%= i + 1 + @users.offset %></td>
     <td><%= link_to user.login, user, :class=>"rank_#{user.level}" %></td>
     <td><%= white_list(truncate(user.school,35)) %></td>
     <td><%= "%.2f" % user.points if !user.points.nil? %></td>

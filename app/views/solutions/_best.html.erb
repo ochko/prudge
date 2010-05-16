@@ -1,0 +1,39 @@
+<table>
+  <tr>
+    <th class="big-title" colspan="5">
+      <%= @solution.user.login%>
+    </th>
+  </tr>
+  <tr>
+    <th class="small-title" colspan="5">
+      (<%=l @solution.created_at %>/<%=l @solution.uploaded_at %>)
+    </th>
+  </tr>
+  <tr>
+    <th class="best-meta" colspan="5">
+      <span class="average-time"><%="%5.2f" % @solution.time %> мсек</span>,
+      <%= @solution.language.name %> хэл
+      <span class="right-button"><%= link_to content_tag(:span, 'Бодолтыг үзэх', :class=>'view-solution'), view_solution_path(@solution), :class => 'small grey awesome' %></span>
+    </th>
+  </tr>
+  <tr>
+    <th>Тэст</th>
+    <th>Ажиллагаа</th>
+    <th>Хугацаа</th>
+    <th>Санах ой</th>
+    <th width="1%">Хариу</th>
+  </tr>
+  <% @solution.results.each_with_index do |result, index| %>
+  <tr>
+    <td class="numbering">
+      <%= index + 1 %>
+      <%= test_purpose(result) %>
+    </td>
+    <td class='small'><%= translate_message(result.status) %></td>
+    <td><%= sec2milisec result.time %> сек</td>
+    <td><%=h result.memory %> кб</td>
+    <td><%= show_correctness(result.matched) %></td>
+  </tr>
+  <% end %>
+</table>
+

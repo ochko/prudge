@@ -15,15 +15,7 @@
     <td>
     </td>
       <td rowspan='3' class='bottom'>
-      <label for="problem_languages">Хэл: </label><br />
-      <%= select_tag "languages[]",
-              options_from_collection_for_select(
-                Language.find(:all),
-                "id",
-                "name",
-                @problem.languages.collect{|l| l.id}),
-              :multiple => true,
-              :size => 4 %>
+
     </td>
 
   </tr>

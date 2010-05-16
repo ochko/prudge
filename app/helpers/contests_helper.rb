@@ -27,10 +27,10 @@ module ContestsHelper
 
  def show_status(contest)
    if Time.now() < contest.start
-     "Эхлэхэд #{distance_of_time_in_words_to_now @contest.start} үлдлээ"
+     "Эхлэхэд #{distance_of_time_in_words_to_now contest.start} үлдлээ"
    elsif Time.now() > contest.start &&
-       Time.now() < @contest.end
-     "Дуусахад #{distance_of_time_in_words_to_now @contest.end} үлдлээ"
+       Time.now() < contest.end
+     "Дуусахад #{distance_of_time_in_words_to_now contest.end} үлдлээ"
    else
      "Дууссан"
    end

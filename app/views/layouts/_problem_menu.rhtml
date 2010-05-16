@@ -13,8 +13,6 @@
     <li class="first"><%=link_to 'Жагсаалт', :controller => 'problems',
       :action => 'list' %></li>
     <% if logged_in? %>
-    <li><%=link_to 'Миний бодолтууд', :controller => 'solutions',
-      :action => 'my' %></li>
     <li><%=link_to 'Бодлого санал болгох', :controller => 'problems',
       :action => 'new' %></li>
     <% end %>

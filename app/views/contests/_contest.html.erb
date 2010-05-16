@@ -1,0 +1,10 @@
+<h2 class="rank_<%= contest.level %>" title="<%= contest.level_name %> түвшний тэмцээн"><%=h contest.name %>
+</h2>
+<div id="contest-meta">
+  <span class="contest-time">
+  <%=l contest.start %> &raquo; 
+  <%=l contest.end %>
+  (<%= show_status contest -%>)
+  </span>
+  <span class="go-up"><%= link_to 'Тэмцээн рүү', contest %></span>
+</div>
