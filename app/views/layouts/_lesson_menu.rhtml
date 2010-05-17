@@ -7,13 +7,14 @@
     <li><%= link_to 'Хичээл', lessons_path, :class=>'current' %></li>
     <li><%= link_to 'Хэлэлцүүлэг', topics_path %></li>
   </ul>
+  <form id="search" action="/search" method="get">
+    <input type="text" name="q" tabindex="1" maxlength="20" size="20">  
+  </form>
 </div>
 <div id="sub-menu">
   <ul>
     <li><%=link_to 'Жагсаалт', lessons_path %></li>
     <li><%=link_to 'Шинэ хичээл нэмэх', new_lesson_path %></li>
-    <li><%=link_to image_tag('search.png')+'Хайх', :controller => 'lessons',
-      :action => 'search' %></li>
     <li><%= link_to image_tag('rss.png')+'RSS', :action=>:feed, :format=>:rss %></li>
   </ul>
 </div>

@@ -68,4 +68,17 @@ class Contest < ActiveRecord::Base
     LEVEL_NAMES[level]
   end
 
+  define_index do
+    indexes :name
+    indexes :text
+    set_property :field_weights => { 
+      :name => 9,
+      :text => 5
+    }
+    set_property :delta => true
+  end
+
+  def text
+    description
+  end
 end

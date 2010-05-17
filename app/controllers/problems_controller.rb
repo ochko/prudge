@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class ProblemsController < ApplicationController
   before_filter :require_user,
-                :except => [:index, :list, :search, :show, :text, :feed]
+                :except => [:index, :list, :show, :text, :feed]
 
   before_filter :require_judge, :only => [:destroy, :nominated]
 
@@ -45,31 +45,6 @@ class ProblemsController < ApplicationController
       format.rss
       format.atom
     end
-  end
-
-  def search
-    conditions = case params['field']
-    when "name" then ["p.name LIKE ? AND c.start < NOW()", "%#{params[:query]}%"]
-    when "text" then ["p.text LIKE ? AND c.start < NOW()", "%#{params[:query]}%"]
-    else ["c.start < NOW()"]
-    end
-
-    @problems = Problem.
-      find(:all,
-           :from => "problems p",
-           :select => "p.*, u.login as login, count(s.id) as solution_count, "+
-           "sum(s.correct) as correct_count",
-           :joins => "join contests c on c.id = p.contest_id " +
-           "left join users u on p.user_id = u.id " +
-           "left join solutions s on p.id = s.problem_id ",
-           :order => "contest_id, created_at",
-           :conditions => conditions,
-           :group => "p.id")
-
-    if request.xml_http_request?
-        render :partial => "search", :layout => false
-    end
-
   end
 
   def nominated

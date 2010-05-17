@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   before_filter :require_user,
-                :except =>[:search, :show]
+                :except => :show
   before_filter :require_judge,
                 :only => [:index, :list, :new, :create, :edit, :destroy, :update]
                               

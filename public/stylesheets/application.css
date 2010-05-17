@@ -69,6 +69,7 @@ h3 { font-size: 1.4em; }
     list-style: none;
     margin: 0;
     padding: 0 5px;
+    display:inline;
 }
 #main-menu li, #sub-menu li {
     display:inline;
@@ -476,19 +477,58 @@ span.right-button{
 
 .best-meta{text-align:center; color: #666;}
 #solution-info {margin-bottom: 1em;}
-#solution-actions a{ margin-left: 1em;}
+#solution-actions a{ margin-left: 1em; float:right;}
 #result{text-align:center; min-height:200px; vertical-align:middle;}
 #result-meta{padding: .5em 0;}
 .border-hor {border-top:1px solid #ddd; border-bottom:1px solid #ddd;}
 div.scroll {overflow:auto;}
-#results-table tr > td:first-child {
-    color: #999;
-    background: #f6f6f6;
+#results-table {
+    margin-left:auto; 
+    margin-right:auto;
+    display:block;
 }
 #results-table td{
     text-align:center;
     border-right: 1px solid #ddd;
 }
-#result {
-    text-align:center;
+#results-table tr > td:first-child {
+    color: #999;
+    background: #f6f6f6;
 }
+
+#result { text-align:center; }
+#solution-percent {margin:0.5em 0;}
+
+.percent{
+    display: block;
+    float:left;
+    background:url(/images/percent.png) top left no-repeat;
+    height: 22px;
+    width:152px;
+}
+.percent span{
+    background:url(/images/percent.png) bottom right no-repeat;
+    display: block;
+    float:left;
+    height:22px;
+    color:#fff;
+    font-size:1.4em;
+}
+#search input{
+    float:right;
+    padding:0 0 0 14px;
+    margin:0;
+    background:url(/images/search.png) #f1f1f1 no-repeat 2px center;
+    border: 1px solid #666;
+    max-width:120px;
+    width:120px;
+}
+#search {
+    float:right;
+    paddin:0;
+    margin:0;
+}
+#search-result li{
+    list-style:none;
+}
+span.match {font-weight:bold;}

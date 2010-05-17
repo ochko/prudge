@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class LessonsController < ApplicationController
   before_filter :require_user,
-                :except => [:index, :list, :search, :show, :get_homeworks, :feed]
+                :except => [:index, :list, :show, :get_homeworks, :feed]
 
   auto_complete_for :problem, :name
 

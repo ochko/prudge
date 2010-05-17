@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 class TopicsController < ApplicationController
-  before_filter :require_user, :except => [:index, :list, :search, :show]
+  before_filter :require_user, :except => [:index, :list, :show]
 
   before_filter :require_admin, :only => [:new,
                                           :create,
@@ -29,9 +29,6 @@ class TopicsController < ApplicationController
     end
   end
 
-  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list }
   def moderate
     @comment_pages, @comments =
       paginate(:comments, :per_page => 100,
@@ -43,31 +40,6 @@ class TopicsController < ApplicationController
       paginate(:page => params[:page], :per_page=> 20,
                :order => 'created_at desc',
                :include => [:user])
-  end
-
-  def search
-    limit = nil
-    if params[:query] and params[:query].length > 2
-    conditions = case params['field']
-    when "text" then ["c.text LIKE ?", "%#{params[:query]}%"]
-    when "user" then ["u.login LIKE ?", "%#{params[:query]}%"]
-    end
-    else
-      conditions = ["1"]
-      limit = 30
-    end
-    @comments = Comment.
-      find(:all,
-           :from => "comments c",
-           :select => "c.*, u.login as user_login",
-           :joins => "join users u on c.user_id = u.id ",
-           :order => "created_at desc",
-           :conditions => conditions,
-           :limit =>limit)
-
-    if request.xml_http_request?
-        render :partial => "search", :layout => false
-    end
   end
 
   def list

@@ -8,26 +8,25 @@
   <%= @solution.language.name %> хэл,
   <%= link_to @solution.source_file_name, view_solution_path(@solution), :title => "Бодолтыг татах" %>
   <span id="solution-actions">
+  <% if @solution.owned_by? current_user %>
+  <%= link_to 'Устгах', {:action => 'destroy', :id => @solution},
+  :confirm => 'Энэ бодолтыг нээрээ устгах уу?', :method => :post, :class=>"medium grey awesome" %> 
+  <%= link_to 'Засварлах', edit_solution_path(@solution), :class=>"medium grey awesome" %> 
+  <% end %>
+
   <% if !@solution.checked %>
   <%= link_to_remote "Шалгах", :update => "result",
   :url => { :action => "check", :id => @solution },
   :html=>{:id=>'check_button', :class=>"medium grey awesome" },
   :before => "$('#check_button').hide(); $('#progress_bar').show();" %>
   <% end %>
-
-  <% if @solution.owned_by? current_user %>
-  <%= link_to 'Засвар', edit_solution_path(@solution), :class=>"medium grey awesome" %> 
-  <%= link_to 'Устгах', {:action => 'destroy', :id => @solution},
-  :confirm => 'Энэ бодолтыг нээрээ устгах уу?', :method => :post, :class=>"medium grey awesome" %> 
-  <% end %>
   </span>
 </div>
 <div id='result' class="span-20"> 
   <% if @solution.checked %>
-  <%= show_percent_word(@solution.problem.tests.size, @solution.results.correct.size) %>
-  <%= inverted_table @solution.results %>
+  <%= render :partial => 'results/list' %>
   <% end %>
-  <%= image_tag("drip-circle.gif",
+  <%= image_tag("spinner.gif",
               :border=> 0,
               :id => "progress_bar",
               :style=>"display: none;" ) %>

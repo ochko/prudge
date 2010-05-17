@@ -11,18 +11,8 @@ module ApplicationHelper
     end
   end    
 
-  def show_percent_word(all, some)
-    if all == some
-      return image_tag('percent-all.png') + '<br />Бүгд зөв'  
-    elsif (all - some) < some
-      return image_tag('percent-almost.png') +'<br />Ихэнх нь зөв'
-    elsif (all - some) == some
-      return image_tag('percent-half.png')+ '<br />Хагас нь зөв'
-    elsif some != 0
-      return image_tag('percent-some.png')+ '<br />Ихэнх нь буруу'
-    else                                  
-      return image_tag('percent-none.png')+ '<br />Бүгд буруу' 
-    end
+  def show_percent(percent)
+    content_tag(:span, content_tag(:span, "#{percent}%", :style =>"width:#{percent}%; overflow:visible;"), :class=>'percent')
   end
 
   def shorten(str, len)

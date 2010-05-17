@@ -12,12 +12,12 @@
   </tr>
   <% for s in @solutions%>
   <tr>
-    <td class="status"><%= show_correctness(s.correct) %></td>
+    <td class="status"><%= link_to show_correctness(s.correct), s %></td>
     <td><%= s.user.login %></td>
     <td><%= s.language.name %></td>
     <td class='small'><%=l s.created_at %></td>
     <td class='small'><%=l s.uploaded_at %></td>
-    <td><%= "%0.0f" % (s.percent*100) %></td>
+    <td><%= (s.percent*100).to_i %></td>
     <td><%= sec2milisec s.time %></td>
     <td><%= link_to image_tag('detail.png'), s, :title => "Тэстүүдийг харах" %></td>
     <td><%= link_to image_tag('view.png'), view_solution_path(s), :title => "Бодолтыг татах" %></td>

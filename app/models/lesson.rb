@@ -13,9 +13,20 @@ class Lesson < ActiveRecord::Base
   validates_presence_of     :title, :text
 
   def self.per_page() 5 end
-  
-  define_index do
-    indexes title
-    indexes text
+
+  def name
+    title
   end
+
+  define_index do
+    indexes :title
+    indexes :text
+    set_property :field_weights => { 
+      :title => 8,
+      :text => 5
+    }
+    set_property :delta => true
+  end
+
+
 end

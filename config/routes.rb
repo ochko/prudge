@@ -12,6 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :pages
   map.resources :problem_tests
   map.resources :results
+  map.resources :comments
 
   map.root :controller => 'contests', :action => 'last'
   map.signup 'signup', :controller => 'users', :action => 'new'
@@ -24,7 +25,7 @@ ActionController::Routing::Routes.draw do |map|
   map.about 'about', :controller => 'home', :action => 'about'
   map.rules 'rules', :controller => 'home', :action => 'rules'
   map.last 'last', :controller => 'solutions', :action => 'last'
-
+  map.connect '/search/:q', :controller => 'search'
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 end

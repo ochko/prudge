@@ -1,3 +1,7 @@
 <span><%= flash[:error] %></span>
-<%= show_percent_word(@solution.problem.tests.size, @solution.results.correct.size) %>
+<div id='solution-percent' class="span-10 prepend-8">
+  <%= show_percent((@solution.percent * 100).to_i) %>
+</div>
+<div class="span-20">
 <%= inverted_table @solution.results %>
+</div>

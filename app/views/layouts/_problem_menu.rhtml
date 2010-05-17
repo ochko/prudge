@@ -7,6 +7,9 @@
     <li><%= link_to 'Хичээл', lessons_path %></li>
     <li><%= link_to 'Хэлэлцүүлэг', topics_path %></li>
   </ul>
+  <form id="search" action="/search" method="get">
+    <input type="text" name="q" tabindex="1" maxlength="20" size="20">  
+  </form>
 </div>
 <div id="sub-menu">
   <ul>
@@ -20,8 +23,7 @@
     <li><%=link_to 'Дэвшигдсэн бодлогууд', :controller => 'problems',
       :action => 'nominated' %></li>
     <% end %>
-    <li class="last"><%=link_to image_tag('search.png')+'Хайх', :controller => 'problems',
-      :action => 'search' %></li>
+
     <li><%= link_to(image_tag('rss.png')+'RSS', :action=>:feed, :format=>:rss) %></li>
   </ul>
 </div>
