@@ -13,6 +13,7 @@ class Problem < ActiveRecord::Base
            :dependent => :destroy
 
   validates_presence_of :name, :text
+  named_scope :commented, :conditions => "comments_count > 0"
 
   def owned_by?(someone)
     self.user_id == someone.id

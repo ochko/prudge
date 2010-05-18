@@ -1,139 +1,29 @@
 # -*- coding: utf-8 -*-
 class TopicsController < ApplicationController
-  before_filter :require_user, :except => [:index, :list, :show]
+  before_filter :require_user, :except => [:index, :show]
 
-  before_filter :require_admin, :only => [:new,
-                                          :create,
-                                          :edit,
-                                          :destroy,
-                                          :update,
-                                          :moderate]
+  before_filter :require_admin, :only => [:new, :create, :edit, :destroy,
+                                          :update, :moderate]
   layout 'discussions'
 
   def index
-    last
-    render :action => 'last'
-  end
-
-  def feed
-    @comments = Comment.
-      find(:all,
-           :select => 'u.login, c.*',
-           :from => 'comments c',
-           :joins => 'join users u on c.user_id = u.id',
-           :order => 'created_at desc',
-           :limit => 20)
-    respond_to do |format|
-      format.rss
-      format.atom
-    end
-  end
-
-  def moderate
-    @comment_pages, @comments =
-      paginate(:comments, :per_page => 100,
-               :order => 'created_at desc')
-  end
-
-  def last
-    @comments = Comment.
-      paginate(:page => params[:page], :per_page=> 20,
-               :order => 'created_at desc',
-               :include => [:user])
-  end
-
-  def list
     if !params[:type]
-      @topics = Topic.
-        find(:all,
-             :from=>'topics t',
-             :joins=>'LEFT JOIN comments c ON t.id = c.topic_id and topic_type = "Topic"',
-             :select=>'t.id, t.title as name, count(c.id) as post_count, '+
-                    'max(c.created_at) as last_time',
-             :group=>'t.id')
-      @page_title ='Хэлэлцүүлгүүд'
-    elsif params[:type].eql?('contests')
-      @topics = Topic.
-        find(:all,
-             :from=>'contests t',
-             :joins=>'LEFT JOIN comments c ON t.id = c.topic_id',
-             :select=>'t.id, t.name as name, count(c.id) as post_count, '+
-                    'max(c.created_at) as last_time',
-             :conditions => 'topic_type = "Contest"',
-             :group=>'t.id')
-      @type = 'contests'
-      @page_title ='Тэмцээний хэлэлцүүлгүүд'
-    elsif params[:type].eql?('problems')
-      @topics = Topic.
-        find(:all,
-             :from=>'problems t',
-             :joins=>'LEFT JOIN comments c ON t.id = c.topic_id',
-             :select=>'t.id, t.name as name, count(c.id) as post_count, '+
-                    'max(c.created_at) as last_time',
-             :conditions => 'topic_type = "Problem"',
-             :group=>'t.id')
-      @type = 'problems'
-      @page_title ='Бодлогын хэлэлцүүлгүүд'
-    elsif params[:type].eql?('lessons')
-      @topics = Topic.
-        find(:all,
-             :from=>'lessons t',
-             :joins=>'LEFT JOIN comments c ON t.id = c.topic_id',
-             :select=>'t.id, t.title as name, count(c.id) as post_count, '+
-                    'max(c.created_at) as last_time',
-             :conditions => 'topic_type = "Lesson"',
-             :group=>'t.id')
-      @type = 'lessons'
-      @page_title ='Хичээлийн хэлэлцүүлгүүд'
+      @topics = Topic.paginate(:page=> params[:page], :per_page => 20,
+                               :order => 'commented_at DESC')
+    elsif %w[contest problem lesson topic].include? params[:type]
+      @topics = params[:type].capitalize.constantize.commented.
+        paginate(:page=> params[:page], :per_page => 20, 
+                 :order => 'commented_at DESC')
     end
   end
 
   def show
     if !params[:type]
       @topic = Topic.
-        find(params[:id],
-             :select=>'topics.id, topics.title as name, '+
-             'topics.description as description')
-      topic_class = 'Topic'
-      @type = 'topics'
-    elsif params[:type].eql?('contests')
-      @topic = Contest.
-        find(params[:id],
-             :select=>'contests.id, contests.name as name, '+
-             'contests.description as description')
-      topic_class = 'Contest'
-      @type = 'contests'
-    elsif params[:type].eql?('problems')
-      @topic = Problem.
-        find(params[:id],
-             :select=>'problems.id, problems.name as name, '+
-             '\'\' as description')
-             #'problems.text as description')
-      topic_class = 'Problem'
-      @type = 'problems'
-    elsif params[:type].eql?('lessons')
-      @topic = Lesson.
-        find(params[:id],
-             :select=>'lessons.id, lessons.title as name, '+
-             'lessons.text as description')
-      topic_class = 'Lesson'
-      @type = 'lessons'
-    elsif params[:type].eql?('topics')
-      @topic = Topic.
-        find(params[:id],
-             :select=>'topics.id, topics.title as name, '+
-             'topics.description as description')
-      topic_class = 'Topic'
-      @type = 'topics'
+        find(params[:id])
+    elsif %w[contest problem lesson topic].include? params[:type]
+      @topic = params[:type].capitalize.constantize.find(params[:id])
     end
-    @comment = Comment.new('topic_id'=>@topic.id,'topic_type'=>topic_class)
-    @comments = Comment.
-      paginate(:page=> params[:page], :per_page=>20,
-               :conditions=>['topic_id = ? AND topic_type = ?',
-                             @topic.id, topic_class],
-               :include => [:user],
-               :order => 'id DESC')
-    @box_title = "#{@comments.total_entries} Коммент"
   end
 
   def new
@@ -144,7 +34,7 @@ class TopicsController < ApplicationController
     @topic = Topic.new(params[:topic])
     if @topic.save
       flash[:notice] = 'Topic was successfully created.'
-      redirect_to :action => 'list'
+      redirect_to @topic
     else
       render :action => 'new'
     end
@@ -158,7 +48,7 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     if @topic.update_attributes(params[:topic])
       flash[:notice] = 'Topic was successfully updated.'
-      redirect_to :action => 'show', :id => @topic
+      redirect_to @topic
     else
       render :action => 'edit'
     end
@@ -166,6 +56,6 @@ class TopicsController < ApplicationController
 
   def destroy
     Topic.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    redirect_to :action => :index
   end
 end

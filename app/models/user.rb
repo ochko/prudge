@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
            :uniq => true, :order => 'start'
   has_many :problems
   has_many :lessons, :foreign_key => 'author_id'
+  has_many :comments, :dependent => :destroy, :order => "created_at DESC"
 
   acts_as_authentic do |c|
     c.openid_required_fields = [:nickname, :email]
@@ -57,5 +58,10 @@ class User < ActiveRecord::Base
     Solution.find(:all, :conditions => 
                   ["problem_id = ? AND user_id = ? AND correct = ?",
                    problem.id, self.id, true])
+  end
+
+  def currently_commented?
+    comments.first && 
+      comments.first.created_at > Time.now - 10.seconds
   end
 end

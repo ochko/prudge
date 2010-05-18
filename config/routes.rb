@@ -25,6 +25,8 @@ ActionController::Routing::Routes.draw do |map|
   map.about 'about', :controller => 'home', :action => 'about'
   map.rules 'rules', :controller => 'home', :action => 'rules'
   map.last 'last', :controller => 'solutions', :action => 'last'
+  map.connect '/moderate', :controller => 'comments', :action => 'moderate'
+  map.connect '/topic/:type', :controller => 'topics'
   map.connect '/search/:q', :controller => 'search'
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'

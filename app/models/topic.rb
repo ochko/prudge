@@ -7,7 +7,7 @@ class Topic < ActiveRecord::Base
            :dependent => :destroy,
            :order => 'comments.id'
 
-  validates_presence_of :title, :description
+  validates_presence_of :title, :description  
   
   def name
     title

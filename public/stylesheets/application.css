@@ -276,7 +276,7 @@ th.level-legend span {
 }
 
 
-#portrait{ float:left; padding: 0 1em 0 0.5em;}
+.portrait{ float:left; padding: 0 1em 0 0.5em;}
 
 #user-statistic { font-size: 1.2em; margin:0.5em 0; float:right;}
 #user-statistic img { vertical-align: baseline;}
@@ -532,3 +532,46 @@ div.scroll {overflow:auto;}
     list-style:none;
 }
 span.match {font-weight:bold;}
+#comments li {
+    list-style:none;
+}
+#comment-spinner {display:none; margin:1em 0;}
+.comment-meta a {font-size:1.1em;}
+.comment-avatar{
+    float:left;
+    margin:0;
+    padding:0;
+    width:55px;
+    vertical-align:top;
+    background: url(/images/comment-corner.png) no-repeat right center;
+}
+
+.comment-text {
+    background: url(/images/comment-back.png) repeat-y left top;
+    min-height:40px;
+    padding: 0.5em 1em;
+}
+.comment{ padding-top:10px;}
+#topic-text {
+    margin-bottom:1em;
+    padding-bottom:1em;
+    border-bottom:1px solid #ddd;
+}
+#comment-posting {
+    padding-top:2em;
+}
+#comment-form textarea{
+    width:500px;
+    height:80px;
+}
+#comment-form input[type=submit]{
+    vertical-align:top;
+    margin:0.5em 1em;
+    height:90px;
+    font-weight:bold
+}
+#comment-message{
+    color: #396;
+    font-weight:bold;
+    padding-left: 2em;
+}

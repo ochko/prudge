@@ -15,7 +15,7 @@ xml.rss "version" => "2.0", "xmlns:dc" => "http://purl.org/dc/elements/1.1/" do
         xml.description comment.text
         xml.pubDate     CGI.rfc1123_date comment.created_at
         xml.guid        url_for :only_path => false, :controller => 'topics', :action => 'show', :id => comment.topic_id, :type => comment.topic_type.downcase.pluralize,:anchor=>comment.id
-        xml.author      "#{comment.login}"
+        xml.author      "#{comment.user.login}"
       end
     end
 

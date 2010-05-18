@@ -91,8 +91,4 @@
   </div>
 </div>
 
-<%= render :partial=>'comments/show',
-           :locals=>{:topic_id   => @contest.id,
-                     :topic_type => 'Contest',
-                     :button_text=> 'Тэмцээний хэлэлцүүлэг' } %>
-
+<%= render :partial => 'comments/commentable', :object => @contest %>

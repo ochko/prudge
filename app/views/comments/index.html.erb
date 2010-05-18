@@ -1,0 +1,19 @@
+<h1>Сүүлд нэмэгдсэн бичээсүүд</h1>
+<%= will_paginate @comments, :class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+
+<div id="comments" class="span-20">
+  <% @comments.each do |c| %>
+  <div class="span-20 comment">
+    <div class="span-20 comment-meta">
+      <%= link_to c.user.login, c.user %>,  <%=l c.created_at %> -д:
+      <span class="go-up"><%= link_to 'Хэлэлцүүлэг рүү', topic_path(c.topic_id, :type => c.topic_type.downcase) %></span>
+    </div>
+    <div class="comment-avatar">
+      <%=image_tag(c.user.gravatar_url(:size => 40)) %>
+    </div>
+    <div class="span-17 comment-text"><%=h c.text %></div>
+  </div>
+  <% end %>
+</div>
+
+<%= will_paginate @comments, :class=>'apple_pagination span-20', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>

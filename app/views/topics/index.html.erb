@@ -1,0 +1,22 @@
+<h1><%= topic_title_for params[:type] %></h1>
+
+<%= will_paginate @topics,:class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th>Илгээсэн тоо</th>
+    <th>Сүүлд илгээсэн</th>
+  </tr>
+<% @topics.each do |topic| %>
+  <tr>
+    <td><%= topic.id %></td>
+    <td><%= link_to topic.name, :action => 'show', :id => topic, :type=> topic.class.name.downcase %></td>
+    <td><%= topic.comments_count %></td>
+    <td><%=l topic.commented_at if topic.commented_at %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= will_paginate @topics,:class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>

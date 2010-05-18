@@ -13,22 +13,16 @@
 </div>
 <div id="sub-menu">
   <ul>
-    <li><%=link_to 'Сүүлд нэмэгдсэн', :controller => 'topics',
-      :action => 'last' %></li>
-    <li><%=link_to 'Сэдвүүд', :controller => 'topics',
-      :action => 'list' %></li>
-    <li><%=link_to 'Тэмцээний', :controller => 'topics',
-      :action => 'list', :type=>'contests' %></li>
-    <li><%=link_to 'Бодлогын', :controller => 'topics',
-      :action => 'list', :type=>'problems' %></li>
-    <li><%=link_to 'Хичээлийн', :controller => 'topics',
-      :action => 'list', :type=>'lessons' %></li>
+    <li><%=link_to 'Сүүлд нэмэгдсэн', comments_path %></li>
+    <li><%=link_to 'Сэдвүүд', topics_path %></li>
+    <li><%=link_to 'Тэмцээний', '/topic/contest' %></li>
+    <li><%=link_to 'Бодлогын', '/topic/problem' %></li>
+    <li><%=link_to 'Хичээлийн', '/topic/lesson' %></li>
     <% if admin? %>
     <li><%=link_to 'Шинэ сэдэв нэмэх', :controller => 'topics',
       :action => 'new' %></li>
-    <li><%=link_to 'Хянах', :controller => 'topics',
-      :action => 'moderate' %></li>
+    <li><%=link_to 'Хянах', '/moderate' %></li>
     <% end %>
-    <li><%= link_to(image_tag('rss.png')+'RSS', :action=>:feed, :format=>:rss) %></li>
+    <li><%= link_to image_tag('rss.png')+'RSS', comments_path(:format=>:rss) %></li>
   </ul>
 </div>

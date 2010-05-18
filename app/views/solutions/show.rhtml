@@ -32,7 +32,4 @@
               :style=>"display: none;" ) %>
 </div>
 
-<%= render :partial=>'comments/show',
-           :locals=>{:topic_id   => @solution.id,
-                     :topic_type => 'Solution',
-                     :button_text=> 'Тусламж дэмжлэгэ' } %>
+<%= render :partial => 'comments/commentable', :object => @solution %>

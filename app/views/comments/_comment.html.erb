@@ -1,0 +1,10 @@
+<div class="span-20 comment">
+  <div class="span-20 comment-meta">
+    <%= link_to comment.user.login, comment.user %>,
+    <%=l comment.created_at %> -д:
+  </div>
+  <div class="comment-avatar">
+    <%=image_tag(comment.user.gravatar_url(:size => 40)) %>
+  </div>
+  <div class="span-17 comment-text"><%=h comment.text %></div>
+</div>

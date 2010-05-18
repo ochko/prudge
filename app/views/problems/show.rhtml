@@ -40,7 +40,4 @@
   <div id="correct-solutions"> </div>
 </div>
 
-<%= render :partial=>'comments/show',
-           :locals=>{:topic_id   => @problem.id,
-                     :topic_type => 'Problem',
-                     :button_text=> 'Санал гомдол' } %>
+<%= render :partial => 'comments/commentable', :object => @problem %>

@@ -24,7 +24,6 @@ class Contest < ActiveRecord::Base
            :class_name => 'Comment',
            :foreign_key => 'topic_id',
            :dependent => :destroy
-  named_scope :pending, :conditions => "end >= NOW()"
 
   validates_presence_of :name, :start, :end
 
@@ -35,6 +34,8 @@ class Contest < ActiveRecord::Base
 
   named_scope :current, :conditions => "end > NOW()", :order => "start ASC"
   named_scope :finished,:conditions => "end < NOW()", :order => "end DESC"
+  named_scope :pending, :conditions => "end >= NOW()"
+  named_scope :commented, :conditions => "comments_count > 0"
 
   def standings
     num, point, avg = 0, 0.0, 0.0

@@ -25,7 +25,5 @@
     <% end %>
   </div>
 </div>
-<%= render :partial=>'comments/show',
-           :locals=>{:topic_id   => @lesson.id,
-                     :topic_type => 'Lesson',
-                     :button_text=> 'Хичээлийн тухай хэлэлцүүлэг' } %>
+
+<%= render :partial => 'comments/commentable', :object => @lesson %>

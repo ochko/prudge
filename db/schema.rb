@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100517060635) do
+ActiveRecord::Schema.define(:version => 20100518040610) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "attachable_id"
@@ -36,12 +36,14 @@ ActiveRecord::Schema.define(:version => 20100517060635) do
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "contests", :force => true do |t|
-    t.string   "name",                          :null => false
-    t.datetime "start",                         :null => false
-    t.datetime "end",                           :null => false
-    t.text     "description",                   :null => false
-    t.integer  "level",       :default => 0
-    t.boolean  "delta",       :default => true, :null => false
+    t.string   "name",                             :null => false
+    t.datetime "start",                            :null => false
+    t.datetime "end",                              :null => false
+    t.text     "description",                      :null => false
+    t.integer  "level",          :default => 0
+    t.boolean  "delta",          :default => true, :null => false
+    t.integer  "comments_count", :default => 0
+    t.datetime "commented_at"
   end
 
   create_table "homeworks", :force => true do |t|
@@ -62,12 +64,14 @@ ActiveRecord::Schema.define(:version => 20100517060635) do
   end
 
   create_table "lessons", :force => true do |t|
-    t.integer  "author_id",                    :null => false
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-    t.string   "title",                        :null => false
-    t.text     "text",                         :null => false
-    t.boolean  "delta",      :default => true, :null => false
+    t.integer  "author_id",                        :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.string   "title",                            :null => false
+    t.text     "text",                             :null => false
+    t.boolean  "delta",          :default => true, :null => false
+    t.integer  "comments_count", :default => 0
+    t.datetime "commented_at"
   end
 
   add_index "lessons", ["author_id"], :name => "index_lessons_on_author_id"
@@ -126,16 +130,18 @@ ActiveRecord::Schema.define(:version => 20100517060635) do
   add_index "problem_tests", ["problem_id"], :name => "index_problem_tests_on_problem_id"
 
   create_table "problems", :force => true do |t|
-    t.integer  "user_id",                                     :null => false
+    t.integer  "user_id",                                         :null => false
     t.integer  "contest_id"
-    t.integer  "level",                     :default => 1,    :null => false
-    t.integer  "time",                      :default => 1,    :null => false
-    t.integer  "memory",                    :default => 64,   :null => false
-    t.string   "name",       :limit => 128,                   :null => false
-    t.text     "text",                                        :null => false
-    t.datetime "created_at",                                  :null => false
+    t.integer  "level",                         :default => 1,    :null => false
+    t.integer  "time",                          :default => 1,    :null => false
+    t.integer  "memory",                        :default => 64,   :null => false
+    t.string   "name",           :limit => 128,                   :null => false
+    t.text     "text",                                            :null => false
+    t.datetime "created_at",                                      :null => false
     t.string   "source"
-    t.boolean  "delta",                     :default => true, :null => false
+    t.boolean  "delta",                         :default => true, :null => false
+    t.integer  "comments_count",                :default => 0
+    t.datetime "commented_at"
   end
 
   add_index "problems", ["contest_id"], :name => "index_problems_on_contest_id"
@@ -191,6 +197,8 @@ ActiveRecord::Schema.define(:version => 20100517060635) do
     t.integer  "source_file_size"
     t.datetime "uploaded_at"
     t.float    "point"
+    t.integer  "comments_count",      :default => 0
+    t.datetime "commented_at"
   end
 
   add_index "solutions", ["contest_id"], :name => "index_solutions_on_contest_id"
@@ -198,10 +206,12 @@ ActiveRecord::Schema.define(:version => 20100517060635) do
   add_index "solutions", ["user_id"], :name => "index_solutions_on_user_id"
 
   create_table "topics", :force => true do |t|
-    t.datetime "created_at",                    :null => false
-    t.string   "title",                         :null => false
-    t.text     "description",                   :null => false
-    t.boolean  "delta",       :default => true, :null => false
+    t.datetime "created_at",                       :null => false
+    t.string   "title",                            :null => false
+    t.text     "description",                      :null => false
+    t.boolean  "delta",          :default => true, :null => false
+    t.integer  "comments_count", :default => 0
+    t.datetime "commented_at"
   end
 
   create_table "users", :force => true do |t|
@@ -210,7 +220,6 @@ ActiveRecord::Schema.define(:version => 20100517060635) do
     t.string   "crypted_password"
     t.string   "salt",                :limit => 40
     t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "school"
     t.boolean  "admin",                             :default => false
     t.boolean  "judge",                             :default => false
@@ -219,7 +228,6 @@ ActiveRecord::Schema.define(:version => 20100517060635) do
     t.string   "single_access_token",                                  :null => false
     t.string   "perishable_token",                                     :null => false
     t.string   "password_salt"
-    t.datetime "last_request_at"
     t.integer  "solutions_count",                   :default => 0
     t.float    "points",                            :default => 0.0
     t.float    "average",                           :default => 0.0

@@ -1,0 +1,36 @@
+<h3 class="comment-title">
+  <%= commentable.comments_count %> Коммэнт
+</h3>
+<div id="comments" class="span-20">
+  <%= render :partial => 'comments/comment', :collection => commentable.comments %>
+</div>
+<div id="comment-posting" class="span-20">
+<% if logged_in? %>
+<div class="span-20 comment-meta">
+  <strong><%= current_user.login %></strong>
+  <span id="comment-message"></span>
+</div>
+<div class="span-1 comment-avatar">
+  <%=image_tag(current_user.gravatar_url(:size => 40)) %>
+  <%= image_tag("spinner.gif", :id => "comment-spinner") %>
+</div>
+<% form_remote_tag :url=>{:controller=>'comments', :action => 'create'},
+       :html=>{:id=>'comment-form', :class => 'span-16'},
+       :before => "$('#comment-spinner').show(); $('#comment-message').html('')",
+       :loading => "$('#comment-form').disable(); ",
+       :success => "$('#comment_text').val('');",
+       :complete => "$('#comment-spinner').hide(); $('#comment-form').enable();",
+       :update => {:success => 'comments', :failure => 'comment-message'},
+       :position=> 'bottom' do %>
+
+    <%= hidden_field_tag 'comment[topic_id]', commentable.id %>
+    <%= hidden_field_tag 'comment[topic_type]', commentable.class.name %>
+
+    <%= text_area 'comment', 'text' %>
+
+    <%= submit_tag "ИЛГЭЭ" %>
+    <% end %>
+
+<% end %>
+</div>
+
