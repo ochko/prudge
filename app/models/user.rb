@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   acts_as_authentic do |c|
     c.openid_required_fields = [:nickname, :email]
+    c.validate_email_field = false
   end
 
   is_gravtastic! :size => 80, :rating => :PG
@@ -19,10 +20,10 @@ class User < ActiveRecord::Base
   def collect_caches!
     effectives = solutions.best.effective
     unless effectives.empty?
-      update_attributes(:solutions_count => solutions.best.count,
+      update_attributes(:solutions_count => effectives.count,
                         :points => effectives.sum(:point),
                         :average => effectives.sum(:time)/effectives.count,
-                        :uploaded_at => solutions.best.maximum(:uploaded_at))
+                        :uploaded_at => effectives.maximum(:uploaded_at))
     else
       update_attributes(:solutions_count => solutions.best.count,
                         :points => 0.0,

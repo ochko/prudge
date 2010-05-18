@@ -1,5 +1,5 @@
 <h2 class="rank_<%=@user.level%> span-14">
-  <%= @user.login.capitalize %>@<%= white_list @user.school %>
+  <%= @user.login.capitalize %>@<%= strip_tags @user.school %>
 </h2>
 <div id="user-statistic">
   <img src="/images/points.png" title="Нийт оноо" />
@@ -8,7 +8,7 @@
   <%= sec2milisec @user.average if !@user.average.nil? %><br />
 </div>
 <div id="medals" class="span-20">
-  <%= image_tag(@user.gravatar_url, :id => "portrait") %>
+  <%= image_tag(@user.gravatar_url, :class => "portrait") %>
   <%= medal_list(@standings) %>
 </div>
 

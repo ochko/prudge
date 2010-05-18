@@ -36,21 +36,8 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.
-      paginate_by_sql("SELECT u.login, u.id, u.school, "+
-                        "count(s.percent) as solution_count, "+
-                        "sum(s.point) as points,  "+
-                        "avg(s.time) as avg,  "+
-                        "date_format(max(s.created_at), '%y/%m/%d-%H:%i') as last_access,  "+
-                        "count(distinct(p.contest_id)) as contest_count  "+
-                        "FROM users u  "+
-                        "left join solutions s "+
-                        "on s.user_id = u.id and s.isbest = 1 "+
-                        "left join problems p on s.problem_id = p.id  "+
-                        "group by u.login, u.id  "+
-                        "order by points DESC, avg ASC" ,
-                        :page => params[:page], :per_page=>100,
-                        :total_entries => User.count_by_sql('select count(*) from users'))
+    @users = User.paginate(:order => "points DESC, average ASC" ,
+                           :page => params[:page], :per_page=>100)
 
   end
 
