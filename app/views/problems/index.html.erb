@@ -7,11 +7,12 @@
         <th>ID</th>
         <th><%= link_to 'Нэр', :order=> 'name' %></th>
         <th><%= link_to 'Оноо', :order=> 'level' %></th>
-        <th>Хязгаар</th>
         <th><%= link_to 'Дэвшүүлсэн', :order=> 'login' %></th>
         <th><%= link_to 'Огноо', :order=> 'created_at' %></th>
-        <th><%= link_to 'Нийт бодолт', :order=> 'solutions_count' %></th>
-        <th><%= link_to 'Зөв бодолт', :order=> 'corrects_count' %></th>
+        <th>Бодолт<br />
+	  <%= link_to 'Нийт', :order=> 'solutions_count' %> /
+          <%= link_to 'Зөв', :order=> 'corrects_count' %>
+	</th>
       </tr>
 
       <% for problem in @problems %>
@@ -27,11 +28,10 @@
           <%= tag_str %><%= link_to problem.name, :controller=>'problems',
                   :action => 'show', :id => problem %></td>
           <%= tag_str %><%= problem.level %></td>
-          <%= tag_str %><%= problem.time %> сек/<%= problem.memory %> кб</td>
           <%= tag_str %><%= problem.login %></td>
           <%= tag_str %><%=l problem.created_at %></td>
-          <%= tag_str %><%= problem.solutions_count %></td>
-          <%= tag_str %><%= problem.corrects_count %></td>
+          <%= tag_str %><%= problem.solutions_count %> /
+          <%= problem.corrects_count %></td>
         </tr>
       <% end %>
     </table>

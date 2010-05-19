@@ -10,7 +10,8 @@ class Problem < ActiveRecord::Base
            :as => 'topic',
            :class_name => 'Comment',
            :foreign_key => 'topic_id',
-           :dependent => :destroy
+           :dependent => :destroy,
+           :order => 'created_at DESC'
 
   validates_presence_of :name, :text
   named_scope :commented, :conditions => "comments_count > 0"

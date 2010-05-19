@@ -13,8 +13,7 @@
 </div>
 <div id="sub-menu">
   <ul>
-    <li class="first"><%=link_to 'Жагсаалт', :controller => 'problems',
-      :action => 'list' %></li>
+    <li class="first"><%=link_to 'Жагсаалт', problems_path %></li>
     <% if logged_in? %>
     <li><%=link_to 'Бодлого санал болгох', :controller => 'problems',
       :action => 'new' %></li>

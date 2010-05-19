@@ -1,0 +1,2 @@
+$("#comments").append("<%= escape_javascript(render(:partial => 'comments/comment', :collection => @comments)) %>");
+$("#flow_pagination").replaceWith("<%= escape_javascript(will_paginate(@comments, :noajax => true, :params =>{:controller => '/comments', :type => params[:type] }, :renderer => FlowPagination::LinkRenderer)) %>");

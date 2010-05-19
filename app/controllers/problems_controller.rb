@@ -6,15 +6,12 @@ class ProblemsController < ApplicationController
   before_filter :require_judge, :only => [:destroy, :nominated]
 
   def index
-    order_direction = session[:direction] || 'ASC'
-    order_field =  session[:order] || 'created_at'
-    if params[:order] && params[:order] != order_field
+    if params[:order]
+      order_direction = session[:order] || 'ASC'
       order_direction = (order_direction == 'ASC') ? 'DESC' : 'ASC'
+      order_sql = params[:order] + ' ' + order_direction
+      session[:order] = order_direction
     end
-    order_field = params[:order] if params[:order]
-    order_sql = order_field + ' ' + order_direction
-    session[:direction] = order_direction
-    session[:order] = order_field
 
     @my_solutions = []
     @my_solutions = current_user.solutions if current_user

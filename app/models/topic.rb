@@ -5,7 +5,7 @@ class Topic < ActiveRecord::Base
            :foreign_key => 'topic_id',
            :include => [:user],
            :dependent => :destroy,
-           :order => 'comments.id'
+           :order => 'created_at DESC'
 
   validates_presence_of :title, :description  
   

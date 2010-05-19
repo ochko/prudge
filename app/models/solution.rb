@@ -25,7 +25,8 @@ class Solution < ActiveRecord::Base
            :class_name => 'Comment',
            :foreign_key => 'topic_id',
            :order => 'created_at',
-           :dependent => :destroy
+           :dependent => :destroy,
+           :order => 'created_at DESC'
 
   named_scope :effective, :conditions => { :invalidated => false }
   named_scope :best, :conditions => { :isbest => true }

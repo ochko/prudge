@@ -1,18 +1,13 @@
-<h3 class="comment-title">
-  <%= commentable.comments_count %> Коммэнт
-</h3>
-<div id="comments" class="span-20">
-  <%= render :partial => 'comments/comment', :collection => commentable.comments %>
-</div>
+<h3>Зурвас бичих</h3>
 <div id="comment-posting" class="span-20">
 <% if logged_in? %>
-<div class="span-20 comment-meta">
-  <strong><%= current_user.login %></strong>
+<div class="span-20 comment-user prepend-2">
+  <span class="rank_<%=current_user.level%>"><strong><%= current_user.login %></strong></span>
   <span id="comment-message"></span>
 </div>
-<div class="span-1 comment-avatar">
-  <%=image_tag(current_user.gravatar_url(:size => 40)) %>
-  <%= image_tag("spinner.gif", :id => "comment-spinner") %>
+<div class="comment-avatar">
+  <%=image_tag(current_user.gravatar_url(:size => 60)) %>
+  <span class="user-points" title="Нийт оноо"><%= "%.2f" % current_user.points if !current_user.points.nil? %></span>
 </div>
 <% form_remote_tag :url=>{:controller=>'comments', :action => 'create'},
        :html=>{:id=>'comment-form', :class => 'span-16'},
@@ -21,7 +16,7 @@
        :success => "$('#comment_text').val('');",
        :complete => "$('#comment-spinner').hide(); $('#comment-form').enable();",
        :update => {:success => 'comments', :failure => 'comment-message'},
-       :position=> 'bottom' do %>
+       :position=> 'top' do %>
 
     <%= hidden_field_tag 'comment[topic_id]', commentable.id %>
     <%= hidden_field_tag 'comment[topic_type]', commentable.class.name %>
@@ -32,5 +27,11 @@
     <% end %>
 
 <% end %>
+<%= image_tag("spinner.gif", :id => "comment-spinner") %>
 </div>
 
+<div id="comments" class="span-20 with-parent">
+  <%= render :partial => 'comments/comment', :collection => commentable.comments.paginate(:page => 1) %>
+</div>
+
+<%= will_paginate commentable.comments.paginate(:page => 1), :params =>{:controller => '/comments', :type => commentable.class.name.downcase }, :renderer => FlowPagination::LinkRenderer, :noajax => true %>
