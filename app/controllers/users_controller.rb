@@ -51,19 +51,30 @@ class UsersController < ApplicationController
   end
 
   def show
-    @total = Problem.sum('level', :conditions=> "contest_id is not null")
     @user = User.find(params[:id])
-    @contests = @user.contests
-    @solutions = @user.solutions
-    @problems = @user.problems
-    @lessons = @user.lessons
     @standings = []
-    @contests.each do |contest|
+    @user.contests.each do |contest|
       numbers, standings = contest.standings
       idx = standings.index( @user )
       @standings << [contest, numbers[idx]] if idx
     end
-    
+  end
+
+  def solutions
+    @solutions = User.find(params[:id]).solutions.
+      paginate(:page => params[:page], :include => :language, 
+               :order => 'uploaded_at DESC')
+    render(:partial => 'solutions') unless params[:page]
+  end
+
+  def lessons
+    @lessons = User.find(params[:id]).lessons
+    render :partial => 'lessons'
+  end
+
+  def problems
+    @problems = User.find(params[:id]).problems
+    render :partial => 'problems'
   end
 
   def auto_complete_for_user_school

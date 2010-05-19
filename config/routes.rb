@@ -1,10 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :users
+  map.resources :users, :member => [:solutions, :lessons, :problems]
   map.resources :password_resets
   map.resource :user_session
 
-  map.resources :contests
-  map.resources :problems
+  map.resources :contests, :member => [:participants]
+  map.resources :problems, :member => [:nominated]
   map.resources :lessons
   map.resources :topics
   map.resources :solutions, :member =>[:best, :submited, :solved, :view]

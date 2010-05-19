@@ -4,7 +4,7 @@ class Solution < ActiveRecord::Base
   EXECUTOR = "#{RAILS_ROOT}/judge/safeexec"
 
   belongs_to :contest
-  belongs_to :problem
+  belongs_to :problem, :counter_cache => 'tried_count'
   belongs_to :user
   belongs_to :language
   has_many :results, :order => 'hidden', :dependent => :destroy
@@ -33,8 +33,8 @@ class Solution < ActiveRecord::Base
   named_scope :correct, :conditions => { :correct => true }
   named_scope :for_user, lambda { |user| { :conditions => ['user_id =?', user.id], :include => [:language, :problem], :order => 'created_at desc' } }
 
-  after_save { |s| s.user.collect_caches! }
-  after_destroy { |s| s.user.collect_caches! }
+  after_save :notify_cachers
+  after_destroy :notify_cachers
 
   def dir()         "#{self.user.solutions_dir}/#{self.problem_id}" end
   def exe_name()    self.source_file_name.split('.').first end
@@ -139,5 +139,9 @@ class Solution < ActiveRecord::Base
     siblings.first.update_attribute(:isbest, true)
   end
 
+  private
+  def notify_cachers
+    self.user.collect_cache!
+  end
 
 end

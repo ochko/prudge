@@ -16,7 +16,12 @@ class ContestsController < ApplicationController
 
   def show
     @contest = Contest.find(params[:id])
+  end
+
+  def participants
+    @contest = Contest.find(params[:id])
     @numbers, @standings = @contest.standings
+    render :partial => 'participants'
   end
 
   def new

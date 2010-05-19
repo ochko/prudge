@@ -1,0 +1,14 @@
+<table id="user-solutions">
+  <tr>
+    <th width="1%"></th>
+    <th>Бодлого/Хэл, Огноо</th>
+    <th class="center"><img src="/images/points.png" title="Оноо"/></th>
+    <th class="center"><img src="/images/ok.png" title="Хувь" /></th>
+    <th class="center"><img src="/images/average.png" title="Хугацаа" /></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <%= render :partial => 'users/solution', :collection =>@solutions %>
+</table>
+
+<%= will_paginate @solutions, :params =>{:action => 'solutions'}, :renderer => FlowPagination::LinkRenderer, :noajax => true %>

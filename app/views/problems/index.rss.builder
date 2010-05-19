@@ -15,7 +15,7 @@ xml.rss "version" => "2.0", "xmlns:dc" => "http://purl.org/dc/elements/1.1/" do
         xml.description problem.text
         xml.pubDate     CGI.rfc1123_date problem.created_at
         xml.guid        url_for :only_path => false, :controller => 'problems', :action => 'show', :id => problem.id
-        xml.author      "#{problem.login}"
+        xml.author      "#{problem.user.login}"
       end
     end
 

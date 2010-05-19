@@ -1,0 +1,15 @@
+  <tr>
+    <td><%= show_correctness(solution.correct) %></td>
+    <td><%= link_to solution.problem.name, solution.problem %>
+      <span class="solution-meta">
+	<%= solution.language.name %> хэл дээр
+        <%=l solution.created_at %> -д бодож
+        <%=l solution.uploaded_at %> -д шинэчилсэн
+      </span>
+    </td>
+    <td class="center"><%= solution.problem.level %></td>
+    <td class="center"><%= "%0.0f" % (solution.percent*100) %></td>
+    <td class="center"><%= sec2milisec solution.time %></td>
+    <td><%= link_to image_tag('detail.png'), solution, :title => "Тэстүүдийг харах" %></td>
+    <td><%= link_to image_tag('view.png'), view_solution_path(solution), :title => "Бодолтыг татах" %></td>
+  </tr>

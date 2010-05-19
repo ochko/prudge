@@ -2,36 +2,27 @@
 
   <% if @problems.size > 0 %>
     <%= will_paginate @problems, :class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
-    <table width="100%">
+    <table id="problems">
       <tr>
         <th>ID</th>
         <th><%= link_to 'Нэр', :order=> 'name' %></th>
         <th><%= link_to 'Оноо', :order=> 'level' %></th>
-        <th><%= link_to 'Дэвшүүлсэн', :order=> 'login' %></th>
+        <th><%= link_to 'Дэвшүүлсэн', :order=> 'user_id' %></th>
         <th><%= link_to 'Огноо', :order=> 'created_at' %></th>
         <th>Бодолт<br />
-	  <%= link_to 'Нийт', :order=> 'solutions_count' %> /
-          <%= link_to 'Зөв', :order=> 'corrects_count' %>
+	  <%= link_to 'Нийт', :order=> 'tried_count' %> /
+          <%= link_to 'Зөв', :order=> 'solved_count' %>
 	</th>
       </tr>
 
       <% for problem in @problems %>
-        <tr>
- 	  <% tag_str = "<td>" %>
-          <% for s in @my_solutions %>
-            <% if s.problem_id == problem.id %>
-               <% tag_str = "<td class='solved'>" %>
-               <% break %>
-            <% end %>
-           <% end %> 
+        <tr <%= 'class="already" title="Бодчихсон"' if @solved.include?(problem.id) %>>
           <td><%= problem.id %></td>
-          <%= tag_str %><%= link_to problem.name, :controller=>'problems',
-                  :action => 'show', :id => problem %></td>
-          <%= tag_str %><%= problem.level %></td>
-          <%= tag_str %><%= problem.login %></td>
-          <%= tag_str %><%=l problem.created_at %></td>
-          <%= tag_str %><%= problem.solutions_count %> /
-          <%= problem.corrects_count %></td>
+          <td><%= link_to problem.name, problem %></td>
+          <td><%= problem.level %></td>
+          <td><%= problem.user.login %></td>
+          <td><%=l problem.created_at %></td>
+          <td><%= problem.tried_count %> / <%= problem.solved_count %></td>
         </tr>
       <% end %>
     </table>

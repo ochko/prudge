@@ -138,7 +138,7 @@ class SolutionsController < ApplicationController
   def check
     @solution = Solution.find(params[:id])
     if !judge?
-      if @solution.checked
+      if @solution.checked || !@solution.invalidated
         render :text => 'Шалгачихсан'
         return
       end

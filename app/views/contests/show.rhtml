@@ -15,10 +15,10 @@
   <%= @contest.description %>
 </div>
 
-<div id="tabs" class="span-20"> 
+<div id="tabs" class="span-20 append-bottom"> 
   <ul>
     <li><a href="#included-problems"><span>Бодлогууд</span></a></li>
-    <li><a href="#participant-of"><span>Оролцогчид</span></a></li>
+    <li><%= link_to content_tag(:span, 'Оролцогчид'), {:action=>'participants', :name => "participant-of"} %></li>
   </ul> 
   <div id="included-problems"> 
     <% if @contest.started? %>
@@ -47,48 +47,7 @@
     <%= render :partial => 'problems/list' %>
     <% end %>
   </div>
-  <div id="participant-of"> 
-    <% if @contest.users.size > 0 %>
-    <table class="two-columns">
-      <tr>
-	<td class="left-column">
-	  <table id="list-of-participants">
-	    <tr>
-	      <th></th>
-	      <th>Нэр</th>
-	      <th><img src="/images/points.png" title="Нийлбэр оноо"/></th>
-	      <th><img src="/images/clock.png" title="Дундаж хугацаа"/></th>
-	      <th></th>
-	    </tr>
-	    <% @numbers.zip(@standings) do |num, user| %>
-	    <tr>
-              <td class="ranking"><%= show_place(num) %></td>
-              <td class='small'>
-		<%= link_to user.login, :controller=>'account',
-		:action=>'show', :id=>user.id %></td>
-              <td class='small'><%= "%.2f" % user.point %></td>
-              <td class='small'><%= sec2milisec user.avg %></td>
-              <td class='small'>
-		<%= link_to_remote image_tag('arrow-r.png'), :url=>{:controller=>'contests',
-		:action=>'participant', :user=>user.id, :contest=>@contest.id},
-		:before => "$('#solved').hide(); $('#spinner').show();",
-		:success => "$('#spinner').hide(); $('#solved').show();",
-		:update=>'solved' %>
-              </td>
-	    </tr>
-	    <% end %>
-	  </table>
-	</td>
-	<td class="right-column">
-	  <div id='solved'> </div>
-	  <div id='spinner'> <%= image_tag "spinner.gif" %> </div>
-	</td>
-      </tr>
-    </table>
-    <% else %>
-    Оролцогчид алга!
-    <% end %>
-  </div>
+  <div id="participant-of"> </div>
 </div>
 
 <%= render :partial => 'comments/commentable', :object => @contest %>

@@ -1,7 +1,10 @@
 class User < ActiveRecord::Base
   has_many :solutions
-  has_many :contests, :through => :solutions, 
-           :uniq => true, :order => 'start'
+  has_many :completions, :class_name => 'Solution', 
+           :conditions => ["correct = ?", true]
+  has_many :contests, :through => :solutions, :uniq => true, :order => 'start'
+  has_many :tried, :through => :solutions, :uniq => true, :source => :problem
+  has_many :solveds, :through => :completions, :uniq => true, :source => :problem
   has_many :problems
   has_many :lessons, :foreign_key => 'author_id'
   has_many :comments, :dependent => :destroy, :order => "created_at DESC"
@@ -18,7 +21,7 @@ class User < ActiveRecord::Base
     Notifier.deliver_password_reset_instructions(self)  
   end
 
-  def collect_caches!
+  def collect_cache!
     effectives = solutions.best.effective
     unless effectives.empty?
       update_attributes(:solutions_count => effectives.count,
@@ -29,6 +32,12 @@ class User < ActiveRecord::Base
       update_attributes(:solutions_count => solutions.best.count,
                         :points => 0.0,
                         :average => 0.0)
+    end
+  end
+
+  def self.collect_caches!
+    User.all.each do |user|
+      user.collect_cache!
     end
   end
 

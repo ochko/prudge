@@ -14,7 +14,7 @@
   <%= link_to 'Засварлах', edit_solution_path(@solution), :class=>"medium grey awesome" %> 
   <% end %>
 
-  <% if !@solution.checked %>
+  <% if !@solution.checked || @solution.invalidated %>
   <%= link_to_remote "Шалгах", :update => "result",
   :url => { :action => "check", :id => @solution },
   :html=>{:id=>'check_button', :class=>"medium grey awesome" },

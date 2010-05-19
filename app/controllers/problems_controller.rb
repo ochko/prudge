@@ -6,42 +6,29 @@ class ProblemsController < ApplicationController
   before_filter :require_judge, :only => [:destroy, :nominated]
 
   def index
-    if params[:order]
-      order_direction = session[:order] || 'ASC'
-      order_direction = (order_direction == 'ASC') ? 'DESC' : 'ASC'
-      order_sql = params[:order] + ' ' + order_direction
-      session[:order] = order_direction
-    end
-
-    @my_solutions = []
-    @my_solutions = current_user.solutions if current_user
- 
-    @problems = Problem.
-        paginate(:page => params[:page], :per_page => 30,
-             :select => "problems.*, u.login as login, count(s.id) as solutions_count, "+
-             "sum(s.correct) as corrects_count",
-             :joins => "join contests c on c.id = problems.contest_id " +
-             "left join users u on problems.user_id = u.id " +
-             "left join solutions s on problems.id = s.problem_id ",
-             :order => order_sql,
-             :conditions => ["c.start < NOW()"],
-             :group => "problems.id")
-    end
-  end
-
-  def feed
-    @problems = Problem.
-      find_by_sql("SELECT p.*, u.login "+
-                  "FROM problems p "+
-                  "join contests c on p.contest_id = c.id "+
-                  "join users u on p.user_id = u.id "+
-                  "where c.start < NOW() "+
-                  "order by p.created_at desc "+
-                  "limit 10")
     respond_to do |format|
-      format.rss
-      format.atom
+      format.html do
+        if params[:order]
+          direction = session[:order] || 'ASC'
+          direction = (direction == 'ASC') ? 'DESC' : 'ASC'
+          order = params[:order] + ' ' + direction
+          session[:order] = direction
+        end
+
+        @solved = []
+        @solved = current_user.solveds.collect{ |p| p.id } if current_user
+        
+        @problems = Problem.active.
+          paginate(:page => params[:page], :include => :user, 
+                   :order => order)
+      end
+      format.rss do
+        @problems = Problem.active(:order => 'created_at DESC',
+                                   :include => :user, :limit => 10)
+        render :layout => false
+      end
     end
+
   end
 
   def nominated

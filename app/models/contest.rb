@@ -33,6 +33,8 @@ class Contest < ActiveRecord::Base
       contest.start < contest.end
   end
 
+  before_save :update_problems
+
   named_scope :current, :conditions => "end > NOW()", :order => "start ASC"
   named_scope :finished,:conditions => "end < NOW()", :order => "end DESC"
   named_scope :pending, :conditions => "end >= NOW()"
@@ -82,5 +84,15 @@ class Contest < ActiveRecord::Base
 
   def text
     description
+  end
+
+  private
+  def update_problems
+    if self.changes.has_key?('start') || self.changes.has_key?('end')
+      self.problems.each do |problem|
+        problem.update_attributes!(:active_from => self.start,
+                                   :inactive_from => self.end)
+      end
+    end
   end
 end

@@ -14,7 +14,11 @@ class Problem < ActiveRecord::Base
            :order => 'created_at DESC'
 
   validates_presence_of :name, :text
+
   named_scope :commented, :conditions => "comments_count > 0"
+  named_scope :active, :conditions => ["active_from < ?", Time.now]
+
+  before_save :copy_times
 
   def owned_by?(someone)
     self.user_id == someone.id
@@ -74,5 +78,29 @@ class Problem < ActiveRecord::Base
       :source => 3
     }
     set_property :delta => true
+  end
+
+  def collect_cache!
+    self.update_attribute(:solved_count => solutions.correct.size)
+  end
+
+  def self.collect_caches!
+    Problem.
+      find(:all,
+           :select => "problems.*, count(s.id) as tc, sum(s.correct) as sc",
+           :joins => "left join solutions s on problems.id = s.problem_id",
+           :group => "problems.id").each do |problem|
+      Problem.update_counters(problem.id, 
+                              :tried_count => problem.tc.to_i,
+                              :solved_count => problem.sc.to_i)
+    end
+  end
+
+  private 
+  def copy_times
+    if self.changes.has_key?('contest_id')
+      self.active_from = self.contest.start
+      self.inactive_from = self.contest.end
+    end
   end
 end

@@ -1,65 +1,26 @@
 <%= error_messages_for 'problem' %>
 
-<!--[form:problem]-->
-<table width="10%">
-  <tr>
-    <td>
-      <label for="problem_name">Нэр : </label>
-    </td>
-    <td>
-      <%= text_field 'problem', 'name', 'size' => 40  %>
-    </td>
-    <td>
+<%= text_field 'problem', 'name', 'size' => 40  %>
+<div class="span-20">
+<%=image_tag('points.png') %>
+<%= select 'problem', 'level', {1 => 1, 2 => 2, 3 => 3, 4 => 4}   %>
+<%=image_tag('clock.png') %>
+<%= text_field 'problem', 'time', :size =>3 %>сек
+<%= image_tag('memory.png') %>
+<%= text_field 'problem', 'memory', 'size' => 4  %>
+<% if !@problem.contest.nil? and @problem.contest.end < Time.now %>
+   <label for="problem_contest_id">Тэмцээн: </label>
+   <%= @problem.contest.name %>
+   <% else %>
+   <% if judge? -%>
+   <label for="problem_contest_id">Тэмцээн: </label>
+   <%= select("problem", "contest_id", Contest.pending.collect {|c| [ c.name, c.id ] }, { :include_blank => true }) %>
+<% end %>
+<% end -%>
+</div>
+<%= text_area('problem', 'text') %>
 
-    </td>
-    <td>
-    </td>
-      <td rowspan='3' class='bottom'>
 
-    </td>
-
-  </tr>
-  <tr>
-    <% if !@problem.contest.nil? and @problem.contest.end < Time.now %>
-         <td><label for="problem_contest_id">Тэмцээн: </label></td>
-         <td><%= @problem.contest.name %></td>
-    <% else %>
-      <% if judge? -%>
-      <td><label for="problem_contest_id">Тэмцээн: </label></td>
-      <td>
-        <%= select("problem", "contest_id", Contest.pending.collect {|c| [ c.name, c.id ] }, { :include_blank => true }) %>
-      <% end -%>
-      </td>
-    <% end %>
-    <td>
-      <label for="problem_time">Хугацаа: </label>
-    </td>
-    <td width='1%'><%= text_field 'problem', 'time', 'size' => 4  %>
-    </td>
-  </tr>
-  <tr>
-    <td><label for="problem_point">Оноо: </label></td>
-    <td>  <%= text_field 'problem', 'level', 'size' => 4  %>
-    </td>
-    <td>
-      <label for="problem_memory">Санах ой: </label>
-    </td>
-    <td>
-      <%= text_field 'problem', 'memory', 'size' => 4  %>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="5">
-      <label for="problem_text">Бодлого</label><br/>
-      <%= text_area('problem', 'text') %>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="5" align='right'>
-      <label for="problem_source">Эх сурвалж: </label>
-      <%= text_field 'problem', 'source', :size => 20  %>
-    </td>
-  </tr>
-</table>
-<!--[eoform:problem]-->
+<label for="problem_source">Эх сурвалж: </label>
+<%= text_field 'problem', 'source', :size => 20  %>
 

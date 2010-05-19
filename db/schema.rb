@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100518040610) do
+ActiveRecord::Schema.define(:version => 20100519163257) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "attachable_id"
@@ -142,6 +142,10 @@ ActiveRecord::Schema.define(:version => 20100518040610) do
     t.boolean  "delta",                         :default => true, :null => false
     t.integer  "comments_count",                :default => 0
     t.datetime "commented_at"
+    t.datetime "active_from"
+    t.datetime "inactive_from"
+    t.integer  "tried_count",                   :default => 0
+    t.integer  "solved_count",                  :default => 0
   end
 
   add_index "problems", ["contest_id"], :name => "index_problems_on_contest_id"

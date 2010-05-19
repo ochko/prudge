@@ -6,10 +6,7 @@ class CachesOnUser < ActiveRecord::Migration
     add_column :users, :uploaded_at, :datetime
 
     User.reset_column_information
-    User.all.each do |user|
-      user.collect_caches!
-    end
-    
+    User.collect_caches!
   end
 
   def self.down

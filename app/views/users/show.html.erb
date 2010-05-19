@@ -12,99 +12,30 @@
 
 <div id="tabs" class="span-20"> 
   <ul>
-    <%= '<li><a href="#participant-of"><span>Оролцсон тэмцээн</span></a></li>' unless @contests.empty? %>
-    <%= '<li><a href="#lessons-written"><span>Бичсэн хичээл</span></a></li>' unless @lessons.empty? %>
-    <%= '<li><a href="#composed-problem"><span>Дэвшүүлсэн бодлого</span></a></li>' unless @problems.empty? %>
-    <%= '<li><a href="#solved-problems"><span>Бодолтууд</span></a></li>' unless @solutions.empty? %>
-  </ul> 
-  <% unless @contests.empty? %>
+    <li><a href="#participant-of"><span>Оролцсон тэмцээн</span></a></li>
+    <li><%= link_to content_tag(:span, 'Бодолтууд'), {:action=>'solutions', :id=>@user.id, :name => "solved-problems"} %></li>
+    <li><%= link_to content_tag(:span, 'Бичсэн хичээл'), {:action=>'lessons', :id=>@user.id, :name => "lessons-written"} %></li>
+    <li><%= link_to content_tag(:span, 'Дэвшүүлсэн бодлого'), {:action=>'problems', :id=>@user.id, :name => "composed-problem"} %></li>
+  </ul>
   <div id="participant-of"> 
     <table width="100%">
       <tr>
-        <th>Байр</th>
-        <th>Нэр</th>
-        <th>Огноо</th>
+	<th>Байр</th>
+	<th>Нэр</th>
+	<th>Огноо</th>
       </tr>
       <% @standings.each do |c,s| %>
       <tr>
-        <td class="ranking"><%= standing(s) %></td>
-        <td><%= link_to c.name, c %></td>
-        <td><%=l c.start %></td>
+	<td class="ranking"><%= standing(s) %></td>
+	<td><%= link_to c.name, c %></td>
+	<td><%=l c.start %></td>
       </tr>
       <% end %>
     </table>
   </div>
-  <% end %>
-  <% unless @lessons.empty? %>
-  <div id="lessons-written"> 
-    <table width="100%">
-      <tr>
-        <th>Гарчиг</th>
-        <th>Огноо</th>
-      </tr>
-      <% for lesson in @lessons %>
-      <tr>
-        <td><%= link_to lesson.title, lesson %></td>
-        <td><%=l lesson.updated_at %></td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-  <% end %>
-  <% unless @problems.empty? %>
-  <div id="composed-problem"> 
-    <table width="100%">
-      <tr>
-	<th width="1%"></th>
-        <th>Нэр</th>
-        <th class="center"><img src="/images/points.png" title="Оноо"/></th>
-        <th class="center"><img src="/images/average.png" title="Хугацаа" /></th>
-        <th class="center"><img src="/images/memory.png" title="Санах ой" /></th>
-        <th>Огноо</th>
-      </tr>
-      <% for p in @problems%>
-      <tr>
-	<td><%= p.id %></td>
-        <td><%= link_to p.name, p %></td>
-        <td class="center"><%= p.level %></td>
-        <td class="center"><%= p.time %>сек</td>
-        <td class="center"><%= p.memory %>кб</td>
-        <td><%=l p.created_at %></td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-  <% end %>
-  <% unless @solutions.empty? %>
-  <div id="solved-problems"> 
-    <table>
-      <tr>
-        <th width="1%"></th>
-        <th>Бодлого/Хэл, Огноо</th>
-        <th class="center"><img src="/images/points.png" title="Оноо"/></th>
-	<th class="center"><img src="/images/ok.png" title="Хувь" /></th>
-        <th class="center"><img src="/images/average.png" title="Хугацаа" /></th>
-	<th></th>
-	<th></th>
-      </tr>
-      <% for s in @solutions%>
-      <tr>
-        <td><%= show_correctness(s.correct) %></td>
-        <td><%= link_to s.problem.name, s.problem %>
-	  <span class="solution-meta">
-	  <%= s.language.name %> хэл дээр
-          <%=l s.created_at %> -д бодож
-          <%=l s.uploaded_at %> -д шинэчилсэн
-	  </span>
-	</td>
-        <td class="center"><%= s.problem.level %></td>
-	<td class="center"><%= "%0.0f" % (s.percent*100) %></td>
-        <td class="center"><%= sec2milisec s.time %></td>
-	<td><%= link_to image_tag('detail.png'), s, :title => "Тэстүүдийг харах" %></td>
-	<td><%= link_to image_tag('view.png'), view_solution_path(s), :title => "Бодолтыг татах" %></td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-  <% end %>
+
+  <div id="solved-problems"> </div>
+  <div id="lessons-written"> </div>
+  <div id="composed-problem"> </div>
+
 </div>
