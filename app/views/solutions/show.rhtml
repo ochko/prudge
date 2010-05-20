@@ -1,6 +1,12 @@
+<div id="solution-super">
 <%= render(:partial => 'contests/contest', :object => @solution.contest) if @solution.contest %>
 <%= render :partial => 'problems/problem', :object => @solution.problem %>
-<h1>Бодолт</h1>
+</div>
+<h3 id="solution-title">
+<%= link_to_function image_tag('button-refresh.png'), "$('#solution-super').slideToggle();", :title => "Бодлогын тухай мэдээлэл харах" %>
+<%= "#{@solution.contest.name} &raquo;" if @solution.contest %> 
+<%= @solution.problem.name %> &raquo;
+Бодолт</h3>
 <div id="solution-info" class='span-20'>
   <label>Бодсон:</label> 
   <%=link_to @solution.user.login, @solution.user %>,

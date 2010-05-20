@@ -6,7 +6,7 @@ class ContestsController < ApplicationController
   before_filter :prepare_wmd, :only => [:edit, :new]
 
   def index
-    @contests = Contest.find(:all, :order => "start DESC")
+    @contests = Contest.paginate(:order => "start DESC", :page => params[:page])
   end
 
   def last

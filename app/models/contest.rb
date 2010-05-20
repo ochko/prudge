@@ -13,9 +13,6 @@ class Contest < ActiveRecord::Base
 
   has_many :problems
   has_many :solutions
-  has_many :grouped_solutions, :class_name => 'Solution',
-      :select => 'problem_id, count(id) as tried, sum(correct) as solved',
-      :group => 'problem_id', :include => :problem
   has_many :users, :through => :solutions,
       :select => "users.login, users.id, sum(solutions.point) as point,avg(solutions.time) as avg",
       :group => 'user_id', :order => "point desc, avg asc"
@@ -30,7 +27,7 @@ class Contest < ActiveRecord::Base
 
   validate do |contest|
     contest.errors.add_to_base("Эхлэх дуусах цаг буруу") if 
-      contest.start < contest.end
+      contest.start > contest.end
   end
 
   before_save :update_problems

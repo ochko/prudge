@@ -31,15 +31,15 @@
 	<th>Дэвшүүлсэн</th>
 	<th>Бодолт</th>
       </tr>
-      <% for solution in @contest.grouped_solutions %>
+      <% @contest.problems.each do |problem| %>
       <tr>
-        <td><%= solution.problem_id %></td>
-        <td><%= link_to solution.problem.name, solution.problem %></td>
-        <td><%= Contest::LEVEL_NAMES[solution.problem.level] %></td>
-        <td><%= solution.problem.time %> сек /
-	  <%= solution.problem.memory %> кб</td>
-        <td><%= solution.problem.user.login %></td>
-        <td><%= solution.tried %> / <%= solution.solved %></td>
+        <td><%= problem.id %></td>
+        <td><%= link_to problem.name, problem %></td>
+        <td><%= Contest::LEVEL_NAMES[problem.level] %></td>
+        <td><%= problem.time %> сек /
+	  <%= problem.memory %> кб</td>
+        <td><%= problem.user.login %></td>
+        <td><%= problem.tried_count %> / <%= problem.solved_count %></td>
       </tr>
       <% end %>
     </table>

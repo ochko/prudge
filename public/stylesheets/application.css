@@ -747,3 +747,6 @@ input#problem_source {width:250px; max-width:250px;}
     border-left: 3px solid #999;
     padding-left:1em;
 }
+#solution-super{
+    display:none;
+}

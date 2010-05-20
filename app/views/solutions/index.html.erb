@@ -1,4 +1,6 @@
 <h1>Сүүлийн бодолтууд</h1>
+<%= will_paginate @solutions,:class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+
 <table>
   <% @solutions.each do |s| %>
     <tr>
@@ -8,3 +10,5 @@
     </tr>
   <% end %>
 </table>
+
+<%= will_paginate @solutions,:class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>

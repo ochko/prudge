@@ -1,19 +1,15 @@
 <h2>Тэмцээнүүд</h2>
-<table width="100%">
-  <tr>
-    <th>Хугацаа</th>
-    <th>Нэр</th>
-    <th>Түвшин</th>
-  </tr>
+<%= will_paginate @contests,:class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
 
+<table width="100%">
 <% for contest in @contests %>
-  <tr class="rank_<%= contest.level %>">
-    <td><b><%=l contest.start %><br />
-        <%=l contest.end %></b></td>
-    <td><%= link_to contest.name, contest %></td>
-    <td>(<%= contest.level_name %>)</td>
+  <tr>
+    <td><span class="rank_<%= contest.level %>"><%= link_to contest.name, contest %></span> (<%= contest.level_name %>)</td>
+    <td><%=l contest.start %> &raquo;
+        <%=l contest.end %></td>
   </tr>
 <% end %>
 </table>
 
+<%= will_paginate @contests,:class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
 

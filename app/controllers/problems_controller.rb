@@ -32,7 +32,7 @@ class ProblemsController < ApplicationController
 
   end
 
-  def nominated
+  def proposals
     @problems = Problem.find(:all, :conditions => ["contest_id IS NULL"])
   end
 

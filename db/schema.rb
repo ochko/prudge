@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100520023845) do
+ActiveRecord::Schema.define(:version => 20100520171153) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "attachable_id"
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20100520023845) do
     t.datetime "inactive_from"
     t.integer  "tried_count",                   :default => 0
     t.integer  "solved_count",                  :default => 0
+    t.integer  "tests_count",                   :default => 0
   end
 
   add_index "problems", ["contest_id"], :name => "index_problems_on_contest_id"

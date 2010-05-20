@@ -1,7 +1,7 @@
 class ProblemTest < ActiveRecord::Base
   TESTS = 'judge/tests'
   
-  belongs_to :problem
+  belongs_to :problem, :counter_cache => 'tests_count'
   has_many :results, :dependent => :destroy, :foreign_key => 'test_id'
 
   named_scope :real, :conditions => { :hidden => true }

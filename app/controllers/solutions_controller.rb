@@ -1,5 +1,5 @@
 class SolutionsController < ApplicationController
-  before_filter :require_user, :except=> [:submited, :solved, :best, :index]
+  before_filter :require_user, :except=> [:submited, :solved, :best]
 
   layout 'contests'
 

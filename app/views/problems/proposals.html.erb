@@ -1,0 +1,23 @@
+<h2>Дэвшигдсэн бодлогууд</h2>
+<table width="100%">
+  <tr>
+    <th>Нэр</th>
+    <th>Оноо</th>
+    <th>Тэст</th>
+    <th>Хязгаарлалт</th>
+    <th>Дэвшүүлсэн</th>
+    <th>Огноо</th>
+  </tr>
+
+<% @problems.each do |problem| %>
+  <tr>
+    <td><%= link_to problem.name, problem %></td>
+    <td><%= problem.level %></td>
+    <td><%= problem.tests_count %></td>
+    <td><%= problem.time %>с /
+      <%= problem.memory %>кб</td>
+    <td><%=link_to h(problem.user.login), problem.user %></td>
+    <td><%=l problem.created_at %></td>
+  </tr>
+<% end %>
+</table>
