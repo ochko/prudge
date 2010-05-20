@@ -18,7 +18,6 @@ class LessonsController < ApplicationController
 
   def show
     @lesson = Lesson.find(params[:id])
-    @problems = @lesson.problems
   end
 
   def new
@@ -39,7 +38,6 @@ class LessonsController < ApplicationController
   def edit
     @lesson = Lesson.find(params[:id])
     return unless validate_ownership?
-    @problems = @lesson.problems
   end
 
   def update
@@ -58,49 +56,6 @@ class LessonsController < ApplicationController
     return unless validate_ownership?
     @lesson.destroy
     redirect_to :action => 'list'
-  end
-
-  def get_homeworks
-    @lesson = Lesson.find(params[:lesson])
-    @problems = @lesson.problems
-    render :partial => 'homework', :layout =>false
-  end
-
-  def list_homeworks
-    @lesson = Lesson.find(params[:lesson])
-    @problems = @lesson.problems
-    render :partial => 'homework_just_list', :layout =>false
-  end
-
-  def add_homework
-    @lesson = Lesson.find(params[:id])
-    return unless validate_ownership?
-    @problem = Problem.
-      find(:first, :conditions => ['name = ?',
-                                   params[:problem][:name]])
-    if @problem
-      @lesson.problems << @problem
-    end
-    @problems = @lesson.problems
-
-    render :partial => 'problems', :layout => false
-  end
-
-  def remove_homework
-    @lesson = Lesson.find(params[:id])
-    return unless validate_ownership?
-    @problem = Problem.find(params[:problem])
-    if @problem
-      Homework.
-        find(:first,
-             :conditions => ['lesson_id = ? and problem_id = ?',
-                            @lesson.id, @problem.id]).
-        destroy
-    end
-
-    @problems = @lesson.problems
-
-    render :partial => 'problems', :layout => false
   end
 
   private

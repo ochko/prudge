@@ -659,13 +659,14 @@ table tr:hover {
     background-image:none;
     background-color: #eee;
 }
-input#problem_name{
+input#problem_name, input#lesson_title{
     font-size: 1.5em;
     width:770px;
+    max-width:770px;
     float:left;
     padding:2px 0.5em;
 }
-textarea#problem_text {
+textarea#problem_text, textarea#lesson_text {
     width:780px;
     float:left;
 }

@@ -2,7 +2,20 @@
 
   <%= will_paginate @lessons, :class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
 
-  <%= render :partial => 'list' %>
+  <% @lessons.each do |lesson| %>
+  <div class="lesson-item">
+    <h2><%= link_to lesson.title, lesson %></h2>
+    <div class="lesson-excerpt">
+      <%=simple_format truncate(strip_tags(lesson.text), :length => 200) %>
+    </div>
+
+    <div class="lesson-meta">
+      Бичсэн: <%= link_to lesson.author.login, lesson.author %>,
+      <%=l lesson.updated_at %>
+      <span class="go-down"><%= link_to 'Үргэлжлэл', lesson %></span>
+    </div>
+  </div>
+  <% end %>
 
   <%= will_paginate @lessons, :class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
 

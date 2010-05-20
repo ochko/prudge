@@ -2,21 +2,25 @@
 
 <%= text_field 'problem', 'name', 'size' => 40  %>
 <div class="span-20">
-<%=image_tag('points.png') %>
-<%= select 'problem', 'level', {1 => 1, 2 => 2, 3 => 3, 4 => 4}   %>
-<%=image_tag('clock.png') %>
-<%= text_field 'problem', 'time', :size =>3 %>сек
-<%= image_tag('memory.png') %>
-<%= text_field 'problem', 'memory', 'size' => 4  %>
+<span class="span-2" title="Түвшин"> <%=image_tag('points.png') %>
+  <%= select 'problem', 'level', {1 => 1, 2 => 2, 3 => 3, 4 => 4}   %>
+</span>
+<span class="span-3" title="Хугацаа"> <%=image_tag('clock.png') %>
+<%= text_field 'problem', 'time', :size =>2 %> сек
+</span>
+<span class="span-14" title="Санах ой"> <%= image_tag('memory.png') %>
+  <%= text_field 'problem', 'memory', 'size' => 3  %>
+
 <% if !@problem.contest.nil? and @problem.contest.end < Time.now %>
    <label for="problem_contest_id">Тэмцээн: </label>
-   <%= @problem.contest.name %>
+   <%= link_to @problem.contest.name, @problem.contest %>
    <% else %>
    <% if judge? -%>
    <label for="problem_contest_id">Тэмцээн: </label>
    <%= select("problem", "contest_id", Contest.pending.collect {|c| [ c.name, c.id ] }, { :include_blank => true }) %>
 <% end %>
 <% end -%>
+</span>
 </div>
 <%= text_area('problem', 'text') %>
 

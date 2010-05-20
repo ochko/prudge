@@ -7,9 +7,6 @@ class Lesson < ActiveRecord::Base
            :foreign_key => 'topic_id',
            :dependent => :destroy
 
-  has_many :homeworks, :dependent => :destroy
-  has_many :problems, :through => :homeworks
-
   validates_presence_of     :title, :text
   named_scope :commented, :conditions => "comments_count > 0"
 
@@ -19,6 +16,10 @@ class Lesson < ActiveRecord::Base
 
   def name
     title
+  end
+
+  def owned_by?(user)
+    user && self.author_id ==  user.id
   end
 
   define_index do

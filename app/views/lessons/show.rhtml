@@ -1,27 +1,16 @@
-<div class="post">
-  <h1><%=h @lesson.title %></h1>
-  <div class="info">
-    Бичсэн: <%= link_to @lesson.author.login, @lesson.author %>,
-    Шинэчилсэн: <%=l @lesson.updated_at %>
-  </div>
-
-  <div class="entry">
+<h1><%=h @lesson.title %></h1>
+<div class="lesson-item">
+  <div class="lesson-body">
     <%= @lesson.text %>
   </div>
 
-  <% if @problems.size > 0 %>
-    <div class="info">
-      Даалгавар:
-      <%= @problems.collect{ |p| link_to(p.name, p) }.join(', ') %>
-    </div>
-  <% end %>
-  <div class="info">
-    <% if logged_in? %>
-      <% if @lesson.author_id == current_user.id %>
-        <%= link_to 'Засварлах', :action => 'edit', :id => @lesson %> |
-        <%= link_to 'Устгах', { :action => 'destroy', :id => @lesson },
-            :confirm => 'Are you sure?', :method => :post %>
-      <% end %>
+  <div class="lesson-meta">
+    Бичсэн: <%= link_to @lesson.author.login, @lesson.author %>,
+    <%=l @lesson.updated_at %>
+
+    <% if @lesson.owned_by? current_user %>
+    <%= link_to 'Засварлах', edit_lesson_path(@lesson) %> |
+    <%= link_to 'Устгах', @lesson, :confirm => 'Are you sure?', :method => :delete %>
     <% end %>
   </div>
 </div>

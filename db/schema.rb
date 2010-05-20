@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100519163257) do
+ActiveRecord::Schema.define(:version => 20100520023845) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "attachable_id"
@@ -45,14 +45,6 @@ ActiveRecord::Schema.define(:version => 20100519163257) do
     t.integer  "comments_count", :default => 0
     t.datetime "commented_at"
   end
-
-  create_table "homeworks", :force => true do |t|
-    t.integer "lesson_id",  :null => false
-    t.integer "problem_id", :null => false
-  end
-
-  add_index "homeworks", ["lesson_id"], :name => "index_homeworks_on_lesson_id"
-  add_index "homeworks", ["problem_id"], :name => "index_homeworks_on_problem_id"
 
   create_table "languages", :force => true do |t|
     t.string  "name",        :limit => 15,                :null => false
