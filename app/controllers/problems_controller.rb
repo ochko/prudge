@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class ProblemsController < ApplicationController
   before_filter :require_user,
-                :except => [:index, :list, :show, :text, :feed]
+                :except => [:index, :show]
 
   before_filter :require_judge, :only => [:destroy, :nominated]
 

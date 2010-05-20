@@ -7,7 +7,7 @@
   <% end %>
 </h1>
 <div id="topic-text">
-  <%= white_list @topic.text %>
+  <%= @topic.text %>
 </div>
 
 <%= render :partial => 'comments/commentable', :object => @topic %>

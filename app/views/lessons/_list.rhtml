@@ -1,19 +1,14 @@
-<% if @lessons.size > 0 %>
-  <% for lesson in @lessons %>
-    <div class="post">
-      <%= link_to(content_tag(:h2, lesson.title), :action=>'show', :id=>lesson) %>
-      <div class="entry">
-        <p><%= white_list truncate(lesson.text, :length => 200) %></p>
-      </div>
-      <div class="read"><%= link_to 'үргэлжлүүлэн унших...',:action=>'show', :id=>lesson %></div>
-      <div class="info">
-        Бичсэн: <%= link_to lesson.author.login, lesson.author %>,
-        Шинэчилсэн: <%=l lesson.updated_at %>,
-      </div>
-    </div>
-  <% end %>
-<% else %>
-Хичээл алга!
-<%= link_to 'Энд', :action=>'new' %>
-дарж шинэ хичээл оруулна уу?
+<% @lessons.each do |lesson| %>
+<div class="lesson-item">
+  <h2><%= link_to lesson.title, lesson %></h2>
+  <div class="lesson-excerpt">
+    <%=simple_format truncate(strip_tags(lesson.text), :length => 200) %>
+  </div>
+
+  <div class="lesson-meta">
+    Бичсэн: <%= link_to lesson.author.login, lesson.author %>,
+    <%=l lesson.updated_at %>
+    <span class="go-down"><%= link_to 'Үргэлжлэл', lesson %></span>
+  </div>
+</div>
 <% end %>

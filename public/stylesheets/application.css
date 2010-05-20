@@ -459,6 +459,11 @@ span.go-up{
     background: url(/images/arrow-ur.png) no-repeat center right;
     padding-right:18px;
 }
+span.go-down{
+    float:right;
+    background: url(/images/arrow-r.png) no-repeat center right;
+    padding-right:22px;
+}
 span.test-input{
     background: url(/images/input.png) no-repeat 0 40%;
     padding:3px 0 3px 15px;
@@ -655,11 +660,21 @@ table tr:hover {
     background-color: #eee;
 }
 input#problem_name{
-    font-size: 2em;
-    width:100%;
+    font-size: 1.5em;
+    width:770px;
     float:left;
+    padding:2px 0.5em;
 }
 textarea#problem_text {
-    width:100%;
+    width:780px;
     float:left;
+}
+.lesson-item{
+    padding:0.5em 0;
+    border-bottom:1px solid #ddd;
+    margin-bottom:1em;
+}
+.lesson-meta{
+    font-size:0.9em;
+    color: #999;
 }

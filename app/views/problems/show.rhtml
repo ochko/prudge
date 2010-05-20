@@ -34,7 +34,7 @@
     <li><%= link_to content_tag(:span, "Зөв бодолт (#{@problem.corrects_count})"), {:controller=>'solutions', :action=>'solved', :problem_id=>@problem.id, :name => "correct-solutions"} %> </li>   
   </ul>
   <div id="problem-text"> 
-    <table><tr><td><%=white_list @problem.text %></td></tr></table> </div>
+    <table><tr><td><%= @problem.text %></td></tr></table> </div>
   <div id="best-solution"> </div>
   <div id="all-solutions"> </div>
   <div id="correct-solutions"> </div>

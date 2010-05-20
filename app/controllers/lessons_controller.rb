@@ -1,26 +1,19 @@
 # -*- coding: utf-8 -*-
 class LessonsController < ApplicationController
   before_filter :require_user,
-                :except => [:index, :list, :show, :get_homeworks, :feed]
+                :except => [:index, :show]
 
   auto_complete_for :problem, :name
 
   def index
     @lessons = Lesson.paginate(:page=>params[:page], :include =>[:author],
                                :order => "created_at desc")
-    render(:layout => false) if request.xml_http_request?
-  end
-
-  def feed
-    @lessons = Lesson.find(:all,
-                           :select => "lessons.*, u.login",
-                           :joins => "join users u on lessons.author_id = u.id",
-                           :order => "created_at desc ",
-                           :limit => 10)
     respond_to do |format|
-      format.rss
-      format.atom
+      format.html
+      format.js { render :layout => false }
+      format.rss { render :layout => false }
     end
+
   end
 
   def show

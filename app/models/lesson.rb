@@ -13,7 +13,9 @@ class Lesson < ActiveRecord::Base
   validates_presence_of     :title, :text
   named_scope :commented, :conditions => "comments_count > 0"
 
-  def self.per_page() 5 end
+  def self.per_page
+    10 
+  end
 
   def name
     title
