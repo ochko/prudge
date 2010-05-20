@@ -4,6 +4,7 @@ class ProblemsController < ApplicationController
                 :except => [:index, :show]
 
   before_filter :require_judge, :only => [:destroy, :nominated]
+  before_filter :prepare_wmd, :only => [:edit, :new]
 
   def index
     respond_to do |format|

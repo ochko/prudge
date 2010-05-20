@@ -3,6 +3,7 @@ class ContestsController < ApplicationController
                 :except => [:index, :last, :show, :participant]
 
   before_filter :require_judge, :only => [:create, :update, :destroy]
+  before_filter :prepare_wmd, :only => [:edit, :new]
 
   def index
     @contests = Contest.find(:all, :order => "start DESC")

@@ -1,9 +1,10 @@
-<h2>Хуудсууд</h2>
+<h2>Хуудсууд 
+  <% if admin? %>
+  <%= link_to 'Шинэ хуудас', :action => 'new' %>
+  <% end %>
+</h2>
 
 <%= will_paginate @pages, :class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
 
 <%= render :partial=>'list' %>
 
-<% if admin? %>
-<%= link_to 'Шинэ хуудас', :action => 'new' %>
-<% end %>

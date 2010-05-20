@@ -1,14 +1,9 @@
 <h1>Бидний баримтлах зарчимууд</h1>
 
 <% for rule in @rules%>
-<div class="post">
+<div class="rule">
   <h2><%= image_tag('rule.png') %> <%=h rule.title%></h2>
-  <div class="entry">
-    <%= rule.content %>
-  </div>
+    <%=markdown rule.content %>
 </div>
 <% end %>
 
-<% if admin? %>
-<%= link_to 'Шинэ дүрэм', :controller=>'pages', :action => 'new' %>
-<% end %>

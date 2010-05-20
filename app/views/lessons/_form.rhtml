@@ -1,5 +1,7 @@
 <%= error_messages_for 'lesson' %>
-
-<%= text_field 'lesson', 'title'  %>
-
+<div class="bigger-inputs span-20">
+  <%= text_field 'lesson', 'title'  %>
+</div>
 <%= text_area('lesson', 'text') %>
+<%= submit_tag "Хадгал" %>
+<div id="preview"> </div>

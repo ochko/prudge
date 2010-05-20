@@ -1,7 +1,7 @@
 <h1><%=h @lesson.title %></h1>
 <div class="lesson-item">
   <div class="lesson-body">
-    <%= @lesson.text %>
+    <%=markdown @lesson.text %>
   </div>
 
   <div class="lesson-meta">

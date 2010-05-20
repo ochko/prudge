@@ -15,31 +15,6 @@ module ApplicationHelper
     content_tag(:span, content_tag(:span, "#{percent}%", :style =>"width:#{percent}%; overflow:visible;"), :class=>'percent')
   end
 
-  def shorten(str, len)
-    if str.length > len
-      return str[0,len] + '...'
-    end
-    return str
-  end
-
-  def bytize(bytes)
-    if bytes < 1024
-      return bytes.to_s + 'b'
-    elsif bytes < 1024*1024
-      return (bytes/1024).to_s + 'Kb'
-    else
-      return (bytes/(1024*1024)).to_s + 'Mb'
-    end
-  end
-
-  def test_type(test)
-    if test.hidden
-      "Жинхэнэ"
-    else
-      "Туршилт"
-    end
-  end
-
   def true_false(bool)
     if bool
       'Тийм'
@@ -106,4 +81,13 @@ module ApplicationHelper
     return list
   end
 
+  def prepare_wmd_if(needed)
+    if needed
+      js = stylesheet_link_tag('wmd')
+      js << javascript_include_tag('showdown')
+      js << javascript_tag('wmd_options = {"output":"Markdown"}')
+      js << javascript_include_tag('wmd')      
+      js << javascript_tag('$(function() { createWmd("textarea", "#preview"); }); ')
+    end
+  end
 end

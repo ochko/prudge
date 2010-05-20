@@ -1,30 +1,31 @@
 <%= error_messages_for 'problem' %>
-
+<div class="bigger-inputs span-20">
 <%= text_field 'problem', 'name', 'size' => 40  %>
-<div class="span-20">
-<span class="span-2" title="Түвшин"> <%=image_tag('points.png') %>
-  <%= select 'problem', 'level', {1 => 1, 2 => 2, 3 => 3, 4 => 4}   %>
+<span class="input-level" title="Түвшин">
+  <%= select 'problem', 'level', {1 => 1, 2 => 2, 3 => 3, 4 => 4}  %>
 </span>
-<span class="span-3" title="Хугацаа"> <%=image_tag('clock.png') %>
-<%= text_field 'problem', 'time', :size =>2 %> сек
+<span class="input-time" title="Хугацаа">
+  <%= text_field 'problem', 'time', :size =>2 %> сек
 </span>
-<span class="span-14" title="Санах ой"> <%= image_tag('memory.png') %>
-  <%= text_field 'problem', 'memory', 'size' => 3  %>
-
-<% if !@problem.contest.nil? and @problem.contest.end < Time.now %>
-   <label for="problem_contest_id">Тэмцээн: </label>
-   <%= link_to @problem.contest.name, @problem.contest %>
-   <% else %>
-   <% if judge? -%>
-   <label for="problem_contest_id">Тэмцээн: </label>
-   <%= select("problem", "contest_id", Contest.pending.collect {|c| [ c.name, c.id ] }, { :include_blank => true }) %>
-<% end %>
-<% end -%>
+<span class="input-memory" title="Санах ой">
+  <%= text_field 'problem', 'memory', 'size' => 3  %> кб
 </span>
 </div>
+
 <%= text_area('problem', 'text') %>
 
-
+<div class="span-20">
+<% if !@problem.contest.nil? and @problem.contest.finished? %>
+<label for="problem_contest_id">Тэмцээн: </label>
+<%= link_to @problem.contest.name, @problem.contest %>
+<% elsif judge? -%>
+<label for="problem_contest_id">Тэмцээн: </label>
+<%= select("problem", "contest_id", Contest.pending.collect {|c| [ c.name, c.id ] }, { :include_blank => true }) %>
+<% end -%>
+<span class="input-source">
 <label for="problem_source">Эх сурвалж: </label>
 <%= text_field 'problem', 'source', :size => 20  %>
-
+</span>
+</div>
+<%= submit_tag "Хадгал" %>
+<div id="preview"> </div>

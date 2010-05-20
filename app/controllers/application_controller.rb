@@ -8,6 +8,9 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user, :current_user?, :admin?, :judge?
 
   protected
+  def prepare_wmd
+    @wmd_needed = true
+  end
 
   private
   def current_user_session

@@ -1,5 +1,5 @@
   <tr>
-    <td><%= show_correctness(solution.correct) %></td>
+    <td><%= link_to show_correctness(solution.correct), solution %></td>
     <td><%= link_to solution.problem.name, solution.problem %>
       <span class="solution-meta">
 	<%= solution.language.name %> хэл дээр

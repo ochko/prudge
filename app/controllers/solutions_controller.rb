@@ -1,13 +1,12 @@
 class SolutionsController < ApplicationController
-  before_filter :require_user, :except=> [:submited, :solved, :best, :last]
+  before_filter :require_user, :except=> [:submited, :solved, :best, :index]
 
   layout 'contests'
 
-  def last
+  def index
     @solutions = Solution.
-      find(:all, :limit => 30,
-           :include => [:user, :problem],
-           :order => 'solutions.uploaded_at desc')
+      paginate(:include => [:user, :problem], :page => params[:page],
+               :order => 'solutions.uploaded_at desc')
   end
 
   def show

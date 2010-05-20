@@ -14,12 +14,10 @@
 <div id="sub-menu">
   <ul>
     <li><%=link_to 'Өнгөрсөн тэмцээнүүд', contests_path  %></li>
-    <li><%=link_to 'Сүүлийн бодолтууд', last_path  %></li>
+    <li><%=link_to 'Сүүлийн бодолтууд', solutions_path  %></li>
     
     <% if judge? %>
     <li><%=link_to 'Тэмцээн зарлах', new_contest_path %></li>
-    <li><%=link_to 'Бодолтууд', :controller => 'solutions', :action => 'list' %></li>
-    <li><%=link_to 'Үр дүнг шалгах', :controller => 'results', :action => 'list' %></li>
     <% end %>
   </ul>  
 </div>

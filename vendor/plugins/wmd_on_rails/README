@@ -1,0 +1,28 @@
+WmdOnRails
+==========
+
+This plugin helps you use the WMD Editor in your Rails app.
+
+Use It
+======
+
+Rake tasks
+----------
+wmd_on_rails:update
+
+  Copy the WMD Editor javascripts to public/javascripts/wmd.
+
+View methods
+------------
+- enable_wmd(options)
+
+  Outputs WMD JavaScript setup. Give it any options you want to
+  pass to the WMD editor. Defaults are as normal, except output.
+  We output Markdown by default instead of HTML.
+  
+- wmd_preview(options)
+
+  Outputs a div with the class "wmd-preview". Options are :tag to use
+  something besides a div, and :class to add more classes to the object.
+
+Copyright (c) 2008 Clinton "Knuckles" Nixon of Viget Labs, released under the MIT license.

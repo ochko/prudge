@@ -1,17 +1,6 @@
 <% for n in @news%>
-  <div class='post'>
-    <h1><%= image_tag('txt.png') %> <%=h n.title%></h1>
-    <div class="entry">
-      <%= n.content %>
-    </div>
-    <p class='info'>
-      Бичсэн: <%= n.created_at %>
-    </p>
-  </div>
+<h2><%=h n.title%></h2>
+<span class="news-meta"><%=l n.created_at %></span>
+<%=markdown n.content %>
 <% end %>
 <%= will_paginate @news, :class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
-
-
-<% if admin? %>
-<%= link_to 'Шинэ мэдээ', :controller=>'pages', :action => 'new' %>
-<% end %>

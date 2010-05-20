@@ -414,30 +414,29 @@ td.status {
     text-align:center;
 }
 span.req-level {
-    background: url(/images/points.png) no-repeat center left;
-    padding-left:14px;
+    background: url(/images/points.png) no-repeat 0% 50%;
+    padding-left:16px;
     font-size:0.8em;
     margin-left:1em;
 }
 span.req-time {
     background: url(/images/clock.png) no-repeat center left;
-    padding-left:14px;
+    padding-left:16px;
     font-size:0.8em;
-}
-span.average-time {
-    background: url(/images/average.png) no-repeat center left;
-    padding-left:14px;
 }
 span.req-memory {
     background: url(/images/memory.png) no-repeat center left;
-    padding-left:16px;
+    padding-left:18px;
     font-size:0.8em;
-    
 }
 span.req-test {
     background: url(/images/test.png) no-repeat center left;
     padding-left:19px;
     font-size:0.8em;
+}
+span.average-time {
+    background: url(/images/average.png) no-repeat center left;
+    padding-left:16px;
 }
 span.view-solution{
     background: url(/images/view-w.png) no-repeat center left;
@@ -484,8 +483,11 @@ span.right-button{
 }
 #new-solution-form{float:right;}
 
-#problem-meta{padding: 0.5em 0; margin-bottom: 0.5em;}
-#problem-actions{display:inline; padding-left:2em; }
+#problem-meta{ margin-bottom: 0.5em;}
+#problem-actions{
+    float:right;
+}
+
 #problem tabs {margin: 1em 0; padding 0.5em 0;}
 
 .best-meta{text-align:center; color: #666;}
@@ -660,16 +662,60 @@ table tr:hover {
     background-color: #eee;
 }
 input#problem_name, input#lesson_title{
-    font-size: 1.5em;
-    width:770px;
-    max-width:770px;
+    width:370px;
+    max-width:370px;
     float:left;
-    padding:2px 0.5em;
+    margin-right:1em;
 }
-textarea#problem_text, textarea#lesson_text {
+input#contest_name {
+    width:600px;
+    max-width:600px;
+    float:left;
+    margin-right:1em;
+}
+input#lesson_title {
+    width:780px;
+    max-width:780px;
+    float:left;
+}
+input#page_title {
+    width:650px;
+    max-width:650px;
+}
+.bigger-inputs input, .bigger-inputs select{
+    font-size: 1.3em;
+    padding:2px 0.3em;
+}
+span.input-level {
+    background: url(/images/points.png) no-repeat 0% 50%;
+    padding-left:16px;
+    margin: 0 1em;
+}
+span.input-time {
+    background: url(/images/clock.png) no-repeat center left;
+    padding-left:16px;
+    margin: 0 .5em;
+}
+span.input-memory {
+    background: url(/images/memory.png) no-repeat center left;
+    padding-left:18px;
+    margin: 0 .5em;
+}
+span.input-source{
+    float:right;
+}
+.input-time input, .input-memory input{
+    max-width:30px;
+}
+
+textarea#problem_text, 
+textarea#lesson_text, 
+textarea#page_content, 
+textarea#contest_description {
     width:780px;
     float:left;
 }
+input#problem_source {width:250px; max-width:250px;}
 .lesson-item{
     padding:0.5em 0;
     border-bottom:1px solid #ddd;
@@ -678,4 +724,26 @@ textarea#problem_text, textarea#lesson_text {
 .lesson-meta{
     font-size:0.9em;
     color: #999;
+}
+#preview {
+    border: 1px dashed #999;
+    float:left;
+    width:780px;
+    margin: 1em 0;
+    padding: 0.5em;
+}
+
+
+#solve-link{ float:right; }
+#solve-link a{ padding: 17px 15px;}
+#start-contest {float:left;}
+#end-contest {float:right;}
+.news-meta{
+    font-size:0.9em;
+    display:block;
+}
+.rule {
+    margin:2em 0;
+    border-left: 3px solid #999;
+    padding-left:1em;
 }

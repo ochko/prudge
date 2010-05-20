@@ -3,7 +3,7 @@ class LessonsController < ApplicationController
   before_filter :require_user,
                 :except => [:index, :show]
 
-  auto_complete_for :problem, :name
+  before_filter :prepare_wmd, :only => [:edit, :new]
 
   def index
     @lessons = Lesson.paginate(:page=>params[:page], :include =>[:author],
