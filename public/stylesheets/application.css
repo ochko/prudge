@@ -339,7 +339,7 @@ input#user_password, input#user_password_confirmation, input#user_session_passwo
     padding-left: 19px;
 }
 
-#tabs, #problem-tabs {border:none; background:inherit;}
+#tabs, #problem-tabs {border:none; background:inherit; min-height:100px;}
 #tabs ul, #problem-tabs ul{border-top:none;border-right:none;border-left:none; background:inherit; border-radius:0;}
 #tabs div, #problem-tabs div {padding:0;}
 #tabs table, #problem-tabs table { border: 1px solid #aaa; border-top:none;}
@@ -491,8 +491,10 @@ span.right-button{
 #problem tabs {margin: 1em 0; padding 0.5em 0;}
 
 .best-meta{text-align:center; color: #666;}
-#solution-info {margin-bottom: 1em;}
-#solution-actions a{ margin-left: 1em; float:right;}
+
+#solution-actions { display:block;}
+#solution-actions a{ margin: 1em .5em 0; }
+.solution-file {font-size:1.8em; display:block; padding:0.3em;}
 #result{text-align:center; min-height:200px; vertical-align:middle;}
 #result-meta{padding: .5em 0;}
 .border-hor {border-top:1px solid #ddd; border-bottom:1px solid #ddd;}
@@ -749,4 +751,86 @@ input#problem_source {width:250px; max-width:250px;}
 }
 #solution-super{
     display:none;
+}
+span.problem-source {
+    display:block;
+    text-align:right;
+    font-style:italic;
+    color: #999;
+}
+.solution-box {
+    width:500px;
+    border:3px solid #999;
+    margin: 1em auto;
+    padding: 3em 2em;
+    text-align:center;
+}
+.solution-box input[type=file], .solution-form input[type=submit]{
+    display:inline;
+    margin:0 1em;
+    max-width:250px;
+}
+.solution-info {
+    width:500px;
+    border:3px solid #999;
+    margin: 1em auto;
+    padding: 1em 2em;
+    text-align:center;
+}
+#test-list pre{
+    margin:0;
+    line-height:1;
+}
+#test-list tr{
+    background-image:none;
+}
+#test-list td{
+    vertical-align:top;
+}
+#test-list td.test-input{
+    border-left:1px solid #ccc;
+}
+#test-list td.test-output{
+    border-left:1px solid #ccc;
+    border-right:1px solid #ccc;
+}
+#test-list td.test-actions{
+    text-align:center;
+}
+#test-list td.test-actions a{
+    display:block;
+    margin-bottom: 1em;
+}
+#test-form textarea{
+    width: 370px;
+    height: 200px;
+}
+#test-input-area{
+    width:390px;
+    float:left;
+}
+#test-output-area{
+    text-align:right;
+    float:right;
+    width:390px;
+}
+#test-input-area label{
+    background: url(/images/input.png) no-repeat 0 40%;
+    padding:3px 0 3px 15px;
+    font-weight:bold;
+    display:block;
+    font-size:1.2em;
+}
+#test-output-area label{
+    background: url(/images/output.png) no-repeat 100% 40%;
+    padding:3px 15px 3px 0;
+    font-weight:bold;
+    text-align:right;
+    display:block;
+    font-size:1.2em;
+}
+#test-save{
+    width:300px;
+    float:right;
+    text-align:right;
 }

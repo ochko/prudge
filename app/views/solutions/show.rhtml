@@ -1,23 +1,23 @@
-<div id="solution-super">
-<%= render(:partial => 'contests/contest', :object => @solution.contest) if @solution.contest %>
-<%= render :partial => 'problems/problem', :object => @solution.problem %>
-</div>
-<h3 id="solution-title">
-<%= link_to_function image_tag('button-refresh.png'), "$('#solution-super').slideToggle();", :title => "Бодлогын тухай мэдээлэл харах" %>
-<%= "#{@solution.contest.name} &raquo;" if @solution.contest %> 
-<%= @solution.problem.name %> &raquo;
-Бодолт</h3>
-<div id="solution-info" class='span-20'>
-  <label>Бодсон:</label> 
-  <%=link_to @solution.user.login, @solution.user %>,
-  <%=l @solution.uploaded_at %>,
-  <%= @solution.language.name %> хэл,
-  <%= link_to @solution.source_file_name, view_solution_path(@solution), :title => "Бодолтыг татах" %>
+<h1>Бодолт</h1>
+<h3 class="center">
+  <%= link_to(@solution.contest.name, @solution.contest) + ' &raquo; ' if @solution.contest %>
+  <%= link_to(@solution.problem.name, @solution.problem) %>
+</h3>
+
+<div class="solution-info">
+  <span class="rank_<%=@solution.user.level%>">
+    <%=link_to @solution.user.login, @solution.user %>
+  </span>
+  <%=l @solution.uploaded_at %>-д
+  <%= @solution.language.name %> хэл дээр бичсэн
+  <span class="solution-file">
+  &laquo; <%= link_to @solution.source_file_name, view_solution_path(@solution), :title => "Бодолтыг татах" %> &raquo;
+  </span>
   <span id="solution-actions">
   <% if @solution.owned_by? current_user %>
+  <%= link_to 'Засварлах', edit_solution_path(@solution), :class=>"medium grey awesome" %> 
   <%= link_to 'Устгах', {:action => 'destroy', :id => @solution},
   :confirm => 'Энэ бодолтыг нээрээ устгах уу?', :method => :post, :class=>"medium grey awesome" %> 
-  <%= link_to 'Засварлах', edit_solution_path(@solution), :class=>"medium grey awesome" %> 
   <% end %>
 
   <% if !@solution.checked || @solution.invalidated %>

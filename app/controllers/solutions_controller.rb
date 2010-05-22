@@ -18,8 +18,7 @@ class SolutionsController < ApplicationController
     @problem = Problem.find(params[:problem_id])
     @solution = @problem.best_solution
     unless @solution
-      flash[:notice] = 'Энэ бодлогыг одоогоор нэг ч хүн бодоогүй байна'
-      redirect_to @problem
+      render :text => '<table><tr><td>Энэ бодлогыг одоогоор нэг ч хүн бодоогүй байна</td></tr</table>'
     else
       render :partial => 'best'
     end
@@ -30,7 +29,7 @@ class SolutionsController < ApplicationController
     @solutions = @problem.solutions(:include => [:language, :user],
                                     :order => 'uploaded_at DESC')
     if @solutions.empty?
-      render :text => 'Энэ бодлогыг одоогоор нэг ч хүн бодоогүй байна'
+      render :text => '<table><tr><td>Энэ бодлогыг одоогоор нэг ч хүн бодоогүй байна</td></tr</table>'
     else
       render :partial => 'list'
     end
@@ -41,7 +40,7 @@ class SolutionsController < ApplicationController
     @solutions = @problem.solutions.correct(:include => [:language, :user],
                                             :order => 'uploaded_at DESC')
     if @solutions.empty?
-      render :text => 'Энэ бодлогыг одоогоор нэг ч хүн зөв бодоогүй байна'
+      render :text => '<table><tr><td>Энэ бодлогыг одоогоор нэг ч хүн зөв бодоогүй байна</td></tr</table>'
     else
       render :partial => 'list'
     end
@@ -72,12 +71,11 @@ class SolutionsController < ApplicationController
     @problem = Problem.find(params[:problem])
     @solution = current_user.last_submission_of(@problem)
     if @solution.nil? || (@solution.contest && @solution.contest.finished?)
-      @solution = Solution.new
-      @solution.problem_id = @problem.id
+      @solution = @problem.solutions.build
+      @solution.contest = @problem.contest unless @problem.contest.finished?
       return unless validate_solvable?
     else
-      @results = @solution.results
-      render :action => 'show'
+      redirect_to @solution
     end
   end
 
@@ -94,9 +92,9 @@ class SolutionsController < ApplicationController
           @last_one.update_attributes(params[:solution])
         end
       else
-        flash[:notice] = "Та хэн нэгний бодолтыг үзчихсэн учраас энэ бодлогыг дахин бодож болохгүй"
-        redirect_to @last_one
+        flash[:notice] = "Та хэн нэгний бодолтыг үзчихсэн учраас энэ бодлогыг дахин бодож болохгүй"        
       end
+      redirect_to @last_one
     else
       if @solution.save
         flash[:notice] = 'Бодолтыг хадгалж авлаа.'

@@ -1,30 +1,24 @@
-<h2>Бодлогын тэст</h2>
-
-<table>
+<h1>Тэст</h1>
+<h2>
+  <%=link_to @problem_test.problem.name, @problem_test.problem %>
+  <span class="go-up">
+    <%= link_to 'Бусад тэстүүд', new_problem_test_path(:problem_id => @problem_test.problem) %> 
+</h2>
+<table id='test-list'>
   <tr>
-    <td colspan="2">
-      <p>
-      <label for="problem_test_problem">Бодлого : </label>
-      <%= link_to @problem_test.problem.name, :controller=>'problems',
-      :action => 'show', :id=> @problem_test.problem_id %>
-      </p>
+    <th width="1%"></th>
+    <th>Оролт</th>
+    <th>Гаралт</th>
+    <th width="40px"></th>
+  </tr>
+  <tr>
+    <td><%= show_correctness(@problem_test.hidden) %></td>
+    <td class="test-input"><pre><%= @problem_test.input %></pre></td>
+    <td class="test-output"><pre><%= @problem_test.output %></pre></td>
+    <td>
+      <%= link_to image_tag('edit.png'), :action => 'edit', :id => @problem_test %>
+      <%= link_to image_tag('delete.png'), problem_test_path(@problem_test), :method => :delete, :confirm => "Тэстийг устгах уу?" %>
     </td>
   </tr>
-  <tr>
-    <td><b>Оролт:</b></td>
-    <td><%= text_area_tag 'input', @problem_test.input %></td>
-  </tr>
-  <tr>
-    <td><b>Гаралт:</b></td>
-    <td><%= text_area_tag 'output', @problem_test.output %></td>
-  </tr>
-  <tr>
-    <td><b>Жинхэнэ тэст:</b></td>
-    <td><%= true_false @problem_test.hidden %></td>
-  </tr>
 </table>
-
-<%= link_to 'Засвар', :action => 'edit', :id => @problem_test %> |
-<%= link_to 'Буцах',  :action => 'new', :problem_id=> @problem_test.problem_id %>
-
 

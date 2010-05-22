@@ -1,10 +1,23 @@
-<h2>Бодлого шалгах тэстийг засварлах</h2>
-
-<% form_tag :action => 'update', :id => @problem_test do %>
-  <%= render :partial => 'form' %>
-  <%= submit_tag 'Хадгал' %>
+<h1>Тэст засварлах(<%= link_to 'болих', :action => 'show', :id => @problem_test %>)</h1>
+<h2><%=link_to @problem_test.problem.name, @problem %></h2>
+<%= error_messages_for 'problem_test' %>
+<% form_for @problem_test, :html=>{:id=>'test-form'} do %>
+<%= hidden_field 'problem_test', 'problem_id' %>
+<div id="test-input-area">
+<label for="problem_test_input">Оролт</label>
+<%= text_area 'problem_test', 'input' %>
+</div>
+<div id="test-output-area">
+<label for="problem_test_output">Гаралт</label>
+<%= text_area 'problem_test', 'output' %>
+</div>
+<div class="span-9">
+<label for="problem_test_hidden">Харагдахгүй тэст үү?: </label>
+<%= select("problem_test", "hidden", {"Тийм"=>"true", "Үгүй"=>"false"}) %>
+</div>
+<div id="test-save">
+<%= submit_tag "Хадгал" %>
+</div>
 <% end %>
 
-<%= link_to 'Харах', :action => 'show', :id => @problem_test %> |
-<%= link_to 'Буцах', :controller=>'problem_tests',
-      :action => 'new', :problem_id=> @problem_test.problem_id %>
+

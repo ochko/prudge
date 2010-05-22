@@ -18,12 +18,10 @@
   <%= link_to 'БОДОХ', new_solution_path(:problem => @problem.id), :class => 'big blue awesome' %>
 </span>
 <div id="problem-meta" class="span-17">
-  <span class="rank_<%=@problem.user.level %>"><%= link_to @problem.user.login, @problem.user -%></span>,
+  <span class="rank_<%=@problem.user.level %>"><%= link_to @problem.user.login, @problem.user, :title => "Дэвшүүлсэн" -%></span>,
   <%=l @problem.created_at -%>
-  <%= content_tag(:span, ', Эх сурвалж: ' + h(@problem.source),
-      :class => 'problem-source') if !@problem.source.empty? -%>
-
-
+  <%= ', ' + link_to(h(@problem.contest.name), @problem.contest,
+      :class => 'problem-contest', :title => 'Тэмцээн') if @problem.contest -%>
 </div>
 <div id="problem-tabs" class="span-20"> 
   <ul>
@@ -33,7 +31,11 @@
     <li><%= link_to content_tag(:span, "Зөв бодолт (#{@problem.corrects_count})"), {:controller=>'solutions', :action=>'solved', :problem_id=>@problem.id, :name => "correct-solutions"} %> </li>   
   </ul>
   <div id="problem-text"> 
-    <table><tr><td><%=markdown @problem.text %></td></tr></table> 
+    <table><tr><td>
+	  <%=markdown @problem.text %>
+	  <%= content_tag(:span, 'Эх сурвалж: ' + h(@problem.source),
+	      :class => 'problem-source') if !@problem.source.empty? -%>
+    </td></tr></table> 
   </div>
   <div id="best-solution"> </div>
   <div id="all-solutions"> </div>

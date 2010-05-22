@@ -1,12 +1,11 @@
-<%= render :partial => 'problems/problem', :object => @result.solution.problem %>
-
 <h1>Тестийн үр дүн:
   <span class="result-match"><%= show_correctness @result.matched %></span>
   <span class="req-time" title="Ажилласан хугацаа"><%= @result.time %></span>
   <span class="req-memory" title="Ашигласан санах ой"><%= @result.memory %></span>
 </h1>
 <div id="result-meta" class="border-hor">
-  <label>Бодсон:</label> <%= link_to h(@result.solution.user.login), @result.solution.user %>,
+  <%= link_to @result.solution.problem.name, @result.solution.problem %>,
+  <label>бодсон:</label> <%= link_to h(@result.solution.user.login), @result.solution.user %>,
   <%=l @result.solution.uploaded_at %>,
   <span class="result-run">Ажиллагаа: <strong><%= translate_message(@result.status) %></strong></span>
 

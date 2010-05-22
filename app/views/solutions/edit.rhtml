@@ -1,15 +1,16 @@
-<h2>Бодолтыг засварлах</h2>
+<h1>Бодолтыг засах(<%= link_to 'болих', @solution %>)</h1>
+<h3 class="center">
+  <%= link_to(@solution.contest.name, @solution.contest) + ' &raquo; ' if @solution.contest %>
+  <%= link_to(@solution.problem.name, @solution.problem) %>
+</h3>
 
+<div class="solution-box">
 <% form_for @solution, :html => { :multipart => true} do |form| %>
-<%= render :partial => 'problems/problem', :object => @solution.problem %>
-<h2>Бодолт</h2>
-<span class="go-up"> <%= link_to 'Болих', @solution %></span>
-<%= form.hidden_field :problem_id, :value => @solution.problem_id %>
-
+<%= form.hidden_field :problem_id %>
+<label>Хэл:</label>
 <%= form.select :language_id, Language.all.collect{|l| [l.name, l.id]} %>
-
 <%= form.file_field :source %>
-<%= submit_tag 'Хадгал', :class=>"small grey awesome" %>
+<%= submit_tag "Хадгал", :class => "medium blue awesome" %>
+
 <% end %>
-
-
+</div>

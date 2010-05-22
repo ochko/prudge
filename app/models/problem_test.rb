@@ -22,6 +22,10 @@ class ProblemTest < ActiveRecord::Base
     "#{self.dir}/#{self.id}.out"
   end
 
+  def others
+    self..problem.tests
+  end
+
   def save_to_file!
     FileUtils.mkpath self.dir
     File.open(self.input_path,  'w'){|f| f.write(self.input.gsub(/\r/,'')) }

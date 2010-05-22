@@ -1,0 +1,12 @@
+<% if test.id %>
+  <tr id="test-<%=test.id%>">
+    <td><%= show_correctness(test.hidden) %></td>
+    <td class="test-input"><pre><%= truncate(test.input) %></pre></td>
+    <td class="test-output"><pre><%= truncate(test.output) %></pre></td>
+    <td class="test-actions">
+      <%= link_to image_tag('test-open.png'), test %>
+      <%= link_to image_tag('edit.png'), :action => 'edit', :id => test %>
+      <%= link_to_remote image_tag('delete.png'), :url =>problem_test_path(test), :method => :delete, :confirm => "Тэстийг устгах уу?" %>
+    </td>
+  </tr>
+<% end %>

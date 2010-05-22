@@ -1,7 +1,0 @@
-<%= render :partial => 'problems/problem', :object => @solution.problem %>
-<h2>Бодолт</h2>
-<%= form.hidden_field :problem_id, :value => @solution.problem_id %>
-
-<%= form.select :language_id, Language.all.collect{|l| [l.name, l.id]} %>
-
-<%= form.file_field :source %>

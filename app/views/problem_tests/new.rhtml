@@ -1,15 +1,36 @@
-<h2>Бодлого шалгах тэст</h2>
-
-<% form_tag :action => 'create' do %>
-  <%= render :partial => 'form' %>
-  <center>
-  <%= submit_to_remote "Save", "Нэм",
-      :update=>'test_list',
+<h1>Тэст оруулах</h1>
+<h2><%=link_to @problem.name, @problem %></h2>
+<%= error_messages_for 'problem_test' %>
+<% form_for @problem_test, :html=>{:id=>'test-form'} do %>
+<%= hidden_field 'problem_test', 'problem_id' %>
+<div id="test-input-area">
+<label for="problem_test_input">Оролт</label>
+<%= text_area 'problem_test', 'input' %>
+</div>
+<div id="test-output-area">
+<label for="problem_test_output">Гаралт</label>
+<%= text_area 'problem_test', 'output' %>
+</div>
+<div class="span-9">
+<label for="problem_test_hidden">Харагдахгүй тэст үү?: </label>
+<%= select("problem_test", "hidden", {"Тийм"=>"true", "Үгүй"=>"false"}) %>
+</div>
+<div id="test-save">
+<%= submit_to_remote "Save", "Оруул",
+      :update=>'test-list',
+      :position => :bottom,
       :url=>{:action=>'create'}%>
-  </center>
+</div>
 <% end %>
 
-<%= render :partial => 'list'%>
+<table id='test-list'>
+  <tr>
+    <th width="1%"></th>
+    <th>Оролт</th>
+    <th>Гаралт</th>
+    <th width="40px"></th>
+  </tr>
 
-<%= link_to 'Буцах', :controller=>'problems',
-                     :action => 'show', :id=>@problem_test.problem_id %>
+<%= render :partial => 'test', :collection => @problem.tests %>
+</table>
+
