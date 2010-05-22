@@ -72,15 +72,19 @@ class Solution < ActiveRecord::Base
   end
 
   def check!
-    return false unless compile
     cleanup!
-    self.tests.each do |test|
-      break unless execute(test)
-      result = results.create!(:test_id => test.id)
-      break if result.failed?
+    if compile
+      self.tests.each do |test|
+        break unless execute(test)
+        result = results.create!(:test_id => test.id)
+        break if result.failed?
+      end
+      summarize_results!
+      nominate_for_best!
+    else
+      self.update_attribute(:nocompile, true)
     end
-    summarize_results!
-    nominate_for_best!
+    save_junk!
   end
 
   def compile
@@ -102,19 +106,28 @@ class Solution < ActiveRecord::Base
     system(cmd)
   end
 
-  def junk
-    IO.readlines(error_path).join('<br/>').gsub(SOLUTIONS_PATH,'')
+  def save_junk!
+    if File.exist?(error_path)
+      self.junk = IO.readlines(error_path).join('<br/>').
+        gsub(SOLUTIONS_PATH,'').gsub(/[0-9]+\//,'')
+      FileUtils.rm(error_path)
+    else
+      self.junk = ''
+    end
+    self.save!
   end
 
   def cleanup!
       self.results.clear
       self.update_attributes(:checked => false,
+                             :nocompile => false,
                              :invalidated => false,
                              :correct => false,
                              :percent => 0.0,
                              :time => 5000.0,
                              :isbest => false,
-                             :point => 0.0) 
+                             :point => 0.0,
+                             :junk => nil) 
   end
 
   def summarize_results!

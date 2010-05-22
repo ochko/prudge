@@ -4,7 +4,7 @@ class Problem < ActiveRecord::Base
 
   has_many :solutions
   has_many :tests, :class_name => 'ProblemTest', 
-           :order => 'hidden, id',
+           :order => 'hidden DESC, id ASC',
            :dependent => :destroy
   has_many :comments,
            :as => 'topic',

@@ -12,7 +12,7 @@
     <th width="40px"></th>
   </tr>
   <tr>
-    <td><%= show_correctness(@problem_test.hidden) %></td>
+    <td><%= render_viewable(@problem_test.hidden) %></td>
     <td class="test-input"><pre><%= @problem_test.input %></pre></td>
     <td class="test-output"><pre><%= @problem_test.output %></pre></td>
     <td>

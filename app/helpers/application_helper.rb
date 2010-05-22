@@ -12,7 +12,7 @@ module ApplicationHelper
   end    
 
   def show_percent(percent)
-    content_tag(:span, content_tag(:span, "#{percent}%", :style =>"width:#{percent}%; overflow:visible;"), :class=>'percent')
+    content_tag(:span, content_tag(:span, "&nbsp;#{percent}%", :style =>"width:#{percent}%; overflow:visible;"), :class=>'percent')
   end
 
   def true_false(bool)
@@ -45,11 +45,19 @@ module ApplicationHelper
     end
   end
 
-  def test_purpose(result)
-    if result.test.hidden
+  def test_purpose(viewable)
+    if viewable
       image_tag('test-hidden.png', :title => 'Харагдахгүй тэст')
     else
-      link_to(image_tag('test-open.png', :title => 'Тэстийг харах'), result)
+      link_to(image_tag('test-open.png', :title => 'арах'), result)
+    end
+  end
+
+  def render_viewable(viewable)
+    if viewable
+      image_tag('test-open.png', :title => 'Харагдана')
+    else
+      image_tag('test-hidden.png', :title => 'Харагдахгүй')
     end
   end
 

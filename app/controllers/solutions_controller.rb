@@ -87,9 +87,12 @@ class SolutionsController < ApplicationController
     @last_one = current_user.last_submission_of(@solution.problem)
     if @last_one
       if !@last_one.locked?
-        if @last_one.owned_by?(current_user) && !@last_one.freezed?
+        if !@last_one.freezed?
           @last_one.cleanup!
           @last_one.update_attributes(params[:solution])
+        else
+          @solution.save
+          @last_one = @solution
         end
       else
         flash[:notice] = "Та хэн нэгний бодолтыг үзчихсэн учраас энэ бодлогыг дахин бодож болохгүй"        
@@ -107,13 +110,11 @@ class SolutionsController < ApplicationController
 
   def edit
     @solution = Solution.find(params[:id])
-    return unless validate_solvable?
     return unless validate_touchable?
   end
 
   def update    
     @solution = Solution.find(params[:id])
-    return unless validate_solvable?
     return unless validate_touchable?
     @solution.cleanup!
     params[:solution].merge!(:uploaded_at => Time.now)
@@ -135,7 +136,8 @@ class SolutionsController < ApplicationController
   def check
     @solution = Solution.find(params[:id])
     if !judge?
-      if @solution.checked || !@solution.invalidated
+      if @solution.nocompile || 
+          (!@solution.invalidated && @solution.checked)
         render :text => 'Шалгачихсан'
         return
       end
@@ -144,11 +146,11 @@ class SolutionsController < ApplicationController
         return
       end
     end
-    if @solution.problem.tests.size == 0
-      render :text => 'Шалгах тэст байхгүй байна'
+    if @solution.problem.tests.real.size == 0
+      render :text => 'Шалгах тэст байхгүй байна(Эсвэл харагдахгүй тэст байхгүй)'
       return
     end
-    flash[:error] = @solution.junk unless @solution.check!
+    @solution.check!
     render :partial => 'results/list'
   end
 
@@ -167,7 +169,7 @@ class SolutionsController < ApplicationController
       return false
     elsif @solution.contest.finished?
       return true
-    elsif @solution.contest.open? ||
+    elsif !@solution.contest.open? &&
         current_user.level > @solution.contest.level
       flash[:notice] = 'Таны түвшин энэ тэмцээнийхээс дээгүүр байна.'
       redirect_to @solution.contest
@@ -199,7 +201,7 @@ class SolutionsController < ApplicationController
       return false
     elsif @solution.freezed?
       flash[:notice] ='Тэмцээн дууссан хойно бодолтыг өөрчилж болохгүй!'
-      redirect_to @solution.contest
+      redirect_to @solution
       return false
     end
     true

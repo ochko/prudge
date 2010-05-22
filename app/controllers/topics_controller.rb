@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 class TopicsController < ApplicationController
-  before_filter :require_user, :except => [:index, :show]
+  before_filter :require_admin, :except => [:index, :show]
+  before_filter :prepare_wmd, :only => [:edit, :new]
 
-  before_filter :require_admin, :only => [:new, :create, :edit, :destroy,
-                                          :update, :moderate]
   layout 'discussions'
 
   def index
@@ -12,8 +11,7 @@ class TopicsController < ApplicationController
                                :order => 'commented_at DESC')
     elsif %w[contest problem lesson topic].include? params[:type]
       @topics = params[:type].capitalize.constantize.commented.
-        paginate(:page=> params[:page], :per_page => 20, 
-                 :order => 'commented_at DESC')
+        paginate(:page=> params[:page], :order => 'commented_at DESC')
     end
   end
 

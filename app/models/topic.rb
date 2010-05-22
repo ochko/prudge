@@ -9,6 +9,10 @@ class Topic < ActiveRecord::Base
 
   validates_presence_of :title, :description  
   
+  def self.per_page
+    30
+  end
+  
   def name
     title
   end

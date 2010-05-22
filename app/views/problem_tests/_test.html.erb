@@ -1,6 +1,6 @@
 <% if test.id %>
   <tr id="test-<%=test.id%>">
-    <td><%= show_correctness(test.hidden) %></td>
+    <td><%= render_viewable(test.hidden) %></td>
     <td class="test-input"><pre><%= truncate(test.input) %></pre></td>
     <td class="test-output"><pre><%= truncate(test.output) %></pre></td>
     <td class="test-actions">

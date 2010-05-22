@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100520171153) do
+ActiveRecord::Schema.define(:version => 20100522082725) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "attachable_id"
@@ -196,6 +196,8 @@ ActiveRecord::Schema.define(:version => 20100520171153) do
     t.float    "point"
     t.integer  "comments_count",      :default => 0
     t.datetime "commented_at"
+    t.text     "junk"
+    t.boolean  "nocompile",           :default => false
   end
 
   add_index "solutions", ["contest_id"], :name => "index_solutions_on_contest_id"

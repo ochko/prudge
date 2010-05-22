@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_filter :require_judge,
+  before_filter :require_admin,
                 :except => :show
 
   before_filter :prepare_wmd, :only => [:edit, :new]

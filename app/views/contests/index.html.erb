@@ -4,7 +4,7 @@
 <table width="100%">
 <% for contest in @contests %>
   <tr>
-    <td><span class="rank_<%= contest.level %>"><%= link_to contest.name, contest %></span> (<%= contest.level_name %>)</td>
+    <td><%= link_to contest.name, contest %> (<span class="rank_<%= contest.level %>"><%= contest.level_name %></span>)</td>
     <td><%=l contest.start %> &raquo;
         <%=l contest.end %></td>
   </tr>

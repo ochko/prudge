@@ -597,7 +597,7 @@ span.match {font-weight:bold;}
     padding-bottom:1em;
 }
 #comment-form textarea{
-    width:500px;
+    width:550px;
     height:80px;
     margin-top:0;
 }
@@ -713,9 +713,15 @@ span.input-source{
 textarea#problem_text, 
 textarea#lesson_text, 
 textarea#page_content, 
+textarea#topic_description,
 textarea#contest_description {
     width:780px;
     float:left;
+}
+input#topic_title {
+    width: 780px;
+    font-size: 1.4em;
+    padding: 2px 3px;
 }
 input#problem_source {width:250px; max-width:250px;}
 .lesson-item{
@@ -762,13 +768,15 @@ span.problem-source {
     width:500px;
     border:3px solid #999;
     margin: 1em auto;
-    padding: 3em 2em;
+    padding: 2em 1em;
     text-align:center;
 }
-.solution-box input[type=file], .solution-form input[type=submit]{
-    display:inline;
+.solution-box input[type=file]{
     margin:0 1em;
-    max-width:250px;
+}
+.solution-box input[type=submit]{
+    margin:1em 10em 0;
+    text-align:center;
 }
 .solution-info {
     width:500px;
@@ -833,4 +841,13 @@ span.problem-source {
     width:300px;
     float:right;
     text-align:right;
+}
+#run-error{
+    text-align:left;
+    text-size:0.9em;
+    font:0.9em 'andale mono', 'lucida console', monospace;
+    color:#C33;
+}
+#check-wait{
+    display:none;
 }

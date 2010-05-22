@@ -10,7 +10,7 @@
   <span class="user-points" title="Нийт оноо"><%= "%.2f" % current_user.points if !current_user.points.nil? %></span>
 </div>
 <% form_remote_tag :url=>{:controller=>'comments', :action => 'create'},
-       :html=>{:id=>'comment-form', :class => 'span-16'},
+       :html=>{:id=>'comment-form', :class => 'span-17'},
        :before => "$('#comment-spinner').show(); $('#comment-message').html('')",
        :loading => "$('#comment-form').disable(); ",
        :success => "$('#comment_text').val('');",

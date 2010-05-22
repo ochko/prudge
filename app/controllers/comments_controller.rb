@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_filter :require_user
-  before_filter :require_admin, :only => :destroy
+  before_filter :require_admin, :only => [:destroy, :moderate]
 
   layout 'discussions'
 
