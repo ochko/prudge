@@ -17,7 +17,7 @@ module ResultsHelper
     content << '</table>'
   end
 
-  def diff_render(diff)
+  def differ(diff)
     diff.gsub(/^(\-|\+|@){2}.+\n/,'').
       gsub('\ No newline at end of file','').
       gsub(/^\+(.+)\n/, '<ins>&raquo;\1</ins>').

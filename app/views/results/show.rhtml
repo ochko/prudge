@@ -23,6 +23,6 @@
 <% if !@result.matched %>
 <div class="span-7 scroll prepend-top">
   <span class="diff-output">&raquo; Зөрүү &laquo;</span>
-  <pre><%= diff_render @result.diff %></pre>
+  <pre><%= differ @result.diff %></pre>
 </div>
 <% end %>
