@@ -7,7 +7,7 @@
     <div class="comment-text">
       <span class="comment-parent"><%= link_to image_tag('arrow-ur.png'), topic_path(comment.topic_id, :type => comment.topic_type.downcase), :title => "Хэлэлцүүлэг рүү" %></span>
       <span class="rank_<%=comment.user.level%>"><%= link_to comment.user.login, comment.user %>:</span>
-      <%=h comment.text %>
+      <%=simple_format h(comment.text) %>
     </div>
     <span class="comment-date">
       <%=l comment.created_at %>

@@ -25,7 +25,7 @@
     <td><%= "%.2f" % user.points %></td>
     <td><%= sec2milisec user.average %></td>
     <td><%= user.solutions_count %></td>
-    <td><%=l user.uploaded_at %></td>
+    <td><%=l(user.uploaded_at) if user.uploaded_at %></td>
   </tr>
 <% end %>
   <tr>

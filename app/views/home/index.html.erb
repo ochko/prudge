@@ -1,5 +1,5 @@
-<% for n in @news%>
-<h2><%=h n.title%></h2>
+<% for n in @news %>
+<h2><%=h n.title %></h2>
 <span class="news-meta"><%=l n.created_at %></span>
 <%=markdown n.content %>
 <% end %>

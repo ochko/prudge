@@ -6,8 +6,9 @@ development: &my_settings
   min_prefix_len: 0
   min_infix_len: 1
   min_word_len: 1
+  html_strip: 1
   charset_type: utf-8
-  charset_table: a..z, A..Z->a..z, 0..9, U+1800..U+18aa, U+0410..U+042f, U+0430..U+044f, U+0401, U+0451, U+04e8, U+04e9, U+04ae, U+04af
+  charset_table: a..z, A..Z->a..z, 0..9, U+0430..U+044f, U+0410..U+042f->U+0430..U+044f, U+0451, U+0401->U+0451, U+04e9, U+04e8->U+04e9, U+04af, U+04ae->U+04af
   
 test:
   <<: *my_settings

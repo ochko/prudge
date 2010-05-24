@@ -7,7 +7,6 @@ class ResultsController < ApplicationController
 
     return if judge?
     
-    contest = @result.solution.contest
     if !@result.solution.owned_by?(current_user)
       flash[:notice] = 'Бусдын тэстийг харж болохгүй'
       redirect_to contest

@@ -23,7 +23,7 @@ module ResultsHelper
                  translate_message(result.status), 
                  sec2milisec(result.time), 
                  result.memory, 
-                 show_correctness(result.matched)]
+                 link_to(show_correctness(result.matched), result)]
     end
     content = '<table id="results-table">'
     matrix.transpose.each do |row|

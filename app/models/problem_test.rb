@@ -1,5 +1,6 @@
 class ProblemTest < ActiveRecord::Base
   TESTS = 'judge/tests'
+  DIFF = '/usr/bin/diff'
   
   belongs_to :problem, :counter_cache => 'tests_count'
   has_many :results, :dependent => :destroy, :foreign_key => 'test_id'
@@ -32,8 +33,8 @@ class ProblemTest < ActiveRecord::Base
     File.open(self.output_path, 'w'){|f| f.write(self.output.gsub(/\r/,''))}
   end
 
-  def matches?(file_path)
-    `diff -b #{file_path} #{output_path}`.empty?
+  def diff(file_path)
+    `#{DIFF} -b #{file_path} #{output_path}`
   end
 
 end

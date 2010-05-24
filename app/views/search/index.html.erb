@@ -3,8 +3,10 @@
 <%= will_paginate @results, :class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
 
 <% @results.each do |result| %>
+<div>
 <dt><%= link_to result.name, result %></dt>
 <dd><%= result.excerpts.text %></dd>
+</div>
 <% end %>
 
 <%= will_paginate @results, :class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>

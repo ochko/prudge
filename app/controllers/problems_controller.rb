@@ -3,7 +3,7 @@ class ProblemsController < ApplicationController
   before_filter :require_user,
                 :except => [:index, :show]
 
-  before_filter :require_judge, :only => [:destroy, :nominated]
+  before_filter :require_judge, :only => [:destroy, :proposals, :check]
   before_filter :prepare_wmd, :only => [:edit, :new]
 
   def index
@@ -92,6 +92,13 @@ class ProblemsController < ApplicationController
       flash[:notice] = 'Энэ бодлогод бодолтууд байгаа учраас устгахгүй.'
       redirect_to @problem
     end
+  end
+
+  def check
+    @problem = Problem.find(params[:id])
+    @problem.check!
+    flash[:notice] = "Бүх бодолтуудыг шалгалаа"
+    redirect_to @problem
   end
 
 end

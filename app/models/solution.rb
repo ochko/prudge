@@ -7,12 +7,12 @@ class Solution < ActiveRecord::Base
   belongs_to :problem, :counter_cache => 'tried_count'
   belongs_to :user
   belongs_to :language
-  has_many :results, :order => 'hidden', :dependent => :destroy
+  has_many :results, :order => 'hidden ASC, matched DESC', :dependent => :destroy
   has_many :tests, :through => :problem, :order => 'hidden, id'
 
   has_attached_file :source, 
-    :url => "/judge/solutions/:user/:problem/:basename.:extension",
-    :path => ":rails_root/judge/solutions/:user/:problem/:basename.:extension"
+    :url => "/judge/solutions/:user/:problem/:id.code",
+    :path => ":rails_root/judge/solutions/:user/:problem/:id.code"
 
   # TODO: Delete after migration
   #has_attachment :path_prefix => 'judge/src'
@@ -32,6 +32,8 @@ class Solution < ActiveRecord::Base
   named_scope :best, :conditions => { :isbest => true }
   named_scope :correct, :conditions => { :correct => true }
   named_scope :for_user, lambda { |user| { :conditions => ['user_id =?', user.id], :include => [:language, :problem], :order => 'created_at desc' } }
+  named_scope :valuable, :conditions => 'percent > 0'
+  named_scope :notcompiled, :conditions => { :nocompile => true }
 
   after_save :notify_cachers
   after_destroy :notify_cachers
@@ -43,6 +45,7 @@ class Solution < ActiveRecord::Base
   def input_path()  "#{user.exe_dir}/#{self.problem_id}.input"  end
   def error_path()  "#{user.exe_dir}/#{self.problem_id}.error"  end
   def usage_path()  "#{user.exe_dir}/#{self.problem_id}.usage"  end
+  def source_path() "#{File.dirname(source.path)}/#{source_file_name}" end
 
   def owned_by?(someone)
     self.user_id == someone.id
@@ -90,7 +93,8 @@ class Solution < ActiveRecord::Base
   def compile
     FileUtils.mkdir(user.exe_dir) unless File.directory? user.exe_dir
     FileUtils.rm(exe_path) if File.exist? exe_path
-    system("#{language.compiler % [source.path, exe_path, exe_name]} 2> #{error_path}")
+    FileUtils.ln(source.path, source_path, :force => true)
+    system("#{language.compiler % [source_path, exe_path, exe_name]} 2> #{error_path}")
   end
 
   def execute(test)
@@ -108,8 +112,7 @@ class Solution < ActiveRecord::Base
 
   def save_junk!
     if File.exist?(error_path)
-      self.junk = IO.readlines(error_path).join('<br/>').
-        gsub(SOLUTIONS_PATH,'').gsub(/[0-9]+\//,'')
+      self.junk = IO.readlines(error_path).join('<br/>').gsub(SOLUTIONS_PATH,'').gsub(/[0-9]+\//,'')
       FileUtils.rm(error_path)
     else
       self.junk = ''

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100522082725) do
+ActiveRecord::Schema.define(:version => 20100523155839) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "attachable_id"
@@ -41,18 +41,17 @@ ActiveRecord::Schema.define(:version => 20100522082725) do
     t.datetime "end",                              :null => false
     t.text     "description",                      :null => false
     t.integer  "level",          :default => 0
-    t.boolean  "delta",          :default => true, :null => false
     t.integer  "comments_count", :default => 0
     t.datetime "commented_at"
+    t.boolean  "delta",          :default => true, :null => false
   end
 
   create_table "languages", :force => true do |t|
-    t.string  "name",        :limit => 15,                :null => false
-    t.text    "description",                              :null => false
-    t.string  "compiler",                                 :null => false
-    t.string  "runner",                                   :null => false
-    t.integer "mem_req",                   :default => 0, :null => false
-    t.integer "time_req",                  :default => 0, :null => false
+    t.string  "name",     :limit => 15,                :null => false
+    t.string  "compiler",                              :null => false
+    t.string  "runner",                                :null => false
+    t.integer "mem_req",                :default => 0, :null => false
+    t.integer "time_req",               :default => 0, :null => false
   end
 
   create_table "lessons", :force => true do |t|
@@ -61,9 +60,9 @@ ActiveRecord::Schema.define(:version => 20100522082725) do
     t.datetime "updated_at",                       :null => false
     t.string   "title",                            :null => false
     t.text     "text",                             :null => false
-    t.boolean  "delta",          :default => true, :null => false
     t.integer  "comments_count", :default => 0
     t.datetime "commented_at"
+    t.boolean  "delta",          :default => true, :null => false
   end
 
   add_index "lessons", ["author_id"], :name => "index_lessons_on_author_id"
@@ -84,11 +83,12 @@ ActiveRecord::Schema.define(:version => 20100522082725) do
   end
 
   create_table "pages", :force => true do |t|
-    t.string   "category",   :limit => 15, :null => false
-    t.string   "title",                    :null => false
-    t.text     "content",                  :null => false
-    t.datetime "created_at",               :null => false
-    t.integer  "user_id",                  :null => false
+    t.string   "category",   :limit => 15,                   :null => false
+    t.string   "title",                                      :null => false
+    t.text     "content",                                    :null => false
+    t.datetime "created_at",                                 :null => false
+    t.integer  "user_id",                                    :null => false
+    t.boolean  "delta",                    :default => true, :null => false
   end
 
   add_index "pages", ["user_id"], :name => "index_pages_on_user_id"
@@ -131,7 +131,6 @@ ActiveRecord::Schema.define(:version => 20100522082725) do
     t.text     "text",                                            :null => false
     t.datetime "created_at",                                      :null => false
     t.string   "source"
-    t.boolean  "delta",                         :default => true, :null => false
     t.integer  "comments_count",                :default => 0
     t.datetime "commented_at"
     t.datetime "active_from"
@@ -139,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20100522082725) do
     t.integer  "tried_count",                   :default => 0
     t.integer  "solved_count",                  :default => 0
     t.integer  "tests_count",                   :default => 0
+    t.boolean  "delta",                         :default => true, :null => false
   end
 
   add_index "problems", ["contest_id"], :name => "index_problems_on_contest_id"
@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(:version => 20100522082725) do
     t.integer "memory",      :default => 64,    :null => false
     t.text    "output",                         :null => false
     t.boolean "hidden",      :default => true
+    t.text    "diff"
   end
 
   add_index "results", ["solution_id"], :name => "index_results_on_solution_id"
@@ -208,9 +209,9 @@ ActiveRecord::Schema.define(:version => 20100522082725) do
     t.datetime "created_at",                       :null => false
     t.string   "title",                            :null => false
     t.text     "description",                      :null => false
-    t.boolean  "delta",          :default => true, :null => false
     t.integer  "comments_count", :default => 0
     t.datetime "commented_at"
+    t.boolean  "delta",          :default => true, :null => false
   end
 
   create_table "users", :force => true do |t|

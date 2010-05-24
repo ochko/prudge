@@ -2,6 +2,7 @@ class Result < ActiveRecord::Base
   belongs_to :solution
   belongs_to :test, :class_name =>'ProblemTest', :foreign_key=>'test_id'
   named_scope :correct, :conditions => { :matched => true }
+  named_scope :incorrect, :conditions => { :matched => false }
   named_scope :real, :conditions => { :hidden => true }
   
 
@@ -10,8 +11,9 @@ class Result < ActiveRecord::Base
     self.status = lines[0]
     self.time = lines[-1].sub('cpu usage: ','').sub(' miliseconds','')
     self.memory = lines[-2].sub('memory usage: ','').sub(' kbytes','')
-    self.matched = self.test.matches?(self.solution.output_path)
-    self.output = IO.readlines(self.solution.output_path)
+    self.diff = self.test.diff(self.solution.output_path)
+    self.matched = self.diff.empty?
+    self.output = IO.readlines(self.solution.output_path).join
     self.hidden = self.test.hidden
     save!
   end

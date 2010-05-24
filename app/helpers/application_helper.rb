@@ -53,8 +53,8 @@ module ApplicationHelper
     end
   end
 
-  def render_viewable(viewable)
-    if viewable
+  def render_viewable(hidden)
+    if !hidden
       image_tag('test-open.png', :title => 'Харагдана')
     else
       image_tag('test-hidden.png', :title => 'Харагдахгүй')

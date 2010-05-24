@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :user_session
 
   map.resources :contests, :member => [:participants]
-  map.resources :problems
+  map.resources :problems, :member => [:check]
   map.resources :lessons
   map.resources :topics
   map.resources :solutions, :member =>[:best, :submited, :solved, :view]

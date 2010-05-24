@@ -3,14 +3,16 @@
 <table>
   <tr>
     <th>Нэр</th>
-    <th>Тайлбар</th>
+    <th>Компайлэр</th>
+    <th>Ажиллуулагч</th>
     <th colspan="2"></th>
   </tr>
 
 <% for language in @languages %>
   <tr>
-    <td><%=h language.name %></td>
-    <td><%=h language.description %></td>
+    <td><%= language.name %></td>
+    <td><%= language.compiler %></td>
+    <td><%= language.runner %></td>
     <td><%= link_to image_tag('edit.png'), :action => 'edit', :id => language %></td>
     <td><%= link_to image_tag('delete.png'), { :action => 'destroy', :id => language }, :confirm => 'Are you sure?', :method => :post %></td>
   </tr>

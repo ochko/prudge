@@ -12,6 +12,9 @@
     <%= link_to image_tag('edit.png'), edit_problem_path(@problem), :title => 'Засварлах' %>
     <%= link_to image_tag('trash.png'), @problem, :confirm => 'Are you sure?', :method => :delete, :title=>'Устгах' %>
     <% end %>
+    <% if judge? %>
+    <%= link_to image_tag('button-refresh.png'), :action => :check %>
+    <% end %>
   </span>
 </h2>
 <span id="solve-link">

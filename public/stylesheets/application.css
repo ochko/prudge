@@ -181,7 +181,7 @@ dt img {
     list-style: square;
 }
 .awesome, .awesome:visited, .awesome:link {
-    background: #333 url(overlay.png) repeat-x; 
+    background: #333 url(images/overlay.png) repeat-x; 
     display: inline-block; 
     padding: 5px 10px 6px; 
     color: #fff; 
@@ -476,6 +476,9 @@ span.test-output{
 span.orig-output{
     background: url(/images/matching.png) no-repeat 100% 40%;
     padding:3px 15px 3px 0;
+    font-weight:bold;
+}
+span.diff-output{
     font-weight:bold;
 }
 span.right-button{
@@ -850,4 +853,7 @@ span.problem-source {
 }
 #check-wait{
     display:none;
+}
+#problem-text{
+    overflow:auto;
 }

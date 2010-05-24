@@ -12,6 +12,7 @@ class Problem < ActiveRecord::Base
            :foreign_key => 'topic_id',
            :dependent => :destroy,
            :order => 'created_at DESC'
+  has_many :users, :through => :solutions, :uniq => true
 
   validates_presence_of :name, :text
 
@@ -81,7 +82,7 @@ class Problem < ActiveRecord::Base
   end
 
   def collect_cache!
-    self.update_attribute(:solved_count => solutions.correct.size)
+    self.update_attribute(:solved_count, solutions.correct.size)
   end
 
   def self.collect_caches!
@@ -94,6 +95,14 @@ class Problem < ActiveRecord::Base
                               :tried_count => problem.tc.to_i,
                               :solved_count => problem.sc.to_i)
     end
+  end
+
+  def check!
+    unless self.tests.real.empty?
+      self.solutions.each { |solution| solution.check! }
+    end
+    self.collect_cache!
+    #self.users.each{ |u| u.collect_cache! }
   end
 
   private 

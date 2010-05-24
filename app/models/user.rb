@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   acts_as_authentic do |c|
     c.openid_required_fields = [:nickname, :email]
     c.validate_email_field = false
+    c.disable_perishable_token_maintenance = true
   end
 
   is_gravtastic! :size => 80, :rating => :PG
