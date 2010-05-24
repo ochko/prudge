@@ -86,8 +86,8 @@ class Solution < ActiveRecord::Base
       nominate_for_best!
     else
       self.update_attribute(:nocompile, true)
+      save_junk!
     end
-    save_junk!
   end
 
   def compile
