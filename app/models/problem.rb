@@ -102,7 +102,7 @@ class Problem < ActiveRecord::Base
       self.solutions.each { |solution| solution.check! }
     end
     self.collect_cache!
-    #self.users.each{ |u| u.collect_cache! }
+    self.users.each{ |u| u.collect_cache! }
   end
 
   private 

@@ -1,6 +1,6 @@
 $(function() {
-  $('#problem-tabs').tabs({ remote: true });
-  $('#tabs').tabs({ remote: true });
+	$('#problem-tabs').tabs({ remote: true, cache: true, spinner: '&nbsp; <img src="/images/loading.gif" /> &nbsp;' });
+	$('#tabs').tabs({ remote: true, cache: true, spinner: '&nbsp; <img src="/images/loading.gif" /> &nbsp;' });
 
   $("#flow_pagination a").live("click", function() {
     $(this).html("").addClass("loading");

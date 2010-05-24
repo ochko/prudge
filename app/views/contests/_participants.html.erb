@@ -14,8 +14,7 @@
 	    <tr>
               <td class="ranking"><%= show_place(num) %></td>
               <td class='small'>
-		<%= link_to user.login, :controller=>'account',
-		:action=>'show', :id=>user.id %></td>
+		<%= link_to user.login, user %></td>
               <td class='small'><%= "%.2f" % user.point %></td>
               <td class='small'><%= sec2milisec user.avg %></td>
               <td class='small'>
@@ -36,5 +35,5 @@
       </tr>
     </table>
     <% else %>
-    Оролцогчид алга!
+    Оролцогч алга!
     <% end %>

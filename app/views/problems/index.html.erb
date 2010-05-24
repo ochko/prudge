@@ -20,7 +20,7 @@
           <td><%= problem.id %></td>
           <td><%= link_to problem.name, problem %></td>
           <td><%= problem.level %></td>
-          <td><%= problem.user.login %></td>
+          <td><%= link_to problem.user.login, problem.user %></td>
           <td><%=l problem.created_at %></td>
           <td><%= problem.tried_count %> / <%= problem.solved_count %></td>
         </tr>
