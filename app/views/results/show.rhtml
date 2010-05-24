@@ -12,19 +12,17 @@
   <span class="go-up"><%= link_to 'Бодолт руу', @result.solution  %></span>
 </div>
 
-<div class="span-6 border prepend-1 prepend-top scroll">
+<div class="span-6 border scroll prepend-top">
   <span class="test-input">Оролт</span>
   <pre><%= @result.test.input %></pre>
 </div>
-<div class="span-6 border prepend-top scroll">
+<div class="span-6 border scroll prepend-top">
   <span class="test-output">Гаралт</span>
   <pre><%= @result.output %></pre>
 </div>
 <% if !@result.matched %>
-<div class="span-6 prepend-top scroll">
-  <span class="orig-output">Зөв Хариу</span>
-  <pre><%= @result.test.output %></pre>
+<div class="span-7 scroll prepend-top">
   <span class="diff-output">&raquo; Зөрүү &laquo;</span>
-  <pre><%= @result.diff %></pre>
+  <pre><%= diff_render @result.diff %></pre>
 </div>
 <% end %>

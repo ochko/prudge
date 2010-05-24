@@ -1,6 +1,6 @@
 class ProblemTest < ActiveRecord::Base
   TESTS = 'judge/tests'
-  DIFF = '/usr/bin/diff'
+  DIFF = '/usr/bin/diff -bu'
   
   belongs_to :problem, :counter_cache => 'tests_count'
   has_many :results, :dependent => :destroy, :foreign_key => 'test_id'
@@ -34,7 +34,7 @@ class ProblemTest < ActiveRecord::Base
   end
 
   def diff(file_path)
-    `#{DIFF} -b #{file_path} #{output_path}`
+    `#{DIFF} #{file_path} #{output_path}`
   end
 
 end

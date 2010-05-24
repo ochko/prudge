@@ -475,7 +475,7 @@ span.test-output{
 }
 span.orig-output{
     background: url(/images/matching.png) no-repeat 100% 40%;
-    padding:3px 15px 3px 0;
+    padding:10px 15px 3px 0;
     font-weight:bold;
 }
 span.diff-output{
@@ -856,4 +856,14 @@ span.problem-source {
 }
 #problem-text{
     overflow:auto;
+}
+ins, del {
+    text-decoration:none;
+    display:block;
+}
+ins {
+    color:#5a5;
+}
+del {
+    color:#c43;
 }

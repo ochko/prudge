@@ -1,19 +1,4 @@
 module ResultsHelper
-  def head_of(test_io, max=60)
-    if test_io.nil?
-      return ''
-    end
-    first_line = test_io.split(/\n/)[0]
-    if first_line.nil?
-      return ''
-    end
-    if first_line.size > max
-      return first_line[0,max] + '...'
-    else
-      return first_line
-    end
-  end
-
   def inverted_table(results)
     matrix = []
     matrix << ['Тэст', '', 'Ажиллагаа', 'Хугацаа', 'Санах ой', 'Хариу']
@@ -31,4 +16,12 @@ module ResultsHelper
     end
     content << '</table>'
   end
+
+  def diff_render(diff)
+    diff.gsub(/^(\-|\+|@){2}.+\n/,'').
+      gsub('\ No newline at end of file','').
+      gsub(/^\+(.+)\n/, '<ins>&raquo;\1</ins>').
+      gsub(/^\-(.+)\n/, '<del> \1&raquo;</del>')
+  end
+  
 end
