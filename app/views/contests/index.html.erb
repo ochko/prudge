@@ -1,15 +1,8 @@
 <h2>Тэмцээнүүд</h2>
-<%= will_paginate @contests,:class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
 
-<table width="100%">
-<% for contest in @contests %>
-  <tr>
-    <td><%= link_to contest.name, contest %> (<span class="rank_<%= contest.level %>"><%= contest.level_name %></span>)</td>
-    <td><%=l contest.start %> &raquo;
-        <%=l contest.end %></td>
-  </tr>
-<% end %>
+<table id="past-contests">
+<%=render :partial => 'contest', :collection => @contests %>
 </table>
 
-<%= will_paginate @contests,:class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+<%= will_paginate @contests, :renderer => FlowPagination::LinkRenderer, :noajax => true %>
 

@@ -16,9 +16,9 @@
       </tr>
 
       <% for problem in @problems %>
-        <tr <%= 'class="already" title="Бодчихсон"' if @solved.include?(problem.id) %>>
+        <tr>
           <td><%= problem.id %></td>
-          <td><%= link_to problem.name, problem %></td>
+          <td <%= 'class="already" title="Бодчихсон"' if @solved.include?(problem.id) %>><%= link_to problem.name, problem %></td>
           <td><%= problem.level %></td>
           <td><%= link_to problem.user.login, problem.user %></td>
           <td><%=l problem.created_at %></td>

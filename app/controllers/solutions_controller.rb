@@ -7,6 +7,10 @@ class SolutionsController < ApplicationController
     @solutions = Solution.
       paginate(:include => [:user, :problem], :page => params[:page],
                :order => 'solutions.uploaded_at desc')
+    respond_to do |format|
+      format.js { render :layout => false }
+      format.html
+    end
   end
 
   def show

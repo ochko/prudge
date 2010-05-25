@@ -12,8 +12,8 @@ class CppVersionUp < ActiveRecord::Migration
   CLIMITS = '(CHAR_BIT|SCHAR_MIN|SCHAR_MAX|UCHAR_MAX|CHAR_MIN|CHAR_MAX|MB_LEN_MAX|SHRT_MIN|SHRT_MAX|USHRT_MAX|INT_MIN|INT_MAX|UINT_MAX|LONG_MIN|LONG_MAX|ULONG_MAX)'
 
   def self.up
-    Language.find_by_name("C++").solutions.valuable.notcompiled.each do |solution|
-      `sed -i 's/include</include </' #{solution.source.path}`
+#    Language.find_by_name("C++").solutions.valuable.notcompiled.each do |solution|
+#      `sed -i 's/include</include </' #{solution.source.path}`
 #      unless `ack-grep '#{CSTRING}' #{solution.source.path}`.empty? 
 #        if `ack-grep '(<cstring>|<string.h>)' #{solution.source.path}`.empty?
 #          `sed -i '1 i #include <cstring>' #{solution.source.path}`
@@ -36,9 +36,9 @@ class CppVersionUp < ActiveRecord::Migration
 #      if solution.junk =~ /#{CSTDLIB}’ was not declared/
 #          `sed -i '1 i #include <cstdlib>' #{solution.source.path}`          
 #      end
-      if solution.junk =~ /#{CLIMITS}’ was not declared/
-          `sed -i '1 i #include <climits>' #{solution.source.path}`          
-      end
+#      if solution.junk =~ /#{CLIMITS}’ was not declared/
+#          `sed -i '1 i #include <climits>' #{solution.source.path}`          
+#      end
 #
 #      if solution.junk =~ /#{ALGORITHM}’ was not declared/
 #          `sed -i '1 i #include <algorithm>' #{solution.source.path}`          
@@ -84,7 +84,7 @@ class CppVersionUp < ActiveRecord::Migration
 #        `sed -i 's/hash_map.h/map/' #{solution.source.path}`
 #        `sed -i 's/hash_map/map/' #{solution.source.path}`
 #      end
-    end
+#    end
 
   end
 

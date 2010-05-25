@@ -7,6 +7,10 @@ class ContestsController < ApplicationController
 
   def index
     @contests = Contest.paginate(:order => "start DESC", :page => params[:page])
+    respond_to do |format|
+      format.js { render :layout => false}
+      format.html
+    end
   end
 
   def last

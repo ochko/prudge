@@ -1,14 +1,7 @@
 <h1>Сүүлийн бодолтууд</h1>
-<%= will_paginate @solutions,:class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
 
-<table>
-  <% @solutions.each do |s| %>
-    <tr>
-      <td><%= link_to s.user.login, s.user, :class=> (s.correct ? 'ok' : 'ng') %> </td>
-      <td><%=l s.uploaded_at %></td>
-      <td><%= link_to s.problem.name, s.problem %></td>
-    </tr>
-  <% end %>
+<table id="last-solutions">
+<%=render :partial => 'solution', :collection => @solutions %>
 </table>
 
-<%= will_paginate @solutions,:class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+<%= will_paginate @solutions, :renderer => FlowPagination::LinkRenderer, :noajax => true %>

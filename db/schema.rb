@@ -40,10 +40,10 @@ ActiveRecord::Schema.define(:version => 20100523155839) do
     t.datetime "start",                            :null => false
     t.datetime "end",                              :null => false
     t.text     "description",                      :null => false
+    t.boolean  "delta",          :default => true, :null => false
     t.integer  "level",          :default => 0
     t.integer  "comments_count", :default => 0
     t.datetime "commented_at"
-    t.boolean  "delta",          :default => true, :null => false
   end
 
   create_table "languages", :force => true do |t|
@@ -60,9 +60,9 @@ ActiveRecord::Schema.define(:version => 20100523155839) do
     t.datetime "updated_at",                       :null => false
     t.string   "title",                            :null => false
     t.text     "text",                             :null => false
+    t.boolean  "delta",          :default => true, :null => false
     t.integer  "comments_count", :default => 0
     t.datetime "commented_at"
-    t.boolean  "delta",          :default => true, :null => false
   end
 
   add_index "lessons", ["author_id"], :name => "index_lessons_on_author_id"
@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(:version => 20100523155839) do
     t.text     "text",                                            :null => false
     t.datetime "created_at",                                      :null => false
     t.string   "source"
+    t.boolean  "delta",                         :default => true, :null => false
     t.integer  "comments_count",                :default => 0
     t.datetime "commented_at"
     t.datetime "active_from"
@@ -138,7 +139,6 @@ ActiveRecord::Schema.define(:version => 20100523155839) do
     t.integer  "tried_count",                   :default => 0
     t.integer  "solved_count",                  :default => 0
     t.integer  "tests_count",                   :default => 0
-    t.boolean  "delta",                         :default => true, :null => false
   end
 
   add_index "problems", ["contest_id"], :name => "index_problems_on_contest_id"
@@ -209,9 +209,9 @@ ActiveRecord::Schema.define(:version => 20100523155839) do
     t.datetime "created_at",                       :null => false
     t.string   "title",                            :null => false
     t.text     "description",                      :null => false
+    t.boolean  "delta",          :default => true, :null => false
     t.integer  "comments_count", :default => 0
     t.datetime "commented_at"
-    t.boolean  "delta",          :default => true, :null => false
   end
 
   create_table "users", :force => true do |t|
