@@ -14,9 +14,6 @@ class Solution < ActiveRecord::Base
     :url => "/judge/solutions/:user/:problem/:id.code",
     :path => ":rails_root/judge/solutions/:user/:problem/:id.code"
 
-  # TODO: Delete after migration
-  has_attachment :path_prefix => 'judge/src'
-
   validates_attachment_presence :source
   validates_attachment_size :source, :less_than => 64.kilobytes
 
