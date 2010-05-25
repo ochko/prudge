@@ -1,7 +1,7 @@
 development: &my_settings
   mem_limit: 256M
-  port: 3316
-  listen: 127.0.0.1:3316
+  port: 3317
+  listen: 127.0.0.1:3317
   enable_star: true
   min_prefix_len: 0
   min_infix_len: 1

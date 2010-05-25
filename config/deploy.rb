@@ -1,23 +1,23 @@
 require 'yaml'
 
-set :application, "zaan"
+set :application, "coder"
 
-set :deploy_to, "/home/ochko/apps/zaan"
+set :deploy_to, "/home/ochko/apps/coder"
 set :repository, "file://."
 set :scm, :git 
 set :deploy_via, :copy
 set :copy_cache, false
 set :copy_exclude, [".git"]
-set :copy_remote_dir, "/home/ochko/apps/zaan/tmp"
+set :copy_remote_dir, "/home/ochko/apps/coder/tmp"
 
 set :user, "ochko"
 set :port, 2002
 set :ssh_options, { :forward_agent => true }
 set :use_sudo, false
 
-role :app, "zaan.query.mn"
-role :web, "zaan.query.mn"
-role :db,  "zaan.query.mn", :primary => true
+role :app, "coder.query.mn"
+role :web, "coder.query.mn"
+role :db,  "coder.query.mn", :primary => true
 
 after "deploy:update_code", "config:copy_shared_configurations"
 
