@@ -9,19 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100525120915) do
-
-  create_table "attachments", :force => true do |t|
-    t.integer  "attachable_id"
-    t.string   "attachable_type", :limit => 15, :null => false
-    t.integer  "size"
-    t.string   "content_type",    :limit => 31, :null => false
-    t.string   "filename",        :limit => 63, :null => false
-    t.string   "notes"
-    t.datetime "created_at",                    :null => false
-  end
-
-  add_index "attachments", ["attachable_type"], :name => "index_attachments_on_attachable_type"
+ActiveRecord::Schema.define(:version => 20100525122014) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",                 :null => false
