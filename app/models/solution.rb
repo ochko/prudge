@@ -81,9 +81,6 @@ class Solution < ActiveRecord::Base
       end
       summarize_results!
       nominate_for_best!
-    else
-      self.update_attribute(:nocompile, true)
-      save_junk!
     end
   end
 
@@ -91,7 +88,10 @@ class Solution < ActiveRecord::Base
     FileUtils.mkdir(user.exe_dir) unless File.directory? user.exe_dir
     FileUtils.rm(exe_path) if File.exist? exe_path
     FileUtils.ln(source.path, source_path, :force => true)
-    system("#{language.compiler % [source_path, exe_path, exe_name]} 2> #{error_path}")
+    compiled = system("#{language.compiler % [source_path, exe_path, exe_name]} 2> #{error_path}")
+    save_error_output! unless compiled
+    update_attribute(:nocompile, !compiled)
+    compiled
   end
 
   def execute(test)
@@ -107,9 +107,10 @@ class Solution < ActiveRecord::Base
     system(cmd)
   end
 
-  def save_junk!
+  def save_error_output!
     if File.exist?(error_path)
-      self.junk = IO.readlines(error_path).join('<br/>').gsub(SOLUTIONS_PATH,'').gsub(/[0-9]+\//,'')
+      self.junk = IO.readlines(error_path).join('<br/>').
+        gsub(SOLUTIONS_PATH,'').gsub(/[0-9]+\//,'')
       FileUtils.rm(error_path)
     else
       self.junk = ''
