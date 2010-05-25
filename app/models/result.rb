@@ -9,7 +9,7 @@ class Result < ActiveRecord::Base
   def after_create    
     lines = IO.readlines(self.solution.usage_path)
     self.status = lines[0]
-    self.time = lines[-1].sub('cpu usage: ','').sub(' miliseconds','')
+    self.time = lines[-1].sub('cpu usage: ','').sub(' seconds','').to_f*1000
     self.memory = lines[-2].sub('memory usage: ','').sub(' kbytes','')
     self.diff = self.test.diff(self.solution.output_path)
     self.matched = self.diff.empty?
