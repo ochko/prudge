@@ -19,7 +19,7 @@ role :app, "coder.query.mn"
 role :web, "coder.query.mn"
 role :db,  "coder.query.mn", :primary => true
 
-after "deploy:update_code", "config:copy_shared_configurations"
+after "deploy:update_code", "config:copy_shared_configurations", "data:link"
 
 # Overrides for Phusion Passenger
 namespace :deploy do
@@ -40,6 +40,16 @@ namespace :config do
   task :copy_shared_configurations, :roles => [:app] do
     %w[database.yml].each do |f|
       run "ln -nsf #{shared_path}/config/#{f} #{release_path}/config/#{f}"
+    end
+  end
+end
+
+# Data directory linking
+namespace :data do
+  desc "link data directories"
+  task :link, :roles => [:app] do
+    %w[judge].each do |f|
+      run "ln -nsf #{shared_path}/#{f} #{release_path}/#{f}"
     end
   end
 end
