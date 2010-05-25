@@ -3,7 +3,7 @@ class ResultsController < ApplicationController
   layout 'problems'
 
   def show
-    @result = ActiveRecord::Result.find(params[:id])
+    @result = ActiveRecord::Base::Result.find(params[:id])
 
     return if judge?
     
