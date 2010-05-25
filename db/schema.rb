@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100523155839) do
+ActiveRecord::Schema.define(:version => 20100525120915) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "attachable_id"
@@ -158,15 +158,6 @@ ActiveRecord::Schema.define(:version => 20100523155839) do
 
   add_index "results", ["solution_id"], :name => "index_results_on_solution_id"
   add_index "results", ["test_id"], :name => "index_results_on_test_id"
-
-  create_table "role_users", :force => true do |t|
-    t.integer "role_id", :null => false
-    t.integer "user_id", :null => false
-  end
-
-  create_table "roles", :force => true do |t|
-    t.string "title", :null => false
-  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
