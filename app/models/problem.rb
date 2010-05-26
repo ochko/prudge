@@ -81,11 +81,14 @@ class Problem < ActiveRecord::Base
     set_property :delta => true
   end
 
-  def collect_cache!
-    self.update_attribute(:solved_count, solutions.correct.size)
+  def check!
+    unless self.tests.real.empty?
+      self.solutions.each { |solution| solution.check! }
+    end
   end
 
-  def self.collect_caches!
+  def self.resum_counts!
+    Problem.update_all("tried_count = 0, solved_count = 0")
     Problem.
       find(:all,
            :select => "problems.*, count(s.id) as tc, sum(s.correct) as sc",
@@ -95,14 +98,6 @@ class Problem < ActiveRecord::Base
                               :tried_count => problem.tc.to_i,
                               :solved_count => problem.sc.to_i)
     end
-  end
-
-  def check!
-    unless self.tests.real.empty?
-      self.solutions.each { |solution| solution.check! }
-    end
-    self.collect_cache!
-    self.users.each{ |u| u.collect_cache! }
   end
 
   private 

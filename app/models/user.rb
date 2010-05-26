@@ -28,24 +28,6 @@ class User < ActiveRecord::Base
     Notifier.deliver_password_reset_instructions(self)  
   end
 
-  def collect_cache!
-    effectives = solutions.best.effective
-    unless effectives.empty?
-      update_attributes(:solutions_count => effectives.count,
-                        :points => effectives.sum(:point),
-                        :uploaded_at => effectives.maximum(:uploaded_at))
-    else
-      update_attributes(:solutions_count => solutions.best.count,
-                        :points => 0.0)
-    end
-  end
-
-  def self.collect_caches!
-    User.all.each do |user|
-      user.collect_cache!
-    end
-  end
-
   def solutions_dir() "#{Solution::SOLUTIONS_PATH}/#{self.id}" end
   def exe_dir()       "#{solutions_dir}/exe" end
 
@@ -78,4 +60,15 @@ class User < ActiveRecord::Base
     comments.first && 
       comments.first.created_at > Time.now - 10.seconds
   end
+  
+  def resum_points!
+    update_attribute(:points, solutions.best.sum(:point))
+  end
+
+  def self.resum_points!
+    User.all.each do |user|
+      user.resum_points!
+    end
+  end
+
 end

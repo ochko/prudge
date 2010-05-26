@@ -16,7 +16,7 @@ class Solution < ActiveRecord::Base
 
   validates_attachment_presence :source
   validates_attachment_size :source, :less_than => 64.kilobytes
-
+  
   has_many :comments,
            :as => 'topic',
            :class_name => 'Comment',
@@ -115,8 +115,10 @@ class Solution < ActiveRecord::Base
   end
 
   def cleanup!
-      self.results.clear
-      self.update_attributes(:checked => false,
+    self.results.clear
+    self.user.decrement!(:points, self.point) if self.point > 0
+    self.problem.decrement!(:solved_count) if self.correct
+    self.update_attributes(:checked => false,
                              :nocompile => false,
                              :invalidated => false,
                              :correct => false,
@@ -125,21 +127,25 @@ class Solution < ActiveRecord::Base
                              :isbest => false,
                              :point => 0.0,
                              :junk => nil) 
+    
   end
 
   def summarize_results!
-    self.update_attributes(:checked => true,
-                           :correct => (self.results.correct.real.size == 
-                                        self.problem.tests.real.size),
-                           :percent => (self.results.correct.real.size / 
-                                        self.problem.tests.real.size),
-                           :time => (self.results.sum('time') / 
-                                     self.results.size),
-                           :point => (self.results.correct.real.size / 
-                                      self.problem.tests.real.size) * 
-                           self.problem.level) unless self.results.empty?
+    unless self.results.empty?
+      passed = self.results.correct.real.size
+      total = self.problem.tests.real.size
+      self.update_attributes(:checked => true,
+                             :correct => (passed == total),
+                             :percent => (passed.to_f / total),
+                             :time => (self.results.sum(:time) / self.results.size),
+                             :point => (passed.to_f / total) * self.problem.level) 
+      self.user.increment!(:points, self.point) if self.point > 0
+      self.problem.increment!(:solved_count) if self.correct
+    end
   end
-
+  
+  after_destroy { |solution| solution.user.decrement!(:points, solution.point)}
+  
   def nominate_for_best!
     siblings = Solution.
       find(:all, :conditions => ['user_id = ? and problem_id = ?',

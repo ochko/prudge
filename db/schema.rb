@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100526161023) do
+ActiveRecord::Schema.define(:version => 20100526170946) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",                 :null => false
@@ -173,7 +173,7 @@ ActiveRecord::Schema.define(:version => 20100526161023) do
     t.string   "source_content_type"
     t.integer  "source_file_size"
     t.datetime "uploaded_at"
-    t.float    "point"
+    t.float    "point",               :default => 0.0
     t.integer  "comments_count",      :default => 0
     t.datetime "commented_at"
     t.text     "junk"

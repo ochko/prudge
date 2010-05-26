@@ -4,7 +4,7 @@ module ResultsHelper
     matrix << ['Тэст', '', 'Ажиллагаа', 'Хугацаа', 'Санах ой', 'Хариу']
     results.each_with_index do |result, index|
       matrix << [index+1, 
-                 test_purpose(result), 
+                 render_viewable(result.hidden), 
                  translate_message(result.status), 
                  sec2milisec(result.time), 
                  result.memory, 
