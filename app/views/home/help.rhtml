@@ -5,7 +5,7 @@
 <span class="news-meta"><%=l n.created_at %></span>
 <%=markdown n.content %>
 <% end %>
-<%= will_paginate @helps, :class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+<%= will_paginate @helps, :class=>'apple_pagination', :previous_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
 
 <% if admin? %>
 <%= link_to 'Шинэ тусламж', :controller=>'pages', :action => 'new' %>

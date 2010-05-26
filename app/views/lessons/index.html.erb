@@ -1,6 +1,6 @@
 <h1>Хичээлүүд</h1>
 
-  <%= will_paginate @lessons, :class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+  <%= will_paginate @lessons, :class=>'apple_pagination', :previous_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
 
   <% @lessons.each do |lesson| %>
   <div class="lesson-item">
@@ -17,5 +17,5 @@
   </div>
   <% end %>
 
-  <%= will_paginate @lessons, :class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+  <%= will_paginate @lessons, :class=>'apple_pagination', :previous_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
 

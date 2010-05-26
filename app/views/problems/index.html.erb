@@ -1,7 +1,7 @@
 <h1>Бодлогууд</h1>
 
   <% if @problems.size > 0 %>
-    <%= will_paginate @problems, :class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+    <%= will_paginate @problems, :class=>'apple_pagination', :previous_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
     <table id="problems">
       <tr>
         <th>ID</th>
@@ -26,7 +26,7 @@
         </tr>
       <% end %>
     </table>
-    <%= will_paginate @problems, :class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+    <%= will_paginate @problems, :class=>'apple_pagination', :previous_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
   <% else %>
     Бодлого алга!
   <% end %>

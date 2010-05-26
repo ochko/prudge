@@ -1,6 +1,6 @@
 <h2>Хайлт: "<%= params[:q] %>"</h2>
 
-<%= will_paginate @results, :class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+<%= will_paginate @results, :class=>'apple_pagination', :previous_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
 
 <% @results.each do |result| %>
 <div>
@@ -9,4 +9,4 @@
 </div>
 <% end %>
 
-<%= will_paginate @results, :class=>'apple_pagination', :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+<%= will_paginate @results, :class=>'apple_pagination', :previous_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
