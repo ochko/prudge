@@ -15,7 +15,7 @@
   </span>
 
   <span id="solution-actions">
-  <% if (!@solution.checked || @solution.invalidated) && !@solution.nocompile %>
+  <% if !@solution.checked && !@solution.nocompile %>
   <%= link_to_remote "Шалгах", :update => "result",
   :url => { :action => "check", :id => @solution },
   :html=>{:id=>'check-button', :class=>"medium grey awesome" },

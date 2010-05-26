@@ -13,7 +13,7 @@
     <%= link_to image_tag('trash.png'), @problem, :confirm => 'Are you sure?', :method => :delete, :title=>'Устгах' %>
     <% end %>
     <% if judge? %>
-    <%= link_to image_tag('button-refresh.png'), :action => :check %>
+    <%= link_to image_tag('button-refresh.png'), {:action => :check}, :title => 'Бүх бодолтыг дахин шалгах' %>
     <% end %>
   </span>
 </h2>

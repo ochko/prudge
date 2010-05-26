@@ -7,8 +7,6 @@ class ProblemTest < ActiveRecord::Base
 
   named_scope :real, :conditions => { :hidden => true }
 
-  after_update { |t| t.problem.test_touched! }
-  
   after_save { |t| t.save_to_file! }
 
   def dir

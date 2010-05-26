@@ -25,10 +25,6 @@ class Problem < ActiveRecord::Base
     self.user_id == someone.id
   end
 
-  def test_touched!
-    solutions.each { |solution| solution.invalidate!}
-  end
-
   def correct_solutions
     solutions.correct
   end

@@ -140,17 +140,15 @@ class SolutionsController < ApplicationController
   def check
     @solution = Solution.find(params[:id])
     if !judge?
-      if @solution.nocompile || 
-          (!@solution.invalidated && @solution.checked)
-        render :text => 'Шалгачихсан'
-        return
-      end
       if !@solution.owned_by?(current_user)
         render :text => 'Бусдын бодлогыг шалгахгүй!'
         return
+      elsif @solution.nocompile || @solution.checked
+        render :text => 'Шалгачихсан'
+        return
       end
     end
-    if @solution.problem.tests.real.size == 0
+    if @solution.problem.tests.real.empty?
       render :text => 'Шалгах тэст байхгүй байна(Эсвэл харагдахгүй тэст байхгүй)'
       return
     end

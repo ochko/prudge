@@ -167,7 +167,6 @@ ActiveRecord::Schema.define(:version => 20100526170946) do
     t.datetime "created_at",                              :null => false
     t.boolean  "locked",              :default => false,  :null => false
     t.boolean  "isbest",              :default => true,   :null => false
-    t.boolean  "invalidated",         :default => false
     t.integer  "contest_id"
     t.string   "source_file_name"
     t.string   "source_content_type"
