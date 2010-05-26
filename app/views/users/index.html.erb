@@ -4,7 +4,7 @@
 
 <table id="all-rank">
   <tr>
-    <th colspan="7" class="level-legend">
+    <th colspan="6" class="level-legend">
       <%= levels_legend :span %>
     </th>
   </tr>
@@ -13,23 +13,21 @@
     <th></th>
     <th>Сургууль/Байгууллага</th>
     <th width='60'>Нийт оноо</th>
-    <th width='1%'>Дундаж хугацаа</th>
     <th width='1%'>Бодсон бодлого</th>
     <th>Сүүлд бодсон</th>
   </tr>
-<% @users.each_with_index do |user, i| %>
+  <% @users.each_with_index do |user, i| %>
   <tr>
     <td class="ranking"><%= i + 1 + @users.offset %></td>
     <td><%= link_to user.login, user, :class=>"rank_#{user.level}" %></td>
     <td><%= truncate(strip_tags(user.school), :length => 35) %></td>
-    <td><%= "%.2f" % user.points %></td>
-    <td><%= sec2milisec user.average %></td>
+    <td><%= "%.3f" % user.points %></td>
     <td><%= user.solutions_count %></td>
     <td><%=l(user.uploaded_at) if user.uploaded_at %></td>
   </tr>
-<% end %>
+  <% end %>
   <tr>
-    <th colspan="7" class="level-legend">
+    <th colspan="6" class="level-legend">
       <%= levels_legend :span %>
     <th>
   </tr>

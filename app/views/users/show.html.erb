@@ -3,7 +3,6 @@
 </h2>
 <div id="user-statistic">
   <span class="user-points" title="Нийт оноо"><%= "%.2f" % @user.points if !@user.points.nil? %></span>
-  <span class="user-average" title="Дундаж хугацаа"><%= sec2milisec @user.average if !@user.average.nil? %></span>
 </div>
 <div id="medals" class="span-20">
   <%= image_tag(@user.gravatar_url, :class => "portrait") %>

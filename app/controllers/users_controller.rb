@@ -36,8 +36,8 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.paginate(:order => "points DESC, average ASC" ,
-                           :page => params[:page], :per_page=>100)
+    @users = User.paginate(:order => "points DESC" ,
+                           :page => params[:page])
 
   end
 
