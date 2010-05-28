@@ -285,9 +285,9 @@ th.level-legend span {
     background: url(/images/points.png) no-repeat 0px 2px; 
     padding-left: 15px; 
 }
-.user-average {
-    background: url(/images/clock.png) no-repeat 0px 2px; 
-    padding-left: 16px; 
+.user-access {
+    background: url(/images/clock.png) no-repeat 0px 3px; 
+    padding-left:16px; 
 }
 #medals {margin: 0 0 10px 0; min-height:85px;}
 #medals a img { padding: 1px 2px; }
