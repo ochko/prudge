@@ -65,6 +65,10 @@ class User < ActiveRecord::Base
     update_attribute(:points, solutions.best.sum(:point))
   end
 
+  def solution_uploaded!
+    self.update_attribute(:uploaded_at, Time.now)
+  end
+
   def self.resum_points!
     User.all.each do |user|
       user.resum_points!
