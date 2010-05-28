@@ -30,7 +30,7 @@ class Problem < ActiveRecord::Base
   end
 
   def best_solution
-    self.solutions.correct(:order => 'time ASC').first
+    self.solutions.correct.by_speed.first
   end
 
   def corrects_count

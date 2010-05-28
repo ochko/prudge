@@ -29,7 +29,7 @@ class Solution < ActiveRecord::Base
   named_scope :correct, :conditions => { :correct => true }
   named_scope :for_user, lambda { |user| { :conditions => ['user_id =?', user.id], :include => [:language, :problem], :order => 'created_at desc' } }
   named_scope :valuable, :conditions => 'percent > 0'
-
+  named_scope :by_speed, :order => 'time ASC, uploaded_at ASC'
   
   def exe_name
     return @exe if @exe
@@ -145,7 +145,9 @@ class Solution < ActiveRecord::Base
   end
   
   after_destroy { |solution| solution.user.decrement!(:points, solution.point)}
-  
+
+  after_save { |solution| solution.user.solution_uploaded! }
+
   def nominate_for_best!
     siblings = Solution.
       find(:all, :conditions => ['user_id = ? and problem_id = ?',
