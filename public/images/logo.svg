@@ -37,7 +37,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="5.7"
      inkscape:cx="62.948191"
-     inkscape:cy="20.414861"
+     inkscape:cy="-0.9873521"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -54,7 +54,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -78,7 +78,7 @@
              x="-2.8070176"
              y="-5.7894735"
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Fontin;-inkscape-font-specification:Fontin" /></flowRegion><flowPara
-           id="flowPara3662"></flowPara></flowRoot>      <flowRoot
+           id="flowPara3662" /></flowRoot>      <flowRoot
          xml:space="preserve"
          id="flowRoot3664"
          style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#101010;fill-opacity:1;stroke:none;font-family:HVD Peace;-inkscape-font-specification:HVD Peace"
@@ -95,17 +95,18 @@
            style="font-size:18.00000033;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Tiza;-inkscape-font-specification:Tiza">coder.mn</flowPara></flowRoot>    </g>
     <text
        xml:space="preserve"
-       style="font-size:20.48332787000000010px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#333333;fill-opacity:1;stroke:none;font-family:Orbitron;-inkscape-font-specification:Orbitron Bold"
-       x="1.7467732"
-       y="1043.0641"
+       style="font-size:26.51959991px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#333333;fill-opacity:1;stroke:none;font-family:Orbitron;-inkscape-font-specification:Orbitron Bold"
+       x="1.0747615"
+       y="1350.4468"
        id="text3672"
        inkscape:export-xdpi="140.75951"
-       inkscape:export-ydpi="140.75951"><tspan
+       inkscape:export-ydpi="140.75951"
+       transform="scale(1.294692,0.77238448)"><tspan
          sodipodi:role="line"
          id="tspan3674"
-         x="1.7467732"
-         y="1043.0641"
-         style="font-size:9.21749782999999923px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Orbitron;-inkscape-font-specification:Orbitron Bold;fill:#333333;fill-opacity:1">WE ARE THE CHAMPIONS</tspan></text>
+         x="1.0747615"
+         y="1350.4468"
+         style="font-size:11.93382072px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:Orbitron;-inkscape-font-specification:Orbitron Bold">HAPPY CODING</tspan></text>
     <path
        style="fill:none;stroke:#333333;stroke-width:1.19999999999999996;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="m 2,22 134,0"
