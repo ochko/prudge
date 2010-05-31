@@ -3,7 +3,11 @@ module UsersHelper
     legend = ''
     Contest::LEVEL_NAMES.each do |level, name|
       if level != 0
-        legend << content_tag(tag, "#{name}: #{Contest::LEVEL_POINTS[level-1]}-#{Contest::LEVEL_POINTS[level]}", :class =>"rank_#{level}")
+        from = Contest::LEVEL_POINTS[level-1]
+        to = Contest::LEVEL_POINTS[level]
+        from = '' if from == 0
+        to = '' if to == 1000
+        legend << content_tag(tag, "#{name}: #{from}~#{to}", :class =>"rank_#{level}")
       end
     end 
     legend
