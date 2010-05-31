@@ -22,7 +22,7 @@ class PagesController < ApplicationController
     @page.user_id = current_user.id
     if @page.save
       flash[:notice] = 'Page was successfully created.'
-      redirect_to :action => 'list'
+      redirect_to :action => 'index'
     else
       render :action => 'new'
     end
@@ -44,6 +44,6 @@ class PagesController < ApplicationController
 
   def destroy
     Page.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    redirect_to :action => 'index'
   end
 end
