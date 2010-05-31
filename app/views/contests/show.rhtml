@@ -21,7 +21,7 @@
     <li><%= link_to content_tag(:span, 'Оролцогчид'), {:action=>'participants', :name => "participant-of"} %></li>
   </ul> 
   <div id="included-problems"> 
-    <% if @contest.started? %>
+    <% if @contest.started? || admin? %>
     <table width="100%">
       <tr>
 	<th>ID</th>
@@ -43,8 +43,6 @@
       </tr>
       <% end %>
     </table>
-    <% elsif admin? %>
-    <%= render :partial => 'problems/list' %>
     <% end %>
   </div>
   <div id="participant-of"> </div>
