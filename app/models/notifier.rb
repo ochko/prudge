@@ -10,4 +10,13 @@ class Notifier < ActionMailer::Base
                   :login => user.login
   end
 
+  def release_notification(user)
+    subject       "Кодер.мн шинэчлэгдлээ"
+    from          "Coder.mn"
+    recipients    user.email
+    sent_on       Time.now  
+    body          :edit_password_reset_url => edit_password_reset_url(user.perishable_token),
+                  :login => user.login
+  end
+
 end

@@ -28,6 +28,11 @@ class User < ActiveRecord::Base
     Notifier.deliver_password_reset_instructions(self)  
   end
 
+  def deliver_release_notification!
+    reset_perishable_token!  
+    Notifier.deliver_release_notification(self)  
+  end
+
   def solutions_dir() "#{Solution::SOLUTIONS_PATH}/#{self.id}" end
   def exe_dir()       "#{solutions_dir}/exe" end
 
