@@ -30,9 +30,14 @@ class ApplicationController < ActionController::Base
 
   def require_user
     unless current_user
-      store_location
-      flash[:notice] = "Энэ хуудас руу орохын тулд нэвтэрсэн байх хэрэгтэй"
-      redirect_to login_url
+      respond_to do |format|
+        format.html do
+          store_location
+          flash[:notice] = "Энэ хуудас руу орохын тулд нэвтэрсэн байх хэрэгтэй"
+          redirect_to login_url
+        end
+        format.js { render :text => "Ийшээ хандахын тулд ЛОГИН хийнэ үү?"}
+      end
       return false
     end
   end

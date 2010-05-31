@@ -3,7 +3,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :password_resets
   map.resource :user_session
 
-  map.resources :contests, :member => [:participants]
+  map.resources :contests
+  map.resources :participants
   map.resources :problems, :member => [:check]
   map.resources :lessons
   map.resources :topics

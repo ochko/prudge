@@ -1,6 +1,6 @@
 class ContestsController < ApplicationController
   before_filter :require_user,
-                :except => [:index, :last, :show, :participant]
+                :except => [:index, :last, :show]
 
   before_filter :require_judge, :only => [:create, :update, :destroy]
   before_filter :prepare_wmd, :only => [:edit, :new]
@@ -21,12 +21,6 @@ class ContestsController < ApplicationController
 
   def show
     @contest = Contest.find(params[:id])
-  end
-
-  def participants
-    @contest = Contest.find(params[:id])
-    @numbers, @standings = @contest.standings
-    render :partial => 'participants'
   end
 
   def new
@@ -60,13 +54,6 @@ class ContestsController < ApplicationController
   def destroy
     Contest.find(params[:id]).destroy
     redirect_to :action => 'index'
-  end
-
-  def participant
-    @user = User.find(params[:user])
-    contest = Contest.find(params[:contest])
-    @solutions = contest.solutions.for_user(@user)
-    render :partial=>'solved'
   end
 
 end

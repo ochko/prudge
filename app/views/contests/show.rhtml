@@ -18,7 +18,7 @@
 <div id="tabs" class="span-20 append-bottom"> 
   <ul>
     <li><a href="#included-problems"><span>Бодлогууд</span></a></li>
-    <li><%= link_to content_tag(:span, 'Оролцогчид'), {:action=>'participants', :name => "participant-of"} %></li>
+    <li><%= link_to content_tag(:span, 'Оролцогчид'), participants_path(:id=>@contest.id, :name => "participant-of") %></li>
   </ul> 
   <div id="included-problems"> 
     <% if @contest.started? || admin? %>
