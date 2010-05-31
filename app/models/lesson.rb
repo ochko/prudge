@@ -22,6 +22,10 @@ class Lesson < ActiveRecord::Base
     user && self.author_id ==  user.id
   end
 
+  def touchable_by?(user)
+    owned_by?(user) || (user && user.admin?)
+  end
+
   define_index do
     indexes :title
     indexes :text

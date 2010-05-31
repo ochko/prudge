@@ -37,12 +37,12 @@ class LessonsController < ApplicationController
 
   def edit
     @lesson = Lesson.find(params[:id])
-    return unless validate_ownership?
+    return unless touchable?
   end
 
   def update
     @lesson = Lesson.find(params[:id])
-    return unless validate_ownership?
+    return unless touchable?
     if @lesson.update_attributes(params[:lesson])
       flash[:notice] = 'Lesson was successfully updated.'
       redirect_to :action => 'show', :id => @lesson
@@ -53,22 +53,18 @@ class LessonsController < ApplicationController
 
   def destroy
     @lesson = Lesson.find(params[:id])
-    return unless validate_ownership?
+    return unless touchable?
     @lesson.destroy
     redirect_to :action => 'list'
   end
 
   private
-  def validate_ownership?
-    if @lesson.author_id == current_user.id
+  def touchable?
+    if @lesson.touchable_by?(current_user)
       return true
     else
-      if request.xhr?
-        render :text=>'Энэ хичээлийг өөр хүн бичсэн.'
-      else
-        flash[:notice] = 'Энэ хичээлийг бичсэн хүн биш байна.'
-        redirect_to :action => 'show', :id => @lesson
-      end
+      flash[:notice] = 'Энэ хичээлийг бичсэн хүн биш байна.'
+      redirect_to :action => 'show', :id => @lesson
       return false
     end
   end

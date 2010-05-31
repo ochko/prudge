@@ -8,7 +8,7 @@
     Бичсэн: <%= link_to @lesson.author.login, @lesson.author %>,
     <%=l @lesson.updated_at %>
 
-    <% if @lesson.owned_by? current_user %>
+    <% if @lesson.touchable_by? current_user %>
     <%= link_to 'Засварлах', edit_lesson_path(@lesson) %> |
     <%= link_to 'Устгах', @lesson, :confirm => 'Are you sure?', :method => :delete %>
     <% end %>

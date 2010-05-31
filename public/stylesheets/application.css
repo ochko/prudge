@@ -18,6 +18,7 @@ h3 { font-size: 1.4em; }
     width:800px;
 }
 #content {min-height: 500px;}
+img {max-width:800px;}
 #logo {
     padding: 5px 0;
 }
