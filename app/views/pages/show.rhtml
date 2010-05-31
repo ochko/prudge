@@ -9,7 +9,7 @@
 </p>
 
 <% if admin? %>
-<%= link_to 'Засварлах', edit_page_path @page %> |
+<%= link_to 'Засварлах', edit_page_path(@page) %> |
 <%= link_to 'Устгах', @page, :confirm => 'Are you sure?', :method => :delete %>
 <% end %>
 
