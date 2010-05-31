@@ -5,6 +5,7 @@
     <table id="problems">
       <tr>
         <th>ID</th>
+	<th width="1%"></th>
         <th><%= link_to 'Нэр', :order=> 'name' %></th>
         <th><%= link_to 'Оноо', :order=> 'level' %></th>
         <th><%= link_to 'Дэвшүүлсэн', :order=> 'user_id' %></th>
@@ -18,7 +19,8 @@
       <% for problem in @problems %>
         <tr>
           <td><%= problem.id %></td>
-          <td <%= 'class="already" title="Бодчихсон"' if @solved.include?(problem.id) %>><%= link_to problem.name, problem %></td>
+          <td><%= solved_or_not @solved[problem.id] %></td>
+          <td><%= link_to problem.name, problem %></td>
           <td><%= problem.level %></td>
           <td><%= link_to problem.user.login, problem.user %></td>
           <td><%=l problem.created_at %></td>
