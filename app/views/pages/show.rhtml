@@ -5,11 +5,11 @@
   <%=h @page.title %>
 </h2>
 <p>
-  <%= @page.content %>
+  <%=markdown @page.content %>
 </p>
 
 <% if admin? %>
-<%= link_to 'Засварлах', :action => 'edit', :id => @page %> |
-<%= link_to 'Устгах', { :action => 'destroy', :id => @page }, :confirm => 'Are you sure?', :method => :post %>
+<%= link_to 'Засварлах', edit_page_path @page %> |
+<%= link_to 'Устгах', @page, :confirm => 'Are you sure?', :method => :delete %>
 <% end %>
 
