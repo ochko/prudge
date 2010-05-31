@@ -6,4 +6,6 @@ class Comment < ActiveRecord::Base
   def self.per_page
     15
   end
+
+  after_create {  |comment| comment.topic.update_attribute(:commented_at, Time.now)}
 end
