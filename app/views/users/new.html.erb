@@ -1,7 +1,7 @@
-<h2>Бүртгүүлэх</h2>
+<h1>Бүртгүүлэх</h1>
 
 <div class="user-form">
-<% form_for @user, :url => me_path do |f| %>
+<% form_for @user do |f| %>
   <%= f.error_messages %>
   <%= f.label :login, "Нэвтрэх нэр" %>
   <%= f.text_field :login %>
@@ -24,10 +24,6 @@
   (<%= link_to "OpenID тай больё", "http://openid.net", :target =>'_blank' %>)
   <%= f.text_field :openid_identifier %>
   </div>
-
-  
-  <%= link_to 'Хэрэглэх нөхцлийг', '/static/terms', :target => '_blank' %>
-  <%= f.check_box  :terms_of_service  %> <b>зөвшөөрөв</b>
   
   <%= f.submit "Бүртгэ", :class=>"small yellow awesome" %>
 <% end %>

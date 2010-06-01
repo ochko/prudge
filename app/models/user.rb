@@ -86,6 +86,7 @@ class User < ActiveRecord::Base
   end
 
   def init_repo
+    FileUtils.mkdir_p(solutions_dir) unless File.directory?(solutions_dir)
     if system("/usr/bin/git init --quiet --template=#{DOT_GIT} #{solutions_dir}")
       system("/bin/sed -i 's/coder-name/#{self.login}/' #{solutions_dir}/.git/config")
       system("/bin/sed -i 's/coder-email/#{self.email}/' #{solutions_dir}/.git/config")
