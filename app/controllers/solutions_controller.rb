@@ -98,14 +98,16 @@ class SolutionsController < ApplicationController
           @solution.save
           @last_one = @solution
         end
+        @last_one.commit_to_repo
       else
         flash[:notice] = "Та хэн нэгний бодолтыг үзчихсэн учраас энэ бодлогыг дахин бодож болохгүй"        
       end
       redirect_to @last_one
     else
       if @solution.save
+        @solution.insert_to_repo
         flash[:notice] = 'Бодолтыг хадгалж авлаа.'
-        redirect_to  @solution
+        redirect_to @solution
       else
         render :action => 'new'
       end
@@ -124,6 +126,7 @@ class SolutionsController < ApplicationController
     params[:solution].merge!(:uploaded_at => Time.now)
     if @solution.update_attributes(params[:solution])
       flash[:notice] = 'Бодолт шинэчлэгдлээ.'
+      @solution.commit_to_repo
       redirect_to @solution
     else
       render :action => 'edit'

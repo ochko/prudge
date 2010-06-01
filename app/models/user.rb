@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  DOT_GIT = "#{RAILS_ROOT}/config/dot.git"
+  GITIGNORE = "#{RAILS_ROOT}/config/dot.gitignore"
+
   has_many :solutions
   has_many :completions, :class_name => 'Solution', 
            :conditions => ["correct = ?", true]
@@ -18,7 +21,9 @@ class User < ActiveRecord::Base
   end
 
   is_gravtastic! :size => 80, :rating => :PG
-  
+
+  after_create :init_repo
+
   def self.per_page
     100
   end
@@ -77,6 +82,20 @@ class User < ActiveRecord::Base
   def self.resum_points!
     User.all.each do |user|
       user.resum_points!
+    end
+  end
+
+  def init_repo
+    if system("/usr/bin/git init --quiet --template=#{DOT_GIT} #{solutions_dir}")
+      system("/bin/sed -i 's/coder-name/#{self.login}/' #{solutions_dir}/.git/config")
+      system("/bin/sed -i 's/coder-email/#{self.email}/' #{solutions_dir}/.git/config")
+      FileUtils.cp GITIGNORE, "#{solutions_dir}/.gitignore"
+    end
+  end
+
+  def import_solutions
+    self.solutions.each do |solution|
+      solution.insert_to_repo
     end
   end
 

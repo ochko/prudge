@@ -16,7 +16,7 @@ class Solution < ActiveRecord::Base
 
   validates_attachment_presence :source
   validates_attachment_size :source, :less_than => 64.kilobytes
-  
+
   has_many :comments,
            :as => 'topic',
            :class_name => 'Comment',
@@ -157,8 +157,17 @@ class Solution < ActiveRecord::Base
     siblings.first.update_attribute(:isbest, true)
   end
 
-  def touch!
-    self.update_attribute(:touched, true)
+  def insert_to_repo
+    FileUtils.cd self.user.solutions_dir do |repo| 
+      system("/usr/bin/git add #{self.problem_id}")
+      system("/usr/bin/git commit -m 'initial commit' #{self.problem_id}")
+    end
   end
 
+  def commit_to_repo
+    FileUtils.cd self.user.solutions_dir do |repo| 
+      system("/usr/bin/git commit -m 'updating' #{self.problem_id}")
+    end
+  end
+  
 end

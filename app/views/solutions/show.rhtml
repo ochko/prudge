@@ -23,7 +23,7 @@
   <% end %>
   <% if @solution.owned_by? current_user %>
   <% if @solution.freezed? %>
-  <%= link_to 'Дахин бодох', new_solution_path(:problem_id => @solution.problem_id), :class=>"medium grey awesome" %> 
+  <%= link_to 'Дахин бодох', new_solution_path(:problem => @solution.problem_id), :class=>"medium grey awesome" %> 
   <% else %>
   <%= link_to 'Засварлах', edit_solution_path(@solution), :class=>"medium grey awesome" %> 
   <%= link_to 'Устгах', @solution,
