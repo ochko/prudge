@@ -9,7 +9,7 @@ class ProblemsController < ApplicationController
   def index
     respond_to do |format|
       format.html do
-        direction = session[:order] || 'DESC'
+        direction = session[:order] || 'ASC'
         direction = (direction == 'ASC') ? 'DESC' : 'ASC'
         session[:order] = direction  
         order = (params[:order] || 'created_at') + ' ' + direction
