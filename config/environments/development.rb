@@ -15,3 +15,9 @@ config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
+
+ActionMailer::Base.delivery_method = :sendmail
+ActionMailer::Base.sendmail_settings = { 
+  :location       => '/usr/sbin/sendmail',
+  :arguments      => '-i -t -f no-reply@coder.mn'
+}

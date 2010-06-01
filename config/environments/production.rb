@@ -27,17 +27,8 @@ config.action_view.cache_template_loading            = true
 # Enable threaded mode
 # config.threadsafe!
 
-ActionMailer::Base.smtp_settings = {
-  :address => "smtp.gmail.com",
-  :port => 587,
-  :authentication => :plain,
-  :enable_starttls_auto => true,
-  :user_name => "mncoders@gmail.com",
-  :password => "taSmHPZ2FVguaxZ8wRWxGx8trsG3997"
+ActionMailer::Base.delivery_method = :sendmail
+ActionMailer::Base.sendmail_settings = { 
+  :location       => '/usr/sbin/sendmail',
+  :arguments      => '-i -t -f no-reply@coder.mn'
 }
-
-#ActionMailer::Base.delivery_method = :sendmail
-#ActionMailer::Base.sendmail_settings = { 
-#  :location       => '/usr/sbin/sendmail',
-#  :arguments      => '-i -t -f coder.mn@gmail.com'
-#}
