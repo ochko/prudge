@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   
   attr_protected :admin, :judge, :solutions_count, :points
 
+  validates_uniqueness_of :email
+
   acts_as_authentic do |c|
     c.openid_required_fields = [:nickname, :email]
     c.validate_email_field = false
