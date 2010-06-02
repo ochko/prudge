@@ -9,17 +9,16 @@ class ProblemsController < ApplicationController
   def index
     respond_to do |format|
       format.html do
-        direction = session[:order] || 'ASC'
-        direction = (direction == 'ASC') ? 'DESC' : 'ASC'
-        session[:order] = direction  
-        order = (params[:order] || 'created_at') + ' ' + direction
+        order = params[:order] || 'DESC'
+        column = params[:column] || 'created_at'
+        @reverse = (order == 'ASC') ? 'DESC' : 'ASC'
 
         @solved = { }
         current_user.solutions.best.each{ |s| @solved[s.problem_id] = s.correct } if current_user
         
         @problems = Problem.active.
           paginate(:page => params[:page], :include => :user, 
-                   :order => order)
+                   :order => "#{column} #{order}")
       end
       format.rss do
         @problems = Problem.active(:order => 'created_at DESC',

@@ -6,13 +6,13 @@
       <tr>
         <th>ID</th>
 	<th width="1%"></th>
-        <th><%= link_to 'Нэр', :order=> 'name' %></th>
-        <th><%= link_to 'Оноо', :order=> 'level' %></th>
-        <th><%= link_to 'Дэвшүүлсэн', :order=> 'user_id' %></th>
-        <th><%= link_to 'Огноо', :order=> 'created_at' %></th>
+        <th><%= link_to 'Нэр',        :column=> 'name', :order => (params[:column] == 'name') ? @reverse : 'ASC' %></th>
+        <th><%= link_to 'Оноо',       :column=> 'level', :order => (params[:column] == 'level') ? @reverse : 'ASC' %></th>
+        <th><%= link_to 'Дэвшүүлсэн', :column=> 'user_id',:order => (params[:column] == 'user_id') ? @reverse : 'ASC' %></th>
+        <th><%= link_to 'Огноо',      :column=> 'created_at', :order => (params[:column] == 'created_at') ? @reverse : 'ASC' %></th>
         <th>Бодолт<br />
-	  <%= link_to 'Нийт', :order=> 'tried_count' %> /
-          <%= link_to 'Зөв', :order=> 'solved_count' %>
+	  <%= link_to 'Нийт',         :column=> 'tried_count',:order => (params[:column] == 'tried_count') ? @reverse : 'ASC' %> /
+          <%= link_to 'Зөв',          :column=> 'solved_count',:order => (params[:column] == 'solved_count') ? @reverse : 'ASC' %>
 	</th>
       </tr>
 
