@@ -1,30 +1,40 @@
 <h1>Бүртгүүлэх</h1>
 
 <div class="user-form">
-<% form_for @user do |f| %>
-  <%= f.error_messages %>
-  <%= f.label :login, "Нэвтрэх нэр" %>
-  <%= f.text_field :login %>
+  <div class="form-top"> </div>
+  <div class="form-middle">
+    <% form_for @user do |f| %>
+    <%= f.error_messages %>
+    <%= f.label :login, "Нэвтрэх нэр" %>
+    <%= f.text_field :login %>
 
-  <%= f.label :email, "И-мэйл" %>
-  <%= f.text_field :email %>
-  
-  <div id="passwords" <%= 'style="display:none;"' unless @user.openid_identifier.blank? %> >
-  
-  <%= f.label :password, "Нууц үг", :style=>"display:inline" %>
-  (<%= link_to_function "Оронд нь OpenID хэрэглэе", '$("#passwords").hide();$("#openid").show();' %>)
-  <%= f.password_field :password %>
+    <%= f.label :email, "И-мэйл" %>
+    <%= f.text_field :email %>
+    
+    <div id="passwords" <%= 'style="display:none;"' unless @user.openid_identifier.blank? %> >
+      
+      <%= f.label :password, "Нууц үг", :style=>"display:inline" %>      
+      <%= f.password_field :password %>
 
-  <%= f.label :password_confirmation, "Нууц үгийг давт" %>
-  <%= f.password_field :password_confirmation %>  
+      <%= f.label :password_confirmation, "Нууц үгийг давт" %>
+      <%= f.password_field :password_confirmation %>  
+      <div class="center">
+      <%= link_to_function "Нууц үгийн оронд OpenID хэрэглэе", '$("#passwords").hide();$("#openid").show();' %>
+      </div>
+    </div>
+
+    <div id="openid" <%= 'style="display:none;"' if @user.openid_identifier.blank? %> >
+      <%= f.label :openid_identifier, "OpenID URL", :style=>"display:inline" %>
+      <%= f.text_field :openid_identifier %>
+      <div class="center">
+      <%= link_to "OpenID тай больё", "http://openid.mn", :target =>'_blank' %>
+      </div>
+      
+    </div>
+    <div class="form-submitter">
+      <%= f.submit "Бүртгэ", :class=>"small yellow awesome" %>
+    </div>
+    <% end %>
   </div>
-
-  <div id="openid" <%= 'style="display:none;"' if @user.openid_identifier.blank? %> >
-  <%= f.label :openid_identifier, "OpenID URL", :style=>"display:inline" %>
-  (<%= link_to "OpenID тай больё", "http://openid.net", :target =>'_blank' %>)
-  <%= f.text_field :openid_identifier %>
-  </div>
-  
-  <%= f.submit "Бүртгэ", :class=>"small yellow awesome" %>
-<% end %>
+  <div class="form-bottom"></div>
 </div>

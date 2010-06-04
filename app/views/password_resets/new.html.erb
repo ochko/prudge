@@ -1,13 +1,19 @@
-<h2>Нууц үгээ мартсан</h2>
+<h1>Нууц үгээ сэргээх</h1>
 
 <div class='user-form'>
-  Анх бүртгүүлэхдээ хэрэглэсэн e-mail хаягаа оруулбал, 
-  нууц үг сэргээх зааврыг e-mail рүү тань илгээе:<br /><br />
-  
-  <% form_tag password_resets_path do %>
-  <label>И-мэйл:</label><br />
-  <%= text_field_tag "email", '', :class=>'title' %><br />
-  <br />
-  <%= submit_tag "Нууц үгээ сэргээе", :class=>"small yellow awesome" %>
-  <% end %>
+  <div class="form-top"> </div>
+  <div class="form-middle">
+    Анх бүртгүүлэхдээ хэрэглэсэн e-mail хаягаа оруулбал, 
+    нууц үг сэргээх зааврыг e-mail рүү тань илгээе:<br /><br />
+    
+    <% form_tag password_resets_path do %>
+    <label>И-мэйл:</label>
+    <%= text_field_tag "email", '', :class=>'title' %><br />
+    <br />
+    <div class="form-submitter">
+      <%= submit_tag "Нууц үгээ сэргээе", :class=>"small yellow awesome" %>
+    </div>
+    <% end %>
+  </div>
+  <div class="form-bottom"></div>
 </div>

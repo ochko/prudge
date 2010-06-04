@@ -1,29 +1,33 @@
-<h2>Өөрийн мэдээллийг засварлах</h2>
+<h1>Тохиргоог шинэчлэх</h1>
 
 <div class="user-form">
-<% form_for @user, :url => user_path do |f| %>
-  <%= f.error_messages %>
-  <%= f.label :login, "Нэвтрэх нэр" %>
-  <%= f.text_field :login %>
-  
-  <%= f.label :email, "И-мэйл" %>
-  <%= f.text_field :email %>
+  <div class="form-top"> </div>
+  <div class="form-middle">
+    <% form_for @user, :url => user_path do |f| %>
+    <%= f.error_messages %>
+    <%= f.label :login, "Нэвтрэх нэр" %>
+    <%= f.text_field :login %>
+    
+    <%= f.label :email, "И-мэйл" %>
+    <%= f.text_field :email %>
 
-  <%= f.label :school, "Сургууль эсвэл байгууллага" %>
-  <%= f.text_field :school %>
-  
-  <% if @user.openid_identifier.blank? %>
-  <%= f.label :password, "Нууц үг солих" %>
-  <%= f.password_field :password %>
-  
-  <%= f.label :password_confirmation, "Нууц үгийг давт" %>
-  <%= f.password_field :password_confirmation %>
-  
-  <% end %>
-  <%= f.label :openid_identifier, "OpenID URL"%>  
-  <%= f.text_field :openid_identifier %>
-  <br/>
-
-  <%= f.submit "Хадгал", :class => 'small awesome' %>
-<% end %>
+    <%= f.label :school, "Сургууль" %>
+    <%= f.text_field :school %>
+    
+    <% if @user.openid_identifier.blank? %>
+    <%= f.label :password, "Нууц үг солих" %>
+    <%= f.password_field :password %>
+    
+    <%= f.label :password_confirmation, "Нууц үгийг давт" %>
+    <%= f.password_field :password_confirmation %>
+    
+    <% end %>
+    <%= f.label :openid_identifier, "OpenID URL"%>  
+    <%= f.text_field :openid_identifier %>
+    <div class="form-submitter">
+      <%= f.submit "Хадгал", :class => 'small awesome' %>
+    </div>
+    <% end %>
+  </div>
+  <div class="form-bottom"></div>
 </div>

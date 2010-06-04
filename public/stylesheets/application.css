@@ -293,16 +293,21 @@ th.level-legend span {
 #medals {margin: 0 0 10px 0; min-height:85px;}
 #medals a img { padding: 1px 2px; }
 
-.user-form {border: 4px solid #909090; width:260px; margin:20px auto; padding:30px; background-color:#e5ecf9;}
+.user-form {width:500px; margin: 20px auto;}
+.user-form .form-submitter {text-align:center; padding:1em;}
+.user-form .form-middle {background: url(/images/form-back.png) repeat-y 0 0; padding:0 50px; font-size:1em;}
+.user-form .form-top {background: url(/images/form-corners.png) no-repeat 0 -43px; height:43px; margin-bottom: -1px;}
+.user-form .form-bottom {background: url(/images/form-corners.png) no-repeat 0 0; height:43px; margin-top: -12px;}
 .user-form input[type="text"], .user-form input[type="password"] {
-    max-width:250px;margin-bottom:15px; border:1px solid #909090;}
-.user-form label {display:block;}
+    max-width:200px; margin: 0 0 15px 0; border:1px solid #CCC; font-size:1.1em;}
+.user-form label {float: left; width: 11em; margin-right: 1em; text-align:right;}
 input#user_openid_identifier, input#user_session_openid_identifier {
     background: url(/images/openid-bg.gif) no-repeat;
     background-color: #FFF;
     background-position: 1px center;
     padding-left: 19px;
 }
+
 input#user_login, input#user_session_login {
     background: url(/images/user-bg.jpg) no-repeat;
     background-color: #FFF;
@@ -331,7 +336,7 @@ input#user_password, input#user_password_confirmation, input#user_session_passwo
 #forgot-link {
     background: url(/images/forgot.png) no-repeat;
     background-position: 0 center;
-    padding: 2px 0 0 19px;
+    padding-left: 19px;
 }
 
 #openid-link {
