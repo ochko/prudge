@@ -9,8 +9,11 @@ class TopicsController < ApplicationController
     if !params[:type]
       @topics = Topic.paginate(:page=> params[:page], :per_page => 20,
                                :order => 'commented_at DESC')
-    elsif %w[contest problem lesson topic].include? params[:type]
+    elsif %w[contest lesson topic].include? params[:type]
       @topics = params[:type].capitalize.constantize.commented.
+        paginate(:page=> params[:page], :order => 'commented_at DESC')
+    elsif 'problem' == params[:type]
+      @topics = Problem.commented.active.
         paginate(:page=> params[:page], :order => 'commented_at DESC')
     end
   end
@@ -21,6 +24,10 @@ class TopicsController < ApplicationController
         find(params[:id])
     elsif %w[contest problem lesson topic].include? params[:type]
       @topic = params[:type].capitalize.constantize.find(params[:id])
+      if @topic.instance_of?(Problem) && !@topic.available_to(current_user)
+        flash[:notice] = "Уучлаарай, Энэ бодлогыг одоохондоо үзэх боломжгүй"
+        redirect_to '/topic/problem'
+      end
     end
   end
 
@@ -31,7 +38,7 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(params[:topic])
     if @topic.save
-      flash[:notice] = 'Topic was successfully created.'
+      flash[:notice] = 'Хэлэлцүүлгийн сэдвийг үүсгэлээ'
       redirect_to @topic
     else
       render :action => 'new'
@@ -45,7 +52,7 @@ class TopicsController < ApplicationController
   def update
     @topic = Topic.find(params[:id])
     if @topic.update_attributes(params[:topic])
-      flash[:notice] = 'Topic was successfully updated.'
+      flash[:notice] = 'Хэлэлцүүлгийн сэдвийг хадгалчихлаа'
       redirect_to @topic
     else
       render :action => 'edit'
@@ -54,6 +61,7 @@ class TopicsController < ApplicationController
 
   def destroy
     Topic.find(params[:id]).destroy
+    flash[:notice] = 'Хэлэлцүүлгийн сэдвийг устгав'
     redirect_to :action => :index
   end
 end
