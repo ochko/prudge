@@ -14,10 +14,13 @@ config.action_view.debug_rjs                         = true
 config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
-config.action_mailer.raise_delivery_errors = false
+config.action_mailer.raise_delivery_errors = true
 
-ActionMailer::Base.delivery_method = :sendmail
-ActionMailer::Base.sendmail_settings = { 
-  :location       => '/usr/sbin/sendmail',
-  :arguments      => '-i -t -f no-reply@coder.mn'
+ActionMailer::Base.smtp_settings = { 
+  :address => "smtp.gmail.com",
+  :port => 587,
+  :authentication => :plain,
+  :enable_starttls_auto => true,
+  :user_name => "coder.mn@gmail.com",
+  :password => "taSmHPZ2FVguaxZ8wRWxGx8trsG3997"
 }
