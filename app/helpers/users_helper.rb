@@ -27,7 +27,8 @@ module UsersHelper
     if id && !id.empty?
       link_to(image_tag("icon-#{media}.png"), 
               SOCIAL_MEDIA_URLS[media] % user.send("social_#{media}"),
-              :title => media.capitalize)
+              :title => media.capitalize,
+              :target => media)
     end
   end
 end
