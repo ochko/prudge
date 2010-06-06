@@ -878,3 +878,15 @@ del {
 #about tr { border:none; background:none;}
 #about .title {font-size:1.8em; border-right: 3px solid #999; text-align:right;}
 #about img {max-width:36px; padding:2px;}
+#social-media-input h3{
+    text-align:center;
+}
+#social-media-contacts img{
+    width:24px;
+    padding: 0 2px;
+}
+#social-media-contacts{
+    width:190px;
+    float:right;
+    text-align:right;
+}

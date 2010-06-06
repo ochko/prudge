@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100601191005) do
+ActiveRecord::Schema.define(:version => 20100606083957) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",                 :null => false
@@ -210,6 +210,12 @@ ActiveRecord::Schema.define(:version => 20100601191005) do
     t.float    "points",                            :default => 0.0
     t.datetime "uploaded_at"
     t.boolean  "mailed",                            :default => false
+    t.string   "social_blogger"
+    t.string   "social_facebook"
+    t.string   "social_google"
+    t.string   "social_hi5"
+    t.string   "social_twitter"
+    t.string   "social_yahoo"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login"

@@ -24,6 +24,27 @@
     <% end %>
     <%= f.label :openid_identifier, "OpenID URL"%>  
     <%= f.text_field :openid_identifier %>
+
+    <div id="social-media-input">
+      <h3>Хэрэв хүсвэл</h3>
+    <%= f.label :social_twitter, "Twitter"%>  
+    <%= f.text_field :social_twitter %>
+    
+    <%= f.label :social_facebook, "Facebook"%>  
+    <%= f.text_field :social_facebook %>
+
+    <%= f.label :social_blogger, "Blogger"%>  
+    <%= f.text_field :social_blogger %>
+    
+    <%= f.label :social_google, "Google"%>  
+    <%= f.text_field :social_google %>
+
+    <%= f.label :social_hi5, "Hi5"%>  
+    <%= f.text_field :social_hi5 %>
+
+    <%= f.label :social_yahoo, "Yahoo"%>  
+    <%= f.text_field :social_yahoo %>
+    </div>
     <div class="form-submitter">
       <%= f.submit "Хадгал", :class => 'small awesome' %>
     </div>

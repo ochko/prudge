@@ -1,5 +1,5 @@
 <h2 class="rank_<%=@user.level%> span-14">
-  <%= @user.login.capitalize %>@<%= strip_tags @user.school %>
+  <%= @user.login.capitalize %>@<%= strip_tags @user.school %>  
 </h2>
 <div id="user-statistic">
   <span class="user-points" title="Нийт оноо">
@@ -9,11 +9,13 @@
     <%=l(@user.uploaded_at, :format => :short) if @user.uploaded_at %>
   </span>
 </div>
-<div id="medals" class="span-20">
+<div id="medals" class="span-14">
   <%= image_tag(@user.gravatar_url, :class => "portrait") %>
   <%= medal_list(@standings) %>
 </div>
-
+<div id="social-media-contacts">
+  <%= %w[twitter facebook blogger google hi5 yahoo].collect {|media| social_media_link(@user, media)} %>
+</div>
 <div id="tabs" class="span-20"> 
   <ul>
     <li><a href="#participant-of"><span>Оролцсон тэмцээн</span></a></li>
