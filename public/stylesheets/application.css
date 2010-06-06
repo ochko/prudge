@@ -873,3 +873,8 @@ ins {
 del {
     color:#c43;
 }
+#about { border:none; }
+#about td { border:none; background:none; padding:0 1em; font-size:1.4em; height:2em;}
+#about tr { border:none; background:none;}
+#about .title {font-size:1.8em; border-right: 3px solid #999; text-align:right;}
+#about img {max-width:36px; padding:2px;}
