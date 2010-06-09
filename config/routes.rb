@@ -8,7 +8,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :problems, :member => [:check]
   map.resources :lessons
   map.resources :topics
-  map.resources :solutions, :member =>[:best, :submited, :solved, :view]
+  map.resources :solutions, :member =>[:best, :submited, :solved, :view, :download]
   map.resources :languages
   map.resources :pages
   map.resources :problem_tests

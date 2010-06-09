@@ -1,27 +1,24 @@
-<h1>Бодолт</h1>
-<h3 class="center">
+<h1>
   <%= link_to(@solution.contest.name, @solution.contest) + ' &raquo; ' if @solution.contest %>
   <%= link_to(@solution.problem.name, @solution.problem) %>
-</h3>
-
-<div class="solution-info">
+</h1>
+<div>
+  <div id='result' class="span-20"> 
+    <%= render :partial => 'results/list' %>
+  </div>
   <span class="rank_<%=@solution.user.level%>">
     <%=link_to @solution.user.login, @solution.user %>
     <%=l @solution.uploaded_at %>-д
-    <%= @solution.language.name %> хэл дээр бичсэн
+    <%= @solution.language.name %> хэл,
   </span>
-  <span class="solution-file">
-  &laquo; <%= h @solution.source_file_name %> &raquo;
-  </span>
+  <%=h @solution.source_file_name  %>
+  <%= link_to image_tag('code-download.png')+" Татаж авах", download_solution_path(@solution), :title => "Бодолтыг татах", :class =>"medium grey awesome" , :style => "float:right" %>
+</div>
+<div class="solution-code span-20" >
+
+  <% harsh @solution.code, :theme => :iplastic, :lines => true, :syntax => @solution.language.name.downcase %>
 
   <span id="solution-actions">
-    <%= link_to image_tag('view-code.png')+" Харах", view_solution_path(@solution), :title => "Бодолтыг харах", :class=>"medium grey awesome" %>
-  <% if !@solution.checked && !@solution.nocompile %>
-  <%= link_to_remote "Шалгах", :update => "result",
-  :url => { :action => "check", :id => @solution },
-  :html=>{:id=>'check-button', :class=>"medium grey awesome" },
-  :before => "$('#check-button').hide();$('#result-content').hide();$('#check-wait').show();" %>
-  <% end %>
   <% if @solution.owned_by? current_user %>
   <% if @solution.freezed? %>
   <%= link_to 'Дахин бодох', new_solution_path(:problem => @solution.problem_id), :class=>"medium grey awesome" %> 
@@ -33,10 +30,6 @@
   <% end %>
   </span>
 
-</div>
-<div id='result' class="span-20"> 
-  <%= render :partial => 'results/list' %>
-  <%= image_tag "spinner.gif", :id => 'check-wait' %>
 </div>
 
 <%= render :partial => 'comments/commentable', :object => @solution %>

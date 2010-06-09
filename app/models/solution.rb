@@ -115,6 +115,10 @@ class Solution < ActiveRecord::Base
     end
   end
 
+  def code
+    File.open(self.source.path, 'r'){ |f| f.read }
+  end
+
   def cleanup!
     self.results.clear
     self.user.decrement!(:points, self.point) if self.point > 0

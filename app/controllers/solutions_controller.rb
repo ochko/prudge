@@ -52,6 +52,19 @@ class SolutionsController < ApplicationController
 
   def view
     @solution = Solution.find(params[:id])
+    return unless @solution.owned_by?(current_user)
+    return unless validate_showable?
+    solutions = current_user.solved(@solution.problem)
+    if solutions.empty?
+      flash[:notice] = "Бодлогыг өөрөө бодож чадсаны дараа л бусдын бодолтыг үзэх боломжтой"
+      redirect_to @solution.problem
+    else
+      solutions.each { |solved| solved.lock! }
+    end
+  end
+
+  def download
+    @solution = Solution.find(params[:id])
     if @solution.owned_by? current_user
       send_file(@solution.source.path, 
                 :filename => @solution.source_file_name, 

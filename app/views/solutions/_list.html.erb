@@ -7,8 +7,6 @@
     <th>Шинэчилсэн</th>
     <th>Хувь</th>
     <th>Хугацаа</th>
-    <th width="1%"></th>
-    <th width="1%"></th>
   </tr>
   <% for solution in @solutions%>
   <tr>
@@ -19,8 +17,6 @@
     <td class='small'><%=l solution.uploaded_at %></td>
     <td><%= (solution.percent*100).to_i %></td>
     <td><%= sec2milisec solution.time %></td>
-    <td><%= link_to image_tag('detail.png'), solution, :title => "Тэстүүдийг харах" %></td>
-    <td><%= link_to image_tag('view.png'), view_solution_path(solution), :title => "Бодолтыг татах" %></td>
   </tr>
   <% end %>
 </table>
