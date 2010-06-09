@@ -52,7 +52,7 @@ class SolutionsController < ApplicationController
 
   def view
     @solution = Solution.find(params[:id])
-    return unless @solution.owned_by?(current_user)
+    return if @solution.owned_by?(current_user)
     return unless validate_showable?
     solutions = current_user.solved(@solution.problem)
     if solutions.empty?
