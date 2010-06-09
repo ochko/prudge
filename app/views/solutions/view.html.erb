@@ -12,13 +12,8 @@
     <%= @solution.language.name %> хэл,
   </span>
   <%=h @solution.source_file_name  %>
-  <%= link_to image_tag('code-download.png')+" Татаж авах", download_solution_path(@solution), :title => "Бодолтыг татах", :class =>"medium grey awesome" , :style => "float:right" %>
-</div>
-<div class="solution-code span-20" >
-
-  <% harsh @solution.code, :theme => :iplastic, :lines => true, :syntax => @solution.language.name.downcase %>
-
-  <span id="solution-actions">
+<span id="view-actions">
+  <%= link_to image_tag('code-download.png')+" Татаж авах", download_solution_path(@solution), :title => "Бодолтыг татах", :class =>"medium grey awesome" %>
   <% if @solution.owned_by? current_user %>
   <% if @solution.freezed? %>
   <%= link_to 'Дахин бодох', new_solution_path(:problem => @solution.problem_id), :class=>"medium grey awesome" %> 
@@ -29,6 +24,12 @@
   <% end %>
   <% end %>
   </span>
+
+</div>
+
+<div class="solution-code span-20" >
+
+  <% harsh @solution.code, :theme => :iplastic, :lines => true, :syntax => @solution.language.name.downcase %>
 
 </div>
 

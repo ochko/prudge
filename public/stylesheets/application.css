@@ -890,3 +890,9 @@ del {
     float:right;
     text-align:right;
 }
+#view-actions a{
+    margin:0 4px;
+}
+#view-actions {
+    float:right;
+}
