@@ -17,6 +17,7 @@ Rails::Initializer.run do |config|
   config.gem 'thinking-sphinx', :lib => 'thinking_sphinx'
   config.gem 'will_paginate'
   config.gem 'ochko-flow_pagination', :lib => 'flow_pagination', :version => '>= 1.2.3'
+  config.gem 'methodmissing-scrooge', :lib => 'scrooge'
 
   config.cache_store = :mem_cache_store, '127.0.0.1:11211', { :namespace => 'coder' }
 
