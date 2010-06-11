@@ -1,0 +1,26 @@
+.syntax {
+  font-family: Menlo, Monaco, Consolas, monospace; }
+  .syntax .function {
+    color: #3333ff; }
+  .syntax .keyword {
+    color: #33cc33; }
+  .syntax .access {
+    color: #ffb600;
+    font-weight: bold; }
+  .syntax .type {
+    color: #119911;
+    font-weight: bold; }
+  .syntax .comment {
+    color: #66aacc;
+    font-style: italic; }
+  .syntax .string, .syntax .constant {
+    color: #ff3333; }
+  .syntax .string .escape {
+    color: #ff9999; }
+  .syntax .operator {
+    color: #cc0000; }
+  .syntax .href {
+    color: blue;
+    text-decoration: underline; }
+  .syntax .variable {
+    font-style: italic; }
