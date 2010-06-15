@@ -2,7 +2,7 @@
 class TopicsController < ApplicationController
   before_filter :require_admin, :except => [:index, :show]
   before_filter :prepare_wmd, :only => [:edit, :new]
-
+  
   layout 'discussions'
 
   def index
@@ -22,7 +22,7 @@ class TopicsController < ApplicationController
     if !params[:type]
       @topic = Topic.
         find(params[:id])
-    elsif %w[contest problem lesson topic solution].include? params[:type]
+    elsif %w[contest problem lesson topic ].include? params[:type]
       @topic = params[:type].capitalize.constantize.find(params[:id])
       if @topic.instance_of?(Problem) && !@topic.available_to(current_user)
         flash[:notice] = "Уучлаарай, Энэ бодлогыг одоохондоо үзэх боломжгүй"
