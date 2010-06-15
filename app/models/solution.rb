@@ -30,7 +30,11 @@ class Solution < ActiveRecord::Base
   named_scope :for_user, lambda { |user| { :conditions => ['user_id =?', user.id], :include => [:language, :problem], :order => 'created_at desc' } }
   named_scope :valuable, :conditions => 'percent > 0'
   named_scope :by_speed, :order => 'time ASC, uploaded_at ASC'
+
+  def name() problem.name end
+  def text() "Хэрэглэгч #{user.login} -ий бодолтод санал/зөвлөгөө/тусламж бичих" end
   
+
   def exe_name
     return @exe if @exe
     @exe = self.source_file_name.split('.').first
