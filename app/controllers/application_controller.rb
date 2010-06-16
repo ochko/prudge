@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
     if current_user
       store_location
       flash[:notice] = "Энэ хуудас руу орохын тулд гарсан байх ёстой"
-      redirect_to me_url
+      redirect_to root_url
       return false
     end
   end
