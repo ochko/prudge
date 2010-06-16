@@ -221,14 +221,16 @@ dt img {
 input[type=submit].awesome, input[type=button].awesome {border:0;} 
 .apple_pagination {
     margin:0.5em 0;
-    background: #F5F5F5;
-    border: 1px solid #E5E5E5;
+    background: #F7F7F7 url(/images/bar-back.png) repeat 0% 0%;
+    border: 1px solid #D0D0D0;
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.5);
     -moz-border-radius: 8px; 
     -webkit-border-radius: 8px;
     text-align: center;
     padding: 0.5em; }
 .apple_pagination a, .apple_pagination span {
-    padding: .3em .4em; 
+    padding: .1em .4em; 
 }
 .apple_pagination span.disabled {
     color: #AAA; }
@@ -256,10 +258,14 @@ table th {
     border-bottom: 1px solid #d8d8d8;
 }
 
+table tr:hover {
+    background: #f0f0f0;
+}
 table tr {
-    background: #f8f8f8 url(/images/row-back.png) repeat-x 0px 100%;
+    background: #f8f8f8;
 }
 table td {
+    
     border-bottom: 1px solid #e1e1e1;
 }
 
