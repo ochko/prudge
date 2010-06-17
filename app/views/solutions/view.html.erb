@@ -28,9 +28,7 @@
 </div>
 
 <div class="solution-code span-20" >
-
-  <% harsh @solution.code, :theme => :iplastic, :lines => true, :syntax => @solution.language.name.downcase %>
-
+  <%= content_tag :pre, @solution.code, :class => "syntax brush-#{@solution.language.name.downcase}" %>
 </div>
 
 <%= render :partial => 'comments/commentable', :object => @solution %>
