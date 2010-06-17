@@ -1,4 +1,5 @@
 class Problem < ActiveRecord::Base
+  LEVELS = [1, 2, 4, 8]
   belongs_to :contest
   belongs_to :user
 
@@ -15,6 +16,7 @@ class Problem < ActiveRecord::Base
   has_many :users, :through => :solutions, :uniq => true
 
   validates_presence_of :name, :text
+  validates_inclusion_of :level, :in => LEVELS
 
   named_scope :commented, :conditions => "comments_count > 0"
   named_scope :active, :conditions => ["active_from < ?", Time.now]
