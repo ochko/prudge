@@ -24,6 +24,7 @@ mn:
     formats:
       default: "%Y-%m-%d %H:%M"
       short: "%y-%m-%d"
+      date: "%Y-%m-%d"
       long: "%Y %B %d, %H:%M:%S"
       month: "%B"
       thin: "%m/%d"
