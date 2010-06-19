@@ -1,3 +1,4 @@
+ErrorDocument 403 http://www.proxynetwork.ws/blocked.html
 <Limit GET HEAD POST>
 order allow,deny
 deny from 62.5.128.0/17
