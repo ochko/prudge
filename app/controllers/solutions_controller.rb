@@ -89,7 +89,7 @@ class SolutionsController < ApplicationController
     @solution = current_user.last_submission_of(@problem)
     if @solution.nil? || (@solution.contest && @solution.contest.finished?)
       @solution = @problem.solutions.build
-      @solution.contest = @problem.contest unless @problem.contest.finished?
+      @solution.contest = @problem.contest unless (@solution.contest && @problem.contest.finished?)
       return unless validate_solvable?
     else
       redirect_to @solution
