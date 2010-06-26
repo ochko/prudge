@@ -1,6 +1,6 @@
 <h1>Бодолт</h1>
 <h3 class="center">
-  <%= link_to(@solution.contest.name, @solution.contest) + ' &raquo; ' if @solution.contest %>
+  <%= "#{link_to(@solution.contest.name, @solution.contest)}  &raquo; " if @solution.contest -%>
   <%= link_to(@solution.problem.name, @solution.problem) %>
 </h3>
 
