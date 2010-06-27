@@ -154,7 +154,7 @@ class Solution < ActiveRecord::Base
   
   after_destroy { |solution| solution.user.decrement!(:points, solution.point)}
 
-  after_save { |solution| solution.user.solution_uploaded! }
+  after_create { |solution| solution.user.solution_uploaded! }
 
   def nominate_for_best!
     siblings = Solution.

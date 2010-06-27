@@ -139,6 +139,7 @@ class SolutionsController < ApplicationController
     params[:solution].merge!(:uploaded_at => Time.now)
     if @solution.update_attributes(params[:solution])
       flash[:notice] = 'Бодолт шинэчлэгдлээ.'
+      @solution.user.solution_uploaded!
       @solution.commit_to_repo
       redirect_to @solution
     else
