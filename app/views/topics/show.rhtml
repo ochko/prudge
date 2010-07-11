@@ -7,7 +7,7 @@
   <% end %>
 </h1>
 <div id="topic-text">
-  <%= @topic.text %>
+  <%=markdown @topic.text %>
 </div>
 
 <%= render :partial => 'comments/commentable', :object => @topic %>
