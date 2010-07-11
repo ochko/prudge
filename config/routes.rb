@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.connect ':controller/list', :action => 'index'
+
   map.resources :users, :member => [:solutions, :lessons, :problems]
   map.resources :password_resets
   map.resource :user_session
@@ -29,6 +31,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/moderate', :controller => 'comments', :action => 'moderate'
   map.connect '/topic/:type', :controller => 'topics'
   map.connect '/search/:q', :controller => 'search'
+  
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 end

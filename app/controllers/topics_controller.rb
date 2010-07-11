@@ -12,7 +12,7 @@ class TopicsController < ApplicationController
     elsif %w[contest lesson topic].include? params[:type]
       @topics = params[:type].capitalize.constantize.commented.
         paginate(:page=> params[:page], :order => 'commented_at DESC')
-    elsif 'problem' == params[:type]
+    elsif 'problem' == params[:type] || 'problems' == params[:type]
       @topics = Problem.commented.active.
         paginate(:page=> params[:page], :order => 'commented_at DESC')
     end
