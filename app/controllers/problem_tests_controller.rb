@@ -63,7 +63,7 @@ class ProblemTestsController < ApplicationController
   end
 
   def destroy
-    @problem_test = ProblemTest.find(params[:id]).destroy
+    @problem_test = ProblemTest.find(params[:id])
     if is_touchable(@problem_test)
       @problem_test.destroy
     else
