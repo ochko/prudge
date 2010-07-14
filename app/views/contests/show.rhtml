@@ -35,7 +35,7 @@
       <tr>
         <td><%= problem.id %></td>
         <td><%= link_to problem.name, problem %></td>
-        <td><%= Contest::LEVEL_NAMES[problem.level] %></td>
+        <td><%= Contest::LEVEL_NAMES[problem.level] %>(<%= problem.level %>)</td>
         <td><%= problem.time %>с /
 	  <%= problem.memory %>кб</td>
         <td><%= link_to problem.user.login, problem.user %></td>
