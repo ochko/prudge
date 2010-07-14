@@ -2,14 +2,14 @@ class Contest < ActiveRecord::Base
   LEVEL_NAMES = { 0 => 'Бүгд', 
     1 => 'Сонирхогч', 
     2 => 'Анхан шат', 
-    3 => 'Дунд шат', 
-    4 => 'Дээд шат' }
+    4 => 'Дунд шат', 
+    8 => 'Дээд шат' }
 
   LEVEL_POINTS = { 0 => 0, 
     1 => 50, 
     2 => 150, 
-    3 => 300, 
-    4 => 1000 }
+    4 => 300, 
+    8 => 1000 }
 
   has_many :problems
   has_many :solutions
