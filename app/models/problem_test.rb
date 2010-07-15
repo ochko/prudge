@@ -1,6 +1,6 @@
 class ProblemTest < ActiveRecord::Base
   TESTS = 'judge/tests'
-  DIFF = '/usr/bin/diff -bu'
+  DIFF = '/usr/bin/diff -wu'
   
   belongs_to :problem, :counter_cache => 'tests_count'
   has_many :results, :dependent => :destroy, :foreign_key => 'test_id'
