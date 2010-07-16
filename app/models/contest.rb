@@ -71,10 +71,10 @@ class Contest < ActiveRecord::Base
 
   define_index do
     indexes :name
-    indexes :text
+    indexes :description
     set_property :field_weights => { 
       :name => 9,
-      :text => 5
+      :description => 5
     }
     set_property :delta => true
   end
