@@ -1,5 +1,5 @@
 <h2>Бодлого санал болгох</h2>
-
+<em>Хэрэв бодлого тань шагналт тэмцээнд сонгогдвол танд <%= Problem::LEVELS.collect{|l| "#{Problem::PRICES[l]}.000₮"}.join(', ') %> шагнал өгнө</em>
 <% form_tag :action => 'create' do %>
   <%= render :partial => 'form' %>
   

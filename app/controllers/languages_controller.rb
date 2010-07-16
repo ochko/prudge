@@ -1,8 +1,9 @@
 class LanguagesController < ApplicationController
-  before_filter :require_admin
+  before_filter :require_admin, :except => :index
 
   def index
     @languages = Language.all
+    render(:action => 'list') if admin?
   end
 
   def new

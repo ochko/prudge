@@ -1,8 +1,10 @@
 <%= error_messages_for 'language' %>
 
-<!--[form:language]-->
 <p><label for="language_name">Нэр</label><br/>
 <%= text_field 'language', 'name'  %></p>
+
+<p><label for="language_description">Тайлбар/Хувилбар</label><br/>
+<%= text_field 'language', 'description'  %></p>
 
 <p><label for="language_compiler">Compiler</label><br/>
 <%= text_field 'language', 'compiler'  %></p>
@@ -15,6 +17,3 @@
 
 <p><label for="language_time_req">Нэмэлт хугацаа</label><br/>
 <%= text_field 'language', 'time_req', 'size'=>5  %> секунд</p>
-
-<!--[eoform:language]-->
-

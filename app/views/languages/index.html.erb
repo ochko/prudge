@@ -1,23 +1,20 @@
-<h2>Програмчлалын хэлүүд</h2>
+<h2>Кодер.мн дээр бодлого бодох хэлүүд</h2>
 
 <table>
   <tr>
-    <th>Нэр</th>
+    <th></th>
     <th>Компайлэр</th>
-    <th>Ажиллуулагч</th>
-    <th colspan="2"></th>
+    <th>Нэмэлт санах ой</th>
+    <th>Нэмэлт хугацаа</th>
   </tr>
 
 <% for language in @languages %>
   <tr>
     <td><%= language.name %></td>
-    <td><%= language.compiler %></td>
-    <td><%= language.runner %></td>
-    <td><%= link_to image_tag('edit.png'), :action => 'edit', :id => language %></td>
-    <td><%= link_to image_tag('delete.png'), { :action => 'destroy', :id => language }, :confirm => 'Are you sure?', :method => :post %></td>
+    <td><%= language.description %></td>
+    <td><%= language.mem_req %></td>
+    <td><%= language.time_req %></td>
   </tr>
 <% end %>
 </table>
-
-<%= link_to 'Шинээр програмчлалын хэл нэмэх', :action => 'new' %>
-
+<em>Зарим хэл дээр бичсэн програм нэмэлт санах ой болон хугацаа шаарддаг</em>

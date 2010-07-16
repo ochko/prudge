@@ -1,5 +1,10 @@
 class Problem < ActiveRecord::Base
   LEVELS = [1, 2, 4, 8]
+  PRICES = { 
+    1 => 5, 
+    2 => 10, 
+    4 => 25, 
+    8 => 50 }
   belongs_to :contest
   belongs_to :user
 

@@ -2,7 +2,7 @@
 <div class="bigger-inputs span-20">
 <%= text_field 'problem', 'name', 'size' => 40  %>
 <span class="input-level" title="Оноо">
-  <%= select 'problem', 'level', Problem::LEVELS.collect{|l| [l,l]}  %>
+  <%= select 'problem', 'level', Problem::LEVELS.collect{|l| ["#{l} (#{Problem::PRICES[l]}K₮)",l]}  %>
 </span>
 <span class="input-time" title="Хугацаа">
   <%= text_field 'problem', 'time', :size =>2 %> сек

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100617101407) do
+ActiveRecord::Schema.define(:version => 20100716170601) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",                 :null => false
@@ -35,11 +35,12 @@ ActiveRecord::Schema.define(:version => 20100617101407) do
   end
 
   create_table "languages", :force => true do |t|
-    t.string  "name",     :limit => 15,                :null => false
-    t.string  "compiler",                              :null => false
-    t.string  "runner",                                :null => false
-    t.integer "mem_req",                :default => 0, :null => false
-    t.integer "time_req",               :default => 0, :null => false
+    t.string  "name",        :limit => 15,                :null => false
+    t.string  "compiler",                                 :null => false
+    t.string  "runner",                                   :null => false
+    t.integer "mem_req",                   :default => 0, :null => false
+    t.integer "time_req",                  :default => 0, :null => false
+    t.string  "description"
   end
 
   create_table "lessons", :force => true do |t|
