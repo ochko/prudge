@@ -22,8 +22,8 @@ class TopicsController < ApplicationController
     if !params[:type]
       @topic = Topic.
         find(params[:id])
-    elsif %w[contest problem lesson topic solution].include? params[:type]
-      @topic = params[:type].capitalize.constantize.find(params[:id])
+    elsif %w[contest problem lesson topic solution].include? params[:type].singularize
+      @topic = params[:type].singularize.capitalize.constantize.find(params[:id])
       if @topic.instance_of?(Problem) && !@topic.available_to(current_user)
         flash[:notice] = "Уучлаарай, Энэ бодлогыг одоохондоо үзэх боломжгүй"
         redirect_to '/topic/problem'
