@@ -1,6 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  # Fixes for old paths
+  map.connect ':controller/feed.rss', :action => 'index', :format => 'rss'
   map.connect ':controller/list', :action => 'index'
-
+  
   map.resources :users, :member => [:solutions, :lessons, :problems]
   map.resources :password_resets
   map.resource :user_session
