@@ -27,6 +27,10 @@ class Problem < ActiveRecord::Base
   named_scope :active, :conditions => ["active_from < ?", Time.now]
 
   before_save :copy_times
+  
+  def active?
+    self.active_from && (self.active_from < Time.now)
+  end
 
   def owned_by?(someone)
     self.user_id == someone.id
