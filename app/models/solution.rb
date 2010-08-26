@@ -2,7 +2,7 @@ class Solution < ActiveRecord::Base
   SOLUTIONS_DIR = 'judge/solutions'
   SOLUTIONS_PATH = "#{RAILS_ROOT}/#{SOLUTIONS_DIR}"
   EXECUTOR = "#{RAILS_ROOT}/judge/safeexec"
-
+  MAX_OUTPUT = 2048 # 2Mbyte
   belongs_to :contest
   belongs_to :problem, :counter_cache => 'tried_count'
   belongs_to :user, :counter_cache => true
@@ -101,6 +101,7 @@ class Solution < ActiveRecord::Base
     cmd = "#{EXECUTOR} "+
            "--cpu #{problem.time + language.time_req} "+
            "--mem #{problem.memory + language.mem_req} "+
+           "--fsize #{MAX_OUTPUT} "+
            "--usage #{usage_path} "+
            "--exec #{exe_path} "+
            "0< #{test.input_path} " +
