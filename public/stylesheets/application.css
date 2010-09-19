@@ -131,6 +131,7 @@ img {max-width:770px;}
 #powered {
     float:right;
     font-size:0.9em;
+    height:3em;
 }
 .ok {
     background: url(/images/ok.png) no-repeat bottom left;
