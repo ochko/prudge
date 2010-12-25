@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 module ResultsHelper
   def inverted_table(results)
     matrix = []
@@ -8,7 +9,7 @@ module ResultsHelper
                  translate_message(result.status), 
                  sec2milisec(result.time), 
                  result.memory, 
-                 link_to(show_correctness(result.matched), result)]
+                 link_to(show_correctness(result.correct?), result)]
     end
     content = '<table id="results-table">'
     matrix.transpose.each do |row|

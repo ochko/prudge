@@ -19,11 +19,15 @@ class Result < ActiveRecord::Base
   end
 
   def failed?
-    not (normal? and matched)
+    not correct?
   end
 
   def normal?
     self.status && self.status.strip.eql?('OK')
+  end
+
+  def correct?
+    normal? and matched
   end
 
 end
