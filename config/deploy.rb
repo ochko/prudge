@@ -11,13 +11,13 @@ set :copy_exclude, [".git"]
 set :copy_remote_dir, "/home/ochko/apps/coder/tmp"
 
 set :user, "ochko"
-set :port, 2002
+set :port, 8080
 set :ssh_options, { :forward_agent => true }
 set :use_sudo, false
 
-role :app, "coder.query.mn"
-role :web, "coder.query.mn"
-role :db,  "coder.query.mn", :primary => true
+role :app, "coder.mn"
+role :web, "coder.mn"
+role :db,  "coder.mn", :primary => true
 
 after "deploy:update_code", "config:copy_shared_configurations", "data:link"
 
