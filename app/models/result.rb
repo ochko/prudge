@@ -19,7 +19,7 @@ class Result < ActiveRecord::Base
   end
 
   def failed?
-    not (normal and matched)
+    not (normal? and matched)
   end
 
   def normal?
