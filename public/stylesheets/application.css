@@ -124,14 +124,19 @@ img {max-width:770px;}
     text-decoration: underline;
 }
 #footer-links {
+    font-size:0.8em;
+    font-weight:bold;
     float:left;
-    border-bottom: 2px solid #bbb;
     padding-bottom:5px;
 }
-#powered {
-    float:right;
-    font-size:0.9em;
-    height:3em;
+#copyright {
+    font-size:0.8em;
+    float:left;
+}
+#sponsors img {
+    margin: 3px;
+    max-height:40px;
+    max-width:140px;
 }
 .ok {
     background: url(/images/ok.png) no-repeat bottom left;

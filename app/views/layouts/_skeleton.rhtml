@@ -62,19 +62,21 @@
     </div>
     <div id="bottom">
       <div id="footer">
-	<div id="footer-links">
+	<div id="footer-links" class="span-6">
 	<%=link_to 'Тусламж', :controller => 'home', :action => 'help' %> |
 	<%=link_to 'Сайтын тухай', :controller => 'home', :action => 'about' %> |
 	<%=link_to 'Бидний зарчим', :controller => 'home', :action => 'rules' %>
+	<div id="copyright" class="span-6">
+	  &copy;2010-<%=Date.today.year%> Coder.mn. All rights reserved.
 	</div>
-	<div id="powered" class="span-6">
-          Powered by <a href="http://www.usi.mn" target="usi">USI</a>. <br />
-	  Developed by <a href="http://ochko.blogspot.com" target="ochko">Maahai L.Ochirkhuyag</a> 2007-2010.
 	</div>
-	<div id="copyright" class="span-10">
-	  &copy;2010 <a href="http://coder.mn">Coder.mn</a>
-	  All rights reserved.
-	</div>
+
+        <div id="sponsors">
+          <a href="http://www.usi.mn" target="usi"><img src="http://www.usi.mn/templates/247shock_blue_452/images/head0.jpg" alt="USI"/></a>
+          <a href="http://www.kt.mn" target="kt"><img src="http://kt.mn/templates/ja_sanidineii_light/images/logo.png" alt="KT"/></a>
+          <a href="http://www.g-mobile.mn" target="gmobile"><img src="http://www.g-mobile.mn/images/logo.png" alt="G-Mobile"/></a>
+          <a href="" target="bagaart"><img src="http://i55.tinypic.com/n5oep2.jpg" alt="Baga Art"/></a>
+        </div>
       </div>
     </div>
     <!-- Google analytics -->
