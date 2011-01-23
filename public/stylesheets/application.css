@@ -281,12 +281,15 @@ th.level-legend {
 th.level-legend span {
     margin:0 1em;
 }
-
+.rank_128 { background: url(/images/rank_128.png) no-repeat 0px 0px; }
+.rank_64 { background: url(/images/rank_64.png) no-repeat 0px 0px; }
+.rank_32 { background: url(/images/rank_32.png) no-repeat 0px 0px; }
+.rank_16 { background: url(/images/rank_16.png) no-repeat 0px 0px; }
 .rank_8 { background: url(/images/rank_8.png) no-repeat 0px 0px; }
 .rank_4 { background: url(/images/rank_4.png) no-repeat 0px 0px; }
 .rank_2 { background: url(/images/rank_2.png) no-repeat 0px 0px; }
 .rank_1 { background: url(/images/rank_1.png) no-repeat 0px 0px; }
-.rank_8, .rank_4, .rank_2, .rank_1, rank_0 {
+.rank_128, .rank_64, .rank_32, .rank_16, .rank_8, .rank_4, .rank_2, .rank_1, rank_0 {
     padding:1px 0px 4px 23px; 
 }
 

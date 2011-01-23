@@ -2,7 +2,7 @@
 <div class="bigger-inputs span-20">
 <%= text_field 'contest', 'name', :title => 'Тэмцээний нэр'  %>
 <span class="input-level" title="Түвшин">
-  <%= select 'contest', 'level', {'' => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4}  %>
+  <%= select 'contest', 'level', [['Бүгд', 0], ['Явган', 1], ['Дугуй', 2], ['Мотоцикл', 4], ['Машин', 8], ['Галт тэрэг', 16], ['Усан онгоц', 32], ['Нисдэг тэрэг', 64], ['Онгоц', 128]]  %>
 </span>
 </div>
 <div class="span-20">

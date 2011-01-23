@@ -10,13 +10,9 @@ module UsersHelper
 
   def levels_legend(tag)
     legend = ''
-    from = ''
-    [1, 2, 4, 8].each do |level|
+    [1, 2, 4, 8, 16, 32, 64, 128].each do |level|
       name = Contest::LEVEL_NAMES[level]
-      to = Contest::LEVEL_POINTS[level]
-      to = '' if to == 1000
-      legend << content_tag(tag, "#{name}: #{from}~#{to}", :class =>"rank_#{level}")
-      from = Contest::LEVEL_POINTS[level]
+      legend << content_tag(tag, "~#{Contest::LEVEL_POINTS[level]}", :class =>"rank_#{level}")
     end 
     legend
   end
