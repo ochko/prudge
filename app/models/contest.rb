@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Contest < ActiveRecord::Base
   LEVEL_NAMES = { 0 => 'Бүгд', 
     1 => 'Сонирхогч', 
@@ -14,8 +15,8 @@ class Contest < ActiveRecord::Base
   has_many :problems
   has_many :solutions
   has_many :users, :through => :solutions,
-      :select => "users.login, users.id, sum(solutions.point) as point,avg(solutions.time) as avg",
-      :group => 'user_id', :order => "point desc, avg asc"
+      :select => "users.login, users.id, sum(solutions.point) as point, sum(solutions.solved_in) as time",
+      :group => 'user_id', :order => "point DESC, time ASC"
   has_many :comments,
            :as => 'topic',
            :class_name => 'Comment',
@@ -38,15 +39,15 @@ class Contest < ActiveRecord::Base
   named_scope :commented, :conditions => "comments_count > 0"
 
   def standings
-    num, point, avg = 0, 0.0, 0.0
+    num, point, time = 0, 0.0, 0.0
     numbers = [] 
     standers = []
     for user in self.users
-      if (point != user.point) || (user.avg.to_f - avg.to_f > 0.1)
+      if (point != user.point) || (user.time.to_f - time.to_f > 0.1)
         point = user.point
         num += 1
       end
-      avg = user.avg
+      time = user.time
       numbers << num
       standers << user
     end

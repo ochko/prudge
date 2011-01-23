@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100716170601) do
+ActiveRecord::Schema.define(:version => 20110123104508) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",                 :null => false
@@ -178,6 +178,7 @@ ActiveRecord::Schema.define(:version => 20100716170601) do
     t.datetime "commented_at"
     t.text     "junk"
     t.boolean  "nocompile",           :default => false
+    t.integer  "solved_in"
   end
 
   add_index "solutions", ["contest_id"], :name => "index_solutions_on_contest_id"

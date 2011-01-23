@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Solution < ActiveRecord::Base
   SOLUTIONS_DIR = 'judge/solutions'
   SOLUTIONS_PATH = "#{RAILS_ROOT}/#{SOLUTIONS_DIR}"
@@ -143,11 +144,13 @@ class Solution < ActiveRecord::Base
     unless self.results.empty?
       passed = self.results.correct.real.size
       total = self.problem.tests.real.size
-      self.update_attributes(:checked => true,
-                             :correct => (passed == total),
-                             :percent => (passed.to_f / total),
-                             :time => (self.results.sum(:time) / self.results.size),
-                             :point => (passed.to_f / total) * self.problem.level) 
+      self.checked = true
+      self.correct = passed == total
+      self.percent = passed.to_f / total
+      self.time    = self.results.sum(:time) / self.results.size
+      self.point   = (passed.to_f / total) * self.problem.level 
+      self.solved_in ||= (self.correct && self.contest && self.contest.start < Time.now && (Time.now - self.contest.start))
+      self.save!
       self.user.increment!(:points, self.point) if self.point > 0
       self.problem.increment!(:solved_count) if self.correct
     end

@@ -6,8 +6,8 @@
 	    <tr>
 	      <th></th>
 	      <th>Нэр</th>
-	      <th><img src="/images/points.png" title="Нийлбэр оноо"/></th>
-	      <th><img src="/images/clock.png" title="Дундаж хугацаа"/></th>
+	      <th><img src="/images/points.png" title="Оноо"/></th>
+	      <th><img src="/images/clock.png" title="Хугацаа"/></th>
 	      <th></th>
 	    </tr>
 	    <% @numbers.zip(@standings) do |num, user| %>
@@ -16,7 +16,7 @@
               <td class='small'>
 		<%= link_to user.login, user %></td>
               <td class='small'><%= "%.2f" % user.point %></td>
-              <td class='small'><%= sec2milisec user.avg %></td>
+              <td class='small'><%= sec2milisec user.time %></td>
               <td class='small'>
 		<%= link_to_remote image_tag('arrow-r.png'), 
 		    :url=>{:controller=>'participants',:action=>'show',:user=>user.id, :contest=>@contest.id},
