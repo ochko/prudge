@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Irish+Growler);
+
 body { background-color: #f1f1f1; color: #333; }
 
 body, p, ol, ul, td {
@@ -281,16 +283,20 @@ th.level-legend {
 th.level-legend span {
     margin:0 1em;
 }
-.rank_128 { background: url(/images/rank_128.png) no-repeat 0px 0px; }
-.rank_64 { background: url(/images/rank_64.png) no-repeat 0px 0px; }
-.rank_32 { background: url(/images/rank_32.png) no-repeat 0px 0px; }
-.rank_16 { background: url(/images/rank_16.png) no-repeat 0px 0px; }
-.rank_8 { background: url(/images/rank_8.png) no-repeat 0px 0px; }
-.rank_4 { background: url(/images/rank_4.png) no-repeat 0px 0px; }
-.rank_2 { background: url(/images/rank_2.png) no-repeat 0px 0px; }
-.rank_1 { background: url(/images/rank_1.png) no-repeat 0px 0px; }
-.rank_128, .rank_64, .rank_32, .rank_16, .rank_8, .rank_4, .rank_2, .rank_1, rank_0 {
-    padding:1px 0px 4px 23px; 
+.rank_128 { background: url(/images/rank_128.png) no-repeat 0px 0px; font-size:1.3em;color: #000; }
+.rank_64 { background: url(/images/rank_64.png) no-repeat 0px 0px; font-size:1.3em;color: #111; }
+.rank_32 { background: url(/images/rank_32.png) no-repeat 0px 0px; font-size:1.2em;color: #111; }
+.rank_16 { background: url(/images/rank_16.png) no-repeat 0px 0px; font-size:1.2em;color: #333; }
+.rank_8 { background: url(/images/rank_8.png) no-repeat 0px 0px; font-size:1.1em;color: #333; }
+.rank_4 { background: url(/images/rank_4.png) no-repeat 0px 0px; font-size:1.1em; color: #555; }
+.rank_2 { background: url(/images/rank_2.png) no-repeat 0px 0px; color: #555; }
+.rank_1 { background: url(/images/rank_1.png) no-repeat 0px 0px; color: #666; }
+.rank_128, .rank_64, .rank_32, .rank_16, .rank_8, .rank_4, .rank_2, .rank_1, .rank_0 {
+    padding:1px 0px 4px 23px; font-family: 'Irish Growler', arial, serif; 
+}
+
+a.rank_128:hover, a.rank_64:hover, a.rank_32:hover, a.rank_16:hover, a.rank_8:hover, a.rank_4:hover, a.rank_2:hover, a.rank_1:hover, a.rank_0:hover {
+    color: #4080C0;
 }
 
 .portrait{ float:left; padding: 0 1em 0 0.5em;}
@@ -424,6 +430,9 @@ td.ranking {
     width:30px;
     text-align:center;
     font-weight:bold;
+    font-family: 'Irish Growler', arial, serif; 
+    font-size: 1.1em;
+    color: #555;
 }
 td.numbering {
     width:45px;
