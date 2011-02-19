@@ -80,34 +80,34 @@ mn:
     distance_in_words:
       half_a_minute: "хагас минут"	
       less_than_x_seconds:
-        one: "{{count}} секундээс бага"
-        other: "{{count}} секундээс бага"
+        one: "%{count} секундээс бага"
+        other: "%{count} секундээс бага"
       x_seconds:
-        one: "{{count}} секунд"
-        other: "{{count}} секунд"
+        one: "%{count} секунд"
+        other: "%{count} секунд"
       less_than_x_minutes:
-        one: "{{count}} минутаас бага"
-        other: "{{count}} минутаас бага"
+        one: "%{count} минутаас бага"
+        other: "%{count} минутаас бага"
       x_minutes:
-        one: "{{count}} минут"
-        other: "{{count}} минут"
+        one: "%{count} минут"
+        other: "%{count} минут"
       about_x_hours:
-        one: "{{count}} цаг орчим"
-        other: "{{count}} цаг орчим"
+        one: "%{count} цаг орчим"
+        other: "%{count} цаг орчим"
       x_days:
-        one: "{{count}} өдөр"
-        other: "{{count}} өдөр"
+        one: "%{count} өдөр"
+        other: "%{count} өдөр"
       about_x_months:
-        one: "{{count}} сар орчим"
-        other: "{{count}} сар орчим"
+        one: "%{count} сар орчим"
+        other: "%{count} сар орчим"
       x_months:
-        one: "{{count}} сар"
-        other: "{{count}} сар"
+        one: "%{count} сар"
+        other: "%{count} сар"
       about_x_years:
-        one: "{{count}} жил орчим"
-        other: "{{count}} жил орчим"
+        one: "%{count} жил орчим"
+        other: "%{count} жил орчим"
       over_x_years:
-        one: "{{count}} жилээс илүү"
+        one: "%{count} жилээс илүү"
     prompts:
       year: "Жил"
       month: "Сар"
@@ -120,8 +120,8 @@ mn:
     errors:
       template:
         header:
-          one: "{{model}}-д алдаа байна"
-          other: "{{model}}-д алдаа байна"
+          one: "%{model}-д алдаа байна"
+          other: "%{model}-д алдаа байна"
         body: "Дараах хэсгүүдэд алдаа гарлаа:"
       messages:
         inclusion: "жагсаалтад алга байна"
@@ -131,23 +131,23 @@ mn:
         accepted: "хүлээн зөвшөөрөгдсөн байх ёстой"
         empty: "байхгүй байж болохгүй"
         blank: "хоосон байж болохгүй"
-        too_long: "хэт урт байна (хамгийн уртдаа {{count}} тэмдэгт)"
-        too_short: "хэт богино байна (хамгийн багадаа {{count}} тэмдэгт)"
-        wrong_length: "урт нь буруу байна ({{count}} тэмдэгт байх ёстой)"
+        too_long: "хэт урт байна (хамгийн уртдаа %{count} тэмдэгт)"
+        too_short: "хэт богино байна (хамгийн багадаа %{count} тэмдэгт)"
+        wrong_length: "урт нь буруу байна (%{count} тэмдэгт байх ёстой)"
         taken: "аль хэдийн авчихсан байна"
         not_a_number: "тоо биш байна"
-        greater_than: "{{count}}-с их байх ёстой"
-        greater_than_or_equal_to: "{{count}}-с их юмуу тэнцүү байх ёстой"
-        equal_to: "{{count}}-тэй тэнцүү байх ёстой"
-        less_than: "{{count}}-с бага байх ёстой"
-        less_than_or_equal_to: "{{count}}-с бага юмуу тэнцүү байх ёстой"
+        greater_than: "%{count}-с их байх ёстой"
+        greater_than_or_equal_to: "%{count}-с их юмуу тэнцүү байх ёстой"
+        equal_to: "%{count}-тэй тэнцүү байх ёстой"
+        less_than: "%{count}-с бага байх ёстой"
+        less_than_or_equal_to: "%{count}-с бага юмуу тэнцүү байх ёстой"
         odd: "сонгой байх ёстой"
         even: "тэгш байх ёстой"
-        record_invalid: "Шалгалт амжилтгүй: {{errors}}"
+        record_invalid: "Шалгалт амжилтгүй: %{errors}"
         should look like an email address: "имэйл хаяг шиг харагдах ёстой"
         # Append your own errors here or at the model/attributes scope.
       full_messages:
-        format: "{{attribute}} {{message}}"
+        format: "%{attribute} %{message}"
  
     models:
       user: "Хэрэглэгч"
