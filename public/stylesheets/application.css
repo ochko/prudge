@@ -110,17 +110,15 @@ img {max-width:770px;}
 #bottom {
     color: #eee;
     width:100%;
-    float:left;
     background-color: #999;
     border-top: 5px solid #666;
-    height:50px;
+    min-height:50px;
     padding:20px 0;
 }
 #footer {
     margin:0 auto;
     width:800px;
 }
-
 #footer a {
     color: #fff;
     text-decoration: underline;
