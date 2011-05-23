@@ -13,7 +13,7 @@
    height="40"
    id="svg2"
    version="1.1"
-   inkscape:version="0.47 r22583"
+   inkscape:version="0.48.1 r9760"
    sodipodi:docname="logo.svg"
    inkscape:export-filename="/home/ochko/apps/coder/public/images/logo.png"
    inkscape:export-xdpi="131.51703"
@@ -36,14 +36,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="5.7"
-     inkscape:cx="62.948191"
-     inkscape:cy="-0.9873521"
+     inkscape:cx="73.839703"
+     inkscape:cy="6.0301918"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1243"
+     inkscape:window-width="1239"
      inkscape:window-height="771"
-     inkscape:window-x="27"
+     inkscape:window-x="31"
      inkscape:window-y="0"
      inkscape:window-maximized="1" />
   <metadata
@@ -54,7 +54,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -92,26 +92,87 @@
              style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#101010;fill-opacity:1;font-family:HVD Peace;-inkscape-font-specification:HVD Peace"
              ry="0" /></flowRegion><flowPara
            id="flowPara3670"
-           style="font-size:18.00000033;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Tiza;-inkscape-font-specification:Tiza">coder.mn</flowPara></flowRoot>    </g>
+           style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Tiza;-inkscape-font-specification:Tiza">coder </flowPara></flowRoot>    </g>
     <text
        xml:space="preserve"
-       style="font-size:26.51959991px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#333333;fill-opacity:1;stroke:none;font-family:Orbitron;-inkscape-font-specification:Orbitron Bold"
-       x="1.0747615"
-       y="1350.4468"
+       style="font-size:27.39917564px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;fill:#333333;fill-opacity:1;stroke:none;font-family:Orbitron;-inkscape-font-specification:Orbitron Bold"
+       x="1.5596607"
+       y="1398.8512"
        id="text3672"
+       inkscape:export-xdpi="140.75951"
+       inkscape:export-ydpi="140.75951"
+       transform="scale(1.3376331,0.74758916)"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3674"
+         x="1.5596607"
+         y="1398.8512"
+         style="font-size:16.53067207px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;fill:#333333;fill-opacity:1;font-family:MASTERPLAN;-inkscape-font-specification:MASTERPLAN Bold">HAPPY CODING</tspan></text>
+    <path
+       style="fill:none;stroke:#333333;stroke-width:1.39646173;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 2,1034.8885 86.841794,0"
+       id="path3676"
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot2995"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Bitstream Vera Sans;font-style:normal;font-weight:normal;font-size:8px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion2997"><rect
+           id="rect2999"
+           width="70.87719"
+           height="33.85965"
+           x="59.824562"
+           y="47.719299"
+           style="font-size:8px" /></flowRegion><flowPara
+         id="flowPara3001"></flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3003"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Bitstream Vera Sans;font-style:normal;font-weight:normal;font-size:20;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion3005"><rect
+           id="rect3007"
+           width="68.771927"
+           height="31.228069"
+           x="47.543861"
+           y="46.315788" /></flowRegion><flowPara
+         id="flowPara3009"></flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-size:26.51959991px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#333333;fill-opacity:1;stroke:none;font-family:Orbitron;-inkscape-font-specification:Orbitron Bold"
+       x="71.070953"
+       y="1321.5804"
+       id="text3672-1"
        inkscape:export-xdpi="140.75951"
        inkscape:export-ydpi="140.75951"
        transform="scale(1.294692,0.77238448)"><tspan
          sodipodi:role="line"
-         id="tspan3674"
-         x="1.0747615"
-         y="1350.4468"
-         style="font-size:11.93382072px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:Orbitron;-inkscape-font-specification:Orbitron Bold">HAPPY CODING</tspan></text>
-    <path
-       style="fill:none;stroke:#333333;stroke-width:1.19999999999999996;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="m 2,22 134,0"
-       id="path3676"
-       transform="translate(0,1012.3622)"
-       sodipodi:nodetypes="cc" />
+         id="tspan3674-1"
+         x="71.070953"
+         y="1321.5804"
+         style="font-size:6.49999998px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:Tiza;-inkscape-font-specification:Tiza Bold">1100011</tspan><tspan
+         sodipodi:role="line"
+         x="71.070953"
+         y="1329.0804"
+         style="font-size:6.49999998px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:Tiza;-inkscape-font-specification:Tiza Bold"
+         id="tspan3070">1101111</tspan><tspan
+         sodipodi:role="line"
+         x="71.070953"
+         y="1336.5804"
+         style="font-size:6.49999998px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:Tiza;-inkscape-font-specification:Tiza Bold"
+         id="tspan3072">1100100</tspan><tspan
+         sodipodi:role="line"
+         x="71.070953"
+         y="1344.0804"
+         style="font-size:6.49999998px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:Tiza;-inkscape-font-specification:Tiza Bold"
+         id="tspan3074">1100101</tspan><tspan
+         sodipodi:role="line"
+         x="71.070953"
+         y="1351.5804"
+         style="font-size:6.49999998px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:Tiza;-inkscape-font-specification:Tiza Bold"
+         id="tspan3076">1110010</tspan><tspan
+         sodipodi:role="line"
+         x="71.070953"
+         y="1359.0804"
+         style="font-size:6.49999998px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:Tiza;-inkscape-font-specification:Tiza Bold"
+         id="tspan3078" /></text>
   </g>
 </svg>
