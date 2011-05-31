@@ -9,15 +9,6 @@ Rails::Initializer.run do |config|
 
   # Skip frameworks you're not going to use (only works if using vendor/rails)
   # config.frameworks -= [ :action_web_service, :action_mailer ]
-  config.gem "bluecloth"
-  config.gem "authlogic"
-  config.gem "authlogic-oid", :lib => "authlogic_openid"
-  config.gem "ruby-openid", :lib => "openid"
-  config.gem 'gravtastic', :version => '>= 2.1.0'
-  config.gem 'thinking-sphinx', :lib => 'thinking_sphinx'
-  config.gem 'will_paginate', :version => '2.3.12'
-  config.gem 'ochko-flow_pagination', :lib => 'flow_pagination', :version => '1.2.3'
-  config.gem 'methodmissing-scrooge', :lib => 'scrooge'
 
   config.cache_store = :mem_cache_store, '127.0.0.1:11211', { :namespace => 'coder' }
 
@@ -41,6 +32,7 @@ Rails::Initializer.run do |config|
   config.i18n.default_locale = :mn
 
 end
-  ExceptionNotification::Notifier.exception_recipients = %w(ochkoo@gmail.com)
-  ExceptionNotification::Notifier.sender_address = %(coder.mn@gmail.com)
-  ExceptionNotification::Notifier.email_prefix = "[Coder.MN] "
+
+ExceptionNotification::Notifier.exception_recipients = %w(ochkoo@gmail.com)
+ExceptionNotification::Notifier.sender_address = %(coder.mn@gmail.com)
+ExceptionNotification::Notifier.email_prefix = "[Coder.MN] "

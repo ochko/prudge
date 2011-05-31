@@ -1,0 +1,80 @@
+GIT
+  remote: git://github.com/methodmissing/scrooge.git
+  revision: 6f74cb919beb4af64cb3a1ec3b2aa28a2d2ff641
+  specs:
+    scrooge (3.0.0)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    actionmailer (2.3.9)
+      actionpack (= 2.3.9)
+    actionpack (2.3.9)
+      activesupport (= 2.3.9)
+      rack (~> 1.1.0)
+    activerecord (2.3.9)
+      activesupport (= 2.3.9)
+    activeresource (2.3.9)
+      activesupport (= 2.3.9)
+    activesupport (2.3.9)
+    after_commit (1.0.8)
+      activerecord (< 3.0.0)
+    authlogic (2.1.6)
+      activesupport
+    authlogic-oid (1.0.4)
+      authlogic
+    bluecloth (2.1.0)
+    capistrano (2.6.0)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
+    gravtastic (3.1.0)
+    highline (1.6.2)
+    mysql (2.8.1)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-sftp (2.0.5)
+      net-ssh (>= 2.0.9)
+    net-ssh (2.1.4)
+    net-ssh-gateway (1.1.0)
+      net-ssh (>= 1.99.1)
+    ochko-flow_pagination (1.2.3)
+    rack (1.1.2)
+    rack-openid (1.3.1)
+      rack (>= 1.1.0)
+      ruby-openid (>= 2.1.8)
+    rails (2.3.9)
+      actionmailer (= 2.3.9)
+      actionpack (= 2.3.9)
+      activerecord (= 2.3.9)
+      activeresource (= 2.3.9)
+      activesupport (= 2.3.9)
+      rake (>= 0.8.3)
+    rake (0.9.0)
+    riddle (1.3.3)
+    ruby-openid (2.1.8)
+    thinking-sphinx (1.4.6)
+      activerecord (< 3.0.0, >= 1.15.6)
+      after_commit (>= 1.0.7)
+      riddle (>= 1.3.3)
+    will_paginate (2.3.12)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  authlogic
+  authlogic-oid
+  bluecloth
+  capistrano
+  gravtastic
+  mysql
+  ochko-flow_pagination (= 1.2.3)
+  rack-openid
+  rails (~> 2.3.9)
+  ruby-openid
+  scrooge!
+  thinking-sphinx
+  will_paginate (~> 2.3.12)

@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include Gravtastic
+
   DOT_GIT = "#{RAILS_ROOT}/config/dot.git"
   GITIGNORE = "#{RAILS_ROOT}/config/dot.gitignore"
 
