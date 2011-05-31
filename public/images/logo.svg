@@ -37,7 +37,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="5.7"
      inkscape:cx="73.839703"
-     inkscape:cy="6.0301918"
+     inkscape:cy="-8.004896"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -54,7 +54,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -148,31 +148,31 @@
          id="tspan3674-1"
          x="71.070953"
          y="1321.5804"
-         style="font-size:6.49999998px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:Tiza;-inkscape-font-specification:Tiza Bold">1100011</tspan><tspan
+         style="font-size:6.49999998000000012px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:HVD Peace;-inkscape-font-specification:HVD Peace">1100011</tspan><tspan
          sodipodi:role="line"
          x="71.070953"
          y="1329.0804"
-         style="font-size:6.49999998px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:Tiza;-inkscape-font-specification:Tiza Bold"
+         style="font-size:6.49999998000000012px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:HVD Peace;-inkscape-font-specification:HVD Peace"
          id="tspan3070">1101111</tspan><tspan
          sodipodi:role="line"
          x="71.070953"
          y="1336.5804"
-         style="font-size:6.49999998px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:Tiza;-inkscape-font-specification:Tiza Bold"
+         style="font-size:6.49999998000000012px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:HVD Peace;-inkscape-font-specification:HVD Peace"
          id="tspan3072">1100100</tspan><tspan
          sodipodi:role="line"
          x="71.070953"
          y="1344.0804"
-         style="font-size:6.49999998px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:Tiza;-inkscape-font-specification:Tiza Bold"
+         style="font-size:6.49999998000000012px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:HVD Peace;-inkscape-font-specification:HVD Peace"
          id="tspan3074">1100101</tspan><tspan
          sodipodi:role="line"
          x="71.070953"
          y="1351.5804"
-         style="font-size:6.49999998px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:Tiza;-inkscape-font-specification:Tiza Bold"
+         style="font-size:6.49999998000000012px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:HVD Peace;-inkscape-font-specification:HVD Peace"
          id="tspan3076">1110010</tspan><tspan
          sodipodi:role="line"
          x="71.070953"
          y="1359.0804"
-         style="font-size:6.49999998px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:Tiza;-inkscape-font-specification:Tiza Bold"
+         style="font-size:6.49999998000000012px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:HVD Peace;-inkscape-font-specification:HVD Peace"
          id="tspan3078" /></text>
   </g>
 </svg>
