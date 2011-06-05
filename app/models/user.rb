@@ -104,4 +104,20 @@ class User < ActiveRecord::Base
     end
   end
 
+  def refreshed_points
+    nodup = {}
+    self.solutions.each do |solution|
+      pid = solution.problem_id
+      nodup[pid] ||= solution
+      nodup[pid] = solution if nodup[pid].point < solution.point
+      nodup
+    end
+    nodup.values.inject(0) { |sum, solution| sum += solution.point}
+  end
+
+  def refresh_points!
+    self.points = refreshed_points
+    save!
+  end
+
 end
