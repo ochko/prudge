@@ -19,7 +19,7 @@ role :app, "coder.query.mn"
 role :web, "coder.query.mn"
 role :db,  "coder.query.mn", :primary => true
 
-after "deploy:update_code", "config:copy", "data:link"
+after "deploy:update_code", "config:bundle", "config:copy", "data:link"
 
 # Overrides for Phusion Passenger
 namespace :deploy do
@@ -34,6 +34,7 @@ namespace :deploy do
   end
 end
 
+
 # Configuration Tasks
 namespace :config do
   desc "copy shared configurations to current"
@@ -42,6 +43,12 @@ namespace :config do
       run "ln -nsf #{shared_path}/config/#{f} #{release_path}/config/#{f}"
     end
   end
+  
+  desc "bundle gems"
+  task :bundle, :roles=> [:app] do
+    run "cd #{release_path}/rails && bundle install --path #{shared_path}/../../gems"
+  end
+
 end
 
 # Data directory linking
