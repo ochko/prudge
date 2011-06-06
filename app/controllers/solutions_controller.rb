@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class SolutionsController < ApplicationController
   before_filter :require_user, :except=> [:submited, :solved, :best]
 
@@ -104,16 +105,16 @@ class SolutionsController < ApplicationController
     @last_one = current_user.last_submission_of(@solution.problem)
     if @last_one
       if !@last_one.locked?
-        if !@last_one.freezed?
-          @last_one.cleanup!
-          @last_one.update_attributes(params[:solution])
-        else
+        if @last_one.freezed?
           @solution.save
           @last_one = @solution
+        else
+          @last_one.cleanup!
+          @last_one.update_attributes(params[:solution])
         end
         @last_one.commit_to_repo
       else
-        flash[:notice] = "Та хэн нэгний бодолтыг үзчихсэн учраас энэ бодлогыг дахин бодож болохгүй"        
+        flash[:notice] = "Та хэн нэгний бодолтыг үзчихсэн учраас энэ бодлогыг дахин бодож болохгүй"
       end
       redirect_to @last_one
     else

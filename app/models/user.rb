@@ -59,9 +59,9 @@ class User < ActiveRecord::Base
   end
 
   def last_submission_of(problem)
-    Solution.find(:first, :conditions => 
+    Solution.last(:conditions => 
                   ["problem_id = ? AND user_id = ?", problem.id, self.id],
-                  :order => 'created_at DESC')
+                  :order => 'created_at ASC')
   end
   
   def solved(problem)
@@ -119,5 +119,4 @@ class User < ActiveRecord::Base
     self.points = refreshed_points
     save!
   end
-
 end

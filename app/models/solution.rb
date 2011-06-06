@@ -32,9 +32,12 @@ class Solution < ActiveRecord::Base
   named_scope :valuable, :conditions => 'percent > 0'
   named_scope :by_speed, :order => 'time ASC, uploaded_at ASC'
 
+  after_destroy { |solution| solution.user.decrement!(:points, solution.point)}
+
+  after_create { |solution| solution.user.solution_uploaded! }
+
   def name() problem.name end
   def text() "Хэрэглэгч #{user.login} -ий бодолтод санал/зөвлөгөө/тусламж бичих" end
-  
 
   def exe_name
     return @exe if @exe
@@ -82,7 +85,7 @@ class Solution < ActiveRecord::Base
         break if result.failed?
       end
       summarize_results!
-      nominate_for_best!
+      nominate_for_best!      
     end
   end
 
@@ -126,18 +129,17 @@ class Solution < ActiveRecord::Base
   end
 
   def cleanup!
-    self.results.clear
-    self.user.decrement!(:points, self.point) if self.point > 0
-    self.problem.decrement!(:solved_count) if self.correct
-    self.update_attributes(:checked => false,
-                           :nocompile => false,
-                           :correct => false,
-                           :percent => 0.0,
-                           :time => 0.0,
-                           :isbest => false,
-                           :point => 0.0,
-                           :junk => nil) 
-    
+    results.clear
+    user.decrement!(:points, point) if point > 0 && isbest
+    problem.decrement!(:solved_count) if correct
+    update_attributes(:checked => false,
+                      :nocompile => false,
+                      :correct => false,
+                      :percent => 0.0,
+                      :time => 0.0,
+                      :isbest => false,
+                      :point => 0.0,
+                      :junk => nil)     
   end
 
   def summarize_results!
@@ -151,22 +153,28 @@ class Solution < ActiveRecord::Base
       self.point   = (passed.to_f / total) * self.problem.level 
       self.solved_in ||= (self.correct && self.contest && self.contest.start < Time.now && (Time.now - self.contest.start))
       self.save!
-      self.user.increment!(:points, self.point) if self.point > 0
+
       self.problem.increment!(:solved_count) if self.correct
     end
   end
   
-  after_destroy { |solution| solution.user.decrement!(:points, solution.point)}
-
-  after_create { |solution| solution.user.solution_uploaded! }
-
   def nominate_for_best!
-    siblings = Solution.
-      find(:all, :conditions => ['user_id = ? and problem_id = ?',
-                                 user_id, problem_id],
-           :order => "percent DESC, time ASC")
-    siblings.each { |sibling| sibling.update_attribute(:isbest, false)}
-    siblings.first.update_attribute(:isbest, true)
+    former = Solution.
+      last(:conditions => ['user_id = ? and problem_id = ? and id <> ?',
+                           user_id, problem_id, id])
+    if former
+      if former.point < point
+        user.increment!(:points, point - former.point)
+        former.update_attribute(:isbest, false)
+        update_attribute(:isbest, true)
+      else
+        former.update_attribute(:isbest, true)
+        update_attribute(:isbest, false)
+      end
+    else
+      user.increment!(:points, point)
+      self.update_attribute(:isbest, true)
+    end
   end
 
   def insert_to_repo
