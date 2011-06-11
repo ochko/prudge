@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110123104508) do
+ActiveRecord::Schema.define(:version => 20110612005832) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",                 :null => false
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20110123104508) do
     t.integer "mem_req",                   :default => 0, :null => false
     t.integer "time_req",                  :default => 0, :null => false
     t.string  "description"
+    t.integer "nproc",                     :default => 0
   end
 
   create_table "lessons", :force => true do |t|
@@ -81,17 +82,6 @@ ActiveRecord::Schema.define(:version => 20110123104508) do
   end
 
   add_index "pages", ["user_id"], :name => "index_pages_on_user_id"
-
-  create_table "photos", :force => true do |t|
-    t.integer "user_id"
-    t.integer "size",                       :null => false
-    t.string  "content_type", :limit => 31, :null => false
-    t.string  "filename",     :limit => 63, :null => false
-    t.integer "height",                     :null => false
-    t.integer "width",                      :null => false
-    t.integer "parent_id"
-    t.string  "thumbnail",    :limit => 15
-  end
 
   create_table "problem_languages", :force => true do |t|
     t.integer "problem_id",  :null => false

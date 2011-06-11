@@ -18,9 +18,8 @@ Rails::Initializer.run do |config|
   # config.active_record.default_timezone = :utc
 
   config.action_controller.session = {
-    :session_key => '_coder_session',
     :key => '_coder_session',
-    :secret      => '4dfcafege5e3f536df7a3fa4db76f5a8070d9d508864b876cabe7d79a773f5bf11088849b897a8c98a38c6ce6he9f92ba79b386dadd2be5e1efefe8f83f4c7m'
+    :secret => '4dfcafege5e3f536df7a3fa4db76f5a8070d9d508864b876cabe7d79a773f5bf11088849b897a8c98a38c6ce6he9f92ba79b386dadd2be5e1efefe8f83f4c7m'
   }
 
   # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 class Solution < ActiveRecord::Base
   SOLUTIONS_DIR = 'judge/solutions'
+  SANDBOX_DIR = "#{RAILS_ROOT}/judge/sandbox"
   SOLUTIONS_PATH = "#{RAILS_ROOT}/#{SOLUTIONS_DIR}"
   EXECUTOR = "#{RAILS_ROOT}/judge/safeexec"
   MAX_OUTPUT = 2048 # 2Mbyte
@@ -45,13 +46,15 @@ class Solution < ActiveRecord::Base
     @exe = self.id if @exe.empty?
     @exe
   end
-  def exe_path()    "#{user.exe_dir}/#{exe_name}" end
+
   def dir()         "#{self.user.solutions_dir}/#{self.problem_id}" end
+  def exe_path()    "#{user.exe_dir}/#{exe_name}" end
+  def script_path() "#{SANDBOX_DIR}/#{source_file_name}" end
   def output_path() "#{user.exe_dir}/#{self.problem_id}.output" end
   def input_path()  "#{user.exe_dir}/#{self.problem_id}.input"  end
   def error_path()  "#{user.exe_dir}/#{self.problem_id}.error"  end
   def usage_path()  "#{user.exe_dir}/#{self.problem_id}.usage"  end
-  def source_path() "#{File.dirname(source.path)}/#{source_file_name}" end
+  def source_path() "#{File.dirname(source.path)}/#{source_file_name}" end  
 
   def owned_by?(someone)
     self.user_id == someone.id
@@ -90,6 +93,8 @@ class Solution < ActiveRecord::Base
   end
 
   def compile
+    return true if language.compiler.blank?
+
     FileUtils.mkdir(user.exe_dir) unless File.directory? user.exe_dir
     FileUtils.rm(exe_path) if File.exist? exe_path
     FileUtils.ln(source.path, source_path, :force => true)
@@ -101,17 +106,40 @@ class Solution < ActiveRecord::Base
   end
 
   def execute(test)
+    if language.runner.blank?
+      execute_compiled test
+    else
+      execute_interpreted test
+    end
+  end
+
+  def execute_interpreted(test)
+    begin
+      FileUtils.ln(source.path, script_path, :force => true)
+      safe_execute(test, language.runner + ' ' +  script_path)
+    ensure
+      FileUtils.rm(script_path) if File.exist? script_path
+    end
+  end
+
+  def execute_compiled(test)
+    safe_execute(test, exe_path)
+  end
+
+  def safe_execute(test, command)
     FileUtils.touch usage_path
     cmd = "#{EXECUTOR} "+
-           "--cpu #{problem.time + language.time_req} "+
-           "--mem #{problem.memory + language.mem_req} "+
-           "--fsize #{MAX_OUTPUT} "+
-           "--usage #{usage_path} "+
-           "--exec #{exe_path} "+
-           "0< #{test.input_path} " +
-           "1> #{output_path} " +
-           "2> #{error_path} "
-    system(cmd)
+      "--cpu #{problem.time + language.time_req} "+
+      "--mem #{problem.memory + language.mem_req} "+
+      "--fsize #{MAX_OUTPUT} "+
+      "--nproc #{language.nproc} "+
+      "--usage #{usage_path} "+
+      "--exec #{command} "+
+      "0< #{test.input_path} " +
+      "1> #{output_path} " +
+      "2> #{error_path} "
+    Rails.logger.info cmd
+    system(cmd)    
   end
 
   def fetch_errors
