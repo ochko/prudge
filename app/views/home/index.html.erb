@@ -1,6 +1,11 @@
+<div class="news">
 <% for n in @news %>
-<h2><%=h n.title %></h2>
-<span class="news-meta"><%=l n.created_at %></span>
-<%=markdown n.content %>
+<div class="news-item">
+  <h1><%=h n.title %></h1>
+  <span class="news-meta"><%=l n.created_at %></span>
+  <%=markdown n.content %>
+</div>
 <% end %>
+</div>
 <%= will_paginate @news, :class=>'apple_pagination', :previous_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+
