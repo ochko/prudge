@@ -921,3 +921,25 @@ del {
 
 div.news-item {padding-bottom:2em;}
 div.news-item h1 {text-align:left;}
+
+table.plain {
+    border-spacing: 0px 0px;
+    border: none;
+}
+
+table.plain th {
+    background-color: #f1f1f1;
+    color: #999;
+    font-weight: normal;
+    border: none;
+}
+
+table.plain tr:hover {
+    background: #f1f1f1;
+}
+table.plain tr {
+    background: #f1f1f1;
+}
+table.plain td {
+    border: none;
+}
