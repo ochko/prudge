@@ -7,6 +7,19 @@ $(function() {
     $.get(this.href, null, null, "script");
     return false;
   });
-  
+
+  $('.load-solutions').live("click", function(){
+    var href = $(this).attr('href');
+    $('#solved').slideUp('fast', function(){
+         $('#spinner').show();
+         $.get(href, function(resp){
+           $('#spinner').hide();
+           $('#solved').html(resp);
+           $('#solved').slideDown('slow');
+         });
+         });
+    return false;
+    });
+
   $.syntax({root: "/javascripts/syntax/"});
 });
