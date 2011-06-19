@@ -1,0 +1,11 @@
+%ul
+  %li!= link_to 'Өмнөх тэмцээн', :controller => 'contests', :action => 'last'
+  %li!= link_to 'Бүх тэмцээнүүд', :controller => 'contests'
+  - if admin?
+    - if @contest
+      %li.edit!= link_to 'Тэмцээнийг засварлах', edit_contest_path(@contest)
+      %li.delete!= link_to 'Тэмцээнийг устгах', { :action => 'destroy', :id => @contest }, :confirm => 'Are you sure?', :method => :post
+  - if judge?
+    %li.add!= link_to 'Шинэ тэмцээн зарлах', new_contest_path
+
+

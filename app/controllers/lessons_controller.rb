@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 class LessonsController < ApplicationController
+  menu :lesson
+
   before_filter :require_user,
                 :except => [:index, :show]
 

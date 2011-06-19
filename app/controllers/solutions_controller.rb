@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 class SolutionsController < ApplicationController
-  before_filter :require_user, :except=> [:submited, :solved, :best]
+  menu :problem
 
-  layout 'contests'
+  before_filter :require_user, :except=> [:submited, :solved, :best]
 
   def index
     @solutions = Solution.

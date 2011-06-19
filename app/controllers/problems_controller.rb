@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 class ProblemsController < ApplicationController
+  menu :problem
+
   before_filter :require_user,
                 :except => [:index, :show]
 

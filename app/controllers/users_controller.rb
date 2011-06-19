@@ -1,4 +1,7 @@
+# -*- coding: utf-8 -*-
 class UsersController < ApplicationController
+  menu :coders
+
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => [:account, :show, :edit, :update]
 

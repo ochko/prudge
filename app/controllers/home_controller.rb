@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  menu :home
 
   def index
     @news = Page.

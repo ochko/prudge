@@ -1,9 +1,4 @@
-<h2 class="rank_<%=@contest.level%>" title="<%= @contest.level_name %> түвшний тэмцээн"><%=h @contest.name %>
-  <% if admin? -%>
-  <%= link_to image_tag('edit.png'), edit_contest_path(@contest), :title =>'Засвар' %>
-  <%= link_to image_tag('delete.png'), { :action => 'destroy', :id => @contest }, :confirm => 'Are you sure?', :method => :post, :title => 'Устгах' %>
-  <% end -%>
-</h2>
+<h2 class="rank_<%=@contest.level%>" title="<%= @contest.level_name %> түвшний тэмцээн"><%=h @contest.name %></h2>
 <div id="contest-meta">
   <span class="contest-time">
   <%=l @contest.start %> &raquo; 

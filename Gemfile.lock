@@ -31,6 +31,7 @@ GEM
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
     gravtastic (3.1.0)
+    haml (3.1.2)
     highline (1.6.2)
     mysql (2.8.1)
     net-scp (1.0.4)
@@ -70,6 +71,7 @@ DEPENDENCIES
   bluecloth
   capistrano
   gravtastic
+  haml
   mysql
   ochko-flow_pagination (= 1.2.3)
   rack-openid

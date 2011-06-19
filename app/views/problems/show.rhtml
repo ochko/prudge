@@ -4,18 +4,6 @@
   <span class="req-time" title="Хугацааны хязгаар"><%= @problem.time %></span>
   <span class="req-memory" title="Санах ойн хязгаар"><%= @problem.memory %></span>  
   <span class="req-test" title="Тэстийн тоо"><%= @problem.tests.size %></span>
-  <span id="problem-actions">
-    <% if @problem.test_addable? current_user %>
-    <%= link_to image_tag('tests.png'), new_problem_test_path(:problem_id => @problem.id), :title => "Тэстүүд" %>
-    <% end %>
-    <% if @problem.has_permission?(current_user) %>
-    <%= link_to image_tag('edit.png'), edit_problem_path(@problem), :title => 'Засварлах' %>
-    <%= link_to image_tag('trash.png'), @problem, :confirm => 'Are you sure?', :method => :delete, :title=>'Устгах' %>
-    <% end %>
-    <% if judge? %>
-    <%= link_to image_tag('button-refresh.png'), {:action => :check}, :title => 'Бүх бодолтыг дахин шалгах' %>
-    <% end %>
-  </span>
 </h2>
 <span id="solve-link">
   <%= link_to 'БОДОХ', new_solution_path(:problem => @problem.id), :class => 'big blue awesome' %>

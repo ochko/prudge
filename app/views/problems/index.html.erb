@@ -1,7 +1,6 @@
-<h1>Бодлогууд</h1>
+<h2>Бодлогууд<%= link_to image_tag('rss.png')+'RSS', problems_path(:format=>:rss) %></h2>
 
   <% if @problems.size > 0 %>
-    <%= will_paginate @problems, :class=>'apple_pagination', :previous_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
     <table id="problems">
       <tr>
 	<th width="1%"></th>

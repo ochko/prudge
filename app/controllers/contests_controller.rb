@@ -1,4 +1,7 @@
+# -*- coding: utf-8 -*-
 class ContestsController < ApplicationController
+  menu :contest
+
   before_filter :require_user,
                 :except => [:index, :last, :show]
 

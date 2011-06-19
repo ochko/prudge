@@ -1,10 +1,19 @@
+# -*- coding: utf-8 -*-
 class ApplicationController < ActionController::Base
   include ExceptionNotification::Notifiable
 
   helper :all
+  helper_method :menu
   protect_from_forgery
   filter_parameter_logging :password, :password_confirmation
   helper_method :current_user_session, :current_user, :current_user?, :admin?, :judge?
+
+  class << self
+    attr_accessor :context_menu
+    def menu name      
+      self.context_menu = name
+    end
+  end
 
   protected
   def prepare_wmd
@@ -12,6 +21,9 @@ class ApplicationController < ActionController::Base
   end
 
   private
+  def menu
+    self.class.context_menu
+  end
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find
@@ -84,6 +96,4 @@ class ApplicationController < ActionController::Base
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
   end
-
-
 end

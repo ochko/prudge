@@ -1,0 +1,11 @@
+%ul
+  %li!= link_to 'Сүүлд нэмэгдсэн', comments_path
+  %li!= link_to 'Тэмцээний', '/topic/contest'
+  %li!= link_to 'Бодлогын', '/topic/problem'
+  %li!= link_to 'Хичээлийн', '/topic/lesson'
+  - if admin?
+    %li!= link_to 'Шинэ сэдэв нэмэх', :controller => 'topics', :action => 'new'
+    %li!= link_to 'Хянах', '/moderate'
+  %li!=  link_to image_tag('rss.png')+'RSS', comments_path(:format=>:rss)
+
+

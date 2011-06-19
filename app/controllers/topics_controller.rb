@@ -3,7 +3,7 @@ class TopicsController < ApplicationController
   before_filter :require_admin, :except => [:index, :show]
   before_filter :prepare_wmd, :only => [:edit, :new]
 
-  layout 'discussions'
+  menu :discussion
 
   def index
     if !params[:type]

@@ -1,8 +1,7 @@
+# -*- coding: utf-8 -*-
 class CommentsController < ApplicationController
   before_filter :require_user, :except => [:index]
   before_filter :require_admin, :only => [:destroy, :moderate]
-
-  layout 'discussions'
 
   def show
     @comments = Comment.
