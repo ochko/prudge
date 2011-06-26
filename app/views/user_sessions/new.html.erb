@@ -1,4 +1,4 @@
-<h1>Нэвтрэх</h1>
+<h1 class="center">Нэвтрэх</h1>
 
 <div class="user-form">
   <div class="form-top"> </div>
@@ -22,9 +22,9 @@
     </div>
     <hr/>
     <div class="center" id="login-links">
-      <%= link_to_function "OpenID-гаар нэвтрэх", 
-	  '$("#passwords").remove();$("#login-links").hide();$("#openid").show();', :id=> "openid-link" %>
-      ||
+      <%= link_to_function "OpenID-гаар нэвтрэх", '$("#passwords").hide();$("#openid-link").hide();$("#password-link").show();$("#openid").show();', :id=> "openid-link" %>
+      <%= link_to_function "Нууц үгээр нэвтрэх", '$("#passwords").show();$("#openid-link").show();$("#password-link").hide();$("#openid").hide();', :id=> "password-link", :style => "display:none" %>
+      |
       <%= link_to 'Нууц үгээ сэргээх', forgot_password_path, :id=>'forgot-link' %>
       
     </div>

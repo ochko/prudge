@@ -1,7 +1,0 @@
-<h1>Сүүлд нэмэгдсэн бичээсүүд</h1>
-
-<div id="comments" class="span-20">
-  <%= render :partial => "comments/comment", :collection => @comments %>
-</div>
-
-<%= will_paginate @comments, :params =>{:controller => '/comments' }, :renderer => FlowPagination::LinkRenderer, :noajax => true %>

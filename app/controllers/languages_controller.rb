@@ -1,4 +1,6 @@
 class LanguagesController < ApplicationController
+  menu :home
+
   before_filter :require_admin, :except => :index
 
   def index

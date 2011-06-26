@@ -3,11 +3,15 @@ class CommentsController < ApplicationController
   before_filter :require_user, :except => [:index]
   before_filter :require_admin, :only => [:destroy, :moderate]
 
+  menu :discussion
+
   def show
     @comments = Comment.
       paginate(:page => params[:page], :order => 'created_at DESC',
                :conditions => ['topic_id = ? AND topic_type = ?',
                                params[:id], params[:type].capitalize])
+
+    render :layout => false
   end
   
   def index

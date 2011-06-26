@@ -1,10 +1,12 @@
-<h1>Бодолт</h1>
+<h1 class="center">Бодолт</h1>
 <h3 class="center">
   <%= "#{link_to(@solution.contest.name, @solution.contest)}  &raquo; " if @solution.contest -%>
   <%= link_to(@solution.problem.name, @solution.problem) %>
 </h3>
 
-<div class="solution-info">
+<div class="user-form center">
+  <div class="form-top"> </div>
+  <div class="form-middle">
   <span class="rank_<%=@solution.user.level%>">
     <%=link_to @solution.user.login, @solution.user %>
     <%=l @solution.uploaded_at %>-д
@@ -32,11 +34,12 @@
   <% end %>
   <% end %>
   </span>
-
-</div>
-<div id='result' class="span-20"> 
-  <%= render :partial => 'results/list' %>
-  <%= image_tag "spinner.gif", :id => 'check-wait' %>
+  </div>
+  <div class="form-bottom"></div>
 </div>
 
+<div class="center">
+<%= render :partial => 'results/list' %>
+<%= image_tag "spinner.gif", :id => 'check-wait' %>
+</div>
 <%= render :partial => 'comments/commentable', :object => @solution %>

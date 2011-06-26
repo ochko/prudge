@@ -1,5 +1,5 @@
 <tr>
-  <td><%= link_to contest.name, contest %> (<span class="rank_<%= contest.level %>"><%= contest.level_name %></span>)</td>
-  <td><%=l contest.start %> &raquo;
-    <%=l contest.end %></td>
+  <td class="status"><span class="rank_<%= contest.level %>" title="<%= contest.level_name %>"></span></td>
+  <td><%= link_to contest.name, contest %></td>
+  <td><%=l contest.start %> &raquo; <%=l contest.end %></td>
 </tr>

@@ -67,6 +67,10 @@ mn:
       index: Кодерууд
       account: Кодер
       show: Кодер
+    comments:
+      index: Сүүлд нэмэгдсэн бичээсүүд
+    user_sessions:
+      new: Нэвтрэх
   date:
     formats:
       default: "%Y-%m-%d"

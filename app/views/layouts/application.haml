@@ -1,0 +1,86 @@
+!!!
+%html{:lang => "en", "xml:lang" => "en", :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html;charset=UTF-8", "http-equiv" => "content-type"}/
+    %meta{:content => "noindex", :name => "robots"}/
+    %meta{:content => "nofollow", :name => "robots"}/
+    %title #{title} @ Coder
+    = auto_discovery_link_tag :rss, lessons_path(:format=>:rss), :title => "Coder Lessons"
+    %link{:href => "/images/run.ico", :rel => "icon", :type => "image/x-icon"}/
+    %link{:href => "/images/run.ico", :rel => "shortcut icon", :type => "image/x-icon"}/
+    = stylesheet_link_tag 'screen'
+    = stylesheet_link_tag 'jquery-ui'
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag :defaults
+    = javascript_include_tag 'syntax/jquery.syntax.min'
+    = javascript_include_tag "http://www.google-analytics.com/ga.js"
+    = prepare_wmd_if @wmd_needed
+  %body
+    #fadeout
+    #flybar
+      %a#logo{:href => "#top"}
+      .navigation.home
+        = link_to image_tag('home.png'), :controller =>'home'
+      .navigation.contests
+        = link_to image_tag('stand.png'), contests_path
+      .navigation.problems
+        = link_to image_tag('gears.png'), problems_path
+      .navigation.lessons
+        = link_to image_tag('lesson.png'), lessons_path
+      .navigation.discuss
+        = link_to image_tag('discuss.png'), topics_path
+      .navigation.coders
+        = link_to image_tag('coders.png'), users_path
+      .navigation.search
+        %form#search{:action => "/search", :method => "get"}
+          %input{:maxlength => "20", :name => "q", :size => "20", :tabindex => "1", :type => "text"}/
+      .navigation.account
+        - if logged_in?
+          \#{image_tag current_user.gravatar_url(:size => 20)}
+          \#{link_to current_user.login, account_path} |
+          = link_to 'Тохиргоо', edit_user_path(current_user), :class => 'settings'
+          | 
+          = link_to 'Гарах', logout_path
+        - else
+          \#{link_to 'Нэвтрэх', login_path} |
+          \#{link_to 'Бүртгүүлэх', signup_path}
+    #wrapper
+      %span#top.bookmark
+      #content
+        - if flash[:notice]
+          #notice.notice
+            %span#notice-close{:style => "float:right"}
+              = link_to_function image_tag('close.png'), "$('#notice').fadeOut()"
+            = flash[:notice]
+        = yield
+      #context-menu
+        = render(:partial => "menus/#{menu}") if menu
+    #bottom
+      #footer-links
+        \#{link_to 'Тусламж', :controller => 'home', :action => 'help'}
+        \#{link_to 'Сайтын тухай', :controller => 'home', :action => 'about'}
+        \#{link_to 'Бидний зарчим', :controller => 'home', :action => 'rules'}
+        \#{link_to 'Програмчлалын хэлүүд', languages_path}
+        #copyright
+          \&copy;2010-#{Date.today.year} Coder.query.mn. All rights reserved.
+      #sponsors
+        %a{:href => "http://www.kt.mn", :target => "kt"}
+          %img{:alt => "KT", :src => "http://kt.mn/templates/ja_sanidineii_light/images/logo.png"}/
+        %a{:href => "http://www.g-mobile.mn", :target => "gmobile"}
+          %img{:alt => "G-Mobile", :src => "http://www.g-mobile.mn/images/logo.png"}/
+        %a{:href => "http://www.usi.mn", :target => "usi"}
+          %img{:alt => "USI", :src => "http://www.usi.mn/images/logo.png"}/
+        %a{:href => "", :target => "bagaart"}
+          %img{:alt => "Baga Art", :src => "http://i55.tinypic.com/n5oep2.jpg"}/
+      #gadsense
+        :javascript
+          google_ad_client = "ca-pub-8413374070755748";
+          google_ad_slot = "4533195807";
+          google_ad_width = 728;
+          google_ad_height = 90;
+        %script{:src => "http://pagead2.googlesyndication.com/pagead/show_ads.js", :type => "text/javascript"}
+    :javascript
+      var pageTracker = _gat._getTracker("UA-1078959-6");
+      pageTracker._initData();
+      pageTracker._trackPageview();
+    

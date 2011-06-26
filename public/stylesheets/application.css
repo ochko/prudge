@@ -68,7 +68,7 @@ a:hover, a:focus {text-decoration:underline;}
 h1 { font-size: 1.8em; margin-top: 20px;}
 h2 { font-size: 1.6em; }
 h3 { font-size: 1.4em; }
-
+h1.center { text-align: center;}
 #content {
     padding-top: 15px;
     float:left;
@@ -200,7 +200,11 @@ img {max-width:770px;}
     font-weight:bold;
     border-bottom: 3px dotted #aaa;
 }
+#footer-links a{
+    padding-right: 10px;
+}
 #copyright {
+    padding: 10px 0 5px 0;
     font-size:0.9em;
 }
 #sponsors {
@@ -399,6 +403,7 @@ a.rank_128:hover, a.rank_64:hover, a.rank_32:hover, a.rank_16:hover, a.rank_8:ho
 .user-form input[type="text"], .user-form input[type="password"] {
     max-width:200px; margin: 0 0 15px 0; border:1px solid #CCC; font-size:1.1em;}
 .user-form label {float: left; width: 11em; margin-right: 1em; text-align:right;}
+
 input#user_openid_identifier, input#user_session_openid_identifier {
     background: url(/images/openid-bg.gif) no-repeat;
     background-color: #FFF;
@@ -613,6 +618,7 @@ div.scroll {overflow:auto;}
     margin-left:auto; 
     margin-right:auto;
     display:block;
+    border:none;
 }
 #results-table td{
     text-align:center;
@@ -840,7 +846,7 @@ input#problem_source {width:250px; max-width:250px;}
 
 
 #solve-link{ float:right; }
-#solve-link a{ padding: 17px 15px;}
+#solve-link a{ padding: 13px 15px;}
 #start-contest {float:left;}
 #end-contest {float:right;}
 .news-meta{
@@ -861,27 +867,7 @@ span.problem-source {
     font-style:italic;
     color: #999;
 }
-.solution-box {
-    width:500px;
-    border:3px solid #999;
-    margin: 1em auto;
-    padding: 2em 1em;
-    text-align:center;
-}
-.solution-box input[type=file]{
-    margin:0 1em;
-}
-.solution-box input[type=submit]{
-    margin:1em 10em 0;
-    text-align:center;
-}
-.solution-info {
-    width:500px;
-    border:3px solid #999;
-    margin: 1em auto;
-    padding: 1em 2em;
-    text-align:center;
-}
+
 #test-list pre{
     margin:0;
     line-height:1;
@@ -1008,4 +994,12 @@ table.plain tr {
 }
 table.plain td {
     border: none;
+}
+span.rss {
+    float:right;
+}
+span.rss a {
+    background: url(/images/rss.png) no-repeat 0 50%;
+    padding-left:20px;
+    font-size: 20px;
 }

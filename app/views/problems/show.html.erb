@@ -9,17 +9,20 @@
   <%= link_to 'БОДОХ', new_solution_path(:problem => @problem.id), :class => 'big blue awesome' %>
 </span>
 <div id="problem-meta" class="span-17">
-  <span class="rank_<%=@problem.user.level %>"><%= link_to @problem.user.login, @problem.user, :title => "Дэвшүүлсэн" -%></span>,
-  <%=l @problem.created_at -%>
-  <%= ', ' + link_to(h(@problem.contest.name), @problem.contest,
-      :class => 'problem-contest', :title => 'Тэмцээн') if @problem.contest -%>
+  <%= link_to @problem.user.login, @problem.user-%>
+  кодер
+  <% if @problem.contest -%>
+  <%= link_to h(@problem.contest.name), @problem.contest %>
+  тэмцээнд
+  <% end %>
+  дэвшүүлсэн
 </div>
 <div id="problem-tabs" class="span-20"> 
   <ul>
     <li><a href="#problem-text"><span>Бодлого</span></a></li>
     <li><%= link_to content_tag(:span, 'Шилдэг бодолт'), {:controller=>'solutions', :action=>'best', :problem_id=>@problem.id, :name => "best-solution"} %> </li>
     <li><%= link_to content_tag(:span, "Нийт бодолт (#{@problem.solutions_count})"), {:controller=>'solutions', :action=>'submited', :problem_id=>@problem.id, :name => "all-solutions"} %> </li>
-    <li><%= link_to content_tag(:span, "Зөв бодолт (#{@problem.corrects_count})"), {:controller=>'solutions', :action=>'solved', :problem_id=>@problem.id, :name => "correct-solutions"} %> </li>   
+    <li><%= link_to content_tag(:span, "Зөв бодолт (#{@problem.corrects_count})"), {:controller=>'solutions', :action=>'solved', :problem_id=>@problem.id, :name => "correct-solutions"} %> </li>
   </ul>
   <div id="problem-text"> 
     <table><tr><td>

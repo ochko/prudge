@@ -3,9 +3,6 @@
   <%= link_to(@solution.problem.name, @solution.problem) %>
 </h1>
 <div>
-  <div id='result' class="span-20"> 
-    <%= render :partial => 'results/list' %>
-  </div>
   <span class="rank_<%=@solution.user.level%>">
     <%=link_to @solution.user.login, @solution.user %>
     <%=l @solution.uploaded_at %>-д

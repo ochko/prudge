@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  menu :home
+
   before_filter :require_admin,
                 :except => :show
 

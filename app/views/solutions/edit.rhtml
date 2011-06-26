@@ -1,16 +1,21 @@
-<h1>Бодолтыг засах(<%= link_to 'болих', @solution %>)</h1>
+<h1 class="center">Бодолтыг засах</h1>
 <h3 class="center">
   <%= link_to(@solution.contest.name, @solution.contest) + ' &raquo; ' if @solution.contest %>
   <%= link_to(@solution.problem.name, @solution.problem) %>
 </h3>
 
-<div class="solution-box">
+<div class="user-form center">
+  <div class="form-top"> </div>
+  <div class="form-middle">
 <% form_for @solution, :html => { :multipart => true} do |form| %>
 <%= form.hidden_field :problem_id %>
-<label>Хэл:</label>
 <%= form.select :language_id, Language.all.collect{|l| [l.name, l.id]} %>
 <%= form.file_field :source %>
+<br/>
+<hr/>
 <%= submit_tag "Хадгал", :class => "medium blue awesome" %>
-
+<%= link_to 'Болих', @solution, :class => "medium grey awesome" %>
 <% end %>
+  </div>
+  <div class="form-bottom"></div>
 </div>

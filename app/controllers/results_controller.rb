@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 class ResultsController < ApplicationController
   before_filter :require_user
-  layout 'problems'
+  menu :problem
 
   def show
     @result = ActiveRecord::Base::Result.find(params[:id])

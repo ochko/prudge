@@ -1,4 +1,4 @@
-<h1>Бүртгүүлэх</h1>
+<h1 class="center">Бүртгүүлэх</h1>
 
 <div class="user-form">
   <div class="form-top"> </div>
@@ -26,10 +26,7 @@
     <div id="openid" <%= 'style="display:none;"' if @user.openid_identifier.blank? %> >
       <%= f.label :openid_identifier, "OpenID URL", :style=>"display:inline" %>
       <%= f.text_field :openid_identifier %>
-      <div class="center">
-      <%= link_to "OpenID тай больё", "http://openid.mn", :target =>'_blank' %>
-      </div>
-      
+
     </div>
     <div class="form-submitter">
       <%= f.submit "Бүртгэ", :class=>"small yellow awesome" %>

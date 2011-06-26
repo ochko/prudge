@@ -1,7 +1,7 @@
 %ul
   - if logged_in?
-    %li.add!= link_to 'Бодлого санал болгох', new_problem_path
-    - if @problem
+    %li.add!= link_to 'Бодлого дэвшүүлэх', new_problem_path
+    - if @problem && @problem.id
       - if @problem.test_addable? current_user
         %li!= link_to 'Энэ бодлогын тестүүд', new_problem_test_path(:problem_id => @problem.id)
       - if @problem.has_permission?(current_user)
@@ -9,7 +9,7 @@
         %li.delete!= link_to 'Бодлогыг устгах', @problem, :confirm => 'Are you sure?', :method => :delete
     - if judge?
       %li!= link_to 'Дэвшигдсэн бодлогууд', proposals_path
-      - if @problem
+      - if @problem && @problem.id
         %li.refresh!= link_to 'Бодолтуудыг дахин шалгах', check_problem_path(@problem)
-
+    %li!= link_to 'Сүүлийн бодолтууд', solutions_path
 
