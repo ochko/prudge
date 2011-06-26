@@ -69,6 +69,7 @@ mn:
       show: Кодер
     comments:
       index: Сүүлд нэмэгдсэн бичээсүүд
+      moderate: Хянах
     user_sessions:
       new: Нэвтрэх
   date:
