@@ -21,7 +21,7 @@ body, p, ol, ul, td {
   position: fixed;
   z-index: 100;
   height: 50px;
-  min-width: 490px;
+  min-width: 800px;
   left: 40px; right: 40px; top: 25px;
   padding-left: 150px;
   background: #eee;
@@ -65,15 +65,16 @@ body, p, ol, ul, td {
 a { color: #4080C0; text-decoration:none;}
 a:hover, a:focus {text-decoration:underline;}
 
-h1 { font-size: 1.8em; margin-top: 20px;}
+h1 { font-size: 1.8em; margin: 5px 0 1em;}
 h2 { font-size: 1.6em; }
 h3 { font-size: 1.4em; }
 h1.center { text-align: center;}
 #content {
     padding-top: 15px;
     float:left;
+    width: 75%;
+    min-width:800px;
     min-height: 500px;
-    width:800px;
 }
 img {max-width:770px;}
 
@@ -156,8 +157,11 @@ img {max-width:770px;}
   -webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.1);
   -moz-box-shadow: 0 3px 5px rgba(0,0,0,0.1);
   box-shadow: 0 3px 5px rgba(0,0,0,0.1);
-  margin: 15px 0 0 30px;
+  margin: 0 50px 0 30px;
   float:right;
+  position: absolute;
+  top: 100px;
+  right: 0px;
 }
   #context-menu ul {
     padding: .5em .5em 0 1em;  
@@ -367,15 +371,15 @@ th.level-legend {
 th.level-legend span {
     margin:0 1em;
 }
-.rank_128 { background: url(/images/rank_128.png) no-repeat 0px 0px; font-size:1.3em;color: #000; }
-.rank_64 { background: url(/images/rank_64.png) no-repeat 0px 0px; font-size:1.3em;color: #111; }
-.rank_32 { background: url(/images/rank_32.png) no-repeat 0px 0px; font-size:1.2em;color: #111; }
-.rank_16 { background: url(/images/rank_16.png) no-repeat 0px 0px; font-size:1.2em;color: #333; }
-.rank_8 { background: url(/images/rank_8.png) no-repeat 0px 0px; font-size:1.1em;color: #333; }
-.rank_4 { background: url(/images/rank_4.png) no-repeat 0px 0px; font-size:1.1em; color: #555; }
-.rank_2 { background: url(/images/rank_2.png) no-repeat 0px 0px; color: #555; }
-.rank_1 { background: url(/images/rank_1.png) no-repeat 0px 0px; color: #666; }
-.rank_0 { background: url(/images/rank_0.png) no-repeat 0px 0px; color: #333; }
+.rank_128 { background: url(/images/rank_128.png) no-repeat 0px 30%; font-size:1.3em;color: #000; }
+.rank_64 { background: url(/images/rank_64.png) no-repeat 0px 30%; font-size:1.3em;color: #111; }
+.rank_32 { background: url(/images/rank_32.png) no-repeat 0px 30%; font-size:1.2em;color: #111; }
+.rank_16 { background: url(/images/rank_16.png) no-repeat 0px 30%; font-size:1.2em;color: #333; }
+.rank_8 { background: url(/images/rank_8.png) no-repeat 0px 30%; font-size:1.1em;color: #333; }
+.rank_4 { background: url(/images/rank_4.png) no-repeat 0px 30%; font-size:1.1em; color: #555; }
+.rank_2 { background: url(/images/rank_2.png) no-repeat 0px 30%; color: #555; }
+.rank_1 { background: url(/images/rank_1.png) no-repeat 0px 30%; color: #666; }
+.rank_0 { background: url(/images/rank_0.png) no-repeat 0px 30%; color: #333; }
 .rank_128, .rank_64, .rank_32, .rank_16, .rank_8, .rank_4, .rank_2, .rank_1, .rank_0 {
     padding:1px 0px 4px 23px; font-family: 'Ubuntu', arial, serif; 
 }
@@ -833,12 +837,14 @@ input#topic_title {
 input#problem_source {width:250px; max-width:250px;}
 .lesson-item{
     padding:0.5em 0;
-    border-bottom:1px solid #ddd;
     margin-bottom:1em;
 }
 .lesson-meta{
     font-size:0.9em;
     color: #999;
+    padding:0 0 1em;
+    margin: -5px 0 1em 0; 
+    border-bottom:3px solid #ddd;
 }
 #preview {
     border: 1px dashed #999;
@@ -856,6 +862,8 @@ input#problem_source {width:250px; max-width:250px;}
 .news-meta{
     display:block;
     padding:0 0 1em;
+    margin: -5px 0 1em 0; 
+    border-bottom:3px solid #ddd;}
 }
 .rule {
     margin:2em 0;
@@ -1006,4 +1014,5 @@ span.rss a {
     background: url(/images/rss.png) no-repeat 0 50%;
     padding-left:20px;
     font-size: 20px;
+    color: #666;
 }

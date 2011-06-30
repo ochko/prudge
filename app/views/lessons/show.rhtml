@@ -1,17 +1,11 @@
 <h1><%=h @lesson.title %></h1>
 <div class="lesson-item">
+  <div class="lesson-meta">
+    <%=l @lesson.updated_at %>,
+    <%= link_to @lesson.author.login, @lesson.author %>    
+  </div>
   <div class="lesson-body">
     <%=markdown @lesson.text %>
-  </div>
-
-  <div class="lesson-meta">
-    Бичсэн: <%= link_to @lesson.author.login, @lesson.author %>,
-    <%=l @lesson.updated_at %>
-
-    <% if @lesson.touchable_by? current_user %>
-    <%= link_to 'Засварлах', edit_lesson_path(@lesson) %> |
-    <%= link_to 'Устгах', @lesson, :confirm => 'Are you sure?', :method => :delete %>
-    <% end %>
   </div>
 </div>
 

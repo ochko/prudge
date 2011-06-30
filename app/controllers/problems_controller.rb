@@ -19,7 +19,7 @@ class ProblemsController < ApplicationController
         current_user.solutions.best.each{ |s| @solved[s.problem_id] = s.correct } if current_user
         
         @problems = Problem.active.
-          paginate(:page => params[:page], :include => :user, 
+          paginate(:page => params[:page], :per_page => 20, :include => :user, 
                    :order => "#{column} #{order}")
       end
       format.rss do

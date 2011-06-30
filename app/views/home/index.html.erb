@@ -1,7 +1,7 @@
 <div class="news">
 <% for n in @news %>
 <div class="news-item">
-  <h2><%=h n.title %></h2>
+  <h1><%=h n.title %></h1>
   <span class="news-meta"><%=l n.created_at %></span>
   <%=markdown n.content %>
 </div>

@@ -1,3 +1,6 @@
 %ul
   %li!= link_to 'Шинэ хичээл нэмэх', new_lesson_path
+  - if @lesson && @lesson.touchable_by?(current_user)
+    %li!= link_to 'Засварлах', edit_lesson_path(@lesson)
+    %li!= link_to 'Устгах', @lesson, :confirm => 'Are you sure?', :method => :delete
 

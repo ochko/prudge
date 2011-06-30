@@ -9,7 +9,7 @@ class ContestsController < ApplicationController
   before_filter :prepare_wmd, :only => [:edit, :new]
 
   def index
-    @contests = Contest.paginate(:order => "start DESC", :page => params[:page])
+    @contests = Contest.paginate(:order => "start DESC", :page => params[:page], :per_page => 20)
     respond_to do |format|
       format.js { render :layout => false}
       format.html
