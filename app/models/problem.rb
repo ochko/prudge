@@ -111,9 +111,9 @@ class Problem < ActiveRecord::Base
 
   private 
   def copy_times
-    if self.changes.has_key?('contest_id')
-      self.active_from = self.contest.start
-      self.inactive_from = self.contest.end
+    if changes.has_key?('contest_id') && contest
+      self.active_from = contest.start
+      self.inactive_from = contest.end
     end
   end
 

@@ -669,7 +669,7 @@ div.scroll {overflow:auto;}
     list-style:none;
 }
 span.match {font-weight:bold;}
-
+#comment_text {border-radius:5px; border: 2px solid #ccc;}
 #comment-spinner {display:none; margin:1em 0;}
 .comment-user {font-size:1.1em; padding-bottom:2px;}
 .comment-avatar{

@@ -65,7 +65,10 @@ class UsersController < ApplicationController
     @solutions = User.find(params[:id]).solutions.
       paginate(:page => params[:page], :include => :language, 
                :order => 'uploaded_at DESC')
-    render(:partial => 'solutions') unless params[:page]
+    respond_to do |format|
+      format.html { render :partial => 'solutions' }
+      format.js { render :layout => false }
+    end
   end
 
   def lessons
