@@ -18,13 +18,13 @@ class ContestsController < ApplicationController
 
   def last
     @contest = Contest.find(:last, :order => "start ASC")
-    @numbers, @standings = @contest.standings
+    init_user_data
     render :action => 'show'
   end
 
   def show
     @contest = Contest.find(params[:id])
-    @contributed = @contest.contributors.include? current_user
+    init_user_data
   end
 
   def new
@@ -60,4 +60,13 @@ class ContestsController < ApplicationController
     redirect_to :action => 'index'
   end
 
+  protected
+
+  def init_user_data
+    @contributed = @contest.contributors.include? current_user
+    @solved = { }
+    if current_user
+      current_user.solutions.for_contest(@contest).each{ |s| @solved[s.problem_id] = s.correct } 
+    end
+  end
 end

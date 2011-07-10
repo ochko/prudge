@@ -21,7 +21,7 @@
 <div id="tabs" class="span-20 append-bottom"> 
   <ul>
     <li><a href="#included-problems"><span>Бодлогууд</span></a></li>
-    <li><%= link_to content_tag(:span, 'Оролцогчид'), participants_path(:id=>@contest.id, :name => "participant-of") %></li>
+    <li><%= link_to content_tag(:span, 'Оролцогчид'), participants_path(:id=>@contest.id, :name => "participant-of", :format => "js") %></li>
   </ul> 
   <div id="included-problems"> 
     <% if @contest.started? || admin? %>
@@ -33,6 +33,7 @@
 	<th><img src="/images/clock.png" /> / <img src="/images/memory.png" /></th>
 	<th>Дэвшүүлсэн</th>
 	<th>Бодолт</th>
+        <th></th>
       </tr>
       <% @contest.problems.each do |problem| %>
       <tr>
@@ -43,6 +44,7 @@
 	  <%= problem.memory %>кб</td>
         <td><%= link_to problem.user.login, problem.user %></td>
         <td><%= problem.tried_count %> / <%= problem.solved_count %></td>
+        <td><%= solved_or_not @solved[problem.id] %></td>
       </tr>
       <% end %>
     </table>
