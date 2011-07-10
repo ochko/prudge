@@ -361,7 +361,6 @@ table tr {
     background: #f8f8f8;
 }
 table td {
-    
     border-bottom: 1px solid #e1e1e1;
 }
 
@@ -387,7 +386,15 @@ th.level-legend span {
 a.rank_128:hover, a.rank_64:hover, a.rank_32:hover, a.rank_16:hover, a.rank_8:hover, a.rank_4:hover, a.rank_2:hover, a.rank_1:hover, a.rank_0:hover {
     color: #4080C0;
 }
-
+.private {
+    background: url(/images/key.png) no-repeat 100% 50%;
+    padding-right: 30px;
+}
+.private-meta {
+    background: url(/images/key.png) no-repeat 0 50%;
+    padding-left: 30px;
+    display: block;
+}
 .portrait{ float:left; padding: 0 1em 0 0.5em;}
 
 #user-statistic { font-size: 1.2em; margin:0.5em 0; float:right;}
@@ -463,12 +470,14 @@ input#user_password, input#user_password_confirmation, input#user_session_passwo
 #tabs td a, #problem-tabs td a { color: #4080C0; }
 .center {text-align:center;}
 .solution-meta{display:block; font-size:0.9em;}
-#contest-meta {margin: -5px 0 1em 0; 
-	       padding-bottom: 0.3em; 
-	       border-bottom:3px solid #ddd;}
-span.contest-time {
+#contest-meta {
     font-size:1.1em;
+    margin: -5px 0 1em 0; 
+    padding-bottom: 0.3em; 
+    border-bottom:3px solid #ddd;}
+span.contest-time {
     padding: 0 13px;
+    margin-left: 10px;
     background: url(/images/clock-w.png) no-repeat 0 3px;
 }
 #contest-description{margin:1em 0;}
@@ -816,6 +825,11 @@ span.input-memory {
 }
 span.input-source{
     float:right;
+}
+.input-private {
+    float:right;
+    padding-right:16px;
+    margin: 5px;
 }
 .input-time input, .input-memory input{
     max-width:30px;

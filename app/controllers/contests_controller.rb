@@ -24,6 +24,7 @@ class ContestsController < ApplicationController
 
   def show
     @contest = Contest.find(params[:id])
+    @contributed = @contest.contributors.include? current_user
   end
 
   def new

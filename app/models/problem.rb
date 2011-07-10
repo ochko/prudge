@@ -27,6 +27,8 @@ class Problem < ActiveRecord::Base
   named_scope :active, :conditions => ["active_from < ?", Time.now]
 
   before_save :copy_times
+
+  after_save :notify_user
   
   def active?
     self.active_from && (self.active_from < Time.now)
@@ -112,6 +114,12 @@ class Problem < ActiveRecord::Base
     if self.changes.has_key?('contest_id')
       self.active_from = self.contest.start
       self.inactive_from = self.contest.end
+    end
+  end
+
+  def notify_user
+    if self.changes['contest_id']
+      user.deliver_problem_selection!(contest, self)
     end
   end
 end

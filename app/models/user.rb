@@ -42,6 +42,10 @@ class User < ActiveRecord::Base
     Notifier.deliver_release_notification(self)  
   end
 
+  def deliver_problem_selection!(contest, problem)
+    Notifier.deliver_problem_selection(self, contest, problem)
+  end
+
   def solutions_dir() "#{Solution::SOLUTIONS_PATH}/#{self.id}" end
   def exe_dir()       "#{solutions_dir}/exe" end
 

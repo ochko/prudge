@@ -177,22 +177,24 @@ class SolutionsController < ApplicationController
   private
 
   def validate_solvable?
-    return true unless @solution.contest
-    if @solution.problem.owned_by?(current_user) &&
-        !@solution.contest.finished?
+    return true unless contest = @solution.contest
+    if @solution.problem.owned_by?(current_user) && !contest.finished?
       flash[:notice] = 'Уучлаарай, өөрийнхөө дэвшүүлсэн бодлогыг тэмцээн дууссаны дараа л бодож болно!.'
-      redirect_to @solution.contest
+      redirect_to contest
       return false
-    elsif !@solution.contest.started?
-      flash[:notice] = 'Ирээдүйд болох тэмцээний бодлогыг бодож болохгүй!.'
-      redirect_to @solution.contest
+    elsif !contest.started?
+      flash[:notice] = 'Эхлээгүй тэмцээний бодлогыг бодож болохгүй!.'
+      redirect_to contest
       return false
-    elsif @solution.contest.finished?
+    elsif contest.finished?
       return true
-    elsif !@solution.contest.open? &&
-        current_user.level > @solution.contest.level
+    elsif !contest.open? && current_user.level > contest.level
       flash[:notice] = 'Таны түвшин энэ тэмцээнийхээс дээгүүр байна.'
-      redirect_to @solution.contest
+      redirect_to contest
+      return false
+    elsif contest.private? && !contest.contributors.include?(current_user)
+      flash[:notice] = 'Энэ тэмцээнд зөвхөн дэвшүүлсэн бодлого тань сонгогдсон тохиолдолд оролцоно. Та тэмцээн дууссаны дараа бодлогуудыг бодож болно.'
+      redirect_to contest
       return false
     else
       return true

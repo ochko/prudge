@@ -22,15 +22,19 @@ class Contest < ActiveRecord::Base
 
   has_many :problems
   has_many :solutions
+
   has_many :users, :through => :solutions,
       :select => "users.login, users.id, sum(solutions.point) as point, sum(solutions.solved_in) as time",
       :group => 'user_id', :order => "point DESC, time ASC"
+
   has_many :comments,
            :as => 'topic',
            :class_name => 'Comment',
            :foreign_key => 'topic_id',
            :dependent => :destroy,
            :order => 'created_at DESC'
+
+  has_many :contributors, :through => :problems, :source => :user, :uniq => true
 
   validates_presence_of :name, :start, :end
 

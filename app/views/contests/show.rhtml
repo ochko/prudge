@@ -1,10 +1,18 @@
-<h1 class="rank_<%=@contest.level%>" title="<%= @contest.level_name %> түвшний тэмцээн"><%=h @contest.name %></h1>
+<h1 class="rank_<%=@contest.level%>" title="<%= @contest.level_name %> түвшний тэмцээн"><%=h @contest.name %>
+<% if @contest.private? %>
+   <% if @contributed %>
+   <%= image_tag 'unlocked.png', :title => 'Дэвшүүлсэн бодлого тань сонгогдсон учраас энэ тэмцээнд орох боломжтой' %>
+   <% else %>
+   <%= image_tag 'locked.png', :title => 'Дэвшүүлсэн бодлого нь сонгогдсон тохиолдолд энэ тэмцээнд орох эрхтэй болно' %>
+   <% end %>
+<% end %>
+</h1>
 <div id="contest-meta">
+  <%= show_status @contest -%>.
   <span class="contest-time">
   <%=l @contest.start %> &raquo; 
   <%=l @contest.end %>
-  (<%= show_status @contest -%>)
-  </span>
+  </span>  
 </div>
 <div id="contest-description">
   <%=markdown @contest.description %>

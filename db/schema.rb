@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110612005832) do
+ActiveRecord::Schema.define(:version => 20110710162743) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",                 :null => false
@@ -24,14 +24,15 @@ ActiveRecord::Schema.define(:version => 20110612005832) do
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "contests", :force => true do |t|
-    t.string   "name",                             :null => false
-    t.datetime "start",                            :null => false
-    t.datetime "end",                              :null => false
-    t.text     "description",                      :null => false
-    t.boolean  "delta",          :default => true, :null => false
+    t.string   "name",                              :null => false
+    t.datetime "start",                             :null => false
+    t.datetime "end",                               :null => false
+    t.text     "description",                       :null => false
+    t.boolean  "delta",          :default => true,  :null => false
     t.integer  "level",          :default => 0
     t.integer  "comments_count", :default => 0
     t.datetime "commented_at"
+    t.boolean  "private",        :default => false
   end
 
   create_table "languages", :force => true do |t|

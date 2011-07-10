@@ -2,7 +2,7 @@
   %li!= link_to 'Өмнөх тэмцээн', :controller => 'contests', :action => 'last'
   %li!= link_to 'Бүх тэмцээнүүд', :controller => 'contests'
   - if admin?
-    - if @contest
+    - if @contest && !@contest.new_record?
       %li.edit!= link_to 'Тэмцээнийг засварлах', edit_contest_path(@contest)
       %li.delete!= link_to 'Тэмцээнийг устгах', { :action => 'destroy', :id => @contest }, :confirm => 'Are you sure?', :method => :post
   - if judge?
