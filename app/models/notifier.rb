@@ -21,7 +21,7 @@ class Notifier < ActionMailer::Base
   end
 
   def problem_selection(user, contest, problem)
-    subject       "Та бодлого тэмцээнд сонгогдлоо"
+    subject       "Таны дэвшүүлсэн бодлого тэмцээнд сонгогдлоо"
     from          "coder.mn@gmail.com"
     recipients    user.email
     sent_on       Time.now  
