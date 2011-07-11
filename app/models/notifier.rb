@@ -32,4 +32,14 @@ class Notifier < ActionMailer::Base
                   :login => user.login
   end
 
+  def new_contest(user, contest)
+    subject       "Кодер дээр Шинэ тэмцээн зарлагдлаа"
+    from          "coder.mn@gmail.com"
+    recipients    user.email
+    sent_on       Time.now  
+    body          :contest => contest,
+                  :contest_url => contest_url(contest),
+                  :login => user.login
+  end
+
 end

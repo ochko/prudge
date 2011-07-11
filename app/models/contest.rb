@@ -45,6 +45,8 @@ class Contest < ActiveRecord::Base
 
   before_save :update_problems
 
+  after_create :notify_users
+
   named_scope :current, :conditions => "end > NOW()", :order => "start ASC"
   named_scope :finished,:conditions => "end < NOW()", :order => "end DESC"
   named_scope :pending, :conditions => "end >= NOW()"
@@ -103,6 +105,12 @@ class Contest < ActiveRecord::Base
         problem.update_attributes!(:active_from => self.start,
                                    :inactive_from => self.end)
       end
+    end
+  end
+  
+  def notify_users
+    User.active.each do |user|
+      user.delay.deliver_new_contest(contest)
     end
   end
 end

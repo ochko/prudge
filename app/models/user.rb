@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   has_many :problems
   has_many :lessons, :foreign_key => 'author_id'
   has_many :comments, :dependent => :destroy, :order => "created_at DESC"
+
+  named_scope :active, :conditions => ['uploaded_at > ?', Time.now - 2.year]
   
   attr_protected :admin, :judge, :solutions_count, :points
 
@@ -44,6 +46,12 @@ class User < ActiveRecord::Base
 
   def deliver_problem_selection!(contest, problem)
     Notifier.deliver_problem_selection(self, contest, problem)
+  end
+
+  def deliver_new_contest(contest)
+    return unless notify_new_contests?
+    sleep 180
+    Notifier.deliver_new_contest(self, contest)
   end
 
   def solutions_dir() "#{Solution::SOLUTIONS_PATH}/#{self.id}" end
