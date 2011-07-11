@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110710234905) do
+ActiveRecord::Schema.define(:version => 20110711215826) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",                 :null => false
@@ -34,6 +34,13 @@ ActiveRecord::Schema.define(:version => 20110710234905) do
     t.datetime "commented_at"
     t.boolean  "private",        :default => false
   end
+
+  create_table "contests_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "contest_id"
+  end
+
+  add_index "contests_users", ["contest_id", "user_id"], :name => "index_contests_users_on_contest_id_and_user_id", :unique => true
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0

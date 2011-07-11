@@ -21,5 +21,15 @@ $(function() {
     return false;
     });
 
+  $('.watch input').change(
+    function(){
+      if ($(this).is(':checked')) {
+        $.get('/watchers/' + $(this).val() + '/watch');
+      }else{
+        $.get('/watchers/' + $(this).val() + '/unwatch');  
+      }
+    }
+  );
+
   $.syntax({root: "/javascripts/syntax/"});
 });

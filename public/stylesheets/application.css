@@ -186,6 +186,10 @@ img {max-width:770px;}
   #context-menu ul li.refresh{
     background: url("/images/refresh.png") no-repeat scroll 0 50%;
   }
+  #context-menu ul li.watch{
+    background: none;
+    padding-left: 0px;
+  }
 
 #bottom {
     float:left;
@@ -415,7 +419,7 @@ a.rank_128:hover, a.rank_64:hover, a.rank_32:hover, a.rank_16:hover, a.rank_8:ho
 .user-form .form-middle {background: url(/images/form-back.png) repeat-y 0 0; padding:0 50px; font-size:1em;}
 .user-form .form-top {background: url(/images/form-corners.png) no-repeat 0 -43px; height:43px; margin-bottom: -1px;}
 .user-form .form-bottom {background: url(/images/form-corners.png) no-repeat 0 0; height:43px; margin-top: -12px;}
-.user-form input[type="text"], .user-form input[type="password"] {
+.user-form input[type="text"], .user-form input[type="password"], .user-form input[type="checkbox"]  {
     max-width:200px; margin: 0 0 15px 0; border:1px solid #CCC; font-size:1.1em;}
 .user-form label {float: left; width: 11em; margin-right: 1em; text-align:right;}
 

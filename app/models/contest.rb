@@ -36,6 +36,8 @@ class Contest < ActiveRecord::Base
 
   has_many :contributors, :through => :problems, :source => :user, :uniq => true
 
+  has_and_belongs_to_many :watchers, :class_name => 'User'
+
   validates_presence_of :name, :start, :end
 
   validate do |contest|
@@ -46,6 +48,8 @@ class Contest < ActiveRecord::Base
   before_save :update_problems
 
   after_create :notify_users
+
+  after_save :notify_watchers
 
   named_scope :current, :conditions => "end > NOW()", :order => "start ASC"
   named_scope :finished,:conditions => "end < NOW()", :order => "end DESC"
@@ -111,6 +115,14 @@ class Contest < ActiveRecord::Base
   def notify_users
     User.active.each do |user|
       user.delay.deliver_new_contest(contest)
+    end
+  end
+
+  def notify_watchers
+    if self.changes['start'] || self.changes['end']
+      watchers.each do |watcher|
+        watcher.delay.deliver_contest_update(self)
+      end
     end
   end
 end

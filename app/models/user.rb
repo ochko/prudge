@@ -54,6 +54,11 @@ class User < ActiveRecord::Base
     Notifier.deliver_new_contest(self, contest)
   end
 
+  def deliver_contest_update(contest)
+    sleep 180
+    Notifier.deliver_contest_update(self, contest)
+  end
+
   def solutions_dir() "#{Solution::SOLUTIONS_PATH}/#{self.id}" end
   def exe_dir()       "#{solutions_dir}/exe" end
 

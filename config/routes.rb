@@ -33,6 +33,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/moderate', :controller => 'comments', :action => 'moderate'
   map.connect '/topic/:type', :controller => 'topics'
   map.connect '/search/:q', :controller => 'search'
+  map.connect '/watchers/:id/:action', :controller => 'watchers'
   
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
