@@ -12,8 +12,7 @@
     %li.watch
       - if @contest.watchers.include? current_user
         != check_box_tag 'watch', @contest.id, true, :title => 'Энэ тэмцээний тухай мэдэгдэл ирэхгүй болгох'
-        Ажиглахаа болих
       - else
         != check_box_tag 'watch', @contest.id, false, :title => 'Тэмцээнийн хугацаа өөрчлөгдөхөд надад мэдэгд'
-        Ажиглах
+      Ажиглах
 
