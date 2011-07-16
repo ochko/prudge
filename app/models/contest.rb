@@ -114,7 +114,7 @@ class Contest < ActiveRecord::Base
   
   def notify_users
     User.active.each do |user|
-      user.delay.deliver_new_contest(contest)
+      user.delay.deliver_new_contest(self)
     end
   end
 
