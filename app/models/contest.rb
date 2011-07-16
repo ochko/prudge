@@ -102,6 +102,15 @@ class Contest < ActiveRecord::Base
     description
   end
 
+  def create_announcement
+    "Шинэ тэмцээн : '#{name}'. http://coder.query.mn/contests/#{id}"
+  end
+
+  def update_announcement
+    "Тэмцээний хугацаа өөрчлөгдөв : '#{name}'. " +
+      "http://coder.query.mn/contests/#{id} #{start -> end}"
+  end
+
   private
   def update_problems
     if self.changes.has_key?('start') || self.changes.has_key?('end')
@@ -113,6 +122,7 @@ class Contest < ActiveRecord::Base
   end
   
   def notify_users
+    Twitit.update create_announcement
     User.active.each do |user|
       user.delay.deliver_new_contest(self)
     end
@@ -120,6 +130,7 @@ class Contest < ActiveRecord::Base
 
   def notify_watchers
     if self.changes['start'] || self.changes['end']
+      Twitit.update update_announcement
       watchers.each do |watcher|
         watcher.delay.deliver_contest_update(self)
       end

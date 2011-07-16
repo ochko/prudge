@@ -17,6 +17,7 @@ GEM
     activeresource (2.3.9)
       activesupport (= 2.3.9)
     activesupport (2.3.9)
+    addressable (2.2.6)
     after_commit (1.0.8)
       activerecord (< 3.0.0)
     authlogic (2.1.6)
@@ -34,9 +35,19 @@ GEM
     delayed_job (2.0.7)
       activesupport (~> 2.0)
       daemons (= 1.0.10)
+    faraday (0.6.1)
+      addressable (~> 2.2.4)
+      multipart-post (~> 1.1.0)
+      rack (>= 1.1.0, < 2)
+    faraday_middleware (0.6.5)
+      faraday (~> 0.6.0)
     gravtastic (3.1.0)
     haml (3.1.2)
+    hashie (1.0.0)
     highline (1.6.2)
+    multi_json (1.0.3)
+    multi_xml (0.2.2)
+    multipart-post (1.1.2)
     mysql (2.8.1)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -60,10 +71,18 @@ GEM
     rake (0.9.0)
     riddle (1.3.3)
     ruby-openid (2.1.8)
+    simple_oauth (0.1.5)
     thinking-sphinx (1.4.6)
       activerecord (< 3.0.0, >= 1.15.6)
       after_commit (>= 1.0.7)
       riddle (>= 1.3.3)
+    twitter (1.6.0)
+      faraday (~> 0.6.1)
+      faraday_middleware (~> 0.6.3)
+      hashie (~> 1.0.0)
+      multi_json (~> 1.0.0)
+      multi_xml (~> 0.2.0)
+      simple_oauth (~> 0.1.5)
     will_paginate (2.3.12)
 
 PLATFORMS
@@ -84,4 +103,5 @@ DEPENDENCIES
   ruby-openid
   scrooge!
   thinking-sphinx
+  twitter
   will_paginate (~> 2.3.12)
