@@ -107,8 +107,7 @@ class Contest < ActiveRecord::Base
   end
 
   def update_announcement
-    "Тэмцээний хугацаа өөрчлөгдөв : '#{name}'. " +
-      "http://coder.query.mn/contests/#{id} #{start -> end}"
+    "Тэмцээний хугацаа өөрчлөгдөв : '#{name}'. http://coder.query.mn/contests/#{id} (#{self.start} -> #{self.end})"
   end
 
   private

@@ -44,6 +44,8 @@
         - else
           \#{link_to 'Нэвтрэх', login_path} |
           \#{link_to 'Бүртгүүлэх', signup_path}
+      .navigation.twitter
+        = link_to image_tag('twitter.png'), "http://twitter.com/codermn", :target => :twitter, :title => 'Follow me on Twitter'
     #wrapper
       %span#top.bookmark
       #content
