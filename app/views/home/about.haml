@@ -1,0 +1,35 @@
+%h1.append-bottom Сайтын тухай
+%table#about
+  %tr
+    %td.title Зорилго
+    %td
+      Код бичих, бодлого бодох дуртай залууст өөрсдийгөө хөгжүүлэх, сурч мэдэх нөхцлийг бүрдүүлэх, амжилт гаргахад нь туслах.
+  %tr
+    %td &nbsp;
+  %tr
+    %td.title Хамтрагчид
+    %td
+      %a{:href => "http://smcs.num.edu.mn", :target => "num"}> МУИС МКС
+      ,
+      = succeed "," do
+        %a{:href => "http://www.usi.edu.mn", :target => "usivoc"} USI МС
+      %a{:href => "#", :target => "usivoc"} Дархан RGB Дунд Сургууль
+  %tr
+    %td &nbsp;
+  %tr
+    %td.title Модераторууд
+    %td
+      = User.moderators.map{|u| link_to u.login, u }.join(", ")
+  %tr
+    %td &nbsp;
+  %tr
+    %td.title Холбогдох
+    %td
+      %a{:href => "http://twitter.com/ochko", :target => "twitter"}
+        %img{:src => "/images/icon-twitter.png"}/
+      %a{:href => "http://ochko.blogspot.com", :target => "blogger"}
+        %img{:src => "/images/icon-blogger.png"}/
+      %a{:href => "http://profiles.google.com/101381802713098409016", :target => "google"}
+        %img{:src => "/images/icon-google.png"}/
+      %a{:href => "http://github.com/ochko", :target => "github"}
+        %img{:src => "/images/icon-github.png"}/

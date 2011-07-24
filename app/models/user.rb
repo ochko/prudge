@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :comments, :dependent => :destroy, :order => "created_at DESC"
 
   named_scope :active, :conditions => ['uploaded_at > ?', Time.now - 2.year]
+  named_scope :moderators, :conditions => ['admin =? or judge =?', true, true]
   
   attr_protected :admin, :judge, :solutions_count, :points
 
@@ -54,7 +55,7 @@ class User < ActiveRecord::Base
     Notifier.deliver_new_contest(self, contest)
   end
 
-  def deliver_contest_update(contest)
+  def deliver_contest_update(contest)    
     sleep 180
     Notifier.deliver_contest_update(self, contest)
   end
