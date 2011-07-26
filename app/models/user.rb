@@ -35,29 +35,37 @@ class User < ActiveRecord::Base
     100
   end
 
-  def deliver_password_reset_instructions!  
-    reset_perishable_token!  
+  def deliver_password_reset_instructions!
+    reset_perishable_token!
     Notifier.deliver_password_reset_instructions(self)  
   end
 
   def deliver_release_notification!
-    reset_perishable_token!  
+    return unless email_valid?
+    reset_perishable_token!
     Notifier.deliver_release_notification(self)  
   end
 
   def deliver_problem_selection!(contest, problem)
+    return unless email_valid?
     Notifier.deliver_problem_selection(self, contest, problem)
   end
 
   def deliver_new_contest(contest)
     return unless notify_new_contests?
+    return unless email_valid?
     sleep 180
     Notifier.deliver_new_contest(self, contest)
   end
 
-  def deliver_contest_update(contest)    
+  def deliver_contest_update(contest)
+    return unless email_valid?
     sleep 180
     Notifier.deliver_contest_update(self, contest)
+  end
+
+  def email_valid?
+    email =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
   end
 
   def solutions_dir() "#{Solution::SOLUTIONS_PATH}/#{self.id}" end
