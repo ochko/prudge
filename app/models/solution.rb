@@ -34,9 +34,9 @@ class Solution < ActiveRecord::Base
   named_scope :by_speed, :order => 'time ASC, uploaded_at ASC'
   named_scope :for_contest, lambda { |c| { :conditions => ['contest_id =?', c.id] } }
 
-  after_destroy { |solution| solution.user.decrement!(:points, solution.point)}
+  before_destroy { |solution| solution.cleanup! }
 
-  after_create { |solution| solution.user.solution_uploaded! }
+  before_create { |solution| solution.user.solution_uploaded! }
 
   def name() problem.name end
   def text() "Хэрэглэгч #{user.login} -ий бодолтод санал/зөвлөгөө/тусламж бичих" end
@@ -168,7 +168,7 @@ class Solution < ActiveRecord::Base
                       :time => 0.0,
                       :isbest => false,
                       :point => 0.0,
-                      :junk => nil)     
+                      :junk => nil)
   end
 
   def summarize_results!
