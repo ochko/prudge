@@ -1,23 +1,30 @@
 require 'yaml'
+require 'bundler/capistrano'
+# Add RVM's lib directory to the load path.
+$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+
+# Load RVM's capistrano plugin.    
+require "rvm/capistrano"
+
+set :rvm_ruby_string, '1.8.7'
+set :rvm_type, :user  # Don't use system-wide RVM
 
 set :application, "coder"
 
 set :deploy_to, "/home/ochko/apps/coder"
-set :repository, "file://."
 set :scm, :git 
-set :deploy_via, :copy
-set :copy_cache, false
-set :copy_exclude, [".git"]
-set :copy_remote_dir, "/home/ochko/apps/coder/tmp"
+set :repository, "ochko@code.app.mn:git/coder"
+set :branch, "master"
+set :deploy_via, :remote_cache
 
 set :user, "ochko"
 set :port, 8080
 set :ssh_options, { :forward_agent => true }
 set :use_sudo, false
 
-role :app, "coder.query.mn"
-role :web, "coder.query.mn"
-role :db,  "coder.query.mn", :primary => true
+role :app, "zulu835.startdedicated.com"
+role :web, "zulu835.startdedicated.com"
+role :db,  "zulu835.startdedicated.com", :primary => true
 
 after "deploy:update_code", "config:copy", "data:link"
 after "deploy:symlink", "config:bundle"
