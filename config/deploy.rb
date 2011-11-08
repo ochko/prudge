@@ -65,27 +65,27 @@ end
 namespace :sphinx do
   desc "stop sphinx search engine"
   task :stop, :roles=>[:app] do
-    run("cd #{ deploy_to}/current; /usr/bin/rake thinking_sphinx:stop RAILS_ENV=production")
+    run("cd #{ deploy_to}/current; bundle exec rake thinking_sphinx:stop RAILS_ENV=production")
   end
 
   desc "rebuild sphinx indexes and start engine"
   task :rebuild, :roles=>[:app] do
-    run("cd #{ deploy_to}/current; /usr/bin/rake thinking_sphinx:rebuild RAILS_ENV=production")
+    run("cd #{ deploy_to}/current; bundle exec rake thinking_sphinx:rebuild RAILS_ENV=production")
   end
   
   desc "start sphinx search engine"
   task :start, :roles=>[:app] do
-    run("cd #{ deploy_to}/current; /usr/bin/rake thinking_sphinx:start RAILS_ENV=production")
+    run("cd #{ deploy_to}/current; bundle exec rake thinking_sphinx:start RAILS_ENV=production")
   end
   
   desc "sphinx index"
   task :index, :roles=>[:app] do
-    run("cd #{ deploy_to}/current; /usr/bin/rake thinking_sphinx:index RAILS_ENV=production")
+    run("cd #{ deploy_to}/current; bundle exec rake thinking_sphinx:index RAILS_ENV=production")
   end
   
   desc "generate sphinx configuration"
   task :configure, :roles=>[:app] do
-    run("cd #{ deploy_to}/current; /usr/bin/rake thinking_sphinx:configure RAILS_ENV=production")
+    run("cd #{ deploy_to}/current; bundle exec rake thinking_sphinx:configure RAILS_ENV=production")
   end
   
   desc "copy existing index database"
