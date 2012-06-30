@@ -156,8 +156,8 @@ class SolutionsController < ApplicationController
     if @my.user_id == current_user.id and
         @my.correct and
         @other.problem_id == @my.problem_id
-
-      if Time.now() > @my.problem.contest.end
+      if @my.created_at < @my.problem.contest.end and
+          Time.now() < @my.problem.contest.end
         @my.update_attribute('locked', true)
         send_file @other.public_filename
       else

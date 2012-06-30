@@ -144,8 +144,7 @@ class TopicsController < ApplicationController
       @topic = Problem.
         find(params[:id],
              :select=>'problems.id, problems.name as name, '+
-             '\'\' as description')
-             #'problems.text as description')
+             'problems.text as description')
       topic_class = 'Problem'
       @type = 'problems'
     elsif params[:type].eql?('lessons')

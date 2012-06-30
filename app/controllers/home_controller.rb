@@ -34,12 +34,4 @@ class HomeController < ApplicationController
                  :order => "created_at asc")
     end
   end
-  def international_rules
-  end
-  def asian
-  end
-  def state
-  end
-  def mongolian
-  end
 end

@@ -8,8 +8,7 @@ class PagesController < ApplicationController
                   :create,
                   :edit,
                   :destroy,
-                  :update] => 'Judge'
-                              
+                  :update] => 'Admin'
   def index
     list
     render :action => 'list'
