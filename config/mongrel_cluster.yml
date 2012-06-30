@@ -1,0 +1,10 @@
+--- 
+user: mongrel
+group: mongrel
+cwd: /usr/home/buyanbat/coder
+log_file: log/mongrel.log
+port: "9990"
+environment: production
+address: 127.0.0.1
+pid_file: tmp/pids/mongrel.pid
+servers: 10
