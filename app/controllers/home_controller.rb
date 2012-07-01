@@ -12,7 +12,6 @@ class HomeController < ApplicationController
   end
 
   def help
-    behavior_cache Page, :tag => (params[:page] || 1) do
       @helps = Page.
         paginate(:page => params[:page], :per_page => 5,
                  :conditions=>["category = ?", 'help'],
@@ -20,10 +19,11 @@ class HomeController < ApplicationController
   end
 
   def rules
-    @rules = Page.
-      paginate(:page => params[:page], :per_page => 5,
-               :conditions=>["category = ?", 'rule'],
-               :order => "created_at asc")
+      @rules = Page.
+        paginate(:page => params[:page], :per_page => 5,
+                 :conditions=>["category = ?", 'rule'],
+                 :order => "created_at asc")
+
   end
   def international
   end
