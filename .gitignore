@@ -10,6 +10,7 @@ semantic.cache
 config/*.sphinx.conf
 config/database.yml
 config/twitter.yml
+config/mail.yml
 config/server.pem
 db/sphinx
 db/backup

@@ -26,12 +26,3 @@ config.action_view.cache_template_loading            = true
 
 # Enable threaded mode
 # config.threadsafe!
-
-ActionMailer::Base.smtp_settings = { 
-  :address => "smtp.gmail.com",
-  :port => 587,
-  :authentication => :plain,
-  :enable_starttls_auto => true,
-  :user_name => "coder.mn@gmail.com",
-  :password => "taSmHPZ2FVguaxZ8wRWxGx8trsG3997"
-}
