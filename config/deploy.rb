@@ -1,13 +1,5 @@
 require 'yaml'
 require 'bundler/capistrano'
-# Add RVM's lib directory to the load path.
-$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
-
-# Load RVM's capistrano plugin.    
-require "rvm/capistrano"
-
-set :rvm_ruby_string, '1.8.7'
-set :rvm_type, :user  # Don't use system-wide RVM
 
 set :application, "coder"
 
@@ -47,7 +39,7 @@ end
 namespace :config do
   desc "copy shared configurations to current"
   task :copy, :roles => [:app] do
-    %w[database.yml twitter.yml].each do |f|
+    %w[database.yml twitter.yml mail.yml].each do |f|
       run "ln -nsf #{shared_path}/config/#{f} #{release_path}/config/#{f}"
     end
   end
