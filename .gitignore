@@ -12,6 +12,7 @@ config/database.yml
 config/twitter.yml
 config/mail.yml
 config/server.pem
+config/deploy.rb
 db/sphinx
 db/backup
 db/*.sqlite3
