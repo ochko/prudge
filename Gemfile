@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem "rails", "~>2.3.9"
 gem "capistrano"
+gem "unicorn"
 gem "mysql"
 gem "bluecloth"
 gem "gravtastic"
