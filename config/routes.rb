@@ -1,47 +1,40 @@
 ActionController::Routing::Routes.draw do |map|
-  # The priority is based upon order of creation: first created -> highest priority.
-
-  # Sample of regular route:
-  #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   map.resources :products
-
-  # Sample resource route with options:
-  #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
-
-  # Sample resource route with sub-resources:
-  #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
+  # Fixes for old paths
+  map.connect ':controller/feed.rss', :action => 'index', :format => 'rss'
+  map.connect ':controller/list', :action => 'index'
   
-  # Sample resource route with more complex sub-resources
-  #   map.resources :products do |products|
-  #     products.resources :comments
-  #     products.resources :sales, :collection => { :recent => :get }
-  #   end
+  map.resources :users, :member => [:solutions, :lessons, :problems]
+  map.resources :password_resets
+  map.resource :user_session
 
-  # Sample resource route within a namespace:
-  #   map.namespace :admin do |admin|
-  #     # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
-  #     admin.resources :products
-  #   end
-  map.resources :problem_types
+  map.resources :contests
+  map.resources :participants
+  map.resources :problems, :member => [:check]
+  map.resources :lessons
+  map.resources :topics
+  map.resources :solutions, :member =>[:best, :submited, :solved, :view, :download]
+  map.resources :languages
+  map.resources :pages
+  map.resources :problem_tests
+  map.resources :results
+  map.resources :comments
 
-  # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  # map.root :controller => "welcome"
-  map.connect '/', :controller => "home", :action => 'welcome'
-
-  map.user_change_password 'users/:id/change_password', :controller => 'account', :action => 'change_password'
-
-  # See how all your routes lay out with "rake routes"
-
-  # Install the default routes as the lowest priority.
-  # Note: These default routes make all actions in every controller accessible via GET requests. You should
-  # consider removing the them or commenting them out if you're using named routes and resources.
+  map.root :controller => 'contests', :action => 'last'
+  map.signup 'signup', :controller => 'users', :action => 'new'
+  map.login 'login', :controller => 'user_sessions', :action => 'new'
+  map.logout 'logout', :controller => 'user_sessions', :action => 'destroy'
+  map.forgot_password 'forgot_password', :controller => 'password_resets', :action => 'new'
+  map.account 'account', :controller => 'users', :action => 'account'
+  map.home 'home', :controller => 'home'
+  map.help 'help', :controller => 'home', :action => 'help'
+  map.about 'about', :controller => 'home', :action => 'about'
+  map.rules 'rules', :controller => 'home', :action => 'rules'
+  map.proposals 'proposals', :controller => 'problems', :action => 'proposals'
+  map.connect '/moderate', :controller => 'comments', :action => 'moderate'
+  map.connect '/topic/:type', :controller => 'topics'
+  map.connect '/search/:q', :controller => 'search'
+  map.connect '/watchers/:id/:action', :controller => 'watchers'
+  
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 end

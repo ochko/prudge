@@ -1,3 +1,5 @@
+.bundle
+.rvmrc
 log/*.log
 log/*.pid
 tmp/**/*
@@ -5,11 +7,15 @@ tmp/*
 doc/api
 doc/app
 semantic.cache
-*~
 config/*.sphinx.conf
 config/database.yml
+config/twitter.yml
+config/mail.yml
+config/server.pem
+config/deploy.rb
 db/sphinx
 db/backup
+db/*.sqlite3
 backup/*
 judge/*
 attachments/*
@@ -17,3 +23,4 @@ public/attachments
 public/banners
 public/photos
 public/uploads
+*~

@@ -1,27 +1,12 @@
 <%= error_messages_for 'page' %>
+<div class="bigger-inputs span-20">
 
-<!--[form:page]-->
-<table>
-  <tr>
-    <td>
-      <label for="page_title">Гарчиг</label><br/>
-      <%= text_field 'page', 'title', 'size'=>65  %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <label for="page_content">Агуулга</label><br/>
-      <%= fckeditor_textarea('page',
-                           'content',
-                           :toolbarSet => 'Simple',
-                           :height => '500') %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <label for="page_tags">Зүүлт</label><br/>
-      <%= text_field 'page', 'tags', 'size'=>65  %>
-    </td>
-  </tr>
-</table>
-<!--[eoform:page]-->
+<select name="page[category]">
+  <option value="news">Мэдээ</option>
+  <option value="help">Тусламж</option>
+  <option value="rule">Дүрэм</option>
+</select>
+
+<%= text_field 'page', 'title'  %>
+</div>
+<%= text_area('page', 'content') %>

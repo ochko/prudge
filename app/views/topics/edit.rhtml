@@ -1,8 +1,4 @@
 <h2>Хэлэлцүүлгийн сэдвийг засварлах</h2>
 
-<% form_tag :action => 'update', :id => @topic do %>
-  <%= render :partial => 'form' %>
-  <%= submit_tag 'Хадгал' %>
-<% end %>
+<%= render :partial => 'form' %>
 
-<%= link_to 'Харуул', :action => 'show', :id => @topic %>

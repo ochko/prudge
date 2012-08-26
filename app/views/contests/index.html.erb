@@ -1,0 +1,8 @@
+<h1>Тэмцээнүүд</h1>
+
+<table id="past-contests">
+<%=render :partial => 'contest', :collection => @contests %>
+</table>
+
+<%= will_paginate @contests, :renderer => FlowPagination::LinkRenderer, :noajax => true %>
+

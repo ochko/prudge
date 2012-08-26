@@ -1,0 +1,34 @@
+<h1 class="center">Нэвтрэх</h1>
+
+<div class="user-form">
+  <div class="form-top"> </div>
+  <div class="form-middle">
+    <% form_for @user_session, :url => user_session_path do |f| %>
+    <%= f.error_messages %>
+    <div id="passwords">
+      <%= f.label :login, "Нэвтрэх нэр" %>
+      <%= f.text_field :login %>
+      
+      <%= f.label :password, "Нууц үг" %>
+      <%= f.password_field :password %>
+    </div>
+
+    <div id="openid" style="display:none;">
+      <%= f.label :openid_identifier, "OpenID URL"%>  
+      <%= f.text_field :openid_identifier %>
+    </div>
+    <div class="form-submitter">
+    <%= f.submit "Нэвтэр", :class => "small yellow awesome" %>
+    </div>
+    <hr/>
+    <div class="center" id="login-links">
+      <%= link_to_function "OpenID-гаар нэвтрэх", '$("#passwords").hide();$("#openid-link").hide();$("#password-link").show();$("#openid").show();', :id=> "openid-link" %>
+      <%= link_to_function "Нууц үгээр нэвтрэх", '$("#passwords").show();$("#openid-link").show();$("#password-link").hide();$("#openid").hide();', :id=> "password-link", :style => "display:none" %>
+      |
+      <%= link_to 'Нууц үгээ сэргээх', forgot_password_path, :id=>'forgot-link' %>
+      
+    </div>
+    <% end %>
+  </div>
+  <div class="form-bottom"></div>
+</div>

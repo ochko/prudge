@@ -1,11 +1,11 @@
 module ProblemsHelper
-  def order_reverse(order)
-    if order =~ /_desc/
-      order.sub(/_desc/, '_asc')
-    elsif order =~ /_asc/
-      order.sub(/_asc/, '_desc')
+  def solved_or_not(correct)
+    if correct == true
+      image_tag('ok.png', :title => "Бодчихсон")
+    elsif correct == false
+      image_tag('ng.png', :title => "Бодож чадаагүй")
     else
-      order
+      ''
     end
   end
 end

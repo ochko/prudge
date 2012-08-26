@@ -1,1 +1,0 @@
-page.visual_effect :highlight, "attachment_#{@attachment.id}"

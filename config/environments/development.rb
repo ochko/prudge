@@ -11,27 +11,16 @@ config.whiny_nils = true
 # Show full error reports and disable caching
 config.action_controller.consider_all_requests_local = true
 config.action_view.debug_rjs                         = true
-config.action_controller.perform_caching             = true
+config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = true
 
-ActionMailer::Base.delivery_method = :sendmail
-ActionMailer::Base.sendmail_settings = {
-  :location       => '/usr/sbin/sendmail',
-  :arguments      => '-i -t'
+ActionMailer::Base.smtp_settings = { 
+  :address => "smtp.gmail.com",
+  :port => 587,
+  :authentication => :plain,
+  :enable_starttls_auto => true,
+  :user_name => "coder.mn@gmail.com",
+  :password => "taSmHPZ2FVguaxZ8wRWxGx8trsG3997"
 }
-
-memcache_options = {
-  :c_threshold => 10_000,
-  :compression => false,
-  :debug => false,
-  :readonly => false,
-  :urlencode => false,
-  :ttl => 300,
-  :namespace => 'coderdev',
-  :disabled => false
-}
-
-CACHE = MemCache.new memcache_options
-CACHE.servers = 'localhost:11211'

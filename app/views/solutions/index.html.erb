@@ -1,0 +1,7 @@
+<h1>Сүүлийн бодолтууд</h1>
+
+<table id="last-solutions">
+<%=render :partial => 'solution', :collection => @solutions %>
+</table>
+
+<%= will_paginate @solutions, :renderer => FlowPagination::LinkRenderer, :noajax => true %>

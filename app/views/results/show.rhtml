@@ -1,34 +1,28 @@
-<h2>Тестийн үр дүн</h2>
-<table>
-  <tr>
-    <td>Бодлого:</td><td> <%=h @result.solution.problem.name %></td>
-  </tr>
-  <tr>
-    <td>Хэрэглэгч:</td><td> <%=h @result.solution.user.login %></td>
-  </tr>
-  <tr>
-    <td>Ажиллагаа:</td><td> <%= translate_message(@result.status) %></td>
-  </tr>
-  <tr>
-    <td>Хугацаа:</td><td> <%=h @result.time %></td>
-  </tr>
-  <tr>
-    <td>Санах ой:</td><td> <%=h @result.memory %></td>
-  </tr>
-  <tr>
-    <td>Оролт:</td><td> <%= fitted_textarea(@result.test.input,12,72,5,72) %></td>
-  </tr>
-  <tr>
-    <td>Гаралт:</td><td><%= fitted_textarea(@result.output,12,72,5,72) %></td>
-  </tr>
-  <tr>
-    <td>Үр дүн:</td><td><%= show_correctness @result.matched %></td>
-  </tr>
-  <% if !@result.matched %>
-  <tr>
-    <td>Хариу:</td><td><%= fitted_textarea(@result.test.output, 12, 72, 5,72) %></td>
-  </tr>
-  <% end %>
-</table>
-<%= link_to 'Бодолт руу', :controller=>'solutions',
-                     :action=>'show', :id=>@result.solution  %>
+<h1>Тестийн үр дүн:
+  <span class="result-match"><%= show_correctness @result.matched %></span>
+  <span class="req-time" title="Ажилласан хугацаа"><%= @result.time %></span>
+  <span class="req-memory" title="Ашигласан санах ой"><%= @result.memory %></span>
+</h1>
+<div id="result-meta" class="border-hor">
+  <%= link_to @result.solution.problem.name, @result.solution.problem %>,
+  <label>бодсон:</label> <%= link_to h(@result.solution.user.login), @result.solution.user %>,
+  <%=l @result.solution.uploaded_at %>,
+  <span class="result-run">Ажиллагаа: <strong><%= translate_message(@result.status) %></strong></span>
+
+  <span class="go-up"><%= link_to 'Бодолт руу', @result.solution  %></span>
+</div>
+
+<div class="span-6 border scroll prepend-top">
+  <span class="test-input">Оролт</span>
+  <pre><%= @result.test.input %></pre>
+</div>
+<div class="span-6 border scroll prepend-top">
+  <span class="test-output">Гаралт</span>
+  <pre><%= @result.output %></pre>
+</div>
+<% if !@result.matched %>
+<div class="span-7 scroll prepend-top">
+  <span class="diff-output">Зөв</span>
+  <pre><%= @result.test.output %></pre>
+</div>
+<% end %>

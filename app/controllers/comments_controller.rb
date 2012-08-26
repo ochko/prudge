@@ -1,32 +1,48 @@
+# -*- coding: utf-8 -*-
 class CommentsController < ApplicationController
-  before_filter :login_required
-  access_control [:destroy] => 'Admin'
+  before_filter :require_user, :except => [:index]
+  before_filter :require_admin, :only => [:destroy, :moderate]
 
-  def form
-    @comment = Comment.new(params[:comment])
+  menu :discussion
+
+  def show
     @comments = Comment.
-      find(:all,
-           :conditions=>["topic_id = ? AND topic_type =?",
-                         @comment.topic_id,
-                         @comment.topic_type],
-           :order=>'created_at')
-    @box_title = "#{@comments.size} #{params[:commit]}"
+      paginate(:page => params[:page], :order => 'created_at DESC',
+               :conditions => ['topic_id = ? AND topic_type = ?',
+                               params[:id], params[:type].capitalize])
 
-    if request.xml_http_request?
-      render :partial=>'form_list'
-    else
-      redirect_to :controller=>'home', :action=>'welcome'
+    render :layout => false
+  end
+  
+  def index
+    @comments = Comment.
+      paginate(:page => params[:page],
+               :order => 'created_at DESC',
+               :include => [:user])
+    respond_to do |format|
+      format.html
+      format.rss
+      format.js { render :layout => false }
     end
   end
 
+  def moderate
+    @comments = Comment.
+      paginate(:page => params[:page], :per_page=> 50,
+               :order => 'created_at desc',
+               :include => [:user])
+  end
+
   def create
-    @comment = Comment.new(params[:comment])
-    @comment.user_id = current_user.id
+    if current_user.currently_commented?
+      render :text => 'Хэт хурдан байна, 10 Секунд хүлээгээд дахин илгээнэ үү?', :status => 404
+      return
+    end
+    @comment = current_user.comments.build(params[:comment])
     if @comment.save
-      render :partial => 'comments/list_item',
-             :locals => { :comment => @comment}
+      render :partial => 'comments/comment', :object => @comment
     else
-      render :text => 'Бичлэгийг хадгалж чадсангүй!'
+      render :text => @comment.errors.full_messages, :status => 404
     end
   end
 
@@ -39,4 +55,5 @@ class CommentsController < ApplicationController
       end
     end
   end
+
 end

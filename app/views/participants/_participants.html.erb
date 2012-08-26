@@ -1,0 +1,37 @@
+    <% if @contest.users.size > 0 %>
+    <table class="two-columns">
+      <tr>
+	<td class="left-column">
+	  <table id="list-of-participants">
+	    <tr>
+	      <th></th>
+	      <th>Нэр</th>
+	      <th><img src="/images/points.png" title="Оноо"/></th>
+	      <th><img src="/images/clock.png" title="Хугацаа"/></th>
+	      <th></th>
+	    </tr>
+	    <% @numbers.zip(@standings) do |num, user| %>
+	    <tr>
+              <td class="ranking"><%= show_place(num) %></td>
+              <td class='small'>
+		<%= link_to user.login, user %></td>
+              <td class='small'><%= "%.2f" % user.point %></td>
+              <td class='small'><%= sec2milisec user.time %></td>
+              <td class='small'>
+                <%= link_to image_tag('arrow-r.png'), 
+		    {:controller=>'participants',:action=>'show',:user=>user.id, :contest=>@contest.id}, 
+                    :class => 'load-solutions' %>
+              </td>
+	    </tr>
+	    <% end %>
+	  </table>
+	</td>
+	<td class="right-column">
+	  <div id='solved'></div>
+	  <div id='spinner'> <%= image_tag "spinner.gif" %> </div>
+	</td>
+      </tr>
+    </table>
+    <% else %>
+    Оролцогч алга!
+    <% end %>

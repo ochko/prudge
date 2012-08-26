@@ -1,0 +1,21 @@
+<%= will_paginate @comments,:class=>'apple_pagination', :previous_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+
+<table>
+  <tr>
+    <th>Огноо</th>
+    <th>Хэрэглэгч</th>
+    <th>Бичлэг</th>
+    <th></th>
+  </tr>
+  <% for c in @comments %>
+  <tr id="comment_<%=c.id%>">
+    <td class="small"><%=l c.created_at %></td>
+    <td><%= link_to c.user.login, c.user %></td>
+    <td class="small"><%=truncate h(c.text), :length => 70 %></td>
+    <td><%= link_to image_tag('arrow-ur.png'), c.topic %></td>
+    <td><%= link_to_remote image_tag('delete.png'), :url=>{:controller=>'comments', :action => 'destroy', :id => c }, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+  <% end %>
+</table>
+
+<%= will_paginate @comments,:class=>'apple_pagination', :previous_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>

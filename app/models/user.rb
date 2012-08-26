@@ -1,139 +1,148 @@
-require 'digest/sha1'
 class User < ActiveRecord::Base
-  before_create :make_activation_code
-  # Virtual attribute for the unencrypted password
-  attr_accessor :password
-  #attr_protected :activated_at
-  has_many :role_users
-  has_many :roles, :through => :role_users
-  has_many :solutions,
-           :conditions => ['isbest = ?', true],
-           :include => [:problem, :language]
-  has_many :duplicate_solutions, :class_name=> 'Solution',
-           :include => [:problem, :language]
-  has_many :contests,
-           :finder_sql =>
-    'SELECT distinct(c.id ), c.name, c.start, c.end, '+
-    'c.type_id, c.prize_id, c.sponsor_id, t.name as type_name, '+
-    'z.name as prize_name, o.name as sponsor_name '+
-    'FROM solutions s '+
-    'join problems p on s.problem_id = p.id '+
-    'join contests c on p.contest_id = c.id '+
-    'join prizes z on c.prize_id = z.id '+
-    'join sponsors o on c.sponsor_id = o.id '+
-    'join contest_types t on c.type_id = t.id '+
-    'where s.user_id = #{id} and s.created_at < c.end '+
-    'order by c.start desc'
+  include Gravtastic
+
+  DOT_GIT = "#{RAILS_ROOT}/config/dot.git"
+  GITIGNORE = "#{RAILS_ROOT}/config/dot.gitignore"
+
+  has_many :solutions
+  has_many :completions, :class_name => 'Solution', 
+           :conditions => ["correct = ?", true]
+  has_many :contests, :through => :solutions, :uniq => true, :order => 'start'
+  has_many :tried, :through => :solutions, :uniq => true, :source => :problem
+  has_many :solveds, :through => :completions, :uniq => true, :source => :problem
   has_many :problems
-  has_one :photo
-  has_many :fulfillments
-  has_many :courses, :foreign_key=>'teacher_id'
-  has_many :memberships
-  has_many :groups, :through => :memberships
   has_many :lessons, :foreign_key => 'author_id'
+  has_many :comments, :dependent => :destroy, :order => "created_at DESC"
 
-  validates_presence_of     :login, :email
-  validates_presence_of     :password,                   :if => :password_required?
-  validates_presence_of     :password_confirmation,      :if => :password_required?
-  validates_length_of       :password, :within => 4..40, :if => :password_required?
-  validates_confirmation_of :password,                   :if => :password_required?
-  validates_length_of       :login,    :within => 3..40
-  validates_length_of       :email,    :within => 3..100
-  validates_uniqueness_of   :login, :email, :case_sensitive => false
-  validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "-Invalid email"
-  before_save :encrypt_password
+  named_scope :active, :conditions => ['uploaded_at > ?', Time.now - 2.year]
+  named_scope :moderators, :conditions => ['admin =? or judge =?', true, true]
+  
+  attr_protected :admin, :judge, :solutions_count, :points
 
-  # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
-  #def self.authenticate(login, password)
-  #  u = find_by_login(login) # need to get the salt
-  #  u && u.authenticated?(password) ? u : nil
-  #end
-  def self.authenticate(login, password)
-    # hide records with a nil activated_at
-    u = find :first, :conditions => ['login = ? and activated_at IS NOT NULL', login]
-    u && u.authenticated?(password) ? u : nil
+  validates_uniqueness_of :email
+
+  acts_as_authentic do |c|
+    c.openid_required_fields = [:nickname, :email]
+    c.validate_email_field = false
+    c.disable_perishable_token_maintenance = true
   end
 
-  # Encrypts some data with the salt.
-  def self.encrypt(password, salt)
-    Digest::SHA1.hexdigest("--#{salt}--#{password}--")
+  is_gravtastic! :size => 80, :rating => :PG
+
+  after_create :init_repo
+
+  def self.per_page
+    100
   end
 
-  # Encrypts the password with the user salt
-  def encrypt(password)
-    self.class.encrypt(password, salt)
+  def deliver_password_reset_instructions!
+    reset_perishable_token!
+    Notifier.deliver_password_reset_instructions(self)  
   end
 
-  def authenticated?(password)
-    crypted_password == encrypt(password)
+  def deliver_release_notification!
+    return unless email_valid?
+    reset_perishable_token!
+    Notifier.deliver_release_notification(self)  
   end
 
-  def remember_token?
-    remember_token_expires_at && Time.now.utc < remember_token_expires_at
+  def deliver_problem_selection!(contest, problem)
+    return unless email_valid?
+    Notifier.deliver_problem_selection(self, contest, problem)
   end
 
-  # These create and unset the fields required for remembering users between browser closes
-  def remember_me
-    self.remember_token_expires_at = 2.weeks.from_now.utc
-    self.remember_token            = encrypt("#{email}--#{remember_token_expires_at}")
-    save(false)
+  def deliver_new_contest(contest)
+    return unless notify_new_contests?
+    return unless email_valid?
+    sleep 180
+    Notifier.deliver_new_contest(self, contest)
   end
 
-  def forget_me
-    self.remember_token_expires_at = nil
-    self.remember_token            = nil
-    save(false)
+  def deliver_contest_update(contest)
+    return unless email_valid?
+    sleep 180
+    Notifier.deliver_contest_update(self, contest)
   end
 
-  # Activates the user in the database.
-  def activate
-    @activated = true
-    update_attributes(:activated_at => Time.now, :activation_code => nil)
+  def email_valid?
+    email =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
   end
 
-  # Returns true if the user has just been activated.
-  def recently_activated?
-    @activated
-  end
+  def solutions_dir() "#{Solution::SOLUTIONS_PATH}/#{self.id}" end
+  def exe_dir()       "#{solutions_dir}/exe" end
 
-  def forgot_password
-    @forgotten_password = true
-    self.make_password_reset_code
-  end
-
-  def reset_password
-    # First update the password_reset_code before setting the
-    # reset_password flag to avoid duplicate email notifications.
-    update_attributes(:password_reset_code => nil)
-    @reset_password = true
-  end
-
-  def recently_reset_password?
-    @reset_password
-  end
-
-  def recently_forgot_password?
-    @forgotten_password
-  end
-
-  protected
-  # If you're going to use activation, uncomment this too
-  def make_activation_code
-    self.activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
-  end
-
-  def make_password_reset_code
-    self.password_reset_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
-  end
-
-    # before filter
-    def encrypt_password
-      return if password.blank?
-      self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--") if new_record?
-      self.crypted_password = encrypt(password)
+  def admin?() self.admin == true  end
+  def judge?() self.judge == true  end
+  
+  def level
+    Contest::LEVEL_POINTS.keys.sort.each do |l|
+      return l if points < Contest::LEVEL_POINTS[l]
     end
+  end
 
-    def password_required?
-      crypted_password.blank? || !password.blank?
+  def level_name
+    Contest::LEVEL_NAMES[level]
+  end
+
+  def last_submission_of(problem)
+    Solution.last(:conditions => 
+                  ["problem_id = ? AND user_id = ?", problem.id, self.id],
+                  :order => 'created_at ASC')
+  end
+  
+  def solved(problem)
+    Solution.find(:all, :conditions => 
+                  ["problem_id = ? AND user_id = ? AND correct = ?",
+                   problem.id, self.id, true])
+  end
+
+  def currently_commented?
+    comments.first && 
+      comments.first.created_at > Time.now - 10.seconds
+  end
+  
+  def resum_points!
+    update_attribute(:points, solutions.best.sum(:point))
+  end
+
+  def solution_uploaded!
+    self.update_attribute(:uploaded_at, Time.now)
+  end
+
+  def self.resum_points!
+    User.all.each do |user|
+      user.resum_points!
     end
+  end
+
+  def init_repo
+    FileUtils.mkdir_p(solutions_dir) unless File.directory?(solutions_dir)
+    if system("/usr/bin/git init --quiet --template=#{DOT_GIT} #{solutions_dir}")
+      system("/bin/sed -i 's/coder-name/#{self.login}/' #{solutions_dir}/.git/config")
+      system("/bin/sed -i 's/coder-email/#{self.email}/' #{solutions_dir}/.git/config")
+      FileUtils.cp GITIGNORE, "#{solutions_dir}/.gitignore"
+    end
+  end
+
+  def import_solutions
+    self.solutions.each do |solution|
+      solution.insert_to_repo
+    end
+  end
+
+  def refreshed_points
+    nodup = {}
+    self.solutions.each do |solution|
+      pid = solution.problem_id
+      nodup[pid] ||= solution
+      nodup[pid] = solution if nodup[pid].point < solution.point
+      nodup
+    end
+    nodup.values.inject(0) { |sum, solution| sum += solution.point}
+  end
+
+  def refresh_points!
+    self.points = refreshed_points
+    save!
+  end
 end

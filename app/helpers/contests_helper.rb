@@ -11,6 +11,7 @@ module ContestsHelper
      image_tag('cup-bronze.png', :title=> 'Хүрэл')
    end
  end
+
  def show_place(num)
    if num > 3
      return num
@@ -23,4 +24,16 @@ module ContestsHelper
      image_tag('cup-bronze.png', :title=> 'Хүрэл')
    end
  end
+
+ def show_status(contest)
+   if Time.now() < contest.start
+     "Эхлэхэд #{distance_of_time_in_words_to_now contest.start} үлдлээ"
+   elsif Time.now() > contest.start &&
+       Time.now() < contest.end
+     "Дуусахад #{distance_of_time_in_words_to_now contest.end} үлдлээ"
+   else
+     "Дууссан"
+   end
+ end
+
 end

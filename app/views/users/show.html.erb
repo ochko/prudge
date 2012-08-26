@@ -1,0 +1,47 @@
+<h2 class="rank_<%=@user.level%> span-14">
+  <%= @user.login.capitalize %>@<%= strip_tags @user.school %>  
+</h2>
+<div id="user-statistic">
+  <span class="user-points" title="Нийт оноо">
+    <%= "%.2f" % @user.points if !@user.points.nil? %>
+  </span>
+  <span class="user-access" title="Сүүлд бодсон">
+    <%=l(@user.uploaded_at, :format => :short) if @user.uploaded_at %>
+  </span>
+</div>
+<div id="medals" class="span-14">
+  <%= image_tag(@user.gravatar_url, :class => "portrait") %>
+  <%= medal_list(@standings) %>
+</div>
+<div id="social-media-contacts">
+  <%= %w[twitter facebook blogger google hi5 yahoo].collect {|media| social_media_link(@user, media)} %>
+</div>
+<div id="tabs" class="span-20"> 
+  <ul>
+    <li><a href="#participant-of"><span>Оролцсон тэмцээн</span></a></li>
+    <li><%= link_to content_tag(:span, 'Бодолтууд'), {:action=>'solutions', :id=>@user.id, :name => "solved-problems"} %></li>
+    <li><%= link_to content_tag(:span, 'Бичсэн хичээл'), {:action=>'lessons', :id=>@user.id, :name => "lessons-written"} %></li>
+    <li><%= link_to content_tag(:span, 'Дэвшүүлсэн бодлого'), {:action=>'problems', :id=>@user.id, :name => "composed-problem"} %></li>
+  </ul>
+  <div id="participant-of"> 
+    <table width="100%">
+      <tr>
+	<th>Байр</th>
+	<th>Нэр</th>
+	<th>Огноо</th>
+      </tr>
+      <% @standings.each do |c,s| %>
+      <tr>
+	<td class="ranking"><%= standing(s) %></td>
+	<td><%= link_to c.name, c %></td>
+	<td><%=l c.start %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div id="solved-problems"> </div>
+  <div id="lessons-written"> </div>
+  <div id="composed-problem"> </div>
+
+</div>

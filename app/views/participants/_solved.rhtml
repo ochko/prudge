@@ -1,0 +1,24 @@
+<table id="participant-solutions">
+  <tr><th colspan="5" class="big-title"><%=h @user.login %></th><tr>
+  <tr>
+    <th width="1%"></th>
+    <th>Бодлого, Хэл, Бодсон/Шинэчилсэн цаг</th>
+    <th class="center"><img src="/images/points.png" title="Оноо"/></th>
+    <th class="center"><img src="/images/ok.png" title="Хувь" /></th>
+    <th class="center"><img src="/images/clock-w.png" title="Хугацаа" /></th>
+  </tr>
+  <% for s in @solutions%>
+  <tr>
+    <td><%= link_to show_correctness(s.correct), s %></td>
+    <td><%= link_to s.problem.name, s.problem %>
+      <span class="solution-meta">
+	<%= s.language.name -%>,
+        <%=l s.created_at -%>/<%=l s.uploaded_at -%>
+      </span>
+    </td>
+    <td class="center"><%= s.problem.level %></td>
+    <td class="center"><%= "%0.0f" % (s.percent*100) %></td>
+    <td class="center"><%= sec2milisec s.time %></td>
+  </tr>
+  <% end %>
+</table>

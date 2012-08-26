@@ -1,0 +1,5 @@
+<tr>
+  <td class="status"><span class="rank_<%= contest.level %>" title="<%= contest.level_name %>"></span></td>
+  <td class="<%= contest.private ? 'private' : 'public' %>"><%= link_to contest.name, contest %></td>
+  <td><%=l contest.start %> &raquo; <%=l contest.end %></td>
+</tr>

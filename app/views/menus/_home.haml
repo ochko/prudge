@@ -1,0 +1,7 @@
+%ul
+  %li!= link_to 'Тусламж', :controller => 'home', :action => 'help'
+  %li!= link_to 'Сайтын тухай', :controller => 'home', :action => 'about'
+  %li!= link_to 'Хэрэглэх нөхцөл', :controller => 'home', :action => 'rules'
+  %li!= link_to 'Програмчлалын хэлүүд', languages_path
+  - if admin?
+    %li!= link_to 'Шинэ мэдээ', new_page_path

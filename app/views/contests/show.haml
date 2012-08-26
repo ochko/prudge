@@ -1,0 +1,56 @@
+%h1{:class => "rank_#{@contest.level}", :title => "#{@contest.level_name} түвшний тэмцээн"}
+  = h @contest.name
+  - if @contest.private?
+    - if @contributed
+      = image_tag 'unlocked.png', :title => 'Дэвшүүлсэн бодлого тань сонгогдсон учраас энэ тэмцээнд орох боломжтой'
+    - else
+      = image_tag 'locked.png', :title => 'Дэвшүүлсэн бодлого нь сонгогдсон тохиолдолд энэ тэмцээнд орох эрхтэй болно'
+
+#contest-meta
+  = show_status @contest
+  \.
+  %span.contest-time
+    = l @contest.start
+    \&raquo;
+    \#{l @contest.end}
+#contest-description
+  = markdown @contest.description
+#tabs.span-20.append-bottom
+  %ul
+    %li
+      %a{:href => "#included-problems"}
+        %span Бодлогууд
+    %li= link_to content_tag(:span, 'Оролцогчид'), participants_path(:id=>@contest.id, :name => "participant-of", :format => "js")
+  #included-problems
+    - if @contest.started? || admin?
+      %table{:width => "100%"}
+        %tr
+          %th ID
+          %th Нэр
+          %th Түвшин
+          %th
+            %img{:src => "/images/clock.png"}/
+            \/
+            %img{:src => "/images/memory.png"}/
+          %th Дэвшүүлсэн
+          %th Бодолт
+          %th
+        - @contest.problems.each do |problem|
+          %tr
+            %td= problem.id
+            %td= link_to problem.name, problem
+            %td
+              = Contest::LEVEL_NAMES[problem.level]
+              (#{problem.level})
+            %td
+              = problem.time
+              с /
+              \#{problem.memory}кб
+            %td= link_to problem.user.login, problem.user
+            %td
+              = problem.tried_count
+              \/ #{problem.solved_count}
+            %td= solved_or_not @solved[problem.id]
+  #participant-of
+
+!= render :partial => 'comments/commentable', :object => @contest

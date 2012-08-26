@@ -1,9 +1,6 @@
 <h2>Бодлогыг засварлах</h2>
 
-<% form_tag :action => 'update', :id => @problem do %>
+<% form_for @problem do %>
   <%= render :partial => 'form' %>
-  <%= submit_tag 'Хадгал' %>
 <% end %>
 
-<%= link_to 'Харуул', :action => 'show', :id => @problem %> |
-<%= link_to 'Буцаад бодлогууд руу', :action => 'list' %>

@@ -1,9 +1,6 @@
 <h1>Editing language</h1>
 
-<% form_tag :action => 'update', :id => @language do %>
+<% form_for @language do %>
   <%= render :partial => 'form' %>
-  <%= submit_tag 'Edit' %>
+  <%= submit_tag 'Хадгал' %>
 <% end %>
-
-<%= link_to 'Show', :action => 'show', :id => @language %> |
-<%= link_to 'Back', :action => 'list' %>

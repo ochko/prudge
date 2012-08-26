@@ -1,0 +1,23 @@
+<table>
+  <tr>
+    <th width="1%"></th>
+    <th>Хэрэглэгч</th>
+    <th>Хэл</th>
+    <th>Бодсон</th>
+    <th>Шинэчилсэн</th>
+    <th>Хувь</th>
+    <th>Хугацаа</th>
+  </tr>
+  <% for solution in @solutions%>
+  <tr>
+    <td class="status"><%= link_to show_correctness(solution.correct), solution %></td>
+    <td><%= link_to solution.user.login, solution.user %></td>
+    <td><%= solution.language.name %></td>
+    <td class='small'><%=l solution.created_at %></td>
+    <td class='small'><%=l solution.uploaded_at %></td>
+    <td><%= (solution.percent*100).to_i %></td>
+    <td><%= sec2milisec solution.time %></td>
+  </tr>
+  <% end %>
+</table>
+

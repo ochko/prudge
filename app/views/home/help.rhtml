@@ -1,19 +1,12 @@
 <h1>Тусламж</h1>
-<% view_cache Page, :tag=> (params[:page] || 1) do %>
-  <% for help in @helps%>
-    <div class='post'>
-      <h1><%= image_tag('help.png') %> <%=h help.title%></h1>
-      <div class="entry">
-        <%= help.content %>
-      </div>
-      <div class="info">
-        Бичсэн <%= help.created_at %>, Зүүлт: <%= page_tag_link help.tags%>
-      </div>
-    </div>
-  <% end %>
-<% end %>
 
-<% restrict_to 'Admin' do %>
-<br />
+<% for n in @helps %>
+<h2><%=h n.title %></h2>
+<span class="news-meta"><%=l n.created_at %></span>
+<%=markdown n.content %>
+<% end %>
+<%= will_paginate @helps, :class=>'apple_pagination', :previous_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+
+<% if admin? %>
 <%= link_to 'Шинэ тусламж', :controller=>'pages', :action => 'new' %>
 <% end %>

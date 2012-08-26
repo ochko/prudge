@@ -1,24 +1,13 @@
 <h1>
-  <%= link_to @topic.name,
-      :controller=>@type,
-      :action=>'show',
-      :id=>@topic %>
-</h1>
-<div class="post">
-  <div class="entry">
-    <%= white_list @topic.description %>
-  </div>
-
-  <% if @type.eql?('topic') %>
-    <% restrict_to 'Admin' do %>
-    <div class="info">
-      <%= link_to 'Засварлах', :action => 'edit', :id => @topic %> |
-      <%= link_to 'Устгах', { :action => 'destroy', :id => @topic },
-          :confirm => 'Are you sure?', :method => :post %>
-    </div>
+  <%= link_to @topic.name, @topic %>
+    <% if admin? && (!params[:type] || params[:type] == 'topic') %>
+    <%= link_to image_tag('edit.png'), :action => 'edit', :id => @topic %>
+    <%= link_to image_tag('delete.png'), @topic, :method => :delete,
+                :confirm => 'Are you sure?' %>
   <% end %>
-<% end %>
+</h1>
+<div id="topic-text">
+  <%=markdown @topic.text %>
 </div>
-<%= will_paginate @comments, :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
-<%= render :partial => 'comments/form_list' %>
-<%= will_paginate @comments, :prev_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;' %>
+
+<%= render :partial => 'comments/commentable', :object => @topic %>

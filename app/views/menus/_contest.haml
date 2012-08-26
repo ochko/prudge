@@ -1,0 +1,17 @@
+%ul
+  %li!= link_to 'Өмнөх тэмцээн', :controller => 'contests', :action => 'last'
+  %li!= link_to 'Бүх тэмцээнүүд', :controller => 'contests'
+  - if current_user
+    - if judge?
+      %li.add!= link_to 'Шинэ тэмцээн зарлах', new_contest_path
+    - if @contest && !@contest.new_record?
+      - if admin?
+        %li.edit!= link_to 'Тэмцээнийг засварлах', edit_contest_path(@contest)
+        %li.delete!= link_to 'Тэмцээнийг устгах', { :action => 'destroy', :id => @contest }, :confirm => 'Are you sure?', :method => :post
+      %li.watch
+        - if @contest.watchers.include? current_user
+          != check_box_tag 'watch', @contest.id, true, :title => 'Энэ тэмцээний тухай мэдэгдэл ирэхгүй болгох'
+        - else
+          != check_box_tag 'watch', @contest.id, false, :title => 'Тэмцээнийн хугацаа өөрчлөгдөхөд надад мэдэгд'
+        Ажиглах
+

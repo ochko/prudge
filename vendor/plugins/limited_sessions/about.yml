@@ -1,7 +1,0 @@
-author: t.e.morgan
-summary: 'limited_sessions: cause sessions to expire or limit them to originating ip'
-homepage: http://iprog.com/project/limited_sessions
-plugin: http://svn.iprog.com/projects/rails/plugins/limited_sessions
-license: MIT
-version: 0.20070906
-rails_version: 1.2+

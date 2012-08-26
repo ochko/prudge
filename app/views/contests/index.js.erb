@@ -1,0 +1,2 @@
+$("#past-contests").append("<%= escape_javascript(render(:partial => 'contest', :collection => @contests)) %>");
+$("#flow_pagination").replaceWith("<%= escape_javascript(will_paginate(@contests, :noajax => true, :renderer => FlowPagination::LinkRenderer)) %>");

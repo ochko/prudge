@@ -1,6 +1,6 @@
 <h2>Шинэ хичээл</h2>
 
-<% form_tag :action => 'create' do %>
+<% form_for @lesson do %>
   <%= render :partial => 'form' %>
-  <%= submit_tag "Хадгал" %>
+
 <% end %>

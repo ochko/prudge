@@ -1,0 +1,33 @@
+%h1
+  Бодлогууд
+  %span.rss
+    = link_to 'RSS', problems_path(:format=>:rss)
+
+- if @problems.size > 0
+  %table#problems
+    %tr
+      %th{:width => "1%"}
+      %th= link_to 'Нэр',        :column=> 'name', :order => (params[:column] == 'name') ? @reverse : 'ASC'
+      %th= link_to 'Оноо',       :column=> 'level', :order => (params[:column] == 'level') ? @reverse : 'ASC'
+      %th= link_to 'Дэвшүүлсэн', :column=> 'user_id',:order => (params[:column] == 'user_id') ? @reverse : 'ASC'
+      %th= link_to 'Огноо',      :column=> 'created_at', :order => (params[:column] == 'created_at') ? @reverse : 'ASC'
+      %th{:colspan => "2"}
+        Бодолт
+        %br/
+        = link_to 'Нийт', :column=> 'tried_count',:order => (params[:column] == 'tried_count') ? @reverse : 'ASC'
+        \/
+        = link_to 'Зөв', :column=> 'solved_count',:order => (params[:column] == 'solved_count') ? @reverse : 'ASC'
+      %th{:width => "1%"}
+    - for problem in @problems
+      %tr
+        %td= problem.id
+        %td= link_to problem.name, problem
+        %td= problem.level
+        %td= link_to problem.user.login, problem.user
+        %td= l problem.created_at, :format=>:date
+        %td= problem.tried_count
+        %td= problem.solved_count
+        %td= solved_or_not @solved[problem.id]
+  = will_paginate @problems, :class=>'apple_pagination', :previous_label => '« Өмнөх', :next_label   => 'Дараах »'
+- else
+  Бодлого алга!

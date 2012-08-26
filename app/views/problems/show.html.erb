@@ -1,0 +1,39 @@
+<h2 class="span-17">
+  <span class="problem-name"><%=h @problem.name %></span>
+  <span class="req-level" title="Оноо"><%= @problem.level %></span>
+  <span class="req-time" title="Хугацааны хязгаар"><%= @problem.time %></span>
+  <span class="req-memory" title="Санах ойн хязгаар"><%= @problem.memory %></span>  
+  <span class="req-test" title="Тэстийн тоо"><%= @problem.tests.size %></span>
+</h2>
+<span id="solve-link">
+  <%= link_to 'БОДОХ', new_solution_path(:problem => @problem.id), :class => 'big blue awesome' %>
+</span>
+<div id="problem-meta" class="span-17">
+  <%= link_to @problem.user.login, @problem.user-%>
+  кодер
+  <% if @problem.contest -%>
+  <%= link_to h(@problem.contest.name), @problem.contest %>
+  тэмцээнд
+  <% end %>
+  дэвшүүлсэн
+</div>
+<div id="problem-tabs" class="span-20"> 
+  <ul>
+    <li><a href="#problem-text"><span>Бодлого</span></a></li>
+    <li><%= link_to content_tag(:span, 'Шилдэг бодолт'), {:controller=>'solutions', :action=>'best', :problem_id=>@problem.id, :name => "best-solution"} %> </li>
+    <li><%= link_to content_tag(:span, "Нийт бодолт (#{@problem.solutions_count})"), {:controller=>'solutions', :action=>'submited', :problem_id=>@problem.id, :name => "all-solutions"} %> </li>
+    <li><%= link_to content_tag(:span, "Зөв бодолт (#{@problem.corrects_count})"), {:controller=>'solutions', :action=>'solved', :problem_id=>@problem.id, :name => "correct-solutions"} %> </li>
+  </ul>
+  <div id="problem-text"> 
+    <table><tr><td>
+	  <%=markdown @problem.text %>
+	  <%= content_tag(:span, 'Эх сурвалж: ' + h(@problem.source),
+	      :class => 'problem-source') if !@problem.source.empty? -%>
+    </td></tr></table> 
+  </div>
+  <div id="best-solution"> </div>
+  <div id="all-solutions"> </div>
+  <div id="correct-solutions"> </div>
+</div>
+
+<%= render :partial => 'comments/commentable', :object => @problem %>

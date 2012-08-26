@@ -1,0 +1,5 @@
+<tr>
+  <td><%= link_to solution.user.login, solution.user, :class=> (solution.correct ? 'ok' : 'ng') %> </td>
+  <td><%=l solution.uploaded_at %></td>
+  <td><%= link_to solution.problem.name, solution.problem %></td>
+</tr>

@@ -1,30 +1,11 @@
 class LanguagesController < ApplicationController
-  layout 'home'
-  before_filter :login_required,
-                :except => [:index, :list, :show]
+  menu :home
 
-  access_control [:new,
-                  :create,
-                  :edit,
-                  :destroy,
-                  :update] => 'Admin'
+  before_filter :require_admin, :except => :index
+
   def index
-    list
-    render :action => 'list'
-  end
-
-  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list }
-
-  def list
-    behavior_cache Language do
-      @languages = Language.all
-    end
-  end
-
-  def show
-    @language = Language.find(params[:id])
+    @languages = Language.all
+    render(:action => 'list') if admin?
   end
 
   def new
@@ -35,7 +16,7 @@ class LanguagesController < ApplicationController
     @language = Language.new(params[:language])
     if @language.save
       flash[:notice] = 'Language was successfully created.'
-      redirect_to :action => 'list'
+      redirect_to :action => :index
     else
       render :action => 'new'
     end
@@ -49,7 +30,7 @@ class LanguagesController < ApplicationController
     @language = Language.find(params[:id])
     if @language.update_attributes(params[:language])
       flash[:notice] = 'Language was successfully updated.'
-      redirect_to :action => 'show', :id => @language
+      redirect_to :action => :index
     else
       render :action => 'edit'
     end
@@ -57,6 +38,6 @@ class LanguagesController < ApplicationController
 
   def destroy
     Language.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    redirect_to :action => :index
   end
 end

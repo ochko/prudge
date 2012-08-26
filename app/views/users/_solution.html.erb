@@ -1,0 +1,13 @@
+  <tr>
+    <td><%= link_to show_correctness(solution.correct), solution %></td>
+    <td><%= link_to solution.problem.name, solution.problem %>
+      <span class="solution-meta">
+	<%= solution.language.name %> хэл дээр
+        <%=l solution.created_at %> -д бодож
+        <%=l solution.uploaded_at %> -д шинэчилсэн
+      </span>
+    </td>
+    <td class="center"><%= solution.problem.level %></td>
+    <td class="center"><%= "%0.0f" % (solution.percent*100) %></td>
+    <td class="center"><%= sec2milisec solution.time %></td>
+  </tr>

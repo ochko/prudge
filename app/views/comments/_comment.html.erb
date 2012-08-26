@@ -1,0 +1,16 @@
+<div class="span-20 comment">
+  <div class="comment-avatar">
+    <%=image_tag(comment.user.gravatar_url(:size => 60)) %>
+    <span class="user-points" title="Нийт оноо"><%= "%.2f" % comment.user.points if !comment.user.points.nil? %></span>
+  </div>
+  <div class="span-17 comment-body">
+    <div class="comment-text">
+      <span class="comment-parent"><%= link_to image_tag('arrow-ur.png'), comment.topic, :title => "Хэлэлцүүлэг рүү" %></span>
+      <span class="rank_<%=comment.user.level%>"><%= link_to comment.user.login, comment.user %>:</span>
+      <%=simple_format h(comment.text) %>
+    </div>
+    <span class="comment-date">
+      <%=l comment.created_at %>
+    </span>
+  </div>
+</div>

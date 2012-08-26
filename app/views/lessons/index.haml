@@ -1,0 +1,14 @@
+%h1
+  Хичээлүүд 
+  %span.rss 
+    = link_to 'RSS', lessons_path(:format=>:rss)
+- @lessons.each do |lesson|
+  .lesson-item
+    %h2= link_to lesson.title, lesson
+    .lesson-meta
+      \#{l lesson.updated_at}, #{link_to lesson.author.login, lesson.author}
+    .lesson-excerpt
+      = simple_format truncate(strip_tags(lesson.text), :length => 200)
+      %span.go-down= link_to 'Үргэлжлэл', lesson
+
+= will_paginate @lessons, :class=>'apple_pagination', :previous_label => '« Өмнөх', :next_label   => 'Дараах »'

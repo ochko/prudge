@@ -1,0 +1,107 @@
+GIT
+  remote: git://github.com/methodmissing/scrooge.git
+  revision: 6f74cb919beb4af64cb3a1ec3b2aa28a2d2ff641
+  specs:
+    scrooge (3.0.0)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    actionmailer (2.3.9)
+      actionpack (= 2.3.9)
+    actionpack (2.3.9)
+      activesupport (= 2.3.9)
+      rack (~> 1.1.0)
+    activerecord (2.3.9)
+      activesupport (= 2.3.9)
+    activeresource (2.3.9)
+      activesupport (= 2.3.9)
+    activesupport (2.3.9)
+    addressable (2.2.6)
+    after_commit (1.0.8)
+      activerecord (< 3.0.0)
+    authlogic (2.1.6)
+      activesupport
+    authlogic-oid (1.0.4)
+      authlogic
+    bluecloth (2.1.0)
+    capistrano (2.6.0)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
+    daemons (1.0.10)
+    delayed_job (2.0.7)
+      activesupport (~> 2.0)
+      daemons (= 1.0.10)
+    faraday (0.6.1)
+      addressable (~> 2.2.4)
+      multipart-post (~> 1.1.0)
+      rack (>= 1.1.0, < 2)
+    faraday_middleware (0.6.5)
+      faraday (~> 0.6.0)
+    gravtastic (3.1.0)
+    haml (3.1.2)
+    hashie (1.0.0)
+    highline (1.6.2)
+    multi_json (1.0.3)
+    multi_xml (0.2.2)
+    multipart-post (1.1.2)
+    mysql (2.8.1)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-sftp (2.0.5)
+      net-ssh (>= 2.0.9)
+    net-ssh (2.1.4)
+    net-ssh-gateway (1.1.0)
+      net-ssh (>= 1.99.1)
+    ochko-flow_pagination (1.2.3)
+    rack (1.1.2)
+    rack-openid (1.3.1)
+      rack (>= 1.1.0)
+      ruby-openid (>= 2.1.8)
+    rails (2.3.9)
+      actionmailer (= 2.3.9)
+      actionpack (= 2.3.9)
+      activerecord (= 2.3.9)
+      activeresource (= 2.3.9)
+      activesupport (= 2.3.9)
+      rake (>= 0.8.3)
+    rake (0.9.0)
+    riddle (1.3.3)
+    ruby-openid (2.1.8)
+    simple_oauth (0.1.5)
+    thinking-sphinx (1.4.6)
+      activerecord (>= 1.15.6, < 3.0.0)
+      after_commit (>= 1.0.7)
+      riddle (>= 1.3.3)
+    twitter (1.6.0)
+      faraday (~> 0.6.1)
+      faraday_middleware (~> 0.6.3)
+      hashie (~> 1.0.0)
+      multi_json (~> 1.0.0)
+      multi_xml (~> 0.2.0)
+      simple_oauth (~> 0.1.5)
+    will_paginate (2.3.12)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  authlogic
+  authlogic-oid
+  bluecloth
+  capistrano
+  delayed_job (~> 2.0.4)
+  gravtastic
+  haml
+  mysql
+  ochko-flow_pagination (= 1.2.3)
+  rack-openid
+  rails (~> 2.3.9)
+  ruby-openid
+  scrooge!
+  thinking-sphinx
+  twitter
+  will_paginate (~> 2.3.12)
