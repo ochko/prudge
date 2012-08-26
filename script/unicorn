@@ -12,7 +12,7 @@
 
 USER=developer
 PATH=/home/$USER/.rbenv/bin:/home/$USER/.rbenv/shims:$PATH
-DAEMON=unicorn
+DAEMON=unicorn_rails
 DAEMON_OPTS="-c /usr/local/apps/coder/current/config/unicorn.rb -E production -D"
 NAME=unicorn
 DESC="Unicorn app for Coder"

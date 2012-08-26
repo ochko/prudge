@@ -24,6 +24,15 @@ before_fork do |server, worker|
 # the database connection
   defined?(ActiveRecord::Base) and
     ActiveRecord::Base.connection.disconnect!
+
+  old_pid = "#{server.config[:pid]}.oldbin"
+  if File.exists?(old_pid) && server.pid != old_pid
+    begin
+      Process.kill("QUIT", File.read(old_pid).to_i)
+    rescue Errno::ENOENT, Errno::ESRCH
+      # someone else did our job for us
+    end
+  end
 end
 
 after_fork do |server, worker|
@@ -31,4 +40,15 @@ after_fork do |server, worker|
 # processes
   defined?(ActiveRecord::Base) and
     ActiveRecord::Base.establish_connection
+end
+
+shared_bundler_gems_path = "/usr/local/apps/coder/shared/bundle"
+ 
+before_exec do |server|
+  paths = (ENV["PATH"] || "").split(File::PATH_SEPARATOR)
+  paths.unshift "#{shared_bundler_gems_path}/ruby/1.8/bin"
+  ENV["PATH"] = paths.uniq.join(File::PATH_SEPARATOR)
+ 
+  ENV['GEM_HOME'] = ENV['GEM_PATH'] = shared_bundler_gems_path
+  ENV['BUNDLE_GEMFILE'] = "#{ENV['PWD']}/Gemfile"
 end
