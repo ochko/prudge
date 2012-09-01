@@ -106,6 +106,7 @@ DEPENDENCIES
   ochko-flow_pagination (= 1.2.3)
   rack-openid
   rails (~> 2.3.9)
+  rake
   ruby-openid
   scrooge!
   thinking-sphinx

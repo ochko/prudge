@@ -4,7 +4,7 @@ shared_path = "/usr/local/apps/coder/shared"
 gem_path = "/usr/local/apps/coder/shared/bundle"
 working_directory base_dir
 
-preload_app true
+preload_app false
 
 # we destroy all workers who are taking too long
 timeout 30
