@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
+gem 'rake' , '>= 0.9.2'
 gem "rails", "~>2.3.9"
-gem "rake"
 gem "capistrano"
 gem "unicorn"
 gem "mysql"
