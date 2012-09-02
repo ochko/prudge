@@ -1,10 +1,10 @@
-worker_processes 2
+worker_processes 3
 base_dir = "/usr/local/apps/coder/current"
 shared_path = "/usr/local/apps/coder/shared"
 gem_path = "/usr/local/apps/coder/shared/bundle"
 working_directory base_dir
 
-preload_app false
+preload_app true
 
 # we destroy all workers who are taking too long
 timeout 30
