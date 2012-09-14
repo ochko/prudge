@@ -1,7 +1,7 @@
-worker_processes 3
+worker_processes 1
 base_dir = "/usr/local/apps/coder/current"
 shared_path = "/usr/local/apps/coder/shared"
-gem_path = "/usr/local/apps/coder/shared/bundle"
+gem_path = "/usr/local/apps/gems"
 working_directory base_dir
 
 preload_app true
@@ -18,15 +18,6 @@ pid "#{shared_path}/pids/unicorn.pid"
 # Set the path of the log files inside the log folder of the testapp
 stderr_path "#{shared_path}/log/unicorn.stderr.log"
 stdout_path "#{shared_path}/log/unicorn.stdout.log"
-
-before_exec do |server|
-  paths = (ENV["PATH"] || "").split(File::PATH_SEPARATOR)
-  paths.unshift "#{gem_path}/ruby/1.8/bin"
-  ENV["PATH"] = paths.uniq.join(File::PATH_SEPARATOR)
- 
-  ENV['GEM_HOME'] = ENV['GEM_PATH'] = gem_path
-  ENV['BUNDLE_GEMFILE'] = "#{ENV['PWD']}/Gemfile"
-end
 
 before_fork do |server, worker|
 # This option works in together with preload_app true setting
