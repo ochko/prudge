@@ -18,6 +18,11 @@ NAME=unicorn
 DESC="Unicorn app for Coder"
 PID=/usr/local/apps/coder/shared/pids/unicorn.pid
 
+workersig () {
+  workerpid="/usr/local/apps/coder/shared/pids/unicorn.$2.pid"
+  test -s "$workerpid" && kill -$1 `cat $workerpid`
+}
+
 case "$1" in
   start)
         CD_TO_APP_DIR="cd /usr/local/apps/coder/current"
@@ -45,6 +50,10 @@ case "$1" in
         echo -n "Reloading $DESC configuration: "
         kill -HUP `cat $PID`
         echo "$NAME."
+        ;;
+  kill_worker)
+        workersig QUIT $2 && exit 0
+        echo >&2 "Worker not running"
         ;;
   *)
         echo "Usage: $NAME {start|stop|restart|reload}" >&2

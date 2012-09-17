@@ -1,0 +1,59 @@
+#! /bin/bash
+
+### BEGIN INIT INFO
+# Provides:          sphinx
+# Required-Start:    $local_fs $remote_fs $network $syslog
+# Required-Stop:     $local_fs $remote_fs $network $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: starts the sphinx search daemon
+# Description:       starts searchd
+### END INIT INFO
+
+USER=developer
+PATH=/home/$USER/.rbenv/bin:/home/$USER/.rbenv/shims:$PATH
+DAEMON=rake
+NAME=searchd
+DESC="Searchd for Coder"
+PID=/usr/local/apps/coder/shared/pids/unicorn.pid
+
+CD_TO_APP_DIR="cd /usr/local/apps/coder/current"
+START_DAEMON_PROCESS="bundle exec $DAEMON"
+
+bundle_exec_rake () {
+  TASK="$START_DAEMON_PROCESS $1 RAILS_ENV=production"
+  if [ `whoami` = root ]; then
+    su - $USER -c "$CD_TO_APP_DIR > /dev/null 2>&1 && $TASK"
+  else
+    $CD_TO_APP_DIR > /dev/null 2>&1 && $TASK
+  fi
+}
+
+case "$1" in
+  start)
+        echo -n "Starting $DESC: "
+        bundle_exec_rake ts:start
+        echo "$NAME."
+        ;;
+  stop)
+        echo -n "Stopping $DESC: "
+        bundle_exec_rake ts:stop
+        echo "$NAME."
+        ;;
+  restart)
+        echo -n "Restarting $DESC: "
+        bundle_exec_rake ts:restart
+        echo "$NAME."
+        ;;
+  reload)
+        echo -n "Reloading $DESC configuration: "
+        bundle_exec_rake ts:rebuild
+        echo "$NAME."
+        ;;
+  *)
+        echo "Usage: $NAME {start|stop|restart|reload}" >&2
+        exit 1
+        ;;
+esac
+
+exit 0

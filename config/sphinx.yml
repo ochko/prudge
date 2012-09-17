@@ -15,3 +15,6 @@ test:
   
 production:
   <<: *my_settings
+  pid_file: /usr/local/apps/coder/shared/pids/sphinx.pid
+  config_file: /usr/local/apps/coder/shared/config/sphinx.conf
+  searchd_file_path: /usr/local/apps/coder/shared/sphinx

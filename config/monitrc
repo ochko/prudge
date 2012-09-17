@@ -1,0 +1,28 @@
+check process unicorn_coder
+  with pidfile /usr/local/apps/coder/shared/pids/unicorn.pid
+  start program = "/usr/local/apps/coder/current/script/unicorn start"
+  stop program = "/usr/local/apps/coder/current/script/unicorn stop"
+  if mem is greater than 300.0 MB for 1 cycles then restart       # eating up memory?
+  if cpu is greater than 50% for 2 cycles then alert              # send an email to admin
+  if cpu is greater than 80% for 3 cycles then restart            # hung process?
+
+  group unicorn
+
+check process unicorn_coder_worker_0
+  with pidfile /usr/local/apps/coder/shared/pids/unicorn.0.pid
+  start program = "/usr/bin/true"
+  stop program = "/usr/local/apps/coder/current/script/unicorn kill_worker 0"
+  if mem is greater than 300.0 MB for 1 cycles then restart
+  if cpu is greater than 80% for 3 cycles then restart
+
+  group unicorn_workers
+
+check process searchd_coder
+  with pidfile /usr/local/apps/coder/shared/pids/sphinx.pid
+  start program = "/usr/local/apps/coder/current/script/sphinx start"
+  stop program = "/usr/local/apps/coder/current/script/sphinx stop"
+  if mem is greater than 200.0 MB for 1 cycles then restart       # eating up memory?
+  if cpu is greater than 50% for 2 cycles then alert              # send an email to admin
+  if cpu is greater than 80% for 3 cycles then restart            # hung process?
+
+  group searchd
