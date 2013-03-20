@@ -23,7 +23,6 @@ class Solution < ActiveRecord::Base
            :as => 'topic',
            :class_name => 'Comment',
            :foreign_key => 'topic_id',
-           :order => 'created_at',
            :dependent => :destroy,
            :order => 'created_at DESC'
 
