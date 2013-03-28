@@ -1,11 +1,9 @@
 .bundle
-.rvmrc
+/ruby-local-exec
 log/*.log
 log/*.pid
 tmp/**/*
 tmp/*
-doc/api
-doc/app
 semantic.cache
 config/*.sphinx.conf
 config/database.yml
