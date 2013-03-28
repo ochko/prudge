@@ -6,7 +6,7 @@ Prudge is an online programming contest judge system.
 * Memcached for caching
 * Postgresql as database
 * Redis for background processing
-* safeexec(https://github.com/ochko/safeexec) for testing code
+* [safeexec](https://github.com/ochko/safeexec) for testing code
 
 ### Installin on Linux(Ubuntu/Debain)
 * apt-get install memcached
@@ -23,6 +23,10 @@ Prudge is an online programming contest judge system.
 * brew install postgresql
 * brew install redis
 
+### Ruby
+Recommends installing ruby via [rbenv](https://github.com/sstephenson/rbenv).
+Current ruby for prudge is 1.8.7
+
 ## Running
 * `git clone git://github.com/ochko/prudge.git`
 * `cd prudge`
@@ -37,6 +41,9 @@ Prudge is an online programming contest judge system.
 * Move compiled binary to judge directory `mv safeexec ~/prudge/judge/ && cd ~/prudge/judge`
 * Then set permissions `sudo chown root safeexec && sudo chmod u+s safeexec`
 * Configure resque in `config/resque.yml`, then start workers `bundle exec resque work`
+
+## Future Plan
+* Upgrade rails/ruby version 2.3/1.8.7 => 3.2/1.9.3 => 4.0/2.0
 
 
 ## Contributing
