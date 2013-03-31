@@ -1,4 +1,4 @@
-# Prudge
+# Prudge [![Code Climate](https://codeclimate.com/github/ochko/prudge.png)](https://codeclimate.com/github/ochko/prudge)
 
 Prudge is an online programming contest judge system.
 
