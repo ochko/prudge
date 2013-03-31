@@ -1,9 +1,6 @@
 class User < ActiveRecord::Base
   include Gravtastic
 
-  DOT_GIT = "#{RAILS_ROOT}/config/dot.git"
-  GITIGNORE = "#{RAILS_ROOT}/config/dot.gitignore"
-
   has_many :solutions
   has_many :completions, :class_name => 'Solution', 
            :conditions => ["correct = ?", true]
@@ -68,9 +65,6 @@ class User < ActiveRecord::Base
     email =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
   end
 
-  def solutions_dir() "#{Solution::SOLUTIONS_PATH}/#{self.id}" end
-  def exe_dir()       "#{solutions_dir}/exe" end
-
   def admin?() self.admin == true  end
   def judge?() self.judge == true  end
   
@@ -116,12 +110,17 @@ class User < ActiveRecord::Base
   end
 
   def init_repo
-    FileUtils.mkdir_p(solutions_dir) unless File.directory?(solutions_dir)
-    if system("/usr/bin/git init --quiet --template=#{DOT_GIT} #{solutions_dir}")
-      system("/bin/sed -i 's/coder-name/#{self.login}/' #{solutions_dir}/.git/config")
-      system("/bin/sed -i 's/coder-email/#{self.email}/' #{solutions_dir}/.git/config")
-      FileUtils.cp GITIGNORE, "#{solutions_dir}/.gitignore"
-    end
+    repo = Repo.new(solutions_dir)
+    repo.init(login, email)
+    repo.ignore('exe')
+  end
+
+  def solutions_dir
+    Repo.root.join(id.to_s)
+  end
+
+  def exe_dir
+    solutions_dir.join Sandbox.dir
   end
 
   def import_solutions

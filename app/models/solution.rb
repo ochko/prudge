@@ -205,17 +205,8 @@ class Solution < ActiveRecord::Base
     end
   end
 
-  def insert_to_repo
-    FileUtils.cd self.user.solutions_dir do |repo| 
-      system("/usr/bin/git add #{self.problem_id}")
-      system("/usr/bin/git commit -m 'initial commit' #{self.problem_id}")
-    end
+  def log
+    repo = Repo.new(user.solutions_dir)
+    repo.commit problem_id.to_s, "Updated solution for #{problem_id}"
   end
-
-  def commit_to_repo
-    FileUtils.cd self.user.solutions_dir do |repo| 
-      system("/usr/bin/git commit -m 'updating' #{self.problem_id}")
-    end
-  end
-  
 end
