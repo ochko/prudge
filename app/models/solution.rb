@@ -12,9 +12,9 @@ class Solution < ActiveRecord::Base
   has_many :results, :order => 'hidden ASC, matched DESC', :dependent => :destroy
   has_many :tests, :through => :problem, :order => 'hidden, id'
 
-  has_attached_file :source, 
-    :url => "/judge/solutions/:user/:problem/:id.code",
-    :path => ":rails_root/judge/solutions/:user/:problem/:id.code"
+  has_attached_file :source,
+                    :url => "/#{Repo.path}/:user/:problem/:id.code",
+                    :path => ":rails_root/#{Repo.path}/:user/:problem/:id.code"
 
   validates_attachment_presence :source
   validates_attachment_size :source, :less_than => 64.kilobytes
