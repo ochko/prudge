@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
 class Solution < ActiveRecord::Base
-  SOLUTIONS_DIR = 'judge/solutions'
-  SANDBOX_DIR = "#{RAILS_ROOT}/judge/sandbox"
-  SOLUTIONS_PATH = "#{RAILS_ROOT}/#{SOLUTIONS_DIR}"
-  EXECUTOR = "#{RAILS_ROOT}/judge/safeexec"
-  MAX_OUTPUT = 2048 # 2Mbyte
   include AASM
 
   aasm :column => 'state' do
