@@ -47,6 +47,7 @@ Current ruby for prudge is 1.8.7
 
 
 ## Contributing
-* After making your changes please add specs for your changes, and please make sure all specs pass
-* Send pull request. Then I might merge ;)
-* If you found any problems please add on github/issues page. But don't post any security related issues there. Please send me privately.
+See [Technical Debts](https://github.com/ochko/prudge/blob/master/TechDebt.md) or [Open Issues](https://github.com/ochko/prudge/issues).
+* After making changes add spec, and please be sure that all specs pass
+* Send me pull request. Then it could be merged ;)
+* If you found any problems please report on [issues](https://github.com/ochko/prudge/issues) page. But don't post any security related issues there, send them privately.
