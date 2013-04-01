@@ -5,6 +5,37 @@ class Solution < ActiveRecord::Base
   SOLUTIONS_PATH = "#{RAILS_ROOT}/#{SOLUTIONS_DIR}"
   EXECUTOR = "#{RAILS_ROOT}/judge/safeexec"
   MAX_OUTPUT = 2048 # 2Mbyte
+  include AASM
+
+  aasm :column => 'state' do
+    state :updated, :before_enter => :log, :after_enter => :reset!, :initial => true
+    state :waiting, :after_enter => :queue
+    state :defunct
+    state :passed
+    state :failed
+    state :locked
+
+    event :post do
+      transitions :to => :updated, :guard => :first?
+    end
+
+    event :repost do
+      transitions :to => :updated, :guard => :notlocked?
+    end
+
+    event :submit do
+      transitions :from => [:updated, :waiting, :errored, :passed, :failed], :to => :waiting
+    end
+
+    event :lock do
+      transitions :from => :passed, :to => :locked
+    end
+
+    event :errored do
+      transitions :from => :waiting, :to => :defunct
+    end
+  end
+
   belongs_to :contest
   belongs_to :problem, :counter_cache => 'tried_count'
   belongs_to :user, :counter_cache => true
