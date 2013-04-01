@@ -42,9 +42,6 @@ Current ruby for prudge is 1.8.7
 * Then set permissions `sudo chown root safeexec && sudo chmod u+s safeexec`
 * Configure resque in `config/resque.yml`, then start workers `bundle exec resque work`
 
-## Future Plan
-* Upgrade rails/ruby version 2.3/1.8.7 => 3.2/1.9.3 => 4.0/2.0
-
 
 ## Contributing
 See [Technical Debts](https://github.com/ochko/prudge/blob/master/TechDebt.md) or [Open Issues](https://github.com/ochko/prudge/issues).
