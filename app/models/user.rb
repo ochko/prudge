@@ -114,14 +114,7 @@ class User < ActiveRecord::Base
   end
 
   def refreshed_points
-    nodup = {}
-    self.solutions.each do |solution|
-      pid = solution.problem_id
-      nodup[pid] ||= solution
-      nodup[pid] = solution if nodup[pid].point < solution.point
-      nodup
-    end
-    nodup.values.inject(0) { |sum, solution| sum += solution.point}
+    User.connection.select_value("select sum(point) from (select problem_id, max(point) as point from solutions where user_id = #{id} group by problem_id) maxes").to_f
   end
 
   def refresh_points!
