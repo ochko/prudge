@@ -133,7 +133,7 @@ class SolutionsController < ApplicationController
     return unless validate_touchable?
   end
 
-  def update    
+  def update
     @solution = Solution.find(params[:id])
     return unless validate_touchable?
     @solution.cleanup!
@@ -170,8 +170,8 @@ class SolutionsController < ApplicationController
       render :text => 'Шалгах тэст байхгүй байна(Эсвэл харагдахгүй тэст байхгүй)'
       return
     end
-    @solution.check!
-    render :partial => 'results/list'
+    @solution.submit
+    render :partial => 'results/wait'
   end
 
   private
