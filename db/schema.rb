@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130324055845) do
+ActiveRecord::Schema.define(:version => 20130401020048) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",                 :null => false
@@ -174,12 +174,9 @@ ActiveRecord::Schema.define(:version => 20130324055845) do
     t.integer  "problem_id",                              :null => false
     t.integer  "user_id",                                 :null => false
     t.integer  "language_id",                             :null => false
-    t.boolean  "checked",             :default => false,  :null => false
-    t.boolean  "correct",             :default => false,  :null => false
     t.float    "percent",             :default => 0.0,    :null => false
     t.float    "time",                :default => 5000.0, :null => false
     t.datetime "created_at",                              :null => false
-    t.boolean  "locked",              :default => false,  :null => false
     t.boolean  "isbest",              :default => true,   :null => false
     t.integer  "contest_id"
     t.string   "source_file_name"
@@ -190,7 +187,6 @@ ActiveRecord::Schema.define(:version => 20130324055845) do
     t.integer  "comments_count",      :default => 0
     t.datetime "commented_at"
     t.text     "junk"
-    t.boolean  "nocompile",           :default => false
     t.integer  "solved_in"
     t.string   "state"
   end

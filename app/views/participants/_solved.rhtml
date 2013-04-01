@@ -9,7 +9,7 @@
   </tr>
   <% for s in @solutions%>
   <tr>
-    <td><%= link_to show_correctness(s.correct), s %></td>
+    <td><%= link_to show_correctness(s.passed?), s %></td>
     <td><%= link_to s.problem.name, s.problem %>
       <span class="solution-meta">
 	<%= s.language.name -%>,

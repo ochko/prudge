@@ -10,7 +10,7 @@
   </tr>
   <% for solution in @solutions%>
   <tr>
-    <td class="status"><%= link_to show_correctness(solution.correct), solution %></td>
+    <td class="status"><%= link_to show_correctness(solution.passed?), solution %></td>
     <td><%= link_to solution.user.login, solution.user %></td>
     <td><%= solution.language.name %></td>
     <td class='small'><%=l solution.created_at %></td>

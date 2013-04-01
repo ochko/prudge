@@ -18,7 +18,7 @@
 
   <span id="solution-actions">
     <%= link_to image_tag('view-code.png')+" Харах", view_solution_path(@solution), :title => "Бодолтыг харах", :class=>"medium grey awesome" %>
-  <% if !@solution.checked && !@solution.nocompile %>
+  <% unless @solution.judged? %>
   <%= link_to_remote "Шалгах", :update => "result",
   :url => { :action => "check", :id => @solution },
   :html=>{:id=>'check-button', :class=>"medium grey awesome" },

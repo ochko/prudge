@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :solutions
   has_many :completions, :class_name => 'Solution', 
-           :conditions => ["correct = ?", true]
+           :conditions => ["state = ?", 'passed']
   has_many :contests, :through => :solutions, :uniq => true, :order => 'start'
   has_many :tried, :through => :solutions, :uniq => true, :source => :problem
   has_many :solveds, :through => :completions, :uniq => true, :source => :problem

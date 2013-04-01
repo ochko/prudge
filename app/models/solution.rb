@@ -15,20 +15,24 @@ class Solution < ActiveRecord::Base
     end
 
     event :repost do
-      transitions :to => :updated, :guard => :notlocked?
+      transitions :to => :updated, :guard => :open?
     end
 
     event :submit do
       transitions :from => [:updated, :waiting, :errored, :passed, :failed], :to => :waiting
     end
 
-    event :lock do
+    event :lock! do
       transitions :from => :passed, :to => :locked
     end
 
     event :errored do
       transitions :from => :waiting, :to => :defunct
     end
+  end
+
+  def judged?
+    passed? || failed? || defunct?
   end
 
   belongs_to :contest
@@ -53,7 +57,6 @@ class Solution < ActiveRecord::Base
            :order => 'created_at DESC'
 
   named_scope :best, :conditions => { :isbest => true }
-  named_scope :correct, :conditions => { :correct => true }
   named_scope :for_user, lambda { |user| { :conditions => ['user_id =?', user.id], :include => [:language, :problem], :order => 'created_at desc' } }
   named_scope :valuable, :conditions => 'percent > 0'
   named_scope :by_speed, :order => 'time ASC, uploaded_at ASC'
@@ -82,16 +85,16 @@ class Solution < ActiveRecord::Base
     repo.commit problem_id.to_s, "Updated solution for #{problem_id}"
   end
 
+  def first?
+    user.solutions.all(:conditions => {:problem_id => problem.id}).count == 0
+  end
+
   def owned_by?(someone)
     self.user_id == someone.id
   end
 
-  def lock!
-    self.update_attribute(:locked, true)
-  end
-
-  def locked?
-    locked
+  def open?
+    !locked?
   end
 
   def freezed?
@@ -112,15 +115,12 @@ class Solution < ActiveRecord::Base
   def reset!
     results.clear
     user.decrement!(:points, point) if point > 0 && isbest
-    problem.decrement!(:solved_count) if correct
-    update_attributes(:checked => false,
-                      :nocompile => false,
-                      :correct => false,
-                      :percent => 0.0,
-                      :time => 0.0,
-                      :isbest => false,
-                      :point => 0.0,
-                      :junk => nil)
+    problem.decrement!(:solved_count) if passed?
+    update_attributes(:percent => 0.0,
+                      :time    => 0.0,
+                      :point   => 0.0,
+                      :isbest  => false,
+                      :junk    => nil)
   end
 
   def summarize!
@@ -129,18 +129,18 @@ class Solution < ActiveRecord::Base
   end
 
   def summarize_results!
-    unless self.results.empty?
-      passed = self.results.correct.real.size
-      total = self.problem.tests.real.size
-      self.checked = true
-      self.correct = passed == total
-      self.percent = passed.to_f / total
-      self.time    = self.results.sum(:time) / self.results.size
-      self.point   = (passed.to_f / total) * self.problem.level 
-      self.solved_in ||= (self.correct && self.contest && self.contest.start < Time.now && (Time.now - self.contest.start))
+    unless results.empty?
+      ok = results.correct.real.size
+      all = problem.tests.real.size
+
+      self.state = (ok == all) ? 'passed' : 'failed'
+      self.percent = (ok.to_f / all)
+      self.point   = percent * problem.level
+      self.time    = (results.sum(:time) / results.size)
+      self.solved_in ||= (passed? && contest.try(:time_passed))
       self.save!
 
-      self.problem.increment!(:solved_count) if self.correct
+      problem.increment!(:solved_count) if passed?
     end
   end
   

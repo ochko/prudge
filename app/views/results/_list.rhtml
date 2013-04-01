@@ -1,6 +1,6 @@
 <div id="result-content">
 <div class="span-16 prepend-3" id='run-error'><%= @solution.junk %></div>
-<% if @solution.checked %>
+<% if @solution.judged? %>
 <div id='solution-percent' class="span-10 prepend-8">
   <%= show_percent((@solution.percent * 100).to_i) %>
 </div>

@@ -84,6 +84,11 @@ class Contest < ActiveRecord::Base
     self.start < Time.now
   end
 
+  def time_passed
+    Return nil unless started?
+    Time.now - start
+  end
+
   def level_name
     LEVEL_NAMES[level]
   end

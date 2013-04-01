@@ -161,7 +161,7 @@ class SolutionsController < ApplicationController
       if !@solution.owned_by?(current_user)
         render :text => 'Бусдын бодлогыг шалгахгүй!'
         return
-      elsif @solution.nocompile || @solution.checked
+      elsif @solution.judged?
         render :text => 'Шалгачихсан'
         return
       end

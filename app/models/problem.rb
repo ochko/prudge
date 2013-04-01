@@ -39,15 +39,15 @@ class Problem < ActiveRecord::Base
   end
 
   def correct_solutions
-    solutions.correct
+    solutions.passed
   end
 
   def best_solution
-    self.solutions.correct.by_speed.first
+    solutions.passed.by_speed.first
   end
 
   def corrects_count
-    Solution.count_by_sql(["SELECT count(id) FROM solutions where problem_id = ? AND correct = true", self.id])
+    solutions.passed.count
   end
 
   def solutions_count
@@ -97,19 +97,14 @@ class Problem < ActiveRecord::Base
   end
 
   def self.resum_counts!
-    Problem.update_all("tried_count = 0, solved_count = 0")
-    Problem.
-      find(:all,
-           :select => "problems.*, count(s.id) as tc, sum(s.correct) as sc",
-           :joins => "left join solutions s on problems.id = s.problem_id",
-           :group => "problems.id").each do |problem|
-      Problem.update_counters(problem.id, 
-                              :tried_count => problem.tc.to_i,
-                              :solved_count => problem.sc.to_i)
+    all.each do |problem|
+      problem.tried_count = problem.solutions_count
+      problem.solved_count = problem.corrects_count
+      problem.save!
     end
   end
 
-  private 
+  private
   def copy_times
     if changes.has_key?('contest_id') && contest
       self.active_from = contest.start
