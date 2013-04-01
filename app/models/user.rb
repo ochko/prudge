@@ -26,8 +26,6 @@ class User < ActiveRecord::Base
 
   is_gravtastic! :size => 80, :rating => :PG
 
-  after_create :init_repo
-
   def self.per_page
     100
   end
@@ -107,20 +105,6 @@ class User < ActiveRecord::Base
     User.all.each do |user|
       user.resum_points!
     end
-  end
-
-  def init_repo
-    repo = Repo.new(solutions_dir)
-    repo.init(login, email)
-    repo.ignore('exe')
-  end
-
-  def solutions_dir
-    Repo.root.join(id.to_s)
-  end
-
-  def exe_dir
-    solutions_dir.join Sandbox.dir
   end
 
   def import_solutions
