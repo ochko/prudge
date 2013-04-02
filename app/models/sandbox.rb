@@ -3,12 +3,6 @@ class Sandbox
     def root
       Rails.root.join('judge','sandbox')
     end
-    def safeexec
-      root.join('safeexec')
-    end
-    def fsize
-      2048 # 2Mbyte
-    end
   end
 
   attr_reader :solution, :user, :problem, :dir, :program, :language
@@ -39,7 +33,7 @@ class Sandbox
 
     def extname
       ext = File.extname(@filename)
-      ext.blank? ? @solution.language.extension : ext
+      ext.blank? ? language.extension : ext
     end
 
     def fullname
@@ -81,32 +75,71 @@ class Sandbox
     end
   end
 
-  def compile
+  def prepare
     FileUtils.rm(program.path) if File.exist?(program.path)
     FileUtils.ln(program.source, program.fullname, :force => true)
+  end
 
-    return language.compile(program)
-  ensure
+  def clean
     if File.exist?(program.error)
       solution.junk = IO.read(stderr).gsub(program.base, '')
       solution.save
     end
   end
 
+  def compile
+    prepare
+    return language.compile(program)
+  ensure
+    clean
+  end
+
   def execute(command, test)
-    FileUtils.touch usage_path
-    cmd = "#{self.class.safeexec} "+
-      "--cpu #{problem.time + language.time_req} "+
-      "--mem #{problem.memory + language.mem_req} "+
-      "--fsize #{self.class.fsize} "+
-      "--nproc #{language.nproc} "+
-      "--usage #{program.usage} "+
-      "--exec #{command} "+
-      "0< #{test.input_path} " +
-      "1> #{program.output} " +
-      "2> #{program.error} "
-    Rails.logger.info cmd
-    system(cmd) # TODO: stdin, stdout, stderr = Open3.popen3('command')
+    runner = Runner.new(language, program, test, command)
+    runner.exec
+  end
+
+  class Runner
+    class << self
+      def binary
+        Sandbox.root.join('safeexec')
+      end
+      def fsize
+        2048 # 2Mbyte
+      end
+    end
+
+    def initialize(language, program, test, command)
+      @language, @program, @test, @command = language, program, test, command
+    end
+
+    attr_reader :language, :program, :test, :command
+
+    def exec
+      FileUtils.touch program.usage
+      # TODO: stdin, stdout, stderr = Open3.popen3('command')
+      system("#{self.class.binary} #{options.join(' ')}")
+    end
+
+    def options
+      ["--cpu #{time}",
+       "--mem #{memory}",
+       "--fsize #{self.class.fsize}",
+       "--nproc #{language.nproc}",
+       "--usage #{program.usage}",
+       "--exec #{command}",
+       "0< #{test.input_path}" ,
+       "1> #{program.output}" ,
+       "2> #{program.error}"]
+    end
+
+    def time
+      problem.time + language.time_req
+    end
+
+    def memory
+      problem.memory + language.mem_req
+    end
   end
 
 end
