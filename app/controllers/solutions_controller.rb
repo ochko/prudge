@@ -21,7 +21,7 @@ class SolutionsController < ApplicationController
 
   def best
     @problem = Problem.find(params[:problem_id])
-    @solution = @problem.best_solution
+    @solution = @problem.solutions.best
     unless @solution
       render :text => '<table><tr><td>Энэ бодлогыг одоогоор нэг ч хүн бодоогүй байна</td></tr</table>'
     else

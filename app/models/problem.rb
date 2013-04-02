@@ -42,10 +42,6 @@ class Problem < ActiveRecord::Base
     solutions.passed
   end
 
-  def best_solution
-    solutions.passed.by_speed.first
-  end
-
   def corrects_count
     solutions.passed.count
   end

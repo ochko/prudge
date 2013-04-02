@@ -56,15 +56,18 @@ class Solution < ActiveRecord::Base
            :dependent => :destroy,
            :order => 'created_at DESC'
 
-  named_scope :best, :conditions => { :isbest => true }
   named_scope :for_user, lambda { |user| { :conditions => ['user_id =?', user.id], :include => [:language, :problem], :order => 'created_at desc' } }
   named_scope :valuable, :conditions => 'percent > 0'
-  named_scope :by_speed, :order => 'time ASC, uploaded_at ASC'
+  named_scope :fast, :order => 'time ASC, uploaded_at ASC'
   named_scope :for_contest, lambda { |c| { :conditions => ['contest_id =?', c.id] } }
 
   before_destroy { |solution| solution.cleanup! }
 
   before_create { |solution| solution.user.solution_uploaded! }
+
+  def self.best
+    passed.fast.first
+  end
 
   def queue
     Resque.enqueue(self.class, self.id)
@@ -114,18 +117,17 @@ class Solution < ActiveRecord::Base
 
   def reset!
     results.clear
-    user.decrement!(:points, point) if point > 0 && isbest
+    user.refresh_points!
     problem.decrement!(:solved_count) if passed?
     update_attributes(:percent => 0.0,
                       :time    => 0.0,
                       :point   => 0.0,
-                      :isbest  => false,
                       :junk    => nil)
   end
 
   def summarize!
     summarize_results!
-    nominate_for_best!
+    user.refresh_points!
   end
 
   def summarize_results!
@@ -141,25 +143,6 @@ class Solution < ActiveRecord::Base
       self.save!
 
       problem.increment!(:solved_count) if passed?
-    end
-  end
-  
-  def nominate_for_best!
-    former = Solution.
-      last(:conditions => ['user_id = ? and problem_id = ? and id <> ?',
-                           user_id, problem_id, id])
-    if former
-      if former.point < point
-        user.increment!(:points, point - former.point)
-        former.update_attribute(:isbest, false)
-        update_attribute(:isbest, true)
-      else
-        former.update_attribute(:isbest, true)
-        update_attribute(:isbest, false)
-      end
-    else
-      user.increment!(:points, point)
-      self.update_attribute(:isbest, true)
     end
   end
 end

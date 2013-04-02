@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130401020048) do
+ActiveRecord::Schema.define(:version => 20130402151633) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",                 :null => false
@@ -177,7 +177,6 @@ ActiveRecord::Schema.define(:version => 20130401020048) do
     t.float    "percent",             :default => 0.0,    :null => false
     t.float    "time",                :default => 5000.0, :null => false
     t.datetime "created_at",                              :null => false
-    t.boolean  "isbest",              :default => true,   :null => false
     t.integer  "contest_id"
     t.string   "source_file_name"
     t.string   "source_content_type"

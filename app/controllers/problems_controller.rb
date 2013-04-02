@@ -15,9 +15,6 @@ class ProblemsController < ApplicationController
         column = params[:column] || 'created_at'
         @reverse = (order == 'ASC') ? 'DESC' : 'ASC'
 
-        @solved = { }
-        current_user.solutions.best.each{ |s| @solved[s.problem_id] = s.state } if current_user
-        
         @problems = Problem.active.
           paginate(:page => params[:page], :per_page => 20, :include => :user, 
                    :order => "#{column} #{order}")

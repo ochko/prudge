@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   include Gravtastic
 
-  has_many :solutions
+  has_many :solutions, :order => 'uploaded_at'
   has_many :completions, :class_name => 'Solution', 
            :conditions => ["state = ?", 'passed']
   has_many :contests, :through => :solutions, :uniq => true, :order => 'start'
@@ -93,18 +93,8 @@ class User < ActiveRecord::Base
       comments.first.created_at > Time.now - 10.seconds
   end
   
-  def resum_points!
-    update_attribute(:points, solutions.best.sum(:point))
-  end
-
   def solution_uploaded!
     self.update_attribute(:uploaded_at, Time.now)
-  end
-
-  def self.resum_points!
-    User.all.each do |user|
-      user.resum_points!
-    end
   end
 
   def import_solutions

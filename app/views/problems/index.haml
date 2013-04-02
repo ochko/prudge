@@ -27,7 +27,7 @@
         %td= l problem.created_at, :format=>:date
         %td= problem.tried_count
         %td= problem.solved_count
-        %td= solved_or_not @solved[problem.id]
+        %td= problem_solution_state problem
   = will_paginate @problems, :class=>'apple_pagination', :previous_label => '« Өмнөх', :next_label   => 'Дараах »'
 - else
   Бодлого алга!
