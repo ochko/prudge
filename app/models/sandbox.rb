@@ -69,8 +69,10 @@ class Sandbox
 
   def check(exe)
     @problem.tests.each do |test|
-      break unless execute(exe, test)
-      result = solution.results.create!(:test_id => test.id)
+      break unless usage = execute(exe, test)
+      result = solution.results.
+        create!(:test_id => test.id,
+                :usage   => usage)
       break if result.failed?
     end
   end
@@ -119,6 +121,9 @@ class Sandbox
       FileUtils.touch program.usage
       # TODO: stdin, stdout, stderr = Open3.popen3('command')
       system("#{self.class.binary} #{options.join(' ')}")
+      return Usage.new(program.usage)
+    ensure
+      FileUtils.rm(program.usage) if File.exist?(program.usage)
     end
 
     def options
@@ -142,4 +147,25 @@ class Sandbox
     end
   end
 
+  class Usage
+    def initialize(raw)
+      @raw = raw
+      parse
+    end
+
+    attr_accessor :status, :time, :memory
+
+    def parse
+      lines = IO.readlines(@raw)
+      self.status = lines[0]
+      self.time = strip(lines[-1], 'cpu usage: ', ' miliseconds')
+      self.memory = strip(lines[-2], 'memory usage: ', ' kbytes')
+    end
+
+    private
+
+    def strip(line, *patterns)
+      patterns.reduce(line) {|stripped, pattern| stripped.sub(pattern, '')}
+    end
+  end
 end

@@ -6,16 +6,18 @@ class Result < ActiveRecord::Base
   named_scope :real, :conditions => { :hidden => true }
   
 
-  def after_create    
-    lines = IO.readlines(self.solution.usage_path)
-    self.status = lines[0]
-    self.time = lines[-1].sub('cpu usage: ','').sub(' miliseconds','')
-    self.memory = lines[-2].sub('memory usage: ','').sub(' kbytes','')
+  def after_create
     self.diff = self.test.diff(self.solution.output_path)
     self.matched = self.diff.empty?
     self.output = IO.readlines(self.solution.output_path).join
     self.hidden = self.test.hidden
     save!
+  end
+
+  def usage=(usage)
+    self.status = usage.status
+    self.time   = usage.time
+    self.memory = usage.memory
   end
 
   def failed?
