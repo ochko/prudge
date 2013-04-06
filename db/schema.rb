@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130406064512) do
+ActiveRecord::Schema.define(:version => 20130406094805) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",                 :null => false
@@ -150,12 +150,12 @@ ActiveRecord::Schema.define(:version => 20130406064512) do
     t.integer "solution_id",                    :null => false
     t.integer "test_id",                        :null => false
     t.boolean "matched",     :default => false, :null => false
-    t.string  "status",      :default => "",    :null => false
     t.integer "time",        :default => 3,     :null => false
     t.integer "memory",      :default => 64,    :null => false
     t.text    "output",                         :null => false
     t.boolean "hidden",      :default => true
     t.text    "diff"
+    t.integer "execution",   :default => 0,     :null => false
   end
 
   add_index "results", ["solution_id"], :name => "index_results_on_solution_id"

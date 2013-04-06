@@ -29,7 +29,7 @@
       <%= index + 1 %>
       <%= test_purpose(result) %>
     </td>
-    <td class='small'><%= translate_message(result.status) %></td>
+    <td class='small'><%= translate_message(result.execution) %></td>
     <td><%= sec2milisec result.time %> сек</td>
     <td><%=h result.memory %> кб</td>
     <td><%= show_correctness(result.matched) %></td>

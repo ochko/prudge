@@ -1,7 +1,7 @@
 # Mongolian localization for Ruby on Rails 2.2+
 # by Ochirkhuyag.L <ochkoo@gmail.com>
 #
- 
+
 mn:
   title:
     home:
@@ -72,6 +72,16 @@ mn:
       moderate: Хянах
     user_sessions:
       new: Нэвтрэх
+  label:
+    execution:
+      ok: "Хэвийн ажиллав"
+      timeout: "Хугацаа хэтрэв"
+      memory: "Санах ой хэтрэв"
+      output: "Гаралт хэтрэв"
+      invalid: "Буруу үйлдэл"
+      return: "Алдаа буцаалаа"
+      ng: "Үл мэдэгдэх алдаа"
+
   date:
     formats:
       default: "%Y-%m-%d"

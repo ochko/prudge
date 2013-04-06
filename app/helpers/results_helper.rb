@@ -6,7 +6,7 @@ module ResultsHelper
     results.each_with_index do |result, index|
       matrix << [index+1, 
                  render_viewable(result.hidden), 
-                 translate_message(result.status), 
+                 translate_message(result.execution),
                  sec2milisec(result.time), 
                  result.memory, 
                  link_to(show_correctness(result.correct?), result)]

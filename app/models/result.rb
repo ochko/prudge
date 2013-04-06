@@ -15,7 +15,7 @@ class Result < ActiveRecord::Base
   end
 
   def usage=(usage)
-    self.status = usage.status
+    self.execution = usage.state
     self.time   = usage.time
     self.memory = usage.memory
   end
@@ -25,7 +25,7 @@ class Result < ActiveRecord::Base
   end
 
   def normal?
-    self.status && self.status.strip.eql?('OK')
+    Usage::OK == execution
   end
 
   def correct?

@@ -32,22 +32,11 @@ module ApplicationHelper
       "%0.3f" % (sec.to_f/1000)
   end
 
-  def translate_message(msg)
-    if msg.strip.eql?('OK')
-      image_tag('run-ok.png', :title=>'Хэвийн ажиллав')
-    elsif msg.strip.eql?('Time Limit Exceeded')
-      image_tag('run-timeout.png', :title=>'Хугацаа хэтрэв')
-    elsif msg.strip.eql?('Memory Limit Exceeded')
-      image_tag('run-memory.png', :title=>'Санах ой хэтрэв')
-    elsif msg.strip.eql?('Output Limit Exceeded')
-      image_tag('run-output.png', :title=>'Гаралт хэтрэв')
-    elsif msg.strip.eql?('Invalid Function')
-      image_tag('run-invalid.png', :title=>'Буруу үйлдэл')
-    elsif msg.strip[0,19].eql?('Command exited with')
-      image_tag('run-return.png', :title=>'Алдаа буцаалаа')
-    else
-      image_tag('run-ng.png', :title=>'Үл мэдэгдэх алдаа')
-    end
+  def translate_message(execution_state)
+    state = Usage::State.get(execution_state)
+
+    image_tag("run-#{state.abbr}.png",
+              :title => t(state.abbr, :scope =>'label.execution'))
   end
 
   def test_purpose(viewable)
