@@ -7,7 +7,7 @@ class SolutionsController < ApplicationController
   def index
     @solutions = Solution.
       paginate(:include => [:user, :problem], :page => params[:page],
-               :order => 'solutions.uploaded_at desc')
+               :order => 'solutions.source_updated_at desc')
     respond_to do |format|
       format.js { render :layout => false }
       format.html
@@ -32,7 +32,7 @@ class SolutionsController < ApplicationController
   def submited
     @problem = Problem.find(params[:problem_id])
     @solutions = @problem.solutions(:include => [:language, :user],
-                                    :order => 'uploaded_at DESC')
+                                    :order => 'source_updated_at DESC')
     if @solutions.empty?
       render :text => '<table><tr><td>Энэ бодлогыг одоогоор нэг ч хүн бодоогүй байна</td></tr</table>'
     else
@@ -43,7 +43,7 @@ class SolutionsController < ApplicationController
   def solved
     @problem = Problem.find(params[:problem_id])
     @solutions = @problem.solutions.correct(:include => [:language, :user],
-                                            :order => 'uploaded_at DESC')
+                                            :order => 'source_updated_at DESC')
     if @solutions.empty?
       render :text => '<table><tr><td>Энэ бодлогыг одоогоор нэг ч хүн зөв бодоогүй байна</td></tr</table>'
     else
@@ -98,7 +98,6 @@ class SolutionsController < ApplicationController
   end
 
   def create
-    params[:solution].merge!(:uploaded_at => Time.now)
     @solution = current_user.solutions.build(params[:solution])
     @solution.apply_contest
     return unless validate_solvable?
@@ -137,7 +136,6 @@ class SolutionsController < ApplicationController
     @solution = Solution.find(params[:id])
     return unless validate_touchable?
     @solution.cleanup!
-    params[:solution].merge!(:uploaded_at => Time.now)
     if @solution.update_attributes(params[:solution])
       flash[:notice] = 'Бодолт шинэчлэгдлээ.'
       @solution.user.solution_uploaded!

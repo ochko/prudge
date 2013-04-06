@@ -26,7 +26,7 @@
             <td><label>Анх хадгалсан:</label></td><td> <%= @solution.created_at.to_s(:date_time24) %></td>
           </tr>
           <tr>
-            <td><label>Өөрчлөлт хийсэн:</label></td><td> <%= @solution.uploaded_at %></td>
+            <td><label>Өөрчлөлт хийсэн:</label></td><td> <%= @solution.source_updated_at %></td>
           </tr>
           <tr>
             <td><label>Файлын нэр:</label></td><td> <%= file_link @solution %></td>

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130402151633) do
+ActiveRecord::Schema.define(:version => 20130406041153) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",                 :null => false
@@ -171,19 +171,17 @@ ActiveRecord::Schema.define(:version => 20130402151633) do
   add_index "sessions", ["updated_at"], :name => "new_index2"
 
   create_table "solutions", :force => true do |t|
-    t.integer  "problem_id",                              :null => false
-    t.integer  "user_id",                                 :null => false
-    t.integer  "language_id",                             :null => false
-    t.float    "percent",             :default => 0.0,    :null => false
-    t.float    "time",                :default => 5000.0, :null => false
-    t.datetime "created_at",                              :null => false
+    t.integer  "problem_id",                            :null => false
+    t.integer  "user_id",                               :null => false
+    t.integer  "language_id",                           :null => false
+    t.float    "percent",           :default => 0.0,    :null => false
+    t.float    "time",              :default => 5000.0, :null => false
+    t.datetime "created_at",                            :null => false
     t.integer  "contest_id"
     t.string   "source_file_name"
-    t.string   "source_content_type"
-    t.integer  "source_file_size"
-    t.datetime "uploaded_at"
-    t.float    "point",               :default => 0.0
-    t.integer  "comments_count",      :default => 0
+    t.datetime "source_updated_at"
+    t.float    "point",             :default => 0.0
+    t.integer  "comments_count",    :default => 0
     t.datetime "commented_at"
     t.text     "junk"
     t.integer  "solved_in"

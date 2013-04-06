@@ -5,7 +5,7 @@
 <div>
   <span class="rank_<%=@solution.user.level%>">
     <%=link_to @solution.user.login, @solution.user %>
-    <%=l @solution.uploaded_at %>-д
+    <%=l @solution.source_updated_at %>-д
     <%= @solution.language.name %> хэл,
   </span>
   <%=h @solution.source_file_name  %>

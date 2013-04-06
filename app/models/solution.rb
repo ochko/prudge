@@ -58,7 +58,7 @@ class Solution < ActiveRecord::Base
 
   named_scope :for_user, lambda { |user| { :conditions => ['user_id =?', user.id], :include => [:language, :problem], :order => 'created_at desc' } }
   named_scope :valuable, :conditions => 'percent > 0'
-  named_scope :fast, :order => 'time ASC, uploaded_at ASC'
+  named_scope :fast, :order => 'time ASC, source_updated_at ASC'
   named_scope :for_contest, lambda { |c| { :conditions => ['contest_id =?', c.id] } }
 
   before_destroy { |solution| solution.cleanup! }

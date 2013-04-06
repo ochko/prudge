@@ -1,5 +1,5 @@
 <tr>
   <td><%= link_to solution.user.login, solution.user, :class=> (solution.passed? ? 'ok' : 'ng') %> </td>
-  <td><%=l solution.uploaded_at %></td>
+  <td><%=l solution.source_updated_at %></td>
   <td><%= link_to solution.problem.name, solution.problem %></td>
 </tr>

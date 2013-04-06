@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   include Gravtastic
 
-  has_many :solutions, :order => 'uploaded_at'
+  has_many :solutions, :order => 'source_updated_at'
   has_many :completions, :class_name => 'Solution', 
            :conditions => ["state = ?", 'passed']
   has_many :contests, :through => :solutions, :uniq => true, :order => 'start'

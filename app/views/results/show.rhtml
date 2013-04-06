@@ -6,7 +6,7 @@
 <div id="result-meta" class="border-hor">
   <%= link_to @result.solution.problem.name, @result.solution.problem %>,
   <label>бодсон:</label> <%= link_to h(@result.solution.user.login), @result.solution.user %>,
-  <%=l @result.solution.uploaded_at %>,
+  <%=l @result.solution.source_updated_at %>,
   <span class="result-run">Ажиллагаа: <strong><%= translate_message(@result.status) %></strong></span>
 
   <span class="go-up"><%= link_to 'Бодолт руу', @result.solution  %></span>
