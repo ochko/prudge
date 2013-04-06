@@ -6,16 +6,9 @@ class TopicsController < ApplicationController
   menu :discussion
 
   def index
-    if !params[:type]
-      @topics = Topic.paginate(:page=> params[:page], :per_page => 20,
-                               :order => 'commented_at DESC')
-    elsif %w[contest lesson topic].include? params[:type]
-      @topics = params[:type].capitalize.constantize.commented.
-        paginate(:page=> params[:page], :order => 'commented_at DESC')
-    elsif 'problem' == params[:type] || 'problems' == params[:type]
-      @topics = Problem.commented.active.
-        paginate(:page=> params[:page], :order => 'commented_at DESC')
-    end
+    type = params[:type] || 'topic'
+    @topics = type.singularize.capitalize.constantize.commented.
+      paginate(:page=> params[:page],  :order => 'commented_at DESC')
   end
 
   def show

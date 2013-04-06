@@ -7,10 +7,12 @@ class Topic < ActiveRecord::Base
            :dependent => :destroy,
            :order => 'created_at DESC'
 
-  validates_presence_of :title, :description  
+  validates_presence_of :title, :description
+
+  named_scope :commented, :conditions => "TRUE"
   
   def self.per_page
-    30
+    20
   end
   
   def name
