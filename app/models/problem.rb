@@ -34,6 +34,10 @@ class Problem < ActiveRecord::Base
     self.active_from && (self.active_from < Time.now)
   end
 
+  def public?
+    contest && contest.started?
+  end
+
   def owned_by?(someone)
     self.user_id == someone.id
   end

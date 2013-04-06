@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
     100
   end
 
+  def owns?(object)
+    object.user_id == self.id
+  end
+
   def deliver_password_reset_instructions!
     reset_perishable_token!
     Notifier.deliver_password_reset_instructions(self)  

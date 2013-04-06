@@ -2,9 +2,7 @@
 class ProblemsController < ApplicationController
   menu :problem
 
-  before_filter :require_user,
-                :except => [:index, :show]
-
+  before_filter :require_user, :except => [:index, :show]
   before_filter :require_judge, :only => [:destroy, :proposals, :check]
   before_filter :prepare_wmd, :only => [:edit, :new]
 

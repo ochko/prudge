@@ -1,8 +1,7 @@
 class PagesController < ApplicationController
   menu :home
 
-  before_filter :require_admin,
-                :except => :show
+  before_filter :require_admin, :except => :show
 
   before_filter :prepare_wmd, :only => [:edit, :new]
                               

@@ -1,7 +1,7 @@
 class Language < ActiveRecord::Base
   has_many :solutions
 
-  attribute_alias :runner, :interpreter
+  alias_attribute :interpreter, :runner
 
   def extension
     name.downcase
