@@ -14,7 +14,7 @@ class ProblemTest < ActiveRecord::Base
   validates_attachment_presence :output
 
   def diff(file_path)
-    `#{DIFF} #{file_path} #{output_path}`
+    `#{DIFF} #{file_path} #{output.path}`
   end
 
 end
