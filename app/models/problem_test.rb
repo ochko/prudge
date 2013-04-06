@@ -1,6 +1,4 @@
 class ProblemTest < ActiveRecord::Base
-  DIFF = '/usr/bin/diff -bBu'
-
   named_scope :real, :conditions => { :hidden => true }
   
   belongs_to :problem, :counter_cache => 'tests_count'
@@ -12,9 +10,4 @@ class ProblemTest < ActiveRecord::Base
 
   validates_attachment_presence :input
   validates_attachment_presence :output
-
-  def diff(file_path)
-    `#{DIFF} #{file_path} #{output.path}`
-  end
-
 end

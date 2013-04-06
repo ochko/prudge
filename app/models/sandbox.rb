@@ -70,11 +70,17 @@ class Sandbox
   def check(exe)
     @problem.tests.each do |test|
       break unless usage = execute(exe, test)
-      result = solution.results.
-        create!(:test_id => test.id,
-                :usage   => usage)
+      result = judge(test, usage)
       break if result.failed?
     end
+  end
+
+  def judge(test, usage)
+    output = Output.new(program.output, test)
+    solution.results.
+      create!(:test => test,
+              :usage => usage,
+              :output => output)
   end
 
   def prepare
@@ -101,6 +107,27 @@ class Sandbox
     runner.exec
   end
 
+  class Output
+    DIFF = '/usr/bin/diff -bBu'
+
+    def initialize(path, test)
+      @path = path
+      @test = test
+    end
+
+    def correct?
+      diff.empty?
+    end
+
+    def diff
+      @diff ||= `#{DIFF} #{@path} #{@test.output.path}`
+    end
+
+    def data
+      @data ||= IO.read(@path)
+    end
+  end
+
   class Runner
     class << self
       def binary
@@ -119,7 +146,6 @@ class Sandbox
 
     def exec
       FileUtils.touch program.usage
-      # TODO: stdin, stdout, stderr = Open3.popen3('command')
       system("#{self.class.binary} #{options.join(' ')}")
       return Usage.new(IO.read(program.usage))
     ensure

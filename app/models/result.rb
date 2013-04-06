@@ -7,11 +7,13 @@ class Result < ActiveRecord::Base
   
 
   def after_create
-    self.diff = self.test.diff(self.solution.output_path)
-    self.matched = self.diff.empty?
-    self.output = IO.readlines(self.solution.output_path).join
-    self.hidden = self.test.hidden
-    save!
+    self.hidden = test.hidden
+  end
+
+  def output=(output)
+    self.matched = output.correct?
+    self.diff = output.diff
+    self.output = output.correct? ? nil : output.data
   end
 
   def usage=(usage)
@@ -25,11 +27,10 @@ class Result < ActiveRecord::Base
   end
 
   def normal?
-    Usage::OK == execution
+    Usage::State.ok.code == execution
   end
 
   def correct?
     normal? and matched
   end
-
 end
