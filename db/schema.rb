@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130406041153) do
+ActiveRecord::Schema.define(:version => 20130406064512) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",                 :null => false
@@ -115,10 +115,10 @@ ActiveRecord::Schema.define(:version => 20130406041153) do
   add_index "problem_languages", ["problem_id"], :name => "index_problem_languages_on_problem_id"
 
   create_table "problem_tests", :force => true do |t|
-    t.integer "problem_id",                                       :null => false
-    t.text    "input",      :limit => 16777215,                   :null => false
-    t.text    "output",     :limit => 16777215,                   :null => false
-    t.boolean "hidden",                         :default => true, :null => false
+    t.integer "problem_id",                         :null => false
+    t.boolean "hidden",           :default => true, :null => false
+    t.string  "input_file_name"
+    t.string  "output_file_name"
   end
 
   add_index "problem_tests", ["problem_id"], :name => "index_problem_tests_on_problem_id"

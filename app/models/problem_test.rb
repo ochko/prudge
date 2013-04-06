@@ -1,35 +1,17 @@
 class ProblemTest < ActiveRecord::Base
-  TESTS = 'judge/tests'
   DIFF = '/usr/bin/diff -bBu'
-  
-  belongs_to :problem, :counter_cache => 'tests_count'
-  has_many :results, :dependent => :destroy, :foreign_key => 'test_id'
 
   named_scope :real, :conditions => { :hidden => true }
+  
+  belongs_to :problem, :counter_cache => 'tests_count'
 
-  after_save { |t| t.save_to_file! }
+  has_many :results, :dependent => :destroy, :foreign_key => 'test_id'
 
-  def dir
-    "#{RAILS_ROOT}/#{TESTS}/#{self.problem_id}"
-  end
+  has_attached_file :input,  :path => ":test_root/input/:problem_id/:id.in"
+  has_attached_file :output, :path => ":test_root/output/:problem_id/:id.out"
 
-  def input_path
-    "#{self.dir}/#{self.id}.in"
-  end
-
-  def output_path
-    "#{self.dir}/#{self.id}.out"
-  end
-
-  def others
-    self..problem.tests
-  end
-
-  def save_to_file!
-    FileUtils.mkpath self.dir
-    File.open(self.input_path,  'w'){|f| f.write(self.input.gsub(/\r/,'')) }
-    File.open(self.output_path, 'w'){|f| f.write(self.output.gsub(/\r/,''))}
-  end
+  validates_attachment_presence :input
+  validates_attachment_presence :output
 
   def diff(file_path)
     `#{DIFF} #{file_path} #{output_path}`
