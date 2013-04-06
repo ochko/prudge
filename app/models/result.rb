@@ -14,12 +14,16 @@ class Result < ActiveRecord::Base
     self.matched = output.correct?
     self.diff = output.diff
     self.output = output.correct? ? nil : output.data
-  end
+  end  
 
   def usage=(usage)
     self.execution = usage.state
     self.time   = usage.time
     self.memory = usage.memory
+  end
+
+  def output
+    matched ? test.output : self[:output]
   end
 
   def failed?
