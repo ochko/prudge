@@ -43,8 +43,8 @@ class Solution < ActiveRecord::Base
   has_many :tests, :through => :problem, :order => 'hidden, id'
 
   has_attached_file :source,
-                    :url => "/#{Repo.path}/:user/:problem/:id.code",
-                    :path => ":rails_root/#{Repo.path}/:user/:problem/:id.code"
+                    :url => "/:repository/:user_id/:problem_id/:id.code",
+                    :path => ":rails_root/:repository/:user_id/:problem_id/:id.code"
 
   validates_attachment_presence :source
   validates_attachment_size :source, :less_than => 64.kilobytes
