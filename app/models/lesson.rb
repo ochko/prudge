@@ -35,6 +35,4 @@ class Lesson < ActiveRecord::Base
     }
     set_property :delta => true
   end
-
-
 end

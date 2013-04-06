@@ -15,5 +15,4 @@ class Twitit
   end
 
   alias :perform :twit
-
 end

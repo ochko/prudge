@@ -7,5 +7,7 @@ class Comment < ActiveRecord::Base
     15
   end
 
-  after_create {  |comment| comment.topic.update_attribute(:commented_at, Time.now)}
+  after_create do |comment|
+    comment.topic.update_attribute(:commented_at, Time.now)
+  end
 end
