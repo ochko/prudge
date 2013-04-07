@@ -72,16 +72,24 @@ class Contest < ActiveRecord::Base
     [numbers, standers]
   end
 
-  def open?
-    self.level == 0
-  end
-
   def finished?
     self.end < Time.now
   end
   
   def started?
     self.start < Time.now
+  end
+
+  def openfor?(user)
+    competable?(user) && invites?(user)
+  end
+
+  def competable?(user)
+    level == 0 || user.level <= level
+  end
+
+  def invites?(user)
+    !private? || contributors.include?(user)
   end
 
   def time_passed

@@ -21,7 +21,13 @@ class Ability
           (!solution.competing? && user.solved?(solution.problem))
       end
       can :modify, Solution do |solution|
-        user.judge? || (user.owns?(@solution) && @solution.open?)
+        user.judge? || (user.owns?(solution) && solution.open?)
+      end
+      can :create, Solution do |solution|
+        contest = solution.contest
+        (contest.nil? || contest.finished? ||
+         (contest.started? && contest.openfor?(user))) &&
+          solution.fresh?
       end
     end
   end

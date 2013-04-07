@@ -37,11 +37,7 @@ class Solution < ActiveRecord::Base
     state :locked
 
     event :post do
-      transitions :to => :updated, :guard => :first?
-    end
-
-    event :repost do
-      transitions :to => :updated, :guard => :open?
+      transitions :to => :updated
     end
 
     event :submit do
@@ -55,10 +51,6 @@ class Solution < ActiveRecord::Base
     event :errored do
       transitions :from => :waiting, :to => :defunct
     end
-  end
-
-  def judged?
-    passed? || failed? || defunct?
   end
 
   before_destroy { |solution| solution.reset! }
@@ -86,8 +78,8 @@ class Solution < ActiveRecord::Base
     repo.commit problem_id.to_s, "Updated solution for #{problem_id}"
   end
 
-  def first?
-    user.solutions.all(:conditions => {:problem_id => problem.id}).count == 0
+  def judged?
+    passed? || failed? || defunct?
   end
 
   def open?
@@ -100,6 +92,14 @@ class Solution < ActiveRecord::Base
 
   def competing?
     contest && !contest.finished?
+  end
+
+  def fresh?
+    previous.nil? || (previous.freezed? && !previous.locked?)
+  end
+
+  def previous
+    @previous ||= user.solutions.last(:conditions => {:problem_id => problem_id}, :order => 'created_at')
   end
 
   def apply_contest

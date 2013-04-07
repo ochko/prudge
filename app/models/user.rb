@@ -79,20 +79,14 @@ class User < ActiveRecord::Base
   def level_name
     Contest::LEVEL_NAMES[level]
   end
-
-  def last_submission_of(problem)
-    Solution.last(:conditions => 
-                  ["problem_id = ? AND user_id = ?", problem.id, self.id],
-                  :order => 'created_at ASC')
-  end
   
   def solved?(problem)
-    solutions.passed.count(:conditions => ["problem_id = ?", problem.id]) > 0
+    solutions.passed.count(:conditions => {:problem_id => problem.id}) > 0
   end
 
   def saw!(solution)
     return if owns?(solution)
-    solutions.all(:conditions => ["problem_id = ?", solution.problem_id]).each(&:lock!)
+    solutions.all(:conditions => {:problem_id => solution.problem_id}).each(&:lock!)
   end
 
   def currently_commented?

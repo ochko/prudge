@@ -64,38 +64,17 @@ class SolutionsController < ApplicationController
 
   def new
     @problem = Problem.find(params[:problem])
-    @solution = current_user.last_submission_of(@problem)
-    if @solution.nil? || (@solution.contest && @solution.contest.finished?)
-      @solution = @problem.solutions.build
-      @solution.contest = @problem.contest unless (@solution.contest && @problem.contest.finished?)
-      return unless validate_solvable?
-    else
-      redirect_to @solution
-    end
+    @solution = @problem.solutions.build
+    @solution.apply_contest
+    creating
   end
 
   def create
     @solution = current_user.solutions.build(params[:solution])
     @solution.apply_contest
-    return unless validate_solvable?
-    @last_one = current_user.last_submission_of(@solution.problem)
-    if @last_one
-      if !@last_one.locked?
-        if @last_one.freezed?
-          @solution.save
-          @last_one = @solution
-        else
-          @last_one.cleanup!
-          @last_one.update_attributes(params[:solution])
-        end
-        @last_one.commit_to_repo
-      else
-        flash[:notice] = "Та хэн нэгний бодолтыг үзчихсэн учраас энэ бодлогыг дахин бодож болохгүй"
-      end
-      redirect_to @last_one
-    else
+    creating do
       if @solution.save
-        @solution.insert_to_repo
+        @solution.post!
         flash[:notice] = 'Бодолтыг хадгалж авлаа.'
         redirect_to @solution
       else
@@ -110,8 +89,8 @@ class SolutionsController < ApplicationController
 
   def update
     editing do 
-      @solution.repost!
       if @solution.update_attributes(params[:solution])
+        @solution.post!
         flash[:notice] = 'Бодолт шинэчлэгдлээ.'
         redirect_to @solution
       else
@@ -169,28 +148,15 @@ class SolutionsController < ApplicationController
     redirect_to current_user.owns?(@solution) ? @solution : @solution.problem
   end
 
-  def validate_solvable?
-    return true unless contest = @solution.contest
-    if current_user.owns?(@solution.problem) && !contest.finished?
-      flash[:notice] = 'Уучлаарай, өөрийнхөө дэвшүүлсэн бодлогыг тэмцээн дууссаны дараа л бодож болно!.'
-      redirect_to contest
-      return false
-    elsif !contest.started?
-      flash[:notice] = 'Эхлээгүй тэмцээний бодлогыг бодож болохгүй!.'
-      redirect_to contest
-      return false
-    elsif contest.finished?
-      return true
-    elsif !contest.open? && current_user.level > contest.level
-      flash[:notice] = 'Таны түвшин энэ тэмцээнийхээс дээгүүр байна.'
-      redirect_to contest
-      return false
-    elsif contest.private? && !contest.contributors.include?(current_user)
-      flash[:notice] = 'Энэ тэмцээнд зөвхөн дэвшүүлсэн бодлого тань сонгогдсон тохиолдолд оролцоно. Та тэмцээн дууссаны дараа бодлогуудыг бодож болно.'
-      redirect_to contest
-      return false
-    else
-      return true
+  def creating
+    authorize! :create, @solution
+    if block_given?
+      Solution.transaction do
+        yield
+      end
     end
+  rescue CanCan::AccessDenied => exception
+    flash[:notice] = exception.message
+    redirect_to (@solution.contest || @solution.previous || @solution.problem)
   end
 end
