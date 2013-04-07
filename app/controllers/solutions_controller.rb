@@ -106,21 +106,11 @@ class SolutionsController < ApplicationController
 
   def check
     @solution = Solution.find(params[:id])
-    if !judge?
-      if !current_user.owns?(@solution)
-        render :text => 'Бусдын бодлогыг шалгахгүй!'
-        return
-      elsif @solution.judged?
-        render :text => 'Шалгачихсан'
-        return
-      end
-    end
-    if @solution.problem.tests.real.empty?
-      render :text => 'Шалгах тэст байхгүй байна(Эсвэл харагдахгүй тэст байхгүй)'
-      return
-    end
+    authorize! :check, @solution
     @solution.submit
     render :partial => 'results/wait'
+  rescue CanCan::AccessDenied => exception
+    render :text => exception.message
   end
 
   private

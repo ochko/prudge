@@ -79,7 +79,7 @@ class Solution < ActiveRecord::Base
   end
 
   def judged?
-    passed? || failed? || defunct?
+    passed? || failed? || defunct? || locked?
   end
 
   def open?

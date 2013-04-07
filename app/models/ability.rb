@@ -21,7 +21,7 @@ class Ability
       can :destroy, Problem do |problem|
         problem.solutions.count == 0
       end
-      can :modify, Solution
+      can [:modify, :check], Solution
     else
       can :read, Problem {|problem| problem.publicized? || user.owns?(problem) }
       can :update, Problem do |problem|
@@ -42,6 +42,10 @@ class Ability
     can :read, Solution do |solution|
       user.owns?(solution) ||
         (!solution.competing? && user.solved?(solution.problem))
+    end
+
+    cannot :check, Solution do |solution|
+      solution.problem.tests.real.empty?
     end
 
     can :read, [Contest, Topic, Comment, Language]
