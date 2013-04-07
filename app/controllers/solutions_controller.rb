@@ -105,29 +105,26 @@ class SolutionsController < ApplicationController
   end
 
   def edit
-    @solution = Solution.find(params[:id])
-    return unless validate_touchable?
+    editing { render :action => 'edit' }
   end
 
   def update
-    @solution = Solution.find(params[:id])
-    return unless validate_touchable?
-    @solution.cleanup!
-    if @solution.update_attributes(params[:solution])
-      flash[:notice] = 'Бодолт шинэчлэгдлээ.'
-      @solution.user.solution_uploaded!
-      @solution.commit_to_repo
-      redirect_to @solution
-    else
-      render :action => 'edit'
+    editing do 
+      @solution.repost!
+      if @solution.update_attributes(params[:solution])
+        flash[:notice] = 'Бодолт шинэчлэгдлээ.'
+        redirect_to @solution
+      else
+        render :action => 'edit'
+      end
     end
   end
 
   def destroy
-    @solution = Solution.find(params[:id])
-    return unless validate_touchable?
-    @solution.destroy
-    redirect_to @solution.problem
+    editing do 
+      @solution.destroy
+      redirect_to @solution.problem
+    end
   end
 
   def check
@@ -158,9 +155,19 @@ class SolutionsController < ApplicationController
     yield
   rescue CanCan::AccessDenied => exception
     flash[:notice] = exception.message
-    redirect_to @solution.problem
+    redirect_to (@solution.contest.nil? || @solution.contest.finished?) : @solution.problem : @solution.contest
   end
 
+  def editing
+    @solution = Solution.find(params[:id])
+    authorize! :modify, @solution
+    Solution.transaction do
+      yield
+    end
+  rescue CanCan::AccessDenied => exception
+    flash[:notice] = exception.message
+    redirect_to current_user.owns?(@solution) ? @solution : @solution.problem
+  end
 
   def validate_solvable?
     return true unless contest = @solution.contest
@@ -186,33 +193,4 @@ class SolutionsController < ApplicationController
       return true
     end
   end
-
-  def validate_showable?
-    if !@solution.contest || @solution.contest.finished? || current_user.owns?(@solution)
-      return true
-    else
-      flash[:notice] = 'Тэмцээн дуусаагүй байхад бусдын бодолтыг харахгүй!'
-      redirect_to @solution.contest
-      return false
-    end
-  end
-
-  def validate_touchable?
-    return true if judge?
-    if !current_user.owns?(@solution)
-      flash[:notice] ='Бусдын бодолтыг өөрчилж болохгүй!'
-      redirect_to @solution.problem
-      return false
-    elsif @solution.locked?
-      flash[:notice] ='Энэ бодолтыг өөрчилж болохгүй'
-      redirect_to @solution
-      return false
-    elsif @solution.freezed?
-      flash[:notice] ='Тэмцээн дууссан хойно бодолтыг өөрчилж болохгүй!'
-      redirect_to @solution
-      return false
-    end
-    true
-  end
-
 end

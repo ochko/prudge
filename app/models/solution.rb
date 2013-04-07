@@ -2,6 +2,32 @@
 class Solution < ActiveRecord::Base
   include AASM
 
+  belongs_to :contest
+  belongs_to :problem, :counter_cache => 'tried_count'
+  belongs_to :user, :counter_cache => true
+  belongs_to :language
+  has_many :results, :order => 'hidden ASC, matched DESC', :dependent => :destroy
+  has_many :tests, :through => :problem, :order => 'hidden, id'
+
+  has_attached_file :source,
+                    :url => "/users/:user_id/solutions/:id.code",
+                    :path => ":repo_root/:user_id/:problem_id/:id.code"
+
+  validates_attachment_presence :source
+  validates_attachment_size :source, :less_than => 64.kilobytes
+
+  has_many :comments,
+           :as => 'topic',
+           :class_name => 'Comment',
+           :foreign_key => 'topic_id',
+           :dependent => :destroy,
+           :order => 'created_at DESC'
+
+  named_scope :for_user, lambda { |user| { :conditions => ['user_id =?', user.id], :include => [:language, :problem], :order => 'created_at desc' } }
+  named_scope :valuable, :conditions => 'percent > 0'
+  named_scope :fast, :order => 'time ASC, source_updated_at ASC'
+  named_scope :for_contest, lambda { |c| { :conditions => ['contest_id =?', c.id] } }
+
   aasm :column => 'state' do
     state :updated, :before_enter => :log, :after_enter => :reset!, :initial => true
     state :waiting, :after_enter => :queue
@@ -35,35 +61,7 @@ class Solution < ActiveRecord::Base
     passed? || failed? || defunct?
   end
 
-  belongs_to :contest
-  belongs_to :problem, :counter_cache => 'tried_count'
-  belongs_to :user, :counter_cache => true
-  belongs_to :language
-  has_many :results, :order => 'hidden ASC, matched DESC', :dependent => :destroy
-  has_many :tests, :through => :problem, :order => 'hidden, id'
-
-  has_attached_file :source,
-                    :url => "/users/:user_id/solutions/:id.code",
-                    :path => ":repo_root/:user_id/:problem_id/:id.code"
-
-  validates_attachment_presence :source
-  validates_attachment_size :source, :less_than => 64.kilobytes
-
-  has_many :comments,
-           :as => 'topic',
-           :class_name => 'Comment',
-           :foreign_key => 'topic_id',
-           :dependent => :destroy,
-           :order => 'created_at DESC'
-
-  named_scope :for_user, lambda { |user| { :conditions => ['user_id =?', user.id], :include => [:language, :problem], :order => 'created_at desc' } }
-  named_scope :valuable, :conditions => 'percent > 0'
-  named_scope :fast, :order => 'time ASC, source_updated_at ASC'
-  named_scope :for_contest, lambda { |c| { :conditions => ['contest_id =?', c.id] } }
-
-  before_destroy { |solution| solution.cleanup! }
-
-  before_create { |solution| solution.user.solution_uploaded! }
+  before_destroy { |solution| solution.reset! }
 
   def self.best
     passed.fast.first
@@ -93,7 +91,7 @@ class Solution < ActiveRecord::Base
   end
 
   def open?
-    !locked?
+    !(locked? || freezed?)
   end
 
   def freezed?
@@ -113,12 +111,13 @@ class Solution < ActiveRecord::Base
 
   def reset!
     results.clear
-    user.refresh_points!
     problem.decrement!(:solved_count) if passed?
     update_attributes(:percent => 0.0,
                       :time    => 0.0,
                       :point   => 0.0,
                       :junk    => nil)
+    user.refresh_points!
+    user.solution_uploaded!
   end
 
   def summarize!

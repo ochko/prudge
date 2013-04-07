@@ -43,7 +43,7 @@ class Problem < ActiveRecord::Base
   end
 
   def corrects_count
-    solutions.passed.count
+    correct_solutions.count
   end
 
   def solutions_count
