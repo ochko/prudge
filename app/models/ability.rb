@@ -8,19 +8,15 @@ class Ability
     if user.admin?
       can :manage, :all
     elsif user.judge?
-      can :manage, :all
-      cannot :destroy, Comment
-      cannot :touch, Language
-      cannot :touch, Page
-      cannot :touch, Topic
+      cannot :read, [Comment, Language, Page, Topic]
     else
       can :read, Problem {|problem| user.owns?(problem) || problem.public? }
-      can :read, Contest
-      can :read, Lesson
-      can :read, Topic
-      can :read, Solution
+      can :read, [Contest, Lesson, Topic, Comment, Language, Page]
 
       can :check, Solution, :user_id => user.id, :state => 'updated'
+      can :read, Solution do |solution|
+        user.owns?(solution) || user.solved?(solution.problem)
+      end
     end
   end
 end

@@ -86,10 +86,13 @@ class User < ActiveRecord::Base
                   :order => 'created_at ASC')
   end
   
-  def solved(problem)
-    Solution.find(:all, :conditions => 
-                  ["problem_id = ? AND user_id = ? AND correct = ?",
-                   problem.id, self.id, true])
+  def solved?(problem)
+    solutions.passed.count(:conditions => ["problem_id = ?", problem.id]) > 0
+  end
+
+  def saw!(solution)
+    return if owns?(solution)
+    solutions.all(:conditions => ["problem_id = ?", solution.problem_id]).each(&:lock!)
   end
 
   def currently_commented?

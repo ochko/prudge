@@ -22,8 +22,8 @@ class Solution < ActiveRecord::Base
       transitions :from => [:updated, :waiting, :errored, :passed, :failed], :to => :waiting
     end
 
-    event :lock! do
-      transitions :from => :passed, :to => :locked
+    event :lock do
+      transitions :to => :locked
     end
 
     event :errored do

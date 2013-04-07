@@ -15,8 +15,7 @@ class SolutionsController < ApplicationController
   end
 
   def show
-    @solution = Solution.find(params[:id])
-    validate_showable?
+    seeing { render :action => :show }
   end
 
   def best
@@ -52,35 +51,13 @@ class SolutionsController < ApplicationController
   end
 
   def view
-    @solution = Solution.find(params[:id])
-    return if current_user.owns?(@solution)
-    return unless validate_showable?
-    solutions = current_user.solved(@solution.problem)
-    if solutions.empty?
-      flash[:notice] = "Бодлогыг өөрөө бодож чадсаны дараа л бусдын бодолтыг үзэх боломжтой"
-      redirect_to @solution.problem
-    else
-      solutions.each { |solved| solved.lock! }
-    end
+    seeing { render :action => :view }
   end
 
   def download
-    @solution = Solution.find(params[:id])
-    if current_user.owns?(@solution)
-      send_file(@solution.source.path, 
-                :filename => @solution.source_file_name, 
-                :disposition => 'attachment')
-      return
-    end
-    return unless validate_showable?
-    solutions = current_user.solved(@solution.problem)
-    if solutions.empty?
-      flash[:notice] = "Бодлогыг өөрөө бодож чадсаны дараа л бусдын бодолтыг үзэх боломжтой"
-      redirect_to @solution.problem
-    else
-      solutions.each { |solved| solved.lock! }
-      send_file(@solution.source.path, 
-                :filename => @solution.source_file_name, 
+    seeing do
+      send_file(@solution.source.path,
+                :filename => @solution.source_file_name,
                 :disposition => 'attachment')
     end
   end
@@ -173,6 +150,17 @@ class SolutionsController < ApplicationController
   end
 
   private
+
+  def seeing
+    @solution = Solution.find(params[:id])
+    authorize! :read, @solution
+    current_user.saw!(@solution)
+    yield
+  rescue CanCan::AccessDenied => exception
+    flash[:notice] = exception.message
+    redirect_to @solution.problem
+  end
+
 
   def validate_solvable?
     return true unless contest = @solution.contest
