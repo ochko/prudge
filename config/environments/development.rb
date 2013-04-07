@@ -15,12 +15,3 @@ config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = true
-
-ActionMailer::Base.smtp_settings = { 
-  :address => "smtp.gmail.com",
-  :port => 587,
-  :authentication => :plain,
-  :enable_starttls_auto => true,
-  :user_name => "coder.mn@gmail.com",
-  :password => "taSmHPZ2FVguaxZ8wRWxGx8trsG3997"
-}
