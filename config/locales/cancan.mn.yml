@@ -1,10 +1,13 @@
 mn:
   unauthorized:
+    read:
+      problem: "Та нэвтрээгүй, эсвэл тухай бодлогыг одоогоор үзэх боломжгүй байна"
     manage:
       all: "Not authorized to %{action} %{subject}."
       user: "Not allowed to manage other user accounts."
     update:
       solution: "Not allowed to edit this solution."
+      problem: "Энэ бодлогыг одоо засаж болохгүй."
     read:
       solution: >-
         Тэмцээн дуусаагүй байхад бусдын бодолтыг харахгүй.

@@ -9,7 +9,7 @@ class Problem < ActiveRecord::Base
   belongs_to :user
 
   has_many :solutions
-  has_many :tests, :class_name => 'ProblemTest', 
+  has_many :tests, :class_name => 'ProblemTest',
            :order => 'hidden DESC, id ASC',
            :dependent => :destroy
   has_many :comments,
@@ -34,7 +34,7 @@ class Problem < ActiveRecord::Base
     self.active_from && (self.active_from < Time.now)
   end
 
-  def public?
+  def publicized?
     contest && contest.started?
   end
 
@@ -64,13 +64,6 @@ class Problem < ActiveRecord::Base
     return true if self.user_id == user.id
     return false if self.contest.nil?
     return true if self.contest.started?
-    return false
-  end
-
-  def test_addable?(user)
-    return false unless user
-    return true if user.judge?
-    return true if self.user_id == user.id
     return false
   end
 

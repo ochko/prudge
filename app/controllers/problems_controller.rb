@@ -2,8 +2,8 @@
 class ProblemsController < ApplicationController
   menu :problem
 
-  before_filter :require_user, :except => [:index, :show]
-  before_filter :require_judge, :only => [:destroy, :proposals, :check]
+  load_and_authorize_resource
+
   before_filter :prepare_wmd, :only => [:edit, :new]
 
   def index
@@ -13,29 +13,22 @@ class ProblemsController < ApplicationController
         column = params[:column] || 'created_at'
         @reverse = (order == 'ASC') ? 'DESC' : 'ASC'
 
-        @problems = Problem.active.
+        @problems = @problems.
           paginate(:page => params[:page], :per_page => 20, :include => :user, 
                    :order => "#{column} #{order}")
       end
       format.rss do
-        @problems = Problem.active(:order => 'created_at DESC',
-                                   :include => :user, :limit => 10)
+        @problems = @problems.all(:order => 'created_at DESC',
+                                  :include => :user, :limit => 10)
         render :layout => false
       end
     end
-
   end
 
   def proposals
-    @problems = Problem.find(:all, :conditions => ["contest_id IS NULL"])
   end
 
   def show
-    @problem = Problem.find(params[:id])
-    unless @problem.available_to(current_user)
-      flash[:notice] = 'Та нэвтрээгүй, эсвэл тухай бодлогыг одоогоор үзэх боломжгүй байна'
-      redirect_to :action => :index
-    end
   end
 
   def new
@@ -43,8 +36,7 @@ class ProblemsController < ApplicationController
   end
 
   def create
-    params[:problem].delete('contest_id') unless judge?
-    @problem = current_user.problems.build(params[:problem])
+    @problem = current_user.problems.build(sanitized_params)
     if @problem.save
       flash[:notice] = 'Бодлогыг хадгалав. Тэстүүдийг нь оруулна уу?'
       redirect_to @problem
@@ -54,45 +46,35 @@ class ProblemsController < ApplicationController
   end
 
   def edit
-    @problem = Problem.find(params[:id])
-    unless @problem.has_permission?(current_user)
-      flash[:notice] = 'Энэ бодлогыг одоо засаж болохгүй!'
-      redirect_to :action => 'list'
-    end
   end
 
   def update
-    @problem = Problem.find(params[:id])
-    if @problem.has_permission?(current_user)
-      params[:problem].delete('contest_id') unless judge?
-      if @problem.update_attributes(params[:problem])
-        flash[:notice] = 'Бодлогыг шинэчиллээ.'
-        redirect_to @problem
-      else
-        render :action => 'edit'
-      end
+    params[:problem].delete('contest_id') unless judge?
+    if @problem.update_attributes(sanitized_params)
+      flash[:notice] = 'Бодлогыг шинэчиллээ.'
+      redirect_to @problem
     else
-      flash[:notice] = 'Энэ бодлогыг одоо засаж болохгүй!'
-      redirect_to :action => :index
+      render :action => 'edit'
     end
   end
 
   def destroy
-    @problem = Problem.find(params[:id])
-    if @problem.solutions.size == 0
-      @problem.destroy
-      redirect_to :action => :index
-    else
-      flash[:notice] = 'Энэ бодлогод бодолтууд байгаа учраас устгахгүй.'
-      redirect_to @problem
-    end
+    raise if @problem.solutions.count == 0
+    @problem.destroy
+    redirect_to :action => :index
   end
 
   def check
-    @problem = Problem.find(params[:id])
     @problem.check!
     flash[:notice] = "Бүх бодолтуудыг шалгалаа"
     redirect_to @problem
+  end
+
+  private
+  def sanitized_params
+    params[:problem].tap do |sanitized|
+      sanitized.delete('contest_id') unless judge?
+    end
   end
 
 end

@@ -5,22 +5,28 @@ class Ability
     alias_action :update, :create, :destroy, :to => :touch
     alias_action :update, :destroy, :to => :modify
 
-    unless user
-      # not logged in
-      can :read, Page
-      can :read, Lesson
-      return
+    can :read, Page
+    can :read, Lesson
+    can :read, Problem, ["active_from < ?", Time.now] do |problem|
+      problem.publicized?
     end
+
+    return unless user # not logged in
 
     if user.admin?
       can :manage, :all
     elsif user.judge?
-      can :read, [Comment, Language, Page, Topic]
+      can [:read, :update, :check], Problem
+      can :proposals, Problem, ["contest_id IS NULL"]
+      can :destroy, Problem do |problem|
+        problem.solutions.count == 0
+      end
       can :modify, Solution
     else
-      can :read, Problem {|problem| user.owns?(problem) || problem.public? }
-      can :read, [Contest, Lesson, Topic, Comment, Language, Page]
-
+      can :read, Problem {|problem| problem.publicized? || user.owns?(problem) }
+      can :update, Problem do |problem|
+        user.owns?(problem) && !problem.publicized?
+      end
       can :check, Solution, :user_id => user.id, :state => 'updated'
       can :modify, Solution do |solution|
         user.owns?(solution) && solution.open?
@@ -38,7 +44,8 @@ class Ability
         (!solution.competing? && user.solved?(solution.problem))
     end
 
-    can :create, Lesson
+    can :read, [Contest, Topic, Comment, Language]
+    can :create, [Lesson, Problem]
     can :modify, Lesson, :author_id => user.id
   end
 end
