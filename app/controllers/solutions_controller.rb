@@ -134,7 +134,7 @@ class SolutionsController < ApplicationController
     yield
   rescue CanCan::AccessDenied => exception
     flash[:notice] = exception.message
-    redirect_to (@solution.contest.nil? || @solution.contest.finished?) : @solution.problem : @solution.contest
+    redirect_to @solution.competing? ? @solution.contest : @solution.problem
   end
 
   def editing

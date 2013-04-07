@@ -64,7 +64,7 @@ class UsersController < ApplicationController
   def solutions
     @solutions = User.find(params[:id]).solutions.
       paginate(:page => params[:page], :include => :language, 
-               :order => 'uploaded_at DESC')
+               :order => 'source_updated_at DESC')
     respond_to do |format|
       format.html { render :partial => 'solutions' }
       format.js { render :layout => false }

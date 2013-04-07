@@ -26,12 +26,19 @@ class Usage
       @all ||= TABLE.map {|row| self.send row.first }
     end
 
+    def self.codes
+      @codes ||= all.reduce({}) do |sum, state|
+        sum[state.code] = state
+        sum
+      end
+    end
+
     def self.detect(status)
       all.detect { |state| status =~ state.pattern } || unknown
     end
 
-    def self.get(state)
-      respond_to?(state) ? send(state) : unknown
+    def self.get(code)
+      codes[code] || unknown
     end
   end
 

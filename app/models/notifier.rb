@@ -30,7 +30,7 @@ class Notifier < ActionMailer::Base
 
   def user_notify(user, title)
     compose(user, title, 
-            :edit_password_reset_url => edit_password_reset_url(user.perishable_token)
+            :edit_password_reset_url => edit_password_reset_url(user.perishable_token))
   end
 
   def contest_notify(user, contest, title)

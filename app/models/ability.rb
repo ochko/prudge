@@ -22,12 +22,8 @@ class Ability
       can :read, [Contest, Lesson, Topic, Comment, Language, Page]
 
       can :check, Solution, :user_id => user.id, :state => 'updated'
-      can :read, Solution do |solution|
-        user.owns?(solution) ||
-          (!solution.competing? && user.solved?(solution.problem))
-      end
       can :modify, Solution do |solution|
-        user.judge? || (user.owns?(solution) && solution.open?)
+        user.owns?(solution) && solution.open?
       end
       can :create, Solution do |solution|
         contest = solution.contest
@@ -37,6 +33,11 @@ class Ability
       end
     end
     # all users
+    can :read, Solution do |solution|
+      user.owns?(solution) ||
+        (!solution.competing? && user.solved?(solution.problem))
+    end
+
     can :create, Lesson
     can :modify, Lesson, :author_id => user.id
   end

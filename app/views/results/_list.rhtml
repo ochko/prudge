@@ -5,7 +5,7 @@
   <%= show_percent((@solution.percent * 100).to_i) %>
 </div>
 <div class="span-20">
-<%= inverted_table @solution.results %>
+<%= results_table_horizontal @solution.results %>
 </div>
 <% end %>
 </div>
