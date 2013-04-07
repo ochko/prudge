@@ -2,8 +2,7 @@
 class LessonsController < ApplicationController
   menu :lesson
 
-  before_filter :require_user,
-                :except => [:index, :show]
+  load_and_authorize_resource
 
   before_filter :prepare_wmd, :only => [:edit, :new]
 
@@ -19,7 +18,6 @@ class LessonsController < ApplicationController
   end
 
   def show
-    @lesson = Lesson.find(params[:id])
   end
 
   def new
@@ -38,13 +36,9 @@ class LessonsController < ApplicationController
   end
 
   def edit
-    @lesson = Lesson.find(params[:id])
-    return unless touchable?
   end
 
   def update
-    @lesson = Lesson.find(params[:id])
-    return unless touchable?
     if @lesson.update_attributes(params[:lesson])
       flash[:notice] = 'Lesson was successfully updated.'
       redirect_to :action => 'show', :id => @lesson
@@ -54,21 +48,7 @@ class LessonsController < ApplicationController
   end
 
   def destroy
-    @lesson = Lesson.find(params[:id])
-    return unless touchable?
     @lesson.destroy
     redirect_to :action => 'list'
   end
-
-  private
-  def touchable?
-    if @lesson.touchable_by?(current_user)
-      return true
-    else
-      flash[:notice] = 'Энэ хичээлийг бичсэн хүн биш байна.'
-      redirect_to :action => 'show', :id => @lesson
-      return false
-    end
-  end
-
 end

@@ -18,11 +18,6 @@ class Lesson < ActiveRecord::Base
     title
   end
 
-  def touchable_by?(user)
-    return false unless user
-    author_id == user.id || user.admin?
-  end
-
   define_index do
     indexes :title
     indexes :text
