@@ -10,7 +10,7 @@ class Ability
       can :manage, :all
     elsif user.judge?
       can :read, [Comment, Language, Page, Topic]
-      can :modify Solution
+      can :modify, Solution
     else
       can :read, Problem {|problem| user.owns?(problem) || problem.public? }
       can :read, [Contest, Lesson, Topic, Comment, Language, Page]
@@ -30,5 +30,6 @@ class Ability
           solution.fresh?
       end
     end
+    can :read, Page
   end
 end

@@ -1,17 +1,17 @@
 class PagesController < ApplicationController
   menu :home
 
-  before_filter :require_admin, :except => :show
+  load_and_authorize_resource
 
   before_filter :prepare_wmd, :only => [:edit, :new]
                               
   def index
+    authorize! :edit, Page
     @pages = Page.paginate :page=>params[:page], :per_page => 20
     render(:layout => false) if request.xml_http_request?
   end
 
   def show
-    @page = Page.find(params[:id])
   end
 
   def new
@@ -30,11 +30,9 @@ class PagesController < ApplicationController
   end
 
   def edit
-    @page = Page.find(params[:id])
   end
 
   def update
-    @page = Page.find(params[:id])
     if @page.update_attributes(params[:page])
       flash[:notice] = 'Page was successfully updated.'
       redirect_to :action => 'show', :id => @page
@@ -44,7 +42,7 @@ class PagesController < ApplicationController
   end
 
   def destroy
-    Page.find(params[:id]).destroy
+    @page.destroy
     redirect_to :action => 'index'
   end
 end
