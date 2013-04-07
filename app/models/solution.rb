@@ -102,11 +102,15 @@ class Solution < ActiveRecord::Base
     @previous ||= user.solutions.last(:conditions => {:problem_id => problem_id}, :order => 'created_at')
   end
 
-  def apply_contest
-    self.contest = nil
-    if self.problem.contest && !self.problem.contest.finished?
-      self.contest = self.problem.contest
+  def problem_id=(id)
+    problem = Problem.find(id)
+    if new_record?
+      self.contest = nil
+      if problem.contest && !problem.contest.finished?
+        self.contest = problem.contest
+      end
     end
+    self.problem = problem
   end
 
   def code

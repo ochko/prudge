@@ -63,15 +63,13 @@ class SolutionsController < ApplicationController
   end
 
   def new
-    @problem = Problem.find(params[:problem])
-    @solution = @problem.solutions.build
+    @solution = Solution.new(:problem_id => params[:problem])
     @solution.apply_contest
     creating
   end
 
   def create
     @solution = current_user.solutions.build(params[:solution])
-    @solution.apply_contest
     creating do
       if @solution.save
         @solution.post!
@@ -88,7 +86,7 @@ class SolutionsController < ApplicationController
   end
 
   def update
-    editing do 
+    editing do
       if @solution.update_attributes(params[:solution])
         @solution.post!
         flash[:notice] = 'Бодолт шинэчлэгдлээ.'
