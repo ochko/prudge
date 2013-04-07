@@ -1,33 +1,24 @@
 class HomeController < ApplicationController
   menu :home
 
-  def index
-    @news = Page.
-      paginate(:page => params[:page], :per_page => 5,
-               :conditions=>["category = ?", 'news'],
-               :order => "created_at desc")
-  end
-
   def about
   end
 
+  def index
+    @news = Page.category('news', params)
+  end
+
   def help
-      @helps = Page.
-        paginate(:page => params[:page], :per_page => 5,
-                 :conditions=>["category = ?", 'help'],
-                 :order => "created_at desc")
+    @helps = Page.category('help', params)
   end
 
   def rules
-      @rules = Page.
-        paginate(:page => params[:page], :per_page => 5,
-                 :conditions=>["category = ?", 'rule'],
-                 :order => "created_at asc")
-
+    @rules = Page.category('rule', params)
   end
+
   def international
   end
+
   def asian
   end
-
 end

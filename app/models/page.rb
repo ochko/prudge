@@ -1,16 +1,8 @@
 class Page < ActiveRecord::Base
-  named_scope :news, :conditions=>["category = ?", 'news'], :order => "created_at desc"
-  named_scope :help, :conditions=>["category = ?", 'help'], :order => "created_at desc"
-  named_scope :rules, :conditions=>["category = ?", 'rule'], :order => "created_at desc"
-
-  define_index do
-    indexes :title
-    indexes :content
-    set_property :field_weights => { 
-      :title => 11,
-      :content => 8
-    }
-    set_property :delta => true
+  def self.category(name, params)
+    paginate(:page => params[:page], :per_page => 5,
+             :conditions=>["category = ?", name],
+             :order => "created_at desc")
   end
 
   def name
@@ -19,5 +11,16 @@ class Page < ActiveRecord::Base
 
   def text
     content
+  end
+
+  # sphinx
+  define_index do
+    indexes :title
+    indexes :content
+    set_property :field_weights => { 
+      :title => 11,
+      :content => 8
+    }
+    set_property :delta => true
   end
 end
