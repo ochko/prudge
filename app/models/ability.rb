@@ -18,9 +18,7 @@ class Ability
       can :check, Solution, :user_id => user.id, :state => 'updated'
       can :read, Solution do |solution|
         user.owns?(solution) ||
-          ( ( solution.contest.nil? ||
-              solution.contest.finished? ) &&
-            user.solved?(solution.problem))
+          (!solution.competing? && user.solved?(solution.problem))
       end
       can :modify, Solution do |solution|
         user.judge? || (user.owns?(@solution) && @solution.open?)

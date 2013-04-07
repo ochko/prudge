@@ -95,7 +95,11 @@ class Solution < ActiveRecord::Base
   end
 
   def freezed?
-    self.contest && self.contest.finished?
+    contest && contest.finished?
+  end
+
+  def competing?
+    contest && !contest.finished?
   end
 
   def apply_contest
