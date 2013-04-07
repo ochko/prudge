@@ -12,7 +12,7 @@
 	    </tr>
 	    <% @numbers.zip(@standings) do |num, user| %>
 	    <tr>
-              <td class="ranking"><%= show_place(num) %></td>
+              <td class="ranking"><%= standing(num) %></td>
               <td class='small'>
 		<%= link_to user.login, user %></td>
               <td class='small'><%= "%.2f" % user.point %></td>
