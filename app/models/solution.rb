@@ -92,10 +92,6 @@ class Solution < ActiveRecord::Base
     user.solutions.all(:conditions => {:problem_id => problem.id}).count == 0
   end
 
-  def owned_by?(someone)
-    self.user_id == someone.id
-  end
-
   def open?
     !locked?
   end

@@ -24,7 +24,7 @@
   :html=>{:id=>'check-button', :class=>"medium grey awesome" },
   :before => "$('#check-button').hide();$('#result-content').hide();$('#check-wait').show();" %>
   <% end %>
-  <% if @solution.owned_by? current_user %>
+  <% if current_user.owns? @solution  %>
   <% if @solution.freezed? %>
   <%= link_to 'Дахин бодох', new_solution_path(:problem => @solution.problem_id), :class=>"medium grey awesome" %> 
   <% else %>

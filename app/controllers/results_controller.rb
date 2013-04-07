@@ -8,7 +8,7 @@ class ResultsController < ApplicationController
 
     return if judge?
     
-    if !@result.solution.owned_by?(current_user)
+    if !current_user.owns?(@result.solution)
       flash[:notice] = 'Бусдын тэстийг харж болохгүй'
       redirect_to @result.solution.problem
     elsif @result.hidden

@@ -38,10 +38,6 @@ class Problem < ActiveRecord::Base
     contest && contest.started?
   end
 
-  def owned_by?(someone)
-    self.user_id == someone.id
-  end
-
   def correct_solutions
     solutions.passed
   end

@@ -53,7 +53,7 @@ class SolutionsController < ApplicationController
 
   def view
     @solution = Solution.find(params[:id])
-    return if @solution.owned_by?(current_user)
+    return if current_user.owns?(@solution)
     return unless validate_showable?
     solutions = current_user.solved(@solution.problem)
     if solutions.empty?
@@ -66,7 +66,7 @@ class SolutionsController < ApplicationController
 
   def download
     @solution = Solution.find(params[:id])
-    if @solution.owned_by? current_user
+    if current_user.owns?(@solution)
       send_file(@solution.source.path, 
                 :filename => @solution.source_file_name, 
                 :disposition => 'attachment')
@@ -156,7 +156,7 @@ class SolutionsController < ApplicationController
   def check
     @solution = Solution.find(params[:id])
     if !judge?
-      if !@solution.owned_by?(current_user)
+      if !current_user.owns?(@solution)
         render :text => 'Бусдын бодлогыг шалгахгүй!'
         return
       elsif @solution.judged?
@@ -176,7 +176,7 @@ class SolutionsController < ApplicationController
 
   def validate_solvable?
     return true unless contest = @solution.contest
-    if @solution.problem.owned_by?(current_user) && !contest.finished?
+    if current_user.owns?(@solution.problem) && !contest.finished?
       flash[:notice] = 'Уучлаарай, өөрийнхөө дэвшүүлсэн бодлогыг тэмцээн дууссаны дараа л бодож болно!.'
       redirect_to contest
       return false
@@ -200,7 +200,7 @@ class SolutionsController < ApplicationController
   end
 
   def validate_showable?
-    if !@solution.contest || @solution.contest.finished? || @solution.owned_by?(current_user)
+    if !@solution.contest || @solution.contest.finished? || current_user.owns?(@solution)
       return true
     else
       flash[:notice] = 'Тэмцээн дуусаагүй байхад бусдын бодолтыг харахгүй!'
@@ -211,7 +211,7 @@ class SolutionsController < ApplicationController
 
   def validate_touchable?
     return true if judge?
-    if !@solution.owned_by?(current_user)
+    if !current_user.owns?(@solution)
       flash[:notice] ='Бусдын бодолтыг өөрчилж болохгүй!'
       redirect_to @solution.problem
       return false

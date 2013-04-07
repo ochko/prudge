@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class ProblemTestsController < ApplicationController
   before_filter :require_user
 
@@ -79,12 +80,12 @@ class ProblemTestsController < ApplicationController
   protected
   def is_touchable(test)
     return true if current_user.judge?
-    return true if test.problem.owned_by?(current_user)
+    return true if current_user.owns?(test.problem)
     return false
   end
 
   def is_viewable(test)
-    return true if test.problem.owned_by?(current_user)
+    return true if current_user.owns?(test.problem)
     return true if current_user.judge?
     return false
   end

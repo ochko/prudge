@@ -18,12 +18,9 @@ class Lesson < ActiveRecord::Base
     title
   end
 
-  def owned_by?(user)
-    user && self.author_id ==  user.id
-  end
-
   def touchable_by?(user)
-    owned_by?(user) || (user && user.admin?)
+    return false unless user
+    author_id == user.id || user.admin?
   end
 
   define_index do
