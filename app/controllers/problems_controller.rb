@@ -59,7 +59,7 @@ class ProblemsController < ApplicationController
   end
 
   def destroy
-    raise if @problem.solutions.count == 0
+    raise if @problem.solutions.count > 0
     @problem.destroy
     redirect_to :action => :index
   end
