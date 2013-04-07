@@ -4,8 +4,8 @@
     - if @problem && @problem.id
       - if can? :update, @problem
         %li!= link_to 'Энэ бодлогын тестүүд', new_problem_test_path(:problem_id => @problem.id)
-      - if @problem.has_permission?(current_user)
         %li.edit!= link_to 'Бодлогыг засварлах', edit_problem_path(@problem)
+      - if can? :destroy, @problem
         %li.delete!= link_to 'Бодлогыг устгах', @problem, :confirm => 'Are you sure?', :method => :delete
     - if judge?
       %li!= link_to 'Дэвшигдсэн бодлогууд', proposals_path

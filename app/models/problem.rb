@@ -50,23 +50,6 @@ class Problem < ActiveRecord::Base
     solutions.count
   end
 
-  def has_permission?(user)
-    return false unless user
-    return true if user.judge?
-    return false unless self.contest.nil?
-    return false if self.user_id != user.id
-    return true
-  end
-
-  def available_to(user)
-    return false unless user
-    return true if user.judge?
-    return true if self.user_id == user.id
-    return false if self.contest.nil?
-    return true if self.contest.started?
-    return false
-  end
-
   define_index do
     indexes :name
     indexes :text
