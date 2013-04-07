@@ -9,6 +9,7 @@ config/*.sphinx.conf
 config/database.yml
 config/twitter.yml
 config/mail.yml
+config/sphinx.yml
 config/server.pem
 config/deploy.rb
 db/sphinx
