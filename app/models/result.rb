@@ -5,8 +5,7 @@ class Result < ActiveRecord::Base
   named_scope :incorrect, :conditions => { :matched => false }
   named_scope :real, :conditions => { :hidden => true }
   
-
-  def after_create
+  def before_save
     self.hidden = test.hidden
   end
 

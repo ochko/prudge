@@ -53,8 +53,6 @@ class Solution < ActiveRecord::Base
     end
   end
 
-  before_destroy { |solution| solution.reset! }
-
   def self.best
     passed.fast.first
   end
@@ -119,21 +117,10 @@ class Solution < ActiveRecord::Base
 
   def reset!
     results.clear
-    problem.decrement!(:solved_count) if passed?
-    update_attributes(:percent => 0.0,
-                      :time    => 0.0,
-                      :point   => 0.0,
-                      :junk    => nil)
-    user.refresh_points!
-    user.solution_uploaded!
+    update_attributes(:percent => 0.0, :time => 0.0, :point => 0.0, :junk => nil)
   end
 
   def summarize!
-    summarize_results!
-    user.refresh_points!
-  end
-
-  def summarize_results!
     return if results.empty?
 
     ok = results.correct.real.size
@@ -144,12 +131,7 @@ class Solution < ActiveRecord::Base
       self.percent = (ok.to_f / all)
       self.point   = percent * problem.level
       self.time    = average_time
-
-      if passed?
-        self.solved_in ||= contest.try(:time_passed)
-        problem.increment!(:solved_count)
-      end
-
+      self.solved_in ||= solution.contest.try(:time_passed)
       self.save!
     end
   end

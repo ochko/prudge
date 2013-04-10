@@ -45,16 +45,20 @@ class Contest < ActiveRecord::Base
       contest.start > contest.end
   end
 
-  before_save :update_problems
-
-  after_create :notify_users
-
-  after_save :notify_watchers
-
   named_scope :current, :conditions => "end > NOW()", :order => "start ASC"
   named_scope :finished,:conditions => "end < NOW()", :order => "end DESC"
   named_scope :pending, :conditions => "end >= NOW()"
   named_scope :commented, :conditions => "comments_count > 0"
+
+  define_index do
+    indexes :name
+    indexes :description
+    set_property :field_weights => { 
+      :name => 9,
+      :description => 5
+    }
+    set_property :delta => true
+  end
 
   def standings
     num, point, time = 0, 0.0, 0.0
@@ -93,22 +97,12 @@ class Contest < ActiveRecord::Base
   end
 
   def time_passed
-    Return nil unless started?
+    return nil unless started?
     Time.now - start
   end
 
   def level_name
     LEVEL_NAMES[level]
-  end
-
-  define_index do
-    indexes :name
-    indexes :description
-    set_property :field_weights => { 
-      :name => 9,
-      :description => 5
-    }
-    set_property :delta => true
   end
 
   def text
@@ -123,29 +117,7 @@ class Contest < ActiveRecord::Base
     "Тэмцээний хугацаа өөрчлөгдөв : '#{name}'. http://coder.query.mn/contests/#{id} (#{self.start} -> #{self.end})"
   end
 
-  private
-  def update_problems
-    if self.changes.has_key?('start') || self.changes.has_key?('end')
-      self.problems.each do |problem|
-        problem.update_attributes!(:active_from => self.start,
-                                   :inactive_from => self.end)
-      end
-    end
-  end
-  
-  def notify_users
-    Twitit.update create_announcement
-    User.active.each do |user|
-      user.delay.deliver_new_contest(self)
-    end
-  end
-
-  def notify_watchers
-    if self.changes['start'] || self.changes['end']
-      Twitit.update update_announcement
-      watchers.each do |watcher|
-        watcher.delay.deliver_contest_update(self)
-      end
-    end
+  def time_changed?
+    (changed & %w[start end]).present?
   end
 end

@@ -45,9 +45,9 @@ class User < ActiveRecord::Base
     Notifier.deliver_release_notification(self)  
   end
 
-  def deliver_problem_selection!(contest, problem)
+  def deliver_problem_selection!(problem)
     return unless email_valid?
-    Notifier.deliver_problem_selection(self, contest, problem)
+    Notifier.deliver_problem_selection(self, problem.contest, problem)
   end
 
   def deliver_new_contest(contest)
@@ -104,12 +104,12 @@ class User < ActiveRecord::Base
     end
   end
 
-  def refreshed_points
+  def point_summary
     User.connection.select_value("select sum(point) from (select problem_id, max(point) as point from solutions where user_id = #{id} group by problem_id) maxes").to_f
   end
 
-  def refresh_points!
-    self.points = refreshed_points
+  def resum_points!
+    self.points = point_summary
     save!
   end
 end
