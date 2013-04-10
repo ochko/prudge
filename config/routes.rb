@@ -1,40 +1,56 @@
-ActionController::Routing::Routes.draw do |map|
-  # Fixes for old paths
-  map.connect ':controller/feed.rss', :action => 'index', :format => 'rss'
-  map.connect ':controller/list', :action => 'index'
-  
-  map.resources :users, :member => [:solutions, :lessons, :problems]
-  map.resources :password_resets
-  map.resource :user_session
+Prudge::Application.routes.draw do
+  match ':controller/feed.rss' => '#index', :format => 'rss'
+  match ':controller/list' => '#index'
+  resources :users do
+    member do
+      :solutions
+      :lessons
+      :problems
+    end
+  end
 
-  map.resources :contests
-  map.resources :participants
-  map.resources :problems, :member => [:check]
-  map.resources :lessons
-  map.resources :topics
-  map.resources :solutions, :member =>[:best, :submited, :solved, :view, :download]
-  map.resources :languages
-  map.resources :pages
-  map.resources :problem_tests
-  map.resources :results
-  map.resources :comments
+  resources :password_resets
+  resource :user_session
+  resources :contests
+  resources :participants
+  resources :problems do
+    member do
+      :check
+    end
+  end
 
-  map.root :controller => 'contests', :action => 'last'
-  map.signup 'signup', :controller => 'users', :action => 'new'
-  map.login 'login', :controller => 'user_sessions', :action => 'new'
-  map.logout 'logout', :controller => 'user_sessions', :action => 'destroy'
-  map.forgot_password 'forgot_password', :controller => 'password_resets', :action => 'new'
-  map.account 'account', :controller => 'users', :action => 'account'
-  map.home 'home', :controller => 'home'
-  map.help 'help', :controller => 'home', :action => 'help'
-  map.about 'about', :controller => 'home', :action => 'about'
-  map.rules 'rules', :controller => 'home', :action => 'rules'
-  map.proposals 'proposals', :controller => 'problems', :action => 'proposals'
-  map.connect '/moderate', :controller => 'comments', :action => 'moderate'
-  map.connect '/topic/:type', :controller => 'topics'
-  map.connect '/search/:q', :controller => 'search'
-  map.connect '/watchers/:id/:action', :controller => 'watchers'
-  
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  resources :lessons
+  resources :topics
+  resources :solutions do
+    member do
+      :best
+      :submited
+      :solved
+      :view
+      :download
+    end
+  end
+
+  resources :languages
+  resources :pages
+  resources :problem_tests
+  resources :results
+  resources :comments
+
+  match '/' => 'contests#last'
+  match 'signup' => 'users#new', :as => :signup
+  match 'login' => 'user_sessions#new', :as => :login
+  match 'logout' => 'user_sessions#destroy', :as => :logout
+  match 'forgot_password' => 'password_resets#new', :as => :forgot_password
+  match 'account' => 'users#account', :as => :account
+  match 'home' => 'home#index', :as => :home
+  match 'help' => 'home#help', :as => :help
+  match 'about' => 'home#about', :as => :about
+  match 'rules' => 'home#rules', :as => :rules
+  match 'proposals' => 'problems#proposals', :as => :proposals
+  match '/moderate' => 'comments#moderate'
+  match '/topic/:type' => 'topics#index'
+  match '/search/:q' => 'search#index'
+  match '/watchers/:id/:action' => 'watchers#index'
+  match '/:controller(/:action(/:id))'
 end
