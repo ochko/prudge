@@ -3,7 +3,7 @@
 <div class='user-form'>
   <div class="form-top"> </div>
   <div class="form-middle">
-    <% form_for @user, :url => password_reset_path, :method => :put do |f| %>
+    <%= form_for @user, :url => password_reset_path, :method => :put do |f| %>
     <%= f.error_messages %>
     <%= f.label :password, 'Нууц үг' %>
     <%= f.password_field :password %>

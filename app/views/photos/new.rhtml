@@ -1,6 +1,6 @@
 <h2>Зураг оруулах</h2>
 
-<% form_for :photo, :url => { :action => 'create' }, :html => { :multipart => true } do |form| -%>
+<%= form_for :photo, :url => { :action => 'create' }, :html => { :multipart => true } do |form| -%>
   <p>
     <label for="uploaded_data">Зургаа сонго:</label>
     <br/><%= form.file_field  :uploaded_data %>

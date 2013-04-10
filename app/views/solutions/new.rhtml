@@ -5,7 +5,7 @@
 </h3>
 
 <div class="solution-box">
-<% form_for @solution, :html => { :multipart => true} do |form| %>
+<%= form_for @solution, :html => { :multipart => true} do |form| %>
 <%= form.hidden_field :problem_id %>
 <label>Хэл:</label>
 <%= form.select :language_id, Language.all.collect{|l| [l.name, l.id]} %>

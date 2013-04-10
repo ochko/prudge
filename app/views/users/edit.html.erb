@@ -3,7 +3,7 @@
 <div class="user-form">
   <div class="form-top"> </div>
   <div class="form-middle">
-    <% form_for @user, :url => user_path do |f| %>
+    <%= form_for @user, :url => user_path do |f| %>
     <%= f.error_messages %>
     <%= f.label :login, "Нэвтрэх нэр" %>
     <%= f.text_field :login %>

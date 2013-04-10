@@ -1,7 +1,7 @@
 <h1>Тэст оруулах</h1>
 <h2><%=link_to @problem.name, @problem %></h2>
 <%= error_messages_for 'problem_test' %>
-<% form_for @problem_test, :html=>{:id=>'test-form'} do %>
+<%= form_for @problem_test, :html=>{:id=>'test-form'} do %>
 <%= hidden_field 'problem_test', 'problem_id' %>
 <div id="test-input-area">
 <label for="problem_test_input">Оролт</label>
