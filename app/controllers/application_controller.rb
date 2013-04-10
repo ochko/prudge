@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   helper :all
   helper_method :menu
   protect_from_forgery
-  filter_parameter_logging :password, :password_confirmation
+
   helper_method :current_user_session, :current_user, :current_user?, :admin?, :judge?
 
   class << self

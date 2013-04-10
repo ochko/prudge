@@ -10,6 +10,8 @@ module Prudge
     config.autoload_paths += [config.root.join('lib')]
     config.encoding = 'utf-8'
     # Settings in config/environments/* take precedence those specified here
+
+    config.filter_parameters += [:password, :password_confirmation]
   
     # Skip frameworks you're not going to use (only works if using vendor/rails)
     # config.frameworks -= [ :action_web_service, :action_mailer ]
