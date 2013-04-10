@@ -1,5 +1,5 @@
 class ProblemTest < ActiveRecord::Base
-  named_scope :real, :conditions => { :hidden => true }
+  scope :real, :conditions => { :hidden => true }
   
   belongs_to :problem, :counter_cache => 'tests_count'
 

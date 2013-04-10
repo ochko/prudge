@@ -45,10 +45,10 @@ class Contest < ActiveRecord::Base
       contest.start > contest.end
   end
 
-  named_scope :current, :conditions => "end > NOW()", :order => "start ASC"
-  named_scope :finished,:conditions => "end < NOW()", :order => "end DESC"
-  named_scope :pending, :conditions => "end >= NOW()"
-  named_scope :commented, :conditions => "comments_count > 0"
+  scope :current, :conditions => "end > NOW()", :order => "start ASC"
+  scope :finished,:conditions => "end < NOW()", :order => "end DESC"
+  scope :pending, :conditions => "end >= NOW()"
+  scope :commented, :conditions => "comments_count > 0"
 
   define_index do
     indexes :name

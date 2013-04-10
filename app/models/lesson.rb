@@ -8,7 +8,7 @@ class Lesson < ActiveRecord::Base
            :dependent => :destroy
 
   validates_presence_of     :title, :text
-  named_scope :commented, :conditions => "comments_count > 0"
+  scope :commented, :conditions => "comments_count > 0"
 
   def self.per_page
     10 

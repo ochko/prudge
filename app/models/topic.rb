@@ -9,7 +9,7 @@ class Topic < ActiveRecord::Base
 
   validates_presence_of :title, :description
 
-  named_scope :commented, :conditions => "TRUE"
+  scope :commented, :conditions => "TRUE"
   
   def self.per_page
     20

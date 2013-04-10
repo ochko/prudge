@@ -11,8 +11,8 @@ class User < ActiveRecord::Base
   has_many :lessons, :foreign_key => 'author_id'
   has_many :comments, :dependent => :destroy, :order => "created_at DESC"
 
-  named_scope :active, :conditions => ['uploaded_at > ?', Time.now - 2.year]
-  named_scope :moderators, :conditions => ['admin =? or judge =?', true, true]
+  scope :active, :conditions => ['uploaded_at > ?', Time.now - 2.year]
+  scope :moderators, :conditions => ['admin =? or judge =?', true, true]
   
   attr_protected :admin, :judge, :solutions_count, :points
 

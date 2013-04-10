@@ -36,8 +36,8 @@ class Problem < ActiveRecord::Base
   validates_presence_of :name, :text
   validates_inclusion_of :level, :in => LEVELS
 
-  named_scope :commented, :conditions => ["comments_count > 0 and active_from < ?", Time.now]
-  named_scope :active, :conditions => ["active_from < ?", Time.now]
+  scope :commented, :conditions => ["comments_count > 0 and active_from < ?", Time.now]
+  scope :active, :conditions => ["active_from < ?", Time.now]
 
   def active?
     self.active_from && (self.active_from < Time.now)

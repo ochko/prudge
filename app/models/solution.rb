@@ -23,10 +23,10 @@ class Solution < ActiveRecord::Base
            :dependent => :destroy,
            :order => 'created_at DESC'
 
-  named_scope :for_user, lambda { |user| { :conditions => ['user_id =?', user.id], :include => [:language, :problem], :order => 'created_at desc' } }
-  named_scope :valuable, :conditions => 'percent > 0'
-  named_scope :fast, :order => 'time ASC, source_updated_at ASC'
-  named_scope :for_contest, lambda { |c| { :conditions => ['contest_id =?', c.id] } }
+  scope :for_user, lambda { |user| { :conditions => ['user_id =?', user.id], :include => [:language, :problem], :order => 'created_at desc' } }
+  scope :valuable, :conditions => 'percent > 0'
+  scope :fast, :order => 'time ASC, source_updated_at ASC'
+  scope :for_contest, lambda { |c| { :conditions => ['contest_id =?', c.id] } }
 
   aasm :column => 'state' do
     state :updated, :before_enter => :log, :after_enter => :reset!, :initial => true
