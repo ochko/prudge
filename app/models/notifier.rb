@@ -43,7 +43,6 @@ class Notifier < ActionMailer::Base
     subject       title
     from          "coder.mn@gmail.com"
     recipients    user.email
-    sent_on       Time.now  
     body          options.merge(:login => user.login)
   end
 
