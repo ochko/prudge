@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 module PagesHelper
   def show_category(category)
     if category == 'news'
@@ -10,6 +11,4 @@ module PagesHelper
       "Хуудас"
     end
   end
-
-
 end

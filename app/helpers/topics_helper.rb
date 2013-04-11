@@ -1,5 +1,5 @@
+# -*- coding: utf-8 -*-
 module TopicsHelper
-
   def topic_title_for(param_type)
     if !param_type
       'Хэлэлцүүлгүүд'
@@ -13,5 +13,4 @@ module TopicsHelper
       'Хэлэлцүүлгүүд'
     end
   end
-
 end
