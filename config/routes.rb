@@ -3,9 +3,9 @@ Prudge::Application.routes.draw do
   match ':controller/list' => '#index'
   resources :users do
     member do
-      :solutions
-      :lessons
-      :problems
+      get :solutions
+      get :lessons
+      get :problems
     end
   end
 
@@ -15,7 +15,7 @@ Prudge::Application.routes.draw do
   resources :participants
   resources :problems do
     member do
-      :check
+      get :check
     end
   end
 
@@ -23,11 +23,11 @@ Prudge::Application.routes.draw do
   resources :topics
   resources :solutions do
     member do
-      :best
-      :submited
-      :solved
-      :view
-      :download
+      get :best
+      get :submited
+      get :solved
+      get :view
+      get :download
     end
   end
 
@@ -52,7 +52,6 @@ Prudge::Application.routes.draw do
   match '/topic/:type' => 'topics#index'
   match '/search/:q' => 'search#index'
   match '/watchers/:id/:action' => 'watchers#index'
-  match '/:controller(/:action(/:id))'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
