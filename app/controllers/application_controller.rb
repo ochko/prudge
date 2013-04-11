@@ -13,11 +13,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  protected
-  def prepare_wmd
-    @wmd_needed = true
-  end
-
   private
   def menu
     self.class.context_menu

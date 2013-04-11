@@ -4,8 +4,6 @@ class ProblemsController < ApplicationController
 
   load_and_authorize_resource
 
-  before_filter :prepare_wmd, :only => [:edit, :new]
-
   def index
     respond_to do |format|
       format.html do

@@ -6,7 +6,6 @@ class ContestsController < ApplicationController
                 :except => [:index, :last, :show]
 
   before_filter :require_judge, :only => [:create, :update, :destroy]
-  before_filter :prepare_wmd, :only => [:edit, :new]
 
   def index
     @contests = Contest.paginate(:order => "start DESC", :page => params[:page], :per_page => 20)

@@ -4,8 +4,6 @@ class LessonsController < ApplicationController
 
   load_and_authorize_resource
 
-  before_filter :prepare_wmd, :only => [:edit, :new]
-
   def index
     @lessons = Lesson.paginate(:page=>params[:page], :include =>[:author],
                                :order => "created_at desc")

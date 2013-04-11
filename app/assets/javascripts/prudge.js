@@ -63,4 +63,7 @@ $(function() {
   });
 
   $.syntax({root: "/javascripts/syntax/"});
+
+  var wmd_options = {"output":"Markdown"};
+  createWmd("textarea", "#preview");
 });

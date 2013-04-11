@@ -2,8 +2,6 @@
 class TopicsController < ApplicationController
   menu :discussion
 
-  before_filter :prepare_wmd, :only => [:edit, :new]
-
   load_and_authorize_resource :except => [:index, :show]
   authorize_resource :only => :show
 

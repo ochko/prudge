@@ -70,16 +70,6 @@ module ApplicationHelper
     return list
   end
 
-  def prepare_wmd_if(needed)
-    if needed
-      js = stylesheet_link_tag('wmd')
-      js << javascript_include_tag('showdown')
-      js << javascript_tag('wmd_options = {"output":"Markdown"}')
-      js << javascript_include_tag('wmd')      
-      js << javascript_tag('$(function() { createWmd("textarea", "#preview"); }); ')
-    end
-  end
-
   def markdown(text)
     raw BlueCloth.new(text).to_html
   end

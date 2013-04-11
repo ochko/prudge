@@ -3,8 +3,6 @@ class PagesController < ApplicationController
 
   load_and_authorize_resource
 
-  before_filter :prepare_wmd, :only => [:edit, :new]
-                              
   def index
     authorize! :edit, Page
     @pages = Page.paginate :page=>params[:page], :per_page => 20
