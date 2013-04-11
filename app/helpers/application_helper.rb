@@ -79,4 +79,8 @@ module ApplicationHelper
       js << javascript_tag('$(function() { createWmd("textarea", "#preview"); }); ')
     end
   end
+
+  def markdown(text)
+    raw BlueCloth.new(text).to_html
+  end
 end
