@@ -17,6 +17,8 @@ module Prudge
     # config.frameworks -= [ :action_web_service, :action_mailer ]
   
     config.cache_store = :mem_cache_store, '127.0.0.1:11211', { :namespace => 'coder' }
+
+    config.session_store :cache_store, :key => '_prudge_session'
   
     config.action_controller.session_store = :mem_cache_store
   
