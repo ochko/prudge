@@ -48,6 +48,7 @@ GEM
       activesupport (>= 3.0)
     cocaine (0.5.1)
       climate_control (>= 0.0.3, < 1.0)
+    dalli (2.3.0)
     delayed_job (3.0.5)
       activesupport (~> 3.0)
     erubis (2.7.0)
@@ -71,7 +72,7 @@ GEM
     mono_logger (1.0.1)
     multi_json (1.7.2)
     multipart-post (1.2.0)
-    mysql (2.9.1)
+    mysql2 (0.3.11)
     net-scp (1.1.0)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.1)
@@ -79,7 +80,6 @@ GEM
     net-ssh (2.6.6)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
-    ochko-flow_pagination (1.2.3)
     paperclip (3.4.1)
       activemodel (>= 3.0.0)
       activerecord (>= 3.0.0)
@@ -169,12 +169,12 @@ DEPENDENCIES
   bluecloth
   cancan
   capistrano
+  dalli
   delayed_job (~> 3.0.5)
   gravtastic
   haml
   json
-  mysql
-  ochko-flow_pagination (= 1.2.3)
+  mysql2
   paperclip (~> 3.0)
   rack-openid
   rails (~> 3.2)
