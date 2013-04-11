@@ -50,16 +50,6 @@ class Contest < ActiveRecord::Base
   scope :pending, :conditions => "end >= NOW()"
   scope :commented, :conditions => "comments_count > 0"
 
-  define_index do
-    indexes :name
-    indexes :description
-    set_property :field_weights => { 
-      :name => 9,
-      :description => 5
-    }
-    set_property :delta => true
-  end
-
   def standings
     num, point, time = 0, 0.0, 0.0
     numbers = [] 

@@ -12,15 +12,4 @@ class Page < ActiveRecord::Base
   def text
     content
   end
-
-  # sphinx
-  define_index do
-    indexes :title
-    indexes :content
-    set_property :field_weights => { 
-      :title => 11,
-      :content => 8
-    }
-    set_property :delta => true
-  end
 end

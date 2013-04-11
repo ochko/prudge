@@ -1,16 +1,4 @@
 class Problem < ActiveRecord::Base
-  define_index do
-    indexes :name
-    indexes :text
-    indexes :source
-    set_property :field_weights => { 
-      :name => 10,
-      :text => 6,
-      :source => 3
-    }
-    set_property :delta => true
-  end
-
   LEVELS = [1, 2, 4, 8]
   PRICES = { 
     1 => 5, 

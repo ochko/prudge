@@ -17,14 +17,4 @@ class Lesson < ActiveRecord::Base
   def name
     title
   end
-
-  define_index do
-    indexes :title
-    indexes :text
-    set_property :field_weights => { 
-      :title => 8,
-      :text => 5
-    }
-    set_property :delta => true
-  end
 end
