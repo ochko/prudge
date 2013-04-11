@@ -4,4 +4,4 @@
 <%=render :partial => 'solution', :collection => @solutions %>
 </table>
 
-<%= will_paginate @solutions, :renderer => FlowPagination::LinkRenderer, :noajax => true %>
+<%= will_paginate @solutions, :noajax => true %>

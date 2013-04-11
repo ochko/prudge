@@ -1,2 +1,2 @@
 $("#user-solutions").append("<%= escape_javascript(render(:partial => 'users/solution', :collection => @solutions)) %>");
-$("#flow_pagination").replaceWith("<%= escape_javascript(will_paginate(@solutions, :noajax => true, :params =>{:action => 'solutions'}, :renderer => FlowPagination::LinkRenderer)) %>");
+$("#flow_pagination").replaceWith("<%= escape_javascript(will_paginate(@solutions, :noajax => true, :params =>{:action => 'solutions'})) %>");

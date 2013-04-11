@@ -4,5 +4,5 @@
 <%=render :partial => 'contest', :collection => @contests %>
 </table>
 
-<%= will_paginate @contests, :renderer => FlowPagination::LinkRenderer, :noajax => true %>
+<%= will_paginate @contests, :noajax => true %>
 

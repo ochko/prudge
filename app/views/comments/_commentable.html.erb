@@ -25,4 +25,4 @@
   <%= render :partial => 'comments/comment', :collection => commentable.comments.paginate(:page => 1) %>
 </div>
 
-<%= will_paginate commentable.comments.paginate(:page => 1), :params =>{:controller => '/comments', :type => commentable.class.name.downcase }, :renderer => FlowPagination::LinkRenderer, :noajax => true %>
+<%= will_paginate commentable.comments.paginate(:page => 1), :params =>{:controller => '/comments', :type => commentable.class.name.downcase }, :noajax => true %>

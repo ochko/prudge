@@ -9,4 +9,4 @@
   <%= render :partial => 'users/solution', :collection =>@solutions %>
 </table>
 
-<%= will_paginate @solutions, :params =>{:action => 'solutions'}, :renderer => FlowPagination::LinkRenderer, :noajax => true %>
+<%= will_paginate @solutions, :params =>{:action => 'solutions'}, :noajax => true %>
