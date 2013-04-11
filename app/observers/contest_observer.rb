@@ -10,7 +10,7 @@ class ContestObserver < ActiveRecord::Observer
   def after_create(contest)
     Twitit.update create_announcement
     User.active.each do |user|
-      user.delay.deliver_new_contest(contest)
+      user.delay.notify_new_contest(contest)
     end
   end
 
@@ -19,7 +19,7 @@ class ContestObserver < ActiveRecord::Observer
 
     Twitit.update update_announcement
     contest.watchers.each do |watcher|
-      watcher.delay.deliver_contest_update(contest)
+      watcher.delay.notify_contest_update(contest)
     end
   end
 end

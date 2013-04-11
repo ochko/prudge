@@ -34,33 +34,33 @@ class User < ActiveRecord::Base
     object.user_id == self.id
   end
 
-  def deliver_password_reset_instructions!
+  def send_password_reset_instructions!
     reset_perishable_token!
-    Notifier.deliver_password_reset_instructions(self)  
+    Notifier.password_reset_instructions(self)
   end
 
-  def deliver_release_notification!
+  def notify_release_notification!
     return unless email_valid?
     reset_perishable_token!
-    Notifier.deliver_release_notification(self)  
+    Notifier.release_notification(self)  
   end
 
-  def deliver_problem_selection!(problem)
+  def notify_problem_selection!(problem)
     return unless email_valid?
-    Notifier.deliver_problem_selection(self, problem.contest, problem)
+    Notifier.problem_selection(self, problem.contest, problem)
   end
 
-  def deliver_new_contest(contest)
+  def notify_new_contest(contest)
     return unless notify_new_contests?
     return unless email_valid?
     sleep 180
-    Notifier.deliver_new_contest(self, contest)
+    Notifier.new_contest(self, contest)
   end
 
-  def deliver_contest_update(contest)
+  def notify_contest_update(contest)
     return unless email_valid?
     sleep 180
-    Notifier.deliver_contest_update(self, contest)
+    Notifier.contest_update(self, contest)
   end
 
   def email_valid?

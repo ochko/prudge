@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 class Notifier < ActionMailer::Base
-  default_url_options[:host] = "coder.query.mn"
+  default :from => "coder.mn@gmail.com", :host => "coder.query.mn"
   
   def password_reset_instructions(user)
     user_notify(user, "Нууц үг сэргээх заавар")
@@ -11,11 +11,12 @@ class Notifier < ActionMailer::Base
   end
 
   def problem_selection(user, contest, problem)
-    compose(user, "Таны дэвшүүлсэн бодлого тэмцээнд сонгогдлоо",
-            :problem_url => problem_url(problem),
-            :contest_url => contest_url(contest),
-            :problem => problem, 
-            :contest => contest)
+    @problem_url = problem_url(problem)
+    @contest_url = contest_url(contest)
+    @problem = problem
+    @contest = contest
+
+    compose(user, "Таны дэвшүүлсэн бодлого тэмцээнд сонгогдлоо")
   end
 
   def new_contest(user, contest)
@@ -29,21 +30,22 @@ class Notifier < ActionMailer::Base
   private
 
   def user_notify(user, title)
-    compose(user, title, 
-            :edit_password_reset_url => edit_password_reset_url(user.perishable_token))
+    @edit_password_reset_url = edit_password_reset_url(user.perishable_token)
+
+    compose(user, title)
   end
 
   def contest_notify(user, contest, title)
-    compose(user, title, 
-            :contest => contest,
-            :contest_url => contest_url(contest))
+    @contest = contest
+    @contest_url = contest_url(contest)
+
+    compose(user, title) 
   end
 
-  def compose(user, title, options)
-    subject       title
-    from          "coder.mn@gmail.com"
-    recipients    user.email
-    body          options.merge(:login => user.login)
+  def compose(user, title)
+    @login = user.login
+
+    mail(:subject => title, :to => user.email)
   end
 
 end

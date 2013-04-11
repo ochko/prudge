@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class PasswordResetsController < ApplicationController
   before_filter :load_user_using_perishable_token, :only => [:edit, :update]
   before_filter :require_no_user
@@ -9,7 +10,7 @@ class PasswordResetsController < ApplicationController
   def create
     @user = User.find_by_email(params[:email])
     if @user
-      @user.deliver_password_reset_instructions!  
+      @user.send_password_reset_instructions!
       flash[:notice] = "Нууц үг сэргээх зааврыг и-мэйл рүү тань илгээв." +
         "Шалгана уу?"
       redirect_to root_url
