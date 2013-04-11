@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 class ApplicationController < ActionController::Base
-  include ExceptionNotification::Notifiable
-
   helper :all
   helper_method :menu
   protect_from_forgery
