@@ -1,0 +1,79 @@
+mn:
+  title:
+    home:
+      index: Мэдээ
+      about: Сайтын тухай
+      help: Тусламж
+      rules: Нөхцөл
+      asian: Ази тив
+      international: Олон улс
+    contests:
+      index: Тэмцээнүүд
+      last: Тэмцээн
+      show: Тэмцээн
+      new: Тэмцээн зарлах
+      edit: Тэмцээнийг засварлах
+    languages:
+      index: Програмчлалын хэлүүд
+      new: Шинэ програмчлалын хэл
+      edit: Програмчлалын хэлийг шинэчлэх
+    lessons:
+      index: Хичээлүүд
+      show: Хичээл
+      new: Хичээл нийтлэх
+      edit: Хичээлийг засварлах
+    pages:
+      index: Хуудсууд
+      show: Хуудас
+      new: Шинэ хуудас оруулах
+      edit: Хуудсыг шинэчлэх
+    password_resets:
+      new: Нууц үг сэргээх хүсэлт
+      edit: Нууц үгээ сэргээх
+    problem_tests:
+      show: Бодлогын тэст
+      new: Шинэ тэст
+      edit: Тэстийг засварлах
+    problems:
+      index: Бодлогууд
+      proposals: Дэвшигдсэн бодлогууд
+      show: Бодлого
+      new: Бодлого дэвшүүлэх
+      edit: Бодлогыг засварлах
+    results:
+      show: Тэстийн үр дүн
+    search:
+      index: Хайлт
+    solutions:
+      index: Сүүлийн бодолтууд
+      show: Бодолт
+      view: Бодолт
+      new: Бодолт илгээх
+      edit: Бодолт засварлах
+    topics:
+      index: Хэлэлцүүлгүүд
+      show: Хэлэлцүүлэг
+      new: Шинэ хэлэлцүүлэг
+      edit: Хэлэлцүүлэг шинэчлэх
+    user_session:
+      new: Нэвтрэх
+    users:
+      new: Бүртгүүлэх
+      edit: Тохиргоог шинэчлэх
+      index: Кодерууд
+      account: Кодер
+      show: Кодер
+    comments:
+      index: Сүүлд нэмэгдсэн бичээсүүд
+      moderate: Хянах
+    user_sessions:
+      new: Нэвтрэх
+  label:
+    execution:
+      ok: "Хэвийн ажиллав"
+      timeout: "Хугацаа хэтрэв"
+      memory: "Санах ой хэтрэв"
+      output: "Гаралт хэтрэв"
+      invalid: "Буруу үйлдэл"
+      return: "Алдаа буцаалаа"
+      ng: "Үл мэдэгдэх алдаа"
