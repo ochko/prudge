@@ -1,3 +1,0 @@
-check process delayed_job with pidfile /home/ochko/apps/coder/shared/pids/delayed_job.pid
-start program = "/home/ochko/apps/coder/current/script/delayed_job -e production start"
-stop program = "/home/ochko/apps/coder/current/script/delayed_job -e production stop"
