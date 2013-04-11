@@ -108,7 +108,7 @@ class SolutionsController < ApplicationController
     @solution = Solution.find(params[:id])
     authorize! :check, @solution
     @solution.submit
-    render :partial => 'results/wait'
+    render :text => 'wait'
   rescue CanCan::AccessDenied => exception
     render :text => exception.message
   end

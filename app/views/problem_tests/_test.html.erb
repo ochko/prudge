@@ -6,7 +6,7 @@
     <td class="test-actions">
       <%= link_to image_tag('test-open.png'), test %>
       <%= link_to image_tag('edit.png'), :action => 'edit', :id => test %>
-      <%= link_to_remote image_tag('delete.png'), :url =>problem_test_path(test), :method => :delete, :confirm => "Тэстийг устгах уу?" %>
+      <%= link_to image_tag('delete.png'), test, :remote => true, :method => :delete, :confirm => "Тэстийг устгах уу?" %>
     </td>
   </tr>
 <% end %>

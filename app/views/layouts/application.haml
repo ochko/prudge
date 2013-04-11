@@ -4,6 +4,7 @@
     %meta{:content => "text/html;charset=UTF-8", "http-equiv" => "content-type"}/
     %meta{:content => "noindex", :name => "robots"}/
     %meta{:content => "nofollow", :name => "robots"}/
+    = csrf_meta_tag
     %title #{title} @ Coder
     = auto_discovery_link_tag :rss, lessons_path(:format=>:rss), :title => "Coder Lessons"
     %link{:href => "/images/run.ico", :rel => "icon", :type => "image/x-icon"}/

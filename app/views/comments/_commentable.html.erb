@@ -8,15 +8,7 @@
   <%=image_tag(current_user.gravatar_url(:size => 60)) %>
   <span class="user-points" title="Нийт оноо"><%= "%.2f" % current_user.points if !current_user.points.nil? %></span>
 </div>
-<% form_remote_tag :url=>{:controller=>'comments', :action => 'create'},
-       :html=>{:id=>'comment-form', :class => 'span-17'},
-       :before => "$('#comment-spinner').show(); $('#comment-message').html('')",
-       :loading => "$('#comment-form').disable(); ",
-       :success => "$('#comment_text').val('');",
-       :complete => "$('#comment-spinner').hide(); $('#comment-form').enable();",
-       :update => {:success => 'comments', :failure => 'comment-message'},
-       :position=> 'top' do %>
-
+<%= form_tag comments_path, :method => :post, :id=>'comment-form', :class => 'span-17' do %>
     <%= hidden_field_tag 'comment[topic_id]', commentable.id %>
     <%= hidden_field_tag 'comment[topic_type]', commentable.class.name %>
 

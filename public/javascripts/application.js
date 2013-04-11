@@ -31,5 +31,36 @@ $(function() {
     }
   );
 
+  $('#check-button').click(function(){
+      $('#check-button').hide();
+      $('#result-content').hide();
+      $('#check-wait').show();
+  });
+
+  $('#comment-form').submit(function(e){
+      $('#comment-spinner').show();
+      $('#comment-message').html('');
+      $('#comment-form').disable();
+
+      $.ajax({
+          url: $(this).attr("action"),
+          type: 'POST',
+          data: $(this).serialize(),
+          success: function(data, status, xhr) {
+              $('#comment_text').val('');
+              $('#comments').prepend(data);
+          },
+          error: function(xhr, status, message) {
+              $('#comment-message').html(message);
+          },
+          complete: function(xhr, status){
+              $('#comment-spinner').hide();
+              $('#comment-form').enable();
+          }
+      });
+
+      return false;
+  });
+
   $.syntax({root: "/javascripts/syntax/"});
 });
