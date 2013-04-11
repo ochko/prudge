@@ -1,4 +1,4 @@
-cfg = YAML.load_file("#{RAILS_ROOT}/config/twitter.yml")
+cfg = YAML.load_file("#{Rails.root}/config/twitter.yml")
 
 Twitter.configure do |config|
   config.consumer_key = cfg["consumer_key"]

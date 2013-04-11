@@ -16,19 +16,12 @@ module Prudge
     # Skip frameworks you're not going to use (only works if using vendor/rails)
     # config.frameworks -= [ :action_web_service, :action_mailer ]
 
-    config.cache_store = :mem_cache_store, '127.0.0.1:11211', { :namespace => 'prudge' }
+    config.cache_store = :dalli_store, '127.0.0.1', { :namespace => 'prudge' }
 
     config.session_store :cache_store, :key => '_prudge_session'
   
-    config.action_controller.session_store = :mem_cache_store
-  
     # Make Active Record use UTC-base instead of local time
     # config.active_record.default_timezone = :utc
-  
-    config.action_controller.session = {
-      :key => '_coder_session',
-      :secret => '4dfcafege5e3f536df7a3fa4db76f5a8070d9d508864b876cabe7d79a773f5bf11088849b897a8c98a38c6ce6he9f92ba79b386dadd2be5e1efefe8f83f4c7m'
-    }
   
     config.autoload_paths << Rails.root.join('app','observers')
     config.active_record.observers = [:solution_observer, :problem_observer, :contest_observer, :comment_observer]
