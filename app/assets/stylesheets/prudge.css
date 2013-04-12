@@ -39,7 +39,6 @@ body, p, ol, ul, td {
     color: #333;
 }
 #logo {
-    background: url("/images/logo.png") no-repeat scroll 0 5px transparent;
     display: block;
     height: 50px;
     left: 10px;

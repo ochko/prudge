@@ -5,7 +5,7 @@
     %meta{:content => "text/html;charset=UTF-8", "http-equiv" => "content-type"}/
     %meta{:content => "noindex", :name => "robots"}/
     %meta{:content => "nofollow", :name => "robots"}/
-    = auto_discovery_link_tag :rss, lessons_path(:format=>:rss), :title => "Coder Lessons"
+    = auto_discovery_link_tag :rss, lessons_path(:format=>:rss), :title => "#{Settings.name} - Lessons"
     %link{:href => "/images/run.ico", :rel => "icon", :type => "image/x-icon"}/
     %link{:href => "/images/run.ico", :rel => "shortcut icon", :type => "image/x-icon"}/
 
@@ -16,6 +16,8 @@
     #fadeout
     #flybar
       %a#logo{:href => "#top"}
+        %h2= Settings.name
+        = Settings.slogan
       .navigation.home
         = link_to image_tag('home.png'), :controller =>'home'
       .navigation.contests
@@ -61,7 +63,8 @@
         \#{link_to 'Бидний зарчим', :controller => 'home', :action => 'rules'}
         \#{link_to 'Програмчлалын хэлүүд', languages_path}
         #copyright
-          \&copy;2010-#{Date.today.year} Coder.query.mn. All rights reserved.
+          \&copy; #{Date.today.year}
+          = Settings.copyright
       #sponsors
         %a{:href => "http://www.kt.mn", :target => "kt"}
           %img{:alt => "KT", :src => "http://kt.mn/templates/ja_sanidineii_light/images/logo.png"}/
