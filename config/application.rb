@@ -7,6 +7,11 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module Prudge
   class Application < Rails::Application
+    yml = YAML.load_file File.expand_path('../config.yml', __FILE__)
+
+    config.time_zone = yml['time_zone']
+    config.i18n.default_locale = yml['default_locale']
+
     config.filter_parameters += [:password, :password_confirmation]
 
     config.autoload_paths += [config.root.join('lib'),
@@ -24,10 +29,6 @@ module Prudge
   
     config.active_record.observers = [:solution_observer, :problem_observer, :contest_observer, :comment_observer]
   
-    config.time_zone = 'Ulaan Bataar'
-  
-    config.i18n.default_locale = :mn
-
     config.assets.enabled = true
     config.assets.version = '1.0'
   end
