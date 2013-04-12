@@ -22,3 +22,8 @@ gem 'cancan'
 gem 'dalli'
 gem 'paperclip', '~>3.0'
 
+group :assets do
+  gem 'sass-rails',   "~> 3.2.0"
+  gem 'coffee-rails', "~> 3.2.0"
+  gem 'uglifier'
+end
