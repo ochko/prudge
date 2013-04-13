@@ -7,11 +7,6 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module Prudge
   class Application < Rails::Application
-    yml = YAML.load_file File.expand_path('../config.yml', __FILE__)
-
-    config.time_zone = yml['time_zone']
-    config.i18n.default_locale = yml['default_locale']
-
     config.filter_parameters += [:password, :password_confirmation]
 
     config.autoload_paths += [config.root.join('lib'),
