@@ -1,0 +1,47 @@
+.account-container.login.stacked
+  .content.clearfix
+    = form_for @user do |f|
+      %h1
+        Create Your Account
+      .login-social
+        %p Sign in using social network:
+        %a.btn.btn-small{:href => "#"}
+          %i.icon-twitter
+          Login with Twitter
+        %a.btn.btn-small{:href => "#"}
+          %i.icon-facebook
+          Login with Facebook
+
+      .login-fields
+        %p Create your free account:
+        .field
+          .input-prepend
+            %span.add-on
+              %i.icon-user
+            = f.text_field :login, :placeholder => "Login", :class => 'span3'
+        .field
+          .input-prepend
+            %span.add-on
+              %i.icon-envelope
+            = f.text_field :email, :placeholder => "Email", :class => 'span3'
+        .field
+          .input-prepend
+            %span.add-on
+              %i.icon-key
+            = f.password_field :password, :placeholder => "Password", :class => 'span3'
+        .field
+          .input-prepend
+            %span.add-on
+              %i.icon-key
+            = f.password_field :password_confirmation, :placeholder => "Password Again", :class => 'span3'
+        / /password
+      / /login-fields
+      .login-actions
+        %button.button.btn.btn-primary
+          %i.icon-off
+          Register
+      / .actions
+  / /content
+/ /account-container
+.login-extra
+  Already have an account? #{link_to 'Login', login_path}

@@ -1,11 +1,8 @@
 /*------------------------------------------------------------------
 Signin
 ------------------------------------------------------------------- */
-@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&subset=latin,cyrillic);
-
 body.login {
   color: #838383;
-  font-family: 'Open Sans Condensed';
   background: url(img/login-bg.png);
 }
 .account-container {
@@ -21,7 +18,6 @@ body.login {
 .account-container h1 {
   margin-bottom: .4em;
   color: #263849;
-  font-family: 'Open Sans Condensed';
   font-size: 30px;
 }
 .login .content {
@@ -37,15 +33,10 @@ body.login {
   box-shadow: inset 2px 2px 4px #f1f1f1;
 }
 
-.login-actions {
-  float: left;
-  width: 100%;
-  margin-top: -1em;
-  margin-bottom: 1.25em;
-}
 .login-social {
   float: left;
   padding: 10px 0 15px;
+  margin: 15px 0;
   border: 1px dotted #CCC;
   border-right: none;
   border-left: none;
