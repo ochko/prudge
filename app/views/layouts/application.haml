@@ -70,16 +70,13 @@
       #context-menu
         = render(:partial => "menus/#{menu}") if menu
 
-    %footer.footer.navbar-fixed-bottom
+    %footer.footer
       .container
-        #footer-links
-          \#{link_to 'Тусламж', :controller => 'home', :action => 'help'}
-          \#{link_to 'Сайтын тухай', :controller => 'home', :action => 'about'}
-          \#{link_to 'Бидний зарчим', :controller => 'home', :action => 'rules'}
-          \#{link_to 'Програмчлалын хэлүүд', languages_path}
-          #copyright
-            \&copy; #{Date.today.year}
-            = Settings.copyright
+        \&copy; #{Date.today.year} #{Settings.copyright} ·
+        \#{link_to 'Тусламж', :controller => 'home', :action => 'help'} ·
+        \#{link_to 'Сайтын тухай', :controller => 'home', :action => 'about'} ·
+        \#{link_to 'Бидний зарчим', :controller => 'home', :action => 'rules'} ·
+        \#{link_to 'Програмчлалын хэлүүд', languages_path}
 
     = javascript_include_tag "application"
 
