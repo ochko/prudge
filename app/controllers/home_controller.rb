@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  layout 'static'
   menu :home
 
   def about

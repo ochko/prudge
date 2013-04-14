@@ -1,35 +1,75 @@
-%h1.append-bottom Сайтын тухай
-%table#about
-  %tr
-    %td.title Зорилго
-    %td
-      Код бичих, бодлого бодох дуртай залууст өөрсдийгөө хөгжүүлэх, сурч мэдэх нөхцлийг бүрдүүлэх, амжилт гаргахад нь туслах.
-  %tr
-    %td &nbsp;
-  %tr
-    %td.title Хамтрагчид
-    %td
-      %a{:href => "http://smcs.num.edu.mn", :target => "num"}> МУИС МКС
-      ,
-      = succeed "," do
-        %a{:href => "http://www.usi.edu.mn", :target => "usivoc"} USI МС
-      %a{:href => "#", :target => "usivoc"} Дархан RGB Дунд Сургууль
-  %tr
-    %td &nbsp;
-  %tr
-    %td.title Модераторууд
-    %td
-      = User.moderators.map{|u| link_to u.login, u }.join(", ")
-  %tr
-    %td &nbsp;
-  %tr
-    %td.title Холбогдох
-    %td
-      %a{:href => "http://twitter.com/ochko", :target => "twitter"}
-        %img{:src => "/images/icon-twitter.png"}/
-      %a{:href => "http://ochko.blogspot.com", :target => "blogger"}
-        %img{:src => "/images/icon-blogger.png"}/
-      %a{:href => "http://profiles.google.com/101381802713098409016", :target => "google"}
-        %img{:src => "/images/icon-google.png"}/
-      %a{:href => "http://github.com/ochko", :target => "github"}
-        %img{:src => "/images/icon-github.png"}/
+.jumbotron.masthead
+  .container
+    %h1= Settings.name
+    %p= Settings.description
+.container
+  .marketing
+    %h1 Supported Languages
+    %p.marketing-byline
+      Greatest languages we support.
+    .row-fluid
+      %ul
+        - Language.all.each do |language|
+          %li.span2
+            = image_tag "languages/#{language.name}.png", :alt => language.name
+
+    %hr.soften/
+    %h1 Judges
+    %p.marketing-byline
+      Team of judges answering questions of any kind.
+    .row-fluid
+      %ul
+        - User.moderators.each do |user|
+          %li.span2
+            = image_tag user.gravatar_url(:size => 128), :alt => user.login, :class => 'img-circle'
+            %br
+            = link_to user.login, user
+            %br
+            - unless user.social_twitter.blank?
+              = link_to "http://twitter.com/#{user.social_twitter}" do
+                %i.icon-twitter
+            - unless user.social_facebook.blank?
+              = link_to "http://twitter.com/#{user.social_twitter}" do
+                %i.icon-facebook
+    %hr.soften/
+    %h1 Powered by Prudge
+    %p.marketing-byline Need reasons to love Prudge? Look no further.
+    .row-fluid
+      .span4
+        = image_tag('about-twitter-github.png', :class => 'marketing-img')
+        %h2 By coders, for coders.
+        %p
+          Built by
+          %a{:href => "https://github.com/ochko"} @ochko
+          and
+          %a{:href => "https://github.com/ochko/prudge"} others.
+          Prudge utilizes 
+          %a{:href => "http://rubyonrails.org"} Ruby on Rails
+          and
+          %a{:href => "http://http://twitter.github.io/bootstrap/"} Bootstrap
+          and is managed through
+          %a{:href => "http://github.com"} GitHub
+          to help coders solve problems on the web.
+      .span4
+        = image_tag('about-devices.png', :class => 'marketing-img')
+        %h2 Works everywhere.
+        %p
+          Prudge was made to not only look and behave great in the latest desktop browsers (as well as IE7!), but in tablet and smartphone browsers as well.
+      .span4
+        = image_tag('about-prudge-features.png', :class => 'marketing-img')
+        %h2 Packed with features.
+        %p
+          Sandboxed code execution ensures security as well as precise measurements on running code.
+          Lesson contents, per problems discussions help beginners to level-up quickly.
+    .prudge-social
+      .container
+        %ul.prudge-social-buttons
+          %li
+            %iframe.github-btn{:allowtransparency => "true", :frameborder => "0", :height => "20px", :scrolling => "0", :src => "http://ghbtns.com/github-btn.html?user=ochko&repo=prudge&type=watch&count=true", :width => "100px"}
+          %li
+            %iframe.github-btn{:allowtransparency => "true", :frameborder => "0", :height => "20px", :scrolling => "0", :src => "http://ghbtns.com/github-btn.html?user=ochko&repo=prudge&type=fork&count=true", :width => "102px"}
+          %li.follow-btn
+            %a.twitter-follow-button{"data-link-color" => "#0069D6", "data-show-count" => "true", :href => "https://twitter.com/codermn"} Follow @codermn
+          %li.tweet-btn
+            %a.twitter-share-button{"data-count" => "horizontal", "data-related" => "mdo:coder mn", "data-url" => "https://github.com/ochko/prudge", "data-via" => "codermn", :href => "https://twitter.com/share"} Tweet
+

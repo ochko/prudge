@@ -60,15 +60,8 @@
                   = link_to 'Login', login_path
                 %li
                   = link_to 'Signup', signup_path
-    .container
-      - if flash[:notice]
-        #notice.notice
-          %span#notice-close{:style => "float:right"}
-            = link_to_function image_tag('close.png'), "$('#notice').fadeOut()"
-          = flash[:notice]
-      = yield
-      #context-menu
-        = render(:partial => "menus/#{menu}") if menu
+
+    = yield
 
     %footer.footer
       .container
@@ -82,5 +75,5 @@
             = Settings.copyright
 
     = javascript_include_tag "application"
-
+    = javascript_include_tag "http://platform.twitter.com/widgets.js"
     
