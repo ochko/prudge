@@ -37,7 +37,7 @@ Prudge::Application.routes.draw do
   resources :results
   resources :comments
 
-  match '/' => 'contests#last'
+  root :to => 'contests#last'
   match 'signup' => 'users#new', :as => :signup
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
