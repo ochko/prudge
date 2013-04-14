@@ -1,0 +1,161 @@
+/*------------------------------------------------------------------
+Signin
+------------------------------------------------------------------- */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&subset=latin,cyrillic);
+
+body.login {
+  color: #838383;
+  font-family: 'Open Sans Condensed';
+  background: url(img/login-bg.png);
+}
+.account-container {
+  width: 360px;
+  display: block;
+  margin: 85px auto 0 auto;
+  background: #f9f9f9;
+  border: 1px solid #d5d5d5;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.account-container h1 {
+  margin-bottom: .4em;
+  color: #263849;
+  font-family: 'Open Sans Condensed';
+  font-size: 30px;
+}
+.login .content {
+  padding: 16px 28px 23px;
+}
+.login-fields .field {
+  margin-bottom: 1.25em;
+}
+
+.login-fields input {
+  color: #8e8d8d;
+  background-color: #fdfdfd;
+  box-shadow: inset 2px 2px 4px #f1f1f1;
+}
+
+.login-actions {
+  float: left;
+  width: 100%;
+  margin-top: -1em;
+  margin-bottom: 1.25em;
+}
+.login-social {
+  float: left;
+  padding: 10px 0 15px;
+  border: 1px dotted #CCC;
+  border-right: none;
+  border-left: none;
+}
+.login-social p {
+  margin-bottom: 1em;
+}
+.login-extra {
+  display: block;
+  width: 300px;
+  margin: 1.5em auto;
+  text-align: center;
+  line-height: 19px;
+  text-shadow: 1px 1px 0px #fff;
+}
+
+.register .login-social {
+  margin-bottom: 1em;
+}
+.register .login-actions {
+  margin-bottom: 0;
+}
+.register .login-fields input {
+  width: 299px;
+  padding-left: 6px;
+}
+.register h1 {
+  color: #444;
+}
+.register span.login-checkbox {
+  position: relative;
+  top: -6px;
+  width: 200px;
+}
+.register span.login-checkbox > input[type="checkbox"] + label {
+  position: relative;
+  line-height: 1.3em;
+}
+@media (max-width: 480px) {
+  .account-container {
+    width: 280px;
+    margin-top: 35px;
+  }
+  .login-fields input {
+    width: 160px;
+  }
+  .login-social {
+    width: 100%;
+  }
+  .twitter {
+    display: block;
+    margin-bottom: 1em;
+  }
+  .register .login-fields input {
+    width: 204px;
+    padding-left: 6px;
+  }
+}
+/*------------------------------------------------------------------
+ 
+Validation Styles
+
+------------------------------------------------------------------- */
+.control-group span.error {
+  color: #B94A48;
+  font-size: 11px;
+  font-weight: 600;
+  position: relative;
+  top: 5px;
+  padding: 4px 8px;
+  margin-bottom: 1em;
+  color: #FFF;
+  background: #B94A48;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.35);
+}
+.control-group span.error::after {
+  content: '';
+  display: inline-block;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #B94A48;
+  position: absolute;
+  top: -6px;
+  left: 7px;
+}
+.control-group.error {
+  padding-bottom: .5em;
+}
+.control-group.error div.clean {
+  display: none;
+}
+.control-group.success span.error {
+  display: none !important;
+}
+.control-group.success span.error::after {
+  border: none;
+}
+.control-group.success div.clean {
+  position: relative;
+  top: 5px;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  background: url(../img/validation/validation-success.png) no-repeat 0 0;
+}
+.control-group.success input + div.clean,
+.control-group.success select + div.clean,
+.control-group.success textarea + div.clean {
+  left: 8px;
+}

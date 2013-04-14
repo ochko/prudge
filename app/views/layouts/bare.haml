@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %title #{title}
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{:content => "noindex", :name => "robots"}/
+    %meta{:content => "nofollow", :name => "robots"}/
+    = auto_discovery_link_tag :rss, lessons_path(:format=>:rss), :title => "#{Settings.name} - Lessons"
+    %link{:href => "/images/run.ico", :rel => "icon", :type => "image/x-icon"}/
+    %link{:href => "/images/run.ico", :rel => "shortcut icon", :type => "image/x-icon"}/
+    = stylesheet_link_tag "application", :media => "all"
+    = csrf_meta_tag
+
+  %body.login
+
+    = yield
+
+    = javascript_include_tag "application"
+    
