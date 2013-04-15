@@ -1,4 +1,20 @@
 $(function() {
+  var $window = $(window)
+
+  $('#language-logos').tooltip({
+      selector: "[data-toggle=tooltip]"
+  });
+
+  // side bar
+  setTimeout(function () {
+    $('.prudge-sidenav').affix({
+      offset: {
+        top: function () { return $window.width() <= 980 ? 290 : 210 }
+      , bottom: 270
+      }
+    })
+  }, 100);
+
   $('#problem-tabs').tabs({ remote: true, cache: true, spinner: '&nbsp; <img src="/images/loading.gif" /> &nbsp;' });
   $('#tabs').tabs({ remote: true, cache: true, spinner: '&nbsp; <img src="/images/loading.gif" /> &nbsp;' });
 

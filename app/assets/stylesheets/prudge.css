@@ -139,7 +139,6 @@ hr.soften {
   right: 0;
   bottom: 0;
   left: 0;
-  background: url(../img/bs-docs-masthead-pattern.png) repeat center center;
   opacity: .4;
 }
 @media
@@ -189,7 +188,74 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
   max-height: 145px;
 }
 
+/* Sidenav for Docs
+-------------------------------------------------- */
 
+.prudge-sidenav {
+  width: 228px;
+  margin: 30px 0 0;
+  padding: 0;
+  background-color: #fff;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+     -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+          box-shadow: 0 1px 4px rgba(0,0,0,.065);
+}
+.prudge-sidenav > li > a {
+  display: block;
+  width: 190px \9;
+  margin: 0 0 -1px;
+  padding: 8px 14px;
+  border: 1px solid #e5e5e5;
+}
+.prudge-sidenav > li:first-child > a {
+  -webkit-border-radius: 6px 6px 0 0;
+     -moz-border-radius: 6px 6px 0 0;
+          border-radius: 6px 6px 0 0;
+}
+.prudge-sidenav > li:last-child > a {
+  -webkit-border-radius: 0 0 6px 6px;
+     -moz-border-radius: 0 0 6px 6px;
+          border-radius: 0 0 6px 6px;
+}
+.prudge-sidenav > .active > a {
+  position: relative;
+  z-index: 2;
+  padding: 9px 15px;
+  border: 0;
+  text-shadow: 0 1px 0 rgba(0,0,0,.15);
+  -webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+     -moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+          box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+}
+/* Chevrons */
+.prudge-sidenav .icon-chevron-right {
+  float: right;
+  margin-top: 2px;
+  margin-right: -6px;
+  opacity: .25;
+}
+.prudge-sidenav > li > a:hover {
+  background-color: #f5f5f5;
+}
+.prudge-sidenav a:hover .icon-chevron-right {
+  opacity: .5;
+}
+.prudge-sidenav .active .icon-chevron-right,
+.prudge-sidenav .active a:hover .icon-chevron-right {
+  background-image: url(../img/glyphicons-halflings-white.png);
+  opacity: 1;
+}
+.prudge-sidenav.affix {
+  top: 40px;
+}
+.prudge-sidenav.affix-bottom {
+  position: absolute;
+  top: auto;
+  bottom: 270px;
+}
 
 /* Footer
 -------------------------------------------------- */
@@ -223,13 +289,13 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
 /* Desktop large
 ------------------------- */
 @media (min-width: 1200px) {
-  .bs-docs-container {
+  .prudge-container {
     max-width: 970px;
   }
-  .bs-docs-sidenav {
+  .prudge-sidenav {
     width: 258px;
   }
-  .bs-docs-sidenav > li > a {
+  .prudge-sidenav > li > a {
     width: 230px \9; /* Override the previous IE8-9 hack */
   }
 }
@@ -252,7 +318,7 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
   }
 
   /* When affixed, space properly */
-  .bs-docs-sidenav {
+  .prudge-sidenav {
     top: 0;
     width: 218px;
     margin-top: 30px;
@@ -272,11 +338,11 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
     margin-top: -20px; /* Offset bottom margin on .navbar */
   }
   /* Adjust sidenav width */
-  .bs-docs-sidenav {
+  .prudge-sidenav {
     width: 166px;
     margin-top: 20px;
   }
-  .bs-docs-sidenav.affix {
+  .prudge-sidenav.affix {
     top: 0;
   }
 }
@@ -306,7 +372,7 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
   .marketing .span4 {
     margin-bottom: 40px;
   }
-  .bs-docs-social {
+  .prudge-social {
     margin: 0 -20px;
   }
 
@@ -316,11 +382,11 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
   }
 
   /* Sidenav */
-  .bs-docs-sidenav {
+  .prudge-sidenav {
     width: auto;
     margin-bottom: 20px;
   }
-  .bs-docs-sidenav.affix {
+  .prudge-sidenav.affix {
     position: static;
     width: auto;
     top: 0;
@@ -398,34 +464,6 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
     white-space: normal;
     word-wrap: break-word;
     word-break: break-all;
-  }
-
-  /* Examples: dropdowns */
-  .bs-docs-example-submenus > .pull-left {
-    float: none;
-    clear: both;
-  }
-  .bs-docs-example-submenus > .pull-left,
-  .bs-docs-example-submenus > .pull-left + .pull-left {
-    margin-left: 0;
-  }
-  .bs-docs-example-submenus p {
-    margin-bottom: 0;
-  }
-  .bs-docs-example-submenus .dropup > .dropdown-menu,
-  .bs-docs-example-submenus .dropdown > .dropdown-menu {
-    margin-bottom: 10px;
-    float: none;
-    max-width: 180px;
-  }
-
-  /* Examples: modal */
-  .modal-example .modal {
-    position: relative;
-    top: auto;
-    right: auto;
-    bottom: auto;
-    left: auto;
   }
 
   /* Tighten up footer */

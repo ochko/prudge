@@ -44,9 +44,8 @@ Prudge::Application.routes.draw do
   match 'forgot_password' => 'password_resets#new', :as => :forgot_password
   match 'account' => 'users#account', :as => :account
   match 'home' => 'home#index', :as => :home
-  match 'help' => 'home#help', :as => :help
   match 'about' => 'home#about', :as => :about
-  match 'rules' => 'home#rules', :as => :rules
+  match 'guide' => 'home#guide', :as => :guide
   match 'proposals' => 'problems#proposals', :as => :proposals
   match '/moderate' => 'comments#moderate'
   match '/topic/:type' => 'topics#index'

@@ -72,11 +72,14 @@
 
     %footer.footer
       .container
-        \&copy; #{Date.today.year} #{Settings.copyright} ·
-        \#{link_to 'Тусламж', :controller => 'home', :action => 'help'} ·
-        \#{link_to 'Сайтын тухай', :controller => 'home', :action => 'about'} ·
-        \#{link_to 'Бидний зарчим', :controller => 'home', :action => 'rules'} ·
-        \#{link_to 'Програмчлалын хэлүүд', languages_path}
+        %p
+          \&copy; #{Date.today.year} #{Settings.copyright}
+        %ul.footer-links
+          %li= link_to 'About', about_path
+          %li.muted &middot;
+          %li= link_to 'Guide', guide_path
+          %li.muted &middot;
+          %li= link_to 'Issues', 'https://github.com/ochko/prudge/issues'
 
     = javascript_include_tag "application"
 

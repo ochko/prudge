@@ -11,7 +11,7 @@
     %link{:href => "/images/run.ico", :rel => "shortcut icon", :type => "image/x-icon"}/
     = stylesheet_link_tag "application", :media => "all"
     = csrf_meta_tag
-  %body
+  %body{'data-spy' => "scroll", 'data-target'=>".prudge-sidebar"}
     .navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
         .container
@@ -65,14 +65,14 @@
 
     %footer.footer
       .container
-        #footer-links
-          \#{link_to 'Тусламж', :controller => 'home', :action => 'help'}
-          \#{link_to 'Сайтын тухай', :controller => 'home', :action => 'about'}
-          \#{link_to 'Бидний зарчим', :controller => 'home', :action => 'rules'}
-          \#{link_to 'Програмчлалын хэлүүд', languages_path}
-          #copyright
-            \&copy; #{Date.today.year}
-            = Settings.copyright
+        %p
+          \&copy; #{Date.today.year} #{Settings.copyright}
+        %ul.footer-links
+          %li= link_to 'About', about_path
+          %li.muted &middot;
+          %li= link_to 'Guide', guide_path
+          %li.muted &middot;
+          %li= link_to 'Issues', 'https://github.com/ochko/prudge/issues'
 
     = javascript_include_tag "application"
     = javascript_include_tag "http://platform.twitter.com/widgets.js"

@@ -8,10 +8,10 @@
     %p.marketing-byline
       Greatest languages we support.
     .row-fluid
-      %ul
+      %ul#language-logos
         - Language.all.each do |language|
           %li.span2
-            = image_tag "languages/#{language.name}.png", :alt => language.name
+            = image_tag "languages/#{language.name}.png", :alt => language.name, 'data-toggle' => :tooltip, 'data-placement' => :bottom, :title => language.description
 
     %hr.soften/
     %h1 Judges
