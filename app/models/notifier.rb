@@ -7,7 +7,7 @@ class Notifier < ActionMailer::Base
   end
 
   def release_notification(user)
-    user_notify(user, "Кодер шинэчлэгдлээ")
+    user_notify(user, "#{Settings.name} шинэчлэгдлээ")
   end
 
   def problem_selection(user, contest, problem)
@@ -20,11 +20,11 @@ class Notifier < ActionMailer::Base
   end
 
   def new_contest(user, contest)
-    contest_notify(user, contest, "Кодер дээр Шинэ тэмцээн зарлагдлаа")
+    contest_notify(user, contest, "#{Settings.name} дээр Шинэ тэмцээн зарлагдлаа")
   end
 
   def contest_update(user, contest)
-    contest_notify(user, contest, "Кодер дээр тэмцээнд өөрчлөлт орлоо")
+    contest_notify(user, contest, "#{Settings.name} дээр тэмцээнд өөрчлөлт орлоо")
   end
 
   private
