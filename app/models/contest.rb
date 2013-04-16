@@ -99,14 +99,6 @@ class Contest < ActiveRecord::Base
     description
   end
 
-  def create_announcement
-    "Шинэ тэмцээн : '#{name}'. http://coder.query.mn/contests/#{id}"
-  end
-
-  def update_announcement
-    "Тэмцээний хугацаа өөрчлөгдөв : '#{name}'. http://coder.query.mn/contests/#{id} (#{self.start} -> #{self.end})"
-  end
-
   def time_changed?
     (changed & %w[start end]).present?
   end

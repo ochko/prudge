@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 class Notifier < ActionMailer::Base
-  default :from => Settings.notifier['from'], :host => Settings.notifier['host']
+  default :from => Settings.notifier
   
   def password_reset_instructions(user)
     user_notify(user, "Нууц үг сэргээх заавар")
