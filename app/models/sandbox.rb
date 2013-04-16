@@ -156,7 +156,7 @@ class Sandbox
       ["--cpu #{time}",
        "--mem #{memory}",
        "--fsize #{self.class.fsize}",
-       "--nproc #{language.nproc}",
+       "--nproc #{language.processes}",
        "--usage #{program.usage}",
        "--exec #{command}",
        "0< #{test.input_path}" ,
@@ -165,11 +165,11 @@ class Sandbox
     end
 
     def time
-      problem.time + language.time_req
+      problem.time + language.time
     end
 
     def memory
-      problem.memory + language.mem_req
+      problem.memory + language.memory
     end
   end
 end

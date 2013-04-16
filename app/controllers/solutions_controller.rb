@@ -6,8 +6,10 @@ class SolutionsController < ApplicationController
 
   def index
     @solutions = Solution.
-      paginate(:include => [:user, :problem], :page => params[:page],
-               :order => 'solutions.source_updated_at desc')
+      paginate(:page => params[:page],
+               :order => 'solutions.source_updated_at desc').
+      preload(:problem)
+
     respond_to do |format|
       format.js { render :layout => false }
       format.html
@@ -30,8 +32,8 @@ class SolutionsController < ApplicationController
 
   def submited
     @problem = Problem.find(params[:problem_id])
-    @solutions = @problem.solutions(:include => [:language, :user],
-                                    :order => 'source_updated_at DESC')
+    @solutions = @problem.solutions(:order => 'source_updated_at DESC').preload(:user)
+      
     if @solutions.empty?
       render :text => '<table><tr><td>Энэ бодлогыг одоогоор нэг ч хүн бодоогүй байна</td></tr</table>'
     else
@@ -41,8 +43,7 @@ class SolutionsController < ApplicationController
 
   def solved
     @problem = Problem.find(params[:problem_id])
-    @solutions = @problem.solutions.correct(:include => [:language, :user],
-                                            :order => 'source_updated_at DESC')
+    @solutions = @problem.solutions.correct(:order => 'source_updated_at DESC').preload(:user)
     if @solutions.empty?
       render :text => '<table><tr><td>Энэ бодлогыг одоогоор нэг ч хүн зөв бодоогүй байна</td></tr</table>'
     else

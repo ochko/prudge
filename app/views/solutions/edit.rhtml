@@ -9,7 +9,7 @@
   <div class="form-middle">
 <%= form_for @solution, :html => { :multipart => true} do |form| %>
 <%= form.hidden_field :problem_id %>
-<%= form.select :language_id, Language.all.collect{|l| [l.name, l.id]} %>
+<%= form.select :language, Language.all.collect{|l| [l.name, l.name.downcase]} %>
 <%= form.file_field :source %>
 <br/>
 <hr/>

@@ -5,7 +5,6 @@ class Solution < ActiveRecord::Base
   belongs_to :contest
   belongs_to :problem, :counter_cache => 'tried_count'
   belongs_to :user, :counter_cache => true
-  belongs_to :language
   has_many :results, :order => 'hidden ASC, matched DESC', :dependent => :destroy
   has_many :tests, :through => :problem, :order => 'hidden, id'
 
@@ -23,7 +22,7 @@ class Solution < ActiveRecord::Base
            :dependent => :destroy,
            :order => 'created_at DESC'
 
-  scope :for_user, lambda { |user| { :conditions => ['user_id =?', user.id], :include => [:language, :problem], :order => 'created_at desc' } }
+  scope :for_user, lambda { |user| { :conditions => ['user_id =?', user.id], :include => [:problem], :order => 'created_at desc' } }
   scope :valuable, :conditions => 'percent > 0'
   scope :fast, :order => 'time ASC, source_updated_at ASC'
   scope :for_contest, lambda { |c| { :conditions => ['contest_id =?', c.id] } }
@@ -59,6 +58,10 @@ class Solution < ActiveRecord::Base
 
   def queue
     Resque.enqueue(self.class, self.id)
+  end
+
+  def language
+    @language = Language[self[:language]]
   end
 
   # Resque invokes it

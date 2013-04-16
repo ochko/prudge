@@ -3,6 +3,7 @@ log/*.log
 log/*.pid
 tmp/**/*
 tmp/*
+config/languages.yml
 config/settings.yml
 config/config.yml
 config/database.yml

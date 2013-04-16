@@ -1,0 +1,30 @@
+-
+  name: C
+  compiler: /usr/bin/gcc -x c -lm %s -o %s
+  description: GCC version 4.4.3
+-
+  name: Pascal
+  compiler: /usr/bin/fpc %s -o%s
+  description: Free Pascal Compiler version 2.4
+-
+  name: C++
+  compiler: /usr/bin/g++ -O3 -x c++ %s -o %s
+  description: g++ gcc version 4.4.3
+-
+  name: Java
+  compiler: /usr/bin/gcj %s -o %s --main=%s -lm
+  memory: 14000
+  description: gcj gcc version 4.4.3
+-
+  name: Ruby
+  interpreter: /opt/ruby/bin/ruby
+  memory: 60000
+  time: 2
+  description: ruby 2.0.0dev
+  processes: 3
+-
+  name: Python
+  interpreter: /opt/python/bin/python3
+  memory: 60000
+  time: 2
+  description: Python 3.2

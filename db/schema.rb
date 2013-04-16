@@ -1,15 +1,17 @@
-# This file is auto-generated from the current state of the database. Instead of editing this file, 
-# please use the migrations feature of Active Record to incrementally modify your database, and
-# then regenerate this schema definition.
+# encoding: UTF-8
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your database schema. If you need
-# to create the application database on another system, you should be using db:schema:load, not running
-# all the migrations from scratch. The latter is a flawed and unsustainable approach (the more migrations
+# Note that this schema.rb definition is the authoritative source for your
+# database schema. If you need to create the application database on another
+# system, you should be using db:schema:load, not running all the migrations
+# from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130407030543) do
+ActiveRecord::Schema.define(:version => 20130416155617) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",                 :null => false
@@ -57,16 +59,6 @@ ActiveRecord::Schema.define(:version => 20130407030543) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
-  create_table "languages", :force => true do |t|
-    t.string  "name",        :limit => 15,                :null => false
-    t.string  "compiler",                                 :null => false
-    t.string  "runner",                                   :null => false
-    t.integer "mem_req",                   :default => 0, :null => false
-    t.integer "time_req",                  :default => 0, :null => false
-    t.string  "description"
-    t.integer "nproc",                     :default => 0
-  end
-
   create_table "lessons", :force => true do |t|
     t.integer  "author_id",                        :null => false
     t.datetime "created_at",                       :null => false
@@ -105,14 +97,6 @@ ActiveRecord::Schema.define(:version => 20130407030543) do
   end
 
   add_index "pages", ["user_id"], :name => "index_pages_on_user_id"
-
-  create_table "problem_languages", :force => true do |t|
-    t.integer "problem_id",  :null => false
-    t.integer "language_id", :null => false
-  end
-
-  add_index "problem_languages", ["language_id"], :name => "index_problem_languages_on_language_id"
-  add_index "problem_languages", ["problem_id"], :name => "index_problem_languages_on_problem_id"
 
   create_table "problem_tests", :force => true do |t|
     t.integer "problem_id",                         :null => false
@@ -173,7 +157,6 @@ ActiveRecord::Schema.define(:version => 20130407030543) do
   create_table "solutions", :force => true do |t|
     t.integer  "problem_id",                            :null => false
     t.integer  "user_id",                               :null => false
-    t.integer  "language_id",                           :null => false
     t.float    "percent",           :default => 0.0,    :null => false
     t.float    "time",              :default => 5000.0, :null => false
     t.datetime "created_at",                            :null => false
@@ -187,6 +170,7 @@ ActiveRecord::Schema.define(:version => 20130407030543) do
     t.integer  "solved_in"
     t.string   "state"
     t.integer  "source_file_size"
+    t.string   "language",          :default => "",     :null => false
   end
 
   add_index "solutions", ["contest_id"], :name => "index_solutions_on_contest_id"

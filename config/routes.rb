@@ -31,7 +31,6 @@ Prudge::Application.routes.draw do
     end
   end
 
-  resources :languages
   resources :pages
   resources :problem_tests
   resources :results
