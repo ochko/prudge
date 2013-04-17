@@ -1,8 +1,10 @@
-%table.table.table-bordered{:width => "100%"}
-  %tr
-    %th Гарчиг
-    %th Огноо
-  - @lessons.each do |lesson|
+%table.table.table-hover.table-striped{:width => "100%"}
+  %thead
     %tr
-      %td= link_to lesson.title, lesson
-      %td= l lesson.updated_at
+      %th Гарчиг
+      %th Огноо
+  %tbody
+    - @lessons.each do |lesson|
+      %tr
+        %td= link_to lesson.title, lesson
+        %td= l lesson.updated_at

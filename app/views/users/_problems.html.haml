@@ -1,23 +1,25 @@
-%table.table.table-bordered.table-striped{:width => "100%"}
-  %tr
-    %th{:width => "1%"}
-    %th Нэр
-    %th.center{:title => 'Points'}
-      %i.icon-check
-    %th.center{:title => 'Time'}
-      %i.icon-time
-    %th.center{:title => 'Memory'}
-      %i.icon-hdd
-    %th Огноо
-  - @problems.each do |p|
+%table.table.table-hover.table-striped{:width => "100%"}
+  %thead
     %tr
-      %td= p.id
-      %td= link_to p.name, p
-      %td.center= p.level
-      %td.center
-        = p.time
-        сек
-      %td.center
-        = p.memory
-        кб
-      %td= l p.created_at
+      %th{:width => "1%"}
+      %th Нэр
+      %th.center{:title => 'Points'}
+        %i.icon-check
+      %th.center{:title => 'Time'}
+        %i.icon-time
+      %th.center{:title => 'Memory'}
+        %i.icon-hdd
+      %th Огноо
+  %tbody
+    - @problems.each do |p|
+      %tr
+        %td= p.id
+        %td= link_to p.name, p
+        %td.center= p.level
+        %td.center
+          = p.time
+          сек
+        %td.center
+          = p.memory
+          кб
+        %td= l p.created_at

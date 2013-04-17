@@ -1,13 +1,15 @@
-%table.table.table-bordered#user-solutions
-  %tr
-    %th
-    %th Бодлого
-    %th.center
-      %i.icon-check{:title => 'Points'}
-    %th.center
-      %i.icon-dashboard{:title => 'Percent'}
-    %th.center
-      %i.icon-time{:title => 'Time'}
-  = render :partial => 'users/solution', :collection =>@solutions
+%table.table.table-hover.table-striped#user-solutions
+  %thead
+    %tr
+      %th
+      %th
+      %th.center
+        %i.icon-check{:title => 'Points'}
+      %th.center
+        %i.icon-dashboard{:title => 'Percent'}
+      %th.center
+        %i.icon-time{:title => 'Time'}
+  %tbody
+    = render :partial => 'users/solution', :collection =>@solutions
 
 = will_paginate @solutions, :params =>{:action => 'solutions'}, :noajax => true

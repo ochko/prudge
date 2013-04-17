@@ -1,4 +1,4 @@
-.row#content
+.row-fluid#content
   .span3#profile-vcard
     = link_to 'http://gravatar.com/emails/' do
       = image_tag(@user.gravatar_url(:size => 210), :class => "img-polaroid", 'data-toggle' => :tooltip, 'data-placement' => :bottom, :title => "Change your avatar at Gravatar.com")
@@ -55,7 +55,7 @@
       %li.active
         %a{'data-target' => "#participant-of"}
           %i.icon-trophy
-          Оролцсон тэмцээн
+          Тэмцээн
       %li
         %a{'data-target' => "#solved-problems", 'data-link' => solutions_user_path(@user)}
           %i.icon-ok-sign
@@ -63,24 +63,26 @@
       %li
         %a{'data-target' => "#lessons-written", 'data-link' => lessons_user_path(@user)}
           %i.icon-book
-          Бичсэн хичээл
+          Хичээл
       %li
         %a{'data-target' => "#composed-problem", 'data-link' => problems_user_path(@user)}
           %i.icon-question-sign
-          Дэвшүүлсэн бодлого
+          Бодлого
  
     .tab-content
       .tab-pane.active#participant-of
-        %table.table.table-bordered
-          %tr
-            %th Байр
-            %th Тэмцээн
-            %th Огноо
-          - @standings.each do |c,s|
+        %table.table.table-hover.table-striped
+          %thead
             %tr
-              %td.ranking= standing(s)
-              %td= link_to c.name, c
-              %td= l c.start
+              %th Байр
+              %th Тэмцээн
+              %th Огноо
+          %tbody
+            - @standings.each do |c,s|
+              %tr
+                %td.ranking= standing(s)
+                %td= link_to c.name, c
+                %td= l c.start
 
       .tab-pane#solved-problems
       .tab-pane#lessons-written
