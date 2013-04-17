@@ -56,18 +56,18 @@ module ApplicationHelper
   end
 
   def medal_list(standings)
-    list =''
+    list =[]
     medal_color = 1
-    standings.sort{|a,b| a[1]<=>b[1]}.each { |c, s|
+    standings.sort{|a,b| a[1]<=>b[1]}.each do |c, s|
       if s < 4
         if medal_color != s
           medal_color = s
-          list += '<br />'
+          list << '<br />'
         end
-        list += link_to(standing(s),c)
+        list << link_to(standing(s),c)
       end
-    }
-    return list
+    end
+    return list.join(' ')
   end
 
   def markdown(text)

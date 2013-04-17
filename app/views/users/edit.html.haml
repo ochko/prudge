@@ -1,0 +1,47 @@
+= form_for @user, :url => user_path, :class => 'form-horizontal' do |f|
+  %fieldset
+    %legend
+      %h1 Тохиргоог шинэчлэх
+    .control-group
+      = f.label :login, "Нэвтрэх нэр", :class => 'control-label'
+      .controls
+        = f.text_field :login, :class => "span3"
+    .control-group
+      = f.label :email, "И-мэйл", :class => 'control-label'
+      .controls
+        = f.text_field :email, :class => "span3"
+    .control-group
+      = f.label :school, "Сургууль", :class => 'control-label'
+      .controls
+        = f.text_field :school, :class => "span3"
+    .control-group
+      = f.label :password, "Нууц үг солих", :class => 'control-label'
+      .controls
+        = f.password_field :password, :placeholder => "******", :class => "span3"
+    .control-group
+      = f.label :password_confirmation, "Нууц үгийг давт", :class => 'control-label'
+      .controls
+        = f.password_field :password_confirmation, :placeholder => "******", :class => "span3"
+    .control-group
+      = f.label :twitter, "Twitter", :class => 'control-label'
+      .controls
+        .input-prepend
+          %span.add-on
+            %i.icon-twitter
+          = f.text_field :twitter, :class => "span3", :placeholder => "@yourname"
+    .control-group
+      = f.label :web, "Web", :class => 'control-label'
+      .controls
+        .input-prepend
+          %span.add-on
+            %i.icon-globe
+          = f.text_field :web, :class => "span3", :placeholder => "http://your.web.url"
+
+    .control-group
+      .controls
+        %label.checkbox
+          = f.check_box :notify_new_contests
+          Шинэ тэмцээн зохиогдоход мэдэгдэх
+    .control-group  
+      .controls
+        = f.submit "Хадгал", :class => 'btn btn-primary'

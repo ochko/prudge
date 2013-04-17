@@ -4,7 +4,8 @@
       = image_tag(@user.gravatar_url(:size => 210), :class => "img-polaroid", 'data-toggle' => :tooltip, 'data-placement' => :bottom, :title => "Change your avatar at Gravatar.com")
     %h3= @user.login
     %hr
-    != medal_list(@standings)
+    %h4
+      != medal_list(@standings)
     %hr
     .profile
       - if @user.school.present?
@@ -42,6 +43,13 @@
         %dd
           %span.muted Last seen
           = l @user.uploaded_at, :format => :date
+    - if @user == current_user
+      %hr
+      = link_to edit_user_path(@user) do
+        %button.btn.btn-small.btn-primary
+          %i.icon-pencil
+          Update profile
+
   .span7
     %ul.nav.nav-tabs#profile-tabs
       %li.active
