@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130416155617) do
+ActiveRecord::Schema.define(:version => 20130417141013) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",                 :null => false
@@ -204,12 +204,8 @@ ActiveRecord::Schema.define(:version => 20130416155617) do
     t.float    "points",                            :default => 0.0
     t.datetime "uploaded_at"
     t.boolean  "mailed",                            :default => false
-    t.string   "social_blogger"
-    t.string   "social_facebook"
-    t.string   "social_google"
-    t.string   "social_hi5"
-    t.string   "social_twitter"
-    t.string   "social_yahoo"
+    t.string   "web"
+    t.string   "twitter"
     t.boolean  "notify_new_contests",               :default => true
   end
 
