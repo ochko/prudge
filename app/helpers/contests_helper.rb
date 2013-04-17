@@ -5,11 +5,11 @@ module ContestsHelper
      return num
    end
    if num == 1
-     image_tag('cup-gold.png', :title=> 'Алт')
+     content_tag(:i, nil, :class => 'icon-trophy gold', :title=> 'Gold')
    elsif num == 2
-     image_tag('cup-silver.png', :title=> 'Мөнгө')
+     content_tag(:i, nil, :class => 'icon-trophy silver', :title=> 'Silver')
    elsif num == 3
-     image_tag('cup-bronze.png', :title=> 'Хүрэл')
+     content_tag(:i, nil, :class => 'icon-trophy bronze', :title=> 'Bronze')
    end
  end
 

@@ -1,0 +1,8 @@
+%table{:width => "100%"}
+  %tr
+    %th Гарчиг
+    %th Огноо
+  - @lessons.each do |lesson|
+    %tr
+      %td= link_to lesson.title, lesson
+      %td= l lesson.updated_at

@@ -270,6 +270,16 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
   overflow-x: hidden;
   text-overflow: ellipsis;
 }
+
+.gold {
+  color: gold;
+}
+.silver {
+  color: silver;
+}
+.bronze {
+  color: sienna;
+}
 /* Footer
 -------------------------------------------------- */
 

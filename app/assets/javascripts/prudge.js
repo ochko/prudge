@@ -1,7 +1,7 @@
 $(function() {
   var $window = $(window)
 
-  $('#language-logos').tooltip({
+  $('#language-logos, #profile-vcard').tooltip({
       selector: "[data-toggle=tooltip]"
   });
 
@@ -15,8 +15,35 @@ $(function() {
     })
   }, 100);
 
-  $('#problem-tabs').tabs({ remote: true, cache: true, spinner: '&nbsp; <img src="/images/loading.gif" /> &nbsp;' });
-  $('#tabs').tabs({ remote: true, cache: true, spinner: '&nbsp; <img src="/images/loading.gif" /> &nbsp;' });
+  $('#profile-tabs a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+
+    var link = $(this).data("link");
+    if (link == undefined) return;
+
+    var target = $($(this).data("target"));
+    if (target.data('loaded') != undefined) return;
+
+    var icon = $(this).find('i');
+    var iconClass = icon.attr('class');
+    icon.removeClass().addClass('icon-refresh icon-spin');
+    
+    $.ajax({
+          url: link,
+          type: 'GET',
+          success: function(data, status, xhr) {
+              target.html(data);
+          },
+          error: function(xhr, status, message) {
+              target.html("Error");
+          },
+          complete: function(xhr, status){
+              icon.removeClass().addClass(iconClass);
+              target.data('loaded', 'true');
+          }
+      });
+  });
 
   $("#flow_pagination a").live("click", function() {
     $(this).html("").addClass("loading");
@@ -78,8 +105,6 @@ $(function() {
       return false;
   });
 
-  $.syntax({root: "/javascripts/syntax/"});
-
-  var wmd_options = {"output":"Markdown"};
-  createWmd("textarea", "#preview");
+//  var wmd_options = {"output":"Markdown"};
+//  createWmd("textarea", "#preview");
 });

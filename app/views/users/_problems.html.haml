@@ -1,0 +1,23 @@
+%table{:width => "100%"}
+  %tr
+    %th{:width => "1%"}
+    %th Нэр
+    %th.center
+      %i.icon-check{:title => 'Points'}
+    %th.center
+      %i.icon-time{:title => 'Time'}
+    %th.center
+      %i.icon-hdd{:title => 'Memory'}
+    %th Огноо
+  - @problems.each do |p|
+    %tr
+      %td= p.id
+      %td= link_to p.name, p
+      %td.center= p.level
+      %td.center
+        = p.time
+        сек
+      %td.center
+        = p.memory
+        кб
+      %td= l p.created_at

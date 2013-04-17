@@ -1,0 +1,13 @@
+%table#user-solutions
+  %tr
+    %th{:width => "1%"}
+    %th Бодлого/Хэл, Огноо
+    %th.center
+      %i.icon-check{:title => 'Points'}
+    %th.center
+      %i.icon-dashboard{:title => 'Percent'}
+    %th.center
+      %i.icon-time{:title => 'Time'}
+  = render :partial => 'users/solution', :collection =>@solutions
+
+= will_paginate @solutions, :params =>{:action => 'solutions'}, :noajax => true

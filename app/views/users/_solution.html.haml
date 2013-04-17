@@ -1,0 +1,12 @@
+%tr
+  %td= link_to show_correctness(solution.passed?), solution
+  %td
+    = link_to solution.problem.name, solution.problem
+    %span.solution-meta
+      = solution.language.name
+      хэл дээр
+      \#{l solution.created_at} -д бодож
+      \#{l solution.source_updated_at} -д шинэчилсэн
+  %td.center= solution.problem.level
+  %td.center= "%0.0f" % (solution.percent*100)
+  %td.center= sec2milisec solution.time
