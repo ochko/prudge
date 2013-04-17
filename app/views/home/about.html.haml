@@ -6,7 +6,7 @@
   .marketing
     %h1 Supported Languages
     %p.marketing-byline
-      Greatest languages we support.
+      Great languages we support.
     .row-fluid
       %ul#language-logos
         - Language.all.each do |language|
@@ -25,12 +25,12 @@
             %br
             = link_to user.login, user
             %br
-            - unless user.social_twitter.blank?
-              = link_to "http://twitter.com/#{user.social_twitter}" do
+            - unless user.twitter.blank?
+              = link_to "http://twitter.com/#{user.twitter}" do
                 %i.icon-twitter
-            - unless user.social_facebook.blank?
-              = link_to "http://twitter.com/#{user.social_twitter}" do
-                %i.icon-facebook
+            - unless user.web.blank?
+              = link_to user.web do
+                %i.icon-globe
     %hr.soften/
     %h1 Powered by Prudge
     %p.marketing-byline Need reasons to love Prudge? Look no further.
