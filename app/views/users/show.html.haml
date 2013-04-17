@@ -1,0 +1,41 @@
+.row#content
+  .span3
+    = image_tag(@user.gravatar_url(:size => 210), :class => "img-polaroid")
+    %h3= @user.login
+    %hr
+    .profile
+      - if @user.school.present?
+        %dl
+          %dt
+            %i.icon-group.muted
+          %dd= strip_tags @user.school
+      - if @user.web.present?
+        %dl
+          %dt
+            %i.icon-link.muted
+          %dd= link_to @user.web, @user.web
+      - if @user.twitter.present?
+        %dl
+          %dt
+            %i.icon-twitter.muted
+          %dd= link_to_twitter @user.twitter
+      %dl
+        %dt
+          %i.icon-flag.muted
+        %dd
+          %span.muted Level/Point
+          = @user.level
+          \/
+          = @user.points.nil? ? 0 : ("%.2f" % @user.points)
+      %dl
+        %dt
+          %i.icon-time.muted
+        %dd
+          %span.muted Joined on
+          = l @user.created_at, :format => :date
+      %dl
+        %dt
+          %i.icon-eye-open.muted
+        %dd
+          %span.muted Last seen
+          = l @user.uploaded_at, :format => :date

@@ -256,7 +256,20 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
   top: auto;
   bottom: 270px;
 }
-
+.profile dl {
+  margin: 5px 0 0 0;
+}
+.profile dl dt {
+  margin: 0;
+  float: left;
+  width: 22px;
+}
+.profile dl dd {
+  margin: 0 0 0 22px;
+  width: 195px;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
 /* Footer
 -------------------------------------------------- */
 
@@ -280,6 +293,10 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
 }
 .footer-links li:first-child {
   padding-left: 0;
+}
+
+#content {
+  padding: 20px 0;
 }
 
 

@@ -26,4 +26,9 @@ module UsersHelper
               :target => media)
     end
   end
+
+  def link_to_twitter(id)
+    handle = id.delete('@')
+    link_to "@#{handle}", "https://twitter.com/#{handle}"
+  end
 end
