@@ -73,7 +73,7 @@
     %footer.footer
       .container
         %p
-          \&copy; #{Date.today.year} #{Settings.copyright}
+          \&copy; #{Settings.copyright % Date.today.year}
         %ul.footer-links
           %li= link_to 'About', about_path
           %li.muted &middot;
