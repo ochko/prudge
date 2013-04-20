@@ -4,4 +4,5 @@
       %h1= h n.title
       %span.news-meta= l n.created_at
       = markdown n.content
-= will_paginate @news, :class=>'apple_pagination', :previous_label => '&laquo; Өмнөх', :next_label   => 'Дараах &raquo;'
+
+= paginate @news

@@ -26,10 +26,6 @@ class User < ActiveRecord::Base
 
   is_gravtastic! :size => 80, :rating => :PG
 
-  def self.per_page
-    100
-  end
-
   def owns?(object)
     object.user_id == self.id
   end

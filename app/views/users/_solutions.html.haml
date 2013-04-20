@@ -2,4 +2,4 @@
   %tbody
     = render :partial => 'users/solution', :collection =>@solutions
 
-= will_paginate @solutions, :params =>{:action => 'solutions'}, :noajax => true
+= paginate @solutions, :params =>{:action => 'solutions'}

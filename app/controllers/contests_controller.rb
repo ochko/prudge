@@ -8,7 +8,8 @@ class ContestsController < ApplicationController
   before_filter :require_judge, :only => [:create, :update, :destroy]
 
   def index
-    @contests = Contest.paginate(:order => "start DESC", :page => params[:page], :per_page => 20)
+    @contests = Contest.order("start DESC").page(params[:page]).per(20)
+
     respond_to do |format|
       format.js { render :layout => false}
       format.html

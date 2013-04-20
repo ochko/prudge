@@ -22,7 +22,7 @@
 </div>
 
 <div id="comments" class="span-20 with-parent">
-  <%= render :partial => 'comments/comment', :collection => commentable.comments.paginate(:page => 1) %>
+  <%= render :partial => 'comments/comment', :collection => commentable.comments.page(1) %>
 </div>
 
-<%= will_paginate commentable.comments.paginate(:page => 1), :params =>{:controller => '/comments', :type => commentable.class.name.downcase }, :noajax => true %>
+<%= paginate commentable.comments.page(1), :params =>{:controller => '/comments', :type => commentable.class.name.downcase } %>

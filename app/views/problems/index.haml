@@ -4,6 +4,8 @@
     = link_to 'RSS', problems_path(:format=>:rss)
 
 - if @problems.size > 0
+  = paginate @problems
+
   %table#problems
     %tr
       %th{:width => "1%"}
@@ -28,6 +30,8 @@
         %td= problem.tried_count
         %td= problem.solved_count
         %td= problem_solution_state problem
-  = will_paginate @problems, :class=>'apple_pagination', :previous_label => '« Өмнөх', :next_label   => 'Дараах »'
+
+  = paginate @problems
+
 - else
   Бодлого алга!

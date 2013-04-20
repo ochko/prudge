@@ -1,8 +1,6 @@
 class Page < ActiveRecord::Base
   def self.category(name, params)
-    paginate(:page => params[:page], :per_page => 5,
-             :conditions=>["category = ?", name],
-             :order => "created_at desc")
+    where(:category => name).order("created_at desc").page(params[:page]).per(5)
   end
 
   def name

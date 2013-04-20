@@ -38,9 +38,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.paginate(:order => "points DESC" ,
-                           :page => params[:page])
-
+    @users = User.order("points DESC").page(params[:page]).per(100)
   end
 
   def account
@@ -64,9 +62,10 @@ class UsersController < ApplicationController
 
   def solutions
     @solutions = User.find(params[:id]).solutions.
-      paginate(:page => params[:page],
-               :order => 'source_updated_at DESC').
+      order('source_updated_at DESC').
+      page(params[:page]).
       preload(:problem)
+
     respond_to do |format|
       format.html { render :partial => 'solutions' }
       format.js { render :layout => false }

@@ -10,10 +10,8 @@ class Topic < ActiveRecord::Base
   validates_presence_of :title, :description
 
   scope :commented, :conditions => "TRUE"
-  
-  def self.per_page
-    20
-  end
+
+  paginates_per 20
   
   def name
     title

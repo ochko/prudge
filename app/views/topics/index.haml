@@ -13,4 +13,5 @@
       %td= link_to topic.name, topic
       %td= topic.comments_count
       %td= l topic.commented_at if topic.commented_at
-= will_paginate @topics,:class=>'apple_pagination', :previous_label => '« Өмнөх', :next_label   => 'Дараах »'
+
+= paginate @topics

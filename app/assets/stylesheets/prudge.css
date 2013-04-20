@@ -289,6 +289,10 @@ img.avatar-large {
 .bronze {
   color: sienna;
 }
+
+.pagination li{
+  font-family: FontAwesome;
+}
 /* Footer
 -------------------------------------------------- */
 

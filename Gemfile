@@ -7,7 +7,6 @@ gem 'mysql2'
 gem 'bluecloth'
 gem 'gravtastic'
 gem 'thinking-sphinx', '~>3.0.2'
-gem 'will_paginate'
 gem 'authlogic'
 gem 'authlogic-oid', :require => 'authlogic_openid'
 gem 'ruby-openid', :require => 'openid'
@@ -21,6 +20,7 @@ gem 'aasm'
 gem 'cancan'
 gem 'dalli'
 gem 'paperclip', '~>3.0'
+gem 'kaminari'
 
 group :assets do
   gem 'sass-rails',   "~> 3.2.0"

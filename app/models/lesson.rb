@@ -10,9 +10,7 @@ class Lesson < ActiveRecord::Base
   validates_presence_of     :title, :text
   scope :commented, :conditions => "comments_count > 0"
 
-  def self.per_page
-    10 
-  end
+  paginates_per 10
 
   def name
     title

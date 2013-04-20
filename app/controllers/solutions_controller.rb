@@ -6,8 +6,8 @@ class SolutionsController < ApplicationController
 
   def index
     @solutions = Solution.
-      paginate(:page => params[:page],
-               :order => 'solutions.source_updated_at desc').
+      order('solutions.source_updated_at desc').
+      page(params[:page]).
       preload(:problem)
 
     respond_to do |format|

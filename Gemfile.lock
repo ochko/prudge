@@ -72,6 +72,10 @@ GEM
     innertube (1.0.2)
     journey (1.0.4)
     json (1.7.7)
+    kaminari (0.13.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      railties (>= 3.0.0)
     mail (2.5.3)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -173,7 +177,6 @@ GEM
       multi_json (>= 1.0.2)
     vegas (0.1.11)
       rack (>= 1.0.0)
-    will_paginate (3.0.4)
 
 PLATFORMS
   ruby
@@ -191,6 +194,7 @@ DEPENDENCIES
   gravtastic
   haml
   json
+  kaminari
   mysql2
   paperclip (~> 3.0)
   rack-openid
@@ -202,4 +206,3 @@ DEPENDENCIES
   thinking-sphinx (~> 3.0.2)
   twitter
   uglifier
-  will_paginate

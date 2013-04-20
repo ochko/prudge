@@ -5,8 +5,9 @@ class LessonsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @lessons = Lesson.paginate(:page=>params[:page], :include =>[:author],
-                               :order => "created_at desc")
+    @lessons = Lesson.order("created_at desc").
+      page(params[:page]).preload(:author)
+
     respond_to do |format|
       format.html
       format.js { render :layout => false }

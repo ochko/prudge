@@ -5,7 +5,8 @@ class PagesController < ApplicationController
 
   def index
     authorize! :edit, Page
-    @pages = Page.paginate :page=>params[:page], :per_page => 20
+    @pages = Page.page(params[:page]).per(20)
+
     render(:layout => false) if request.xml_http_request?
   end
 

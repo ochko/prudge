@@ -7,8 +7,7 @@ class TopicsController < ApplicationController
 
   def index
     klass = contantize
-    @topics = klass.commented.
-      paginate(:page=> params[:page], :order => 'commented_at DESC')
+    @topics = klass.commented.order('commented_at DESC').page(params[:page])
   end
 
   def show

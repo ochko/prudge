@@ -12,8 +12,9 @@ class ProblemsController < ApplicationController
         @reverse = (order == 'ASC') ? 'DESC' : 'ASC'
 
         @problems = @problems.
-          paginate(:page => params[:page], :per_page => 20, :include => :user, 
-                   :order => "#{column} #{order}")
+          order("#{column} #{order}").
+          page(params[:page]).per(20).
+          preload(:user)
       end
       format.rss do
         @problems = @problems.all(:order => 'created_at DESC',

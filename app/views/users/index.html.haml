@@ -1,0 +1,22 @@
+%h1 Кодерууд
+
+= paginate @users
+
+%table#all-rank
+  %tr
+    %th{:width => "1%"}
+    %th
+    %th Сургууль/Байгууллага
+    %th{:width => "60"} Нийт оноо
+    %th{:width => "1%"} Бодсон бодлого
+    %th Сүүлийн бодолт
+  - @users.each_with_index do |user, i|
+    %tr
+      %td.ranking= i + 1 + (@users.current_page - 1) * 100
+      %td= link_to user.login, user, :class=>"rank_#{user.level}"
+      %td= truncate(strip_tags(user.school), :length => 35)
+      %td= "%.3f" % user.points
+      %td= user.solutions_count
+      %td= l(user.uploaded_at) if user.uploaded_at
+
+= paginate @users

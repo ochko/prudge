@@ -3,4 +3,5 @@
   %span.rss= link_to 'RSS', comments_path(:format=>:rss)
 #comments.span-20
   = render :partial => "comments/comment", :collection => @comments
-= will_paginate @comments, :params =>{:controller => '/comments' }, :noajax => true
+
+= paginate @comments, :params =>{:controller => '/comments' }

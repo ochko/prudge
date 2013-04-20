@@ -7,18 +7,17 @@ class CommentsController < ApplicationController
 
   def show
     @comments = Comment.
-      paginate(:page => params[:page], :order => 'created_at DESC',
-               :conditions => ['topic_id = ? AND topic_type = ?',
-                               params[:id], params[:type].capitalize])
+      where(:topic_id => params[:id],
+            :topic_type => params[:type].capitalize).
+      order('created_at DESC').page(params[:page])
 
     render :layout => false
   end
   
   def index
-    @comments = Comment.
-      paginate(:page => params[:page],
-               :order => 'created_at DESC',
-               :include => [:user])
+    @comments = Comment.order('created_at DESC').
+      page(params[:page]).preload(:user)
+
     respond_to do |format|
       format.html
       format.rss
@@ -27,10 +26,8 @@ class CommentsController < ApplicationController
   end
 
   def moderate
-    @comments = Comment.
-      paginate(:page => params[:page], :per_page=> 50,
-               :order => 'created_at desc',
-               :include => [:user])
+    @comments = Comment.order('created_at DESC').
+      page(params[:page]).per(50).preload(:user)
   end
 
   def create
