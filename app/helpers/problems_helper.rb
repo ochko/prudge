@@ -11,6 +11,14 @@ module ProblemsHelper
     end
   end
 
+  def render_viewable(hidden)
+    if !hidden
+      image_tag('test-open.png', :title => 'Харагдана')
+    else
+      image_tag('test-hidden.png', :title => 'Харагдахгүй')
+    end
+  end
+
   def problem_solution_state(problem)
     solved_or_not problem_solution_states[problem.id]
   end
@@ -23,4 +31,37 @@ module ProblemsHelper
       states
     end
   end
+
+  def results_table_horizontal(results)
+    matrix_to_table(humanized_results_matrix(results).transpose, "results-table")
+  end
+
+  def results_table_vertical(results)
+    matrix_to_table(humanized_results_matrix(results), "results-table")
+  end
+
+  private
+
+  def humanized_results_matrix(results)
+    header = ['Тэст', '', 'Ажиллагаа', 'Хугацаа', 'Санах ой', 'Хариу']
+    index = 0
+    results.reduce([header]) do |matrix, result|
+      matrix << [index += 1,
+                 render_viewable(result.hidden), 
+                 translate_message(result.execution),
+                 sec2milisec(result.time), 
+                 result.memory, 
+                 link_to(show_correctness(result.correct?), result)]
+    end
+  end
+
+  def matrix_to_table(matrix, id)
+    content = ["<table id='#{id}'>"]
+    matrix.each do |row|
+      content << "<tr><td>" << row.join('</td><td>') << '</td></tr>'
+    end
+    content << "</table>"
+    content.join
+  end
+
 end
