@@ -271,6 +271,15 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
   text-overflow: ellipsis;
 }
 
+img.avatar-large {
+  width: 210px;
+  height: 210px;
+}
+
+.solution-info {
+  display:block;
+}
+
 .gold {
   color: gold;
 }

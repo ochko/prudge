@@ -1,14 +1,4 @@
-%table.table.table-hover.table-striped#user-solutions
-  %thead
-    %tr
-      %th
-      %th
-      %th.center
-        %i.icon-check{:title => 'Points'}
-      %th.center
-        %i.icon-dashboard{:title => 'Percent'}
-      %th.center
-        %i.icon-time{:title => 'Time'}
+%table.table.table-hover.table-striped.table-bordered#user-solutions
   %tbody
     = render :partial => 'users/solution', :collection =>@solutions
 

@@ -1,7 +1,7 @@
 .row#content
   .span3#profile-vcard
     = link_to 'http://gravatar.com/emails/' do
-      = image_tag(@user.gravatar_url(:size => 210), :class => "img-polaroid", 'data-toggle' => :tooltip, 'data-placement' => :bottom, :title => "Change your avatar at Gravatar.com")
+      = image_tag(@user.gravatar_url(:size => 210), :class => "img-polaroid avatar-large", 'data-toggle' => :tooltip, 'data-placement' => :bottom, :title => "Change your avatar at Gravatar.com")
   .span4
     = form_for @user, :url => user_path, :class => 'form-horizontal' do |f|
       %fieldset

@@ -9,11 +9,7 @@ module ApplicationHelper
   end
 
   def show_correctness(correct)
-    if correct
-      image_tag('ok.png')
-    else
-      image_tag('ng.png')
-    end
+    content_tag(:i, nil, :class => correct ? 'icon-check' : 'icon-check-empty')
   end    
 
   def show_percent(percent)

@@ -1,7 +1,7 @@
 .row-fluid#content
   .span3#profile-vcard
     = link_to 'http://gravatar.com/emails/' do
-      = image_tag(@user.gravatar_url(:size => 210), :class => "img-polaroid", 'data-toggle' => :tooltip, 'data-placement' => :bottom, :title => "Change your avatar at Gravatar.com")
+      = image_tag(@user.gravatar_url(:size => 210), :class => "img-polaroid avatar-large", 'data-toggle' => :tooltip, 'data-placement' => :bottom, :title => "Change your avatar at Gravatar.com")
     %h3= @user.login
     %hr
     %h4
@@ -51,7 +51,7 @@
           Update profile
 
   .span7
-    %ul.nav.nav-tabs#profile-tabs
+    %ul.nav.nav-pills#profile-tabs
       %li.active
         %a{'data-target' => "#participant-of"}
           %i.icon-trophy
@@ -71,18 +71,17 @@
  
     .tab-content
       .tab-pane.active#participant-of
-        %table.table.table-hover.table-striped
+        %table.table.table-hover.table-striped.table-bordered
           %thead
             %tr
-              %th Байр
-              %th Тэмцээн
-              %th Огноо
+              %th Оролцсон тэмцээн
           %tbody
             - @standings.each do |c,s|
               %tr
-                %td.ranking= standing(s)
-                %td= link_to c.name, c
-                %td= l c.start
+                %td
+                  %strong= standing(s)
+                  = link_to c.name, c
+                  %span.muted.pull-right= l c.start, :format => :date
 
       .tab-pane#solved-problems
       .tab-pane#lessons-written
