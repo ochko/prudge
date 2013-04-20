@@ -11,4 +11,8 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require_tree .
+//= require jquery_ujs
+//= require bootstrap
+//= require showdown
+//= require wmd
+//= require prudge

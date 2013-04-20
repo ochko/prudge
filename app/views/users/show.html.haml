@@ -85,7 +85,7 @@
           %i.icon-trophy
           Тэмцээн
       %li
-        %a{'data-target' => "#solved-problems", 'data-link' => solutions_user_path(@user)}
+        %a{'data-target' => "#solved-problems", 'data-delegate' => '#solutions-flow'}
           %i.icon-ok-sign
           Бодолтууд
       %li
@@ -112,5 +112,11 @@
                   %span.muted.pull-right= l c.start, :format => :date
 
       .tab-pane#solved-problems
+        %table.table.table-hover.table-striped.table-bordered#user-solutions
+          %tbody
+            = render :partial => 'users/solution', :collection =>@solutions
+        = link_to solutions_user_path(@user), :class => 'btn btn-large btn-block page-flow', :id => 'solutions-flow', :data => {:page => 1, :flow => '#user-solutions'} do
+          %i.icon-circle-arrow-down
+
       .tab-pane#lessons-written
       .tab-pane#composed-problem

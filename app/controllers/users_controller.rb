@@ -67,9 +67,10 @@ class UsersController < ApplicationController
       page(params[:page]).
       preload(:problem)
 
-    respond_to do |format|
-      format.html { render :partial => 'solutions' }
-      format.js { render :layout => false }
+    if @solutions.empty?
+      render :text => '', :status => 404
+    else
+      render :partial => 'users/solution', :collection => @solutions
     end
   end
 

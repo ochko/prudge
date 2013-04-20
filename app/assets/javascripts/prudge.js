@@ -19,6 +19,12 @@ $(function() {
     e.preventDefault();
     $(this).tab('show');
 
+    var delegate = $(this).data("delegate");
+    if (delegate != undefined) {
+      $(delegate).click();
+      return;
+    }
+
     var link = $(this).data("link");
     if (link == undefined) return;
 
@@ -45,10 +51,33 @@ $(function() {
       });
   });
 
-  $("#flow_pagination a").live("click", function() {
-    $(this).html("").addClass("loading");
-    $.get(this.href, null, null, "script");
-    return false;
+  $("a.page-flow").click(function(e) {
+    e.preventDefault();
+
+    var link = $(this);
+    var url  = link.attr("href");
+    var page = parseInt(link.data('page'));
+    var flow = $(link.data('flow'));
+    var icon = link.find('i');
+
+    var iconClass = icon.attr('class');
+    icon.removeClass().addClass('icon-refresh icon-spin');
+    link.addClass('disabled');
+    $.ajax({
+      url: url+"?page="+page,
+      type: 'GET',
+      success: function(data, status, xhr) {
+          flow.append(data);
+      },
+      error: function(xhr, status, message) {
+          link.hide();
+      },
+      complete: function(xhr, status){
+          icon.removeClass().addClass(iconClass);
+          link.data('page', page + 1);
+          link.removeClass('disabled');
+      }
+    });
   });
 
   $('.load-solutions').live("click", function(){
