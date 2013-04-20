@@ -1,0 +1,21 @@
+%section
+  = form_for @lesson do
+    .row
+      .span6
+        = text_field 'lesson', 'title', :class => 'input-block-level'
+        = error_messages_for @lesson
+    .row
+      .span6
+        #editor-buttons
+    .row
+      .span6
+        = text_area('lesson', 'text', :id => 'editor-input', :class => 'input-block-level')  
+        %button.btn.btn-primary{:type=> :submit}
+          %i.icon-save
+          Save
+        = link_to @lesson, :confirm => 'Are you sure?', :method => :delete, :class => 'btn' do
+          %i.icon-trash
+          Delete
+      .span6
+        #editor-preview
+

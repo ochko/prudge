@@ -1,17 +1,20 @@
-%h1
-  Хичээлүүд 
-  %span.rss 
-    = link_to 'RSS', lessons_path(:format=>:rss)
+%section
+  .pull-right
+    = link_to lessons_path(:format=>:rss), :class => 'btn btn-warning' do
+      %i.icon-rss
+  
+  - @lessons.each do |lesson|
+    .lesson-title
+      %h3= lesson.title
+      = link_to lesson, :class => 'pull-right' do
+        %i.icon-share-alt
 
-= paginate @lessons
+      .muted
+        Posted on
+        \#{l lesson.updated_at, :format => :date}
+        by #{link_to lesson.author.login, lesson.author}
 
-- @lessons.each do |lesson|
-  .lesson-item
-    %h2= link_to lesson.title, lesson
-    .lesson-meta
-      \#{l lesson.updated_at}, #{link_to lesson.author.login, lesson.author}
-    .lesson-excerpt
+    .lesson-content
       = simple_format truncate(strip_tags(lesson.text), :length => 200)
-      %span.go-down= link_to 'Үргэлжлэл', lesson
-
-= paginate @lessons
+  
+  = paginate @lessons

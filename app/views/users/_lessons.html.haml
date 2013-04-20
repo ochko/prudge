@@ -3,7 +3,7 @@
     %tr
       %th Lessons authored
   %tbody
-    - @lessons.each do |lesson|
+    - @user.lessons.each do |lesson|
       %tr
         %td
           %p.lead
@@ -11,3 +11,11 @@
           %small.muted
             Posted on
             = l lesson.updated_at, :format => :date
+          = link_to edit_lesson_path(lesson), :class => 'btn btn-mini pull-right' do
+            %i.icon-pencil
+            Засварлах
+
+- if @user == current_user
+  = link_to new_lesson_path, :class => 'btn pull-right' do
+    %i.icon-book
+    Шинэ хичээл нэмэх

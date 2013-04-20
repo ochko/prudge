@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 class LessonsController < ApplicationController
-  menu :lesson
-
   load_and_authorize_resource
 
   def index

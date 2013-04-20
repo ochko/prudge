@@ -1,0 +1,11 @@
+%section
+  .lesson-title
+    %h2= @lesson.title
+    .muted
+      Posted on
+      \#{l @lesson.updated_at, :format => :date}
+      by #{link_to @lesson.author.login, @lesson.author}
+  .lesson-content
+    = markdown @lesson.text
+  
+  = render :partial => 'comments/commentable', :object => @lesson

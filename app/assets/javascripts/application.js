@@ -13,6 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require showdown
-//= require wmd
+//= require editor
 //= require prudge

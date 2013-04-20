@@ -329,6 +329,19 @@ img.avatar-large {
   font-family: FontAwesome;
 }
 
+.lesson-title h3, .lesson-title h2{
+  margin: 20px 0 0;
+  font-weight: 200;
+}
+
+.lesson-title small{
+  margin: 0 0 20px;
+}
+
+.lesson-content {
+  margin: 20px 0 40px;
+}
+
 /* Footer
 -------------------------------------------------- */
 

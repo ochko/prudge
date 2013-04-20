@@ -32,4 +32,12 @@ module ApplicationHelper
   def school_names
     User.where("school is not null and school != ''").order(:school).pluck(:school).uniq
   end
+
+  def error_messages_for(model)
+    return unless model.errors.any?
+    content_tag(:ul,
+                model.errors.full_messages.reduce('') { |errors, msg|
+                  errors << content_tag(:li, msg)
+                })
+  end
 end

@@ -75,7 +75,7 @@ class UsersController < ApplicationController
   end
 
   def lessons
-    @lessons = User.find(params[:id]).lessons
+    @user = User.find(params[:id])
     render :partial => 'lessons'
   end
 

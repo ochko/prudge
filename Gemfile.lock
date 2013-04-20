@@ -180,6 +180,8 @@ GEM
       multi_json (>= 1.0.2)
     vegas (0.1.11)
       rack (>= 1.0.0)
+    wmd-rails (0.0.7)
+      rails (>= 3.1.1)
 
 PLATFORMS
   ruby
@@ -210,3 +212,4 @@ DEPENDENCIES
   thinking-sphinx (~> 3.0.2)
   twitter
   uglifier
+  wmd-rails

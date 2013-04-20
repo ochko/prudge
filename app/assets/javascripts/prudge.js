@@ -134,6 +134,4 @@ $(function() {
       return false;
   });
 
-//  var wmd_options = {"output":"Markdown"};
-//  createWmd("textarea", "#preview");
 });
