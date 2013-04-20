@@ -58,7 +58,7 @@
             .input-prepend
               %span.add-on
                 %i.icon-group
-              = f.text_field :school, :class => "span3"
+              = f.text_field :school, :class => "span3", :autocomplete => "off", :data => {:provide =>"typeahead", :source => school_names.to_json}
           .control-group
           .controls
             %label.checkbox

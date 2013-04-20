@@ -28,4 +28,8 @@ module ApplicationHelper
   def markdown(text)
     raw BlueCloth.new(text).to_html
   end
+
+  def school_names
+    User.where("school is not null and school != ''").order(:school).pluck(:school).uniq
+  end
 end
