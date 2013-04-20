@@ -17,7 +17,8 @@ class SolutionsController < ApplicationController
   end
 
   def show
-    seeing { render :action => :show }
+    @solution = Solution.find(params[:id])
+    render :action => :show
   end
 
   def best
