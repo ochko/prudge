@@ -271,12 +271,47 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
   text-overflow: ellipsis;
 }
 
+h3.list-heading {
+  margin: 20px 0 16px 0;
+  height: 0px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: normal;
+  color: #999999;
+  border-bottom: 1px solid #ddd;
+}
+
+h3.list-heading .inner {
+  display: inline-block;
+  position: relative;
+  top: -20px;
+  padding: 0 5px;
+  background: #fff;
+}
+
 img.avatar-large {
   width: 210px;
   height: 210px;
 }
 
 .solution-info {
+  display:block;
+}
+
+.user-rank {
+  font-size: 21px;
+  font-weight: 200;
+}
+
+.user-rank {
+  font-size: 21px;
+  font-weight: 200;
+}
+
+.user-rank small{
+  margin-top: 5px;
+  font-size: 14px;
+  color: #999;
   display:block;
 }
 
@@ -293,6 +328,7 @@ img.avatar-large {
 .pagination li{
   font-family: FontAwesome;
 }
+
 /* Footer
 -------------------------------------------------- */
 

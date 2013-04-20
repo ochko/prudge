@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 module ContestsHelper
   def standing(num)
-    if num > 3
-      return num
-    end
-    if num == 1
-      content_tag(:i, nil, :class => 'icon-trophy gold', :title=> 'Gold')
-    elsif num == 2
-      content_tag(:i, nil, :class => 'icon-trophy silver', :title=> 'Silver')
-    elsif num == 3
-      content_tag(:i, nil, :class => 'icon-trophy bronze', :title=> 'Bronze')
-    end
+    medal = medal_name(num)
+
+    return num unless medal
+
+    content_tag(:i, nil, :class => "icon-trophy #{medal}", :title=> medal)
+  end
+
+  def medal_name(num)
+    %w(nothing gold silver bronze)[num]
   end
 
   def show_status(contest)
@@ -25,17 +24,12 @@ module ContestsHelper
   end
 
   def medal_list(standings)
-    list =[]
-    medal_color = 1
-    standings.sort{|a,b| a[1]<=>b[1]}.each do |c, s|
-      if s < 4
-        if medal_color != s
-          medal_color = s
-          list << '<br />'
-        end
-        list << link_to(standing(s),c)
-      end
+    counts = {}
+    standings.sort{|a,b| a[1]<=>b[1]}.each do |_, standing|
+      next if standing > 3 || standing < 1
+      counts[standing] ||= 0
+      counts[standing] += 1
     end
-    return list.join(' ')
+    counts
   end
 end

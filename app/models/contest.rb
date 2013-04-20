@@ -54,7 +54,7 @@ class Contest < ActiveRecord::Base
     num, point, time = 0, 0.0, 0.0
     numbers = [] 
     standers = []
-    for user in self.users
+    users.each do |user|
       if (point != user.point) || (user.time.to_f - time.to_f > 0.1)
         point = user.point
         num += 1

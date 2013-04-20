@@ -77,3 +77,7 @@ mn:
       invalid: "Буруу үйлдэл"
       return: "Алдаа буцаалаа"
       ng: "Үл мэдэгдэх алдаа"
+    standing:
+      gold: "Алт"
+      silver: "Мөнгө"
+      bronze: "Хүрэл"

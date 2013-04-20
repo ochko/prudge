@@ -55,8 +55,9 @@ class UsersController < ApplicationController
     @standings = []
     @user.contests.each do |contest|
       numbers, standings = contest.standings
-      idx = standings.index( @user )
-      @standings << [contest, numbers[idx]] if idx
+      idx = standings.index(@user)
+      next unless idx
+      @standings << [contest, numbers[idx]]
     end
   end
 

@@ -1,48 +1,76 @@
-.row-fluid#content
-  .span3#profile-vcard
+.row#content
+  .span3.profile#profile-vcard
     = link_to 'http://gravatar.com/emails/' do
       = image_tag(@user.gravatar_url(:size => 210), :class => "img-polaroid avatar-large", 'data-toggle' => :tooltip, 'data-placement' => :bottom, :title => "Change your avatar at Gravatar.com")
     %h3= @user.login
-    %hr
-    %h4
-      != medal_list(@standings)
-    %hr
-    .profile
-      - if @user.school.present?
-        %dl
-          %dt
-            %i.icon-group.muted
-          %dd= strip_tags @user.school
-      - if @user.web.present?
-        %dl
-          %dt
-            %i.icon-link.muted
-          %dd= link_to @user.web, @user.web
-      - if @user.twitter.present?
-        %dl
-          %dt
-            %i.icon-twitter.muted
-          %dd= link_to_twitter @user.twitter
+    %h3.list-heading
+      .inner
+        %i.icon-trophy
+        Awards
+    .row
+      - medal_list(@standings).each do |num, count|
+        .span1.text-center
+          %h2
+            = standing(num)
+            = count
+          .muted
+            = t(medal_name(num), :scope => 'label.standing')
+
+    %h3.list-heading
+      .inner
+        %i.icon-star-empty
+        Achievements
+    %dl
+      %dt
+        %i.icon-dashboard.muted
+      %dd
+        %span.muted Total points:
+        = @user.points.nil? ? 0 : ("%.2f" % @user.points)
+    %dl
+      %dt
+        %i.icon-cogs.muted
+      %dd
+        %span.muted Posted solutions:
+        = @user.solutions_count
+    %dl
+      %dt
+        %i.icon-flag.muted
+      %dd
+        %span.muted Reached level:
+        = @user.level
+    %dl
+      %dt
+        %i.icon-time.muted
+      %dd
+        %span.muted Joined on
+        = l @user.created_at, :format => :date
+    %dl
+      %dt
+        %i.icon-eye-open.muted
+      %dd
+        %span.muted Last seen
+        = l @user.uploaded_at, :format => :date
+
+    %h3.list-heading
+      .inner
+        %i.icon-link
+        Connect
+    - if @user.school.present?
       %dl
         %dt
-          %i.icon-flag.muted
-        %dd
-          %span.muted Level/Point
-          = @user.level
-          \/
-          = @user.points.nil? ? 0 : ("%.2f" % @user.points)
+          %i.icon-group.muted
+        %dd= strip_tags @user.school
+    - if @user.web.present?
       %dl
         %dt
-          %i.icon-time.muted
-        %dd
-          %span.muted Joined on
-          = l @user.created_at, :format => :date
+          %i.icon-globe.muted
+        %dd= link_to @user.web, @user.web
+    - if @user.twitter.present?
       %dl
         %dt
-          %i.icon-eye-open.muted
-        %dd
-          %span.muted Last seen
-          = l @user.uploaded_at, :format => :date
+          %i.icon-twitter.muted
+        %dd= link_to_twitter @user.twitter
+
     - if @user == current_user
       %hr
       = link_to edit_user_path(@user) do
