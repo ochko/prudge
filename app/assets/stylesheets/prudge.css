@@ -1,3 +1,9 @@
+/* Customizations
+-------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 200;
+}
+
 /* Body and structure
 -------------------------------------------------- */
 body {
@@ -256,6 +262,26 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
   top: auto;
   bottom: 270px;
 }
+
+/* User profile and Ranking list
+-------------------------------------------------- */
+.user-rank {
+  font-size: 21px;
+  font-weight: 200;
+}
+
+.user-rank {
+  font-size: 21px;
+  font-weight: 200;
+}
+
+.user-rank small{
+  margin-top: 5px;
+  font-size: 14px;
+  color: #999;
+  display:block;
+}
+
 .profile dl {
   margin: 5px 0 0 0;
 }
@@ -294,24 +320,9 @@ img.avatar-large {
   height: 210px;
 }
 
+/* Problem, Solution and Contest
+-------------------------------------------------- */
 .solution-info {
-  display:block;
-}
-
-.user-rank {
-  font-size: 21px;
-  font-weight: 200;
-}
-
-.user-rank {
-  font-size: 21px;
-  font-weight: 200;
-}
-
-.user-rank small{
-  margin-top: 5px;
-  font-size: 14px;
-  color: #999;
   display:block;
 }
 
@@ -329,6 +340,8 @@ img.avatar-large {
   font-family: FontAwesome;
 }
 
+/* Lessons and News pages
+-------------------------------------------------- */
 .lesson-title h3, .lesson-title h2{
   margin: 20px 0 0;
   font-weight: 200;
@@ -344,7 +357,6 @@ img.avatar-large {
 
 /* Footer
 -------------------------------------------------- */
-
 .footer {
   text-align: center;
   padding: 30px 0;
@@ -531,21 +543,6 @@ img.avatar-large {
   }
   .marketing-byline {
     font-size: 18px;
-  }
-
-  /* center example sites */
-  .example-sites {
-    margin-left: 0;
-  }
-  .example-sites > li {
-    float: none;
-    display: block;
-    max-width: 280px;
-    margin: 0 auto 18px;
-    text-align: center;
-  }
-  .example-sites .thumbnail > img {
-    max-width: 270px;
   }
 
   /* Do our best to make tables work in narrow viewports */

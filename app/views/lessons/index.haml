@@ -2,7 +2,7 @@
   .pull-right
     = link_to lessons_path(:format=>:rss), :class => 'btn btn-warning' do
       %i.icon-rss
-  
+  %h1 Lessons  
   - @lessons.each do |lesson|
     .lesson-title
       %h3= lesson.title

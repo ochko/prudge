@@ -1,10 +1,15 @@
 %section
-  .lesson-title
-    %h2= @lesson.title
-    .muted
-      Posted on
-      \#{l @lesson.updated_at, :format => :date}
-      by #{link_to @lesson.author.login, @lesson.author}
+  .media
+    = link_to @lesson.author, :class => "pull-left" do
+      = image_tag @lesson.author.gravatar_url(:size => 120), :class => 'img-polaroid'
+    .media-body
+      %h2.media-heading
+        = @lesson.title
+      .muted
+        Posted on
+        %strong=l @lesson.updated_at, :format => :date
+        %br
+        by #{link_to @lesson.author.login, @lesson.author}
   .lesson-content
     = markdown @lesson.text
   
