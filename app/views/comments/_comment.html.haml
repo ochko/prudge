@@ -1,0 +1,12 @@
+.media.comment-media
+  = image_tag comment.user.gravatar_url(:size => 64), :class => 'pull-left img-polaroid'
+  .media-body
+    .popover.fade.right.in.comment-bubble
+      .arrow
+      %h3.popover-title
+        = link_to comment.user.login, comment.user
+        at
+        = l comment.created_at
+      .popover-content
+        = simple_format h(comment.text)  
+      

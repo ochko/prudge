@@ -4,7 +4,7 @@
       %i.icon-rss
   %h1 Lessons  
   - @lessons.each do |lesson|
-    .lesson-title
+    .page-title
       %h3= lesson.title
       = link_to lesson, :class => 'pull-right' do
         %i.icon-share-alt
@@ -14,7 +14,7 @@
         \#{l lesson.updated_at, :format => :date}
         by #{link_to lesson.author.login, lesson.author}
 
-    .lesson-content
+    .page-content
       = simple_format truncate(strip_tags(lesson.text), :length => 200)
   
   = paginate @lessons

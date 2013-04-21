@@ -1,4 +1,4 @@
-.row#content
+.row
   .span3.profile#profile-vcard
     = link_to 'http://gravatar.com/emails/' do
       = image_tag(@user.gravatar_url(:size => 210), :class => "img-polaroid avatar-large", 'data-toggle' => :tooltip, 'data-placement' => :bottom, :title => "Change your avatar at Gravatar.com")

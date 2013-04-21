@@ -66,9 +66,9 @@
           %span#notice-close{:style => "float:right"}
             = link_to_function image_tag('close.png'), "$('#notice').fadeOut()"
           = flash[:notice]
-      = yield
-      #context-menu
+      %section
         = render(:partial => "menus/#{menu}") if menu
+      = yield
 
     %footer.footer
       .container

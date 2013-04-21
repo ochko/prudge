@@ -7,7 +7,8 @@ class Lesson < ActiveRecord::Base
            :foreign_key => 'topic_id',
            :dependent => :destroy
 
-  validates_presence_of     :title, :text
+  validates_presence_of :title, :text
+
   scope :commented, :conditions => "comments_count > 0"
 
   paginates_per 10

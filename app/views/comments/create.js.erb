@@ -1,0 +1,6 @@
+<% if @comment.errors.any? %>
+$('#alert-message').text("<%= escape_javascript(@comment.errors.full_messages.join) %>");
+$('#alert-box').show();
+<% else %>
+$("#comments").prepend("<%= escape_javascript(render(:partial => 'comments/comment', :object => @comment)) %>");
+<% end %>

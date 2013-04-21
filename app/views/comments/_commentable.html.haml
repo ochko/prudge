@@ -1,0 +1,25 @@
+- if logged_in?
+  .row
+    .span12
+      = form_tag comments_path, :method => :post, :remote => true do
+        = hidden_field_tag 'comment[topic_id]', commentable.id
+        = hidden_field_tag 'comment[topic_type]', commentable.class.name
+        .media.comment-media
+          .pull-left
+            = image_tag current_user.gravatar_url(:size => 128), :class => 'img-polaroid'
+          .media-body
+            .popover.fade.right.in.comment-bubble
+              .arrow
+              .popover-content
+                = text_area_tag 'comment[text]', '', :rows => 4, :cols => 80, :class=> 'input-block-level'
+                %button.btn.btn-primary#submit{:type => 'submit'}
+                  %i.icon-comments-alt
+                  ИЛГЭЭ
+                .alert.hide#alert-box
+                  %button.close{:type=>"button", 'data-dismiss'=>"alert"} &times;
+                  %span#alert-message
+
+            
+.row
+  .span12#comments
+    = render :partial => 'comments/comment', :collection => commentable.comments

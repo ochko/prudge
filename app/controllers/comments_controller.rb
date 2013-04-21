@@ -31,15 +31,14 @@ class CommentsController < ApplicationController
   end
 
   def create
-    if current_user.currently_commented?
-      render :text => 'Хэт хурдан байна, 10 Секунд хүлээгээд дахин илгээнэ үү?', :status => 404
-      return
-    end
     @comment = current_user.comments.build(params[:comment])
-    if @comment.save
-      render :partial => 'comments/comment', :object => @comment
+    if current_user.currently_commented?
+      @comment.errors[:text] << 'Хэт хурдан байна, 10 Секунд хүлээгээд дахин илгээнэ үү?'
     else
-      render :text => @comment.errors.full_messages, :status => 404
+      @comment.save
+    end
+    respond_to do |format|
+      format.js { render :layout => false }
     end
   end
 

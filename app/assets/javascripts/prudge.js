@@ -15,6 +15,26 @@ $(function() {
     })
   }, 100);
 
+  var ajaxBtnIcon;
+  $(document).on("ajaxStart", function(e, xhr, settings, exception)  {
+    var btn = $("#submit");
+    if (btn.length == 0) return;
+    btn.attr('disabled', 'disabled');
+    var icon = btn.find('i')
+    if (icon.length == 0) return;
+    ajaxBtnIcon = btn.find('i').attr('class');
+    icon.removeClass().addClass('icon-refresh icon-spin');
+  });
+
+  $(document).on("ajaxComplete", function(e, xhr, settings, exception)  {
+    var btn = $("#submit");
+    if (btn.length == 0) return;
+    btn.removeAttr('disabled');
+    var icon = btn.find('i')
+    if (icon.length == 0) return;
+    icon.removeClass().addClass(ajaxBtnIcon);
+  });
+
   $('#profile-tabs a').click(function (e) {
     e.preventDefault();
     $(this).tab('show');
