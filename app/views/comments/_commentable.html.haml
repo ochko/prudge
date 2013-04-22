@@ -1,6 +1,6 @@
 - if logged_in?
   .row
-    .span12
+    .span6
       = form_tag comments_path, :method => :post, :remote => true do
         = hidden_field_tag 'comment[topic_id]', commentable.id
         = hidden_field_tag 'comment[topic_type]', commentable.class.name
@@ -21,5 +21,5 @@
 
             
 .row
-  .span12#comments
+  .span6#comments
     = render :partial => 'comments/comment', :collection => commentable.comments
