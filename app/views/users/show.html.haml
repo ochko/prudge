@@ -79,21 +79,21 @@
           Update profile
 
   .span7
-    %ul.nav.nav-pills#profile-tabs
+    %ul.nav.nav-tabs#profile-tabs
       %li.active
-        %a{'data-target' => "#participant-of"}
+        %a{'href' => "#participant-of"}
           %i.icon-trophy
           Тэмцээн
       %li
-        %a{'data-target' => "#solved-problems", 'data-delegate' => '#solutions-flow'}
+        %a{'href' => "#solved-problems", 'data-delegate' => '#solutions-flow'}
           %i.icon-ok-sign
           Бодолтууд
       %li
-        %a{'data-target' => "#lessons-written", 'data-link' => lessons_user_path(@user)}
+        %a{'href' => "#lessons-written", 'data-link' => lessons_user_path(@user)}
           %i.icon-book
           Хичээл
       %li
-        %a{'data-target' => "#composed-problem", 'data-link' => problems_user_path(@user)}
+        %a{'href' => "#composed-problem", 'data-link' => problems_user_path(@user)}
           %i.icon-question-sign
           Бодлого
  

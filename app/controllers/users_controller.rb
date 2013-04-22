@@ -80,7 +80,7 @@ class UsersController < ApplicationController
   end
 
   def problems
-    @problems = User.find(params[:id]).problems
+    @user = User.find(params[:id])
     render :partial => 'problems'
   end
 

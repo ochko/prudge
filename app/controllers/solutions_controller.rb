@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 class SolutionsController < ApplicationController
-  menu :problem
-
   before_filter :require_user, :except=> [:submited, :solved, :best]
 
   def index
@@ -44,7 +42,9 @@ class SolutionsController < ApplicationController
 
   def solved
     @problem = Problem.find(params[:problem_id])
-    @solutions = @problem.solutions.correct(:order => 'source_updated_at DESC').preload(:user)
+    @solutions = @problem.solutions.passed.
+      order('source_updated_at DESC').
+      preload(:user)
     if @solutions.empty?
       render :text => '<table><tr><td>Энэ бодлогыг одоогоор нэг ч хүн зөв бодоогүй байна</td></tr</table>'
     else

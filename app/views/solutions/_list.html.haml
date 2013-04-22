@@ -1,0 +1,22 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th
+      %th
+      %th
+      %th
+      %th
+        %i.icon-cogs
+      %th
+        %i.icon-time
+  %tbody
+    - for solution in @solutions
+      %tr
+        %td= link_to show_correctness(solution.passed?), solution
+        %td= link_to solution.user.login, solution.user
+        %td= solution.language.name
+        %td= l solution.source_updated_at
+        %td #{(solution.percent*100).to_i}%
+        %td
+          = "%5.2f" % solution.time
+          %abbr{:title => 'milliseconds'} ms

@@ -263,6 +263,11 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
   bottom: 270px;
 }
 
+/* Generic
+-------------------------------------------------- */
+.main-content {
+  padding: 20px 0;
+}
 /* User profile and Ranking list
 -------------------------------------------------- */
 .user-rank {
@@ -298,7 +303,7 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
 }
 
 h3.list-heading {
-  margin: 20px 0 16px 0;
+  margin: 20px 0;
   height: 0px;
   text-align: center;
   font-size: 14px;
@@ -358,6 +363,9 @@ img.avatar-large {
 
 /* Footer
 -------------------------------------------------- */
+#footer-push {
+  height: 800px;
+}
 .footer {
   text-align: center;
   padding: 30px 0;

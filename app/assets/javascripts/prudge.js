@@ -35,7 +35,7 @@ $(function() {
     icon.removeClass().addClass(ajaxBtnIcon);
   });
 
-  $('#profile-tabs a').click(function (e) {
+  $('#profile-tabs a, #problem-tabs a').click(function (e) {
     e.preventDefault();
     $(this).tab('show');
 
@@ -48,7 +48,7 @@ $(function() {
     var link = $(this).data("link");
     if (link == undefined) return;
 
-    var target = $($(this).data("target"));
+    var target = $($(this).attr("href"));
     if (target.data('loaded') != undefined) return;
 
     var icon = $(this).find('i');

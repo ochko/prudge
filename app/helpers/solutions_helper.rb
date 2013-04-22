@@ -13,9 +13,9 @@ module SolutionsHelper
 
   def test_purpose(viewable)
     if viewable
-      image_tag('test-hidden.png', :title => 'Харагдахгүй тэст')
+      content_tag(:i, nil, :class => 'muted icon-lock', :title => 'Харагдахгүй тэст')
     else
-      link_to(image_tag('test-open.png', :title => 'арах'), result)
+      link_to(content_tag(:i, nil, :class => 'icon-unlock', :title => 'Ил тест'), result)
     end
   end
 

@@ -16,8 +16,7 @@ class Ability
     if user.admin?
       can :manage, :all
     elsif user.judge?
-      can [:read, :update, :check], Problem
-      can :proposals, Problem, ["contest_id IS NULL"]
+      can [:read, :update, :check, :approve], Problem
       can :destroy, Problem do |problem|
         problem.solutions.count == 0
       end

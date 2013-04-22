@@ -6,7 +6,7 @@
         = hidden_field_tag 'comment[topic_type]', commentable.class.name
         .media.comment-media
           .pull-left
-            = image_tag current_user.gravatar_url(:size => 128), :class => 'img-polaroid'
+            = image_tag current_user.gravatar_url(:size => 64), :class => 'img-polaroid'
           .media-body
             .popover.fade.right.in.comment-bubble
               .arrow

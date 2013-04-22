@@ -1,47 +1,89 @@
 .row
   .span12
-    .page-title
-      %h2
-        = @problem.name
-        = link_to 'БОДОХ', new_solution_path(:problem => @problem.id), :class => 'btn btn-large pull-right'
-      .muted
-        %i.icon-flag{:title => "Level"}
-        = @problem.level
-        %i.icon-time{:title => "Time limit"}
-        = @problem.time
-        %i.icon-hdd{:title => "Санах ойн хязгаар"}
-        = @problem.memory
-        %i.icon-cogs{:title => "Тэстийн тоо"}
-        = @problem.tests.size
-        %br
-        = link_to @problem.user.login, @problem.user
-        хэрэглэгч
-        - if @problem.contest
-          = link_to h(@problem.contest.name), @problem.contest
-          тэмцээнд
-        дэвшүүлсэн
-    #problem-tabs.span-20
-      %ul
-        %li
-          %a{:href => "#problem-text"}
-            %span Бодлого
-        %li
-          = link_to content_tag(:span, 'Шилдэг бодолт'), {:controller=>'solutions', :action=>'best', :problem_id=>@problem.id, :name => "best-solution"}
-        %li
-          = link_to content_tag(:span, "Нийт бодолт (#{@problem.solutions_count})"), {:controller=>'solutions', :action=>'submited', :problem_id=>@problem.id, :name => "all-solutions"}
-        %li
-          = link_to content_tag(:span, "Зөв бодолт (#{@problem.corrects_count})"), {:controller=>'solutions', :action=>'solved', :problem_id=>@problem.id, :name => "correct-solutions"}
-      #problem-text
-        %table
-          %tr
-            %td
-              = markdown @problem.text
-              = content_tag(:span, 'Эх сурвалж: ' + h(@problem.source), |
-                :class => 'problem-source') if !@problem.source.empty?  |
-      #best-solution
-      #all-solutions
-      #correct-solutions
-      
+    %h2
+      = @problem.name
 .row
-  .span12
-    = render :partial => 'comments/commentable', :object => @problem
+  .span3.profile
+    .media
+      = image_tag(@problem.user.gravatar_url(:size => 64), :class => "img-polaroid pull-left")
+      .media-body
+        Posted by
+        = link_to @problem.user.login, @problem.user
+        - if @problem.contest
+          %br
+          for
+          = link_to @problem.contest.name, @problem.contest
+    %hr
+    %dl
+      %dt
+        %i.icon-flag
+      %dd
+        %span.muted Difficulty
+        = @problem.level
+    %dl
+      %dt
+        %i.icon-time
+      %dd
+        %span.muted Time limit
+        = @problem.time
+    %dl
+      %dt
+        %i.icon-hdd
+      %dd
+        %span.muted Memory Limit
+        = @problem.memory
+    %dl
+      %dt
+        %i.icon-cogs
+      %dd
+        %span.muted Tests
+        = @problem.tests.size
+    %hr
+    = link_to new_solution_path(:problem => @problem.id), :class => 'btn btn-primary btn-large btn-block' do
+      %i.icon-check
+      Solve
+    %h3.list-heading
+      .inner
+        %i.icon-wrench
+    .btn-group
+      - if can? :update, @problem
+        = link_to edit_problem_path(@problem), :class => 'btn btn-small' do
+          %i.icon-wrench
+          Засвар
+      - if can? :update, @problem
+        = link_to @problem, :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-small' do
+          %i.icon-trash
+          Устгах
+      - if can? :check, @problem
+        = link_to check_problem_path(@problem), :class => 'btn btn-small' do
+          %i.icon-repeat
+          Дахин шалгах
+
+  .span7
+    %ul.nav.nav-tabs#problem-tabs
+      %li.active
+        %a{'href' => "#problem-text"}
+          %i.icon-question-sign
+          Бодлого
+      %li
+        %a{'href' => "#best-solution", 'data-link' => best_solution_path(:problem_id=>@problem.id)}
+          %i.icon-dashboard
+          Шилдэг бодолт
+      %li
+        %a{'href' => "#all-solutions", 'data-link' => submited_solution_path(:problem_id=>@problem.id)}
+          %i.icon-book
+          Нийт бодолт
+      %li
+        %a{'href' => "#correct-solutions", 'data-link' => solved_solution_path(:problem_id=>@problem.id)}
+          %i.icon-question-sign
+          Зөв бодолт
+ 
+    .tab-content
+      .tab-pane.active#problem-text
+        = markdown @problem.text
+        = content_tag(:span, 'Эх сурвалж: ' + h(@problem.source), :class => 'problem-source') if !@problem.source.empty?
+        = render :partial => 'comments/commentable', :object => @problem
+      .tab-pane#best-solution
+      .tab-pane#all-solutions
+      .tab-pane#correct-solutions
+    

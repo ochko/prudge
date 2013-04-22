@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 class ProblemsController < ApplicationController
-  menu :problem
-
-  load_and_authorize_resource
+  load_and_authorize_resource :except => :proposals
 
   def index
     respond_to do |format|
@@ -25,6 +23,8 @@ class ProblemsController < ApplicationController
   end
 
   def proposals
+    authorize! :approve, Problem
+    @problems = Problem.where('contest_id is null').preload(:user)
   end
 
   def show

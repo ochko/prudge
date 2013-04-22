@@ -2,6 +2,10 @@ class HomeController < ApplicationController
   layout 'static'
   menu :home
 
+  def dashboard
+    render :layout => :application
+  end
+
   def about
   end
 

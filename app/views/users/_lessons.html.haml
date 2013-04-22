@@ -1,7 +1,11 @@
 %table.table.table-bordered{:width => "100%"}
   %thead
     %tr
-      %th Lessons authored
+      %th
+        - if @user == current_user
+          = link_to new_lesson_path, :class => 'btn btn-small' do
+            %i.icon-plus-sign
+            Шинэ хичээл нэмэх
   %tbody
     - @user.lessons.each do |lesson|
       %tr
@@ -15,7 +19,3 @@
             %i.icon-pencil
             Засварлах
 
-- if @user == current_user
-  = link_to new_lesson_path, :class => 'btn pull-right' do
-    %i.icon-book
-    Шинэ хичээл нэмэх

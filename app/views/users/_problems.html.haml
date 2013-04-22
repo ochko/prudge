@@ -1,8 +1,12 @@
-%table.table.table-hover.table-striped.table-bordered{:width => "100%"}
+%table.table.table-hover.table-striped.table-bordered
   %thead
     %tr
       %th{:width => "1%"}
-      %th Нэр
+      %th 
+        - if @user == current_user
+          = link_to new_problem_path, :class => 'btn btn-small' do
+            %i.icon-plus-sign
+            Бодлого дэвшүүлэх
       %th.center{:title => 'Points'}
         %i.icon-check
       %th.center{:title => 'Time'}
@@ -11,7 +15,7 @@
         %i.icon-hdd
       %th Огноо
   %tbody
-    - @problems.each do |p|
+    - @user.problems.each do |p|
       %tr
         %td= p.id
         %td= link_to p.name, p
@@ -23,3 +27,4 @@
           = p.memory
           кб
         %td= l p.created_at
+
