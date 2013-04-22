@@ -1,12 +1,11 @@
+.pull-right
+  = link_to problems_path(:format=>:rss), :class => 'btn btn-warning' do
+    %i.icon-rss
 %h1
-  Бодлогууд
-  %span.rss
-    = link_to 'RSS', problems_path(:format=>:rss)
+  Problems
 
-- if @problems.size > 0
-  = paginate @problems
-
-  %table#problems
+%table.table.table-striped#problems
+  %thead
     %tr
       %th{:width => "1%"}
       %th= link_to 'Нэр',        :column=> 'name', :order => (params[:column] == 'name') ? @reverse : 'ASC'
@@ -20,7 +19,8 @@
         \/
         = link_to 'Зөв', :column=> 'solved_count',:order => (params[:column] == 'solved_count') ? @reverse : 'ASC'
       %th{:width => "1%"}
-    - for problem in @problems
+  %tbody
+    - @problems.each do |problem|
       %tr
         %td= problem.id
         %td= link_to problem.name, problem
@@ -31,7 +31,4 @@
         %td= problem.solved_count
         %td= problem_solution_state problem
 
-  = paginate @problems
-
-- else
-  Бодлого алга!
+= paginate @problems

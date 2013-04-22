@@ -1,20 +1,19 @@
-%section
-  .pull-right
-    = link_to lessons_path(:format=>:rss), :class => 'btn btn-warning' do
-      %i.icon-rss
-  %h1 Lessons  
-  - @lessons.each do |lesson|
-    .page-title
-      %h3= lesson.title
-      = link_to lesson, :class => 'pull-right' do
-        %i.icon-share-alt
+.pull-right
+  = link_to lessons_path(:format=>:rss), :class => 'btn btn-warning' do
+    %i.icon-rss
+%h1 Lessons
+- @lessons.each do |lesson|
+  .page-title
+    %h3= lesson.title
+    = link_to lesson, :class => 'pull-right' do
+      %i.icon-share-alt
 
-      .muted
-        Posted on
-        \#{l lesson.updated_at, :format => :date}
-        by #{link_to lesson.author.login, lesson.author}
+    .muted
+      Posted on
+      \#{l lesson.updated_at, :format => :date}
+      by #{link_to lesson.author.login, lesson.author}
 
-    .page-content
-      = simple_format truncate(strip_tags(lesson.text), :length => 200)
-  
-  = paginate @lessons
+  .page-content
+    = simple_format truncate(strip_tags(lesson.text), :length => 200)
+
+= paginate @lessons
