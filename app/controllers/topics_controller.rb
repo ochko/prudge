@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 class TopicsController < ApplicationController
-  menu :discussion
-
   load_and_authorize_resource :except => [:index, :show]
   authorize_resource :only => :show
 

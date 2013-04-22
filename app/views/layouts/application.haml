@@ -31,8 +31,16 @@
                 = link_to 'Problems', problems_path
               %li
                 = link_to 'Lessons', lessons_path
-              %li
-                = link_to 'Discussions', topics_path
+              %li.dropdown
+                %a.dropdown-toggle{'data-toggle' => 'dropdown', :href => '#'}
+                  Discussions
+                  %b.caret
+                %ul.dropdown-menu
+                  %li= link_to 'General', topics_path
+                  %li= link_to 'Тэмцээний', '/topic/contest'
+                  %li= link_to 'Бодлогын', '/topic/problem'
+                  %li= link_to 'Хичээлийн', '/topic/lesson'
+                  %li= link_to 'Сүүлд нэмэгдсэн', comments_path
               %li
                 = link_to 'Coders', users_path
               %form.navbar-search.pull-left#search{:action => "/search", :method => "get"}
@@ -44,13 +52,17 @@
                     %b.caret
                   %ul.dropdown-menu
                     %li
-                      = link_to account_path do
+                      = link_to account_users_path do
                         %i.icon-user
                         Account
                     %li
                       = link_to edit_user_path(current_user) do
                         %i.icon-wrench
                         Preferences
+                    %li
+                      = link_to dashboard_path do
+                        %i.icon-sitemap
+                        Dashboard
                     %li
                       = link_to logout_path do
                         %i.icon-signout
@@ -61,14 +73,9 @@
                 %li
                   = link_to 'Signup', signup_path
     .container
-      - if flash[:notice]
-        #notice.notice
-          %span#notice-close{:style => "float:right"}
-            = link_to_function image_tag('close.png'), "$('#notice').fadeOut()"
-          = flash[:notice]
       %section
-        = render(:partial => "menus/#{menu}") if menu
-      = yield
+        = flashy
+        = yield
 
     #footer-push.clearfix
     %footer.footer

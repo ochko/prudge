@@ -3,8 +3,6 @@ class CommentsController < ApplicationController
   before_filter :require_user, :except => [:index]
   before_filter :require_admin, :only => [:destroy, :moderate]
 
-  menu :discussion
-
   def show
     @comments = Comment.
       where(:topic_id => params[:id],

@@ -1,0 +1,20 @@
+%h2 Дэвшигдсэн бодлогууд
+%table{:width => "100%"}
+  %tr
+    %th Нэр
+    %th Оноо
+    %th Тэст
+    %th Хязгаарлалт
+    %th Дэвшүүлсэн
+    %th Огноо
+  - @problems.each do |problem|
+    %tr
+      %td= link_to problem.name, problem
+      %td= problem.level
+      %td= problem.tests_count
+      %td
+        = problem.time
+        с /
+        \#{problem.memory}кб
+      %td= link_to h(problem.user.login), problem.user
+      %td= l problem.created_at

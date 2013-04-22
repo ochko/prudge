@@ -1,22 +1,11 @@
 # -*- coding: utf-8 -*-
 class ApplicationController < ActionController::Base
   helper :all
-  helper_method :menu
   protect_from_forgery
 
   helper_method :current_user_session, :current_user, :current_user?, :admin?, :judge?
 
-  class << self
-    attr_accessor :context_menu
-    def menu name      
-      self.context_menu = name
-    end
-  end
-
   private
-  def menu
-    self.class.context_menu
-  end
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find

@@ -1,5 +1,26 @@
+%h1
+  Dashboard
+  %small
+    Manage the site
+
 %section
   .row
-            - if judge?
-          %li!= link_to 'Дэвшигдсэн бодлогууд', proposals_path
-%li!= link_to 'Сүүлийн бодолтууд', solutions_path
+    .span3
+      = link_to proposed_problems_path, :class => 'btn btn-large btn-block' do
+        %i.icon-question-sign
+        Дэвшигдсэн бодлогууд
+      = link_to solutions_path, :class => 'btn btn-large btn-block' do
+        %i.icon-cloud-download
+        Сүүлийн бодолтууд
+      = link_to new_page_path, :class => 'btn btn-large btn-block' do
+        %i.icon-bullhorn
+        Шинэ мэдээ
+      = link_to new_topic_path, :class => 'btn btn-large btn-block' do
+        %i.icon-comment
+        Шинэ хэлэлцүүлэг
+      = link_to moderate_comments_path, :class => 'btn btn-large btn-block' do
+        %i.icon-comment
+        Хэлэлцүүлэг Хянах
+      = link_to new_contest_path, :class => 'btn btn-large btn-block' do
+        %i.icon-trophy
+        Шинэ тэмцээн зарлах

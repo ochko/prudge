@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 class ContestsController < ApplicationController
-  menu :contest
-
-  before_filter :require_user,
-                :except => [:index, :last, :show]
-
+  before_filter :require_user, :except => [:index, :last, :show]
   before_filter :require_judge, :only => [:create, :update, :destroy]
 
   def index

@@ -16,6 +16,7 @@ class Ability
     if user.admin?
       can :manage, :all
     elsif user.judge?
+      can :read, :dashboard
       can [:read, :update, :check, :approve], Problem
       can :destroy, Problem do |problem|
         problem.solutions.count == 0

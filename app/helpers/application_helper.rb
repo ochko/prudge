@@ -4,6 +4,31 @@ module ApplicationHelper
     @title || t("title.#{controller_name}.#{action_name}")
   end
 
+  def flashy
+    css, message = nil, nil
+
+    if msg = flash[:notice] || params[:notice]
+      css, message = 'alert-success', msg
+    elsif msg = flash[:error] || params[:error]
+      css, message = 'alert alert-error', msg
+    elsif msg = flash[:warning] || params[:warning]
+      css, message = 'alert alert-info', msg
+    elsif msg = flash[:alert] || params[:alert]
+      css, message = 'alert alert-error', msg
+    end
+
+    message_box_with_close_button(message, css)
+  end
+
+  def message_box_with_close_button(message, css='alert-success')
+    return if message.blank?
+
+    content_tag(:div,
+                content_tag(:button, 'x', :type => 'button', :class => 'close',
+                            'data-dismiss'=> 'alert') + message,
+                :class => "alert #{css} alert-block")
+  end
+
   def logged_in?
     current_user
   end

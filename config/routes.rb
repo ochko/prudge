@@ -2,6 +2,9 @@ Prudge::Application.routes.draw do
   match ':controller/feed.rss' => '#index', :format => 'rss'
   match ':controller/list' => '#index'
   resources :users do
+    collection do
+      get :account
+    end
     member do
       get :solutions
       get :lessons
@@ -14,6 +17,9 @@ Prudge::Application.routes.draw do
   resources :contests
   resources :participants
   resources :problems do
+    collection do
+      get :proposed
+    end
     member do
       get :check
     end
@@ -34,19 +40,21 @@ Prudge::Application.routes.draw do
   resources :pages
   resources :problem_tests
   resources :results
-  resources :comments
+  resources :comments do
+    collection do
+      get :moderate
+    end
+  end
 
   root :to => 'contests#last'
   match 'signup' => 'users#new', :as => :signup
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
   match 'forgot_password' => 'password_resets#new', :as => :forgot_password
-  match 'account' => 'users#account', :as => :account
   match 'home' => 'home#index', :as => :home
   match 'about' => 'home#about', :as => :about
   match 'guide' => 'home#guide', :as => :guide
-  match 'proposals' => 'problems#proposals', :as => :proposals
-  match '/moderate' => 'comments#moderate'
+  match 'dashboard' => 'home#dashboard', :as => :dashboard
   match '/topic/:type' => 'topics#index'
   match '/search/:q' => 'search#index'
   match '/watchers/:id/:action' => 'watchers#index'

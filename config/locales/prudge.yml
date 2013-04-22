@@ -7,6 +7,7 @@ mn:
       rules: Нөхцөл
       asian: Ази тив
       international: Олон улс
+      dashboard: Dashboard
     contests:
       index: Тэмцээнүүд
       last: Тэмцээн
@@ -36,7 +37,7 @@ mn:
       edit: Тэстийг засварлах
     problems:
       index: Бодлогууд
-      proposals: Дэвшигдсэн бодлогууд
+      proposed: Дэвшигдсэн бодлогууд
       show: Бодлого
       new: Бодлого дэвшүүлэх
       edit: Бодлогыг засварлах
