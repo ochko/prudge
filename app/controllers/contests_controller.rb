@@ -12,10 +12,33 @@ class ContestsController < ApplicationController
     end
   end
 
+  def watch
+    contest = Contest.find params[:id]
+    contest.watchers << current_user
+    render :nothing => true
+  end
+
+  def unwatch
+    contest = Contest.find params[:id]
+    contest.watchers.delete current_user
+    render :nothing => true
+  end
+
   def last
     @contest = Contest.find(:last, :order => "start ASC")
     init_user_data
     render :action => 'show'
+  end
+
+  def contestants
+    @contest = Contest.find(params[:id])
+    @numbers, @standings = @contest.standings
+
+    if @contest.users.size > 0
+      render :partial => 'contestants'
+    else
+      render :text => 'Оролцогч алга!'
+    end
   end
 
   def show

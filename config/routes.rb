@@ -14,7 +14,16 @@ Prudge::Application.routes.draw do
 
   resources :password_resets
   resource :user_session
-  resources :contests
+  resources :contests do
+    member do
+      get :contestants
+      post :watch
+      post :unwatch
+    end
+    resources :users, :only => :show do
+      resources :solutions, :only => :index
+    end
+  end
   resources :participants
   resources :problems do
     collection do
@@ -28,6 +37,9 @@ Prudge::Application.routes.draw do
   resources :lessons
   resources :topics
   resources :solutions do
+    collection do
+      get :latest
+    end
     member do
       get :best
       get :submited
@@ -56,8 +68,7 @@ Prudge::Application.routes.draw do
   match 'guide' => 'home#guide', :as => :guide
   match 'dashboard' => 'home#dashboard', :as => :dashboard
   match '/topic/:type' => 'topics#index'
-  match '/search/:q' => 'search#index'
-  match '/watchers/:id/:action' => 'watchers#index'
+  match '/search/:q' => 'search#index'  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

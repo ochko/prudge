@@ -1,7 +1,7 @@
 $(function() {
   var $window = $(window)
 
-  $('#language-logos, #profile-vcard').tooltip({
+  $('#language-logos, #profile-vcard, #header-tooltip, #watcher').tooltip({
       selector: "[data-toggle=tooltip]"
   });
 
@@ -14,6 +14,15 @@ $(function() {
       }
     })
   }, 100);
+
+  $('#watch').click(function(e) {
+    $(this).hide();
+    $('#unwatch').show();
+  });
+  $('#unwatch').click(function(e) {
+    $(this).hide();
+    $('#watch').show();
+  });
 
   var ajaxBtnIcon;
   $(document).on("ajaxStart", function(e, xhr, settings, exception)  {
@@ -35,7 +44,7 @@ $(function() {
     icon.removeClass().addClass(ajaxBtnIcon);
   });
 
-  $('#profile-tabs a, #problem-tabs a').click(function (e) {
+  $('#profile-tabs a, #problem-tabs a, #contest-tabs a').click(function (e) {
     e.preventDefault();
     $(this).tab('show');
 
@@ -100,28 +109,20 @@ $(function() {
     });
   });
 
-  $('.load-solutions').live("click", function(){
+  $('#contestants .loader').live("click", function(){
     var href = $(this).attr('href');
+    var icon = $(this).find('i');
+    var standing = $(this).closest('tr').find('.standing');
     $('#solved').slideUp('fast', function(){
-         $('#spinner').show();
+         icon.addClass('icon-spin');
          $.get(href, function(resp){
-           $('#spinner').hide();
+           icon.removeClass('icon-spin');
            $('#solved').html(resp);
            $('#solved').slideDown('slow');
          });
          });
     return false;
     });
-
-  $('.watch input').change(
-    function(){
-      if ($(this).is(':checked')) {
-        $.get('/watchers/' + $(this).val() + '/watch');
-      }else{
-        $.get('/watchers/' + $(this).val() + '/unwatch');  
-      }
-    }
-  );
 
   $('#check-button').click(function(){
       $('#check-button').hide();

@@ -1,0 +1,24 @@
+%table.table.table-bordered.table-stripped
+  %thead
+    %tr
+      %th#standing
+      %th= @user.login
+      %th.text-center
+        %i.icon-flag
+      %th.text-center
+        %i.icon-cogs
+      %th.text-center
+        %i.icon-time
+  %tbody
+    - @solutions.each do |s|
+      %tr
+        %td= link_to show_correctness(s.passed?), s
+        %td
+          = link_to s.problem.name, s.problem
+          %span.solution-meta
+            = s.language.name
+            ,
+            \#{l s.created_at}/#{l s.source_updated_at}
+        %td.center= s.problem.level
+        %td.center #{"%0.0f" % (s.percent*100)}%
+        %td.center= sec2milisec s.time

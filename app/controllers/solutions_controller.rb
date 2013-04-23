@@ -3,6 +3,15 @@ class SolutionsController < ApplicationController
   before_filter :require_user, :except=> [:submited, :solved, :best]
 
   def index
+    @user = User.find(params[:user_id])
+    @solutions = Solution.
+      where(user_id: @user.id, contest_id: params[:contest_id]).
+      order('created_at desc').preload(:problem)
+
+    render :layout => false
+  end
+
+  def latest
     @solutions = Solution.
       order('solutions.source_updated_at desc').
       page(params[:page]).

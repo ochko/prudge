@@ -83,14 +83,4 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     render :partial => 'problems'
   end
-
-  def auto_complete_for_user_school
-    @users = User.
-      all(:select => 'DISTINCT(school)',
-          :conditions => [ 'LOWER(school) LIKE ?', '%' + params[:user][:school].downcase + '%' ],
-          :order => 'school ASC',
-          :limit => 20)
-    render :inline => "<%= auto_complete_result @users, 'school' %>"
-  end
-
 end

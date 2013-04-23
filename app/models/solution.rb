@@ -22,7 +22,6 @@ class Solution < ActiveRecord::Base
            :dependent => :destroy,
            :order => 'created_at DESC'
 
-  scope :for_user, lambda { |user| { :conditions => ['user_id =?', user.id], :include => [:problem], :order => 'created_at desc' } }
   scope :valuable, :conditions => 'percent > 0'
   scope :fast, :order => 'time ASC, source_updated_at ASC'
   scope :for_contest, lambda { |c| { :conditions => ['contest_id =?', c.id] } }

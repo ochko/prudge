@@ -46,7 +46,7 @@ mn:
     search:
       index: Хайлт
     solutions:
-      index: Сүүлийн бодолтууд
+      latest: Сүүлийн бодолтууд
       show: Бодолт
       view: Бодолт
       new: Бодолт илгээх

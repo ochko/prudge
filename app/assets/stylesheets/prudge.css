@@ -345,6 +345,10 @@ img.avatar-large {
   font-family: FontAwesome;
 }
 
+#contestants .loader:hover {
+  text-decoration:none;
+}
+
 /* Lessons and News pages
 -------------------------------------------------- */
 .page-title h3, .page-title h2{
