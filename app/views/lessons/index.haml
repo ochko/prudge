@@ -1,12 +1,13 @@
 .pull-right
   = link_to lessons_path(:format=>:rss), :class => 'btn btn-warning' do
     %i.icon-rss
-%h1 Lessons
 - @lessons.each do |lesson|
   .page-title
-    %h3= lesson.title
-    = link_to lesson, :class => 'pull-right' do
-      %i.icon-share-alt
+    %h2
+      = lesson.title
+      %small
+        = link_to lesson do
+          %i.icon-share-alt
 
     .muted
       Posted on
