@@ -119,6 +119,9 @@ $(function() {
            icon.removeClass('icon-spin');
            $('#solved').html(resp);
            $('#solved').slideDown('slow');
+           if(window.innerWidth <= 800) {
+             $(document.body).scrollTop($('#standing').offset().top);
+           }
          });
          });
     return false;

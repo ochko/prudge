@@ -13,7 +13,7 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new(params[:user_session])
     @user_session.save do |result|
       if result
-        redirect_back_or_default account_url
+        redirect_back_or_default account_users_url
       else
         render :action => :new
       end

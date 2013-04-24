@@ -3,9 +3,10 @@
   %head
     %title #{title}
     %meta{:charset => "utf-8"}/
-    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{:content => "width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0", :name => "viewport"}/
     %meta{:content => "noindex", :name => "robots"}/
     %meta{:content => "nofollow", :name => "robots"}/
+    %meta{:name => "apple-mobile-web-app-capable", :content => "yes"}/
     = auto_discovery_link_tag :rss, lessons_path(:format=>:rss), :title => "#{Settings.name} - Lessons"
     %link{:href => "/images/run.ico", :rel => "icon", :type => "image/x-icon"}/
     %link{:href => "/images/run.ico", :rel => "shortcut icon", :type => "image/x-icon"}/
