@@ -1,12 +1,12 @@
-.media.comment-media
-  = image_tag comment.user.gravatar_url(:size => 64), :class => 'pull-left img-polaroid'
-  .media-body
-    .popover.fade.right.in.comment-bubble
-      .arrow
-      %h3.popover-title
-        = link_to comment.user.login, comment.user
-        at
-        = l comment.created_at
-      .popover-content
-        = simple_format h(comment.text)  
+.row
+  .span6
+    %header.comment
+      = image_tag comment.user.gravatar_url(:size => 44), :class => 'pull-left img-circle'
+      = link_to comment.user.login, comment.user, :class => 'comment-user'
+      %a{:href => '#', :class => 'comment-like'}
+        1
+        %i.icon-heart
+    .comment-body
+      = simple_format h(comment.text)
+
       

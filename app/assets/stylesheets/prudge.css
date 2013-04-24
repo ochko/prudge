@@ -398,17 +398,56 @@ img.avatar-large {
 
 /* Comment
 ------------------------- */
-.comment-media {
-  margin: 30px 0;
-}
-.comment-bubble {
-  position: relative;
-  display: inline-block;
-  max-width: 100%;
-  min-width: 50%;
+.comment-body {
+  margin-top: 15px;
+  padding: 0 6px;
+  font-size: 16px;
+  font-weight: 200;
+  line-height: 22px;
 }
 
+.comment-user {
+  margin-left: 14px;
+  top: 50%;
+  line-height: 40px;
+  font-size: 16px;
+  color: #333;
+}
+.comment-user:hover {
+  color: #333;
+  text-decoration: none;
+}
+.comment-like {
+  float: right;
+  margin-right: 20px;
+  top: 50%;
+  line-height: 42px;
+  font-size: 12px;
+  color: #666;
+}
 
+.comment-like:hover {
+  color: #d75959;
+  text-decoration: none;
+}
+
+header.comment {
+  min-height: 44px;
+  margin-top: 20px;
+  background: #e5e5e5;
+  border-top: #dfdfdf solid 1px;
+  border-bottom: #e5e5e5 solid 1px;
+  -webkit-border-radius: 44px;
+  -webkit-border-top-right-radius: 6px;
+  -webkit-border-bottom-right-radius: 6px;
+  -moz-border-radius: 44px;
+  -moz-border-radius-topright: 6px;
+  -moz-border-radius-bottomright: 6px;
+  border-radius: 44px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  zoom: 1;
+}
 /* Responsive
 -------------------------------------------------- */
 
@@ -581,5 +620,13 @@ img.avatar-large {
   .footer {
     padding-top: 20px;
     padding-bottom: 20px;
+  }
+
+  #footer-push {
+    display: none;
+  }
+
+  .comment-media .img-polaroid {
+    display: none;
   }
 }
