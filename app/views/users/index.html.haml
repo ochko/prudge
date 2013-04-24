@@ -15,7 +15,7 @@
                 %abbr{:title => "#{'%.3f' % user.points} points"}pts
           %td
             = link_to user.login, user
-            %p.muted
+            .muted
               = strip_tags(user.school)
     
     = paginate @users

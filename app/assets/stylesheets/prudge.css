@@ -271,18 +271,14 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
 /* User profile and Ranking list
 -------------------------------------------------- */
 .user-rank {
-  font-size: 21px;
-  font-weight: 200;
-}
-
-.user-rank {
-  font-size: 21px;
+  font-size: 23px;
   font-weight: 200;
 }
 
 .user-rank small{
+  white-space:nowrap;
   margin-top: 5px;
-  font-size: 14px;
+  font-size: 12px;
   color: #999;
   display:block;
 }
