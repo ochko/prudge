@@ -347,8 +347,8 @@ img.avatar-large {
 
 /* Lessons and News pages
 -------------------------------------------------- */
-.page-title h3, .page-title h2{
-  margin: 20px 0 0;
+.page-title h1, .page-title h2, .page-title h3{
+  padding-top: 12px;
   font-weight: 200;
 }
 
@@ -360,7 +360,9 @@ img.avatar-large {
   margin: 20px 0 40px;
 }
 
-
+.rss-button {
+  margin-top: 20px;
+}
 /* Footer
 -------------------------------------------------- */
 #footer-push {
