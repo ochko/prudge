@@ -18,7 +18,6 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.rss
       format.js { render :layout => false }
     end
   end
