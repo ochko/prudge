@@ -1,22 +1,19 @@
 - @contests.each do |contest|
-  .page-title
-    %h2
-      = contest.name
-      %small
-        = link_to contest do
-          %i.icon-share-alt
+  %h2
+    = contest.name
+  .subhead
+    = show_status contest
+    %i.icon-time
+    = l contest.start
+    %i.icon-double-angle-right
+    = l contest.end
+    - if contest.private?
+      %i.icon-lock{:data => {:toggle => :tooltip, :placement => 'bottom'}, :title => 'Дэвшүүлсэн бодлого нь сонгогдсон тохиолдолд энэ тэмцээнд орох эрхтэй болно'}
+    = link_to contest, :class => 'btn btn-mini pull-right' do
+      Visit contest
+      %i.icon-share-alt
 
-    .muted
-      = show_status contest
-      %i.icon-time
-      = l contest.start
-      %i.icon-double-angle-right
-      = l contest.end
-      - if contest.private?
-        %i.icon-lock{:data => {:toggle => :tooltip, :placement => 'bottom'}, :title => 'Дэвшүүлсэн бодлого нь сонгогдсон тохиолдолд энэ тэмцээнд орох эрхтэй болно'}
-
-
-  .page-content
+  %section
     = markdown contest.description
 
 = paginate @contests

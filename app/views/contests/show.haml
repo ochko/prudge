@@ -1,31 +1,26 @@
-.row
-  .span12.page-title
-    %h2#header-tooltip
-      = @contest.name
-      - if @contest.private?
-        - if @contributed
-          %i.muted.icon-unlock{:data => {:toggle => :tooltop, :placement => 'bottom'}, :title => 'Дэвшүүлсэн бодлого тань сонгогдсон учраас энэ тэмцээнд орох боломжтой'}
-        - else
-          %i.muted.icon-lock{:data => {:toggle => :tooltip, :placement => 'bottom'}, :title => 'Дэвшүүлсэн бодлого нь сонгогдсон тохиолдолд энэ тэмцээнд орох эрхтэй болно'}
-    .muted
-      = show_status @contest
-      %i.icon-time
-      = l @contest.start
-      %i.icon-double-angle-right
-      = l @contest.end
-
-.row
-  .span9
-    - if admin?
-      .btn-group.pull-right
-        = link_to edit_contest_path(@contest), :class => 'btn btn-small' do
-          %i.icon-wrench
-          Edit
-        = link_to @contest, :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-small' do
-          %i.icon-trash
-          Delete
-
-    = markdown @contest.description
+%h2#header-tooltip
+  = @contest.name
+  - if @contest.private?
+    - if @contributed
+      %i.muted.icon-unlock{:data => {:toggle => :tooltop, :placement => 'bottom'}, :title => 'Дэвшүүлсэн бодлого тань сонгогдсон учраас энэ тэмцээнд орох боломжтой'}
+    - else
+      %i.muted.icon-lock{:data => {:toggle => :tooltip, :placement => 'bottom'}, :title => 'Дэвшүүлсэн бодлого нь сонгогдсон тохиолдолд энэ тэмцээнд орох эрхтэй болно'}
+.subhead
+  = show_status @contest
+  %i.icon-time
+  = l @contest.start
+  %i.icon-double-angle-right
+  = l @contest.end
+  - if admin?
+    .btn-group.pull-right
+      = link_to edit_contest_path(@contest), :class => 'btn btn-mini' do
+        %i.icon-wrench
+        Edit
+      = link_to @contest, :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini' do
+        %i.icon-trash
+        Delete
+%section
+  = markdown @contest.description
 
 .row
   .span9
