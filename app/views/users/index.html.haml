@@ -1,21 +1,22 @@
-.row
-  .span6
-    %h1 Кодерууд
-    
-    = paginate @users
-    
-    %table.table
-      - @users.each_with_index do |user, i|
-        %tr
-          %td
-            .user-rank
-              = i + 1 + (@users.current_page - 1) * 100
-              %small
-                = "%.0f" % user.points
-                %abbr{:title => "#{'%.3f' % user.points} points"}pts
-          %td
-            = link_to user.login, user
-            .muted
-              = strip_tags(user.school)
-    
-    = paginate @users
+%section
+  .row
+    .span6
+      %h1 Кодерууд
+      
+      = paginate @users
+      
+      %table.table
+        - @users.each_with_index do |user, i|
+          %tr
+            %td
+              .user-rank
+                = i + 1 + (@users.current_page - 1) * 100
+                %small
+                  = "%.0f" % user.points
+                  %abbr{:title => "#{'%.3f' % user.points} points"}pts
+            %td
+              = link_to user.login, user
+              .muted
+                = strip_tags(user.school)
+      
+      = paginate @users

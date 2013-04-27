@@ -1,19 +1,11 @@
-.row
-  .span12.page-title
-    %h2
-      = @problem.name
+%h1
+  = @problem.name
+.subhead
+  Posted by #{link_to @problem.user.login, @problem.user}
+  - if @problem.contest
+    for #{link_to @problem.contest.name, @problem.contest}
 .row
   .span3.profile
-    .media
-      = image_tag(@problem.user.gravatar_url(:size => 64), :class => "img-polaroid pull-left")
-      .media-body
-        Posted by
-        = link_to @problem.user.login, @problem.user
-        - if @problem.contest
-          %br
-          for
-          = link_to @problem.contest.name, @problem.contest
-    %hr
     %dl
       %dt
         %i.icon-flag
@@ -42,6 +34,7 @@
     = link_to new_solution_path(:problem => @problem.id), :class => 'btn btn-primary btn-large btn-block' do
       %i.icon-check
       Solve
+
     %h3.list-heading
       .inner
         %i.icon-wrench
@@ -49,15 +42,15 @@
       - if can? :update, @problem
         = link_to edit_problem_path(@problem), :class => 'btn btn-small' do
           %i.icon-wrench
-          Засвар
-      - if can? :update, @problem
+          Edit
+      - if can? :destroy, @problem
         = link_to @problem, :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-small' do
           %i.icon-trash
-          Устгах
+          Delete
       - if can? :check, @problem
         = link_to check_problem_path(@problem), :class => 'btn btn-small' do
           %i.icon-repeat
-          Дахин шалгах
+          Recheck
 
   .span7
     %ul.nav.nav-tabs#problem-tabs
@@ -80,9 +73,12 @@
  
     .tab-content
       .tab-pane.active#problem-text
-        = markdown @problem.text
-        = content_tag(:span, 'Эх сурвалж: ' + h(@problem.source), :class => 'problem-source') if !@problem.source.empty?
-        = render :partial => 'comments/commentable', :object => @problem
+        %section
+          = markdown @problem.text
+          = content_tag(:span, 'Эх сурвалж: ' + h(@problem.source), :class => 'problem-source') if !@problem.source.empty?
+
+        %section
+          = render :partial => 'comments/commentable', :object => @problem
       .tab-pane#best-solution
       .tab-pane#all-solutions
       .tab-pane#correct-solutions

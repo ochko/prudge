@@ -1,7 +1,7 @@
 %h1 
   Сүүлд нэмэгдсэн бичээсүүд
-  %span.rss= link_to 'RSS', comments_path(:format=>:rss)
-#comments.span-20
+
+%section#comments
   = render :partial => "comments/comment", :collection => @comments
 
 = paginate @comments, :params =>{:controller => '/comments' }

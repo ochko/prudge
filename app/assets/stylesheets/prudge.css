@@ -61,9 +61,8 @@ body > .navbar .brand:hover {
 
 /* padding for in-page bookmarks and fixed navbar */
 section {
-  padding-top: 30px;
+  margin: 30px 0;
 }
-section > .page-header,
 section > .lead {
   color: #5a5a5a;
 }
@@ -263,11 +262,6 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
   bottom: 270px;
 }
 
-/* Generic
--------------------------------------------------- */
-.main-content {
-  padding: 20px 0;
-}
 /* User profile and Ranking list
 -------------------------------------------------- */
 .user-rank {
@@ -316,11 +310,6 @@ h3.list-heading .inner {
   background: #fff;
 }
 
-img.avatar-large {
-  width: 210px;
-  height: 210px;
-}
-
 /* Problem, Solution and Contest
 -------------------------------------------------- */
 .solution-info {
@@ -347,21 +336,19 @@ img.avatar-large {
 
 /* Lessons and News pages
 -------------------------------------------------- */
-.page-title h1, .page-title h2, .page-title h3{
-  padding-top: 12px;
+section > h1, section > h2, section > h3{
   font-weight: 200;
 }
-
-.page-title small{
-  margin: 0 0 20px;
+.subhead {
+  color: #999999;
+  margin-bottom: 10px;
 }
-
-.page-content {
-  margin: 20px 0 40px;
+.subhead a {
+  color: #666666;
+  font-weight: 400;
 }
-
-.rss-button {
-  margin-top: 20px;
+.subhead a:hover {
+  text-decoration: none;
 }
 /* Footer
 -------------------------------------------------- */

@@ -1,8 +1,9 @@
 .row
-  .span3.profile#profile-vcard
-    = link_to 'http://gravatar.com/emails/' do
-      = image_tag(@user.gravatar_url(:size => 210), :class => "img-polaroid avatar-large", 'data-toggle' => :tooltip, 'data-placement' => :bottom, :title => "Change your avatar at Gravatar.com")
-    %h3= @user.login
+  .span3.profile
+    %p.text-center#profile-vcard
+      = link_to 'http://gravatar.com/emails/' do
+        = image_tag(@user.gravatar_url(:size => 196), :class => "img-circle", 'data-toggle' => :tooltip, 'data-placement' => :bottom, :title => "Change your avatar at Gravatar.com")
+    %h3.text-center= @user.login
     %h3.list-heading
       .inner
         %i.icon-trophy

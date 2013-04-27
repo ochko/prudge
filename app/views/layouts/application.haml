@@ -7,9 +7,10 @@
     %meta{:content => "noindex", :name => "robots"}/
     %meta{:content => "nofollow", :name => "robots"}/
     %meta{:name => "apple-mobile-web-app-capable", :content => "yes"}/
-    = auto_discovery_link_tag :rss, lessons_path(:format=>:rss), :title => "#{Settings.name} - Lessons"
+
     %link{:href => image_path('run.ico'), :rel => "icon", :type => "image/x-icon"}/
     %link{:href => image_path('run.ico'), :rel => "shortcut icon", :type => "image/x-icon"}/
+
     = stylesheet_link_tag "application", :media => "all"
     = csrf_meta_tag
   %body
@@ -75,7 +76,8 @@
                   = link_to 'Signup', signup_path
     .container
       = flashy
-      = yield
+      %section
+        = yield
 
     #footer-push.clearfix
     %footer.footer
