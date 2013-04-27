@@ -3,9 +3,9 @@ module ProblemsHelper
   def solved_or_not(state)
     case state
     when 'passed'
-      image_tag('ok.png', :title => "Бодчихсон")
+      content_tag(:i, '', :class => 'icon-ok-circle', :title => "Бодчихсон")
     when 'failed'
-      image_tag('ng.png', :title => "Бодож чадаагүй")
+      content_tag(:i, '', :class => 'icon-remove-circle', :title => "Бодож чадаагүй")
     else
       ''
     end

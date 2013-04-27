@@ -19,7 +19,7 @@ module ContestsHelper
         Time.now() < contest.end
       "Дуусахад #{distance_of_time_in_words_to_now contest.end} үлдлээ"
     else
-      "Дууссан"
+      "Тэмцээн дууссан"
     end
   end
 

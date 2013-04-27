@@ -278,7 +278,10 @@ th.headerSortUp:before {
   font-family: FontAwesome;
   content: "\f106";
 }
-
+/* General */
+.muted a {
+  color: #666;
+}
 
 /* User profile and Ranking list
 -------------------------------------------------- */

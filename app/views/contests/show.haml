@@ -6,34 +6,34 @@
     - else
       %i.muted.icon-lock{:data => {:toggle => :tooltip, :placement => 'bottom'}, :title => 'Дэвшүүлсэн бодлого нь сонгогдсон тохиолдолд энэ тэмцээнд орох эрхтэй болно'}
 .subhead
-  = show_status @contest
+  .muted
+    = show_status @contest
   %i.icon-time
   = l @contest.start
   %i.icon-double-angle-right
   = l @contest.end
+  %br
+  - if current_user
+    - watching = @contest.watchers.include? current_user
+    = link_to unwatch_contest_path(@contest), :method => :post, :data => {:toggle => :tooltip, :placement => 'bottom', :remote => true}, :id => 'watch', :class=> "btn btn-mini #{watching ? '' : 'hide'}", :title => 'Энэ тэмцээний тухай мэдэгдэл ирэхгүй болгох' do
+      %i.icon-eye-close
+      Unwatch
+    = link_to watch_contest_path(@contest), :method => :post, :data => {:toggle => :tooltip, :placement => 'bottom', :remote => true}, :id => 'unwatch', :class => "btn btn-mini #{watching ? 'hide' : ''}", :title => 'Тэмцээнийн хугацаа өөрчлөгдөхөд надад мэдэгд' do
+      %i.icon-eye-open
+      Watch
   - if admin?
-    .btn-group.pull-right
-      = link_to edit_contest_path(@contest), :class => 'btn btn-mini' do
-        %i.icon-wrench
-        Edit
-      = link_to @contest, :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini' do
-        %i.icon-trash
-        Delete
+    = link_to edit_contest_path(@contest), :class => 'btn btn-mini' do
+      %i.icon-wrench
+      Edit
+    = link_to @contest, :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini' do
+      %i.icon-trash
+      Delete
+
 %section
   = markdown @contest.description
 
 .row
   .span9
-    - if current_user
-      .pull-right#watcher
-        - watching = @contest.watchers.include? current_user
-        = link_to unwatch_contest_path(@contest), :method => :post, :data => {:toggle => :tooltip, :placement => 'bottom', :remote => true}, :id => 'watch', :class=> "btn btn-small #{watching ? '' : 'hide'}", :title => 'Энэ тэмцээний тухай мэдэгдэл ирэхгүй болгох' do
-          %i.icon-eye-close
-          Unwatch
-        = link_to watch_contest_path(@contest), :method => :post, :data => {:toggle => :tooltip, :placement => 'bottom', :remote => true}, :id => 'unwatch', :class => "btn btn-small #{watching ? 'hide' : ''}", :title => 'Тэмцээнийн хугацаа өөрчлөгдөхөд надад мэдэгд' do
-          %i.icon-eye-open
-          Watch
-
     %ul.nav.nav-tabs#contest-tabs
       %li.active
         %a{'href' => "#included-problems"}
@@ -47,35 +47,26 @@
       .tab-pane.active#included-problems
         - if @contest.started? || admin?
           %table.table
-            %thead
-              %tr
-                %th ID
-                %th Нэр
-                %th Түвшин
-                %th
-                  %i.icon-time
-                  \/
-                  %i.icon-hdd
-                %th Дэвшүүлсэн
-                %th Бодолт
-                %th
             %tbody
               - @contest.problems.each do |problem|
                 %tr
-                  %td= problem.id
-                  %td= link_to problem.name, problem
                   %td
-                    = Contest::LEVEL_NAMES[problem.level]
-                    (#{problem.level})
-                  %td
-                    = problem.time
-                    с /
-                    \#{problem.memory}кб
-                  %td= link_to problem.user.login, problem.user
-                  %td
-                    = problem.tried_count
-                    \/ #{problem.solved_count}
-                  %td= solved_or_not @solved[problem.id]
+                    %h4
+                      = link_to problem.name, problem
+                      = solved_or_not @solved[problem.id]
+                      %span{title: 'Submitted'}= problem.tried_count
+                      \/
+                      %span{title: 'Passed'}= problem.solved_count
+                    .muted
+                      %small
+                        %i.icon-flag{title: 'Level'}
+                        = problem.level
+                        %i.icon-time{title: 'Time limit'}
+                        \#{problem.time} sec
+                        %i.icon-hdd{title: 'Memory limit'}
+                        \#{problem.memory} kb,
+                        by
+                        = link_to problem.user.login, problem.user
 
         = render :partial => 'comments/commentable', :object => @contest
 
