@@ -117,17 +117,34 @@ class Solution < ActiveRecord::Base
   def summarize!
     return if results.empty?
 
-    ok = results.correct.real.size
-    all = problem.tests.real.size
-
     self.class.transaction do
-      self.state = (ok == all) ? 'passed' : 'failed'
-      self.percent = (ok.to_f / all)
-      self.point   = percent * problem.level
+      self.state = all_tests_passed? ? 'passed' : 'failed'
+      self.percent = passed_ration
+      self.point   = points_taken
       self.time    = average_time
-      self.solved_in ||= solution.contest.try(:time_passed)
+      self.solved_in ||= contest.try(:time_passed)
       self.save!
     end
+  end
+
+  def all_tests_passed?
+    passed_real_tests_count == real_tests_count
+  end
+
+  def passed_ration
+    passed_real_tests_count.to_f / real_tests_count
+  end
+
+  def passed_real_tests_count
+    @passed_real_tests_count ||= results.correct.real.size
+  end
+
+  def real_tests_count
+    @real_tests_count ||= problem.tests.real.size
+  end
+
+  def points_taken
+    passed_ration * problem.level
   end
 
   def average_time
