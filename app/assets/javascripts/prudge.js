@@ -69,6 +69,16 @@ $(function() {
             type: 'GET',
             success: function(data, status, xhr) {
                 target.html(data);
+
+                $('#solutions-table thead .toggler').click(function(e) {
+                    $('#solutions-table tbody tr.failed').toggle();
+                    klass = $(this).hasClass('icon-check-empty') ? 'icon-check' : 'icon-check-empty';
+                    $(this).removeClass().addClass(klass);
+                });
+
+                $("#solutions-table").tablesorter({headers: { 0: {sorter: false},
+                                                              1: {sorter: false}
+                                                            }});
             },
             error: function(xhr, status, message) {
                 target.html("Error");

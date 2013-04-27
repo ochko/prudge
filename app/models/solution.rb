@@ -22,10 +22,6 @@ class Solution < ActiveRecord::Base
            :dependent => :destroy,
            :order => 'created_at DESC'
 
-  scope :valuable, :conditions => 'percent > 0'
-  scope :fast, :order => 'time ASC, source_updated_at ASC'
-  scope :for_contest, lambda { |c| { :conditions => ['contest_id =?', c.id] } }
-
   aasm :column => 'state' do
     state :updated, :before_enter => :log, :after_enter => :reset!, :initial => true
     state :waiting, :after_enter => :queue
@@ -49,10 +45,6 @@ class Solution < ActiveRecord::Base
     event :errored do
       transitions :from => :waiting, :to => :defunct
     end
-  end
-
-  def self.best
-    passed.fast.first
   end
 
   def queue

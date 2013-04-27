@@ -30,10 +30,6 @@
       %dd
         %span.muted Tests
         = @problem.tests.size
-    %hr
-    = link_to new_solution_path(:problem => @problem.id), :class => 'btn btn-primary btn-large btn-block' do
-      %i.icon-check
-      Solve
 
     %h3.list-heading
       .inner
@@ -52,25 +48,22 @@
           %i.icon-repeat
           Recheck
 
+    %hr
+    = link_to new_solution_path(:problem => @problem.id), :class => 'btn btn-primary btn-large btn-block' do
+      %i.icon-upload
+      Submit solution
+    %hr
+
   .span7
     %ul.nav.nav-tabs#problem-tabs
       %li.active
         %a{'href' => "#problem-text"}
           %i.icon-question-sign
-          Бодлого
+          Problem
       %li
-        %a{'href' => "#best-solution", 'data-link' => best_solution_path(:problem_id=>@problem.id)}
-          %i.icon-dashboard
-          Шилдэг бодолт
-      %li
-        %a{'href' => "#all-solutions", 'data-link' => submited_solution_path(:problem_id=>@problem.id)}
-          %i.icon-book
-          Нийт бодолт
-      %li
-        %a{'href' => "#correct-solutions", 'data-link' => solved_solution_path(:problem_id=>@problem.id)}
-          %i.icon-question-sign
-          Зөв бодолт
- 
+        %a{'href' => "#solutions-tab", 'data-link' => submited_solution_path(:problem_id=>@problem.id)}
+          %i.icon-upload
+          Submissions
     .tab-content
       .tab-pane.active#problem-text
         %section
@@ -79,7 +72,5 @@
 
         %section
           = render :partial => 'comments/commentable', :object => @problem
-      .tab-pane#best-solution
-      .tab-pane#all-solutions
-      .tab-pane#correct-solutions
+      .tab-pane#solutions-tab
     

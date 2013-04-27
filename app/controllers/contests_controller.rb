@@ -85,7 +85,9 @@ class ContestsController < ApplicationController
     @contributed = @contest.contributors.include? current_user
     @solved = { }
     if current_user
-      current_user.solutions.for_contest(@contest).each{ |s| @solved[s.problem_id] = s.state } 
+      current_user.solutions.
+        where(contest_id: @contest.id).
+        each{ |s| @solved[s.problem_id] = s.state }
     end
   end
 end

@@ -197,7 +197,7 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
 -------------------------------------------------- */
 
 .prudge-sidenav {
-  width: 228px;
+  width: 140px;
   margin: 30px 0 0;
   padding: 0;
   background-color: #fff;
@@ -261,6 +261,24 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
   top: auto;
   bottom: 270px;
 }
+/* Table sort */
+th.header {
+  cursor: pointer; 
+}
+th.header:before {
+  font-family: FontAwesome;
+  margin-right: 4px;  
+  content: "\f105";
+}
+th.headerSortDown:before {
+  font-family: FontAwesome;
+  content: "\f107";
+}
+th.headerSortUp:before {
+  font-family: FontAwesome;
+  content: "\f106";
+}
+
 
 /* User profile and Ranking list
 -------------------------------------------------- */

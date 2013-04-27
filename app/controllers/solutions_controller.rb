@@ -28,34 +28,14 @@ class SolutionsController < ApplicationController
     render :action => :show
   end
 
-  def best
-    @problem = Problem.find(params[:problem_id])
-    @solution = @problem.solutions.best
-    unless @solution
-      render :text => '<table><tr><td>Энэ бодлогыг одоогоор нэг ч хүн бодоогүй байна</td></tr</table>'
-    else
-      render :partial => 'best'
-    end
-  end
-
   def submited
     @problem = Problem.find(params[:problem_id])
-    @solutions = @problem.solutions(:order => 'source_updated_at DESC').preload(:user)
+    @solutions = @problem.solutions.
+      order('percent DESC, time ASC, source_updated_at ASC').
+      preload(:user)
       
     if @solutions.empty?
-      render :text => '<table><tr><td>Энэ бодлогыг одоогоор нэг ч хүн бодоогүй байна</td></tr</table>'
-    else
-      render :partial => 'list'
-    end
-  end
-
-  def solved
-    @problem = Problem.find(params[:problem_id])
-    @solutions = @problem.solutions.passed.
-      order('source_updated_at DESC').
-      preload(:user)
-    if @solutions.empty?
-      render :text => '<table><tr><td>Энэ бодлогыг одоогоор нэг ч хүн зөв бодоогүй байна</td></tr</table>'
+      render :text => 'Энэ бодлогыг одоогоор нэг ч хүн бодоогүй байна'
     else
       render :partial => 'list'
     end

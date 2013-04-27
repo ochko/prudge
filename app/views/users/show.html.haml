@@ -4,6 +4,12 @@
       = link_to 'http://gravatar.com/emails/' do
         = image_tag(@user.gravatar_url(:size => 196), :class => "img-circle", 'data-toggle' => :tooltip, 'data-placement' => :bottom, :title => "Change your avatar at Gravatar.com")
     %h3.text-center= @user.login
+    - if @user == current_user
+      %p.text-center
+        = link_to edit_user_path(@user) do
+          %button.btn.btn-mini
+            %i.icon-pencil
+            Update profile
     %h3.list-heading
       .inner
         %i.icon-trophy
@@ -16,7 +22,6 @@
             = count
           .muted
             = t(medal_name(num), :scope => 'label.standing')
-
     %h3.list-heading
       .inner
         %i.icon-star-empty
@@ -71,14 +76,7 @@
         %dt
           %i.icon-twitter.muted
         %dd= link_to_twitter @user.twitter
-
-    - if @user == current_user
-      %hr
-      = link_to edit_user_path(@user) do
-        %button.btn.btn-small.btn-primary
-          %i.icon-pencil
-          Update profile
-
+    %hr
   .span7
     %ul.nav.nav-tabs#profile-tabs
       %li.active
