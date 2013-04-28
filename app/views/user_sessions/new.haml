@@ -9,20 +9,17 @@
           .input-prepend
             %span.add-on
               %i.icon-user
-            = f.text_field :login, :placeholder => "Username", :class => 'span3'
-        / /field
+            = f.text_field :login, :placeholder => "Username", :class => 'input-block-level'
         .field
           .input-prepend
             %span.add-on
               %i.icon-key
-            = f.password_field :password, :placeholder => "Password", :class => 'span3'
-        / /password
-      / /login-fields
+            = f.password_field :password, :placeholder => "Password", :class => 'input-block-level'
       .login-actions
         %button.button.btn.btn-primary
           %i.icon-off
           Sign In
-      / .actions
+
       .login-social
         %p Sign in using social network:
         %a.btn.btn-small{:href => "#"}
@@ -31,11 +28,9 @@
         %a.btn.btn-small{:href => "#"}
           %i.icon-facebook
           Login with Facebook
-  / /content
-/ /account-container
-/ Text Under Box
+
 .login-extra
   Don't have an account? #{link_to 'Sign Up', signup_path}
   %br/
   Remind #{link_to 'Password', forgot_password_path}
-/ /login-extra
+

@@ -72,7 +72,7 @@ class ApplicationController < ActionController::Base
   
   def store_location
     if request.format == "html"
-      session[:return_to] = request.request_uri
+      session[:return_to] = request.url
     end
   end
   
