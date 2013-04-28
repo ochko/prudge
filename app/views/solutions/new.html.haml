@@ -1,0 +1,56 @@
+%h1
+  = @problem.name
+.subhead
+  Posted by #{link_to @problem.user.login, @problem.user}
+  - if @problem.contest
+    for #{link_to @problem.contest.name, @problem.contest}
+.row
+  .span3.profile
+    %dl
+      %dt
+        %i.icon-flag
+      %dd
+        %span.muted Difficulty
+        = @problem.level
+    %dl
+      %dt
+        %i.icon-time
+      %dd
+        %span.muted Time limit
+        = @problem.time
+        sec
+    %dl
+      %dt
+        %i.icon-hdd
+      %dd
+        %span.muted Memory Limit
+        = @problem.memory
+        bytes
+    %dl
+      %dt
+        %i.icon-cogs
+      %dd
+        %span.muted Tests
+        = @problem.tests.size
+.row
+  .span5
+    %section
+      = form_for @solution, :html => { :multipart => true, :class => 'form-horizontal'} do |form|
+        %legend Submit a solution
+        - if @solution.contest.nil? && @problem.contest && @problem.contest.openfor?(current_user)
+          = message_box_with_close_button(t('message.individual_submission', :page => link_to(@problem.contest.name, @contest)), css='alert-info')
+        = form.hidden_field :problem_id
+        = form.hidden_field :contest_id
+        .control-group
+          %label.control-label{:for => :language} Source
+          .controls
+            = form.file_field :source, :class => 'input-medium'
+        .control-group
+          %label.control-label{:for => :language} Language
+          .controls
+            = form.select :language, Language.all.collect{|l| [l.name, l.name.downcase]}, {}, :class => 'input-small'
+        .control-group
+          .controls
+            %button{:type=>"submit", :class=>"btn btn-primary"}
+              %i.icon-upload
+              Submit

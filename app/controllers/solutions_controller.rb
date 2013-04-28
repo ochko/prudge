@@ -54,8 +54,10 @@ class SolutionsController < ApplicationController
   end
 
   def new
-    @solution = Solution.new(:problem_id => params[:problem])
-    @solution.apply_contest
+    @contest = Contest.find(params[:contest_id]) if params[:contest_id]
+    @problem = (@contest ? @contest.problems : Problem).find(params[:problem_id])
+    @solution = @problem.solutions.build(:contest => @contest)
+
     creating
   end
 

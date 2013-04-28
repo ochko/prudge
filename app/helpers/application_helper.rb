@@ -24,8 +24,11 @@ module ApplicationHelper
     return if message.blank?
 
     content_tag(:div,
-                content_tag(:button, 'x', :type => 'button', :class => 'close',
-                            'data-dismiss'=> 'alert') + message,
+                content_tag(:button, 
+                            content_tag(:i,'', :class => "icon-remove-circle"),
+                            :type => 'button', :class => 'close',
+                            'data-dismiss'=> 'alert') + 
+                message.html_safe,
                 :class => "alert #{css} alert-block")
   end
 

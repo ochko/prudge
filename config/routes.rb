@@ -20,12 +20,16 @@ Prudge::Application.routes.draw do
       post :watch
       post :unwatch
     end
+    resources :problems, :only => :show do
+      resources :solutions
+    end
     resources :users, :only => :show do
       resources :solutions, :only => :index
     end
   end
   resources :participants
   resources :problems do
+    resources :solutions
     collection do
       get :proposed
     end

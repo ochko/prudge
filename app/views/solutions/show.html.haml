@@ -6,8 +6,8 @@
   
 .subhead
   = link_to @solution.user.login, @solution.user
-  posted at #{l @solution.source_updated_at}
-  in  #{@solution.language.name} « #{h @solution.source_file_name} »
+  submitted at #{l @solution.source_updated_at}
+  in  #{@solution.language.name} #{h @solution.source_file_name}
 .btn-group
   = link_to view_solution_path(@solution), :title => "Бодолтыг харах", :class=>"btn btn-small" do
     %i.icon-eye-open

@@ -73,8 +73,12 @@ class Contest < ActiveRecord::Base
     self.start < Time.now
   end
 
+  def continuing?
+    started? && !finished?
+  end
+
   def openfor?(user)
-    competable?(user) && invites?(user)
+    continuing? && competable?(user) && invites?(user)
   end
 
   def competable?(user)

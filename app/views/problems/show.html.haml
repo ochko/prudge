@@ -51,7 +51,7 @@
           Recheck
 
     %hr
-    = link_to new_solution_path(:problem => @problem.id), :class => 'btn btn-primary btn-large btn-block' do
+    = link_to (@contest ? new_contest_problem_solution_path(@contest, @problem) : new_problem_solution_path(@problem)), :class => 'btn btn-primary btn-large btn-block' do
       %i.icon-upload
       Submit solution
     %hr

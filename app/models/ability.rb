@@ -33,9 +33,7 @@ class Ability
       end
       can :create, Solution do |solution|
         contest = solution.contest
-        (contest.nil? || contest.finished? ||
-         (contest.started? && contest.openfor?(user))) &&
-          solution.fresh?
+        (contest.nil? || contest.openfor?(user)) && solution.fresh?
       end
     end
     # all users

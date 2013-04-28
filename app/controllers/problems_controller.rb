@@ -23,6 +23,7 @@ class ProblemsController < ApplicationController
   end
 
   def show
+    @contest = Contest.find(params[:contest_id]) if params[:contest_id]
   end
 
   def new
