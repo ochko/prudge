@@ -12,11 +12,7 @@ module ProblemsHelper
   end
 
   def render_viewable(hidden)
-    if !hidden
-      image_tag('test-open.png', :title => 'Харагдана')
-    else
-      image_tag('test-hidden.png', :title => 'Харагдахгүй')
-    end
+    content_tag(:i, '', :class => hidden ? "icon-lock" : "icon-unlock")
   end
 
   def problem_solution_state(problem)
@@ -56,7 +52,7 @@ module ProblemsHelper
   end
 
   def matrix_to_table(matrix, id)
-    content = ["<table id='#{id}'>"]
+    content = ["<table id='#{id}' class='table table-bordered'>"]
     matrix.each do |row|
       content << "<tr><td>" << row.join('</td><td>') << '</td></tr>'
     end

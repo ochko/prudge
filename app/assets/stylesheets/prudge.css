@@ -336,6 +336,12 @@ h3.list-heading .inner {
 .solution-info {
   display:block;
 }
+.progress-cirque {
+  margin: 20px;
+}
+.progress-cirque .cirque-label.percent {
+  font-size: 28px;
+}
 
 .gold {
   color: gold;

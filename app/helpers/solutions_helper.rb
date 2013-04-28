@@ -29,8 +29,4 @@ module SolutionsHelper
   def show_correctness(correct)
     content_tag(:i, nil, :class => correct ? 'icon-check' : 'icon-check-empty')
   end
-
-  def show_percent(percent)
-    content_tag(:span, content_tag(:span, "&nbsp;#{percent}%", :style =>"width:#{percent}%; overflow:visible;"), :class=>'percent')
-  end
 end

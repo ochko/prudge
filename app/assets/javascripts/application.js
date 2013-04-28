@@ -15,4 +15,5 @@
 //= require jquery.tablesorter
 //= require bootstrap
 //= require editor
+//= require cirque
 //= require prudge

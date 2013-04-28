@@ -168,4 +168,13 @@ $(function() {
         return false;
     });
 
+	$('#solution-percent .progress-cirque').cirque ({
+		radius: 80,
+		total: 100,
+		lineWidth: 15,
+        arcColor: '#94BA65',
+		trackColor: '#CCCCCC',
+	});
+
+
 });

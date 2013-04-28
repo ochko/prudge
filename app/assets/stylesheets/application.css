@@ -11,6 +11,7 @@
  *= require bootstrap
  *= require bootstrap-responsive
  *= require login
- *= require prudge
+ *= require cirque
  *= require wmd/wmd
+ *= require prudge
  */

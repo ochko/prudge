@@ -1,0 +1,37 @@
+#result-content
+  - unless @solution.junk.blank?
+    .alert.alert-block
+      %button.button{:class=>"close", 'data-dismiss'=>"alert"}
+        %i.icon-remove-circle
+      %h4
+        %storng Compiler output
+      %p!= @solution.junk
+    
+  - if @solution.judged?
+    .row
+      .span6.text-center#solution-percent
+        .progress-cirque{:data => {:value => @solution.percent * 100}}
+    .row
+      .span6
+        %table.table.table-bordered
+          %thead
+            %tr
+              %th{title: 'Test number'}
+              %th{title: 'Test hidden/shown'}
+              %th{title: 'Run status'}
+                %i.icon-cog
+              %th{title: 'Time in seconds'}
+                %i.icon-time
+              %th{title: 'Memory in kilobytes'}
+                %i.icon-hdd
+              %th{title: 'Test passed?'}
+          %tbody
+            - @solution.results.each_with_index do |result, index|
+              %tr
+                %td= index + 1
+                %td= render_viewable(result.hidden)
+                %td= translate_message(result.execution)
+                %td= sec2milisec(result.time)
+                %td= result.memory
+                %td= link_to(show_correctness(result.correct?), result)
+
