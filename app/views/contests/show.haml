@@ -6,12 +6,12 @@
     - else
       %i.muted.icon-lock{:data => {:toggle => :tooltip, :placement => 'bottom'}, :title => 'Дэвшүүлсэн бодлого нь сонгогдсон тохиолдолд энэ тэмцээнд орох эрхтэй болно'}
 .subhead
-  .muted
-    = show_status @contest
   %i.icon-time
   = l @contest.start
   %i.icon-double-angle-right
   = l @contest.end
+  .muted
+    = show_status @contest
   %br
   - if current_user
     - watching = @contest.watchers.include? current_user
@@ -52,11 +52,10 @@
                 %tr
                   %td
                     %h4
-                      = link_to problem.name, problem
                       = solved_or_not @solved[problem.id]
-                      %span{title: 'Submitted'}= problem.tried_count
-                      \/
-                      %span{title: 'Passed'}= problem.solved_count
+                      = link_to problem.name, problem
+                      %small.muted{title: 'Submitted/Passed'}
+                        [#{problem.tried_count}/#{problem.solved_count}]
                     .muted
                       %small
                         %i.icon-flag{title: 'Level'}
