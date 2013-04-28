@@ -41,8 +41,7 @@ class Contest < ActiveRecord::Base
   validates_presence_of :name, :start, :end
 
   validate do |contest|
-    contest.errors.add_to_base("Эхлэх дуусах цаг буруу") if 
-      contest.start > contest.end
+    contest.errors.add_to_base("Эхлэх дуусах цаг буруу") if contest.start > contest.end
   end
 
   scope :current, :conditions => "end > NOW()", :order => "start ASC"
