@@ -11,7 +11,7 @@ class ContestObserver < ActiveRecord::Observer
   def after_create(contest)
     Twitit.update opening_announcement(contest)
 
-    User.active.each do |user|
+    User.where(notify_new_contests: true).each do |user|
       user.delay.notify_new_contest(contest)
     end
   end

@@ -8,7 +8,6 @@ class SolutionObserver < ActiveRecord::Observer
     changes = solution.changes
 
     solution.user.resum_points! if changes["point"]
-    solution.user.solution_uploaded! if changes["source_updated_at"]
     solution.problem.resum_counts! if changes["state"] 
   end
 end

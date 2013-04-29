@@ -55,7 +55,10 @@
         %i.icon-eye-open.muted
       %dd
         %span.muted Last seen
-        = l @user.uploaded_at, :format => :date
+        - if submitted_at = @user.submitted_at
+          = l submitted_at, :format => :date
+        - else
+          Never
 
     %h3.list-heading
       .inner

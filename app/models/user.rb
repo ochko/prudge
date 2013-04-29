@@ -11,7 +11,6 @@ class User < ActiveRecord::Base
   has_many :lessons, :foreign_key => 'author_id'
   has_many :comments, :dependent => :destroy, :order => "created_at DESC"
 
-  scope :active, :conditions => ['uploaded_at > ?', Time.now - 2.year]
   scope :moderators, :conditions => ['admin =? or judge =?', true, true]
   
   attr_protected :admin, :judge, :solutions_count, :points
@@ -84,13 +83,13 @@ class User < ActiveRecord::Base
     solutions.all(:conditions => {:problem_id => solution.problem_id}).each(&:lock!)
   end
 
+  def submitted_at
+    solutions.maximum(:source_updated_at)
+  end
+
   def currently_commented?
     comments.first && 
       comments.first.created_at > Time.now - 10.seconds
-  end
-  
-  def solution_uploaded!
-    self.update_attribute(:uploaded_at, Time.now)
   end
 
   def import_solutions
