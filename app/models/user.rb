@@ -61,9 +61,6 @@ class User < ActiveRecord::Base
     email =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
   end
 
-  def admin?() self.admin == true  end
-  def judge?() self.judge == true  end
-  
   def level
     Contest::LEVEL_POINTS.keys.sort.each do |l|
       return l if points < Contest::LEVEL_POINTS[l]
