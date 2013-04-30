@@ -3,7 +3,7 @@
     %i.icon-flag
   %dd
     %span.muted Difficulty
-    #{problem.level} (#{problem.difficulty}%)
+    = problem.level
 %dl
   %dt
     %i.icon-time
@@ -29,4 +29,4 @@
     %i.icon-group
   %dd
     %span.muted Passed/Total
-    \#{problem.solved_count}/#{problem.tried_count}
+    \#{problem.solved_count}/#{problem.tried_count} (#{problem.success_rate}%)
