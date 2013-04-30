@@ -22,9 +22,17 @@ module ProblemsHelper
   def problem_solution_states
     return {} unless current_user
     @problem_solution_states ||= current_user.solutions.
-      reduce do |states, solution|
+      reduce({}) do |states, solution|
       states[solution.problem_id] = solution.state
       states
+    end
+  end
+
+  def submit_path(contest, problem, user)
+    if contest && contest.openfor?(user)
+      new_contest_problem_solution_path(contest, problem)
+    else
+      new_problem_solution_path(problem)
     end
   end
 

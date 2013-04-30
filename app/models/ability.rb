@@ -23,7 +23,9 @@ class Ability
       end
       can [:modify, :check], Solution
     else
-      can :read, Problem {|problem| problem.publicized? || user.owns?(problem) }
+      can :read, Problem, ["user_id = ?", user.id] do |problem|
+        problem.publicized? || user.owns?(problem)
+      end
       can :update, Problem do |problem|
         user.owns?(problem) && !problem.publicized?
       end

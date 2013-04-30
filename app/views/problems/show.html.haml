@@ -6,33 +6,7 @@
     for #{link_to @problem.contest.name, @problem.contest}
 .row
   .span3.profile
-    %dl
-      %dt
-        %i.icon-flag
-      %dd
-        %span.muted Difficulty
-        = @problem.level
-    %dl
-      %dt
-        %i.icon-time
-      %dd
-        %span.muted Time limit
-        = @problem.time
-        sec
-    %dl
-      %dt
-        %i.icon-hdd
-      %dd
-        %span.muted Memory Limit
-        = @problem.memory
-        bytes
-    %dl
-      %dt
-        %i.icon-cogs
-      %dd
-        %span.muted Tests
-        = @problem.tests.size
-
+    = render :partial => 'problems/profile', :locals => {:problem => @problem}
     %h3.list-heading
       .inner
         %i.icon-wrench
@@ -49,14 +23,19 @@
         = link_to check_problem_path(@problem), :class => 'btn btn-small' do
           %i.icon-repeat
           Recheck
-
+    - if current_user
+      %h3.list-heading
+        .inner
+          %i.icon-user
+          My Solution
+      - if @solution
+        = render(:partial => 'results/list')
+      - else
+        = link_to submit_path(@contest, @problem, current_user), :class=>"btn btn-large btn-block" do
+          %i.icon-upload
+          Submit
     %hr
-    = link_to (@contest ? new_contest_problem_solution_path(@contest, @problem) : new_problem_solution_path(@problem)), :class => 'btn btn-primary btn-large btn-block' do
-      %i.icon-upload
-      Submit solution
-    %hr
-
-  .span7
+  .span6
     %ul.nav.nav-tabs#problem-tabs
       %li.active
         %a{'href' => "#problem-text"}

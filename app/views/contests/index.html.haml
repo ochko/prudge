@@ -1,6 +1,6 @@
 - @contests.each do |contest|
   %h2
-    = contest.name
+    = link_to contest.name, contest
   .subhead
     - if contest.private?
       %i.icon-lock{:data => {:toggle => :tooltip, :placement => 'bottom'}, :title => 'Дэвшүүлсэн бодлого нь сонгогдсон тохиолдолд энэ тэмцээнд орох эрхтэй болно'}
@@ -8,12 +8,13 @@
     = l contest.start
     %i.icon-double-angle-right
     = l contest.end
-    .muted= show_status contest
-    = link_to contest, :class => 'btn btn-mini pull-right' do
-      Visit contest
-      %i.icon-share-alt
+    .muted
+      = show_status contest
 
   %section
     = markdown contest.description
+    = link_to contest, :class => 'btn btn-mini' do
+      Visit contest
+      %i.icon-share-alt
 
 = paginate @contests

@@ -1,18 +1,77 @@
-#result-content
-  - unless @solution.junk.blank?
-    .alert.alert-block
-      %button.button{:class=>"close", 'data-dismiss'=>"alert"}
-        %i.icon-remove-circle
-      %h4
-        %storng Compiler output
-      %p!= @solution.junk
-    
+%section#result-content
+  %p
+    .btn-group
+      - if can? :check, @solution
+        = link_to check_solution_path(@solution), :remote => true, :html => {:id=>'check-button', :class=>"btn btn-small" } do
+          %i.icon-cogs
+          Run
+      - if can? :modify, @solution
+        = link_to edit_solution_path(@solution), :class=>"btn btn-small" do
+          %i.icon-wrench
+          Edit
+        = link_to @solution, :confirm => 'Энэ бодолтыг нээрээ устгах уу?', :method => :delete, :class=>"btn btn-small" do
+          %i.icon-trash
+          Delete
+      - elsif current_user.owns? @solution
+        = link_to submit_path(@contest, @solution.problem, current_user), :class=>"btn btn-small" do
+          %i.icon-upload
+          Submit
+        = link_to @solution, :class=>"btn btn-small", :id => 'open-solution' do
+          %i.icon-share-alt
+          Open
+        = link_to download_solution_path(@solution), :class=>"btn btn-small" do
+          %i.icon-download
+          Download
+
+  .row-fluid
+    .span12.profile
+      %dl
+        %dt
+          %i.icon-user
+        %dd
+          %span.muted Coder
+          = link_to @solution.user.login, @solution.user
+      %dl
+        %dt
+          %i.icon-file-alt
+        %dd
+          %span.muted Source
+          = link_to @solution.source_file_name, view_solution_path(@solution)
+      %dl
+        %dt
+          %i.icon-upload
+        %dd
+          %span.muted Submitted
+          = l @solution.source_updated_at
+      %dl
+        %dt
+          %i.icon-time
+        %dd
+          %span.muted Time
+          = @solution.time
+          %abbr{:title => 'Milliseconds'} ms
+      %dl
+        %dt
+          %i.icon-plus-sign
+        %dd
+          %span.muted Points
+          = @solution.point
+
   - if @solution.judged?
-    .row
-      .span6.text-center#solution-percent
+    .row-fluid
+      .span12.text-center#solution-percent
         .progress-cirque{:data => {:value => @solution.percent * 100}}
-    .row
-      .span6
+    - unless @solution.junk.blank?
+      .row-fluid
+        .span12
+          .alert.alert-block
+            %button.button{:class=>"close", 'data-dismiss'=>"alert"}
+              %i.icon-remove-circle
+            %h4
+              %storng Compiler output
+            %p!= @solution.junk
+    .row-fluid
+      .span12
         %table.table.table-bordered
           %thead
             %tr

@@ -57,12 +57,17 @@ class SolutionsController < ApplicationController
     @contest = Contest.find(params[:contest_id]) if params[:contest_id]
     @problem = (@contest ? @contest.problems : Problem).find(params[:problem_id])
     @solution = @problem.solutions.build(:contest => @contest)
+    @solution.user = current_user
 
     creating
   end
 
   def create
-    @solution = current_user.solutions.build(params[:solution])
+    @contest = Contest.find(params[:contest_id]) if params[:contest_id]
+    @problem = (@contest ? @contest.problems : Problem).find(params[:problem_id])
+    @solution = @problem.solutions.build(params[:solution])
+    @solution.user = current_user
+
     creating do
       if @solution.save
         @solution.post!
@@ -75,7 +80,11 @@ class SolutionsController < ApplicationController
   end
 
   def edit
-    editing { render :action => 'edit' }
+    editing do
+      @problem = @solution.problem
+      @contest = @solution.contest
+      render :action => 'edit'
+    end
   end
 
   def update

@@ -72,7 +72,7 @@ class User < ActiveRecord::Base
   end
   
   def solved?(problem)
-    solutions.passed.count(:conditions => {:problem_id => problem.id}) > 0
+    solutions.where(problem_id: problem.id).passed.count > 0
   end
 
   def saw!(solution)

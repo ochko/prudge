@@ -24,6 +24,7 @@ class ProblemsController < ApplicationController
 
   def show
     @contest = Contest.find(params[:contest_id]) if params[:contest_id]
+    @solution = current_user.solutions.where(problem_id: @problem.id).order(:id).last if current_user
   end
 
   def new

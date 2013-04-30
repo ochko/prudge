@@ -27,6 +27,12 @@ class Problem < ActiveRecord::Base
   scope :commented, :conditions => ["comments_count > 0 and active_from < ?", Time.now]
   scope :active, :conditions => ["active_from < ?", Time.now]
 
+  def difficulty
+    return 1 if tried_count == 0 || (tried_count == solved_count)
+    return 100 if solved_count == 0
+    (tried_count - solved_count) * 100 / tried_count
+  end
+
   def active?
     self.active_from && (self.active_from < Time.now)
   end

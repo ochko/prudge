@@ -12,22 +12,21 @@
   = l @contest.end
   .muted
     = show_status @contest
-  %br
-  - if current_user
-    - watching = @contest.watchers.include? current_user
-    = link_to unwatch_contest_path(@contest), :method => :post, :data => {:toggle => :tooltip, :placement => 'bottom', :remote => true}, :id => 'watch', :class=> "btn btn-mini #{watching ? '' : 'hide'}", :title => 'Энэ тэмцээний тухай мэдэгдэл ирэхгүй болгох' do
-      %i.icon-eye-close
-      Unwatch
-    = link_to watch_contest_path(@contest), :method => :post, :data => {:toggle => :tooltip, :placement => 'bottom', :remote => true}, :id => 'unwatch', :class => "btn btn-mini #{watching ? 'hide' : ''}", :title => 'Тэмцээнийн хугацаа өөрчлөгдөхөд надад мэдэгд' do
-      %i.icon-eye-open
-      Watch
-  - if admin?
-    = link_to edit_contest_path(@contest), :class => 'btn btn-mini' do
-      %i.icon-wrench
-      Edit
-    = link_to @contest, :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini' do
-      %i.icon-trash
-      Delete
+    - if current_user
+      - watching = @contest.watchers.include? current_user
+      = link_to unwatch_contest_path(@contest), :method => :post, :data => {:toggle => :tooltip, :placement => 'bottom', :remote => true}, :id => 'watch', :class=> "btn btn-mini #{watching ? '' : 'hide'}", :title => 'Энэ тэмцээний тухай мэдэгдэл ирэхгүй болгох' do
+        %i.icon-eye-close
+        Unwatch
+      = link_to watch_contest_path(@contest), :method => :post, :data => {:toggle => :tooltip, :placement => 'bottom', :remote => true}, :id => 'unwatch', :class => "btn btn-mini #{watching ? 'hide' : ''}", :title => 'Тэмцээнийн хугацаа өөрчлөгдөхөд надад мэдэгд' do
+        %i.icon-eye-open
+        Watch
+    - if admin?
+      = link_to edit_contest_path(@contest), :class => 'btn btn-mini' do
+        %i.icon-wrench
+        Edit
+      = link_to @contest, :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini' do
+        %i.icon-trash
+        Delete
 
 %section
   = markdown @contest.description

@@ -1,0 +1,32 @@
+%dl
+  %dt
+    %i.icon-flag
+  %dd
+    %span.muted Difficulty
+    #{problem.level} (#{problem.difficulty}%)
+%dl
+  %dt
+    %i.icon-time
+  %dd
+    %span.muted Time limit
+    = problem.time
+    sec
+%dl
+  %dt
+    %i.icon-hdd
+  %dd
+    %span.muted Memory Limit
+    = problem.memory
+    bytes
+%dl
+  %dt
+    %i.icon-cogs
+  %dd
+    %span.muted Tests
+    = problem.tests.size
+%dl
+  %dt
+    %i.icon-group
+  %dd
+    %span.muted Passed/Total
+    \#{problem.solved_count}/#{problem.tried_count}
