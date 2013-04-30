@@ -6,19 +6,23 @@
     %table.table.table-striped#problems
       %thead
         %tr
-          %th{:width => "1%", :title => 'Difficulty from 1 to 8'}
+          %th{:title => 'Difficulty and Success rate'}
             = link_to problems_path(:column=> 'level', :order => (params[:column] == 'level') ? @reverse : 'ASC') do
               %i.icon-flag
+          %th
+            = link_to 'Name', problems_path(:column=> 'name', :order => (params[:column] == 'name') ? @reverse : 'ASC'), :title => 'Order by name'
+            \/
+            = link_to 'Date', problems_path(:column=> 'created_at', :order => (params[:column] == 'created_at') ? @reverse : 'ASC'), :title => 'Order by date'
           %th{:width => "1%"}
-          %th= link_to 'Нэр',        :column=> 'name', :order => (params[:column] == 'name') ? @reverse : 'ASC'
-          %th= link_to 'Огноо',      :column=> 'created_at', :order => (params[:column] == 'created_at') ? @reverse : 'ASC'
       %tbody
         - @problems.each do |problem|
           %tr
-            %td= problem.level
-            %td= problem_solution_state problem
-            %td= link_to problem.name, problem
-            %td= l problem.created_at, :format=>:date
-            %td #{problem.difficulty}%
-    
+            %td
+              = problem.level
+              .muted{:title => 'Success rate'} #{problem.success_rate}%
+            %td
+              = link_to problem.name, problem
+              .muted= l problem.created_at, :format=>:date
+            %td
+              .magnify.muted= problem_solution_state problem
     = paginate @problems

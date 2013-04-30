@@ -283,6 +283,10 @@ th.headerSortUp:before {
   color: #666;
 }
 
+.magnify {
+  font-size: 21px;
+}
+
 h1 a, h2 a {
   color: inherit;
 }
