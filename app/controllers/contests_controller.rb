@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 class ContestsController < ApplicationController
   before_filter :require_user, :except => [:index, :last, :show]
-  before_filter :require_judge, :only => [:create, :update, :destroy]
 
   def index
     @contests = Contest.order("start DESC").page(params[:page]).per(20)

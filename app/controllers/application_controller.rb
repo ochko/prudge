@@ -5,7 +5,30 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user_session, :current_user, :current_user?, :admin?, :judge?
 
+  def current_ability
+    @current_ability ||=
+      if current_user.nil?
+        BaseAbility
+      elsif current_user.admin?
+        AdminAbility
+      elsif current_user.judge?
+        JudgeAbility
+      else
+        CoderAbility
+      end.
+      new(current_user)
+  end
+
   private
+
+  def admin?
+    current_user && current_user.admin
+  end
+
+  def judge?
+    current_user && current_user.judge
+  end
+
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find
@@ -33,32 +56,6 @@ class ApplicationController < ActionController::Base
       end
       return false
     end
-  end
-
-  def require_judge
-    unless current_user && current_user.judge?
-      store_location
-      flash[:notice] = "Шүүгч л хандах эрхтэй!"
-      redirect_to root_url
-      return false
-    end
-  end
-
-  def require_admin
-    unless current_user && current_user.admin?
-      store_location
-      flash[:notice] = "Админ л хандах эрхтэй!"
-      redirect_to root_url
-      return false
-    end
-  end
-
-  def admin?
-    current_user && current_user.admin
-  end
-
-  def judge?
-    current_user && current_user.judge
   end
 
   def require_no_user
