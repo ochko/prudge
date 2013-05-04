@@ -1,5 +1,4 @@
 Prudge::Application.routes.draw do
-  match ':controller/feed.rss' => '#index', :format => 'rss'
   match ':controller/list' => '#index'
   resources :users do
     collection do
