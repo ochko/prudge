@@ -25,17 +25,25 @@
           %a.brand{:href => "./index.html"}
             = Settings.name
           .nav-collapse.collapse
-            %ul.nav
+            %ul.nav#topnav
               %form.navbar-search.pull-left#search{:action => "/search", :method => "get"}
                 %input.search-query.span2{:type => "text", :placeholder => "Search", :name => "q"}
+              %li                
+                = link_to contests_path do
+                  %i.icon-trophy
+                  Contests
               %li
-                = link_to 'Contests', contests_path
+                = link_to problems_path do
+                  %i.icon-question-sign
+                  Problems
               %li
-                = link_to 'Problems', problems_path
+                = link_to blog_posts_path do
+                  %i.icon-pencil
+                  Blogs
               %li
-                = link_to 'Blog', blog_posts_path
-              %li
-                = link_to 'Coders', users_path
+                = link_to users_path do
+                  %i.icon-group
+                  Coders
               - if logged_in?
                 %li.dropdown
                   %a.dropdown-toggle{'data-toggle' => 'dropdown', :href => '#'}

@@ -176,5 +176,5 @@ $(function() {
 		trackColor: '#CCCCCC',
 	});
 
-
+    $("#topnav a[href*='"+window.location.pathname.split('/')[1]+"']").parent().addClass('active');
 });
