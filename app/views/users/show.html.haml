@@ -91,9 +91,9 @@
           %i.icon-ok-sign
           Бодолтууд
       %li
-        %a{'href' => "#lessons-written", 'data-link' => lessons_user_path(@user)}
+        %a{'href' => "#posts", 'data-link' => user_posts_path(@user)}
           %i.icon-book
-          Хичээл
+          Blogs
       %li
         %a{'href' => "#composed-problem", 'data-link' => problems_user_path(@user)}
           %i.icon-question-sign
@@ -120,5 +120,5 @@
         = link_to solutions_user_path(@user), :class => 'btn btn-large btn-block page-flow', :id => 'solutions-flow', :data => {:page => 1, :flow => '#user-solutions'} do
           %i.icon-circle-arrow-down
 
-      .tab-pane#lessons-written
+      .tab-pane#posts
       .tab-pane#composed-problem

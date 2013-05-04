@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130429064651) do
+ActiveRecord::Schema.define(:version => 20130503131614) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",                 :null => false
@@ -97,6 +97,16 @@ ActiveRecord::Schema.define(:version => 20130429064651) do
   end
 
   add_index "pages", ["user_id"], :name => "index_pages_on_user_id"
+
+  create_table "posts", :force => true do |t|
+    t.boolean  "delta",      :default => true
+    t.integer  "author_id",                    :null => false
+    t.string   "category",                     :null => false
+    t.string   "title",                        :null => false
+    t.text     "body",                         :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
 
   create_table "problem_tests", :force => true do |t|
     t.integer "problem_id",                         :null => false

@@ -1,0 +1,19 @@
+%h1 Write new post
+
+%section
+  = form_for @post do |form|
+    .row
+      .span6
+        = error_messages_for @post
+        = form.text_field :title, :class => 'input-block-level'
+    .row
+      .span6
+        #editor-buttons
+    .row
+      .span6
+        = form.text_area(:body, :id => 'editor-input', :class => 'input-block-level')
+        %button.btn.btn-primary{:type=> :submit}
+          %i.icon-save
+          Save
+      .span6
+        #editor-preview

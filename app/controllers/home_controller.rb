@@ -1,6 +1,4 @@
 class HomeController < ApplicationController
-  layout 'static'
-
   def dashboard
     authorize! :read, :dashboard
     render :layout => 'application'

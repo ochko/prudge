@@ -26,6 +26,9 @@
             = Settings.name
           .nav-collapse.collapse
             %ul.nav
+              %form.navbar-search.pull-left#search{:action => "/search", :method => "get"}
+                %input.search-query.span2{:type => "text", :placeholder => "Search", :name => "q"}
+
               %li.active
                 = link_to "Home", :controller =>'home'
               %li
@@ -37,9 +40,9 @@
               %li
                 = link_to 'Discussions', topics_path
               %li
+                = link_to 'Blog', blog_posts_path
+              %li
                 = link_to 'Coders', users_path
-              %form.navbar-search.pull-left#search{:action => "/search", :method => "get"}
-                %input.search-query.span2{:type => "text", :placeholder => "Search", :name => "q"}
               - if logged_in?
                 %li.dropdown
                   %a.dropdown-toggle{'data-toggle' => 'dropdown', :href => '#'}

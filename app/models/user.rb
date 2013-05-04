@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :tried, :through => :solutions, :uniq => true, :source => :problem
   has_many :solveds, :through => :completions, :uniq => true, :source => :problem
   has_many :problems
-  has_many :lessons, :foreign_key => 'author_id'
+  has_many :posts, :foreign_key => 'author_id'
   has_many :comments, :dependent => :destroy, :order => "created_at DESC"
 
   scope :moderators, :conditions => ['admin =? or judge =?', true, true]

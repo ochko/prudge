@@ -13,6 +13,7 @@
 
     = stylesheet_link_tag "application", :media => "all"
     = csrf_meta_tag
+
   %body
     .navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
@@ -25,6 +26,8 @@
             = Settings.name
           .nav-collapse.collapse
             %ul.nav
+              %form.navbar-search.pull-left#search{:action => "/search", :method => "get"}
+                %input.search-query.span2{:type => "text", :placeholder => "Search", :name => "q"}
               %li.active
                 = link_to "Home", :controller =>'home'
               %li
@@ -44,9 +47,9 @@
                   %li= link_to 'Хичээлийн', '/topic/lesson'
                   %li= link_to 'Сүүлд нэмэгдсэн', comments_path
               %li
+                = link_to 'Blog', blog_posts_path
+              %li
                 = link_to 'Coders', users_path
-              %form.navbar-search.pull-left#search{:action => "/search", :method => "get"}
-                %input.search-query.span2{:type => "text", :placeholder => "Search", :name => "q"}
               - if logged_in?
                 %li.dropdown
                   %a.dropdown-toggle{'data-toggle' => 'dropdown', :href => '#'}
@@ -88,6 +91,8 @@
           %li= link_to 'About', about_path
           %li.muted &middot;
           %li= link_to 'Guide', guide_path
+          %li.muted &middot;
+          %li= link_to 'Help', help_posts_path
           %li.muted &middot;
           %li= link_to 'Issues', 'https://github.com/ochko/prudge/issues'
 

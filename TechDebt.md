@@ -5,5 +5,6 @@
 * Migrate to Postgesql
 * Well covered specs
 * Replace OpenID with Oauth(twitter/facebook)
-* Replace will_paginate with kaminari
 * Remove contest levels
+* Add page for International/Asian/Regional contest rules
+

@@ -7,9 +7,9 @@ Prudge::Application.routes.draw do
     end
     member do
       get :solutions
-      get :lessons
       get :problems
     end
+    resources :posts
   end
 
   resources :password_resets
@@ -37,7 +37,12 @@ Prudge::Application.routes.draw do
       get :check
     end
   end
-
+  resources :posts, :except => :index do
+    collection do
+      get :blog
+      get :help
+    end
+  end
   resources :lessons
   resources :topics
   resources :solutions do

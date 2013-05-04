@@ -1,0 +1,18 @@
+.row
+  .span12
+    .media
+      = link_to @post.author, :class => "pull-left" do
+        = image_tag @post.author.gravatar_url(:size => 64), :class => 'img-circle'
+      .media-body
+        %h2.media-heading
+          = @post.title
+        .subhead
+          Posted on
+          =l @post.updated_at, :format => :date
+          by #{link_to @post.author.login, @post.author}
+    %section
+      = markdown @post.body
+
+%section
+  = render :partial => 'comments/commentable', :object => @post
+    

@@ -3,6 +3,12 @@ class Language
     @@ary = []
     @@hash = {}
 
+    def init
+      YAML.load_file(Rails.root.join('config', 'languages.yml')).each do |options|
+        add options
+      end
+    end
+
     def add(options)
       language = new(options)
       @@ary << language
@@ -10,6 +16,7 @@ class Language
     end
 
     def [](name)
+      init if @@hash.empty?
       @@hash[name.to_s.downcase]
     end
 

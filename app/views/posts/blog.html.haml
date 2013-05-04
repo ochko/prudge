@@ -1,0 +1,14 @@
+- @posts.each do |post|
+  %h2
+    = link_to post.title, post
+  .subhead
+    Posted on #{l post.updated_at, :format => :date}
+    by #{link_to post.author.login, post.author}
+
+  %section
+    = simple_format truncate(strip_tags(post.body), :length => 300)
+    = link_to post, :class => 'btn btn-mini' do
+      %i.icon-arrow-right
+      Read more
+
+= paginate @posts

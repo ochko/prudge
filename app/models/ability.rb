@@ -23,6 +23,7 @@ class Ability
       end
       can [:modify, :check], Solution
     else
+      can :manage, Post, :user_id => user.id, :category => 'blog'
       can :read, Problem, ["user_id = ?", user.id] do |problem|
         problem.publicized? || user.owns?(problem)
       end
@@ -48,8 +49,8 @@ class Ability
       solution.problem.tests.real.empty?
     end
 
-    can :read, [Contest, Topic, Comment, Language]
-    can :create, [Lesson, Problem]
+    can :read, [Contest, Topic, Comment]
+    can :create, [Lesson, Problem, Comment]
     can :modify, Lesson, :author_id => user.id
   end
 end

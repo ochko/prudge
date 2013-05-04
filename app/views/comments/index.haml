@@ -1,7 +1,23 @@
-%h1 
-  Сүүлд нэмэгдсэн бичээсүүд
+= paginate @comments
 
-%section#comments
-  = render :partial => "comments/comment", :collection => @comments
+%table.table
+  %thead
+    %tr
+      %th Огноо
+      %th Хэрэглэгч
+      %th Бичлэг
+      %th
+  %tbody
+    - @comments.each do |c|
+      %tr{:id => "comment_#{c.id}"}
+        %td.small= l c.created_at
+        %td= link_to c.user.login, c.user
+        %td.small= truncate h(c.text), :length => 70
+        %td
+          = link_to c.topic do
+            %i.icon-share-alt
+        %td
+          = link_to c, :remote => true, :confirm => 'Are you sure?', :method => :delete do
+            %i.icon-trash
 
-= paginate @comments, :params =>{:controller => '/comments' }
+= paginate @comments

@@ -1,0 +1,16 @@
+%header
+  %h1
+    Help
+.row
+  .span3.prudge-sidebar
+    %ul.nav.nav-list.prudge-sidenav
+      - @posts.each do |post|
+        %li
+          %a{:href => "#help-#{post.id}"}
+            %i.icon-chevron-right
+            = post.title
+  .span9
+    - @posts.each do |post|
+      %section{:id => "help-#{post.id}"}
+        %h2= post.title
+        = markdown post.body

@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 class CommentsController < ApplicationController
-  before_filter :require_user, :except => [:index]
-  before_filter :require_admin, :only => [:destroy, :moderate]
-
   def show
     @comments = Comment.
       where(:topic_id => params[:id],
@@ -13,16 +10,8 @@ class CommentsController < ApplicationController
   end
   
   def index
-    @comments = Comment.order('created_at DESC').
-      page(params[:page]).preload(:user)
+    authorize! :destroy, Comment
 
-    respond_to do |format|
-      format.html
-      format.js { render :layout => false }
-    end
-  end
-
-  def moderate
     @comments = Comment.order('created_at DESC').
       page(params[:page]).per(50).preload(:user)
   end
@@ -40,12 +29,11 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
-    if !@comment.nil?
+    if @comment = Comment.find(params[:id])
       @comment.destroy
-      respond_to do |format|
-        format.js
-      end
+    end
+    respond_to do |format|
+      format.js { render :layout => false }
     end
   end
 
