@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 module ApplicationHelper
   def title
-    @title || t("title.#{controller_name}.#{action_name}")
+    eval('"' + t("title.#{controller_name}.#{action_name}") +'"')
   end
 
   def flashy

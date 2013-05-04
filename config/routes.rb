@@ -56,6 +56,7 @@ Prudge::Application.routes.draw do
       get :latest
     end
     member do
+      get :check
       get :submited
       get :view
       get :download
