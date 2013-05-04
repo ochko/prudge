@@ -16,11 +16,6 @@ class SolutionsController < ApplicationController
       order('solutions.source_updated_at desc').
       page(params[:page]).
       preload(:problem)
-
-    respond_to do |format|
-      format.js { render :layout => false }
-      format.html
-    end
   end
 
   def show

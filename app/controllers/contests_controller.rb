@@ -5,11 +5,6 @@ class ContestsController < ApplicationController
 
   def index
     @contests = Contest.order("start DESC").page(params[:page]).per(20)
-
-    respond_to do |format|
-      format.js { render :layout => false}
-      format.html
-    end
   end
 
   def watch
