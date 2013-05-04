@@ -128,19 +128,19 @@ class Solution < ActiveRecord::Base
   end
 
   def all_tests_passed?
-    passed_real_tests_count == real_tests_count
+    passed_tests_count == tests_count
   end
 
   def passed_ration
-    passed_real_tests_count.to_f / real_tests_count
+    passed_tests_count.to_f / tests_count
   end
 
-  def passed_real_tests_count
-    @passed_real_tests_count ||= results.correct.real.size
+  def passed_tests_count
+    @passed_tests_count ||= results.correct.size
   end
 
-  def real_tests_count
-    @real_tests_count ||= problem.tests.real.size
+  def tests_count
+    @tests_count ||= problem.tests.size
   end
 
   def points_taken
