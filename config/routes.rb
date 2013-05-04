@@ -65,17 +65,16 @@ Prudge::Application.routes.draw do
     end
   end
 
-  root :to => 'contests#last'
   match 'signup' => 'users#new', :as => :signup
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
   match 'forgot_password' => 'password_resets#new', :as => :forgot_password
-  match 'home' => 'home#index', :as => :home
+
   match 'about' => 'home#about', :as => :about
-  match 'guide' => 'home#guide', :as => :guide
   match 'dashboard' => 'home#dashboard', :as => :dashboard
-  match '/topic/:type' => 'topics#index'
-  match '/search/:q' => 'search#index'  
+  match '/search/:q' => 'search#index'
+
+  root :to => 'contests#last'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

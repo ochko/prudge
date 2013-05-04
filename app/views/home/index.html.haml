@@ -1,8 +1,0 @@
-.news
-  - for n in @news
-    .news-item
-      %h1= h n.title
-      %span.news-meta= l n.created_at
-      = markdown n.content
-
-= paginate @news

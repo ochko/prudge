@@ -28,17 +28,12 @@
             %ul.nav
               %form.navbar-search.pull-left#search{:action => "/search", :method => "get"}
                 %input.search-query.span2{:type => "text", :placeholder => "Search", :name => "q"}
-
-              %li.active
-                = link_to "Home", :controller =>'home'
               %li
                 = link_to 'Contests', contests_path
               %li
                 = link_to 'Problems', problems_path
               %li
                 = link_to 'Lessons', lessons_path
-              %li
-                = link_to 'Discussions', topics_path
               %li
                 = link_to 'Blog', blog_posts_path
               %li
@@ -58,6 +53,10 @@
                         %i.icon-wrench
                         Preferences
                     %li
+                      = link_to dashboard_path do
+                        %i.icon-sitemap
+                        Dashboard
+                    %li
                       = link_to logout_path do
                         %i.icon-signout
                         Logout
@@ -76,7 +75,7 @@
         %ul.footer-links
           %li= link_to 'About', about_path
           %li.muted &middot;
-          %li= link_to 'Guide', guide_path
+          %li= link_to 'Help', help_posts_path
           %li.muted &middot;
           %li= link_to 'Issues', 'https://github.com/ochko/prudge/issues'
 
