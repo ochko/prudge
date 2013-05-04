@@ -47,7 +47,7 @@
         - if @contest.started? || admin?
           %table.table
             %tbody
-              - @contest.problems.each do |problem|
+              - @contest.problems.preload(:user).each do |problem|
                 %tr
                   %td
                     %h4

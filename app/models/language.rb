@@ -21,6 +21,7 @@ class Language
     end
 
     def all
+      init if @@hash.empty?
       @@ary
     end
   end

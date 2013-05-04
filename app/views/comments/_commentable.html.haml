@@ -15,4 +15,4 @@
         
 .row
   .span6#comments
-    = render :partial => 'comments/comment', :collection => commentable.comments
+    = render :partial => 'comments/comment', :collection => commentable.comments.preload(:user)

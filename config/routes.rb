@@ -1,5 +1,6 @@
 Prudge::Application.routes.draw do
   match ':controller/list' => '#index'
+
   resources :users do
     collection do
       get :account
@@ -12,7 +13,9 @@ Prudge::Application.routes.draw do
   end
 
   resources :password_resets
+
   resource :user_session
+
   resources :contests do
     member do
       get :contestants
@@ -26,7 +29,9 @@ Prudge::Application.routes.draw do
       resources :solutions, :only => :index
     end
   end
+
   resources :participants
+
   resources :problems do
     resources :solutions
     collection do
@@ -36,14 +41,16 @@ Prudge::Application.routes.draw do
       get :check
     end
   end
+
+  resources :problem_tests
+
   resources :posts, :except => :index do
     collection do
       get :blog
       get :help
     end
   end
-  resources :lessons
-  resources :topics
+
   resources :solutions do
     collection do
       get :latest
@@ -55,14 +62,9 @@ Prudge::Application.routes.draw do
     end
   end
 
-  resources :pages
-  resources :problem_tests
   resources :results
-  resources :comments do
-    collection do
-      get :moderate
-    end
-  end
+
+  resources :comments
 
   match 'signup' => 'users#new', :as => :signup
   match 'login' => 'user_sessions#new', :as => :login

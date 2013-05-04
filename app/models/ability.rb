@@ -5,13 +5,12 @@ class Ability
     alias_action :update, :create, :destroy, :to => :touch
     alias_action :update, :destroy, :to => :modify
 
-    can :read, Page
-    can :read, Lesson
+    can :read, Post
     can :read, Problem, ["active_from < ?", Time.now] do |problem|
       problem.publicized?
     end
 
-    return unless user # not logged in
+    return unless user # not logged in    
 
     if user.admin?
       can :manage, :all
@@ -23,7 +22,6 @@ class Ability
       end
       can [:modify, :check], Solution
     else
-      can :manage, Post, :user_id => user.id, :category => 'blog'
       can :read, Problem, ["user_id = ?", user.id] do |problem|
         problem.publicized? || user.owns?(problem)
       end
@@ -49,8 +47,8 @@ class Ability
       solution.problem.tests.real.empty?
     end
 
-    can :read, [Contest, Topic, Comment]
-    can :create, [Lesson, Problem, Comment]
-    can :modify, Lesson, :author_id => user.id
+    can :manage, Post, :author_id => user.id, :category => 'blog'
+    can :read, [Contest, Comment]
+    can :create, [Problem, Comment]
   end
 end
