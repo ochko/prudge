@@ -1,6 +1,21 @@
 $(function() {
     var $window = $(window)
 
+    var problemNames;
+
+    $('#search').typeahead({
+        source: function (query, process) {
+            if (problemNames == undefined) {
+                $.get('/problems.json', {}, function (data) {
+                    problemNames = data;
+                    return problemNames;
+                });
+            }else{
+                return problemNames;
+            }
+        }
+    });
+
     $('#language-logos, #profile-vcard, #header-tooltip, #watcher').tooltip({
         selector: "[data-toggle=tooltip]"
     });

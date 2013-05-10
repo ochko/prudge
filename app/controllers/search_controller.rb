@@ -1,10 +1,10 @@
 class SearchController < ApplicationController
   def index
     @results = ThinkingSphinx.
-      search(params[:q]).
+      search(params[:q], :excerpts => {}).
       page(params[:page]).per(20)
 
-    @results.delete_if { |r| !r.respond_to?('active?') || !r.active? }
+    @results.context[:panes] << ThinkingSphinx::Panes::ExcerptsPane
   end
 
 end

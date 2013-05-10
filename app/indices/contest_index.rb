@@ -1,4 +1,4 @@
-ThinkingSphinx::Index.define :contest, :with => :active_record do
+ThinkingSphinx::Index.define :contest, :with => :active_record, :delta => true do
   indexes :name
   indexes :description
   
@@ -6,6 +6,4 @@ ThinkingSphinx::Index.define :contest, :with => :active_record do
     :name => 9,
     :description => 5
   }
-
-  set_property :delta => true
 end

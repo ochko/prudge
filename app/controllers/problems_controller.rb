@@ -4,6 +4,9 @@ class ProblemsController < ApplicationController
 
   def index
     respond_to do |format|
+      format.json do
+        render :json => Problem.order(:name).uniq.pluck(:name)
+      end
       format.html do
         order = params[:order] || 'DESC'
         column = params[:column] || 'created_at'

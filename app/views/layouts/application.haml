@@ -26,8 +26,8 @@
             = Settings.name
           .nav-collapse.collapse
             %ul.nav#topnav
-              %form.navbar-search.pull-left#search{:action => "/search", :method => "get"}
-                %input.search-query.span2{:type => "text", :placeholder => "Search", :name => "q"}
+              %form.navbar-search.pull-left{:action => "/search", :method => "get"}
+                %input.search-query.span2#search{:type => "text", :placeholder => "Search", :name => "q", :value => params[:q]}
               %li                
                 = link_to contests_path do
                   %i.icon-trophy

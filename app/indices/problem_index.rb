@@ -1,4 +1,4 @@
-ThinkingSphinx::Index.define :problem, :with => :active_record do
+ThinkingSphinx::Index.define :problem, :with => :active_record, :delta => true do
   indexes :name
   indexes :text
   indexes :source
@@ -9,5 +9,5 @@ ThinkingSphinx::Index.define :problem, :with => :active_record do
     :source => 3
   }
 
-  set_property :delta => true
+  where "active_from < now()"
 end
