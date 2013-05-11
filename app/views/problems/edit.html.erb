@@ -1,8 +1,0 @@
-<h2>Бодлогыг засварлах</h2>
-
-<%= form_for @problem do %>
-  <%= render :partial => 'form' %>
-<% end %>
-
-= link_to 'Энэ бодлогын тестүүд', new_problem_test_path(:problem_id => @problem.id)
-

@@ -45,6 +45,13 @@ mn:
       title: Бодлого дэвшүүлэх
     edit:
       title: '%{subject} · Edit'
+    form:
+      name: Нэр
+      source: Эх сурвалж
+      contest: Тэмцээн
+      points: Оноо
+      time: Хугацаа
+      memory: Санах ой
   results:
     show:
       title: Тэстийн үр дүн
@@ -95,6 +102,11 @@ mn:
       gold: "Алт"
       silver: "Мөнгө"
       bronze: "Хүрэл"
+  button:
+    save: Хадгал
+  unit:
+    second: сек
+    kb: кб
   message:
     individual_submission: >-
       Энэ бодолтыг тэмцээнд оруулахгүйгээр илгээх гэж байна.

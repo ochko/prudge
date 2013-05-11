@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 module ApplicationHelper
   def title
-    t(:title,
-      :subject => %w(edit show).include?(action_name) ? subject.name : nil,
-      :scope => [controller_name, action_name], :default => controller_name)
+    @title ||= t(:title, :subject => subject,
+                 :scope => [controller_name, action_name], :default => controller_name)
   end
 
   def subject
-    controller.instance_variable_get("@#{controller_name.singularize}")
+    return nil unless %w(edit show).include?(action_name)
+    return unless instance = controller.instance_variable_get("@#{controller_name.singularize}")
+    instance.try(:name)
   end
 
   def flashy
