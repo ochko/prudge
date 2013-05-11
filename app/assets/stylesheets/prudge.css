@@ -299,6 +299,10 @@ h1 a:hover, h2 a:hover {
   margin: 15px 0 40px;
 }
 
+.container > .alert {
+  margin-top: 10px;
+}
+
 /* User profile and Ranking list
 -------------------------------------------------- */
 .user-rank {

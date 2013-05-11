@@ -1,0 +1,19 @@
+= form_for @user, :url => password_reset_path, :method => :put do |f|
+  = error_messages_for @user
+  %fieldset
+    %legend
+      Reset your password
+    = f.label :password, 'Enter your new password'
+    .input-prepend
+      %span.add-on
+        %i.icon-key
+      = f.password_field :password, :class => 'span3'
+    = f.label :password_confirmation, 'Repeat your new password'
+    .input-prepend
+      %span.add-on
+        %i.icon-key.muted
+      = f.password_field :password_confirmation, :class => 'span3'
+    %br
+    %button.btn{:type => 'submit'}
+      Save & Login
+      %i.icon-signin

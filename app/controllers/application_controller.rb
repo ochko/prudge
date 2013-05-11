@@ -21,6 +21,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def message_for(name, options = {})
+    I18n.translate name, options.merge(:scope => :message)
+  end
+
   def admin?
     current_user && current_user.admin
   end

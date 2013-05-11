@@ -1,0 +1,12 @@
+= form_tag password_resets_path do
+  %fieldset
+    %legend
+      Password reset
+    %label.control-label
+      Enter your registered email
+    .input-prepend
+      %span.add-on @
+      = text_field_tag "email", '', :class => 'span2'
+    %br
+    = submit_tag "Send", :class=>"btn"
+

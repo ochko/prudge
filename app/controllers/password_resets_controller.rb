@@ -4,32 +4,29 @@ class PasswordResetsController < ApplicationController
   before_filter :require_no_user
   
   def new  
-    render  
   end  
   
   def create
     @user = User.find_by_email(params[:email])
     if @user
       @user.send_password_reset_instructions!
-      flash[:notice] = "Нууц үг сэргээх зааврыг и-мэйл рүү тань илгээв." +
-        "Шалгана уу?"
+      flash[:notice] = message_for :password_reset_instructions
       redirect_to root_url
     else
-      flash[:notice] = "Ийм и-мэйлээр бүртгүүлсэн хэрэглэгч алга байна!"
+      flash[:notice] = message_for :user_not_found_by_email
       render :action => :new
     end  
   end
   
   def edit
-    render
   end
  
   def update
     @user.password = params[:user][:password]
     @user.password_confirmation = params[:user][:password_confirmation]
     if @user.save
-      flash[:notice] = "Нууц үгийг амжилттай шинэчиллээ"
-      redirect_to account_url
+      flash[:notice] = message_for :password_updated
+      redirect_to account_users_url
     else
       render :action => :edit
     end
@@ -40,9 +37,7 @@ class PasswordResetsController < ApplicationController
   def load_user_using_perishable_token  
     @user = User.find_using_perishable_token(params[:id])  
     unless @user  
-      flash[:notice] = "Уучлаарай, таны бүртгэлийг олсонгүй. " +  
-        "И-мэйл дотроосоо URL ийг хуулж аваад хөтөч дээрээ ачаалж үз, эсвэл " +
-        "нууц үг сэргээх процессийг ахин хийж үзнэ үү?"
+      flash[:notice] = message_for :password_reset_not_found
       redirect_to root_url  
     end  
   end
