@@ -1,7 +1,13 @@
 # -*- coding: utf-8 -*-
 module ApplicationHelper
   def title
-    eval('"' + t("title.#{controller_name}.#{action_name}", :default => controller_name) +'"')
+    t(:title,
+      :subject => %w(edit show).include?(action_name) ? subject.name : nil,
+      :scope => [controller_name, action_name], :default => controller_name)
+  end
+
+  def subject
+    controller.instance_variable_get("@#{controller_name.singularize}")
   end
 
   def flashy

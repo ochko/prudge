@@ -61,9 +61,14 @@ class Solution < ActiveRecord::Base
     sandbox.run
   end
 
+  def name
+    problem.name
+  end
+
   # For discussion/comment
-  def name() problem.name end
-  def text() "Хэрэглэгч #{user.login} -ий бодолтод санал/зөвлөгөө/тусламж бичих" end
+  def text
+    "Хэрэглэгч #{user.login} -ий бодолтод санал/зөвлөгөө/тусламж бичих"
+  end
 
   def log
     repo = Repo.new(user)

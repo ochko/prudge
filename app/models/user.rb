@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
 
   is_gravtastic! :size => 80, :rating => :PG
 
+  def name
+    login
+  end
+
   def owns?(object)
     object.user_id == self.id
   end

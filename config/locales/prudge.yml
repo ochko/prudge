@@ -1,54 +1,87 @@
 mn:
-  title:
-    posts:
-      blog: Блог
-      help: Тусламж
-      show: '#{@post.title}'
-    home:
-      about: Сайтын тухай
-      dashboard: Dashboard
-    contests:
-      index: Тэмцээнүүд
-      last: Тэмцээн
-      show: '#{@contest.name}'
-      new: Тэмцээн зарлах
-      edit: 'Edit: #{@contest.name}'
-    password_resets:
-      new: Нууц үг сэргээх хүсэлт
-      edit: Нууц үгээ сэргээх
-    problem_tests:
-      show: Бодлогын тэст
-      new: Шинэ тэст
-      edit: Тэстийг засварлах
-    problems:
-      index: Бодлогууд
-      proposed: Дэвшигдсэн бодлогууд
-      show: '#{@problem.name}'
-      new: Бодлого дэвшүүлэх
-      edit: 'Edit: #{@problem.name}'
-    results:
-      show: Тэстийн үр дүн
-    search:
-      index: Хайлт
-    solutions:
-      latest: Сүүлийн бодолтууд
-      show: 'Solution: #{@solution.problem.name}'
-      view: Бодолт
-      new: Бодолт илгээх
-      edit: Бодолт засварлах
-    user_session:
-      new: Нэвтрэх
-    users:
-      new: Бүртгүүлэх
-      edit: Тохиргоог шинэчлэх
-      index: Кодерууд
-      account: '#{@user.login}'
-      show: '#{@user.login}'
-    comments:
-      index: Сүүлд нэмэгдсэн бичээсүүд
-      moderate: Хянах
-    user_sessions:
-      new: Нэвтрэх
+  posts:
+    blog:
+      title: Блог
+    help:
+      title: Тусламж
+    show:
+      title: "%{subject}"
+  home:
+    about:
+      title: Сайтын тухай
+    dashboard:
+      title: Dashboard
+  contests:
+    index:
+      title: Тэмцээнүүд
+    last:
+      title: Тэмцээн
+    show:
+      title: "%{subject}"
+    new:
+      title: Тэмцээн зарлах
+    edit:
+      title: '%{subject} · Edit'
+  password_resets:
+    new:
+      title: Нууц үг сэргээх хүсэлт
+    edit:
+      title: Нууц үгээ сэргээх
+  problem_tests:
+    show:
+      title: Бодлогын тэст
+    new:
+      title: Шинэ тэст
+    edit:
+      title: Тэстийг засварлах
+  problems:      
+    index:
+      title: Бодлогууд
+    proposed:
+      title: Дэвшигдсэн бодлогууд
+    show:
+      title: '%{subject}'
+    new:
+      title: Бодлого дэвшүүлэх
+    edit:
+      title: '%{subject} · Edit'
+  results:
+    show:
+      title: Тэстийн үр дүн
+  search:
+    index:
+      title: Хайлт
+  solutions:
+    latest:
+      title: Сүүлийн бодолтууд
+    show:
+      title: '%{subject} · Бодолт'
+    view:
+      title: Бодолт
+    new:
+      title: Бодолт илгээх
+    edit:
+      title: Бодолт засварлах
+  user_session:
+    new:
+      title: Нэвтрэх
+  users:
+    new:
+      title: Бүртгүүлэх
+    edit:
+      title: Тохиргоог шинэчлэх
+    index:
+      title: Кодерууд
+    show:
+      title: '%{subject}'
+  comments:
+    index:
+      title: Сүүлд нэмэгдсэн бичээсүүд
+    moderate:
+      title: Хянах
+  user_sessions:
+    new:
+      title: Нэвтрэх
   label:
     execution:
       ok: "Хэвийн ажиллав"
