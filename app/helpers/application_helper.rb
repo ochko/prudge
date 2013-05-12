@@ -6,7 +6,7 @@ module ApplicationHelper
   end
 
   def subject
-    return unless %w(edit show view).include?(action_name)
+    return unless %w(edit show view index).include?(action_name)
     return unless instance = controller.instance_variable_get("@#{controller_name.singularize}")
     return unless instance.respond_to?(:name)
     instance.name

@@ -1,0 +1,25 @@
+%h2
+  = link_to @problem.name, @problem
+  %small Add new test
+.row
+  .span3.profile
+    = render partial: 'problems/profile', locals: {problem: @problem}
+
+%h3 New test
+= error_messages_for @problem_test
+.row
+  .span4
+    = form_for @problem_test, :url => problem_tests_path(@problem), :method => :post do |form|
+      %label.control-label Input
+      .controls
+        = form.file_field :input, :class => 'input-medium'
+      %label.control-label Output
+      .controls
+        = form.file_field :output, :class => 'input-medium'
+      .controls
+        %label.checkbox
+          = form.check_box :hidden
+          this is hidden test
+        %button.btn.btn-primary{:type => 'submit'}
+          %i.icon-save
+          Save

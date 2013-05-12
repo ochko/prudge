@@ -33,6 +33,12 @@ Prudge::Application.routes.draw do
   resources :participants
 
   resources :problems do
+    resources :problem_tests, :as => :tests do
+      member do
+        get :input
+        get :output
+      end
+    end
     resources :solutions
     collection do
       get :proposed
@@ -41,8 +47,6 @@ Prudge::Application.routes.draw do
       get :check
     end
   end
-
-  resources :problem_tests
 
   resources :posts, :except => :index do
     collection do

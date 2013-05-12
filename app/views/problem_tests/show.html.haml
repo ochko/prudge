@@ -1,0 +1,31 @@
+%h2
+  = link_to @problem.name, @problem
+  %small Test
+.row
+  .span3.profile
+    = render partial: 'problems/profile', locals: {problem: @problem}
+
+%h3
+  Test
+  = render_viewable(@problem_test.hidden)
+  .btn-group
+    = link_to problem_tests_path(@problem), :class => 'btn btn-small' do
+      Бусад тэстүүд
+    = link_to problem_test_path(@problem, @problem_test), :method => :delete, :confirm => "Тэстийг устгах уу?", :class => 'btn btn-small' do
+      %i.icon-trash
+      Delete
+
+.row
+  .span3
+    %h4 Input
+    %pre.io= @problem_test.input_head
+    = link_to input_problem_test_path(@problem, @problem_test), :class => 'btn btn-small' do
+      %i.icon-download-alt
+      Download Input
+    
+  .span3
+    %h4 Output
+    %pre.io= @problem_test.output_head
+    = link_to output_problem_test_path(@problem, @problem_test), :class => 'btn btn-small' do
+      %i.icon-download-alt
+      Download Output

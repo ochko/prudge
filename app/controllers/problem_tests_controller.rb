@@ -1,18 +1,37 @@
 # -*- coding: utf-8 -*-
 class ProblemTestsController < ApplicationController
   before_filter :require_user
+  load_resource :problem
+
+  def index
+    @problem_test = @problem # for title
+    @tests = @problem.tests
+  end
 
   def show
-    @problem_test = ProblemTest.find(params[:id])
+    @problem_test = @problem.tests.find(params[:id])
     if !is_viewable(@problem_test)
       flash[:notice] = 'Тэстийг үзэж болохгүй.'
       redirect_to @problem_test.problem
     end
   end
 
+  def input
+    @problem_test = @problem.tests.find(params[:id])
+    send_file(@problem_test.input.path,
+              :filename => @problem_test.input_file_name,
+              :disposition => 'attachment')
+  end
+
+  def output
+    @problem_test = @problem.tests.find(params[:id])
+    send_file(@problem_test.output.path,
+              :filename => @problem_test.output_file_name,
+              :disposition => 'attachment')
+  end
+
   def new
-    @problem = Problem.find(params[:problem_id])
-    @problem_test = @problem.tests.build
+    @problem_test = @problem.tests.build(hidden: true)
     unless is_touchable(@problem_test)
       flash[:notice] = 'Тэст оруулж болохгүй.'
       redirect_to @problem
@@ -20,61 +39,31 @@ class ProblemTestsController < ApplicationController
   end
 
   def create
-    @problem_test = ProblemTest.new(params[:problem_test])
+    @problem_test = @problem.tests.build(params[:problem_test])
     if is_touchable(@problem_test)
       if @problem_test.save
-        if request.xml_http_request?
-          render :partial => 'test', :object => @problem_test
-        else
-          flash[:notice] = 'Тэстийг хадгалж авлаа.'
-          redirect_to @problem_test.problem
-        end
+        flash[:notice] = 'Тэстийг хадгалж авлаа.'
+        redirect_to problem_tests_path(@problem)
       else
         render :action => 'new'
       end
     else
       flash[:notice] = 'Тэст оруулж болохгүй.'
-      redirect_to @problem_test.problem
-    end
-  end
-
-  def edit
-    @problem_test = ProblemTest.find(params[:id])
-    if !is_touchable(@problem_test)
-      flash[:notice] = 'Тэстийг засварлаж болохгүй.'
-      redirect_to @problem_test.problem
-      return
-    end
-  end
-
-  def update
-    @problem_test = ProblemTest.find(params[:id])
-    if is_touchable(@problem_test)
-      if @problem_test.update_attributes(params[:problem_test])
-        flash[:notice] = 'ProblemTest was successfully updated.'
-        redirect_to @problem_test
-      else
-        render :action => 'edit'
-      end
-    else
-      flash[:notice] = 'Тэстийг засварлаж болохгүй.'
-      redirect_to @problem_test.problem
-      return
+      redirect_to problem_tests_path(@problem)
     end
   end
 
   def destroy
-    @problem_test = ProblemTest.find(params[:id])
+    @problem_test = @problem.tests.find(params[:id])
+
     if is_touchable(@problem_test)
       @problem_test.destroy
+      flash[:notice] = 'Тэстийг устгав.'
     else
       flash[:notice] = 'Тэстийг устгаж болохгүй.'
     end
-    respond_to do |format|
-      format.html { redirect_to @problem_test.problem }
-      format.js
-    end
-    
+
+    redirect_to problem_tests_path(@problem)
   end
 
   protected

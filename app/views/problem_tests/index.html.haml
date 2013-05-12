@@ -1,0 +1,26 @@
+%h2
+  = link_to @problem.name, @problem
+.row
+  .span3.profile
+    = render partial: 'problems/profile', locals: {problem: @problem}
+
+%h3 Tests
+.row
+  .span2
+    %table.table
+      %tbody
+        - @tests.each_with_index do |test, index|
+          %tr{:id => "test-#{test.id}"}
+            %td
+              = index
+              = render_viewable(test.hidden)
+            %td
+              = link_to problem_test_path(@problem, test) do
+                %i.icon-eye-open
+            %td
+              = link_to problem_test_path(@problem, test), :method => :delete, :confirm => "Тэстийг устгах уу?" do
+                %i.icon-trash
+
+    = link_to new_problem_test_path(@problem), :class => 'btn btn-block' do
+      %i.icon-plus-sign
+      Add new test

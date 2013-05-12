@@ -30,6 +30,8 @@ mn:
     edit:
       title: Нууц үгээ сэргээх
   problem_tests:
+    index:
+      title: '%{subject}'
     show:
       title: Бодлогын тэст
     new:
