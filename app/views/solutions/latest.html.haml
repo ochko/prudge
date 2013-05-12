@@ -1,0 +1,11 @@
+%h1= title
+
+%table
+  - @solutions.each do |solution|
+    %tr
+      %td
+        = link_to solution.user.login, solution.user, :class=> (solution.passed? ? 'ok' : 'ng')
+      %td= l solution.source_updated_at
+      %td= link_to solution.problem.name, solution.problem
+
+= paginate @solutions
