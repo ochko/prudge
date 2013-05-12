@@ -22,7 +22,7 @@ class Result < ActiveRecord::Base
   end
 
   def output
-    matched ? test.output : self[:output]
+    matched ? test.output_head : self[:output]
   end
 
   def failed?

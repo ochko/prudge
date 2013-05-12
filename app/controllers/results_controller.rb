@@ -3,7 +3,7 @@ class ResultsController < ApplicationController
   before_filter :require_user
 
   def show
-    @result = ActiveRecord::Base::Result.find(params[:id])
+    @result = Result.find(params[:id])
 
     return if judge?
     

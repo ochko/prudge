@@ -1,0 +1,65 @@
+%h2
+  = link_to @result.solution.problem.name, @result.solution.problem
+  %small
+    = t(@result.matched ? 'passed' : 'failed', :scope => [:label, :test])
+
+.row
+  .span6.profile
+    %dl
+      %dt
+        %i.icon-user
+      %dd
+        %span Coder
+        = link_to h(@result.solution.user.login), @result.solution.user
+    %dl
+      %dt
+        %i.icon-file-alt
+      %dd
+        %span.muted Source
+        = link_to @result.solution.source_file_name, @result.solution
+    %dl
+      %dt
+        %i.icon-upload
+      %dd
+        %span.muted Submitted
+        = l @result.solution.source_updated_at
+    %dl
+      %dt
+        %i.icon-exchange
+      %dd
+        %span.muted Result
+        = show_correctness @result.matched
+    %dl
+      %dt
+        %i.icon-cog
+      %dd
+        %span.muted Program
+        = translate_message(@result.execution)
+    %dl
+      %dt
+        %i.icon-time
+      %dd
+        %span.muted Time
+        = @result.time
+        ms
+    %dl
+      %dt
+        %i.icon-hdd
+      %dd
+        %span.muted Memory
+        = @result.memory
+        kb
+.row
+  .span6
+    %h3 Input
+    %pre.io= @result.test.input_head
+.row
+  .span6
+    %h3 Output
+    %pre.io= @result.output
+
+- unless @result.matched
+  .row
+    .span6
+      %h3 Correct
+      %pre.io= @result.test.output_head

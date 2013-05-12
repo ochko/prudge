@@ -406,6 +406,12 @@ h3.list-heading .inner {
   display:none;
 }
 
+pre.io {
+  max-height: 340px;
+  min-height: 60px;
+  overflow: scroll;
+}
+
 .gold {
   color: gold;
 }

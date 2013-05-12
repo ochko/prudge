@@ -92,6 +92,9 @@ mn:
     new:
       title: Нэвтрэх
   label:
+    test:
+      passed: Тест давсан
+      failed: Тест зөрсөн
     execution:
       ok: "Хэвийн ажиллав"
       timeout: "Хугацаа хэтрэв"
