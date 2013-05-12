@@ -1,5 +1,5 @@
 %h2
-  = link_to @result.solution.problem.name, @result.solution.problem
+  = link_to @solution.problem.name, @solution.problem
   %small
     = t(@result.matched ? 'passed' : 'failed', :scope => [:label, :test])
 
@@ -10,19 +10,19 @@
         %i.icon-user
       %dd
         %span Coder
-        = link_to h(@result.solution.user.login), @result.solution.user
+        = link_to h(@solution.user.login), @solution.user
     %dl
       %dt
         %i.icon-file-alt
       %dd
         %span.muted Source
-        = link_to @result.solution.source_file_name, @result.solution
+        = link_to @solution.source_file_name, @solution
     %dl
       %dt
         %i.icon-upload
       %dd
         %span.muted Submitted
-        = l @result.solution.source_updated_at
+        = l @solution.source_updated_at
     %dl
       %dt
         %i.icon-exchange

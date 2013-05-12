@@ -52,6 +52,7 @@ Prudge::Application.routes.draw do
   end
 
   resources :solutions do
+    resources :results
     collection do
       get :latest
     end
@@ -62,8 +63,6 @@ Prudge::Application.routes.draw do
       get :download
     end
   end
-
-  resources :results
 
   resources :comments
 
