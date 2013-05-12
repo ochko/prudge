@@ -13,5 +13,6 @@
  *= require login
  *= require cirque
  *= require wmd/wmd
+ *= require prettify
  *= require prudge
  */

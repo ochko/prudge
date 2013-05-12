@@ -16,6 +16,8 @@ $(function() {
         }
     });
 
+    window.prettyPrint && prettyPrint()
+
     $('#language-logos, #profile-vcard, #header-tooltip, #watcher').tooltip({
         selector: "[data-toggle=tooltip]"
     });

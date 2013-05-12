@@ -6,6 +6,8 @@ mn:
       title: Тусламж
     show:
       title: "%{subject}"
+    edit:
+      title: "%{subject} · Засварлах"
   home:
     about:
       title: Сайтын тухай
@@ -21,7 +23,7 @@ mn:
     new:
       title: Тэмцээн зарлах
     edit:
-      title: '%{subject} · Edit'
+      title: '%{subject} · Засварлах'
   password_resets:
     new:
       title: Нууц үг сэргээх хүсэлт
@@ -44,7 +46,7 @@ mn:
     new:
       title: Бодлого дэвшүүлэх
     edit:
-      title: '%{subject} · Edit'
+      title: '%{subject} · Засварлах'
     form:
       name: Нэр
       source: Эх сурвалж
@@ -64,11 +66,11 @@ mn:
     show:
       title: '%{subject} · Бодолт'
     view:
-      title: Бодолт
+      title: '%{subject} · Бодолт'
     new:
       title: Бодолт илгээх
     edit:
-      title: Бодолт засварлах
+      title: '%{subject} · Бодолт засварлах'
   user_session:
     new:
       title: Нэвтрэх
@@ -76,7 +78,7 @@ mn:
     new:
       title: Бүртгүүлэх
     edit:
-      title: Тохиргоог шинэчлэх
+      title: '%{subject} · Тохиргоог шинэчлэх'
     index:
       title: Кодерууд
     show:

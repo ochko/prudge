@@ -1,0 +1,90 @@
+%h1
+  - if @solution.contest
+    = link_to(@solution.contest.name, @solution.contest)
+    %i.icon-double-angle-right
+  = link_to(@solution.problem.name, @solution.problem)
+
+.row
+  .span3.profile
+    = render :partial => 'problems/profile', :locals => {:problem => @solution.problem}
+
+%h2 Solution
+
+.row
+  .span6
+    .source-code
+      .title
+        %i.icon-file-alt
+        = @solution.source_file_name
+      .row-fluid
+        .span12.profile
+          %dl
+            %dt
+              %i.icon-user
+            %dd
+              %span.muted Coder
+              = link_to @solution.user.login, @solution.user
+          %dl
+            %dt
+              %i.icon-upload
+            %dd
+              %span.muted Submitted
+              = l @solution.source_updated_at
+          %dl
+            %dt
+              %i.icon-time
+            %dd
+              %span.muted Time
+              = @solution.time
+              %abbr{:title => 'Milliseconds'} ms
+          %dl
+            %dt
+              %i.icon-plus-sign
+            %dd
+              %span.muted Points
+              = @solution.point
+
+    = content_tag :pre, @solution.code, :class => 'prettyprint linenums'
+
+    - if @solution.judged?
+      - unless @solution.junk.blank?
+        .row-fluid
+          .span12
+            .alert.alert-block
+              %button.button{:class=>"close", 'data-dismiss'=>"alert"}
+                %i.icon-remove-circle
+              %h4
+                %storng Compiler output
+              %p!= @solution.junk
+      .row-fluid
+        .span12
+          %table.table.table-bordered
+            %thead
+              %tr
+                %th{title: 'Test number'}
+                  Tests
+                %th{title: 'Test hidden/shown'}
+                %th{title: 'Run status'}
+                  %i.icon-cog
+                %th{title: 'Time in seconds'}
+                  %i.icon-time
+                %th{title: 'Memory in kilobytes'}
+                  %i.icon-hdd
+                %th{title: 'Test passed?'}
+            %tbody
+              - @solution.results.each_with_index do |result, index|
+                %tr
+                  %td= index + 1
+                  %td.muted= render_viewable(result.hidden)
+                  %td= translate_message(result.execution)
+                  %td= sec2milisec(result.time)
+                  %td= result.memory
+                  %td= link_to(show_correctness(result.correct?), result)
+
+    = link_to download_solution_path(@solution), :class => 'btn' do
+      %i.icon-download-alt
+      Download source
+
+.row
+  .span6
+    = render :partial => 'comments/commentable', :object => @solution
