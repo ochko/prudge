@@ -2,6 +2,7 @@
 class ProblemTestsController < ApplicationController
   before_filter :require_user
   load_resource :problem
+  before_filter :load_test, :only => [:show, :input, :output, :destroy]
 
   def index
     @problem_test = @problem # for title
@@ -9,7 +10,6 @@ class ProblemTestsController < ApplicationController
   end
 
   def show
-    @problem_test = @problem.tests.find(params[:id])
     if !is_viewable(@problem_test)
       flash[:notice] = 'Тэстийг үзэж болохгүй.'
       redirect_to @problem_test.problem
@@ -17,17 +17,11 @@ class ProblemTestsController < ApplicationController
   end
 
   def input
-    @problem_test = @problem.tests.find(params[:id])
-    send_file(@problem_test.input.path,
-              :filename => @problem_test.input_file_name,
-              :disposition => 'attachment')
+    send_attachment :input
   end
 
   def output
-    @problem_test = @problem.tests.find(params[:id])
-    send_file(@problem_test.output.path,
-              :filename => @problem_test.output_file_name,
-              :disposition => 'attachment')
+    send_attachment :output
   end
 
   def new
@@ -40,6 +34,7 @@ class ProblemTestsController < ApplicationController
 
   def create
     @problem_test = @problem.tests.build(params[:problem_test])
+
     if is_touchable(@problem_test)
       if @problem_test.save
         flash[:notice] = 'Тэстийг хадгалж авлаа.'
@@ -54,8 +49,6 @@ class ProblemTestsController < ApplicationController
   end
 
   def destroy
-    @problem_test = @problem.tests.find(params[:id])
-
     if is_touchable(@problem_test)
       @problem_test.destroy
       flash[:notice] = 'Тэстийг устгав.'
@@ -66,7 +59,12 @@ class ProblemTestsController < ApplicationController
     redirect_to problem_tests_path(@problem)
   end
 
-  protected
+  private
+
+  def load_test
+    @problem_test = @problem.tests.find(params[:id])
+  end
+
   def is_touchable(test)
     return true if current_user.judge?
     return true if current_user.owns?(test.problem)
@@ -79,4 +77,11 @@ class ProblemTestsController < ApplicationController
     return false
   end
 
+  def send_attachment(attribute)
+    attachment = @problem_test.send(attribute)
+
+    send_file(attachment.path,
+              :filename => attachment.original_filename,
+              :disposition => 'attachment')
+  end
 end
