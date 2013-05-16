@@ -10,6 +10,13 @@ class UserAbility < BaseAbility
     can :manage, Post, :author_id => user.id, :category => 'blog'
     
     can [:watch, :unwatch], Contest
+
     can :create, [Problem, Comment]
+
+    can [:read, :update, :destroy], Problem, :user_id => user.id
+
+    cannot :destroy do |problem|
+      problem.solutions.exists?
+    end
   end
 end

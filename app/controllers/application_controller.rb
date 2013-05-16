@@ -25,6 +25,10 @@ class ApplicationController < ActionController::Base
     I18n.translate name, options.merge(:scope => :message)
   end
 
+  def flash_notice(name, options = {})
+    flash[:notice] = message_for(name, options)
+  end
+
   def admin?
     current_user && current_user.admin
   end

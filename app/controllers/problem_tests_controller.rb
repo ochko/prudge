@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class ProblemTestsController < ApplicationController
-  before_filter :require_user
   load_resource :problem
+
   before_filter :load_test, :only => [:show, :input, :output, :destroy]
 
   def index
@@ -10,9 +10,9 @@ class ProblemTestsController < ApplicationController
   end
 
   def show
-    if !is_viewable(@problem_test)
-      flash[:notice] = 'Тэстийг үзэж болохгүй.'
-      redirect_to @problem_test.problem
+    if cannot? :read, @problem
+      flash_notce 'test.hidden'
+      redirect_to @problem
     end
   end
 
@@ -26,8 +26,8 @@ class ProblemTestsController < ApplicationController
 
   def new
     @problem_test = @problem.tests.build(hidden: true)
-    unless is_touchable(@problem_test)
-      flash[:notice] = 'Тэст оруулж болохгүй.'
+    if cannot? :update, @problem
+      flash_notice 'test.frozen'
       redirect_to @problem
     end
   end
@@ -35,27 +35,25 @@ class ProblemTestsController < ApplicationController
   def create
     @problem_test = @problem.tests.build(params[:problem_test])
 
-    if is_touchable(@problem_test)
+    if can? :update, @problem
       if @problem_test.save
-        flash[:notice] = 'Тэстийг хадгалж авлаа.'
+        flash_notice 'test.saved'
         redirect_to problem_tests_path(@problem)
       else
         render :action => 'new'
       end
     else
-      flash[:notice] = 'Тэст оруулж болохгүй.'
-      redirect_to problem_tests_path(@problem)
+      flash_notice] = 'test.frozen'
     end
   end
 
   def destroy
-    if is_touchable(@problem_test)
+    if can? :update, @problem
       @problem_test.destroy
-      flash[:notice] = 'Тэстийг устгав.'
+      flash_notice 'test.deleted'
     else
-      flash[:notice] = 'Тэстийг устгаж болохгүй.'
+      flash_notice 'test.nodelete'
     end
-
     redirect_to problem_tests_path(@problem)
   end
 
@@ -65,23 +63,13 @@ class ProblemTestsController < ApplicationController
     @problem_test = @problem.tests.find(params[:id])
   end
 
-  def is_touchable(test)
-    return true if current_user.judge?
-    return true if current_user.owns?(test.problem)
-    return false
-  end
-
-  def is_viewable(test)
-    return true if current_user.owns?(test.problem)
-    return true if current_user.judge?
-    return false
-  end
-
   def send_attachment(attribute)
-    attachment = @problem_test.send(attribute)
+    if can?(:update, @problem) || can?(:read, @problem_test)
+      attachment = @problem_test.send(attribute)
 
-    send_file(attachment.path,
-              :filename => attachment.original_filename,
-              :disposition => 'attachment')
+      send_file(attachment.path,
+                :filename => attachment.original_filename,
+                :disposition => 'attachment')
+    end
   end
 end

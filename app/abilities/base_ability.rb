@@ -8,5 +8,7 @@ class BaseAbility
     can :read, Problem, ["active_from < ?", Time.now] do |problem|
       problem.publicized?
     end
+
+    can :read, ProblemTest, :hidden => false
   end
 end
