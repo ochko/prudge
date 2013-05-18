@@ -43,7 +43,7 @@ class ProblemTestsController < ApplicationController
         render :action => 'new'
       end
     else
-      flash_notice] = 'test.frozen'
+      flash_notice = 'test.frozen'
     end
   end
 
