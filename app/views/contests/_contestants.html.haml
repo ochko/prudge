@@ -1,23 +1,24 @@
-.span4
-  %table.table.table-bordered
-    %thead
-      %tr
-        %th
-        %th
-        %th
-          %i.icon-flag
-        %th
-          %i.icon-time
-        %th
-    %tbody#contestants
-      - @numbers.zip(@standings) do |num, user|
+.row
+  .span4
+    %table.table.table-bordered
+      %thead
         %tr
-          %td.standing= standing(num)
-          %td= link_to user.login, user
-          %td= "%.2f" % user.point
-          %td= sec2milisec user.time
-          %td
-            = link_to contest_user_solutions_path(@contest, user), :class => 'loader' do
-              %i.icon-refresh
-.span4
-  #solved
+          %th
+          %th
+          %th
+            %i.icon-flag
+          %th
+            %i.icon-time
+          %th
+      %tbody#contestants
+        - @numbers.zip(@standings) do |num, user|
+          %tr
+            %td.standing= standing(num)
+            %td= link_to user.login, user
+            %td= "%.2f" % user.point
+            %td= sec2milisec user.time
+            %td
+              = link_to contest_user_solutions_path(@contest, user), :class => 'loader' do
+                %i.icon-refresh
+  .span4
+    #solved
