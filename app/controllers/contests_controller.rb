@@ -31,7 +31,7 @@ class ContestsController < ApplicationController
     if @contest.users.size > 0
       render :partial => 'contestants'
     else
-      render :text => 'Оролцогч алга!'
+      render :text => message_for('contest.no_contestants')
     end
   end
 
@@ -47,7 +47,7 @@ class ContestsController < ApplicationController
   def create
     @contest = Contest.new(params[:contest])
     if @contest.save
-      flash[:notice] = 'Тэмцээнийг үүсгэлээ.'
+      flash_notice 'contest.created'
       redirect_to @contest
     else
       render :action => 'new'
@@ -61,7 +61,7 @@ class ContestsController < ApplicationController
   def update
     @contest = Contest.find(params[:id])
     if @contest.update_attributes(params[:contest])
-      flash[:notice] = 'Тэмцээнийг шинэчлэн хадгаллаа.'
+      flash_notice 'contest.updated'
       redirect_to @contest
     else
       render :action => 'edit'
@@ -70,6 +70,7 @@ class ContestsController < ApplicationController
 
   def destroy
     Contest.find(params[:id]).destroy
+    flash_notice 'contest.deleted'
     redirect_to :action => 'index'
   end
 
