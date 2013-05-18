@@ -1,20 +1,10 @@
 # -*- coding: utf-8 -*-
 class ResultsController < ApplicationController
-  before_filter :require_user
+  load_and_authorize_resource :result
 
   def show
     @solution = Solution.find(params[:solution_id])
     @result = @solution.results.find(params[:id])
-
-    return if judge?
-    
-    if !current_user.owns?(@result.solution)
-      flash[:notice] = 'Бусдын тэстийг харж болохгүй'
-      redirect_to @result.solution.problem
-    elsif @result.hidden
-      flash[:notice] = 'Жинхэнэ тэстийг харж болохгүй!.'
-      redirect_to @result.solution
-    end
   end
 
 end

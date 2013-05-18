@@ -6,6 +6,8 @@ class JudgeAbility < UserAbility
 
     can [:modify, :check], Solution
 
+    can :read, Result
+
     super(user)
   end
 end

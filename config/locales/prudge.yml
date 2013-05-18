@@ -131,16 +131,3 @@ mn:
       hidden: 'Тэстийг үзэж болохгүй.'
       frozen: 'Тэст оруулж болохгүй.'
       nodelete: 'Тэстийг устгаж болохгүй.'
-  unauthorized:
-    manage:
-      all: "You have no access!"
-    read:
-      problem_test: "Тэстийг үзэж болохгүй."
-    create:
-      problem_test: "Тэст оруулж болохгүй."
-    destroy:
-      problem_test: "Тэстийг устгаж болохгүй."
-    input:
-      problem_test: "Тэстийг үзэж болохгүй."
-    output:
-      problem_test: "Тэстийг үзэж болохгүй."

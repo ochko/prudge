@@ -2,6 +2,10 @@ class UserAbility < BaseAbility
   def initialize(user)
     super(user)
 
+    can :read, Result do |result|
+      !result.hidden || user.owns?(result.solution)
+    end
+
     can :read, Solution do |solution|
       user.owns?(solution) ||
         (!solution.competing? && user.solved?(solution.problem))
