@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 class ContestsController < ApplicationController
-  before_filter :require_user, :except => [:index, :last, :show]
+  authorize_resource :contest, :except => [:index, :last, :show]
 
   def index
     @contests = Contest.order("start DESC").page(params[:page]).per(20)
