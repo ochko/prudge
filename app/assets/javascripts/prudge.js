@@ -1,17 +1,17 @@
 $(function() {
     var $window = $(window)
 
-    var problemNames;
+    var searchHints;
 
     $('#search').typeahead({
         source: function (query, process) {
-            if (problemNames == undefined) {
-                $.get('/problems.json', {}, function (data) {
-                    problemNames = data;
-                    return problemNames;
+            if (searchHints == undefined) {
+                $.get('/searches.json', {}, function (data) {
+                    searchHints = data;
+                    return searchHints;
                 });
             }else{
-                return problemNames;
+                return searchHints;
             }
         }
     });

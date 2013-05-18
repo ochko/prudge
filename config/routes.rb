@@ -77,7 +77,8 @@ Prudge::Application.routes.draw do
 
   match 'about' => 'home#about', :as => :about
   match 'dashboard' => 'home#dashboard', :as => :dashboard
-  match '/search' => 'search#index'
+  match 'search' => 'search#index'
+  match 'searches.json' => 'search#hints'
 
   root :to => 'contests#last'
 

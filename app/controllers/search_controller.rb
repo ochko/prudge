@@ -7,4 +7,9 @@ class SearchController < ApplicationController
     @results.context[:panes] << ThinkingSphinx::Panes::ExcerptsPane
   end
 
+  def hints
+    render :json => (Problem.uniq.pluck(:name) +
+                     Post.uniq.pluck(:title) +
+                     Contest.uniq.pluck(:name)).sort
+  end
 end

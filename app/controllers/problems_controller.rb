@@ -3,21 +3,14 @@ class ProblemsController < ApplicationController
   load_and_authorize_resource :except => :proposed
 
   def index
-    respond_to do |format|
-      format.json do
-        render :json => Problem.order(:name).uniq.pluck(:name)
-      end
-      format.html do
-        order = params[:order] || 'DESC'
-        column = params[:column] || 'created_at'
-        @reverse = (order == 'ASC') ? 'DESC' : 'ASC'
+    order = params[:order] || 'DESC'
+    column = params[:column] || 'created_at'
+    @reverse = (order == 'ASC') ? 'DESC' : 'ASC'
 
-        @problems = @problems.
-          order("#{column} #{order}").
-          page(params[:page]).per(20).
-          preload(:user)
-      end
-    end
+    @problems = @problems.
+      order("#{column} #{order}").
+      page(params[:page]).per(20).
+      preload(:user)
   end
 
   def proposed
