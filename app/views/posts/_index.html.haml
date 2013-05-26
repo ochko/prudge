@@ -3,16 +3,16 @@
     %tr
       %th
         - if @user == current_user
-          = link_to new_post_path, :class => 'btn btn-small' do
+          = link_to new_post_path, :class => 'btn btn-small pull-right' do
             %i.icon-plus-sign
-            New blog post
+            New post
   %tbody
-    - @user.posts.each do |post|
+    - @posts.each do |post|
       %tr
         %td
           %p.lead
             = link_to post.title, post
-          %small.muted
+          %span.muted
             Posted on
             = l post.updated_at, :format => :date
           = link_to edit_post_path(post), :class => 'btn btn-mini pull-right' do
