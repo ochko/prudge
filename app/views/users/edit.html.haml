@@ -1,37 +1,37 @@
 .row#content
   .span3#profile-vcard
     = link_to 'http://gravatar.com/emails/' do
-      = image_tag(@user.gravatar_url(:size => 210), :class => "img-polaroid avatar-large", 'data-toggle' => :tooltip, 'data-placement' => :bottom, :title => "Change your avatar at Gravatar.com")
+      = image_tag(@user.gravatar_url(:size => 210), :class => "img-polaroid avatar-large", 'data-toggle' => :tooltip, 'data-placement' => :bottom, :title => t('.change-gravatar'))
   .span4
     = form_for @user, :url => user_path, :class => 'form-horizontal' do |f|
       %fieldset
         %legend
           %h3
             %i.icon-wrench
-            Update your profile
+            = t '.update-profile'
         .control-group
-          = f.label :login, "Нэвтрэх нэр", :class => 'control-label'
+          = f.label :login, t('.login'), :class => 'control-label'
           .controls
             .input-prepend
               %span.add-on
                 %i.icon-user
               = f.text_field :login, :class => "span3"
         .control-group
-          = f.label :email, "И-мэйл", :class => 'control-label'
+          = f.label :email, t('.email'), :class => 'control-label'
           .controls
             .input-prepend
               %span.add-on
                 %i.icon-envelope
               = f.text_field :email, :class => "span3"
         .control-group
-          = f.label :twitter, "Twitter", :class => 'control-label'
+          = f.label :twitter, t('.twitter'), :class => 'control-label'
           .controls
             .input-prepend
               %span.add-on
                 %i.icon-twitter
               = f.text_field :twitter, :class => "span3", :placeholder => "@yourname"
         .control-group
-          = f.label :web, "Web", :class => 'control-label'
+          = f.label :web, t('.web'), :class => 'control-label'
           .controls
             .input-prepend
               %span.add-on
@@ -39,21 +39,21 @@
               = f.text_field :web, :class => "span3", :placeholder => "http://your.web.url"
 
         .control-group
-          = f.label :password, "Нууц үг солих", :class => 'control-label'
+          = f.label :password, t('.change-password'), :class => 'control-label'
           .controls
             .input-prepend
               %span.add-on
                 %i.icon-key
               = f.password_field :password, :placeholder => "******", :class => "span3"
         .control-group
-          = f.label :password_confirmation, "Нууц үгийг давт", :class => 'control-label'
+          = f.label :password_confirmation, t('.repeat-password'), :class => 'control-label'
           .controls
             .input-prepend
               %span.add-on
                 %i.icon-key
               = f.password_field :password_confirmation, :placeholder => "******", :class => "span3"
         .control-group
-          = f.label :school, "Сургууль/Байгаа газар", :class => 'control-label'
+          = f.label :school, t('.organization'), :class => 'control-label'
           .controls
             .input-prepend
               %span.add-on
@@ -63,7 +63,7 @@
           .controls
             %label.checkbox
               = f.check_box :notify_new_contests
-              Шинэ тэмцээн зохиогдоход мэдэгдэх
+              = t '.inform-new-contest'
         .control-group  
           .controls
-            = f.submit "Хадгал", :class => 'btn btn-primary'
+            = f.submit t('button.save'), :class => 'btn btn-primary'

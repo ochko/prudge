@@ -2,18 +2,18 @@
   .span3.profile
     %p.text-center#profile-vcard
       = link_to 'http://gravatar.com/emails/' do
-        = image_tag(@user.gravatar_url(:size => 196), :class => "img-circle", 'data-toggle' => :tooltip, 'data-placement' => :bottom, :title => "Change your avatar at Gravatar.com")
+        = image_tag(@user.gravatar_url(:size => 196), :class => "img-circle", 'data-toggle' => :tooltip, 'data-placement' => :bottom, :title => t('.change-gravatar'))
     %h3.text-center= @user.login
     - if @user == current_user
       %p.text-center
         = link_to edit_user_path(@user) do
           %button.btn.btn-mini
             %i.icon-pencil
-            Update profile
+            = t '.update-profile'
     %h3.list-heading
       .inner
         %i.icon-trophy
-        Awards
+        = t '.medals'
     .row
       - medal_list(@standings).each do |num, count|
         .span1.text-center
@@ -25,45 +25,45 @@
     %h3.list-heading
       .inner
         %i.icon-star
-        Achievements
+        = t '.achievements'
     %dl
       %dt
         %i.icon-dashboard.muted
       %dd
-        %span.muted Total points:
+        %span.muted #{t '.total-points'}:
         = @user.points.nil? ? 0 : ("%.2f" % @user.points)
     %dl
       %dt
         %i.icon-cogs.muted
       %dd
-        %span.muted Posted solutions:
+        %span.muted #{t '.posted-solutions'}:
         = @user.solutions_count
     %dl
       %dt
         %i.icon-flag.muted
       %dd
-        %span.muted Reached level:
+        %span.muted #{t '.reached-level'}:
         = @user.level
     %dl
       %dt
         %i.icon-time.muted
       %dd
-        %span.muted Joined on
+        %span.muted #{t '.joined'}
         = l @user.created_at, :format => :date
     %dl
       %dt
         %i.icon-eye-open.muted
       %dd
-        %span.muted Last seen
+        %span.muted #{t '.last-seen'}
         - if submitted_at = @user.submitted_at
           = l submitted_at, :format => :date
         - else
-          Never
+          = t '.never'
 
     %h3.list-heading
       .inner
         %i.icon-link
-        Connect
+        = t '.connect'
     - if @user.school.present?
       %dl
         %dt
@@ -85,26 +85,26 @@
       %li.active
         %a{'href' => "#participant-of"}
           %i.icon-trophy
-          Тэмцээн
+          = t 'title.contest'
       %li
         %a{'href' => "#solved-problems", 'data-delegate' => '#solutions-flow'}
           %i.icon-ok-sign
-          Бодолтууд
+          = t 'title.solution'
       %li
         %a{'href' => "#posts", 'data-link' => user_posts_path(@user)}
           %i.icon-book
-          Blogs
+          = t 'title.post'
       %li
         %a{'href' => "#composed-problem", 'data-link' => problems_user_path(@user)}
           %i.icon-question-sign
-          Бодлого
+          = t 'title.problem'
  
     .tab-content
       .tab-pane.active#participant-of
         %table.table.table-hover.table-striped.table-bordered
           %thead
             %tr
-              %th Оролцсон тэмцээн
+              %th= t '.contests'
           %tbody
             - @standings.each do |c,s|
               %tr

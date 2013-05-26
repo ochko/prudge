@@ -8,16 +8,16 @@
     .span3
       = link_to proposed_problems_path, :class => 'btn btn-large btn-block' do
         %i.icon-question-sign
-        Дэвшигдсэн бодлогууд
+        = t '.proposed_problems'
       = link_to latest_solutions_path, :class => 'btn btn-large btn-block' do
         %i.icon-cloud-download
-        Сүүлийн бодолтууд
+        = t '.latest_solutions'
       = link_to new_post_path, :class => 'btn btn-large btn-block' do
         %i.icon-comment
-        Шинэ блог пост
+        = t '.new_post'
       = link_to comments_path, :class => 'btn btn-large btn-block' do
         %i.icon-comment
-        Хэлэлцүүлэг Хянах
+        = t '.moderate_comments'
       = link_to new_contest_path, :class => 'btn btn-large btn-block' do
         %i.icon-trophy
-        Шинэ тэмцээн зарлах
+        = t '.new_contest'

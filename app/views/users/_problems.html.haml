@@ -6,14 +6,14 @@
         - if @user == current_user
           = link_to new_problem_path, :class => 'btn btn-small' do
             %i.icon-plus-sign
-            Бодлого дэвшүүлэх
-      %th.center{:title => 'Points'}
+            = t '.new'
+      %th.center{:title => t('common.points')}
         %i.icon-check
-      %th.center{:title => 'Time'}
+      %th.center{:title => t('common.time_limit')}
         %i.icon-time
-      %th.center{:title => 'Memory'}
+      %th.center{:title => t('common.memory_limit')}
         %i.icon-hdd
-      %th Огноо
+      %th= t 'title.date'
   %tbody
     - @user.problems.each do |p|
       %tr
@@ -22,9 +22,8 @@
         %td.center= p.level
         %td.center
           = p.time
-          сек
+          = t('common.unit_time')
         %td.center
           = p.memory
-          кб
+          = t('common.unit_memory')
         %td= l p.created_at
-

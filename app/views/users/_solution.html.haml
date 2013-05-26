@@ -3,9 +3,4 @@
     = link_to show_correctness(solution.passed?), solution
     = link_to solution.problem.name, solution.problem
     %small.solution-info.muted
-      = solution.language.name
-      хэл дээр
-      \#{l solution.source_updated_at, :format => :date} -д
-      \#{"%0.0f" % (solution.percent*100)}%
-      бодож
-      \#{"%0.1f" % solution.point} оноо авсан
+      = t('.info', :language => solution.language.name, :date => l(solution.source_updated_at, :format => :date), :percent => "%0.0f" % (solution.percent*100), :point => "%0.1f" % solution.point)

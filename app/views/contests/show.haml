@@ -61,9 +61,9 @@
                         %i.icon-flag{title: t('.level')}
                         = problem.level
                         %i.icon-time{title: t('.time_limit')}
-                        \#{problem.time} #{t 'common.unit_seconds'}
+                        \#{problem.time} #{t 'common.unit_time'}
                         %i.icon-hdd{title: t('.memory_limit')}
-                        \#{problem.memory} #{t 'common.unit_kilobytes'}
+                        \#{problem.memory} #{t 'common.unit_memory'}
 
         = render :partial => 'comments/commentable', :object => @contest
 

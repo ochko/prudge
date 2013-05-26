@@ -40,8 +40,9 @@ mn:
     confirm_deletion: &confirm-delete "Үнэхээр устгах уу?"
     time_limit: &time-limit "Хугацааны хязгаар"
     memory_limit: &memory-limit "Санах ойн хязгаар"
-    unit_seconds: сек
-    unit_kilobytes: кб
+    points: "Оноо"
+    unit_time: сек
+    unit_memory: кб
 
   posts:
     blog:
@@ -57,6 +58,11 @@ mn:
       title: Сайтын тухай
     dashboard:
       title: Dashboard
+      proposed_problems: "Дэвшигдсэн бодлогууд"
+      latest_solutions: "Сүүлийн бодолтууд"
+      new_post: "Шинэ блог пост"
+      moderate_comments: "Хэлэлцүүлэг Хянах"
+      new_contest: "Шинэ тэмцээн зарлах"
   contests:
     common: &contest-common
       name: "Тэмцээний нэр"
@@ -141,14 +147,41 @@ mn:
     new:
       title: Нэвтрэх
   users:
+    common: &user-common
+      change-gravatar: "Цээж зургаа Gravatar.com дээр өөрчлөх"
+      update-profile: "Профайл шинэчлэх"
+      login: "Нэвтрэх нэр"
+      email: "И-мэйл"
+      twitter: "Твитэр"
+      web: "Вэб хаяг"
+      repeat-password: "Нууц үгийг давт"
+      organization: "Сургууль/Байгаа газар"
+      inform-new-contest: "Шинэ тэмцээн зохиогдоход мэдэгдэх"
     new:
       title: Бүртгүүлэх
     edit:
       title: '%{subject} · Тохиргоог шинэчлэх'
+      change-password: "Нууц үг солих"
+      <<: *user-common
     index:
       title: Кодерууд
     show:
       title: '%{subject}'
+      medals: Медалууд
+      achievements: Амжилт
+      contests: "Оролцсон тэмцээн"
+      total-points: "Total points"
+      posted-solutions: "Posted solutions"
+      reached-level: Reached level
+      joined: Joined on
+      last-seen: Last seen
+      never: Never
+      connect: Connect
+      <<: *user-common
+    solution:
+      info: "%{language} хэл дээр %{date} -д %{percent}% бодож %{point} оноо авсан"
+    problems:
+      new: "Бодлого дэвшүүлэх"
   comments:
     index:
       title: Сүүлд нэмэгдсэн бичээсүүд
