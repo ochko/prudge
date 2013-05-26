@@ -12,4 +12,12 @@ class Post < ActiveRecord::Base
   validates_presence_of :title, :body, :author
 
   paginates_per 10
+
+  def name
+    title
+  end
+
+  def text
+    body
+  end
 end

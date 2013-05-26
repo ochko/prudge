@@ -5,6 +5,8 @@ class SearchController < ApplicationController
       page(params[:page]).per(20)
 
     @results.context[:panes] << ThinkingSphinx::Panes::ExcerptsPane
+
+    flash_notice(:search_result_empty) if @results.empty?
   end
 
   def hints

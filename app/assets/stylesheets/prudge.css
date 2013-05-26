@@ -340,6 +340,16 @@ h1 a:hover, h2 a:hover {
   margin-top: 10px;
 }
 
+.search-result {
+  margin-bottom: 20px;
+}
+
+.search-result dt {
+  font-size: 18px;
+  font-weight: 300;
+  margin-bottom: 4px;
+}
+
 /* User profile and Ranking list
 -------------------------------------------------- */
 .user-rank {
