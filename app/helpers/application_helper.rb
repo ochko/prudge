@@ -5,6 +5,10 @@ module ApplicationHelper
                  :scope => [controller_name, action_name], :default => controller_name)
   end
 
+  def tt(title)
+    t(title, :scope => :title)
+  end
+
   def subject
     return unless %w(edit show view index).include?(action_name)
     return unless instance = controller.instance_variable_get("@#{controller_name.singularize}")

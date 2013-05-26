@@ -3,9 +3,9 @@
 %table.table
   %thead
     %tr
-      %th Огноо
-      %th Хэрэглэгч
-      %th Бичлэг
+      %th= tt :date
+      %th= tt :user
+      %th= tt :post
       %th
   %tbody
     - @comments.each do |c|
@@ -17,7 +17,7 @@
           = link_to c.topic do
             %i.icon-share-alt
         %td
-          = link_to c, :remote => true, :confirm => 'Are you sure?', :method => :delete do
+          = link_to c, :remote => true, :confirm => t('.delete?'), :method => :delete do
             %i.icon-trash
 
 = paginate @comments

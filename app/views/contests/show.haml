@@ -2,9 +2,9 @@
   = @contest.name
   - if @contest.private?
     - if @contributed
-      %i.muted.icon-unlock{:data => {:toggle => :tooltop, :placement => 'bottom'}, :title => 'Дэвшүүлсэн бодлого тань сонгогдсон учраас энэ тэмцээнд орох боломжтой'}
+      %i.muted.icon-unlock{:data => {:toggle => :tooltop, :placement => 'bottom'}, :title => t('.private-in')}
     - else
-      %i.muted.icon-lock{:data => {:toggle => :tooltip, :placement => 'bottom'}, :title => 'Дэвшүүлсэн бодлого нь сонгогдсон тохиолдолд энэ тэмцээнд орох эрхтэй болно'}
+      %i.muted.icon-lock{:data => {:toggle => :tooltip, :placement => 'bottom'}, :title => t('.private-out')}
 .subhead
   %i.icon-time
   = l @contest.start
@@ -14,19 +14,19 @@
     = show_status @contest
     - if current_user
       - watching = @contest.watchers.include? current_user
-      = link_to unwatch_contest_path(@contest), :method => :post, :data => {:toggle => :tooltip, :placement => 'bottom', :remote => true}, :id => 'watch', :class=> "btn btn-mini #{watching ? '' : 'hide'}", :title => 'Энэ тэмцээний тухай мэдэгдэл ирэхгүй болгох' do
+      = link_to unwatch_contest_path(@contest), :method => :post, :data => {:toggle => :tooltip, :placement => 'bottom', :remote => true}, :id => 'watch', :class=> "btn btn-mini #{watching ? '' : 'hide'}", :title => t('.unwatch') do
         %i.icon-eye-close
         Unwatch
-      = link_to watch_contest_path(@contest), :method => :post, :data => {:toggle => :tooltip, :placement => 'bottom', :remote => true}, :id => 'unwatch', :class => "btn btn-mini #{watching ? 'hide' : ''}", :title => 'Тэмцээнийн хугацаа өөрчлөгдөхөд надад мэдэгд' do
+      = link_to watch_contest_path(@contest), :method => :post, :data => {:toggle => :tooltip, :placement => 'bottom', :remote => true}, :id => 'unwatch', :class => "btn btn-mini #{watching ? 'hide' : ''}", :title => t('.watch') do
         %i.icon-eye-open
         Watch
     - if admin?
       = link_to edit_contest_path(@contest), :class => 'btn btn-mini' do
         %i.icon-wrench
-        Edit
-      = link_to @contest, :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini' do
+        = t 'button.edit'
+      = link_to @contest, :method => :delete, :confirm => t('.delete?'), :class => 'btn btn-mini' do
         %i.icon-trash
-        Delete
+        = t 'button.delete'
 
 %section
   = markdown @contest.description
@@ -37,11 +37,11 @@
       %li.active
         %a{'href' => "#included-problems"}
           %i.icon-question-sign
-          Бодлогууд
+          = t '.problems'
       %li
         %a{'href' => "#participant-of", 'data-link' => contestants_contest_path(@contest)}
           %i.icon-group
-          Оролцогчид
+          = t '.contestants'
     .tab-content
       .tab-pane.active#included-problems
         - if @contest.started? || admin?
@@ -53,18 +53,17 @@
                     %h4
                       = solved_or_not @solved[problem.id]
                       = link_to problem.name, [@contest, problem]
-                      %small.muted{title: 'Submitted/Passed'}
+                      %small.muted{title: t('.submitted_passed')}
                         [#{problem.tried_count}/#{problem.solved_count}]
+                        = link_to problem.user.login, problem.user
                     .muted
                       %small
-                        %i.icon-flag{title: 'Level'}
+                        %i.icon-flag{title: t('.level')}
                         = problem.level
-                        %i.icon-time{title: 'Time limit'}
-                        \#{problem.time} sec
-                        %i.icon-hdd{title: 'Memory limit'}
-                        \#{problem.memory} kb,
-                        by
-                        = link_to problem.user.login, problem.user
+                        %i.icon-time{title: t('.time_limit')}
+                        \#{problem.time} #{t 'common.unit_seconds'}
+                        %i.icon-hdd{title: t('.memory_limit')}
+                        \#{problem.memory} #{t 'common.unit_kilobytes'}
 
         = render :partial => 'comments/commentable', :object => @contest
 

@@ -32,4 +32,10 @@ module ContestsHelper
     end
     counts
   end
+
+  def options_for_levels
+    [0,1,2,4,8,16,32,64,128].map do |level|
+      [t(level.to_s, :scope => :rank), level]
+    end
+  end
 end

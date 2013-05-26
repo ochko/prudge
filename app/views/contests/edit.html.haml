@@ -1,28 +1,27 @@
-%h2 Edit contest
+%h2= title
 
 %section
   = form_for @contest do |f|
     .row
       .span6
         = error_messages_for @contest
-        = f.text_field :name, :title => 'Тэмцээний нэр', :class => 'input-block-level'
+        = f.text_field :name, :class => 'input-block-level'
       .span6
         .input-prepend
           %span.add-on
             %i.icon-time
-          %input.span2{:name=>"contest[start]", :type=>"datetime", :placeholder => 'Start time', :value => @contest.start}
+          %input.span2{:name=>"contest[start]", :type=>"datetime", :placeholder => t('.start_time'), :value => @contest.start}
         %i.icon-double-angle-right
         .input-prepend
           %span.add-on
             %i.icon-time
-          %input.span2{:name=>"contest[end]", :type=>"datetime", :placeholder => 'End time', :value => @contest.end}
+          %input.span2{:name=>"contest[end]", :type=>"datetime", :placeholder => t('.end_time'), :value => @contest.end}
     .row
       .span6
-        %span.input-level{:title => "Түвшин"}
-          Түвшин
-          = select 'contest', 'level', [['Бүгд', 0], ['Явган', 1], ['Дугуй', 2], ['Мотоцикл', 4], ['Машин', 8], ['Галт тэрэг', 16], ['Усан онгоц', 32], ['Нисдэг тэрэг', 64], ['Онгоц', 128]]
-          Зөвхөн бодлого дэвшүүлсэн нь оролцох
-          = check_box 'contest', 'private'
+        = t '.level'
+        = select 'contest', 'level', options_for_levels
+        = t '.private'
+        = check_box 'contest', 'private'
     .row
       .span6
         #editor-buttons
@@ -31,10 +30,10 @@
         = text_area 'contest', 'description', :id => 'editor-input', :class => 'input-block-level'
         %button.btn.btn-primary{:type=> :submit}
           %i.icon-save
-          Save
-        = link_to @contest, :confirm => 'Are you sure?', :method => :delete, :class => 'btn' do
+          = t 'button.save'
+        = link_to @contest, :confirm => t('.delete?'), :method => :delete, :class => 'btn' do
           %i.icon-trash
-          Delete
+          = t 'button.delete'
 
       .span6
         #editor-preview

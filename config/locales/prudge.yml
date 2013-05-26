@@ -1,4 +1,48 @@
 mn:
+  title:
+    contest: Тэмцээн
+    post: Пост
+    problem: Бодлого
+    solution: Бодолт
+    date: Огноо
+    user: Хэрэглэгч
+
+  label:
+    test:
+      passed: Тест давсан
+      failed: Тест зөрсөн
+    execution:
+      ok: "Хэвийн ажиллав"
+      timeout: "Хугацаа хэтрэв"
+      memory: "Санах ой хэтрэв"
+      output: "Гаралт хэтрэв"
+      invalid: "Буруу үйлдэл"
+      return: "Алдаа буцаалаа"
+      ng: "Үл мэдэгдэх алдаа"
+    standing:
+      gold: "Алт"
+      silver: "Мөнгө"
+      bronze: "Хүрэл"
+    level: &level "Түвшин"
+
+  rank:
+    "0": "Бүгд"
+    "1": "Явган"
+    "2": "Дугуй"
+    "4": "Мотоцикл"
+    "8": "Машин"
+    "16": "Галт тэрэг"
+    "32": "Усан онгоц"
+    "64": "Нисдэг тэрэг"
+    "128": "Онгоц"
+
+  common:
+    confirm_deletion: &confirm-delete "Үнэхээр устгах уу?"
+    time_limit: &time-limit "Хугацааны хязгаар"
+    memory_limit: &memory-limit "Санах ойн хязгаар"
+    unit_seconds: сек
+    unit_kilobytes: кб
+
   posts:
     blog:
       title: Блог
@@ -14,16 +58,36 @@ mn:
     dashboard:
       title: Dashboard
   contests:
+    common: &contest-common
+      name: "Тэмцээний нэр"
+      start_time: "Эхлэх цаг"
+      end_time: "Дуусах цаг"
+      level: *level
+      time_limit: *time-limit
+      memory_limit: *memory-limit
+      private: "Зөвхөн бодлого дэвшүүлсэн нь оролцох"
+      delete?: *confirm-delete
     index:
-      title: Тэмцээнүүд
+      title: "Тэмцээнүүд"
+      explain-private: &private-explain "Дэвшүүлсэн бодлого нь сонгогдсон тохиолдолд энэ тэмцээнд орох эрхтэй болно"
     last:
-      title: Тэмцээн
+      title: "Тэмцээн"
     show:
       title: "%{subject}"
+      private-in: "Дэвшүүлсэн бодлого тань сонгогдсон учраас энэ тэмцээнд орох боломжтой"
+      private-out: *private-explain
+      unwatch: "Энэ тэмцээний тухай мэдэгдэл ирэхгүй болгох"
+      watch: "Тэмцээнийн хугацаа өөрчлөгдөхөд надад мэдэгд"
+      problems: "Бодлогууд"
+      contestants: "Оролцогчид"
+      submitted_passed: 'Submitted/Passed'
+      <<: *contest-common
     new:
       title: Тэмцээн зарлах
+      <<: *contest-common
     edit:
       title: '%{subject} · Засварлах'
+      <<: *contest-common
   password_resets:
     new:
       title: Нууц үг сэргээх хүсэлт
@@ -88,33 +152,20 @@ mn:
   comments:
     index:
       title: Сүүлд нэмэгдсэн бичээсүүд
+      delete?: *confirm-delete
     moderate:
       title: Хянах
   user_sessions:
     new:
       title: Нэвтрэх
-  label:
-    test:
-      passed: Тест давсан
-      failed: Тест зөрсөн
-    execution:
-      ok: "Хэвийн ажиллав"
-      timeout: "Хугацаа хэтрэв"
-      memory: "Санах ой хэтрэв"
-      output: "Гаралт хэтрэв"
-      invalid: "Буруу үйлдэл"
-      return: "Алдаа буцаалаа"
-      ng: "Үл мэдэгдэх алдаа"
-    standing:
-      gold: "Алт"
-      silver: "Мөнгө"
-      bronze: "Хүрэл"
   button:
+    edit: Засвар
     save: Хадгал
+    delete: Устга
   unit:
     second: сек
     kb: кб
-  message:
+  message:    
     search_result_empty: "Хайлтаар юу ч олдсонгүй. Хайх үгээ арай богиносгох юм уу өөр үгээр хайна уу?"
     individual_submission: >-
       Энэ бодолтыг тэмцээнд оруулахгүйгээр илгээх гэж байна.
