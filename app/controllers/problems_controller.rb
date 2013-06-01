@@ -30,7 +30,7 @@ class ProblemsController < ApplicationController
   def create
     @problem = current_user.problems.build(sanitized_params)
     if @problem.save
-      flash[:notice] = 'Бодлогыг хадгалав. Тэстүүдийг нь оруулна уу?'
+      flash_notice
       redirect_to @problem
     else
       render :action => 'new'
@@ -43,7 +43,7 @@ class ProblemsController < ApplicationController
   def update
     params[:problem].delete('contest_id') unless judge?
     if @problem.update_attributes(sanitized_params)
-      flash[:notice] = 'Бодлогыг шинэчиллээ.'
+      flash_notice
       redirect_to @problem
     else
       render :action => 'edit'
@@ -53,12 +53,13 @@ class ProblemsController < ApplicationController
   def destroy
     raise if @problem.solutions.count > 0
     @problem.destroy
+    flash_notice
     redirect_to :action => :index
   end
 
   def check
     @problem.check!
-    flash[:notice] = "Бүх бодолтуудыг шалгалаа"
+    flash_notice
     redirect_to @problem
   end
 

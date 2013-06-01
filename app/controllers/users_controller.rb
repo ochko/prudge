@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @user.save do |result|
       if result
-        flash[:notice] = "Бүртгэл амжилттай"
+        flash_notice
         redirect_back_or_default account_url
       else
         render :action => :new
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     @user.attributes = params[:user]
     @user.save do |result|
       if result
-        flash[:notice] = "Мэдээллийг шинэчиллээ!"
+        flash_notice
         redirect_to account_url
       else
         render :action => 'edit'

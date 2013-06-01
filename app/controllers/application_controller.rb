@@ -22,10 +22,11 @@ class ApplicationController < ActionController::Base
   private
 
   def message_for(name, options = {})
+    name ||= "#{controller_name}.#{action_name}"
     I18n.translate name, options.merge(:scope => :message)
   end
 
-  def flash_notice(name, options = {})
+  def flash_notice(name=nil, options = {})
     flash[:notice] = message_for(name, options)
   end
 
@@ -57,10 +58,10 @@ class ApplicationController < ActionController::Base
       respond_to do |format|
         format.html do
           store_location
-          flash[:notice] = "Энэ хуудас руу орохын тулд нэвтэрсэн байх хэрэгтэй"
+          flash_notice :login_required
           redirect_to login_url
         end
-        format.js { render :text => "Ийшээ хандахын тулд ЛОГИН хийнэ үү?"}
+        format.js { render :text => message_for(:login_required)}
       end
       return false
     end
@@ -69,7 +70,7 @@ class ApplicationController < ActionController::Base
   def require_no_user
     if current_user
       store_location
-      flash[:notice] = "Энэ хуудас руу орохын тулд гарсан байх ёстой"
+      flash_notice = :logout_required
       redirect_to root_url
       return false
     end

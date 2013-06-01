@@ -31,7 +31,7 @@ class ContestsController < ApplicationController
     if @contest.users.size > 0
       render :partial => 'contestants'
     else
-      render :text => message_for('contest.no_contestants')
+      render :text => message_for(:no_contestants)
     end
   end
 
@@ -47,7 +47,7 @@ class ContestsController < ApplicationController
   def create
     @contest = Contest.new(params[:contest])
     if @contest.save
-      flash_notice 'contest.created'
+      flash_notice
       redirect_to @contest
     else
       render :action => 'new'
@@ -61,7 +61,7 @@ class ContestsController < ApplicationController
   def update
     @contest = Contest.find(params[:id])
     if @contest.update_attributes(params[:contest])
-      flash_notice 'contest.updated'
+      flash_notice
       redirect_to @contest
     else
       render :action => 'edit'
@@ -70,7 +70,7 @@ class ContestsController < ApplicationController
 
   def destroy
     Contest.find(params[:id]).destroy
-    flash_notice 'contest.deleted'
+    flash_notice
     redirect_to :action => 'index'
   end
 

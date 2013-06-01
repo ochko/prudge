@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.build(params[:comment])
     if current_user.currently_commented?
-      @comment.errors[:text] << 'Хэт хурдан байна, 10 Секунд хүлээгээд дахин илгээнэ үү?'
+      @comment.errors[:text] << message_for(:rate_limited)
     else
       @comment.save
     end

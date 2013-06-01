@@ -22,7 +22,7 @@ class UserSessionsController < ApplicationController
   
   def destroy
     current_user_session.destroy
-    flash[:notice] = "Гарчихлаа!"
+    flash_notice
     redirect_back_or_default root_url
   end
 end

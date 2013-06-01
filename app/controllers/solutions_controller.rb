@@ -30,7 +30,7 @@ class SolutionsController < ApplicationController
       preload(:user)
       
     if @solutions.empty?
-      render :text => 'Энэ бодлогыг одоогоор нэг ч хүн бодоогүй байна'
+      render :text => message_for('solutions.empty')
     else
       render :partial => 'list'
     end
@@ -66,7 +66,7 @@ class SolutionsController < ApplicationController
     creating do
       if @solution.save
         @solution.post!
-        flash[:notice] = 'Бодолтыг хадгалж авлаа.'
+        flash_notice
         redirect_to @solution
       else
         render :action => 'new'
@@ -86,7 +86,7 @@ class SolutionsController < ApplicationController
     editing do
       if @solution.update_attributes(params[:solution])
         @solution.post!
-        flash[:notice] = 'Бодолт шинэчлэгдлээ.'
+        flash_notice
         redirect_to @solution
       else
         render :action => 'edit'

@@ -11,7 +11,7 @@ class ProblemTestsController < ApplicationController
 
   def show
     if cannot? :read, @problem
-      flash_notce 'test.hidden'
+      flash_notice 'test.hidden'
       redirect_to @problem
     end
   end
