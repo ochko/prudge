@@ -1,0 +1,15 @@
+# Send email using sendmail
+delivery_method: :sendmail
+sendmail_settings:
+  location: '/usr/sbin/sendmail'
+  arguments: '-i -t'
+
+# Send with gmail
+#delivery_method: :smtp
+#smtp_settings:
+#  address: smtp.gmail.com
+#  port: 587
+#  authentication: plain
+#  enable_starttls_auto: true
+#  user_name: example@gmail.com
+#  password: secret

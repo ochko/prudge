@@ -1,3 +1,5 @@
 settings = YAML.load_file("#{Rails.root}/config/mail.yml").symbolize_keys
 
-ActionMailer::Base.smtp_settings = settings
+settings.each do |name, setting|
+  ActionMailer::Base.send("#{name}=", setting)
+end
