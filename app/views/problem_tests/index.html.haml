@@ -4,7 +4,7 @@
   .span3.profile
     = render partial: 'problems/profile', locals: {problem: @problem}
 
-%h3 Tests
+%h3= t '.tests'
 .row
   .span2
     %table.table
@@ -18,9 +18,9 @@
               = link_to problem_test_path(@problem, test) do
                 %i.icon-eye-open
             %td
-              = link_to problem_test_path(@problem, test), :method => :delete, :confirm => "Тэстийг устгах уу?" do
+              = link_to problem_test_path(@problem, test), :method => :delete, :confirm => t('.delete?') do
                 %i.icon-trash
 
     = link_to new_problem_test_path(@problem), :class => 'btn btn-block' do
       %i.icon-plus-sign
-      Add new test
+      = t '.add-new-test'
