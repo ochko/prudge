@@ -3,8 +3,7 @@ namespace :prudge do
   task :release => :environment do
     User.all.each do |user|
       next unless user.email_valid?
-      Notifier.release_notification(user)
-      sleep 180 # because gmail has rate limit
+      Notifier.release_notification(user).deliver
     end
   end
 end

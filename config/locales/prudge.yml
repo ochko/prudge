@@ -44,6 +44,16 @@ mn:
     unit_time: сек
     unit_memory: кб
 
+  button:
+    edit: Засвар
+    save: Хадгал
+    delete: Устга
+    download: Татаж авах
+
+  unit:
+    second: сек
+    kb: кб
+
   posts:
     blog:
       title: Блог
@@ -100,14 +110,26 @@ mn:
     edit:
       title: Нууц үгээ сэргээх
   problem_tests:
+    common: &tests-common
+      test: Тест
+      tests: Тестүүд
+      delete?: "Тэстийг устгах уу?"
+      input: Оролт
+      output: Гаралт
     index:
       title: '%{subject}'
+      add-new-test: "Шинэ тест нэмэх"
+      <<: *tests-common
     show:
       title: Бодлогын тэст
+      other: Бусад тэстүүд
+      <<: *tests-common
     new:
       title: Шинэ тэст
+      <<: *tests-common
     edit:
       title: Тэстийг засварлах
+      <<: *tests-common
   problems:      
     index:
       title: Бодлогууд
@@ -191,13 +213,17 @@ mn:
   user_sessions:
     new:
       title: Нэвтрэх
-  button:
-    edit: Засвар
-    save: Хадгал
-    delete: Устга
-  unit:
-    second: сек
-    kb: кб
+  twit:
+    opening_announcement: >-
+      #{name} зарлагдаа.
+      Эхлэх: #{start},
+      Дуусах: #{end}.
+      #{url}
+    update_announcement: >-
+      #{name} өөрчлөгдөв.
+      Эхлэх: #{start},
+      Дуусах: #{end}.
+      #{url}
   notifier:
     password_reset_instructions:
       subject: "[%{site}] Нууц үг шинэчлэх заавар"

@@ -10,6 +10,7 @@ module Prudge
     config.filter_parameters += [:password, :password_confirmation]
 
     config.autoload_paths += [config.root.join('lib'),
+                              config.root.join('app','jobs'),
                               config.root.join('app','abilities'),
                               config.root.join('app','observers'),
                               config.root.join('app','indices')]

@@ -32,24 +32,6 @@ class User < ActiveRecord::Base
     object.user_id == self.id
   end
 
-  def notify_problem_selection!(problem)
-    return unless email_valid?
-    Notifier.problem_selection(self, problem.contest, problem)
-  end
-
-  def notify_new_contest(contest)
-    return unless notify_new_contests?
-    return unless email_valid?
-    sleep 180
-    Notifier.new_contest(self, contest)
-  end
-
-  def notify_contest_update(contest)
-    return unless email_valid?
-    sleep 180
-    Notifier.contest_update(self, contest)
-  end
-
   def email_valid?
     email =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
   end
