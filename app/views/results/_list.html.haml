@@ -36,7 +36,7 @@
           %i.icon-file-alt
         %dd
           %span.muted= t '.source'
-          = link_to squeeze(@solution.source_file_name, 10), view_solution_path(@solution)
+          = link_to squeeze(@solution.source_file_name, 10), view_solution_path(@solution), :title => @solution.source_file_name
       %dl
         %dt
           %i.icon-upload

@@ -44,6 +44,7 @@ mn:
     submit: Илгээ
     open: Нээ
     send: Илгээ
+    recheck: Дахин шалга
 
   unit:
     second: сек
@@ -53,6 +54,10 @@ mn:
     common: &shared-common
       delete?: "Үнэхээр устгах уу?"
     problem: &shared-problem
+      date: "Огноо"
+      author: "Дэвшүүлсэн"
+      source: "Эх сурвалж"
+      problem-name: "Нэр"
       points: "Оноо"
       difficulty: "Чанар"
       time-limit: "Хугацааны хязгаар"
@@ -143,22 +148,27 @@ mn:
       <<: *tests-common
   problems:      
     index:
-      title: Бодлогууд
+      title: "Бодлогууд"
     proposed:
-      title: Дэвшигдсэн бодлогууд
+      title: "Дэвшигдсэн бодлогууд"
+      limits: "Хязгаарлалт"
+      <<: *shared-problem
     show:
       title: '%{subject}'
+      author: '%{author} дэвшүүлсэн'
+      contest: '%{contest}-д %{author} дэвшүүлсэн'
+      my_solution: "Миний бодолт"
+      statement: "Бодлого"
+      submissions: "Бодолтууд"
+      source: "Эх сурвалж: %{source}"
     new:
-      title: Бодлого дэвшүүлэх
+      title: "Бодлого дэвшүүлэх"
     edit:
       title: '%{subject} · Засварлах'
-    form:
-      name: Нэр
-      source: Эх сурвалж
+      problem_tests: 'Энэ бодлогын тестүүд'
+    form:      
       contest: Тэмцээн
-      points: Оноо
-      time: Хугацаа
-      memory: Санах ой
+      <<: *shared-problem
     profile:
       <<: *shared-problem
   results:

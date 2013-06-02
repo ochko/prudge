@@ -400,6 +400,11 @@ h3.list-heading .inner {
 
 /* Problem, Solution and Contest
 -------------------------------------------------- */
+.problem-source {
+  margin-top: 20px;
+  text-align: right;
+  font-style: italic;
+}
 .solution-info {
   display:block;
 }

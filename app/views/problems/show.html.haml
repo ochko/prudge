@@ -1,9 +1,10 @@
 %h1
   = @problem.name
 .subhead
-  Posted by #{link_to @problem.user.login, @problem.user}
   - if @problem.contest
-    for #{link_to @problem.contest.name, @problem.contest}
+    != t '.contest', :contest => link_to(@problem.contest.name, @problem.contest), :author => link_to(@problem.user.login, @problem.user)
+  - else
+    != t '.author', :author => link_to(@problem.user.login, @problem.user)
 .row
   .span3.profile
     = render :partial => 'problems/profile', :locals => {:problem => @problem}
@@ -14,42 +15,43 @@
       - if can? :update, @problem
         = link_to edit_problem_path(@problem), :class => 'btn btn-small' do
           %i.icon-wrench
-          Edit
+          = t 'button.edit'
       - if can? :destroy, @problem
         = link_to @problem, :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-small' do
           %i.icon-trash
-          Delete
+          = t 'button.delete'
       - if can? :check, @problem
         = link_to check_problem_path(@problem), :class => 'btn btn-small' do
           %i.icon-repeat
-          Recheck
+          = t 'button.recheck'
     - if current_user
       %h3.list-heading
         .inner
           %i.icon-user
-          My Solution
+          = t '.my_solution'
       - if @solution
         = render(:partial => 'results/list')
       - else
         = link_to submit_path(@contest, @problem, current_user), :class=>"btn btn-large btn-block" do
           %i.icon-upload
-          Submit
+          = t 'button.submit'
     %hr
   .span6
     %ul.nav.nav-tabs#problem-tabs
       %li.active
         %a{'href' => "#problem-text"}
           %i.icon-question-sign
-          Problem
+          = t '.statement'
       %li
         %a{'href' => "#solutions-tab", 'data-link' => submited_solution_path(:problem_id=>@problem.id)}
           %i.icon-upload
-          Submissions
+          = t '.submissions'
     .tab-content
       .tab-pane.active#problem-text
         %section
           = markdown @problem.text
-          = content_tag(:span, 'Эх сурвалж: ' + h(@problem.source), :class => 'problem-source') if !@problem.source.empty?
+          - if !@problem.source.blank?
+            .muted.problem-source= t '.source', :source => h(@problem.source)
 
         %section
           = render :partial => 'comments/commentable', :object => @problem

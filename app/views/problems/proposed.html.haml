@@ -1,20 +1,17 @@
-%h2 Дэвшигдсэн бодлогууд
+%h2= title
 %table{:width => "100%"}
   %tr
-    %th Нэр
-    %th Оноо
-    %th Тэст
-    %th Хязгаарлалт
-    %th Дэвшүүлсэн
-    %th Огноо
+    %th= t '.problem-name'
+    %th= t '.points'
+    %th= t '.test-count'
+    %th= t '.limits'
+    %th= t '.author'
+    %th= t '.date'
   - @problems.each do |problem|
     %tr
       %td= link_to problem.name, problem
       %td= problem.level
       %td= problem.tests_count
-      %td
-        = problem.time
-        с /
-        \#{problem.memory}кб
+      %td #{problem.time}#{t 'unit.second'} / #{problem.memory}#{t 'unit.kb'}
       %td= link_to h(problem.user.login), problem.user
       %td= l problem.created_at
