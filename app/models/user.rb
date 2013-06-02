@@ -32,11 +32,6 @@ class User < ActiveRecord::Base
     object.user_id == self.id
   end
 
-  def send_password_reset_instructions!
-    reset_perishable_token!
-    Notifier.password_reset_instructions(self)
-  end
-
   def notify_release_notification!
     return unless email_valid?
     reset_perishable_token!

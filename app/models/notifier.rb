@@ -6,6 +6,11 @@ class Notifier < ActionMailer::Base
     user_notify user
   end
 
+  def password_reset_confirmation(user)
+    @forgot_password_url = forgot_password_url
+    user_notify user
+  end
+
   def release_notification(user)
     user_notify user
   end

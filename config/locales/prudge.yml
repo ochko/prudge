@@ -200,7 +200,9 @@ mn:
     kb: кб
   notifier:
     password_reset_instructions:
-      subject: "[%{site}] Нууц үг сэргээх заавар"
+      subject: "[%{site}] Нууц үг шинэчлэх заавар"
+    password_reset_confirmation:
+      subject: "[%{site}] Нууц үг тань шинэчлэгдэв"
     release_notification:
       subject: "[%{site}] Шинэчлэгдлээ"
     problem_selection:

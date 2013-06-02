@@ -7,9 +7,10 @@ class PasswordResetsController < ApplicationController
   end
 
   def create
-    @user = User.find_by_email(params[:email])
-    if @user
-      @user.send_password_reset_instructions!
+    if @user = User.find_by_email(params[:email])
+      @user.reset_perishable_token!
+      Notifier.password_reset_instructions(@user).deliver
+
       flash_notice :password_reset_instructions
       redirect_to root_url
     else
@@ -25,6 +26,7 @@ class PasswordResetsController < ApplicationController
     @user.password = params[:user][:password]
     @user.password_confirmation = params[:user][:password_confirmation]
     if @user.save
+      Notifier.password_reset_confirmation(@user).deliver
       flash_notice :password_updated
       redirect_to account_users_url
     else
