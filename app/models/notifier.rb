@@ -3,16 +3,21 @@ class Notifier < ActionMailer::Base
   default :from => Settings.notifier
   
   def password_reset_instructions(user)
-    user_notify user
+    @edit_password_reset_url = edit_password_reset_url(user.perishable_token)
+
+    compose user
   end
 
   def password_reset_confirmation(user)
     @forgot_password_url = forgot_password_url
-    user_notify user
+
+    compose user
   end
 
   def release_notification(user)
-    user_notify user
+    @login_url = login_url
+
+    compose user
   end
 
   def problem_selection(user, contest, problem)
@@ -33,12 +38,6 @@ class Notifier < ActionMailer::Base
   end
 
   private
-
-  def user_notify(user)
-    @edit_password_reset_url = edit_password_reset_url(user.perishable_token)
-
-    compose(user)
-  end
 
   def contest_notify(user, contest)
     @contest = contest

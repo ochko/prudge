@@ -32,12 +32,6 @@ class User < ActiveRecord::Base
     object.user_id == self.id
   end
 
-  def notify_release_notification!
-    return unless email_valid?
-    reset_perishable_token!
-    Notifier.release_notification(self)  
-  end
-
   def notify_problem_selection!(problem)
     return unless email_valid?
     Notifier.problem_selection(self, problem.contest, problem)
