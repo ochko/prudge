@@ -9,7 +9,6 @@ gem 'gravtastic'
 gem 'thinking-sphinx', '~>3.0.2'
 gem 'authlogic'
 gem 'haml'
-gem 'delayed_job', '~>3.0.5'
 gem 'twitter'
 gem 'resque'
 gem 'json'
@@ -22,7 +21,7 @@ gem 'jquery-rails'
 gem 'wmd-rails'
 
 group :assets do
-  gem 'sass-rails',   "~> 3.2.0"
-  gem 'coffee-rails', "~> 3.2.0"
+  gem 'sass-rails',   "~> 3.2"
+  gem 'coffee-rails', "~> 3.2"
   gem 'uglifier'
 end
