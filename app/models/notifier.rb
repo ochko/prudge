@@ -3,11 +3,11 @@ class Notifier < ActionMailer::Base
   default :from => Settings.notifier
   
   def password_reset_instructions(user)
-    user_notify(user, "Нууц үг сэргээх заавар")
+    user_notify user
   end
 
   def release_notification(user)
-    user_notify(user, "#{Settings.name} шинэчлэгдлээ")
+    user_notify user
   end
 
   def problem_selection(user, contest, problem)
@@ -16,36 +16,43 @@ class Notifier < ActionMailer::Base
     @problem = problem
     @contest = contest
 
-    compose(user, "Таны дэвшүүлсэн бодлого тэмцээнд сонгогдлоо")
+    compose user
   end
 
   def new_contest(user, contest)
-    contest_notify(user, contest, "#{Settings.name} дээр Шинэ тэмцээн зарлагдлаа")
+    contest_notify(user, contest)
   end
 
   def contest_update(user, contest)
-    contest_notify(user, contest, "#{Settings.name} дээр тэмцээнд өөрчлөлт орлоо")
+    contest_notify(user, contest)
   end
 
   private
 
-  def user_notify(user, title)
+  def user_notify(user)
     @edit_password_reset_url = edit_password_reset_url(user.perishable_token)
 
-    compose(user, title)
+    compose(user)
   end
 
-  def contest_notify(user, contest, title)
+  def contest_notify(user, contest)
     @contest = contest
     @contest_url = contest_url(contest)
 
-    compose(user, title) 
+    compose(user, :contest => @contest.name)
   end
 
-  def compose(user, title)
+  def compose(user, options = {})
     @login = user.login
-
-    mail(:subject => title, :to => user.email)
+    
+    mail(:to => user.email,
+         :subject => localized_subject(options))
   end
 
+  def localized_subject(options)
+    I18n.t(:subject,
+           { :scope => [:notifier, action_name],
+             :site => Settings.name }.merge(options) )
+    
+  end
 end

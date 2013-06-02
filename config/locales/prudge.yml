@@ -198,6 +198,17 @@ mn:
   unit:
     second: сек
     kb: кб
+  notifier:
+    password_reset_instructions:
+      subject: "[%{site}] Нууц үг сэргээх заавар"
+    release_notification:
+      subject: "[%{site}] Шинэчлэгдлээ"
+    problem_selection:
+      subject: "[%{site}] Таны дэвшүүлсэн бодлого тэмцээнд сонгогдлоо"
+    new_contest:
+      subject: "[%{site}] %{contest} зохиогдох гэж байна"
+    contest_update:
+      subject: "[%{site}] %{contest} өөрчлөгдлөө"
   message:
     login_required: "Ийшээ хандахын тулд нэвтэрсэн байх хэрэгтэй"
     logout_required: "Энэ хуудас руу орохын тулд гарсан байх ёстой"
