@@ -23,7 +23,6 @@ mn:
       gold: "Алт"
       silver: "Мөнгө"
       bronze: "Хүрэл"
-    level: &level "Түвшин"
 
   rank:
     "0": "Бүгд"
@@ -36,23 +35,36 @@ mn:
     "64": "Нисдэг тэрэг"
     "128": "Онгоц"
 
-  common:
-    confirm_deletion: &confirm-delete "Үнэхээр устгах уу?"
-    time_limit: &time-limit "Хугацааны хязгаар"
-    memory_limit: &memory-limit "Санах ойн хязгаар"
-    points: "Оноо"
-    unit_time: сек
-    unit_memory: кб
-
   button:
     edit: Засвар
     save: Хадгал
     delete: Устга
     download: Татаж авах
+    run: Ажиллуул
+    submit: Илгээ
+    open: Нээ
+    send: Илгээ
 
   unit:
     second: сек
     kb: кб
+
+  shared:
+    common: &shared-common
+      delete?: "Үнэхээр устгах уу?"
+    problem: &shared-problem
+      points: "Оноо"
+      difficulty: "Чанар"
+      time-limit: "Хугацааны хязгаар"
+      memory-limit: "Санах ойн хязгаар"
+      test-count: "Тестийн тоо"
+      pass-try-ratio: "Зөв/Бүгд"
+    solution: &shared-solution
+      coder: Кодер
+      source: Соорс
+      submitted: Илгээсэн
+      avg-time: Хугацаа
+      taken-points: Оноо
 
   posts:
     blog:
@@ -76,13 +88,12 @@ mn:
   contests:
     common: &contest-common
       name: "Тэмцээний нэр"
+      level: "Түвшин"
       start_time: "Эхлэх цаг"
       end_time: "Дуусах цаг"
-      level: *level
-      time_limit: *time-limit
-      memory_limit: *memory-limit
       private: "Зөвхөн бодлого дэвшүүлсэн нь оролцох"
-      delete?: *confirm-delete
+      <<: *shared-common
+      <<: *shared-problem
     index:
       title: "Тэмцээнүүд"
       explain-private: &private-explain "Дэвшүүлсэн бодлого нь сонгогдсон тохиолдолд энэ тэмцээнд орох эрхтэй болно"
@@ -148,17 +159,30 @@ mn:
       points: Оноо
       time: Хугацаа
       memory: Санах ой
+    profile:
+      <<: *shared-problem
   results:
+    common: &results-common
+      run-time: Хугацаа
+      run-memory: Санах ой
+      run-status: Ажилласан байдал
     show:
       title: Тэстийн үр дүн
+    list:
+      delete?: "Энэ бодолтыг нээрээ устгах уу?"
+      <<: *shared-solution
+      <<: *results-common
   search:
     index:
       title: Хайлт
   solutions:
+    common: &solutions-common
+      solution: Бодолт
     latest:
       title: Сүүлийн бодолтууд
     show:
       title: '%{subject} · Бодолт'
+      <<: *solutions-common
     view:
       title: '%{subject} · Бодолт'
     new:
@@ -204,10 +228,13 @@ mn:
       info: "%{language} хэл дээр %{date} -д %{percent}% бодож %{point} оноо авсан"
     problems:
       new: "Бодлого дэвшүүлэх"
+      <<: *shared-problem
   comments:
+    commentable:
+      add-comment: "Сэтгэгдэл нэмэрлэх"
     index:
       title: Сүүлд нэмэгдсэн бичээсүүд
-      delete?: *confirm-delete
+      <<: *shared-common
     moderate:
       title: Хянах
   user_sessions:

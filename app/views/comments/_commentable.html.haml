@@ -4,14 +4,14 @@
       = form_tag comments_path, :method => :post, :remote => true do
         = hidden_field_tag 'comment[topic_id]', commentable.id
         = hidden_field_tag 'comment[topic_type]', commentable.class.name
-        %h3 Add a comment
+        %h3= t '.add-comment'
         .alert.hide#alert-box
           %button.close{:type=>"button", 'data-dismiss'=>"alert"} &times;
           %span#alert-message
         = text_area_tag 'comment[text]', '', :rows => 4, :cols => 80, :class=> 'input-block-level'
         %button.btn.btn-primary#submit{:type => 'submit'}
           %i.icon-comments-alt
-          Send
+          = t 'button.send'
         
 .row
   .span6#comments

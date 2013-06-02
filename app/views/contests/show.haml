@@ -60,10 +60,10 @@
                       %small
                         %i.icon-flag{title: t('.level')}
                         = problem.level
-                        %i.icon-time{title: t('.time_limit')}
-                        \#{problem.time} #{t 'common.unit_time'}
-                        %i.icon-hdd{title: t('.memory_limit')}
-                        \#{problem.memory} #{t 'common.unit_memory'}
+                        %i.icon-time{title: t('.time-limit')}
+                        \#{problem.time} #{t 'unit.second'}
+                        %i.icon-hdd{title: t('.memory-limit')}
+                        \#{problem.memory} #{t 'unit.kb'}
 
         = render :partial => 'comments/commentable', :object => @contest
 

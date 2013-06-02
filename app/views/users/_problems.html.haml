@@ -7,11 +7,11 @@
           = link_to new_problem_path, :class => 'btn btn-small' do
             %i.icon-plus-sign
             = t '.new'
-      %th.center{:title => t('common.points')}
+      %th.center{:title => t('.points')}
         %i.icon-check
-      %th.center{:title => t('common.time_limit')}
+      %th.center{:title => t('.time-limit')}
         %i.icon-time
-      %th.center{:title => t('common.memory_limit')}
+      %th.center{:title => t('.memory-limit')}
         %i.icon-hdd
       %th= t 'title.date'
   %tbody
@@ -22,8 +22,8 @@
         %td.center= p.level
         %td.center
           = p.time
-          = t('common.unit_time')
+          = t('unit.second')
         %td.center
           = p.memory
-          = t('common.unit_memory')
+          = t('unit.kb')
         %td= l p.created_at

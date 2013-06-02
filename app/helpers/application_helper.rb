@@ -69,6 +69,18 @@ module ApplicationHelper
     raw BlueCloth.new(text).to_html
   end
 
+  def squeeze(text, size)
+    chars = text.mb_chars
+    length = chars.length
+
+    return text if length <= size
+
+    left = size - 2
+    right = length - size + 1
+
+    (chars[0...left] + '...' + chars[right...-1]).to_s
+  end
+
   def school_names
     User.where("school is not null and school != ''").order(:school).pluck(:school).uniq
   end

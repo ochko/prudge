@@ -4,24 +4,24 @@
       - if can? :check, @solution
         = link_to check_solution_path(@solution), :remote => true, :html => {:id=>'check-button', :class=>"btn btn-small" } do
           %i.icon-cogs
-          Run
+          = t 'button.run'
       - if can? :modify, @solution
         = link_to edit_solution_path(@solution), :class=>"btn btn-small" do
           %i.icon-wrench
-          Edit
-        = link_to @solution, :confirm => 'Энэ бодолтыг нээрээ устгах уу?', :method => :delete, :class=>"btn btn-small" do
+          = t 'button.edit'
+        = link_to @solution, :confirm => t('.delete?'), :method => :delete, :class=>"btn btn-small" do
           %i.icon-trash
-          Delete
+          = t 'button.delete'
       - elsif current_user.owns? @solution
         = link_to submit_path(@contest, @solution.problem, current_user), :class=>"btn btn-small" do
           %i.icon-upload
-          Submit
+          = t 'button.submit'
         = link_to @solution, :class=>"btn btn-small", :id => 'open-solution' do
           %i.icon-share-alt
-          Open
+          = t 'button.open'
         = link_to download_solution_path(@solution), :class=>"btn btn-small" do
           %i.icon-download
-          Download
+          = t 'button.download'
 
   .row-fluid
     .span12.profile
@@ -29,32 +29,32 @@
         %dt
           %i.icon-user
         %dd
-          %span.muted Coder
+          %span.muted= t '.coder'
           = link_to @solution.user.login, @solution.user
       %dl
         %dt
           %i.icon-file-alt
         %dd
-          %span.muted Source
-          = link_to @solution.source_file_name, view_solution_path(@solution)
+          %span.muted= t '.source'
+          = link_to squeeze(@solution.source_file_name, 10), view_solution_path(@solution)
       %dl
         %dt
           %i.icon-upload
         %dd
-          %span.muted Submitted
+          %span.muted= t '.submitted'
           = l @solution.source_updated_at
       %dl
         %dt
           %i.icon-time
         %dd
-          %span.muted Time
+          %span.muted= t '.avg-time'
           = @solution.time
           %abbr{:title => 'Milliseconds'} ms
       %dl
         %dt
           %i.icon-plus-sign
         %dd
-          %span.muted Points
+          %span.muted= t '.taken-points'
           = @solution.point
 
   - if @solution.judged?
@@ -77,11 +77,11 @@
             %tr
               %th{title: 'Test number'}
               %th{title: 'Test hidden/shown'}
-              %th{title: 'Run status'}
+              %th{title: t('.run-status')}
                 %i.icon-cog
-              %th{title: 'Time in seconds'}
+              %th{title: t('.run-time')}
                 %i.icon-time
-              %th{title: 'Memory in kilobytes'}
+              %th{title: t('.run-memory')}
                 %i.icon-hdd
               %th{title: 'Test passed?'}
           %tbody

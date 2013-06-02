@@ -2,31 +2,31 @@
   %dt
     %i.icon-flag
   %dd
-    %span.muted Difficulty
+    %span.muted= t '.difficulty'
     = problem.level
 %dl
   %dt
     %i.icon-time
   %dd
-    %span.muted Time limit
+    %span.muted= t '.time-limit'
     = problem.time
-    sec
+    = t 'unit.second'
 %dl
   %dt
     %i.icon-hdd
   %dd
-    %span.muted Memory Limit
+    %span.muted= t '.memory-limit'
     = problem.memory
-    bytes
+    = t 'unit.kb'
 %dl
   %dt
     %i.icon-cogs
   %dd
-    %span.muted Tests
+    %span.muted= t '.test-count'
     = problem.tests.size
 %dl
   %dt
     %i.icon-group
   %dd
-    %span.muted Passed/Total
+    %span.muted= t '.pass-try-ratio'
     \#{problem.solved_count}/#{problem.tried_count} (#{problem.success_rate}%)
