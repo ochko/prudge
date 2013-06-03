@@ -1,6 +1,6 @@
 # Technical Debts
 
-* Use Resque for background processing
+* Add signup activation
 * Migrate to Postgesql
 * Well covered specs
 * Replace OpenID with Oauth(twitter/facebook)
