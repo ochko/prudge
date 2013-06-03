@@ -1,0 +1,15 @@
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: prudge
+  username: prudge
+  password:
+  pool: 5
+
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: prudge
+  username: prudge
+  password:
+  pool: 5
