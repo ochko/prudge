@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130603133330) do
+ActiveRecord::Schema.define(:version => 20130603133942) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",                 :null => false
@@ -44,19 +44,6 @@ ActiveRecord::Schema.define(:version => 20130603133330) do
 
   add_index "contests_users", ["contest_id", "user_id"], :name => "index_contests_users_on_contest_id_and_user_id", :unique => true
 
-  create_table "lessons", :force => true do |t|
-    t.integer  "author_id",                        :null => false
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-    t.string   "title",                            :null => false
-    t.text     "text",                             :null => false
-    t.boolean  "delta",          :default => true, :null => false
-    t.integer  "comments_count", :default => 0
-    t.datetime "commented_at"
-  end
-
-  add_index "lessons", ["author_id"], :name => "index_lessons_on_author_id"
-
   create_table "open_id_authentication_associations", :force => true do |t|
     t.integer "issued"
     t.integer "lifetime"
@@ -71,17 +58,6 @@ ActiveRecord::Schema.define(:version => 20130603133330) do
     t.string  "server_url"
     t.string  "salt",       :null => false
   end
-
-  create_table "pages", :force => true do |t|
-    t.string   "category",   :limit => 15,                   :null => false
-    t.string   "title",                                      :null => false
-    t.text     "content",                                    :null => false
-    t.datetime "created_at",                                 :null => false
-    t.integer  "user_id",                                    :null => false
-    t.boolean  "delta",                    :default => true, :null => false
-  end
-
-  add_index "pages", ["user_id"], :name => "index_pages_on_user_id"
 
   create_table "posts", :force => true do |t|
     t.boolean  "delta",      :default => true
@@ -171,15 +147,6 @@ ActiveRecord::Schema.define(:version => 20130603133330) do
   add_index "solutions", ["contest_id"], :name => "index_solutions_on_contest_id"
   add_index "solutions", ["problem_id"], :name => "index_solutions_on_problem_id"
   add_index "solutions", ["user_id"], :name => "index_solutions_on_user_id"
-
-  create_table "topics", :force => true do |t|
-    t.datetime "created_at",                       :null => false
-    t.string   "title",                            :null => false
-    t.text     "description",                      :null => false
-    t.boolean  "delta",          :default => true, :null => false
-    t.integer  "comments_count", :default => 0
-    t.datetime "commented_at"
-  end
 
   create_table "users", :force => true do |t|
     t.string   "login",                                                :null => false
