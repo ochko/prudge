@@ -25,7 +25,7 @@ class Contest < ActiveRecord::Base
 
   has_many :users, :through => :solutions,
       :select => "users.login, users.id, sum(solutions.point) as point, sum(solutions.solved_in) as time",
-      :group => 'user_id', :order => "point DESC, time ASC"
+      :group => 'users.login, users.id', :order => "point DESC, time ASC"
 
   has_many :comments,
            :as => 'topic',
