@@ -1,7 +1,6 @@
 # Technical Debts
 
 * Add signup activation
-* Migrate to Postgesql
 * Well covered specs
 * Replace OpenID with Oauth(twitter/facebook)
 * Remove contest levels
