@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130603134213) do
+ActiveRecord::Schema.define(:version => 20130603134534) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",                 :null => false
@@ -43,21 +43,6 @@ ActiveRecord::Schema.define(:version => 20130603134213) do
   end
 
   add_index "contests_users", ["contest_id", "user_id"], :name => "index_contests_users_on_contest_id_and_user_id", :unique => true
-
-  create_table "open_id_authentication_associations", :force => true do |t|
-    t.integer "issued"
-    t.integer "lifetime"
-    t.string  "handle"
-    t.string  "assoc_type"
-    t.binary  "server_url"
-    t.binary  "secret"
-  end
-
-  create_table "open_id_authentication_nonces", :force => true do |t|
-    t.integer "timestamp",  :null => false
-    t.string  "server_url"
-    t.string  "salt",       :null => false
-  end
 
   create_table "posts", :force => true do |t|
     t.boolean  "delta",      :default => true
@@ -148,7 +133,6 @@ ActiveRecord::Schema.define(:version => 20130603134213) do
     t.string   "school"
     t.boolean  "admin",                             :default => false
     t.boolean  "judge",                             :default => false
-    t.string   "openid_identifier"
     t.string   "persistence_token"
     t.string   "single_access_token"
     t.string   "perishable_token"
@@ -162,6 +146,5 @@ ActiveRecord::Schema.define(:version => 20130603134213) do
   end
 
   add_index "users", ["login"], :name => "index_users_on_login"
-  add_index "users", ["openid_identifier"], :name => "index_users_on_openid_identifier"
 
 end
