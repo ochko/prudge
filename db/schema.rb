@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130603134534) do
+ActiveRecord::Schema.define(:version => 20130603143300) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",                 :null => false
@@ -26,15 +26,13 @@ ActiveRecord::Schema.define(:version => 20130603134534) do
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "contests", :force => true do |t|
-    t.string   "name",                              :null => false
-    t.datetime "start",                             :null => false
-    t.datetime "end",                               :null => false
-    t.text     "description",                       :null => false
-    t.boolean  "delta",          :default => true,  :null => false
-    t.integer  "level",          :default => 0
-    t.integer  "comments_count", :default => 0
-    t.datetime "commented_at"
-    t.boolean  "private",        :default => false
+    t.string   "name",                           :null => false
+    t.datetime "start",                          :null => false
+    t.datetime "end",                            :null => false
+    t.text     "description",                    :null => false
+    t.boolean  "delta",       :default => true,  :null => false
+    t.integer  "level",       :default => 0
+    t.boolean  "private",     :default => false
   end
 
   create_table "contests_users", :id => false, :force => true do |t|
@@ -64,23 +62,21 @@ ActiveRecord::Schema.define(:version => 20130603134534) do
   add_index "problem_tests", ["problem_id"], :name => "index_problem_tests_on_problem_id"
 
   create_table "problems", :force => true do |t|
-    t.integer  "user_id",                                         :null => false
+    t.integer  "user_id",                                        :null => false
     t.integer  "contest_id"
-    t.integer  "level",                         :default => 1,    :null => false
-    t.integer  "time",                          :default => 1,    :null => false
-    t.integer  "memory",                        :default => 64,   :null => false
-    t.string   "name",           :limit => 128,                   :null => false
-    t.text     "text",                                            :null => false
-    t.datetime "created_at",                                      :null => false
+    t.integer  "level",                        :default => 1,    :null => false
+    t.integer  "time",                         :default => 1,    :null => false
+    t.integer  "memory",                       :default => 64,   :null => false
+    t.string   "name",          :limit => 128,                   :null => false
+    t.text     "text",                                           :null => false
+    t.datetime "created_at",                                     :null => false
     t.string   "source"
-    t.boolean  "delta",                         :default => true, :null => false
-    t.integer  "comments_count",                :default => 0
-    t.datetime "commented_at"
+    t.boolean  "delta",                        :default => true, :null => false
     t.datetime "active_from"
     t.datetime "inactive_from"
-    t.integer  "tried_count",                   :default => 0
-    t.integer  "solved_count",                  :default => 0
-    t.integer  "tests_count",                   :default => 0
+    t.integer  "tried_count",                  :default => 0
+    t.integer  "solved_count",                 :default => 0
+    t.integer  "tests_count",                  :default => 0
   end
 
   add_index "problems", ["contest_id"], :name => "index_problems_on_contest_id"
@@ -111,8 +107,6 @@ ActiveRecord::Schema.define(:version => 20130603134534) do
     t.string   "source_file_name"
     t.datetime "source_updated_at"
     t.float    "point",             :default => 0.0
-    t.integer  "comments_count",    :default => 0
-    t.datetime "commented_at"
     t.text     "junk"
     t.integer  "solved_in"
     t.string   "state"

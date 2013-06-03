@@ -47,7 +47,6 @@ class Contest < ActiveRecord::Base
   scope :current, :conditions => "end > NOW()", :order => "start ASC"
   scope :finished,:conditions => "end < NOW()", :order => "end DESC"
   scope :pending, :conditions => "end >= NOW()"
-  scope :commented, :conditions => "comments_count > 0"
 
   def standings
     num, point, time = 0, 0.0, 0.0

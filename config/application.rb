@@ -24,7 +24,9 @@ module Prudge
     # Make Active Record use UTC-base instead of local time
     config.active_record.default_timezone = :utc
   
-    config.active_record.observers = [:solution_observer, :problem_observer, :contest_observer, :comment_observer]
+    config.active_record.observers = [:solution_observer,
+                                      :problem_observer,
+                                      :contest_observer]
   
     config.assets.enabled = true
     config.assets.version = '1.0'
