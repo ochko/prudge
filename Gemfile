@@ -4,6 +4,7 @@ gem 'rake', '>= 0.9.2'
 gem 'rails', '~>3.2'
 gem 'capistrano'
 gem 'pg'
+gem 'mysql2', '~> 0.3.12b5' # for thinking-sphinx
 gem 'bluecloth'
 gem 'gravtastic'
 gem 'thinking-sphinx', '~>3.0.2'

@@ -82,8 +82,9 @@ GEM
     middleware (0.1.0)
     mime-types (1.22)
     mono_logger (1.0.1)
-    multi_json (1.7.3)
+    multi_json (1.7.6)
     multipart-post (1.2.0)
+    mysql2 (0.3.12b6)
     net-scp (1.1.0)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.1)
@@ -191,6 +192,7 @@ DEPENDENCIES
   jquery-rails
   json
   kaminari
+  mysql2 (~> 0.3.12b5)
   paperclip (~> 3.0)
   pg
   rails (~> 3.2)
