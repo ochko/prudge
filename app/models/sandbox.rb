@@ -80,7 +80,7 @@ class Sandbox
     solution.results.
       create!(:test => test,
               :usage => usage,
-              :output => output)
+              :result => output)
   end
 
   def prepare

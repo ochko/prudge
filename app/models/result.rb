@@ -4,16 +4,19 @@ class Result < ActiveRecord::Base
   scope :correct, :conditions => { :matched => true }
   scope :incorrect, :conditions => { :matched => false }
   scope :real, :conditions => { :hidden => true }
-  
+
+  has_attached_file :output, :path => ":results_dir/:test_id.output"
+  has_attached_file :diff,   :path => ":results_dir/:test_id.diff"
+
   def before_save
     self.hidden = test.hidden
   end
 
-  def output=(output)
+  def result=(output)
     self.matched = output.correct?
     self.diff = output.diff
     self.output = output.correct? ? nil : output.data
-  end  
+  end
 
   def usage=(usage)
     self.execution = usage.state
