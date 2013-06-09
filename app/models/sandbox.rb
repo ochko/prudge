@@ -78,9 +78,10 @@ class Sandbox
   def judge(test, usage)
     output = Output.new(program.output, test)
     solution.results.
-      create!(:test => test,
-              :usage => usage,
-              :result => output)
+      create!(:test   => test,
+              :usage  => usage,
+              :result => output,
+              :hidden => test.hidden)
   end
 
   def prepare
@@ -110,21 +111,18 @@ class Sandbox
   class Output
     DIFF = '/usr/bin/diff -bBu'
 
+    attr_reader :path, :diff
+
     def initialize(path, test)
       @path = path
+      @diff = "#{@path}.diff"
       @test = test
+
+      system("#{DIFF} #{@path} #{@test.output.path} > #{@diff}")
     end
 
-    def correct?
-      diff.empty?
-    end
-
-    def diff
-      @diff ||= `#{DIFF} #{@path} #{@test.output.path}`
-    end
-
-    def data
-      @data ||= IO.read(@path)
+    def matched?
+      @matched ||= File.read(@diff).blank?
     end
   end
 

@@ -1,6 +1,7 @@
 class Result < ActiveRecord::Base
   belongs_to :solution
   belongs_to :test, :class_name =>'ProblemTest', :foreign_key=>'test_id'
+
   scope :correct, :conditions => { :matched => true }
   scope :incorrect, :conditions => { :matched => false }
   scope :real, :conditions => { :hidden => true }
@@ -8,24 +9,22 @@ class Result < ActiveRecord::Base
   has_attached_file :output, :path => ":results_dir/:test_id.output"
   has_attached_file :diff,   :path => ":results_dir/:test_id.diff"
 
-  def before_save
-    self.hidden = test.hidden
-  end
-
   def result=(output)
-    self.matched = output.correct?
-    self.diff = output.diff
-    self.output = output.correct? ? nil : output.data
+    # save output only for non-matched results
+    unless self.matched = output.matched?
+      self.output = File.open(output.path)
+      self.diff   = File.open(output.diff)
+    end
   end
 
   def usage=(usage)
     self.execution = usage.state
-    self.time   = usage.time
-    self.memory = usage.memory
+    self.time      = usage.time
+    self.memory    = usage.memory
   end
 
-  def output
-    matched ? test.output_head : self[:output]
+  def data
+    matched ? test.output_head : File.read(output.path)
   end
 
   def failed?
