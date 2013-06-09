@@ -26,7 +26,7 @@ class Language
     end
   end
   attr_accessor :name, :description, :compiler, :interpreter
-  attr_writer :memory, :time, :processes
+  attr_writer :memory, :time, :processes, :extension
 
   def initialize(options)
     options.each do |key, value|
@@ -45,13 +45,13 @@ class Language
   def processes
     @processes || 0
   end
-  
+
   def extension
-    name.downcase
+    @extension || name.downcase
   end
 
   def compiled?
-    compiler.blank?
+    !compiler.blank?
   end
 
   def interpreted?
@@ -67,13 +67,16 @@ class Language
 
     return exe(program) if interpreted? # no need to compile
 
-    cmd = (compiler % [program.fullname, program.path, program.basename])
-
-    if system("#{cmd} 2> #{program.error}")
+    if Kernel.system command(program)
       return exe(program)
     else
       raise CompileError.new("Compile time error")
     end
+  end
+
+  def command(program)
+    cmd = compiler % [program.fullname, program.path, program.basename]
+    "#{cmd} 2> #{program.error}"
   end
 
   def exe(program)
@@ -86,4 +89,3 @@ class Language
 
   class CompileError < Exception; end
 end
-
