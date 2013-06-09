@@ -5,9 +5,9 @@ gem 'rails', '~>3.2'
 gem 'capistrano'
 gem 'pg'
 gem 'mysql2', '~> 0.3.12b5' # for thinking-sphinx
+gem 'thinking-sphinx', '~>3.0.2'
 gem 'bluecloth'
 gem 'gravtastic'
-gem 'thinking-sphinx', '~>3.0.2'
 gem 'authlogic'
 gem 'haml'
 gem 'twitter'
@@ -25,4 +25,11 @@ group :assets do
   gem 'sass-rails',   "~> 3.2"
   gem 'coffee-rails', "~> 3.2"
   gem 'uglifier'
+end
+
+group :test, :development do
+  gem 'rspec'
+  gem 'spork'
+  gem 'spork-rails'
+  gem 'rspec-rails'
 end

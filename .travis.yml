@@ -1,0 +1,9 @@
+language: ruby
+rvm:
+  - 1.9.3
+before_script:
+  - psql -c 'create database prudge_test' -U postgres
+  - cp config/examples/*.yml config/
+script:
+  - RAILS_ENV=test bundle exec rake --trace db:schema:load
+  - bundle exec rspec ./spec

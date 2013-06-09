@@ -1,15 +1,23 @@
 production:
   adapter: postgresql
   encoding: utf8
-  database: prudge
-  username: prudge
+  database: prudge_prod
+  username: postgres
   password:
   pool: 5
 
 development:
   adapter: postgresql
   encoding: utf8
-  database: prudge
-  username: prudge
+  database: prudge_dev
+  username: postgres
+  password:
+  pool: 5
+
+test:
+  adapter: postgresql
+  encoding: utf8
+  database: prudge_test
+  username: postgres
   password:
   pool: 5
