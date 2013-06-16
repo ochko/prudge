@@ -40,12 +40,6 @@
         = @user.solutions_count
     %dl
       %dt
-        %i.icon-flag.muted
-      %dd
-        %span.muted #{t '.reached-level'}:
-        = @user.level
-    %dl
-      %dt
         %i.icon-time.muted
       %dd
         %span.muted #{t '.joined'}
@@ -98,7 +92,7 @@
         %a{'href' => "#composed-problem", 'data-link' => problems_user_path(@user)}
           %i.icon-question-sign
           = t 'title.problem'
- 
+
     .tab-content
       .tab-pane.active#participant-of
         %table.table.table-hover.table-striped.table-bordered

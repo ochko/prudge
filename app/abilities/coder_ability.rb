@@ -18,7 +18,7 @@ class CoderAbility < UserAbility
 
     can :create, Solution do |solution|
       contest = solution.contest
-      (contest.nil? || contest.openfor?(user)) && solution.fresh?
+      (contest.nil? || contest.continuing?) && solution.fresh?
     end
 
     super(user)

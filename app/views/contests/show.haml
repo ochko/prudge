@@ -1,10 +1,5 @@
 %h2#header-tooltip
   = @contest.name
-  - if @contest.private?
-    - if @contributed
-      %i.muted.icon-unlock{:data => {:toggle => :tooltop, :placement => 'bottom'}, :title => t('.private-in')}
-    - else
-      %i.muted.icon-lock{:data => {:toggle => :tooltip, :placement => 'bottom'}, :title => t('.private-out')}
 .subhead
   %i.icon-time
   = l @contest.start

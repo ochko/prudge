@@ -29,7 +29,7 @@ module ProblemsHelper
   end
 
   def submit_path(contest, problem, user)
-    if contest && contest.openfor?(user)
+    if contest && contest.continuing?
       new_contest_problem_solution_path(contest, problem)
     else
       new_problem_solution_path(problem)

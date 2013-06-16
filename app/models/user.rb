@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   include Gravtastic
 
   has_many :solutions, :order => 'source_updated_at'
-  has_many :completions, :class_name => 'Solution', 
+  has_many :completions, :class_name => 'Solution',
            :conditions => ["state = ?", 'passed']
   has_many :contests, :through => :solutions, :uniq => true, :order => 'start desc'
   has_many :tried, :through => :solutions, :uniq => true, :source => :problem
@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :comments, :dependent => :destroy, :order => "created_at DESC"
 
   scope :moderators, :conditions => ['admin =? or judge =?', true, true]
-  
+
   attr_protected :admin, :judge, :solutions_count, :points
 
   validates_uniqueness_of :email
@@ -36,16 +36,6 @@ class User < ActiveRecord::Base
     email =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
   end
 
-  def level
-    Contest::LEVEL_POINTS.keys.sort.each do |l|
-      return l if points < Contest::LEVEL_POINTS[l]
-    end
-  end
-
-  def level_name
-    Contest::LEVEL_NAMES[level]
-  end
-  
   def solved?(problem)
     solutions.where(problem_id: problem.id).passed.count > 0
   end
@@ -60,7 +50,7 @@ class User < ActiveRecord::Base
   end
 
   def currently_commented?
-    comments.first && 
+    comments.first &&
       comments.first.created_at > Time.now - 10.seconds
   end
 

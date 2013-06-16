@@ -1,25 +1,5 @@
 # -*- coding: utf-8 -*-
 class Contest < ActiveRecord::Base
-  LEVEL_NAMES = { 0 => 'Бүгд', 
-    1 => 'Явган', 
-    2 => 'Дугуй', 
-    4 => 'Мотоцикл', 
-    8 => 'Машин',
-    16=> 'Галт тэрэг',
-    32=> 'Усан онгоц',
-    64=> 'Нисдэг тэрэг',
-    128=> 'Онгоц'}
-
-  LEVEL_POINTS = { 0 => 0, 
-    1 => 50, 
-    2 => 150, 
-    4 => 300, 
-    8 => 450,
-    16=> 600,
-    32=> 750,
-    64=> 900,
-    128=> 1150}
-
   has_many :problems
   has_many :solutions
 
@@ -33,8 +13,6 @@ class Contest < ActiveRecord::Base
            :foreign_key => 'topic_id',
            :dependent => :destroy,
            :order => 'created_at DESC'
-
-  has_many :contributors, :through => :problems, :source => :user, :uniq => true
 
   has_and_belongs_to_many :watchers, :class_name => 'User'
 
@@ -50,7 +28,7 @@ class Contest < ActiveRecord::Base
 
   def standings
     num, point, time = 0, 0.0, 0.0
-    numbers = [] 
+    numbers = []
     standers = []
     users.each do |user|
       if (point != user.point) || (user.time.to_f - time.to_f > 0.1)
@@ -67,25 +45,13 @@ class Contest < ActiveRecord::Base
   def finished?
     self.end < Time.now
   end
-  
+
   def started?
     self.start < Time.now
   end
 
   def continuing?
     started? && !finished?
-  end
-
-  def openfor?(user)
-    continuing? && competable?(user) && invites?(user)
-  end
-
-  def competable?(user)
-    level == 0 || user.level <= level
-  end
-
-  def invites?(user)
-    !private? || contributors.include?(user)
   end
 
   def time_passed

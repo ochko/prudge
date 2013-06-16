@@ -96,18 +96,14 @@ mn:
       level: "Түвшин"
       start_time: "Эхлэх цаг"
       end_time: "Дуусах цаг"
-      private: "Зөвхөн бодлого дэвшүүлсэн нь оролцох"
       <<: *shared-common
       <<: *shared-problem
     index:
       title: "Тэмцээнүүд"
-      explain-private: &private-explain "Дэвшүүлсэн бодлого нь сонгогдсон тохиолдолд энэ тэмцээнд орох эрхтэй болно"
     last:
       title: "Тэмцээн"
     show:
       title: "%{subject}"
-      private-in: "Дэвшүүлсэн бодлого тань сонгогдсон учраас энэ тэмцээнд орох боломжтой"
-      private-out: *private-explain
       unwatch: "Энэ тэмцээний тухай мэдэгдэл ирэхгүй болгох"
       watch: "Тэмцээнийн хугацаа өөрчлөгдөхөд надад мэдэгд"
       problems: "Бодлогууд"
@@ -146,7 +142,7 @@ mn:
     edit:
       title: Тэстийг засварлах
       <<: *tests-common
-  problems:      
+  problems:
     index:
       title: "Бодлогууд"
     proposed:
@@ -166,7 +162,7 @@ mn:
     edit:
       title: '%{subject} · Засварлах'
       problem_tests: 'Энэ бодлогын тестүүд'
-    form:      
+    form:
       contest: Тэмцээн
       <<: *shared-problem
     profile:

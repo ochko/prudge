@@ -77,7 +77,6 @@ class ContestsController < ApplicationController
   protected
 
   def init_user_data
-    @contributed = @contest.contributors.include? current_user
     @solved = { }
     if current_user
       current_user.solutions.

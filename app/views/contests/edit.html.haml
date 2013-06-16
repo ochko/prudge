@@ -18,12 +18,6 @@
           %input.span2{:name=>"contest[end]", :type=>"datetime", :placeholder => t('.end_time'), :value => @contest.end}
     .row
       .span6
-        = t '.level'
-        = select 'contest', 'level', options_for_levels
-        = t '.private'
-        = check_box 'contest', 'private'
-    .row
-      .span6
         #editor-buttons
     .row
       .span6

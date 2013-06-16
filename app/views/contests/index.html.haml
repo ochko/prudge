@@ -2,8 +2,6 @@
   %h2
     = link_to contest.name, contest
   .subhead
-    - if contest.private?
-      %i.icon-lock{:data => {:toggle => :tooltip, :placement => 'bottom'}, :title => t('.explain-private')}
     %i.icon-time
     = l contest.start
     %i.icon-double-angle-right
