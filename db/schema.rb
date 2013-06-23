@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130616114140) do
+ActiveRecord::Schema.define(:version => 20130616122201) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",   :null => false
@@ -63,7 +63,6 @@ ActiveRecord::Schema.define(:version => 20130616114140) do
   create_table "problems", :force => true do |t|
     t.integer  "user_id",                       :null => false
     t.integer  "contest_id"
-    t.integer  "level",         :default => 1,  :null => false
     t.integer  "time",          :default => 1,  :null => false
     t.integer  "memory",        :default => 64, :null => false
     t.text     "name",                          :null => false

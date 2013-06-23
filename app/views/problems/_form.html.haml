@@ -7,39 +7,38 @@
 
       = text_field 'problem', 'name', :class => 'input-block-level'
 
-      %i.icon-flag
-      = select 'problem', 'level', Problem::LEVELS, {}, :class => 'span1'
-
-      .input-prepend.input-append
-        %span.add-on
-          %i.icon-time
-        = text_field 'problem', 'time', :class => 'span1'
-        %span.add-on= t('unit.second')
-
-      .input-prepend.input-append
-        %span.add-on
-          %i.icon-hdd
-        = text_field 'problem', 'memory', :class => 'span1'
-        %span.add-on= t('unit.kb')
-      
-      %label= t('.source')
-      = text_field 'problem', 'source', :size => 20
-
       %label= t('.contest')
       - if @problem.contest && @problem.contest.finished?
         = link_to @problem.contest.name, @problem.contest
       - elsif judge?
         = select("problem", "contest_id", Contest.pending.collect {|c| [ c.name, c.id ] }, { :include_blank => true })
-      
+
       .row
         .span6
           #editor-buttons
       .row
         .span6
           = text_area('problem', 'text', :class => 'input-block-level', :id => 'editor-input')
-      
+      .row
+        .span6
+          .input-prepend.input-append
+            %span.add-on
+              %i.icon-time
+            = text_field 'problem', 'time', :class => 'span1'
+            %span.add-on= t('unit.second')
+
+          .input-prepend.input-append
+            %span.add-on
+              %i.icon-hdd
+            = text_field 'problem', 'memory', :class => 'span1'
+            %span.add-on= t('unit.kb')
+          .input-prepend
+            %span.add-on
+              %i.icon-bookmark-empty
+            = text_field 'problem', 'source', :size => 20, :placeholder => t('.source')
+
       %button.btn.btn-primary{:type=> :submit}
         %i.icon-save
         = t('button.save')
-      
+
       #editor-preview

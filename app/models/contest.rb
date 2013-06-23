@@ -59,10 +59,6 @@ class Contest < ActiveRecord::Base
     Time.now - start
   end
 
-  def level_name
-    LEVEL_NAMES[level]
-  end
-
   def text
     description
   end

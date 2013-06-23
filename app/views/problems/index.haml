@@ -18,7 +18,7 @@
         - @problems.each do |problem|
           %tr
             %td
-              = problem.level
+              = '%.3f' % problem.point
               .muted{:title => 'Success rate'} #{problem.success_rate}%
             %td
               = link_to problem.name, problem

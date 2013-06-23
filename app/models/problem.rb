@@ -1,11 +1,4 @@
 class Problem < ActiveRecord::Base
-  LEVELS = [1, 2, 4, 8]
-  PRICES = { 
-    1 => 5, 
-    2 => 10, 
-    4 => 25, 
-    8 => 50 }
-
   belongs_to :contest
   belongs_to :user
 
@@ -22,13 +15,21 @@ class Problem < ActiveRecord::Base
   has_many :users, :through => :solutions, :uniq => true
 
   validates_presence_of :name, :text
-  validates_inclusion_of :level, :in => LEVELS
 
   scope :active, :conditions => ["active_from < ?", Time.now]
 
   def success_rate
     return 0 if tried_count == 0 || solved_count == 0
     solved_count * 100 / tried_count
+  end
+
+  def difficulty
+    return 0.5 if tried_count == 0
+    1 - solved_count / tried_count.to_f
+  end
+
+  def point
+    5 * Math::E**(2*difficulty - 1)
   end
 
   def active?
