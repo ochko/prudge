@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130623065520) do
+ActiveRecord::Schema.define(:version => 20130623104704) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",   :null => false
@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20130623065520) do
     t.integer  "source_file_size"
     t.text     "language",           :default => "", :null => false
     t.text     "source_fingerprint"
+    t.integer  "attempt_count",      :default => 0,  :null => false
   end
 
   add_index "solutions", ["contest_id"], :name => "index_solutions_on_contest_id"

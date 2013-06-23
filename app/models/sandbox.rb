@@ -62,6 +62,7 @@ class Sandbox
   def run
     exe = compile
     check(exe)
+    solution.attempted!
     solution.summarize!
   rescue Language::CompileError
     solution.errored!

@@ -132,6 +132,11 @@ class Solution < ActiveRecord::Base
     end
   end
 
+  def attempted!
+    attempts = user.solutions.maximum(:attempt_count) || 0
+    update_attribute(:attempt_count, attempts + 1)
+  end
+
   def all_tests_passed?
     passed_tests_count == tests_count
   end
@@ -149,10 +154,17 @@ class Solution < ActiveRecord::Base
   end
 
   def points_taken
-    passed_ration * problem.point
+    passed_ration * problem.point * attempt_bonus
   end
 
   def average_time
     results.sum(:time) / results.size
+  end
+
+  # decreases by 1% per attempt
+  def attempt_bonus
+    return 0.01 if attempt_count > 100 # unlikely to happen, but possible
+
+    (101 - attempt_count)/100.0
   end
 end
