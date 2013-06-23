@@ -15,13 +15,13 @@
         %i.icon-trophy
         = t '.medals'
     .row
-      - medal_list(@standings).each do |num, count|
+      - medal_counts(@user).each do |s|
         .span1.text-center
           %h2
-            = standing(num)
-            = count
+            = standing(s.rank)
+            = s[:count]
           .muted
-            = t(medal_name(num), :scope => 'label.standing')
+            = t(medal_name(s.rank), :scope => 'label.standing')
     %h3.list-heading
       .inner
         %i.icon-star

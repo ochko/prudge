@@ -9,7 +9,7 @@ module ContestsHelper
   end
 
   def medal_name(num)
-    %w(nothing gold silver bronze)[num]
+    %w(_ gold silver bronze)[num]
   end
 
   def show_status(contest)
@@ -23,19 +23,7 @@ module ContestsHelper
     end
   end
 
-  def medal_list(standings)
-    counts = {}
-    standings.each do |standing|
-      next if standing.rank > 3 || standing.rank < 1
-      counts[standing.rank] ||= 0
-      counts[standing.rank] += 1
-    end
-    counts
-  end
-
-  def options_for_levels
-    [0,1,2,4,8,16,32,64,128].map do |level|
-      [t(level.to_s, :scope => :rank), level]
-    end
+  def medal_counts(user)
+    user.standings.where('rank <= 3').group('rank').select('rank, count(id) as count').sort_by(&:rank)
   end
 end
