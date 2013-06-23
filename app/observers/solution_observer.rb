@@ -7,7 +7,11 @@ class SolutionObserver < ActiveRecord::Observer
   def after_save(solution)
     changes = solution.changes
 
-    solution.user.resum_points! if changes["point"]
-    solution.problem.resum_counts! if changes["state"] 
+    solution.problem.resum_counts! if changes["state"]
+
+    if changes["point"]
+      solution.user.resum_points!
+      solution.contest.rank!
+    end
   end
 end

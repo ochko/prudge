@@ -100,12 +100,12 @@
             %tr
               %th= t '.contests'
           %tbody
-            - @standings.each do |c,s|
+            - @standings.each do |s|
               %tr
                 %td
-                  %strong= standing(s)
-                  = link_to c.name, c
-                  %span.muted.pull-right= l c.start, :format => :date
+                  %strong= standing(s.rank)
+                  = link_to s.contest.name, s.contest
+                  %span.muted.pull-right= l s.contest.start, :format => :date
 
       .tab-pane#solved-problems
         %table.table.table-hover.table-striped.table-bordered#user-solutions

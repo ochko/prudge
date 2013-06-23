@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130616122201) do
+ActiveRecord::Schema.define(:version => 20130623065520) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",   :null => false
@@ -40,6 +40,17 @@ ActiveRecord::Schema.define(:version => 20130616122201) do
 
   add_index "contests_users", ["contest_id", "user_id"], :name => "contests_users_contest_id_user_id_key", :unique => true
   add_index "contests_users", ["contest_id", "user_id"], :name => "index_contests_users_on_contest_id_and_user_id", :unique => true
+
+  create_table "participants", :force => true do |t|
+    t.integer "contest_id",                  :null => false
+    t.integer "user_id",                     :null => false
+    t.integer "rank"
+    t.float   "points",     :default => 0.0
+  end
+
+  add_index "participants", ["contest_id", "user_id"], :name => "index_participants_on_contest_id_and_user_id", :unique => true
+  add_index "participants", ["contest_id"], :name => "index_participants_on_contest_id"
+  add_index "participants", ["user_id"], :name => "index_participants_on_user_id"
 
   create_table "posts", :force => true do |t|
     t.boolean  "delta"

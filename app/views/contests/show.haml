@@ -53,8 +53,8 @@
                         = link_to problem.user.login, problem.user
                     .muted
                       %small
-                        %i.icon-flag{title: t('.level')}
-                        = problem.level
+                        %i.icon-flag{title: t('.points')}
+                        = '%0.3f' % problem.point
                         %i.icon-time{title: t('.time-limit')}
                         \#{problem.time} #{t 'unit.second'}
                         %i.icon-hdd{title: t('.memory-limit')}

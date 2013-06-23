@@ -8,17 +8,14 @@
           %th
             %i.icon-flag
           %th
-            %i.icon-time
-          %th
       %tbody#contestants
-        - @numbers.zip(@standings) do |num, user|
+        - @contest.participants(:preload => :user).each do |participant|
           %tr
-            %td.standing= standing(num)
-            %td= link_to user.login, user
-            %td= "%.2f" % user.point
-            %td= sec2milisec user.time
+            %td.standing= standing(participant.rank)
+            %td= link_to participant.user.login, participant.user
+            %td= "%.2f" % participant.points
             %td
-              = link_to contest_user_solutions_path(@contest, user), :class => 'loader' do
+              = link_to contest_user_solutions_path(@contest, participant.user), :class => 'loader' do
                 %i.icon-refresh
   .span4
     #solved

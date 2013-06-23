@@ -15,10 +15,10 @@
         %td= link_to show_correctness(s.passed?), s
         %td
           = link_to s.problem.name, s.problem
-          %span.solution-meta
+          %small.muted
             = s.language.name
-            ,
-            \#{l s.created_at}/#{l s.source_updated_at}
-        %td.center= s.problem.level
+            %br
+            = subsequent_dates s.created_at, s.source_updated_at
+        %td.center= '%.3f' % s.point
         %td.center #{"%0.0f" % (s.percent*100)}%
         %td.center= sec2milisec s.time

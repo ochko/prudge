@@ -2,10 +2,7 @@
 class Contest < ActiveRecord::Base
   has_many :problems
   has_many :solutions
-
-  has_many :users, :through => :solutions,
-      :select => "users.login, users.id, sum(solutions.point) as point, sum(solutions.solved_in) as time",
-      :group => 'users.login, users.id', :order => "point DESC, time ASC"
+  has_many :participants
 
   has_many :comments,
            :as => 'topic',
@@ -26,20 +23,20 @@ class Contest < ActiveRecord::Base
   scope :finished,:conditions => "end < NOW()", :order => "end DESC"
   scope :pending, :conditions => "end >= NOW()"
 
-  def standings
-    num, point, time = 0, 0.0, 0.0
-    numbers = []
-    standers = []
-    users.each do |user|
-      if (point != user.point) || (user.time.to_f - time.to_f > 0.1)
-        point = user.point
-        num += 1
+  def rank!
+    return unless continuing?
+
+    fetched = participants.grouped
+
+    Participant.transaction do
+      solutions.select("user_id, sum(point) as point").group(:user_id).order('point DESC').reduce(0) do |rank, solution|
+        participant = fetched[solution.user_id] || participants.build(:user_id => solution.user_id)
+        participant.rank = (rank += 1)
+        participant.points = solution.point
+        participant.save!
+        rank
       end
-      time = user.time
-      numbers << num
-      standers << user
     end
-    [numbers, standers]
   end
 
   def finished?

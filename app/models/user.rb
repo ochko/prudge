@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :problems
   has_many :posts, :foreign_key => 'author_id'
   has_many :comments, :dependent => :destroy, :order => "created_at DESC"
+  has_many :standings, :class_name => 'Participant'
 
   scope :moderators, :conditions => ['admin =? or judge =?', true, true]
 

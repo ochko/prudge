@@ -25,10 +25,10 @@ module ContestsHelper
 
   def medal_list(standings)
     counts = {}
-    standings.sort{|a,b| a[1]<=>b[1]}.each do |_, standing|
-      next if standing > 3 || standing < 1
-      counts[standing] ||= 0
-      counts[standing] += 1
+    standings.each do |standing|
+      next if standing.rank > 3 || standing.rank < 1
+      counts[standing.rank] ||= 0
+      counts[standing.rank] += 1
     end
     counts
   end

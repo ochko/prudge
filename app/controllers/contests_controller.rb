@@ -26,9 +26,8 @@ class ContestsController < ApplicationController
 
   def contestants
     @contest = Contest.find(params[:id])
-    @numbers, @standings = @contest.standings
 
-    if @contest.users.size > 0
+    if @contest.participants.size > 0
       render :partial => 'contestants'
     else
       render :text => message_for(:no_contestants)

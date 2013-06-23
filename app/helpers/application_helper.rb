@@ -36,10 +36,10 @@ module ApplicationHelper
     return if message.blank?
 
     content_tag(:div,
-                content_tag(:button, 
+                content_tag(:button,
                             content_tag(:i,'', :class => "icon-remove-circle"),
                             :type => 'button', :class => 'close',
-                            'data-dismiss'=> 'alert') + 
+                            'data-dismiss'=> 'alert') +
                 message.html_safe,
                 :class => "alert #{css} alert-block")
   end
@@ -63,6 +63,10 @@ module ApplicationHelper
 
   def sec2milisec(sec)
       "%0.3f" % (sec.to_f/1000)
+  end
+
+  def subsequent_dates(date1, date2, separator='~')
+    date1.strftime("%Y-%m-%d %H:%M") + separator + date2.strftime("%H:%M")
   end
 
   def markdown(text)

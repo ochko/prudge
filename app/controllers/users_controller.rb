@@ -52,13 +52,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @standings = []
-    @user.contests.each do |contest|
-      numbers, standings = contest.standings
-      idx = standings.index(@user)
-      next unless idx
-      @standings << [contest, numbers[idx]]
-    end
+    @standings = @user.standings.preload(:contest)
   end
 
   def solutions

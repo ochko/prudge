@@ -2,7 +2,7 @@
   %thead
     %tr
       %th{:width => "1%"}
-      %th 
+      %th
         - if @user == current_user
           = link_to new_problem_path, :class => 'btn btn-small' do
             %i.icon-plus-sign
@@ -19,7 +19,7 @@
       %tr
         %td= p.id
         %td= link_to p.name, p
-        %td.center= p.level
+        %td.center= '%.3f' % p.point
         %td.center
           = p.time
           = t('unit.second')

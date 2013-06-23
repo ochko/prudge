@@ -2,7 +2,6 @@
 %table{:width => "100%"}
   %tr
     %th= t '.problem-name'
-    %th= t '.points'
     %th= t '.test-count'
     %th= t '.limits'
     %th= t '.author'
@@ -10,7 +9,6 @@
   - @problems.each do |problem|
     %tr
       %td= link_to problem.name, problem
-      %td= problem.level
       %td= problem.tests_count
       %td #{problem.time}#{t 'unit.second'} / #{problem.memory}#{t 'unit.kb'}
       %td= link_to h(problem.user.login), problem.user
