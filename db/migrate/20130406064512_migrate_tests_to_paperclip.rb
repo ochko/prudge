@@ -20,7 +20,7 @@ class MigrateTestsToPaperclip < ActiveRecord::Migration
   end
 
   def self.store(record)
-    dir = Rails.root.join('judge', 'tests', record[:problem_id])
+    dir = Rails.root.join('judge', 'tests', record[:problem_id].to_s)
     FileUtils.mkpath dir
 
     input = dir.join("#{record[:id]}.in")
