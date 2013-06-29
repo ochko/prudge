@@ -14,7 +14,6 @@ config/server.pem
 config/deploy.rb
 config/*.sphinx.conf
 db/sphinx
-db/backup
 backup/*
 judge/*
 *~
