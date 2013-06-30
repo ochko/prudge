@@ -79,7 +79,7 @@
                   %td= translate_message(result.execution)
                   %td= sec2milisec(result.time)
                   %td= result.memory
-                  %td= link_to(show_correctness(result.correct?), result)
+                  %td= link_to(show_correctness(result.correct?), [@solution, result])
 
     = link_to download_solution_path(@solution), :class => 'btn' do
       %i.icon-download-alt
