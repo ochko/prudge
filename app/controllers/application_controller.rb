@@ -19,6 +19,13 @@ class ApplicationController < ActionController::Base
       new(current_user)
   end
 
+  rescue_from CanCan::AccessDenied do |exception|
+    respond_to do |format|
+      format.js { render :text => message_for(:access_denied, :message => exception.message) }
+      format.html { redirect_to root_url, :alert => exception.message }
+    end
+  end
+
   private
 
   def message_for(name, options = {})
@@ -42,7 +49,7 @@ class ApplicationController < ActionController::Base
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find
   end
-  
+
   def current_user
     return @current_user if defined?(@current_user)
     @current_user = current_user_session && current_user_session.user
@@ -75,7 +82,7 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
-  
+
   def store_location
     if request.format == "html"
       session[:return_to] = request.url
