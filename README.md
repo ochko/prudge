@@ -40,11 +40,13 @@ Current ruby for prudge is 1.8.7
 * `bundle exec script/server` then open http://0.0.0.0:3000 in browser
 
 ### Configuring safeexec
-* Download safeexec somewhere `git://github.com/ochko/safeexec.git`
-* `cd safeexec && make`
-* Move compiled binary to judge directory `mv safeexec ~/prudge/judge/ && cd ~/prudge/judge`
-* Then set permissions `sudo chown root safeexec && sudo chmod u+s safeexec`
-* Configure resque in `config/resque.yml`, then start workers `bundle exec resque work`
+* Initialize submodule: `git submodule update --init`
+* Make binary executable: `cd judge/runner && make`
+* Give setuid root permission to the binary: `sudo chown root safeexec && sudo chmod u+s safeexec`
+
+### Configuring Resque
+* Configure resque in `config/resque.yml`
+* Start workers `bundle exec resque work`
 
 ### Configuring Sphinx
 * `cp config/sphinx.yml.example config/sphinx.yml`

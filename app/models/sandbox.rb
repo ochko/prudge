@@ -137,9 +137,14 @@ class Sandbox
 
   class Runner
     class << self
-      def binary
-        Sandbox.root.join('safeexec')
+      def root
+        Rails.root.join('judge', 'runner')
       end
+
+      def binary
+        root.join('safeexec')
+      end
+
       def fsize
         2048 # 2Mbyte
       end
