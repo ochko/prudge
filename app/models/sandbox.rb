@@ -138,14 +138,10 @@ class Sandbox
   end
 
   class Runner
-    class << self
-      def binary
-        Sandbox.root.join('safeexec')
-      end
+    cattr_accessor :binary
 
-      def fsize
-        2048 # 2Mbyte
-      end
+    def self.fsize
+      2048 # 2Mbyte
     end
 
     def initialize(language, program, test, command, problem)
