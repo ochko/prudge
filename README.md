@@ -45,11 +45,11 @@ Current ruby for prudge is 1.8.7
 * Give setuid root permission to the binary: `sudo chown root safeexec && sudo chmod u+s safeexec`
 
 ### Configuring Resque
-* Configure resque in `config/resque.yml`
-* Start workers `bundle exec resque work`
+* `cp config/examples/resque.yml config/resque.yml`
+* Start workers `QUEUE=* bundle exec rake resque:work`
 
 ### Configuring Sphinx
-* `cp config/sphinx.yml.example config/sphinx.yml`
+* `cp config/examples/sphinx.yml config/sphinx.yml`
 * See [Sphinx docs](http://sphinxsearch.com/docs/current.html) for additional configuration.
 
 ## Contributing

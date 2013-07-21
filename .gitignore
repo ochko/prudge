@@ -3,16 +3,6 @@ log/*.log
 log/*.pid
 tmp/**/*
 tmp/*
-config/languages.yml
-config/settings.yml
-config/config.yml
-config/database.yml
-config/twitter.yml
-config/mail.yml
-config/sphinx.yml
-config/server.pem
-config/deploy.rb
-config/*.sphinx.conf
 db/sphinx
 backup/*
 *~

@@ -1,4 +1,6 @@
 class Sandbox
+  @queue = :high
+
   class << self
     def root
       Rails.root.join('judge','sandbox')

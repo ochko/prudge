@@ -1,0 +1,11 @@
+/resque.yml
+/languages.yml
+/settings.yml
+/config.yml
+/database.yml
+/twitter.yml
+/mail.yml
+/sphinx.yml
+/server.pem
+/deploy.rb
+/*.sphinx.conf

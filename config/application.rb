@@ -20,14 +20,14 @@ module Prudge
     config.cache_store = :dalli_store, '127.0.0.1', { :namespace => 'prudge' }
 
     config.session_store :cache_store, :key => '_prudge_session'
-  
+
     # Make Active Record use UTC-base instead of local time
     config.active_record.default_timezone = :utc
-  
+
     config.active_record.observers = [:solution_observer,
                                       :problem_observer,
                                       :contest_observer]
-  
+
     config.assets.enabled = true
     config.assets.version = '1.0'
   end
