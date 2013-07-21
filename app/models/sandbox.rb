@@ -139,12 +139,8 @@ class Sandbox
 
   class Runner
     class << self
-      def root
-        Rails.root.join('judge', 'runner')
-      end
-
       def binary
-        root.join('safeexec')
+        Sandbox.root.join('safeexec')
       end
 
       def fsize

@@ -41,8 +41,8 @@ Current ruby for prudge is 1.8.7
 
 ### Configuring safeexec
 * Initialize submodule: `git submodule update --init`
-* Make binary executable: `cd judge/runner && make`
-* Give setuid root permission to the binary: `sudo chown root safeexec && sudo chmod u+s safeexec`
+* Make binary executable: `cd judge/runner && make && mv safeexec ../sandbox/`
+* Give setuid root permission to the binary: `cd ../sandbox && sudo chown root safeexec && sudo chmod u+s safeexec`
 
 ### Configuring Resque
 * `cp config/examples/resque.yml config/resque.yml`
