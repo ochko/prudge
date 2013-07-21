@@ -1,0 +1,13 @@
+defaults: &defaults
+  git: "/usr/local/bin/git"
+  diff: "/usr/bin/diff -bBu"
+  runner: ":root/judge/sandbox/safeexec"
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

@@ -8,17 +8,7 @@ class Repo
       Rails.root.join(path)
     end
 
-    def bin
-      return @bin if defined?(@bin)
-      @bin =
-        if (path = `which git`.strip).present?
-          path
-        else
-          ['/usr/bin/git',
-           '/usr/local/bin/git',
-           '/opt/local/bin/git'].detect {|file| File.executable?(path)}
-        end
-    end
+    attr_accessor :git
   end
 
   attr_accessor :dir, :user
@@ -28,6 +18,10 @@ class Repo
 
     self.user = user
     self.dir = Repo.root.join(user.id.to_s)
+  end
+
+  def git
+    self.class.git
   end
 
   def prepare
@@ -68,7 +62,7 @@ class Repo
 
   def configuration(key)
     inside do
-      return %x(#{self.class.bin} config --local --get #{key}).strip
+      return %x(#{git} config --local --get #{key}).strip
     end
   end
 
@@ -81,7 +75,7 @@ class Repo
   private
 
   def run(*command)
-    system(self.class.bin, *command)
+    system(git, *command)
   end
 
   def inside
