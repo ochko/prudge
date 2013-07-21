@@ -3,6 +3,12 @@ class Sandbox
     def root
       Rails.root.join('judge','sandbox')
     end
+
+    # Resque invokes it
+    def perform(id)
+      sandbox = new(Solution.find(id))
+      sandbox.run
+    end
   end
 
   attr_reader :solution, :user, :problem, :dir, :program, :language, :problem

@@ -48,17 +48,11 @@ class Solution < ActiveRecord::Base
   end
 
   def queue
-    Resque.enqueue(self.class, self.id)
+    Resque.enqueue(Sandbox, self.id)
   end
 
   def language
     @language = Language[self[:language]]
-  end
-
-  # Resque invokes it
-  def self.perform(id)
-    sandbox = Sandbox.new(find(id))
-    sandbox.run
   end
 
   def name
