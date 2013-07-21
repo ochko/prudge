@@ -34,7 +34,7 @@ class Sandbox
 
     def basename
       base = File.basename(@filename)
-      base.blank? ? @solution.id.to_s : base
+      base.blank? ? @solution.id.to_s : base.sub(/#{extname}$/,'')
     end
 
     def extname
@@ -43,7 +43,7 @@ class Sandbox
     end
 
     def fullname
-      @base.join "#{basename}.#{extname}"
+      @base.join "#{basename}#{extname}"
     end
 
     def path

@@ -47,7 +47,7 @@ class Language
   end
 
   def extension
-    @extension || name.downcase
+    @extension || ('.' + name.downcase)
   end
 
   def compiled?

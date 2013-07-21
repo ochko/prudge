@@ -18,7 +18,7 @@
   description: gcj gcc version 4.4.3
 -
   name: Ruby
-  extension: rb
+  extension: '.rb'
   interpreter: /opt/ruby/bin/ruby
   memory: 60000
   time: 2
@@ -26,7 +26,7 @@
   processes: 3
 -
   name: Python
-  extension: py
+  extension: '.py'
   interpreter: /opt/python/bin/python3
   memory: 60000
   time: 2
