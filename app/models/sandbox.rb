@@ -120,7 +120,7 @@ class Sandbox
   end
 
   class Output
-    DIFF = '/usr/bin/diff -bBu'
+    cattr_accessor :diff
 
     attr_reader :path, :diff
 
@@ -129,7 +129,7 @@ class Sandbox
       @diff = "#{@path}.diff"
       @test = test
 
-      system("#{DIFF} #{@path} #{@test.output.path} > #{@diff}")
+      system("#{self.class.diff} #{@path} #{@test.output.path} > #{@diff}")
     end
 
     def matched?
