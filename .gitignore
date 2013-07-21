@@ -15,6 +15,5 @@ config/deploy.rb
 config/*.sphinx.conf
 db/sphinx
 backup/*
-judge/*
 *~
 .DS_Store

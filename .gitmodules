@@ -1,0 +1,3 @@
+[submodule "judge/runner"]
+	path = judge/runner
+	url = git@github.com:ochko/safeexec.git
