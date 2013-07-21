@@ -10,7 +10,7 @@ describe Language do
   let(:ruby) {
     Language.
       new(name: 'Ruby',
-          extension: 'rb',
+          extension: '.rb',
           interpreter: '/opt/ruby/bin/ruby',
           memory: 60000,
           time: 2,
@@ -112,10 +112,10 @@ describe Language do
 
   describe 'extension' do
     it 'is lowercase of name by default' do
-      c.extension.should == 'c'
+      c.extension.should == '.c'
     end
     it 'is given extension' do
-      ruby.extension.should == 'rb'
+      ruby.extension.should == '.rb'
     end
   end
 
