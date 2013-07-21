@@ -90,7 +90,7 @@ class Repo
     else
       FileUtils.cd dir do |repo|
         @inside = repo
-        yield    
+        yield
         @inside = nil
       end
     end
