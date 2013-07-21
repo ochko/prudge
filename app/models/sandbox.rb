@@ -5,20 +5,20 @@ class Sandbox
     end
   end
 
-  attr_reader :solution, :user, :problem, :dir, :program, :language
+  attr_reader :solution, :user, :problem, :dir, :program, :language, :problem
 
   def initialize(solution)
     @solution = solution
     @user = solution.user
     @problem = solution.problem
     @language = solution.language
-    @program = Program.new(self, solution)
     @dir = self.class.root.join(user.id.to_s)
+    @program = Program.new(self, solution)
     FileUtils.mkdir(dir) unless File.directory?(dir)
   end
 
   class Program
-    def initialize(solution)
+    def initialize(sandbox, solution)
       @base = sandbox.dir
       @solution = solution
       @problem = solution.problem
@@ -92,7 +92,7 @@ class Sandbox
 
   def clean
     if File.exist?(program.error)
-      solution.junk = IO.read(stderr).gsub(program.base, '')
+      solution.junk = IO.read(program.error).gsub("#{dir}", '')
       solution.save
     end
   end
@@ -105,7 +105,7 @@ class Sandbox
   end
 
   def execute(command, test)
-    runner = Runner.new(language, program, test, command)
+    runner = Runner.new(language, program, test, command, problem)
     runner.exec
   end
 
@@ -137,11 +137,11 @@ class Sandbox
       end
     end
 
-    def initialize(language, program, test, command)
-      @language, @program, @test, @command = language, program, test, command
+    def initialize(language, program, test, command, problem)
+      @language, @program, @test, @command, @problem = language, program, test, command, problem
     end
 
-    attr_reader :language, :program, :test, :command
+    attr_reader :language, :program, :test, :command, :problem
 
     def exec
       FileUtils.touch program.usage
@@ -158,7 +158,7 @@ class Sandbox
        "--nproc #{language.processes}",
        "--usage #{program.usage}",
        "--exec #{command}",
-       "0< #{test.input_path}" ,
+       "0< #{test.input.path}" ,
        "1> #{program.output}" ,
        "2> #{program.error}"]
     end
