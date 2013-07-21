@@ -69,6 +69,8 @@ class Sandbox
   end
 
   def check(exe)
+    solution.reset! unless solution.results.empty?
+
     @problem.tests.each do |test|
       break unless usage = execute(exe, test)
       result = judge(test, usage)
