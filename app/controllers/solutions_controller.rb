@@ -28,7 +28,7 @@ class SolutionsController < ApplicationController
     @solutions = @problem.solutions.
       order('percent DESC, time ASC, source_updated_at ASC').
       preload(:user)
-      
+
     if @solutions.empty?
       render :text => message_for('solutions.empty')
     else
@@ -59,7 +59,8 @@ class SolutionsController < ApplicationController
 
   def create
     @contest = Contest.find(params[:contest_id]) if params[:contest_id]
-    @problem = (@contest ? @contest.problems : Problem).find(params[:problem_id])
+    problem_id = params[:solution].delete(:problem_id) || params[:problem_id]
+    @problem = (@contest ? @contest.problems : Problem).find(problem_id)
     @solution = @problem.solutions.build(params[:solution])
     @solution.user = current_user
 
@@ -95,7 +96,7 @@ class SolutionsController < ApplicationController
   end
 
   def destroy
-    editing do 
+    editing do
       @solution.destroy
       redirect_to @solution.problem
     end
