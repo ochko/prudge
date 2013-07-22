@@ -58,14 +58,12 @@ class SolutionsController < ApplicationController
   end
 
   def create
-    @contest = Contest.find(params[:contest_id]) if params[:contest_id]
-    problem_id = params[:solution].delete(:problem_id) || params[:problem_id]
-    @problem = (@contest ? @contest.problems : Problem).find(problem_id)
-    @solution = @problem.solutions.build(params[:solution])
+    @solution = Solution.build(params[:solution])
     @solution.user = current_user
 
     creating do
       if @solution.save
+        @solution.log("New solution for #{@solution.problem_id}")
         flash_notice
         redirect_to @solution
       else
@@ -85,6 +83,8 @@ class SolutionsController < ApplicationController
   def update
     editing do
       if @solution.update_attributes(params[:solution])
+        @solution.reset!
+        @solution.log("Updated solution for #{@solution.problem_id}")
         flash_notice
         redirect_to @solution
       else

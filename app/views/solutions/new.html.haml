@@ -13,7 +13,7 @@
       = form_for @solution, :html => { :multipart => true, :class => 'form-horizontal'} do |form|
         %legend Submit a solution
         - if @solution.contest.nil? && @problem.contest && @problem.contest.continuing?
-          = message_box_with_close_button(t('message.individual_submission', :page => link_to(@problem.contest.name, @contest)), css='alert-info')
+          = message_box_with_close_button(t('message.individual_submission', :page => link_to(@problem.contest.name, @problem.contest)), css='alert-info')
         = form.hidden_field :problem_id
         = form.hidden_field :contest_id
         .control-group
