@@ -23,7 +23,7 @@ class Solution < ActiveRecord::Base
            :order => 'created_at DESC'
 
   aasm :column => 'state' do
-    state :updated, :before_enter => :log, :after_enter => :reset!, :initial => true
+    state :updated, :before_enter => :log, :after_enter => :reset!
     state :waiting, :after_enter => :queue
     state :defunct
     state :passed
