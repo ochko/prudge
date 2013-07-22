@@ -16,13 +16,17 @@ class SolutionObserver < ActiveRecord::Observer
   end
 
   def after_update(solution)
-    return unless solution.changes['source_fingerprint']
-
-    solution.reset!
-    solution.log("Updated solution for #{solution.problem_id}")
+    if solution.changes['source_fingerprint']
+      solution.reset!
+      solution.log("Updated solution for #{solution.problem_id}")
+    end
   end
 
   def after_create(solution)
     solution.log("New solution for #{solution.problem_id}")
+  end
+
+  def before_create(solution)
+    solution.reset!
   end
 end
