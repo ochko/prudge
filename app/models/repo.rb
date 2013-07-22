@@ -25,16 +25,11 @@ class Repo
   end
 
   def prepare
-    setup unless ready?
+    init unless ready?
   end
 
   def ready?
     configuration('user.name') == user.login
-  end
-
-  def setup
-    init
-    ignore(Sandbox.dir)
   end
 
   def init
@@ -50,8 +45,23 @@ class Repo
   def commit(path, comment='updated')
     inside do
       prepare
-      run('add', path) && run('commit', "-m #{comment}")
+
+      if new?(path) || changed?(path)
+        run('add', '--', path) && run('commit', "-m #{comment}")
+      end
     end
+  end
+
+  def new?(path)
+    !tracked?(path)
+  end
+
+  def tracked?(path)
+    run('ls-files', '--error-unmatch', '--', path)
+  end
+
+  def changed?(path)
+    !run('diff', '--no-ext-diff', '--quiet', '--exit-code', '--', path)
   end
 
   def ignore(pattern)
@@ -83,9 +93,12 @@ class Repo
       yield
     else
       FileUtils.cd dir do |repo|
-        @inside = repo
-        yield
-        @inside = nil
+        begin
+          @inside = repo
+          yield
+        ensure
+          @inside = nil
+        end
       end
     end
   end

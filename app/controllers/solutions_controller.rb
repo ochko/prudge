@@ -66,7 +66,6 @@ class SolutionsController < ApplicationController
 
     creating do
       if @solution.save
-        @solution.post!
         flash_notice
         redirect_to @solution
       else
@@ -86,7 +85,6 @@ class SolutionsController < ApplicationController
   def update
     editing do
       if @solution.update_attributes(params[:solution])
-        @solution.post!
         flash_notice
         redirect_to @solution
       else

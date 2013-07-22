@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 class Solution < ActiveRecord::Base
-  include AASM
-
   belongs_to :contest
   belongs_to :problem, :counter_cache => 'tried_count'
   belongs_to :user, :counter_cache => true
@@ -15,40 +13,27 @@ class Solution < ActiveRecord::Base
   validates_attachment_presence :source
   validates_attachment_size :source, :less_than => 64.kilobytes
 
-  has_many :comments,
-           :as => 'topic',
-           :class_name => 'Comment',
+  has_many(:comments,
+           :class_name  => 'Comment',
+           :as          => 'topic',
            :foreign_key => 'topic_id',
-           :dependent => :destroy,
-           :order => 'created_at DESC'
+           :dependent   => :destroy,
+           :order       => 'created_at DESC')
 
-  aasm :column => 'state' do
-    state :updated, :before_enter => :log, :after_enter => :reset!
-    state :waiting, :after_enter => :queue
-    state :defunct
-    state :passed
-    state :failed
-    state :locked
+  scope :passed, where(:state => 'passed')
 
-    event :post do
-      transitions :to => :updated
-    end
-
-    event :submit do
-      transitions :from => [:updated, :waiting, :errored, :passed, :failed], :to => :waiting
-    end
-
-    event :lock do
-      transitions :to => :locked
-    end
-
-    event :errored do
-      transitions :from => :waiting, :to => :defunct
-    end
+  def submit!
+    Resque.enqueue(Sandbox, self.id)
   end
 
-  def queue
-    Resque.enqueue(Sandbox, self.id)
+  def lock!
+    self.state = 'locked'
+    save!
+  end
+
+  def errored!
+    self.state = 'defunct'
+    save!
   end
 
   def language
@@ -64,9 +49,9 @@ class Solution < ActiveRecord::Base
     "Хэрэглэгч #{user.login} -ий бодолтод санал/зөвлөгөө/тусламж бичих"
   end
 
-  def log
+  def log(comment)
     repo = Repo.new(user)
-    repo.commit problem_id.to_s, "Updated solution for #{problem_id}"
+    repo.commit problem_id.to_s, comment
   end
 
   def judged?

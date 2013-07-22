@@ -1,7 +1,6 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    aasm (3.0.16)
     actionmailer (3.2.13)
       actionpack (= 3.2.13)
       mail (~> 2.5.3)
@@ -200,7 +199,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aasm
   authlogic
   bluecloth
   cancan
