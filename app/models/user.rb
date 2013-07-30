@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
 
   def saw!(solution)
     return if owns?(solution)
-    solutions.all(:conditions => {:problem_id => solution.problem_id}).each(&:lock!)
+    solutions.all(:conditions => {:problem_id => solution.problem_id}).each(&:locked!)
   end
 
   def submitted_at

@@ -26,16 +26,6 @@ class Solution < ActiveRecord::Base
     Resque.enqueue(Sandbox, self.id)
   end
 
-  def lock!
-    self.state = 'locked'
-    save!
-  end
-
-  def errored!
-    self.state = 'defunct'
-    save!
-  end
-
   def language
     @language = Language[self[:language]]
   end
@@ -52,6 +42,16 @@ class Solution < ActiveRecord::Base
   def log(comment)
     repo = Repo.new(user)
     repo.commit problem_id.to_s, comment
+  end
+
+  %w(passed failed defunct locked).each do |stt|
+    define_method "#{stt}?" do
+      self.state == stt
+    end
+    define_method "#{stt}!" do
+      self.state = stt
+      save!
+    end
   end
 
   def judged?

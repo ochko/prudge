@@ -58,7 +58,7 @@ class SolutionsController < ApplicationController
   end
 
   def create
-    @solution = Solution.build(params[:solution])
+    @solution = Solution.new(params[:solution])
     @solution.user = current_user
 
     creating do

@@ -73,7 +73,7 @@ class Sandbox
     solution.attempted!
     solution.summarize!
   rescue Language::CompileError
-    solution.errored!
+    solution.defunct!
   end
 
   def check(exe)
