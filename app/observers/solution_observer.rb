@@ -11,7 +11,7 @@ class SolutionObserver < ActiveRecord::Observer
 
     if changes["point"]
       solution.user.resum_points!
-      solution.contest.rank!
+      solution.contest.try(:rank!)
     end
   end
 end
