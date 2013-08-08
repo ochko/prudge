@@ -1,33 +1,32 @@
 # -*- coding: utf-8 -*-
+
 class ContestsController < ApplicationController
+
   authorize_resource :contest, :except => [:index, :last, :show]
+  respond_to :html
 
   def index
     @contests = Contest.order("start DESC").page(params[:page]).per(20)
   end
 
   def watch
-    contest = Contest.find params[:id]
     contest.watchers << current_user
-    render :nothing => true
+    render nothing: true
   end
 
   def unwatch
-    contest = Contest.find params[:id]
     contest.watchers.delete current_user
-    render :nothing => true
+    render nothing: true
   end
 
   def last
     @contest = Contest.find(:last, :order => "start ASC")
     init_user_data
-    render :action => 'show'
+    render :show
   end
 
   def contestants
-    @contest = Contest.find(params[:id])
-
-    if @contest.participants.size > 0
+    if contest.participants.size > 0
       render :partial => 'contestants'
     else
       render :text => message_for(:no_contestants)
@@ -49,38 +48,42 @@ class ContestsController < ApplicationController
       flash_notice
       redirect_to @contest
     else
-      render :action => 'new'
+      render :new
     end
   end
 
   def edit
-    @contest = Contest.find(params[:id])
+    respond_with contest
   end
 
   def update
-    @contest = Contest.find(params[:id])
-    if @contest.update_attributes(params[:contest])
+    if contest.update_attributes(params[:contest])
       flash_notice
-      redirect_to @contest
+      redirect_to contest
     else
-      render :action => 'edit'
+      render :edit
     end
   end
 
   def destroy
-    Contest.find(params[:id]).destroy
+    contest.destroy
     flash_notice
-    redirect_to :action => 'index'
+    redirect_to contests_url
   end
 
   protected
 
-  def init_user_data
-    @solved = { }
-    if current_user
-      current_user.solutions.
-        where(contest_id: @contest.id).
-        each{ |s| @solved[s.problem_id] = s.state }
+    def init_user_data
+      @solved = { }
+      if current_user
+        current_user.solutions.
+          where(contest_id: @contest.id).
+          each{ |s| @solved[s.problem_id] = s.state }
+      end
     end
-  end
+
+  private
+    def contest
+      @contest ||= Contest.find(params[:id])
+    end
 end
