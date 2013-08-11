@@ -37,7 +37,7 @@ Current ruby for prudge is 1.8.7
 * `bundle install`
 * Create database and configure in `config/database.yml`
 * `bundle exec rake db:schema:load`
-* `bundle exec script/server` then open http://0.0.0.0:3000 in browser
+* `bundle exec rails server` or `bundle exec foreman start`
 
 ### Configuring safeexec
 * Initialize submodule: `git submodule update --init`
