@@ -19,6 +19,7 @@ gem 'paperclip', '~>3.0'
 gem 'kaminari'
 gem 'jquery-rails'
 gem 'wmd-rails'
+gem 'pry'
 
 group :assets do
   gem 'sass-rails',   "~> 3.2"
