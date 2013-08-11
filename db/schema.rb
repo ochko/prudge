@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130808160813) do
+ActiveRecord::Schema.define(:version => 20130804055745) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",   :null => false
@@ -26,12 +26,11 @@ ActiveRecord::Schema.define(:version => 20130808160813) do
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "contests", :force => true do |t|
-    t.text     "name",                          :null => false
-    t.datetime "start",                         :null => false
-    t.datetime "end",                           :null => false
-    t.text     "description",                   :null => false
-    t.boolean  "delta",                         :null => false
-    t.integer  "comments_count", :default => 0
+    t.text     "name",        :null => false
+    t.datetime "start",       :null => false
+    t.datetime "end",         :null => false
+    t.text     "description", :null => false
+    t.boolean  "delta",       :null => false
   end
 
   create_table "contests_users", :id => false, :force => true do |t|
