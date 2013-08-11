@@ -1,4 +1,4 @@
-%h1 Write new post
+%h1= t('.write_new_post')
 
 %section
   = form_for @post do |form|
@@ -14,6 +14,6 @@
         = form.text_area(:body, :id => 'editor-input', :class => 'input-block-level')
         %button.btn.btn-primary{:type=> :submit}
           %i.icon-save
-          Save
+          = t('.save')
       .span6
         #editor-preview

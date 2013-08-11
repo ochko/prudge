@@ -14,10 +14,9 @@
         = form.text_area(:body, :id => 'editor-input', :class => 'input-block-level')
         %button.btn.btn-primary{:type=> :submit}
           %i.icon-save
-          Save
+          = t('.save')
         = link_to @post, :confirm => 'Are you sure?', :method => :delete, :class => 'btn' do
           %i.icon-trash
-          Delete
+          = t('.delete')
       .span6
         #editor-preview
-

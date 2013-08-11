@@ -9,6 +9,6 @@
     = simple_format truncate(strip_tags(post.body), :length => 300)
     = link_to post, :class => 'btn btn-mini' do
       %i.icon-arrow-right
-      Read more
+      = t('.read_more')
 
 = paginate @posts

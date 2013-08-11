@@ -5,7 +5,7 @@
         - if @user == current_user
           = link_to new_post_path, :class => 'btn btn-small pull-right' do
             %i.icon-plus-sign
-            New post
+            = t('.new_post')
   %tbody
     - @posts.each do |post|
       %tr
@@ -13,9 +13,8 @@
           %p.lead
             = link_to post.title, post
           %span.muted
-            Posted on
+            = t('.posted_on')
             = l post.updated_at, :format => :date
           = link_to edit_post_path(post), :class => 'btn btn-mini pull-right' do
             %i.icon-pencil
-            Edit
-
+            = t('.edit')

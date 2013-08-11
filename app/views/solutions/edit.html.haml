@@ -11,22 +11,22 @@
   .span5
     %section
       = form_for @solution, :html => { :multipart => true, :class => 'form-horizontal'} do |form|
-        %legend Edit a solution
+        %legend= t('.edit_a_solution')
         - if @solution.contest.nil? && @problem.contest && @problem.contest.continuing?
           = message_box_with_close_button(t('message.individual_submission', :page => link_to(@problem.contest.name, @contest)), css='alert-info')
         = form.hidden_field :contest_id
         .control-group
-          %label.control-label{:for => :language} Source
+          %label.control-label{:for= => :language} t('.source')
           .controls
             = form.file_field :source, :class => 'input-medium'
         .control-group
-          %label.control-label{:for => :language} Language
+          %label.control-label{:for= => :language} t('.language')
           .controls
             = form.select :language, Language.all.collect{|l| [l.name, l.name.downcase]}, {}, :class => 'input-small'
         .control-group
           .controls
             %button{:type=>"submit", :class=>"btn btn-primary"}
               %i.icon-upload
-              Submit
+              = t('.submit')
             = link_to @solution, :class=>"btn" do
-              Cancel
+              = t('.cancel')

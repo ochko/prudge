@@ -7,7 +7,7 @@
         %h2.media-heading
           = @post.title
         .subhead
-          Posted on
+          = t('.posted_on')
           =l @post.updated_at, :format => :date
           by #{link_to @post.author.login, @post.author}
     %section
@@ -15,4 +15,3 @@
 
 %section
   = render :partial => 'comments/commentable', :object => @post
-    

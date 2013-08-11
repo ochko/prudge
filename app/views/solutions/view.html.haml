@@ -8,7 +8,7 @@
   .span3.profile
     = render :partial => 'problems/profile', :locals => {:problem => @solution.problem}
 
-%h2 Solution
+%h2= t('.solution')
 
 .row
   .span6
@@ -22,26 +22,26 @@
             %dt
               %i.icon-user
             %dd
-              %span.muted Coder
+              %span.muted= t('.coder')
               = link_to @solution.user.login, @solution.user
           %dl
             %dt
               %i.icon-upload
             %dd
-              %span.muted Submitted
+              %span.muted= t('.submitted')
               = l @solution.source_updated_at
           %dl
             %dt
               %i.icon-time
             %dd
-              %span.muted Time
+              %span.muted= t('.time')
               = @solution.time
               %abbr{:title => 'Milliseconds'} ms
           %dl
             %dt
               %i.icon-plus-sign
             %dd
-              %span.muted Points
+              %span.muted= t('.points')
               = @solution.point
 
     = content_tag :pre, @solution.code, :class => 'prettyprint linenums'
@@ -54,7 +54,7 @@
               %button.button{:class=>"close", 'data-dismiss'=>"alert"}
                 %i.icon-remove-circle
               %h4
-                %storng Compiler output
+                %storng= t('.compiler_output')
               %p!= @solution.junk
       .row-fluid
         .span12
@@ -62,7 +62,7 @@
             %thead
               %tr
                 %th{title: 'Test number'}
-                  Tests
+                  = t('.tests')
                 %th{title: 'Test hidden/shown'}
                 %th{title: 'Run status'}
                   %i.icon-cog
@@ -83,7 +83,7 @@
 
     = link_to download_solution_path(@solution), :class => 'btn' do
       %i.icon-download-alt
-      Download source
+      = t('.download_source')
 
 .row
   .span6

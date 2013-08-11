@@ -12,7 +12,7 @@
   %section
     = markdown contest.description
     = link_to contest, :class => 'btn btn-mini' do
-      Visit contest
+      = t('.visit_contest')
       %i.icon-share-alt
 
 = paginate @contests

@@ -28,22 +28,22 @@
             %ul.nav#topnav
               %form.navbar-search.pull-left{:action => "/search", :method => "get"}
                 %input.search-query.span2#search{:type => "text", :placeholder => "Search", :name => "q", :value => params[:q]}
-              %li                
+              %li
                 = link_to contests_path do
                   %i.icon-trophy
-                  Contests
+                  = t('.contests')
               %li
                 = link_to problems_path do
                   %i.icon-question-sign
-                  Problems
+                  = t('.problems')
               %li
                 = link_to blog_posts_path do
                   %i.icon-pencil
-                  Blogs
+                  = t('.blogs')
               %li
                 = link_to users_path do
                   %i.icon-group
-                  Coders
+                  = t('.coders')
               - if logged_in?
                 %li.dropdown
                   %a.dropdown-toggle{'data-toggle' => 'dropdown', :href => '#'}
@@ -53,24 +53,24 @@
                     %li
                       = link_to account_users_path do
                         %i.icon-user
-                        Account
+                        = t('.account')
                     %li
                       = link_to edit_user_path(current_user) do
                         %i.icon-wrench
-                        Preferences
+                        = t('.preferences')
                     %li
                       = link_to dashboard_path do
                         %i.icon-sitemap
-                        Dashboard
+                        = t('.dashboard')
                     %li
                       = link_to logout_path do
                         %i.icon-signout
-                        Logout
+                        = t('.logout')
               - else
                 %li
-                  = link_to 'Login', login_path
+                  = link_to t('.login'), login_path
                 %li
-                  = link_to 'Signup', signup_path
+                  = link_to t('.signup'), signup_path
     .container
       = flashy
       %section
@@ -82,12 +82,11 @@
         %p
           \&copy; #{Settings.copyright % Date.today.year}
         %ul.footer-links
-          %li= link_to 'About', about_path
+          %li= link_to t('.about'), about_path
           %li.muted &middot;
-          %li= link_to 'Help', help_posts_path
+          %li= link_to t('.help'), help_posts_path
           %li.muted &middot;
-          %li= link_to 'Issues', 'https://github.com/ochko/prudge/issues'
+          %li= link_to t('.issues'), 'https://github.com/ochko/prudge/issues'
 
     = javascript_include_tag "application"
 
-    

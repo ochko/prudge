@@ -2,7 +2,7 @@
   = error_messages_for @user
   %fieldset
     %legend
-      Reset your password
+      = t('.reset_your_password')
     = f.label :password, 'Enter your new password'
     .input-prepend
       %span.add-on
@@ -15,5 +15,5 @@
       = f.password_field :password_confirmation, :class => 'span3'
     %br
     %button.btn{:type => 'submit'}
-      Save & Login
+      = t('.save_login')
       %i.icon-signin

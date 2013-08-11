@@ -2,18 +2,18 @@
   .content.clearfix
     = form_for @user do |f|
       %h1
-        Create Your Account
+        = t('.create_your_account')
       .login-social
-        %p Sign in using social network:
+        %p= t('.sign_in_using_social_network:')
         %a.btn.btn-small{:href => "#"}
           %i.icon-twitter
-          Login with Twitter
+          = t('.login_with_twitter')
         %a.btn.btn-small{:href => "#"}
           %i.icon-facebook
-          Login with Facebook
+          = t('.login_with_facebook')
 
       .login-fields
-        %p Create your free account:
+        %p= t('.create_your_free_account:')
         .field
           .input-prepend
             %span.add-on
@@ -39,7 +39,7 @@
       .login-actions
         %button.button.btn.btn-primary
           %i.icon-off
-          Register
+          = t('.register')
       / .actions
   / /content
 / /account-container

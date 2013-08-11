@@ -33,3 +33,7 @@ group :test, :development do
   gem 'spork-rails'
   gem 'rspec-rails'
 end
+
+group :development do
+  gem 'haml-i18n-extractor'
+end

@@ -63,6 +63,12 @@ GEM
     gravtastic (3.2.6)
     haml (4.0.2)
       tilt
+    haml-i18n-extractor (0.3.5)
+      activesupport
+      haml
+      highline
+      tilt
+      trollop (= 1.16.2)
     highline (1.6.16)
     hike (1.2.2)
     i18n (0.6.1)
@@ -189,6 +195,7 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
+    trollop (1.16.2)
     twitter (4.6.2)
       faraday (~> 0.8, < 0.10)
       multi_json (~> 1.0)
@@ -214,6 +221,7 @@ DEPENDENCIES
   dalli
   gravtastic
   haml
+  haml-i18n-extractor
   jquery-rails
   json
   kaminari

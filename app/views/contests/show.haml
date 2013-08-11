@@ -11,10 +11,10 @@
       - watching = @contest.watchers.include? current_user
       = link_to unwatch_contest_path(@contest), :method => :post, :data => {:toggle => :tooltip, :placement => 'bottom', :remote => true}, :id => 'watch', :class=> "btn btn-mini #{watching ? '' : 'hide'}", :title => t('.unwatch') do
         %i.icon-eye-close
-        Unwatch
+        = t('.unwatch')
       = link_to watch_contest_path(@contest), :method => :post, :data => {:toggle => :tooltip, :placement => 'bottom', :remote => true}, :id => 'unwatch', :class => "btn btn-mini #{watching ? 'hide' : ''}", :title => t('.watch') do
         %i.icon-eye-open
-        Watch
+        = t('.watch')
     - if admin?
       = link_to edit_contest_path(@contest), :class => 'btn btn-mini' do
         %i.icon-wrench

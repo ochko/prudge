@@ -68,7 +68,7 @@
             %button.button{:class=>"close", 'data-dismiss'=>"alert"}
               %i.icon-remove-circle
             %h4
-              %storng Compiler output
+              %storng= t('.compiler_output')
             %p!= @solution.junk
     .row-fluid
       .span12
@@ -93,4 +93,3 @@
                 %td= sec2milisec(result.time)
                 %td= result.memory
                 %td= link_to(show_correctness(result.correct?), [@solution, result])
-

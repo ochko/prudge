@@ -4,7 +4,7 @@
       %h1
         Sign in to #{Settings.name}
       .login-fields
-        %p Sign in using your registered account:
+        %p= t('.sign_in_using_your_registered_')
         .field
           .input-prepend
             %span.add-on
@@ -18,19 +18,18 @@
       .login-actions
         %button.button.btn.btn-primary
           %i.icon-off
-          Sign In
+          = t('.sign_in')
 
       .login-social
-        %p Sign in using social network:
+        %p= t('.sign_in_using_social_network:')
         %a.btn.btn-small{:href => "#"}
           %i.icon-twitter
-          Login with Twitter
+          = t('.login_with_twitter')
         %a.btn.btn-small{:href => "#"}
           %i.icon-facebook
-          Login with Facebook
+          = t('.login_with_facebook')
 
 .login-extra
   Don't have an account? #{link_to 'Sign Up', signup_path}
   %br/
   Remind #{link_to 'Password', forgot_password_path}
-

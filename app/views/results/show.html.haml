@@ -9,57 +9,57 @@
       %dt
         %i.icon-user
       %dd
-        %span Coder
+        %span= t('.coder')
         = link_to h(@solution.user.login), @solution.user
     %dl
       %dt
         %i.icon-file-alt
       %dd
-        %span.muted Source
+        %span.muted= t('.source')
         = link_to @solution.source_file_name, @solution
     %dl
       %dt
         %i.icon-upload
       %dd
-        %span.muted Submitted
+        %span.muted= t('.submitted')
         = l @solution.source_updated_at
     %dl
       %dt
         %i.icon-exchange
       %dd
-        %span.muted Result
+        %span.muted= t('.result')
         = show_correctness @result.matched
     %dl
       %dt
         %i.icon-cog
       %dd
-        %span.muted Program
+        %span.muted= t('.program')
         = translate_message(@result.execution)
     %dl
       %dt
         %i.icon-time
       %dd
-        %span.muted Time
+        %span.muted= t('.time')
         = @result.time
         ms
     %dl
       %dt
         %i.icon-hdd
       %dd
-        %span.muted Memory
+        %span.muted= t('.memory')
         = @result.memory
         kb
 .row
   .span6
-    %h3 Input
+    %h3= t('.input')
     %pre.io= @result.test.input_head
 .row
   .span6
-    %h3 Output
+    %h3= t('.output')
     %pre.io= @result.data
 
 - unless @result.matched
   .row
     .span6
-      %h3 Correct
+      %h3= t('.correct')
       %pre.io= @result.test.output_head
