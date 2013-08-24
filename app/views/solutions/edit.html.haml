@@ -16,11 +16,11 @@
           = message_box_with_close_button(t('message.individual_submission', :page => link_to(@problem.contest.name, @contest)), css='alert-info')
         = form.hidden_field :contest_id
         .control-group
-          %label.control-label{:for= => :language} t('.source')
+          %label.control-label{:for= => :language}= t('.source')
           .controls
             = form.file_field :source, :class => 'input-medium'
         .control-group
-          %label.control-label{:for= => :language} t('.language')
+          %label.control-label{:for= => :language}= t('.language')
           .controls
             = form.select :language, Language.all.collect{|l| [l.name, l.name.downcase]}, {}, :class => 'input-small'
         .control-group

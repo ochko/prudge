@@ -43,8 +43,11 @@
             %dd
               %span.muted= t('.points')
               = @solution.point
+          = link_to download_solution_path(@solution), :class => 'btn btn-small pull-right' do
+            %i.icon-download-alt
+            = t('.download')
 
-    = content_tag :pre, @solution.code, :class => 'prettyprint linenums'
+    %pre.prettyprint.linenums~ @solution.code
 
     - if @solution.judged?
       - unless @solution.junk.blank?
@@ -80,10 +83,6 @@
                   %td= sec2milisec(result.time)
                   %td= result.memory
                   %td= link_to(show_correctness(result.correct?), [@solution, result])
-
-    = link_to download_solution_path(@solution), :class => 'btn' do
-      %i.icon-download-alt
-      = t('.download_source')
 
 .row
   .span6
