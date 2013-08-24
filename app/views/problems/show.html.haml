@@ -49,7 +49,7 @@
     .tab-content
       .tab-pane.active#problem-text
         %section
-          = markdown @problem.text
+          ~ markdown @problem.text
           - if !@problem.source.blank?
             .muted.problem-source= t '.source', :source => h(@problem.source)
 

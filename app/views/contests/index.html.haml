@@ -10,7 +10,7 @@
       = show_status contest
 
   %section
-    = markdown contest.description
+    ~ markdown contest.description
     = link_to contest, :class => 'btn btn-mini' do
       = t('.visit_contest')
       %i.icon-share-alt

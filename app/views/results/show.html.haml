@@ -52,14 +52,14 @@
 .row
   .span6
     %h3= t('.input')
-    %pre.io= @result.test.input_head
+    %pre.io~ @result.test.input_head
 .row
   .span6
     %h3= t('.output')
-    %pre.io= @result.data
+    %pre.io~ @result.data
 
 - unless @result.matched
   .row
     .span6
       %h3= t('.correct')
-      %pre.io= @result.test.output_head
+      %pre.io~ @result.test.output_head

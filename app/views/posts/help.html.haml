@@ -13,4 +13,4 @@
     - @posts.each do |post|
       %section{:id => "help-#{post.id}"}
         %h2= post.title
-        = markdown post.body
+        ~ markdown post.body

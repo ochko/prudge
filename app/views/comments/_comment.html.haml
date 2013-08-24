@@ -7,6 +7,4 @@
         1
         %i.icon-heart
     .comment-body
-      = simple_format h(comment.text)
-
-      
+      ~ simple_format h(comment.text)
