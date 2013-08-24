@@ -37,4 +37,5 @@ end
 
 group :development do
   gem 'haml-i18n-extractor'
+  gem 'guard-livereload'
 end
