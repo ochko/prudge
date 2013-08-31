@@ -80,7 +80,7 @@ $(function() {
         var icon = $(this).find('i');
         var iconClass = icon.attr('class');
         icon.removeClass().addClass('icon-refresh icon-spin');
-        
+
         $.ajax({
             url: link,
             type: 'GET',
@@ -152,12 +152,6 @@ $(function() {
             });
         });
         return false;
-    });
-
-    $('#check-button').click(function(){
-        $('#check-button').hide();
-        $('#result-content').hide();
-        $('#check-wait').show();
     });
 
     $('#comment-form').submit(function(e){

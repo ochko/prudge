@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130804055745) do
+ActiveRecord::Schema.define(:version => 20130831153215) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",   :null => false
@@ -113,22 +113,22 @@ ActiveRecord::Schema.define(:version => 20130804055745) do
   add_index "results", ["test_id"], :name => "index_results_on_test_id"
 
   create_table "solutions", :force => true do |t|
-    t.integer  "problem_id",                          :null => false
-    t.integer  "user_id",                             :null => false
-    t.float    "percent",            :default => 0.0, :null => false
-    t.float    "time",               :default => 0.0, :null => false
-    t.datetime "created_at",                          :null => false
+    t.integer  "problem_id",                                :null => false
+    t.integer  "user_id",                                   :null => false
+    t.float    "percent",            :default => 0.0,       :null => false
+    t.float    "time",               :default => 0.0,       :null => false
+    t.datetime "created_at",                                :null => false
     t.integer  "contest_id"
     t.text     "source_file_name"
     t.datetime "source_updated_at"
     t.float    "point",              :default => 0.0
     t.text     "junk"
     t.integer  "solved_in"
-    t.text     "state"
+    t.text     "state",              :default => "updated", :null => false
     t.integer  "source_file_size"
-    t.text     "language",           :default => "",  :null => false
+    t.text     "language",           :default => "",        :null => false
     t.text     "source_fingerprint"
-    t.integer  "attempt_count",      :default => 0,   :null => false
+    t.integer  "attempt_count",      :default => 0,         :null => false
   end
 
   add_index "solutions", ["contest_id"], :name => "index_solutions_on_contest_id"

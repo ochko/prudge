@@ -300,11 +300,11 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
 }
 /* Table sort */
 th.header {
-  cursor: pointer; 
+  cursor: pointer;
 }
 th.header:before {
   font-family: FontAwesome;
-  margin-right: 4px;  
+  margin-right: 4px;
   content: "\f105";
 }
 th.headerSortDown:before {
@@ -544,6 +544,11 @@ header.comment {
   border-bottom-right-radius: 6px;
   zoom: 1;
 }
+
+#check-wait {
+  font-size: 6em;
+}
+
 /* Responsive
 -------------------------------------------------- */
 

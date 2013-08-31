@@ -103,10 +103,10 @@ class SolutionsController < ApplicationController
   def check
     @solution = Solution.find(params[:id])
     authorize! :check, @solution
-    @solution.submit
-    render :text => 'wait'
+    @solution.submit!
   rescue CanCan::AccessDenied => exception
-    render :text => exception.message
+    flash[:notice] = exception.message
+    redirect_to @solution.competing? ? @solution.contest : @solution.problem
   end
 
   private

@@ -2,10 +2,10 @@
   %p
     .btn-group
       - if can? :check, @solution
-        = link_to check_solution_path(@solution), :remote => true, :html => {:id=>'check-button', :class=>"btn btn-small" } do
+        = link_to check_solution_path(@solution), :id=>'check-button', :class=>"btn btn-small" do
           %i.icon-cogs
           = t 'button.run'
-      - if can? :modify, @solution
+      - if can? :update, @solution
         = link_to edit_solution_path(@solution), :class=>"btn btn-small" do
           %i.icon-wrench
           = t 'button.edit'
@@ -93,3 +93,8 @@
                 %td= sec2milisec(result.time)
                 %td= result.memory
                 %td= link_to(show_correctness(result.correct?), [@solution, result])
+  - elsif @solution.submitted?
+    .row-fluid
+      .span12.text-center#solution-percent
+        %i.muted.icon-spin.icon-spinner#check-wait
+        %p.lead= t('.wait-checking')

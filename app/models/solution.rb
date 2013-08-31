@@ -23,7 +23,10 @@ class Solution < ActiveRecord::Base
   scope :passed, where(:state => 'passed')
 
   def submit!
-    Resque.enqueue(Sandbox, self.id)
+    Solution.transaction do
+      Resque.enqueue(Sandbox, self.id)
+      submitted!
+    end
   end
 
   def language
@@ -44,7 +47,7 @@ class Solution < ActiveRecord::Base
     repo.commit problem_id.to_s, comment
   end
 
-  %w(passed failed defunct locked).each do |stt|
+  %w(passed failed defunct locked submitted).each do |stt|
     define_method "#{stt}?" do
       self.state == stt
     end
@@ -75,7 +78,7 @@ class Solution < ActiveRecord::Base
   end
 
   def updated?
-    state == 'updated'
+    state == 'updated' || submitted?
   end
 
   def previous
@@ -99,7 +102,11 @@ class Solution < ActiveRecord::Base
 
   def reset!
     results.clear
-    update_attributes(:percent => 0.0, :time => 0.0, :point => 0.0, :junk => nil)
+    update_attributes(:state => 'updated',
+                      :percent => 0.0,
+                      :time => 0.0,
+                      :point => 0.0,
+                      :junk => nil)
   end
 
   def summarize!
