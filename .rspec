@@ -1,3 +1,4 @@
 --drb
 --color
 --format progress
+-r turnip/rspec

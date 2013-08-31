@@ -28,14 +28,17 @@ group :assets do
   gem 'uglifier'
 end
 
-group :test, :development do
-  gem 'rspec'
-  gem 'spork'
-  gem 'spork-rails'
-  gem 'rspec-rails'
-end
-
 group :development do
   gem 'haml-i18n-extractor'
+end
+
+group :test do
+  gem 'turnip'
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'spork'
+  gem 'spork-rails'
   gem 'guard-livereload'
+  gem 'guard-rspec'
+  gem 'guard-spork'
 end
