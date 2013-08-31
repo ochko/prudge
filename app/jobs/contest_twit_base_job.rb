@@ -1,4 +1,6 @@
 class ContestTwitBaseJob
+  @queue = :twit
+
   def post_for(subject, contest)
     I18n.t(subject,
            :scope => [:twit],

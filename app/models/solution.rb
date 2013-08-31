@@ -74,6 +74,10 @@ class Solution < ActiveRecord::Base
     previous.nil? || (previous.freezed? && !previous.locked?)
   end
 
+  def updated?
+    state == 'updated'
+  end
+
   def previous
     @previous ||= user.solutions.last(:conditions => {:problem_id => problem_id}, :order => 'created_at')
   end

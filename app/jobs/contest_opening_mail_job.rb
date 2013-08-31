@@ -1,4 +1,6 @@
 class ContestOpeningMailJob
+  @queue = :mail
+
   def work(id)
     contest = Contest.find id
 

@@ -1,6 +1,6 @@
 class ProblemTest < ActiveRecord::Base
   scope :real, :conditions => { :hidden => true }
-  
+
   belongs_to :problem, :counter_cache => 'tests_count'
 
   has_many :results, :dependent => :destroy, :foreign_key => 'test_id'
@@ -17,6 +17,10 @@ class ProblemTest < ActiveRecord::Base
 
   def output_head(size=1.kilobytes)
     read_head output.path, size
+  end
+
+  def visible?
+    !hidden
   end
 
   private

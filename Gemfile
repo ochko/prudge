@@ -39,6 +39,9 @@ group :test do
 
   gem 'database_cleaner'  # blank slate for each test run
 
+  gem 'fabrication'       # creates objects for test
+  gem 'faker'             # supply fake data for test objects
+
   gem 'spork'             # preloads rails env for faster test run
   gem 'spork-rails'
 
