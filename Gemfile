@@ -33,12 +33,14 @@ group :development do
 end
 
 group :test do
-  gem 'turnip'
+  gem 'turnip'            # acceptance test
   gem 'rspec'
   gem 'rspec-rails'
-  gem 'spork'
+
+  gem 'spork'             # preloads rails env for faster test run
   gem 'spork-rails'
-  gem 'guard-livereload'
-  gem 'guard-rspec'
-  gem 'guard-spork'
+
+  gem 'guard-livereload'  # reloads browser when files change
+  gem 'guard-rspec'       # run specs
+  gem 'guard-spork'       # loads spork
 end
