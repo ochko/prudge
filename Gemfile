@@ -37,6 +37,8 @@ group :test do
   gem 'rspec'
   gem 'rspec-rails'
 
+  gem 'database_cleaner'  # blank slate for each test run
+
   gem 'spork'             # preloads rails env for faster test run
   gem 'spork-rails'
 
