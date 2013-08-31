@@ -1,11 +1,7 @@
 class Repo
   class << self
-    def path
-      'judge/solutions'
-    end
-
     def root
-      Rails.root.join(path)
+      Rails.root.join(Settings.judge, 'solutions')
     end
 
     attr_accessor :git

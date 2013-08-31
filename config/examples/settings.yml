@@ -1,6 +1,17 @@
-name: "Prudge"
-slogan: "Happy Coding"
-copyright: "All rights reserved"
-description: "Programming contest organization, problem solving site"
-notifier: "email@example.com"
+defaults: &defaults
+  name: "Prudge"
+  slogan: "Happy Coding"
+  copyright: "All rights reserved"
+  description: "Programming contest organization, problem solving site"
+  notifier: "admin@your-domain.here"
+  judge: 'judge'
 
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+  judge: 'spec/judge'
+
+production:
+  <<: *defaults

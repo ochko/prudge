@@ -3,7 +3,7 @@ class Sandbox
 
   class << self
     def root
-      Rails.root.join('judge','sandbox')
+      Rails.root.join(Settings.judge, 'sandbox')
     end
 
     # Resque invokes it
