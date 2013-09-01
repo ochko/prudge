@@ -3,15 +3,6 @@ describe "CoderAbility" do
 
   subject(:ability) {CoderAbility.new(coder)}
 
-  describe "contest" do
-    let(:contest) { Fabricate.build(:contest) }
-
-    it{ should be_able_to(:read, contest) }
-    it{ should_not be_able_to(:update, contest) }
-    it{ should_not be_able_to(:delete, contest) }
-    it{ should_not be_able_to(:create, contest) }
-  end
-
   describe "problem" do
     it{ should be_able_to(:create, Problem) }
 
@@ -108,14 +99,17 @@ describe "CoderAbility" do
   end
 
   describe "contest" do
-    let(:contest) { Fabricate :contest }
+    let(:contest) { Fabricate.build(:contest) }
 
     it{ should be_able_to(:watch, contest) }
     it{ should be_able_to(:unwatch, contest) }
+    it{ should be_able_to(:contestants, contest) }
     it{ should be_able_to(:read, contest) }
     it{ should be_able_to(:last, contest) }
     # but
-    it{ should_not be_able_to(:manage, contest) }
+    it{ should_not be_able_to(:update, contest) }
+    it{ should_not be_able_to(:delete, contest) }
+    it{ should_not be_able_to(:create, contest) }
   end
 
   describe "post" do

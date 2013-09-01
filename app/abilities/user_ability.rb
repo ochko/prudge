@@ -13,7 +13,7 @@ class UserAbility < BaseAbility
 
     can :manage, Post, :author_id => user.id, :category => 'blog'
 
-    can [:watch, :unwatch], Contest
+    can [:watch, :unwatch, :contestants], Contest
 
     can :create, [Problem, Comment]
 
