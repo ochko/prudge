@@ -104,6 +104,7 @@ class SolutionsController < ApplicationController
     @solution = Solution.find(params[:id])
     authorize! :check, @solution
     @solution.submit!
+    render :action => 'show'
   rescue CanCan::AccessDenied => exception
     flash[:notice] = exception.message
     redirect_to @solution.competing? ? @solution.contest : @solution.problem
