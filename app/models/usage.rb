@@ -43,17 +43,17 @@ class Usage
   end
 
   def initialize(raw)
-    @raw = raw
+    @raw = raw || ''
     parse
   end
 
   attr_accessor :status, :time, :memory, :state
 
   def parse
-    lines = @raw.split("\n")
+    lines = @raw.strip.split("\n")
     self.status = lines[0]
-    self.time = strip(lines[-1], 'cpu usage: ', ' miliseconds')
-    self.memory = strip(lines[-2], 'memory usage: ', ' kbytes')
+    self.time = UsageTime(lines[-1])
+    self.memory = UsageMemory(lines[-2])
   end
 
   def state
@@ -65,5 +65,23 @@ class Usage
   def strip(line, *patterns)
     return if line.blank?
     patterns.reduce(line) {|stripped, pattern| stripped.sub(pattern, '')}
+  end
+
+  def UsageTime(string)
+    text = strip(string, 'cpu usage:')
+
+    miliseconds =
+      if text =~ /miliseconds/
+        strip(text, 'miliseconds')
+      elsif text =~ /seconds/
+        Float(strip(text, 'seconds'))*1000
+      end
+
+    miliseconds.blank? ? nil : Integer(miliseconds)
+  end
+
+  def UsageMemory(string)
+    kbytes = strip(string, 'memory usage: ', ' kbytes')
+    kbytes.blank? ? nil : Integer(kbytes)
   end
 end
