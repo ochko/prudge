@@ -1,10 +1,11 @@
 describe "CoderAbility" do
   let(:coder) { Fabricate :coder }
-  let(:contest) { Fabricate.build(:contest) }
 
   subject(:ability) {CoderAbility.new(coder)}
 
   describe "contest" do
+    let(:contest) { Fabricate.build(:contest) }
+
     it{ should be_able_to(:read, contest) }
     it{ should_not be_able_to(:update, contest) }
     it{ should_not be_able_to(:delete, contest) }
@@ -233,5 +234,10 @@ describe "CoderAbility" do
       end
 
     end
+  end
+
+  describe "result" do
+    it{ should be_able_to(:read, Fabricate.build(:result, hidden: false)) }
+    it{ should_not be_able_to(:read, Fabricate.build(:result, hidden: true)) }
   end
 end

@@ -8,7 +8,7 @@ class JudgeAbility < UserAbility
 
     can :manage, ProblemTest
 
-    can [:modify, :check], Solution
+    can [:update, :check], Solution
 
     can :read, Result
 

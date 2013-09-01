@@ -3,7 +3,7 @@ class UserAbility < BaseAbility
     super(user)
 
     can :read, Result do |result|
-      !result.hidden || user.owns?(result.solution)
+      result.visible?
     end
 
     can :read, Solution do |solution|

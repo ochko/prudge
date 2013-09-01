@@ -1,6 +1,7 @@
 class Result < ActiveRecord::Base
   belongs_to :solution
   belongs_to :test, :class_name =>'ProblemTest', :foreign_key=>'test_id'
+  has_one :problem, :through => :solution
 
   scope :correct, :conditions => { :matched => true }
   scope :incorrect, :conditions => { :matched => false }
@@ -37,5 +38,9 @@ class Result < ActiveRecord::Base
 
   def correct?
     normal? and matched
+  end
+
+  def visible?
+    !hidden
   end
 end

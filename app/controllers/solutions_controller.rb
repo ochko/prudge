@@ -124,7 +124,7 @@ class SolutionsController < ApplicationController
 
   def editing
     @solution = Solution.find(params[:id])
-    authorize! :modify, @solution
+    authorize! :update, @solution
     Solution.transaction do
       yield
     end
