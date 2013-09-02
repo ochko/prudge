@@ -1,17 +1,103 @@
 # CHANGELOG
 
+## 2013-09-01
+ * Code check will be processed in the background
+ * Removed counter_cache columns
+ * Added foreman for starting all required processes
+ * Resque for background processing
+ * Removed contest level, problem level and private contest
+ * Added fingerprint to solutions
+ * Using output file instead db column
+ * More localizations extracted
+ * erb --> haml
+ * Using prettify for source code display
+ * Show only first 1 kilbytes of test result
+ * Added posts and removed pages, topics and lessons resources
+ * Separated abilities by role
+ * It is possible to solve problem with all tests visible
+ * Removed rss feeds
+ * Removed best solution and solved solutions tabs, use table sorter
+ * Some mobile browser friendliness
+ * Sleek view for users ranking
+ * Deleted atom_feed_helper plugin
+ * Replaced legacy auto_complete plugin with bootstrap typeahead
+ * Replace plugin with wmd editor gem
+ * Rename rhtml to html.erb
+ * Simpler list on user profile
+ * Replaced will_paginate with kaminari
+ * User profile page re-desinged
+ * Languages are no longer AR, now in config
+ * Delete all social column except web and twitter
+ * Replaced blueprint with bootstrap
+ * Major UI redesign
+ * Upgrade to Rails 3.2, Ruby 1.9.3
+ * Asset pipeline
+ * Store test data with paperclip(out of db)
+ * CanCan for authorization
+ * Update rails gem to 2.3.18
+
+## 2011-11-29
+ * Removed google ad. not being clicked nor being noticed by coders :(
+ * Twitter announcement added
+ * Using delayed job for new contest notification
+ * Added new kind of contest -- contributors only private contest
+ * Using haml as templating enginge
+ * Added support for script languages(ruby, python)
+ * Using bundler for managing gem versions
+ * Google adsense :P
+ * Using web font
+ * Take first solved time as a time
+ * Sponsors added
+ * Limit output file size
+ * Hide inactive problems on search page
+ * Level is changed to power of 2
+ * Ingore white spaces when comparing results
+ * Rails gem version upgraded to 2.3.8
+ * Harsh is replaced by jquery.syntax
+ * problem points are power of 2
+ * Comments added per solution
+ * Installed exception notification
+ * Customized HTTP error pages
+ * Scrooge is used for loading only needed columns
+ * Social media infor added to user profiles
+ * Harsh plugin for code styling
+ * Started using local git repo per user
+
 ## 2010-05-31
+ * Notification mailer new release
+ * Added favicon
+ * Show only output of compile error
+ * Show diff of results
+ * Replaced attachment_fu with paperclip and attachment model removed
+ * Twitter like flow pagination
+ * Use ajax for user tab
+ * Removed in_place_editing and respont_to_parent
+ * Homeworks removed from lessons
+ * Sanitized users listing
+ * Comment moderation added
+ * Search feature added using thinking_sphinx
+ * Removed plugins acts_as_authenticated, acl_system2, acts_as_rateable
+ * Using jrails
+ * OpenID is added by open_id_authentication plugin
+ * Tabbed view for user page
+ * Removed banner configurable banner
+ * Removed contest types
+ * Removed whole course organization section
+ * Removed tasks and fullfillments section
+ * Removed student workgroups
+ * Removed polls
+ * Removed prizes
+ * Removed problem types
+ * Removed Questions & Answers section
+ * Removed ratings feature
+ * Removed sponsors section
+ * Removed some files in scripts/* from old rails version
+ * Removed some plugins acts_as_taggable, classic_pagination, acts_as_textiled, fckeditor, interlock, limited_sessions, mini_magick, ssl_requirement, textile_editor
 
-Хэд хоног чөлөө заваараа оролдсоор coder.mn сайтыг шинэчиллээ. Хэдхэн цагийн дараа шинэ хувилбар онлайн болсон байх болно. Шинэчлэлт хийсэн зорилго бол илүү энгийн болгох, ажиллагааг сайжруулах байв. Хийгдсэн өөрчлөлтүүд:
+## 2010-05
+ * Copied from SVN repository
+ * Upgraded to Rails 2.1.1
 
- * Хэрэглэгчийн нэр дотроос зарим содон тэмдэгтүүдийг хассан. Тухайлбал налуу зураас, хаалт гэх мэт. Тэгэхээр зарим хэрэглэгчдийн логин нэр солигдсон байгаа гэсэн үг. Нууц үг сэргээх линкээр ороод бүртгүүлсэн имэйлээ оруулвал хэрэглэгчийн нэрийг нууц үг сэргээх линкийн хамт илгээх болно.
- * Нууц үг хадгалах энкриптлэл солигдсон. Иймд хуучин нууц үгээрээ орж чадахгүй гэсэн. Вэб дээр нууц үгсийг тэр чигээр хадгалдаггүй учраас нууц үг сэргээх линкээр орж нууц үгээ шинэчлэхээс өөр аргагүй гэсэн үг.
- * Өөрийн зургийг оруулах боломжийг хассан. Оронд нь gravatar ашиглах болсон. Gravatar.com руу ороод зургаа оруулчвал coder.mn дээр зураг тань гараад ирэх болно.
- * Хэрэглэгчийн нэр нууц үгээр орохоос гадна, openid хэрэглэж нэвтрэх боломжтой болсон.
- * Бодлого, хичээл оруулахад файл хавсаргадаг боломжийг хассан. Хэрэв зураг, код мэтийг хавсаргах шаардлагатай бол tinypic.com, youtube.com зэрэг вэб сайтууд дээр байрлуулаад линкийг нь оруулах хэрэгтэй. Энэ нь сэрвэр дээр зай хэмнэхдээ биш вэб ачаалагдах хурдыг нэмж байгаа давуу талтай.
- * Бодлогод оноо оруулахгүй, харин 4 түвшинтэй болгосон. Үүнтэй холбоотойгоор хэрэглэгчдийн нийт оноо бас өөрчлөгдсөн.
- * Бодлого шалгах системд нилээн өөрчлөлт орсон тул бүх бодолтыг дахин шалгаж оноог шинэчилсэн байгаа.
- * gcc 4.1 хувилбар луу шилжсэн тул зарим бодолт компайл хийгдэхгүй болсон байсныг зассан. Ихэвчлэн C++ дээр бодсон бодолтод header файл оруулахаа мартсан байсан.
- * Өмнөх бодлого шалгах систем санах ойн хязгаарыг жаахан алдаатай тооцдог байсныг засахыг оролдсон. Шинэ шалгагчаар үзэхэд зарим бодлого санах ойн хязгаарыг давахгүй болсон тохиолдол гарч байна лээ.
- * Ажил захиалдаг, хийж гүйцэтгэдэг хэсгийг хассан. Учир нь хэн ч хэрэглэхгүй байсан.
- * Зарим бага сага өөрчлөлтийг энд дурьдсангүй орхив. Өнөө хүртэл тасалдах, зогсох зэрэг асуудал олон байсан боловч, хэрэглэсээр ирсэн тэвчээртэй кодерууддаа баярлалаа.
+## 2007-11-25
+ * SVN Repository created
+ * Application created with Rails 1.2
