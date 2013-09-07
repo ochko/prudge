@@ -21,6 +21,7 @@ gem 'jquery-rails'
 gem 'wmd-rails'
 gem 'pry'
 gem 'foreman'
+gem 'exceptional'
 
 group :assets do
   gem 'sass-rails',   "~> 3.2"
