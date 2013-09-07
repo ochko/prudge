@@ -7,7 +7,7 @@ class ProblemsController < ApplicationController
     column = params[:column] || 'created_at'
     @reverse = (order == 'ASC') ? 'DESC' : 'ASC'
 
-    @problems = @problems.
+    @problems = Problem.active.
       order("#{column} #{order}").
       page(params[:page]).per(20).
       preload(:user)
