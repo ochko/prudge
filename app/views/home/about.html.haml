@@ -6,12 +6,14 @@
   .marketing
     %h1 Supported Languages
     %p.marketing-byline
-      Great languages we support.
-    .row-fluid
-      %ul#language-logos
-        - Language.all.each do |language|
-          %li.span2
-            = image_tag "languages/#{language.name}.png", :alt => language.name, 'data-toggle' => :tooltip, 'data-placement' => :top, :title => language.description
+      Here are great languages we support. You can solve problems using any of these languages.
+    .row
+      - Language.all.each do |language|
+        .span2.language-panel
+          .well.language-logo
+            %h2.name= language.name
+            %hr.soften.divider
+            = language.description
 
     %hr.soften/
     %h1 Judges

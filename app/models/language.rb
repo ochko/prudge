@@ -1,3 +1,21 @@
+# Programming language responsible for compiling a source code
+#
+# @name String
+# @describtion String
+# @compiler String for compiler command contains at least 2 `%s` expression.
+#   first %s is for source file path
+#   second %s is for executable path
+#   third %s is optional, like class name containin main method etc
+#   Examples::
+#     C:    `/usr/bin/gcc -x c -lm %s -o %s`
+#     Java: `/usr/bin/gcj %s -o %s --main=%s -lm`
+#     C#:   `gmcs -out:Program.exe -target:exe %s && mkbundle Program.exe --deps --static -o Program.c -oo Program.o -c && cc -ggdb -o %s -Wall Program.c -I/usr/local/include/mono-2.0 -L/usr/local/lib -lmono-2.0 -liconv -lm Program.o`
+# @interpreter String for scrtiping language interpreter
+#   It doesn't need any parameter.
+#   Examples::
+#     Ruby: `/usr/local/bin/ruby`
+#     Python: `/opt/python/bin/python3`
+#
 class Language
   class << self
     @@ary = []
@@ -62,6 +80,15 @@ class Language
     compiler.blank? && interpreter.blank?
   end
 
+  # Compiles if language is compiled
+  #
+  # == Parameters:
+  # progam::
+  #   object that responds to `fullname`, `path` and `basename`
+  #
+  # == Returns:
+  # Compiled executable path
+  #
   def compile(program)
     raise CompileError.new("Compiler or Interpreter needs") if invalid?
 
