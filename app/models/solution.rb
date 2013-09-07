@@ -24,7 +24,7 @@ class Solution < ActiveRecord::Base
 
   def submit!
     Solution.transaction do
-      Resque.enqueue(Sandbox, self.id)
+      Resque.enqueue(CheckSolutionJob, self.id)
       submitted!
     end
   end

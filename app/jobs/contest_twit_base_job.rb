@@ -1,4 +1,4 @@
-class ContestTwitBaseJob
+class ContestTwitBaseJob < BaseJob
   @queue = :twit
 
   def post_for(subject, contest)

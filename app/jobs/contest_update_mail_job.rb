@@ -1,7 +1,7 @@
-class ContestUpdateMailJob
+class ContestUpdateMailJob < BaseJob
   @queue = :mail
 
-  def work(id)
+  def self.perform(id)
     contest = Contest.find id
 
     contest.watchers.each do |user|

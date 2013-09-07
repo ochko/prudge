@@ -1,7 +1,7 @@
-class ContestOpeningMailJob
+class ContestOpeningMailJob < BaseJob
   @queue = :mail
 
-  def work(id)
+  def self.perform(id)
     contest = Contest.find id
 
     User.where(notify_new_contests: true).each do |user|

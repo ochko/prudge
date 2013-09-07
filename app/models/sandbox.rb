@@ -1,15 +1,7 @@
 class Sandbox
-  @queue = :high
-
   class << self
     def root
       Rails.root.join(Settings.judge, 'sandbox')
-    end
-
-    # Resque invokes it
-    def perform(id)
-      sandbox = new(Solution.find(id))
-      sandbox.run
     end
   end
 

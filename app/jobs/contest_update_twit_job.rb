@@ -1,7 +1,7 @@
 class ContestUpdateTwitJob < ContestTwitBaseJob
   @queue = :twit
 
-  def work(id)
+  def self.perform(id)
     contest = Contest.find(id)
     Twitter.update(post_for :update_announcement, contest)
   end
