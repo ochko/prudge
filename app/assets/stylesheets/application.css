@@ -10,6 +10,7 @@
  *
  *= require bootstrap
  *= require bootstrap-responsive
+ *= require font-awesome
  *= require login
  *= require cirque
  *= require wmd/wmd
