@@ -19,11 +19,20 @@ module SolutionsHelper
     end
   end
 
+  StateIcons = {
+    'ng'     => 'icon-bug',
+    'ok'     => 'icon-rocket',
+    'timeout'=> 'icon-dashboard',
+    'memory' => 'icon-hdd',
+    'output' => 'icon-beaker',
+    'invalid'=> 'icon-ban-circle',
+    'return' => 'icon-warning-sign' }
+
   def translate_message(execution_state)
     state = Usage::State.get(execution_state)
 
-    image_tag("run-#{state.abbr}.png",
-              :title => t(state.abbr, :scope =>'label.execution'))
+    content_tag(:i, nil, :class => StateIcons[state.abbr],
+                :title => t(state.abbr, :scope =>'label.execution'))
   end
 
   def show_correctness(correct)
