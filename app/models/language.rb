@@ -108,7 +108,7 @@ class Language
 
   def exe(program)
     if interpreted?
-      interpreter + ' ' +  program.fullname
+      "#{interpreter} #{program.fullname}"
     else
       program.path
     end
