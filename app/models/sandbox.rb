@@ -1,4 +1,6 @@
 class Sandbox
+  MAX_RUNTIME = 20 # sec
+
   class << self
     def root
       Rails.root.join(Settings.judge, 'sandbox')
@@ -152,6 +154,7 @@ class Sandbox
 
     def options
       ["--cpu #{time}",
+       "--clock #{MAX_RUNTIME}",
        "--mem #{memory}",
        "--fsize #{self.class.fsize}",
        "--nproc #{language.processes}",
