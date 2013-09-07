@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130831153215) do
+ActiveRecord::Schema.define(:version => 20130907171847) do
 
   create_table "comments", :force => true do |t|
     t.integer  "topic_id",   :null => false
@@ -136,8 +136,8 @@ ActiveRecord::Schema.define(:version => 20130831153215) do
   add_index "solutions", ["user_id"], :name => "index_solutions_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.text     "login",                              :null => false
-    t.text     "email",                              :null => false
+    t.text     "login",                                :null => false
+    t.text     "email",                                :null => false
     t.text     "crypted_password"
     t.text     "salt"
     t.datetime "created_at"
@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(:version => 20130831153215) do
     t.text     "perishable_token"
     t.text     "password_salt"
     t.integer  "solutions_count",     :default => 0
-    t.float    "points"
+    t.float    "points",              :default => 0.0, :null => false
     t.boolean  "mailed"
     t.text     "web"
     t.text     "twitter"
