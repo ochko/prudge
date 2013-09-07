@@ -3,7 +3,7 @@ Signin
 ------------------------------------------------------------------- */
 body.login {
   color: #838383;
-  background: url(img/login-bg.png);
+  background-color: #EEEEEE;
 }
 .account-container {
   width: 360px;
@@ -96,7 +96,7 @@ body.login {
   }
 }
 /*------------------------------------------------------------------
- 
+
 Validation Styles
 
 ------------------------------------------------------------------- */
@@ -143,7 +143,6 @@ Validation Styles
   display: inline-block;
   width: 15px;
   height: 15px;
-  background: url(../img/validation/validation-success.png) no-repeat 0 0;
 }
 .control-group.success input + div.clean,
 .control-group.success select + div.clean,

@@ -14,25 +14,24 @@
     float:left;
     border:1px solid #b1b1b1;
     margin-bottom:2px;
-    -moz-border-radius: 15px; 
+    -moz-border-radius: 15px;
     -webkit-border-radius: 15px;
-    background: #f1f1f1 url(/images/bar-back.png) repeat-x; 
 }
 
 .wmd-input
-{ 
+{
     border: 1px solid #b1b1b1;
     height: 240px;
     width: 380px;
 }
 
 .wmd-preview
-{ 
+{
 
 }
 
 .wmd-output
-{ 
+{
 
 }
 
@@ -42,7 +41,7 @@
 	margin-right: 10px;
 	margin-bottom: 5px;
 	margin-top: 5px;
-	padding: 0px;  
+	padding: 0px;
 	height: 20px;
 }
 
@@ -53,10 +52,10 @@ ul.wmd-button-row li
 
 .wmd-spacer
 {
-	width: 20px; 
-	height: 20px; 
+	width: 20px;
+	height: 20px;
 	margin: 0;
-	display: inline-block; 
+	display: inline-block;
 	list-style: none;
 	background-image: url(wmd-separator.png);
 	background-repeat: no-repeat;
@@ -65,25 +64,25 @@ ul.wmd-button-row li
 
 .wmd-button
 {
-	width: 20px; 
-	height: 20px; 
+	width: 20px;
+	height: 20px;
 	margin-left: 1px;
 	margin-right: 1px;
 	background-image: url(wmd-buttons.png);
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
-	display: inline-block; 
+	display: inline-block;
 	list-style: none;
 }
 
 .wmd-button > a
 {
-	width: 20px; 
-	height: 20px; 
+	width: 20px;
+	height: 20px;
 	margin-left: 5px;
 	margin-right: 5px;
-	
-	display: inline-block; 
+
+	display: inline-block;
 }
 
 
@@ -115,7 +114,7 @@ ul.wmd-button-row li
 {
 	border: 1px solid #999999;
 	background-color: #F5F5F5;
-	-moz-border-radius: 10px; 
+	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 }
 
