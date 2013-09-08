@@ -35,5 +35,12 @@ module Prudge
       g.test_framework      :rspec, fixture: true
       g.fixture_replacement :fabrication
     end
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance|
+      if class_attr_index = html_tag.index('class="')
+        html_tag.insert class_attr_index+7, 'error '
+      else
+        html_tag.insert html_tag.index('>'), ' class="error"'
+      end
+    }
   end
 end

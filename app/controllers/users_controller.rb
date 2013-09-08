@@ -10,13 +10,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    @user.save do |result|
-      if result
-        flash_notice
-        redirect_back_or_default account_url
-      else
-        render :action => :new
-      end
+    if @user.save
+      flash_notice
+      redirect_back_or_default account_users_path
+    else
+      render :action => :new
     end
   end
 
@@ -26,14 +24,11 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    @user.attributes = params[:user]
-    @user.save do |result|
-      if result
-        flash_notice
-        redirect_to account_url
-      else
-        render :action => 'edit'
-      end
+    if @user.update_attributes(params[:user])
+      flash_notice
+      redirect_to account_users_path
+    else
+      render :action => 'edit'
     end
   end
 

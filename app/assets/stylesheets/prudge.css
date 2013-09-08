@@ -607,6 +607,10 @@ header.comment {
 
 }
 
+.control-group label.error {
+  color: #b94a48;
+}
+
 /* Responsive
 -------------------------------------------------- */
 

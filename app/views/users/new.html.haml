@@ -11,9 +11,14 @@
         %a.btn.btn-small{:href => "#"}
           %i.icon-facebook
           = t('.login_with_facebook')
-
       .login-fields
         %p= t('.create_your_free_account:')
+        - if @user.errors.any?
+          .alert.alert-block.alert-error
+            %button.close{'type' => 'button', 'data-dismiss'=>'alert'} &times;
+            %ul
+              - @user.errors.full_messages.each do |msg|
+                %li= msg
         .field
           .input-prepend
             %span.add-on

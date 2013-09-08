@@ -9,6 +9,12 @@
           %h3
             %i.icon-wrench
             = t '.update-profile'
+        - if @user.errors.any?
+          .alert.alert-block
+            %button.close{'type' => 'button', 'data-dismiss'=>'alert'} &times;
+            %ul
+              - @user.errors.full_messages.each do |msg|
+                %li= msg
         .control-group
           = f.label :login, t('.login'), :class => 'control-label'
           .controls
