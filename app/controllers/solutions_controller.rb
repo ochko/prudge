@@ -49,7 +49,7 @@ class SolutionsController < ApplicationController
   end
 
   def new
-    @contest = Contest.find(params[:contest_id]) if params[:contest_id]
+    @contest = Contest.find(params[:contest_id]) unless params[:contest_id].blank?
     @problem = (@contest ? @contest.problems : Problem).find(params[:problem_id])
     @solution = @problem.solutions.build(:contest => @contest)
     @solution.user = current_user
