@@ -25,7 +25,11 @@ class Result < ActiveRecord::Base
   end
 
   def data
-    matched ? test.output_head : File.read(output.path)
+    matched ? test.output_head : output_data
+  end
+
+  def output_data
+    output.path ? File.read(output.path) : nil
   end
 
   def failed?
