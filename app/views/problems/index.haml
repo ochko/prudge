@@ -7,12 +7,12 @@
       %thead
         %tr
           %th{:title => 'Difficulty and Success rate'}
-            = link_to problems_path(:column=> 'level', :order => (params[:column] == 'level') ? @reverse : 'ASC') do
+            = link_to problems_path(:column=> 'level', :order => @sort['level']), :title => 'Order by difficulty' do
               %i.icon-flag
           %th
-            = link_to 'Name', problems_path(:column=> 'name', :order => (params[:column] == 'name') ? @reverse : 'ASC'), :title => 'Order by name'
+            = link_to 'Name', problems_path(:column=> 'name', :order => @sort['name']), :title => 'Order by name'
             \/
-            = link_to 'Date', problems_path(:column=> 'created_at', :order => (params[:column] == 'created_at') ? @reverse : 'ASC'), :title => 'Order by date'
+            = link_to 'Date', problems_path(:column=> 'date', :order => @sort['date']), :title => 'Order by date'
           %th{:width => "1%"}
       %tbody
         - @problems.each do |problem|

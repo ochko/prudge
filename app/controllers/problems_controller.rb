@@ -3,14 +3,11 @@ class ProblemsController < ApplicationController
   load_and_authorize_resource :except => :proposed
 
   def index
-    order = params[:order] || 'DESC'
-    column = params[:column] || 'created_at'
-    @reverse = (order == 'ASC') ? 'DESC' : 'ASC'
+    @sort = Problem::Sort.new(params)
 
-    @problems = Problem.active.
-      order("#{column} #{order}").
-      page(params[:page]).per(20).
-      preload(:user)
+    @problems = Problem.active.preload(:user).
+      order(@sort.order).
+      page(params[:page]).per(20)
   end
 
   def proposed

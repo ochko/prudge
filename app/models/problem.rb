@@ -69,4 +69,35 @@ class Problem < ActiveRecord::Base
     self.active_from = contest.start
     self.inactive_from = contest.end
   end
+
+  class Sort
+    Columns = {
+      'name' => 'name',
+      'date' => 'created_at',
+      'level' => "(case tried_count when 0 then 0.5 else solved_count/tried_count::float end)"}
+
+    Directions = {
+      'ASC' => 'ASC',
+      'DESC' => 'DESC' }
+
+    attr_accessor :column, :direction, :key
+
+    def initialize(params)
+      self.key = params[:column] || 'date'
+      self.column = Columns[params[:column]] || 'created_at'
+      self.direction = Directions[params[:order]] || 'DESC'
+    end
+
+    def [](column)
+      key == column ? reversal : 'ASC'
+    end
+
+    def order
+      "#{column} #{direction}"
+    end
+
+    def reversal
+      direction == 'ASC' ? 'DESC' : 'ASC'
+    end
+  end
 end
