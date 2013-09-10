@@ -11,8 +11,8 @@
         ms
   %tbody
     - @solutions.each do |solution|
-      %tr{:class => solution.passed? ? 'passed' : 'failed'}
-        %td= link_to show_correctness(solution.passed?), solution
+      %tr{:class => solution.succeeded? ? 'passed' : 'failed'}
+        %td= link_to show_correctness(solution.succeeded?), solution
         %td
           = link_to solution.user.login, solution.user
           .muted #{solution.language.name}, #{(solution.percent*100).to_i}%

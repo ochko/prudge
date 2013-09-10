@@ -21,6 +21,7 @@ class Solution < ActiveRecord::Base
            :order       => 'created_at DESC')
 
   scope :passed, where(:state => 'passed')
+  scope :succeeded, where(:state => ['passed', 'locked'])
 
   def submit!
     Solution.transaction do
@@ -55,6 +56,10 @@ class Solution < ActiveRecord::Base
       self.state = stt
       save!
     end
+  end
+
+  def succeeded?
+    passed? || locked?
   end
 
   def judged?

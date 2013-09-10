@@ -12,7 +12,7 @@
   %tbody
     - @solutions.each do |s|
       %tr
-        %td= link_to show_correctness(s.passed?), s
+        %td= link_to show_correctness(s.succeeded?), s
         %td
           = link_to s.problem.name, s.problem
           %small.muted
