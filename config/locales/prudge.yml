@@ -276,6 +276,9 @@ mn:
     logout_required: "Энэ хуудас руу орохын тулд гарсан байх ёстой"
     rate_limited: "Хэт хурдан байна, 10 Секунд хүлээгээд дахин илгээнэ үү?"
     search_result_empty: "Хайлтаар юу ч олдсонгүй. Хайх үгээ арай богиносгох юм уу өөр үгээр хайна уу?"
+    search_syntax_error: >-
+      Хайлтын синтакс буруу байна: <strong>%{query}</strong><br/>
+      Зааврыг <a href="http://sphinxsearch.com/docs/archives/1.10/extended-syntax.html">sphinx query syntax</a> хуудсаас үз.
     individual_submission: >-
       Энэ бодолтыг тэмцээнд оруулахгүйгээр илгээх гэж байна.
       Хэрэв тэмцээнд оролцохыг хүсвэл "%{page}" тэмцээний хуудаснаас орно уу?

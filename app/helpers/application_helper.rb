@@ -17,16 +17,16 @@ module ApplicationHelper
   end
 
   def flashy
-    css, message = nil, nil
+    message, css = nil, nil
 
     if msg = flash[:notice] || params[:notice]
-      css, message = 'alert-success', msg
+      message, css = msg, 'alert-success'
     elsif msg = flash[:error] || params[:error]
-      css, message = 'alert alert-error', msg
+      message, css = msg, 'alert alert-error'
     elsif msg = flash[:warning] || params[:warning]
-      css, message = 'alert alert-info', msg
+      message, css = msg, 'alert alert-info'
     elsif msg = flash[:alert] || params[:alert]
-      css, message = 'alert alert-error', msg
+      message, css = msg, 'alert alert-error'
     end
 
     message_box_with_close_button(message, css)

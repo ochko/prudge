@@ -37,6 +37,10 @@ class ApplicationController < ActionController::Base
     flash[:notice] = message_for(name, options)
   end
 
+  def flash_error(name=nil, options = {})
+    flash[:error] = message_for(name, options)
+  end
+
   def admin?
     current_user && current_user.admin
   end

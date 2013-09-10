@@ -7,6 +7,10 @@ class SearchController < ApplicationController
     @results.context[:panes] << ThinkingSphinx::Panes::ExcerptsPane
 
     flash_notice(:search_result_empty) if @results.empty?
+
+  rescue ThinkingSphinx::SyntaxError
+    @results = nil
+    flash_error(:search_syntax_error, query: params[:q])
   end
 
   def hints

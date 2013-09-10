@@ -1,10 +1,11 @@
-= paginate @results
+- if @results
+  = paginate @results
 
-- @results.each do |result|
-  %dl.search-result
-    %dt
-      = link_to result.name, result
-      %small.muted= t result.class.name.downcase, :scope => :type
-    %dd!= result.excerpts.text
+  - @results.each do |result|
+    %dl.search-result
+      %dt
+        = link_to result.name, result
+        %small.muted= t result.class.name.downcase, :scope => :type
+      %dd!= result.excerpts.text
 
-= paginate @results
+  = paginate @results
