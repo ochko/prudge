@@ -4,7 +4,7 @@ class ProblemObserver < ActiveRecord::Observer
       Notifier.problem_selection(problem.user, problem.contest, problem)
     end
     if problem.changes['tried_count'] || problem.changes['solved_count']
-      problem.contest.rank!
+      problem.contest.rank! if problem.contest
     end
   end
 
