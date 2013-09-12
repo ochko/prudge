@@ -40,16 +40,21 @@ class Language
 
     def all
       init if @@hash.empty?
-      @@ary
+      @@ary.select(&:active)
     end
   end
+
   attr_accessor :name, :description, :compiler, :interpreter
-  attr_writer :memory, :time, :processes, :extension
+  attr_writer :memory, :time, :processes, :extension, :active
 
   def initialize(options)
     options.each do |key, value|
       self.send("#{key}=", value)
     end
+  end
+
+  def active
+    @active.nil? ? true : @active
   end
 
   def memory
@@ -91,6 +96,7 @@ class Language
   #
   def compile(program)
     raise CompileError.new("Compiler or Interpreter needs") if invalid?
+    raise CompileError.new("Language is not supported") unless active
 
     return exe(program) if interpreted? # no need to compile
 
