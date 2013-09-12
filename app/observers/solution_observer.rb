@@ -12,6 +12,12 @@ class SolutionObserver < ActiveRecord::Observer
     if changes["point"]
       solution.user.resum_points!
       solution.contest.try(:rank!)
+      Stats.refresh('points')
     end
+  end
+
+  def after_create(solution)
+    Stats.refresh('compilations')
+    Stats.refresh('runs')
   end
 end

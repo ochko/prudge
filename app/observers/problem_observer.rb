@@ -11,4 +11,8 @@ class ProblemObserver < ActiveRecord::Observer
   def before_save(problem)
     problem.update_active_interval if problem.changes['contest_id']
   end
+
+  def after_create(solution)
+    Stats.refresh('problems')
+  end
 end

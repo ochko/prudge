@@ -6,7 +6,8 @@
   .marketing
     %h1 Supported Languages
     %p.marketing-byline
-      Here are great languages we support. You can solve problems using any of these languages.
+      Here are great languages we support.
+      You can solve problems using any of these languages.
     .row
       - Language.all.each do |language|
         .span2.language-panel
@@ -14,7 +15,28 @@
             %h2.name= language.name
             %hr.soften.divider
             = language.description
-
+    %hr.soften/
+    .row-fluid
+      .span3
+        %span.bignum= number_with_delimiter Stats.problems, delimiter: ','
+        %hr.soften.divider
+        %i.icon-puzzle-piece.x6
+        %span.stats-label problems
+      .span3
+        %span.bignum= number_with_delimiter Stats.compilations, delimiter: ','
+        %hr.soften.divider
+        %i.icon-cogs.x6
+        %span.stats-label compilations
+      .span3
+        %span.bignum= number_with_delimiter Stats.runs, delimiter: ','
+        %hr.soften.divider
+        %i.icon-rocket.x6
+        %span.stats-label test runs
+      .span3
+        %span.bignum= number_with_delimiter Stats.points, delimiter: ','
+        %hr.soften.divider
+        %i.icon-dashboard.x6
+        %span.stats-label total points
     %hr.soften/
     %h1 Judges
     %p.marketing-byline
@@ -36,10 +58,12 @@
     %hr.soften/
     %h1 Powered by Prudge
     %p.marketing-byline
-      Need your own contest judge site? Use Prudge for free.
+      Need your own contest judge site? Use
+      %a{:href => "https://github.com/ochko/prudge"}Prudge
+      for free.
     .row-fluid
       .span12
-        %h2 By coders, for coders.
+        %h2 It is by coders, for coders.
         %i.icon-twitter.x6
         %i.icon-github.x6
         %p
