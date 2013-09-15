@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 class ContestObserver < ActiveRecord::Observer
   def after_create(contest)
-    Resque.enqueue ContestOpeningMailJob, contest.id
     Resque.enqueue ContestOpeningTwitJob, contest.id
   end
 
@@ -14,6 +13,5 @@ class ContestObserver < ActiveRecord::Observer
     end
 
     Resque.enqueue ContestUpdateTwitJob, contest.id
-    Resque.enqueue ContestUpdateMailJob, contest.id
   end
 end
