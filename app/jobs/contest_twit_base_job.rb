@@ -1,7 +1,7 @@
 class ContestTwitBaseJob < BaseJob
   @queue = :twit
 
-  def post_for(subject, contest)
+  def self.post_for(subject, contest)
     I18n.t(subject,
            :scope => [:twit],
            :name  => contest.name,
@@ -10,9 +10,7 @@ class ContestTwitBaseJob < BaseJob
            :end   => contest.end)
   end
 
-  private
-
-  def contest_url(contest)
+  def self.contest_url(contest)
     Rails.application.routes.url_helpers.contest_url(contest)
   end
 end
