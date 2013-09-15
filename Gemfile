@@ -22,7 +22,6 @@ gem 'wmd-rails'
 gem 'pry'
 gem 'foreman'
 gem 'exceptional'
-gem 'postmark-rails'
 
 group :assets do
   gem 'sass-rails',   "~> 3.2"
