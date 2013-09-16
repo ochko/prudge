@@ -4,17 +4,6 @@
     %p= Settings.description
 .container
   .marketing
-    %h1 Supported Languages
-    %p.marketing-byline
-      Here are great languages we support.
-      You can solve problems using any of these languages.
-    .row
-      - Language.all.each do |language|
-        .span2.language-panel
-          .well.language-logo
-            %h2.name= language.name
-            %hr.soften.divider
-            = language.description
     %hr.soften/
     .row-fluid
       .span3
@@ -37,6 +26,18 @@
         %hr.soften.divider
         %i.icon-dashboard.x6
         %span.stats-label total points
+
+    %h1 Supported Languages
+    %p.marketing-byline
+      Here are great languages we support.
+      You can solve problems using any of these languages.
+    .row
+      - Language.all.each do |language|
+        .span2.language-panel
+          .well.language-logo
+            %h2.name= language.name
+            %hr.soften.divider
+            = language.description
     %hr.soften/
     %h1 Judges
     %p.marketing-byline
