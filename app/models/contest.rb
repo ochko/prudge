@@ -19,9 +19,9 @@ class Contest < ActiveRecord::Base
     contest.errors.add_to_base("Эхлэх дуусах цаг буруу") if contest.start > contest.end
   end
 
-  scope :current, :conditions => "end > NOW()", :order => "start ASC"
-  scope :finished,:conditions => "end < NOW()", :order => "end DESC"
-  scope :pending, :conditions => "end >= NOW()"
+  scope :current, :conditions => '"end" > CURRENT_TIMESTAMP', :order => "start ASC"
+  scope :finished,:conditions => '"end" < CURRENT_TIMESTAMP', :order => "end DESC"
+  scope :pending, :conditions => '"end" >= CURRENT_TIMESTAMP'
 
   def rank!
     return unless continuing?
