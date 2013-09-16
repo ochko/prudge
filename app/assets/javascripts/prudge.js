@@ -32,6 +32,13 @@ $(function() {
         })
     }, 100);
 
+    if ($('#check-wait-link').length > 0){
+        setTimeout(function () {
+            var link = $('#check-wait-link').attr('href');
+            location.href = link;
+        }, 15000);
+    }
+
     $('#watch').click(function(e) {
         $(this).hide();
         $('#unwatch').show();

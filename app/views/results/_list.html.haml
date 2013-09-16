@@ -96,5 +96,6 @@
   - elsif @solution.submitted?
     .row-fluid
       .span12.text-center#solution-percent
-        %i.muted.icon-spin.icon-spinner#check-wait
+        = link_to @solution, :id => 'check-wait-link' do
+          %i.muted.icon-spin.icon-spinner.x6
         %p.lead= t('.wait-checking')
