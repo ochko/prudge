@@ -249,15 +249,15 @@ mn:
       title: Нэвтрэх
   twit:
     opening_announcement: >-
-      #{name} зарлагдаа.
-      Эхлэх: #{start},
-      Дуусах: #{end}.
-      #{url}
+      %{name} тэмцээн зарлагдаа.
+      Эхлэх: %{start},
+      Дуусах: %{end}.
+      %{url}
     update_announcement: >-
-      #{name} өөрчлөгдөв.
-      Эхлэх: #{start},
-      Дуусах: #{end}.
-      #{url}
+      %{name} тэмцээны хугацаа өөрчлөгдөв.
+      Эхлэх: %{start},
+      Дуусах: %{end}.
+      %{url}
   notifier:
     password_reset_instructions:
       subject: "[%{site}] Нууц үг шинэчлэх заавар"
