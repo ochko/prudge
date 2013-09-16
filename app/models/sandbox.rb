@@ -28,6 +28,10 @@ class Sandbox
       @filename = @source.original_filename.strip
     end
 
+    def language
+      @solution.language
+    end
+
     def basename
       base = File.basename(@filename)
       base.blank? ? @solution.id.to_s : base.sub(/#{extname}$/,'')
