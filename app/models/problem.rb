@@ -65,9 +65,13 @@ class Problem < ActiveRecord::Base
   end
 
   def update_active_interval
-    return unless contest
-    self.active_from = contest.start
-    self.inactive_from = contest.end
+    if contest
+      self.active_from = contest.start
+      self.inactive_from = contest.end
+    else
+      self.active_from = nil
+      self.inactive_from = nil
+    end
   end
 
   class Sort
