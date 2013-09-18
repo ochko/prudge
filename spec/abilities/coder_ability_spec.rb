@@ -156,10 +156,18 @@ describe "CoderAbility" do
     end
 
     context "contest is not selected" do
-      let(:solution) do
-        Fabricate.build :solution, contest: nil
+      let(:problem) { Fabricate.build :problem }
+      let(:solution) { Fabricate.build :solution, contest: nil, problem: problem, user: coder }
+
+      context "problem is owned" do
+        before { problem.user = coder }
+        it{ should be_able_to(:create, solution) }
       end
-      it{ should be_able_to(:create, solution) }
+
+      context "problem is not owned" do
+        before { problem.user.should_not == coder }
+        it{ should_not be_able_to(:create, solution) }
+      end
     end
 
     context "owned by coder" do
