@@ -4,28 +4,31 @@
     %p= Settings.description
 .container
   .marketing
-    %hr.soften/
-    .row-fluid
+    .row-fluid.stats-row
       .span3
         %span.bignum= number_with_delimiter Stats.problems, delimiter: ','
         %hr.soften.divider
-        %i.icon-puzzle-piece.x6
+        %i.icon-puzzle-piece.x6.stats-icon
         %span.stats-label problems
+        %hr.soften.divider
       .span3
         %span.bignum= number_with_delimiter Stats.compilations, delimiter: ','
         %hr.soften.divider
-        %i.icon-cogs.x6
+        %i.icon-cogs.x6.stats-icon
         %span.stats-label compilations
+        %hr.soften.divider
       .span3
         %span.bignum= number_with_delimiter Stats.runs, delimiter: ','
         %hr.soften.divider
-        %i.icon-rocket.x6
+        %i.icon-rocket.x6.stats-icon
         %span.stats-label test runs
+        %hr.soften.divider
       .span3
         %span.bignum= number_with_delimiter Stats.points, delimiter: ','
         %hr.soften.divider
-        %i.icon-dashboard.x6
+        %i.icon-dashboard.x6.stats-icon
         %span.stats-label total points
+        %hr.soften.divider
 
     %h1 Supported Languages
     %p.marketing-byline

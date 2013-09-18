@@ -554,13 +554,21 @@ header.comment {
 }
 
 .bignum {
+  display: block;
+  padding: 10px 0;
   font-size: 40px;
   font-weight: 200;
   color: #5a5a5a;
 }
 
+.stats-row {
+  margin-top: 70px;
+}
+.stats-icon {
+  display: block;
+}
 .stats-label {
-  margin-top: 5px;
+  paddin-bottom: 20px;
   color: #999;
   font-weight: 200;
   font-size: 20px;
