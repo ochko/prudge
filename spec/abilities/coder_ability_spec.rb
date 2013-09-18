@@ -153,6 +153,10 @@ describe "CoderAbility" do
         Fabricate.build :solution, contest: Fabricate.build(:finished_contest)
       end
       it{ should_not be_able_to(:create, solution) }
+      context "solve outside contest" do
+        before {solution.contest = nil}
+        it{ should be_able_to(:create, solution) }
+      end
     end
 
     context "contest is not selected" do
@@ -166,7 +170,7 @@ describe "CoderAbility" do
 
       context "problem is not owned" do
         before { problem.user.should_not == coder }
-        it{ should_not be_able_to(:create, solution) }
+        it{ should be_able_to(:create, solution) }
       end
     end
 

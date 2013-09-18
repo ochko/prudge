@@ -11,11 +11,8 @@ class JudgeAbility < UserAbility
     can [:update, :check], Solution
 
     can :create, Solution do |solution|
-      if contest = solution.contest
-        contest.continuing? && solution.fresh?
-      else
-        solution.fresh?
-      end
+      contest = solution.contest
+      (contest.nil? || contest.continuing?) && solution.fresh?
     end
 
     can :read, Result

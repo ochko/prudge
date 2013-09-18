@@ -27,11 +27,8 @@ class CoderAbility < UserAbility
     end
 
     can :create, Solution do |solution|
-      if contest = solution.contest
-        contest.continuing? && solution.fresh?
-      else
-        user.owns?(solution.problem) && solution.fresh?
-      end
+      contest = solution.contest
+      (contest.nil? || contest.continuing?) && solution.fresh?
     end
 
     cannot :destroy, Problem do |problem|
