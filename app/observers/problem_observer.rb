@@ -7,7 +7,7 @@ class ProblemObserver < ActiveRecord::Observer
     if problem.changes['tried_count'] || problem.changes['solved_count']
       problem.solutions.each do |solution|
         if solution.contest.nil? || solution.contest.continuing?
-          solution.point = points_taken
+          solution.point = solution.points_taken
           solution.save!
         end
       end
