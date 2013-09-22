@@ -65,7 +65,6 @@ class User < ActiveRecord::Base
   end
 
   def resum_points!
-    self.points = point_summary
-    save!
+    update_attribute :points, point_summary
   end
 end
