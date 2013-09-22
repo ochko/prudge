@@ -67,6 +67,7 @@ class SolutionsController < ApplicationController
         flash_notice
         redirect_to @solution
       else
+        @problem = @solution.problem
         render :action => 'new'
       end
     end
