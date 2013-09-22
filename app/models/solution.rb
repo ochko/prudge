@@ -149,7 +149,7 @@ class Solution < ActiveRecord::Base
   end
 
   def points_taken
-    passed_ration * problem.point * attempt_bonus
+    percent * problem.point * attempt_bonus
   end
 
   def average_time
