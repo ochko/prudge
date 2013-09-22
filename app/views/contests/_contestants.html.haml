@@ -9,7 +9,7 @@
             %i.icon-flag
           %th
       %tbody#contestants
-        - @contest.participants.preload(:user).each do |participant|
+        - @contest.participants.order(:rank).preload(:user).each do |participant|
           %tr
             %td.standing= standing(participant.rank)
             %td= link_to participant.user.login, participant.user
