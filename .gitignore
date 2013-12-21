@@ -7,3 +7,4 @@ db/sphinx
 backup/*
 *~
 .DS_Store
+/coverage

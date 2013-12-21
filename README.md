@@ -1,4 +1,4 @@
-# Prudge [![Code Climate](https://codeclimate.com/github/ochko/prudge.png)](https://codeclimate.com/github/ochko/prudge) [![Build Status](https://travis-ci.org/ochko/prudge.png?branch=master)](https://travis-ci.org/ochko/prudge)
+# Prudge [![Code Climate](https://codeclimate.com/github/ochko/prudge.png)](https://codeclimate.com/github/ochko/prudge) [![Build Status](https://travis-ci.org/ochko/prudge.png?branch=master)](https://travis-ci.org/ochko/prudge) [![Coverage Status](https://coveralls.io/repos/ochko/prudge/badge.png)](https://coveralls.io/r/ochko/prudge)
 
 Prudge is an online programming contest judge system.
 

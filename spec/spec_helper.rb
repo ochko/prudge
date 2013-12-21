@@ -8,6 +8,10 @@ Spork.prefork do
   # if you change any configuration or code from libraries loaded here, you'll
   # need to restart spork for it take effect.
 
+  # coveralls.io
+  require 'coveralls'
+  Coveralls.wear!
+
   ENV["RAILS_ENV"] ||= "test"
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
