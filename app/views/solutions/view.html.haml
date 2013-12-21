@@ -47,7 +47,7 @@
             %i.icon-download-alt
             = t('.download')
 
-    %pre.prettyprint.linenums~ @solution.code
+    !~ highlight @solution
 
     - if @solution.judged?
       - unless @solution.junk.blank?

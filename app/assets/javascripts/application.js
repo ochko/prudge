@@ -16,5 +16,4 @@
 //= require bootstrap
 //= require editor
 //= require cirque
-//= require prettify
 //= require prudge

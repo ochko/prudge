@@ -156,10 +156,14 @@ GEM
       mime-types
     pg (0.14.1)
     polyglot (0.3.3)
+    posix-spawn (0.3.8)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
+    pygments.rb (0.5.4)
+      posix-spawn (~> 0.3.6)
+      yajl-ruby (~> 1.1.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -274,6 +278,7 @@ GEM
       rack (>= 1.0.0)
     wmd-rails (0.0.7)
       rails (>= 3.1.1)
+    yajl-ruby (1.1.0)
 
 PLATFORMS
   ruby
@@ -303,6 +308,7 @@ DEPENDENCIES
   paperclip (~> 3.0)
   pg
   pry
+  pygments.rb
   rails (~> 3.2)
   rake (>= 0.9.2)
   resque

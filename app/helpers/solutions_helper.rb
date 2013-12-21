@@ -1,5 +1,13 @@
 # -*- coding: utf-8 -*-
 module SolutionsHelper
+  def highlight(solution)
+    options = {encoding: 'utf-8', style: 'monokai'}
+    if lexer = Pygments::Lexer.find(solution.language.name)
+      options.merge!(lexer: lexer.aliases[0].downcase)
+    end
+    Pygments.highlight(solution.code, options)
+  end
+
   def file_link(solution)
     if solution.user_id == current_user.id
       link_to(solution.source_file_name,
