@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'rake', '>= 0.9.2'
 gem 'rails', '~>3.2'
 gem 'capistrano'
+gem 'unicorn'
 gem 'pg'
 gem 'mysql2', '~> 0.3.12b5' # for thinking-sphinx
 gem 'thinking-sphinx', '~>3.0.2'
