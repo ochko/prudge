@@ -54,7 +54,7 @@ class Problem < ActiveRecord::Base
 
   def check!
     unless self.tests.real.empty?
-      self.solutions.each { |solution| solution.check! }
+      self.solutions.each { |solution| solution.submit! }
     end
   end
 
