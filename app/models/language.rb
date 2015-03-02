@@ -108,7 +108,9 @@ class Language
   end
 
   def command(program)
-    cmd = compiler % [program.fullname, program.path, program.basename]
+    cmd = compiler % { source: program.fullname,
+                       output: program.path,
+                       basename: program.basename }
     "#{cmd} 2> #{program.error}"
   end
 

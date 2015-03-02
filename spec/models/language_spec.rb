@@ -4,9 +4,19 @@ describe Language do
   let(:c) {
     Language.
       new(name: 'C',
-          compiler: '/usr/bin/gcc -x c -lm %s -o %s',
-          description: 'GCC version 4.4.3') }
-
+          compiler: '/usr/bin/gcc -x c -lm %{source} -o %{output}',
+          description: 'GCC') }
+  let(:go) {
+    Language.
+      new(name: 'Go',
+          compiler: '/opt/go/bin build -o %{output} %{source}',
+          description: 'golang') }
+  let(:java) {
+    Language.
+      new(name: 'Java',
+          compiler: '/usr/bin/gcj %{source} -o %{output} --main=%{basename} -lm',
+          memory: 14000,
+          description: 'gcj') }
   let(:ruby) {
     Language.
       new(name: 'Ruby',
@@ -21,9 +31,9 @@ describe Language do
 
   let(:program) {
     double('program',
-           :fullname => '/program/full/name.c',
-           :path => '/program/full/name.exe',
-           :basename => 'name.c',
+           :fullname => '/program/path/name.c',
+           :path => '/program/path/exe',
+           :basename => 'name',
            :error => '/tmp/error.log' ) }
 
   describe '#compile' do
@@ -48,7 +58,7 @@ describe Language do
       end
       it 'returns compiled program path' do
         Kernel.should_receive(:system).with('command') { true }
-        c.compile(program).should == '/program/full/name.exe'
+        c.compile(program).should == '/program/path/exe'
       end
       it 'raises error if compilation failed' do
         Kernel.should_receive(:system).with('command') { false }
@@ -58,8 +68,36 @@ describe Language do
   end
 
   describe "#command" do
-    it 'is compiler with source arguments' do
-      c.command(program).should == '/usr/bin/gcc -x c -lm /program/full/name.c -o /program/full/name.exe 2> /tmp/error.log'
+    describe 'for c' do
+      it 'is c compiler with arguments' do
+        c.command(program).should == '/usr/bin/gcc -x c -lm /program/path/name.c -o /program/path/exe 2> /tmp/error.log'
+      end
+    end
+
+    describe 'for java' do
+      let(:program) {
+        double('program',
+               :fullname => '/program/full/Solution.java',
+               :path => '/program/full/Solution',
+               :basename => 'Solution',
+               :error => '/tmp/error.log' ) }
+
+      it 'is java compiler with arguments' do
+        java.command(program).should == "/usr/bin/gcj /program/full/Solution.java -o /program/full/Solution --main=Solution -lm 2> /tmp/error.log"
+      end
+    end
+
+    describe 'for go' do
+      let(:program) {
+        double('program',
+               :fullname => '/program/full/solve.go',
+               :path => '/program/full/solve',
+               :basename => 'solve',
+               :error => '/tmp/error.log' ) }
+
+      it 'is go compiler with arguments' do
+        go.command(program).should == "/opt/go/bin build -o /program/full/solve /program/full/solve.go 2> /tmp/error.log"
+      end
     end
   end
 
@@ -78,7 +116,7 @@ describe Language do
     end
     context 'when compiled' do
       it 'is executable program path' do
-        c.exe(program).should == '/program/full/name.exe'
+        c.exe(program).should == '/program/path/exe'
       end
     end
   end

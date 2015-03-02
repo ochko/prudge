@@ -1,19 +1,19 @@
 -
   name: C
-  compiler: /usr/bin/gcc -x c -lm %s -o %s
+  compiler: /usr/bin/gcc -x c -lm %{source} -o %{output}
   description: GCC version 4.4.3
 -
   name: Pascal
   extension: pas
-  compiler: /usr/bin/fpc %s -o%s
+  compiler: /usr/bin/fpc %{source} -o%{source}
   description: Free Pascal Compiler version 2.4
 -
   name: C++
-  compiler: /usr/bin/g++ -O3 -x c++ %s -o %s
+  compiler: /usr/bin/g++ -O3 -x c++ %{source} -o %{output}
   description: g++ gcc version 4.4.3
 -
   name: Java
-  compiler: /usr/bin/gcj %s -o %s --main=%s -lm
+  compiler: /usr/bin/gcj %{source} -o %{output} --main=%{basename} -lm
   memory: 14000
   description: gcj gcc version 4.4.3
 -
@@ -31,3 +31,7 @@
   memory: 60000
   time: 2
   description: Python 3.2
+-
+  name: Go
+  compiler: /opt/go/bin build -o %{output} %{source}
+  description: go version go1.4.2
