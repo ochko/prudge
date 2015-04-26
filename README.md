@@ -33,7 +33,7 @@ Prudge is an online programming contest judge system.
 
 ### Ruby
 Recommends installing ruby via [rbenv](https://github.com/sstephenson/rbenv).
-Current ruby for prudge is 1.8.7
+Current ruby for prudge is 1.9.3-p448
 
 ## Running
 * `git clone git://github.com/ochko/prudge.git`
