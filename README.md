@@ -15,8 +15,8 @@ Prudge is an online programming contest judge system.
 
 ### Installin on Linux(Ubuntu/Debain)
 * apt-get install memcached
-* apt-get install postgresql92-server
-* apt-get install redis
+* apt-get install postgresql
+* apt-get install redis-server
 * apt-get install sphinxsearch
 
 ### Installing on FreeBSD
