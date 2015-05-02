@@ -39,22 +39,39 @@ Current ruby for prudge is 1.9.3-p551
 * `git clone git://github.com/ochko/prudge.git`
 * `cd prudge`
 * `bundle install`
+
+> Please attent that you can meet some errors during bundling. If you see them, just cope the text of an error in Google and you will find the name of the package which you have to install to fix your issue.
+
 * Create database and configure in `config/database.yml`
+
+> You will also have to create `config.yml`, `languages.yml`, `mail.yml`, `resque.yml`, `sphinx.yml`, `settings.yml` and `twitter.yml` files before entering the next step. Examples of these files can be found into the `examples` folder.
+
 * `bundle exec rake db:schema:load`
 * `bundle exec rails server` or `bundle exec foreman start`
 
+> When starting a server you can probably get some new errors. You should carefully read the output to get rid of them. You may be asked to create folders like `tmp`, `pids` an others and give them chmod 777 in order to make the script working fine.
+
+### Configuring Sphinx
+* `cp config/examples/sphinx.yml config/sphinx.yml`
+* See [Sphinx docs](http://sphinxsearch.com/docs/current.html) for additional configuration.
+
 ### Configuring safeexec
-* Initialize submodule: `git submodule update --init`
-* Make binary executable: `cd judge/runner && make && mv safeexec ../sandbox/`
+* Clone needed files from Github to any folder: `git clone https://github.com/ochko/safeexec.git`
+
+> If you're working with Debian Linux (ex. Ubuntu) please clone a fork of safeexec using `git clone https://github.com/cemc/safeexec.git`
+
+* `cd safeexec && make`. After this you will have a compiled binary file called `safeexec`
+* Copy this file to the `prudge/judge` folder. Assuming the script is located in your home directory do this `mv safeexec ~/prudge/judge/ && cd ~/prudge/judge`
 * Give setuid root permission to the binary: `cd ../sandbox && sudo chown root safeexec && sudo chmod u+s safeexec`
 
 ### Configuring Resque
 * `cp config/examples/resque.yml config/resque.yml`
 * Start workers `QUEUE=* bundle exec rake resque:work`
 
-### Configuring Sphinx
-* `cp config/examples/sphinx.yml config/sphinx.yml`
-* See [Sphinx docs](http://sphinxsearch.com/docs/current.html) for additional configuration.
+> Note that it is ok if you see nothing. It only means that workers are working as they are expected :)
+
+## Making your site available from the Internet
+After you run the script you have to install Nginx or Apache and proxy call from your domain to the port where Prudge is working (3000 or 5000 by default).
 
 ## Contributing
 See [Technical Debts](https://github.com/ochko/prudge/blob/master/TechDebt.md) or [Open Issues](https://github.com/ochko/prudge/issues).
