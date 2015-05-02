@@ -15,7 +15,7 @@ Prudge is an online programming contest judge system.
 
 ### Installin on Linux(Ubuntu/Debain)
 * apt-get install memcached
-* apt-get install postgresql
+* apt-get install postgresql postgresql-contrib
 * apt-get install redis-server
 * apt-get install sphinxsearch
 
@@ -33,7 +33,7 @@ Prudge is an online programming contest judge system.
 
 ### Ruby
 Recommends installing ruby via [rbenv](https://github.com/sstephenson/rbenv).
-Current ruby for prudge is 1.9.3-p448
+Current ruby for prudge is 1.9.3-p551
 
 ## Running
 * `git clone git://github.com/ochko/prudge.git`
