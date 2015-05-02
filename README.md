@@ -71,7 +71,34 @@ Current ruby for prudge is 1.9.3-p551
 > Note that it is ok if you see nothing. It only means that workers are working as they are expected :)
 
 ## Making your site available from the Internet
-After you run the script you have to install Nginx or Apache and proxy call from your domain to the port where Prudge is working (3000 or 5000 by default).
+After you run the script you have to install Nginx or Apache and proxy call from your domain to the needed port and Unicorn.
+
+This is an example of the config which you should create:
+```
+upstream unicorn_prudge {
+  server unix:/tmp/unicorn-coder.sock fail_timeout=0;
+}
+
+server {
+  listen 80;
+  server_name YOUR_DOMAIN;
+  keepalive_timeout 5;
+  root PRUDGE_PUBLIC_FOLDER (for example /home/prudge/prudge/public);
+  try_files $uri/index.html $uri.html $uri @app;
+
+  location @app {
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_redirect off;
+    proxy_pass http://unicorn_prudge;
+  }
+
+  error_page 500 502 503 504 /500.html;
+  location = /500.html {
+    root PRUDGE_PUBLIC_FOLDER (for example /home/prudge/prudge/public);
+  }
+}
+```
 
 ## Contributing
 See [Technical Debts](https://github.com/ochko/prudge/blob/master/TechDebt.md) or [Open Issues](https://github.com/ochko/prudge/issues).
