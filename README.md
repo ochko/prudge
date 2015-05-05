@@ -15,9 +15,9 @@ Prudge is an online programming contest judge system.
 
 ### Installin on Linux(Ubuntu/Debain)
 * apt-get install memcached
-* apt-get install postgresql postgresql-contrib
+* apt-get install postgresql postgresql-contrib libpq-dev
 * apt-get install redis-server
-* apt-get install sphinxsearch
+* apt-get install sphinxsearch mysql-client mysql-server libmysqlclient-dev
 
 ### Installing on FreeBSD
 * cd /usr/ports/databases/memcached && make install clean
@@ -38,6 +38,7 @@ Current ruby for prudge is 1.9.3-p551
 ## Running
 * `git clone git://github.com/ochko/prudge.git`
 * `cd prudge`
+* `gem install bundler`
 * `bundle install`
 
 > Please attent that you can meet some errors during bundling. If you see them, just cope the text of an error in Google and you will find the name of the package which you have to install to fix your issue.
@@ -66,7 +67,8 @@ Current ruby for prudge is 1.9.3-p551
 
 ### Configuring Resque
 * `cp config/examples/resque.yml config/resque.yml`
-* Start workers `QUEUE=* bundle exec rake resque:work`
+* Start workers `RAILS_ENV=production QUEUE=* bundle exec rake resque:work`
+* Or daemonize `nohup bundle exec rake resque:work QUEUE=* PIDFILE=tmp/pids/resque.pid & >> log/resque.log 2>&1`
 
 > Note that it is ok if you see nothing. It only means that workers are working as they are expected :)
 
@@ -99,6 +101,14 @@ server {
   }
 }
 ```
+
+### Configuring paths for binary executables
+* `cp config/examples/binaries.yml config/binaries.yml`
+* Look into `binaries.yml` and set correct paths
+
+### Configuring mail delivery
+* `cp config/examples/mail.yml config/mail.yml`
+* Edit `mail.yml` with appropriate mail settings. See [Action Mailer docs](http://guides.rubyonrails.org/action_mailer_basics.html#example-action-mailer-configuration) for detail.
 
 ## Contributing
 See [Technical Debts](https://github.com/ochko/prudge/blob/master/TechDebt.md) or [Open Issues](https://github.com/ochko/prudge/issues).
