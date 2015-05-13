@@ -1,7 +1,7 @@
 # update config/monitrc if worker process nunmber changes
 worker_processes 1
-base_dir = "/usr/local/apps/coder/current"
-shared_path = "/usr/local/apps/coder/shared"
+base_dir = "/usr/local/apps/prudge/current"
+shared_path = "/usr/local/apps/prudge/shared"
 gem_path = "/usr/local/apps/gems"
 working_directory base_dir
 
@@ -12,7 +12,7 @@ timeout 30
 
 # This is where we specify the socket.
 # We will point the upstream Nginx module to this socket later on
-listen "/tmp/unicorn-coder.sock", :backlog => 64
+listen "/tmp/unicorn-prudge.sock", :backlog => 64
 
 pid "#{shared_path}/pids/unicorn.pid"
 
