@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+# USER=prudge
+# PATH=/home/${USER}/.rbenv/bin:/home/${USER}/.rbenv/shims:${PATH}
+
+if [ -z $BASEDIR ]; then
+  export BASEDIR=/usr/local/apps/prudge
+fi
+
+PID="${BASEDIR}/shared/pids/resque.pid"
+LOG="${BASEDIR}/shared/logs/resque.log"
+
+CMD="bundle exec rake environment resque:work RAILS_ENV={RAILS_ENV:-production} PIDFILE=${PID} VERBOSE=1 QUEUE=* BACKGROUND=yes >> ${LOG} 2>&1"
+
+case "$1" in
+  start)
+      cd ${BASEDIR}/current && $CMD
+      ;;
+  stop)
+      # Wait for child to finish processing then exit
+      pkill -QUIT -F ${PID} && rm -f ${PID}
+      ;;
+  restart)
+      # Immediately kill child then exit
+      pkill -TERM -F ${PID} && rm -f ${PID}
+      # Start
+      cd ${BASEDIR}/current && $CMD
+      ;;
+  *)
+      echo "Usage: resque {start|stop|restart}" >&2
+      exit 1
+      ;;
+esac
+
+exit 0
