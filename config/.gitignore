@@ -8,5 +8,4 @@
 /sphinx.yml
 /exceptional.yml
 /server.pem
-/deploy.rb
 /*.sphinx.conf
