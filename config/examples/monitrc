@@ -1,32 +1,24 @@
 check process prudge_unicorn
-  with pidfile /usr/local/apps/coder/shared/pids/unicorn.pid
-  start program = "/usr/local/apps/coder/current/script/unicorn start"
-  stop program = "/usr/local/apps/coder/current/script/unicorn stop"
+  with pidfile /APPROOT/shared/pids/unicorn.pid
+  start program = "/APPROOT/current/script/unicorn start" as uid DEPLOYER and gid DEPLOYER
+  stop program = "/APPROOT/current/script/unicorn stop"
   if mem is greater than 300.0 MB for 1 cycles then restart       # eating up memory?
   if cpu is greater than 50% for 2 cycles then alert              # send an email to admin
   if cpu is greater than 80% for 3 cycles then restart            # hung process?
   group unicorn
 
-check process prudge_unicorn_wk_0
-  with pidfile /usr/local/apps/coder/shared/pids/unicorn.0.pid
-  start program = "/usr/bin/true"
-  stop program = "/usr/local/apps/coder/current/script/unicorn kill_worker 0"
-  if mem is greater than 300.0 MB for 1 cycles then restart
-  if cpu is greater than 80% for 3 cycles then restart
-  group unicorn_workers
-
 check process prudge_searchd
-  with pidfile /usr/local/apps/coder/shared/pids/sphinx.pid
-  start program = "/usr/local/apps/coder/current/script/sphinx start"
-  stop program = "/usr/local/apps/coder/current/script/sphinx stop"
+  with pidfile /APPROOT/shared/pids/sphinx.pid
+  start program = "/APPROOT/current/script/sphinx start" as uid DEPLOYER and gid DEPLOYER
+  stop program = "/APPROOT/current/script/sphinx stop"
   if mem is greater than 200.0 MB for 1 cycles then restart       # eating up memory?
   if cpu is greater than 50% for 2 cycles then alert              # send an email to admin
   if cpu is greater than 80% for 3 cycles then restart            # hung process?
   group searchd
 
-check process prudge_resque_wk
-  with pidfile /usr/local/apps/coder/shared/pids/resque.pid
-  start program = "/usr/local/apps/coder/current/script/resque start" as uid developer and gid developer
-  stop program = "/usr/local/apps/coder/current/script/resque stop"
+check process prudge_resque
+  with pidfile /APPROOT/shared/pids/resque.pid
+  start program = "/APPROOT/current/script/resque start" as uid DEPLOYER and gid DEPLOYER
+  stop program = "/APPROOT/current/script/resque stop"
   if totalmem is greater than 300 MB for 10 cycles then restart  # eating up memory?
   group resque_workers

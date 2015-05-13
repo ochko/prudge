@@ -9,14 +9,14 @@ development: &my_settings
   html_strip: 1
   charset_type: utf-8
   charset_table: a..z, A..Z->a..z, 0..9, U+0430..U+044f, U+0410..U+042f->U+0430..U+044f, U+0451, U+0401->U+0451, U+04e9, U+04e8->U+04e9, U+04af, U+04ae->U+04af
-  
+
 test:
   <<: *my_settings
-  
+
 production:
   <<: *my_settings
-  pid_file: /usr/apps/prudge/shared/pids/sphinx.pid
-  config_file: /usr/apps/prudge/shared/config/sphinx.conf
-  searchd_file_path: /usr/apps/prudge/shared/sphinx
+  pid_file: /APPROOT/shared/pids/sphinx.pid
+  config_file: /APPROOT/shared/config/sphinx.conf
+  searchd_file_path: /APPROOT/shared/sphinx
   searchd_binary_name: /usr/local/sbin/searchd
   indexer_binary_name: /usr/local/bin/indexer

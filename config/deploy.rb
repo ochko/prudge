@@ -72,12 +72,19 @@ set :bundle_jobs, 2
 
 namespace :deploy do
 
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute "#{current_path}/script/unicorn restart"
+    end
+  end
+
+  desc 'Restart application'
+  task :configure do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute "sed -i 's/APPROOT/#{fetch(:deploy_to)}/g' #{current_path}/config/monitrc"
+      execute "sed -i 's/DEPLOYER/#{fetch(:user)}/g' #{current_path}/config/monitrc"
+      execute "sed -i 's/APPROOT/#{fetch(:deploy_to)}/g' #{current_path}/config/sphinx.yml"
     end
   end
 

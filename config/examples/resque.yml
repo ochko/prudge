@@ -7,5 +7,5 @@ test:
   namespace: test:prudge
 
 production:
-  redis: your.redis.server:6379
+  redis: localhost:6379
   namespace: prudge
