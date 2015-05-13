@@ -22,6 +22,10 @@ set :repo_url, 'git@github.com:ochko/prudge.git'
 # Default value for :pty is false
 # set :pty, true
 
+set :default_env, {
+      'BASEDIR' => fetch(:deploy_to)
+    }
+
 # Default value for :linked_files is []
 set :linked_files,
     fetch(:linked_files, []).push(

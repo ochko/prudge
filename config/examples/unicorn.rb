@@ -1,11 +1,8 @@
-# update config/monitrc if worker process nunmber changes
+base_dir = ENV['BASEDIR'] || "/usr/local/apps/prudge"
+shared_path = "#{base_dir}/shared"
+working_directory "#{base_dir}/current"
+# update monitrc if worker process nunmber changes
 worker_processes 1
-base_dir = "/usr/local/apps/prudge/current"
-shared_path = "/usr/local/apps/prudge/shared"
-gem_path = "/usr/local/apps/gems"
-working_directory base_dir
-
-preload_app true
 
 # we destroy all workers who are taking too long
 timeout 30
@@ -19,6 +16,8 @@ pid "#{shared_path}/pids/unicorn.pid"
 # Set the path of the log files inside the log folder of the testapp
 stderr_path "#{shared_path}/log/unicorn.stderr.log"
 stdout_path "#{shared_path}/log/unicorn.stdout.log"
+
+preload_app true
 
 before_fork do |server, worker|
   # This option works in together with preload_app true setting

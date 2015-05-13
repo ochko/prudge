@@ -1,64 +1,29 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
-### BEGIN INIT INFO
-# Provides:          unicorn
-# Required-Start:    $local_fs $remote_fs $network $syslog
-# Required-Stop:     $local_fs $remote_fs $network $syslog
-# Default-Start:     2 3 4 5
-# Default-Stop:      0 1 6
-# Short-Description: starts the unicorn web server
-# Description:       starts unicorn
-### END INIT INFO
+if [ -z $BASEDIR ]; then
+  export BASEDIR=/usr/local/apps/prudge
+fi
 
-USER=developer
-PATH=/home/$USER/.rbenv/bin:/home/$USER/.rbenv/shims:/usr/local/bin:$PATH
-DAEMON=unicorn_rails
-DAEMON_OPTS="-c /usr/local/apps/coder/current/config/unicorn.rb -E production -D"
-NAME=unicorn
-DESC="Unicorn app for Coder"
-PID=/usr/local/apps/coder/shared/pids/unicorn.pid
-
-workersig () {
-  workerpid="/usr/local/apps/coder/shared/pids/unicorn.$2.pid"
-  test -s "$workerpid" && kill -$1 `cat $workerpid`
-}
+OPTS="-c ${BASEDIR}/current/config/unicorn.rb -E ${RAILS_ENV:-production} -D"
+PID="${BASEDIR}/shared/pids/unicorn.pid"
 
 case "$1" in
   start)
-        CD_TO_APP_DIR="cd /usr/local/apps/coder/current"
-        START_DAEMON_PROCESS="bundle exec $DAEMON $DAEMON_OPTS"
-
-        echo -n "Starting $DESC: "
-        if [ `whoami` = root ]; then
-          su - $USER -c "$CD_TO_APP_DIR > /dev/null 2>&1 && $START_DAEMON_PROCESS"
-        else
-          $CD_TO_APP_DIR > /dev/null 2>&1 && $START_DAEMON_PROCESS
-        fi
-        echo "$NAME."
-        ;;
+      cd ${BASEDIR}/current && bundle exec unicorn_rails ${OPTS}
+      ;;
   stop)
-        echo -n "Stopping $DESC: "
-        kill -QUIT `cat $PID`
-        echo "$NAME."
-        ;;
+      pkill -QUIT -F ${PID}
+      ;;
   restart)
-        echo -n "Restarting $DESC: "
-        kill -USR2 `cat $PID`
-        echo "$NAME."
-        ;;
+      pkill -USR2 -F ${PID}
+      ;;
   reload)
-        echo -n "Reloading $DESC configuration: "
-        kill -HUP `cat $PID`
-        echo "$NAME."
-        ;;
-  kill_worker)
-        workersig QUIT $2 && exit 0
-        echo >&2 "Worker not running"
-        ;;
+      pkill -HUP -F ${PID}
+      ;;
   *)
-        echo "Usage: $NAME {start|stop|restart|reload}" >&2
-        exit 1
-        ;;
+      echo "Usage: unicorn {start|stop|restart|reload}" >&2
+      exit 1
+      ;;
 esac
 
 exit 0
