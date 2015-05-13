@@ -15,7 +15,7 @@ PATH=/home/$USER/.rbenv/bin:/home/$USER/.rbenv/shims:$PATH
 DAEMON=rake
 NAME=searchd
 DESC="Searchd for Coder"
-PID=/usr/local/apps/coder/shared/pids/unicorn.pid
+PID=/usr/local/apps/coder/shared/pids/sphinx.pid
 
 CD_TO_APP_DIR="cd /usr/local/apps/coder/current"
 START_DAEMON_PROCESS="bundle exec $DAEMON"
