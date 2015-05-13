@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
 
   acts_as_authentic do |c|
+    c.crypto_provider = Authlogic::CryptoProviders::Sha512
     c.validate_email_field = false
     c.disable_perishable_token_maintenance = true
   end
