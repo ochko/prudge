@@ -1,3 +1,5 @@
+# Copy this file to production.rb and customize
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
