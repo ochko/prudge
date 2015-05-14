@@ -22,10 +22,6 @@ set :repo_url, 'git@github.com:ochko/prudge.git'
 # Default value for :pty is false
 # set :pty, true
 
-set :default_env, {
-      'BASEDIR' => fetch(:deploy_to)
-    }
-
 # Default value for :linked_files is []
 set :linked_files,
     fetch(:linked_files, []).push(
@@ -79,13 +75,17 @@ namespace :deploy do
     end
   end
 
-  desc 'Restart application'
-  task :configure do
+  task :setup do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "sed -i 's/APPROOT/#{fetch(:deploy_to)}/g' #{current_path}/config/monitrc"
-      execute "sed -i 's/DEPLOYER/#{fetch(:user)}/g' #{current_path}/config/monitrc"
-      execute "sed -i 's/APPROOT/#{fetch(:deploy_to)}/g' #{current_path}/config/sphinx.yml"
+      fetch(:linked_files).each do |path|
+        filename = path.gsub('config/', '')
+        upload! "config/examples/#{filename}", "#{shared_path}/config"
+      end
+      execute "sed -i 's%/APPROOT%#{fetch(:deploy_to)}%g' #{shared_path}/config/monitrc"
+      execute "sed -i 's%/DEPLOYER%#{fetch(:user)}%g' #{shared_path}/config/monitrc"
+      execute "sed -i 's%/APPROOT%#{fetch(:deploy_to)}%g' #{shared_path}/config/sphinx.yml"
     end
   end
 
+  after :publishing, :restart
 end

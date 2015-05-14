@@ -5,7 +5,7 @@ if [ -z $BASEDIR ]; then
 fi
 
 OPTS="-c ${BASEDIR}/current/config/unicorn.rb -E ${RAILS_ENV:-production} -D"
-PID="${BASEDIR}/shared/pids/unicorn.pid"
+PID="${BASEDIR}/shared/tmp/pids/unicorn.pid"
 
 case "$1" in
   start)

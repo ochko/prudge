@@ -1,5 +1,5 @@
 check process prudge_unicorn
-  with pidfile /APPROOT/shared/pids/unicorn.pid
+  with pidfile /APPROOT/shared/tmp/pids/unicorn.pid
   start program = "/APPROOT/current/script/unicorn start" as uid DEPLOYER and gid DEPLOYER
   stop program = "/APPROOT/current/script/unicorn stop"
   if mem is greater than 300.0 MB for 1 cycles then restart       # eating up memory?
@@ -8,7 +8,7 @@ check process prudge_unicorn
   group unicorn
 
 check process prudge_searchd
-  with pidfile /APPROOT/shared/pids/sphinx.pid
+  with pidfile /APPROOT/shared/tmp/pids/sphinx.pid
   start program = "/APPROOT/current/script/sphinx start" as uid DEPLOYER and gid DEPLOYER
   stop program = "/APPROOT/current/script/sphinx stop"
   if mem is greater than 200.0 MB for 1 cycles then restart       # eating up memory?
@@ -17,7 +17,7 @@ check process prudge_searchd
   group searchd
 
 check process prudge_resque
-  with pidfile /APPROOT/shared/pids/resque.pid
+  with pidfile /APPROOT/shared/tmp/pids/resque.pid
   start program = "/APPROOT/current/script/resque start" as uid DEPLOYER and gid DEPLOYER
   stop program = "/APPROOT/current/script/resque stop"
   if totalmem is greater than 300 MB for 10 cycles then restart  # eating up memory?

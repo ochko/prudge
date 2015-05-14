@@ -7,7 +7,7 @@ if [ -z $BASEDIR ]; then
   export BASEDIR=/usr/local/apps/prudge
 fi
 
-PID="${BASEDIR}/shared/pids/resque.pid"
+PID="${BASEDIR}/shared/tmp/pids/resque.pid"
 LOG="${BASEDIR}/shared/logs/resque.log"
 
 CMD="bundle exec rake environment resque:work RAILS_ENV={RAILS_ENV:-production} PIDFILE=${PID} VERBOSE=1 QUEUE=* BACKGROUND=yes >> ${LOG} 2>&1"
