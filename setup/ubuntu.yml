@@ -1,0 +1,163 @@
+- hosts: server
+  sudo_user: root
+  remote_user: ochko
+  vars:
+    - approot: /usr/local/apps/prudge
+    - prudge_user: prudge
+    - prudge_user_pwd: $6$WIHr4pxGhBmo$.Acv7uyDe//qA6q.PJFz1eWH.ONJv/QYTGJ2OwbeyiEOLkPR2NJPKIzv9LSdbWeQFcdv0w7jnYdXpqR8Epmme/
+    - prudge_db: prudge
+    - prudge_server: prudge.test.com
+    - pgadmin_user: postgres
+    - ruby_version: 1.9.3-p551
+  tasks:
+    - name: Add user for prudge
+      user: >-
+        name={{ prudge_user }}
+        password={{ prudge_user_pwd }}
+        shell=/bin/bash
+        generate_ssh_key=yes
+
+    - name: Create app directory
+      file: path={{ approot }} owner={{ prudge_user }} group={{ prudge_user }} mode=0755 state=directory
+
+    - name: Install git
+      apt: name=git state=installed
+
+    - name: Postgresql | Install
+      apt: name={{ item }} state=installed
+      with_items:
+        - postgresql
+        - postgresql-contrib
+        - libpq-dev
+        # py27-psycopg2 for macports
+        - python-psycopg2
+
+    - name: Postgresql | Create user
+      postgresql_user: name={{ prudge_user }} state=present
+      sudo: yes
+      sudo_user: "{{ pgadmin_user }}"
+
+    - name: Postgresql | Create database
+      postgresql_db: name={{ prudge_db }} owner={{ prudge_user }} state=present
+      sudo: yes
+      sudo_user: "{{ pgadmin_user }}"
+
+    - name: Postgresql | Update priviledges
+      postgresql_privs: db={{ prudge_db }} role={{ prudge_user }} privs=ALL type=database
+      sudo: yes
+      sudo_user: "{{ pgadmin_user }}"
+
+    - name: Rbenv | Install required packages
+      apt: name={{ item }} state=installed
+      with_items:
+        - autoconf
+        - bison
+        - build-essential
+        - libssl-dev
+        - libyaml-dev
+        - libreadline6-dev
+        - zlib1g-dev
+        - libncurses5-dev
+        - libffi-dev
+        - libgdbm3
+        - libgdbm-dev
+
+    - name: Rbenv | Install
+      sudo_user: "{{ prudge_user }}"
+      sudo: yes
+      git: repo=https://github.com/sstephenson/rbenv.git dest=~{{ prudge_user }}/.rbenv accept_hostkey=true update=no
+
+    - name: Rbenv | Ensure fragments bash dir exists
+      sudo_user: "{{ prudge_user }}"
+      sudo: yes
+      file: dest=~{{ prudge_user }}/.bash.d/ state=directory
+
+    - name: Rbenv | Install rbenv bash file
+      copy: src=files/rbenv.bash dest=~{{ prudge_user }}/.bash.d/rbenv.bash mode=700 owner={{ prudge_user }}
+
+    - name: Rbenv | Source rbenv bash file in dot bashrc
+      sudo_user: "{{ prudge_user }}"
+      sudo: yes
+      lineinfile: dest=~{{ prudge_user }}/.bash_profile regexp="^source ~/\.bash\.d/rbenv\.bash" insertafter=EOF line="source ~/.bash.d/rbenv.bash" create=yes
+
+    - name: Rbenv | Create plugin directory
+      file: path=~{{ prudge_user }}/.rbenv/plugins/ owner={{ prudge_user }} group={{ prudge_user }} mode=0755 state=directory
+
+    - name: Rbenv | Install ruby-build
+      sudo_user: "{{ prudge_user }}"
+      sudo: yes
+      git: repo=git://github.com/sstephenson/ruby-build.git dest=~{{ prudge_user }}/.rbenv/plugins/ruby-build accept_hostkey=true update=no
+
+    - name: Rbenv | Checks if target ruby is installed
+      shell: cd; bash -lc "rbenv versions | grep {{ ruby_version }} | tr '*' ' ' | tr -d ' ' | cut -f1 -d' '" chdir=~{{ prudge_user }}
+      sudo_user: "{{ prudge_user }}"
+      sudo: yes
+      register: ruby_is_installed
+      changed_when: ruby_is_installed.stdout != ruby_version
+
+    - name: Rbenv | Sets fake ruby version for check mode
+      set_fact:
+        ruby_is_installed: { 'stdout': "{{ruby_version}}" }
+      when: ruby_is_installed|skipped
+
+    - name: Rbenv | Installs ruby
+      shell: bash -lc "rbenv install {{ ruby_version }}" chdir=~{{ prudge_user }} creates=~{{ prudge_user }}/.rbenv/versions/{{ ruby_version }}
+      sudo_user: "{{ prudge_user }}"
+      sudo: yes
+      when: ruby_is_installed.stdout != ruby_version
+      async: 900
+      poll: 30
+
+    - name: Rbenv | Copy .gemrc
+      copy: src=files/gemrc dest=~{{ prudge_user }}/.gemrc owner={{ prudge_user }} force=no
+
+    - name: Rbenv | Installs bundler for new ruby
+      shell: bash -lc "rbenv local {{ ruby_version }} && (gem query --installed --name bundler || gem install bundler)" chdir=~{{ prudge_user }}
+      become_user: "{{ prudge_user }}"
+      become: yes
+
+    - name: Rbenv | Set global rbenv version
+      shell: bash -lc "rbenv global {{ ruby_version }}" chdir=~{{ prudge_user }}
+      sudo_user: "{{ prudge_user }}"
+      sudo: yes
+
+    - name: Install nodejs
+      apt: name=nodejs state=installed
+    - name: Install memcached
+      apt: name=memcached state=installed
+    - name: Install redis
+      apt: name=redis-server state=installed
+    - name: Install sphinxsearch
+      apt: name=sphinxsearch state=installed
+
+    - name: Install mysql for sphinx
+      apt: name={{ item }} state=installed
+      with_items:
+        - mysql-client
+        - mysql-server
+        - libmysqlclient-dev
+
+    - name: Install Nginx
+      apt: name=nginx state=installed
+      register: nginxinstalled
+      notify:
+        - Start Nginx
+
+    - name: Add Site Config
+      when: nginxinstalled|success
+      register: prudgestcfg
+      template: src=files/nginx.conf.j2 dest=/etc/nginx/sites-available/prudge.conf owner=root group=root
+
+    - name: Enable Site Config
+      when: prudgestcfg|success
+      file: src=/etc/nginx/sites-available/prudge.conf dest=/etc/nginx/sites-enabled/prudge.conf state=link
+
+  handlers:
+    - name: Start postgresql
+      service: name=postgresql state=started
+    - name: Start memcached
+      service: name=memcached state=started
+    - name: Start redis
+      service: name=redis state=started
+    - name: Start Nginx
+      service: name=nginx state=started

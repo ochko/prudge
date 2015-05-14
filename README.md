@@ -6,18 +6,32 @@
 
 Prudge is an online programming contest judge system.
 
-## Required services
+# Installing
+
+There are two ways to install prudge -- Manual and Ansible.
+
+## Install using Ansible
+
+Install [ansible](http://docs.ansible.com/intro_installation.html) on your local machine. Ansible is a simple automation tool for deployment. Ensure you have an ssh access to your server, and able to run commands as a root(sudo).
+Generate password hash with `$ mkpasswd --method=SHA-512` and update `prudge_user_pwd` attribute in `setup/ubuntu.yml`.
+Modify `setup/server` file with your own server's hostname.
+
+For Ubuntu/Debian:
+`$ ansible-playbook -i server -u ochko --become --ask-become-pass ubuntu.yml`
+
+For FreeBSD:
+`$ ansible-playbook -i server -u ochko --become --ask-become-pass freebsd.yml`
+
+## Manual
+
+When Ansible playbook is not available for your platform.
+
+### Required services
 * Memcached for caching
 * Postgresql as database
 * Redis for background processing
 * Sphinx for full text search
 * [safeexec](https://github.com/ochko/safeexec) for testing code
-
-### Installin on Linux(Ubuntu/Debain)
-* apt-get install memcached
-* apt-get install postgresql postgresql-contrib libpq-dev
-* apt-get install redis-server
-* apt-get install sphinxsearch mysql-client mysql-server libmysqlclient-dev
 
 ### Installing on FreeBSD
 * cd /usr/ports/databases/memcached && make install clean
@@ -33,13 +47,19 @@ Prudge is an online programming contest judge system.
 
 ### Ruby
 Recommends installing ruby via [rbenv](https://github.com/sstephenson/rbenv).
-Current ruby for prudge is 1.9.3-p551
+When your rbenv and ruby-build is ready do:
 
-## Running
+* `$ rbenv install 1.9.3-p551`
+* `gem install bundler`
+
+### Running
 * `git clone git://github.com/ochko/prudge.git`
 * `cd prudge`
-* `gem install bundler`
 * `bundle install`
+* `cp config/deploy/example.rb config/deploy/production.rb` edit production.rb
+* `bundle exec cap production deploy:check`
+* `bundle exec cap production deploy:setup`
+* `bundle exec cap production deploy`
 
 > Please attent that you can meet some errors during bundling. If you see them, just cope the text of an error in Google and you will find the name of the package which you have to install to fix your issue.
 

@@ -75,6 +75,7 @@ namespace :deploy do
     end
   end
 
+  desc 'Setup configurations'
   task :setup do
     on roles(:app), in: :sequence, wait: 5 do
       fetch(:linked_files).each do |path|
@@ -84,6 +85,17 @@ namespace :deploy do
       execute "sed -i 's%/APPROOT%#{fetch(:deploy_to)}%g' #{shared_path}/config/monitrc"
       execute "sed -i 's%/DEPLOYER%#{fetch(:user)}%g' #{shared_path}/config/monitrc"
       execute "sed -i 's%/APPROOT%#{fetch(:deploy_to)}%g' #{shared_path}/config/sphinx.yml"
+    end
+  end
+
+  desc 'Invoke a rake command on the remote server'
+  task :seed => :set_rails_env do
+    on primary(:app) do
+      within current_path do
+        with :rails_env => fetch(:rails_env) do
+          rake 'db:seed'
+        end
+      end
     end
   end
 
