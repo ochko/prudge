@@ -15,10 +15,16 @@ case "$1" in
       pkill -QUIT -F ${PID}
       ;;
   restart)
-      pkill -USR2 -F ${PID}
+      if [ -e ${PID} ]; then
+          pkill -USR2 -F ${PID}
+      else
+          cd ${BASEDIR}/current && bundle exec unicorn_rails ${OPTS}
+      fi
       ;;
   reload)
-      pkill -HUP -F ${PID}
+      if [ -e ${PID} ]; then
+          pkill -HUP -F ${PID}
+      fi
       ;;
   *)
       echo "Usage: unicorn {start|stop|restart|reload}" >&2

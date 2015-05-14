@@ -94,6 +94,7 @@ namespace :deploy do
     on primary(:app) do
       within current_path do
         with :rails_env => fetch(:rails_env) do
+          rake 'db:schema:load'
           rake 'db:seed'
         end
       end
