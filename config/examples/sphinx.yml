@@ -15,8 +15,8 @@ test:
 
 production:
   <<: *my_settings
-  pid_file: /APPROOT/shared/tmp/pids/sphinx.pid
-  config_file: /APPROOT/shared/config/sphinx.conf
-  searchd_file_path: /APPROOT/shared/sphinx
+  pid_file: APPROOT/shared/tmp/pids/sphinx.pid
+  config_file: APPROOT/shared/config/sphinx.conf
+  searchd_file_path: APPROOT/shared/sphinx
   searchd_binary_name: /usr/local/sbin/searchd
   indexer_binary_name: /usr/local/bin/indexer

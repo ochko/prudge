@@ -1,24 +1,24 @@
 check process prudge_unicorn
-  with pidfile /APPROOT/shared/tmp/pids/unicorn.pid
-  start program = "/APPROOT/current/script/unicorn start" as uid DEPLOYER and gid DEPLOYER
-  stop program = "/APPROOT/current/script/unicorn stop"
+  with pidfile APPROOT/shared/tmp/pids/unicorn.pid
+  start program = "env BASEDIR=APPROOT APPROOT/current/script/unicorn start" as uid DEPLOYER and gid DEPLOYER
+  stop program = "env BASEDIR=APPROOT APPROOT/current/script/unicorn stop"
   if mem is greater than 300.0 MB for 1 cycles then restart       # eating up memory?
   if cpu is greater than 50% for 2 cycles then alert              # send an email to admin
   if cpu is greater than 80% for 3 cycles then restart            # hung process?
   group unicorn
 
 check process prudge_searchd
-  with pidfile /APPROOT/shared/tmp/pids/sphinx.pid
-  start program = "/APPROOT/current/script/sphinx start" as uid DEPLOYER and gid DEPLOYER
-  stop program = "/APPROOT/current/script/sphinx stop"
+  with pidfile APPROOT/shared/tmp/pids/sphinx.pid
+  start program = "env BASEDIR=APPROOT APPROOT/current/script/sphinx start" as uid DEPLOYER and gid DEPLOYER
+  stop program = "env BASEDIR=APPROOT APPROOT/current/script/sphinx stop"
   if mem is greater than 200.0 MB for 1 cycles then restart       # eating up memory?
   if cpu is greater than 50% for 2 cycles then alert              # send an email to admin
   if cpu is greater than 80% for 3 cycles then restart            # hung process?
   group searchd
 
 check process prudge_resque
-  with pidfile /APPROOT/shared/tmp/pids/resque.pid
-  start program = "/APPROOT/current/script/resque start" as uid DEPLOYER and gid DEPLOYER
-  stop program = "/APPROOT/current/script/resque stop"
+  with pidfile APPROOT/shared/tmp/pids/resque.pid
+  start program = "env BASEDIR=APPROOT APPROOT/current/script/resque start" as uid DEPLOYER and gid DEPLOYER
+  stop program = "env BASEDIR=APPROOT APPROOT/current/script/resque stop"
   if totalmem is greater than 300 MB for 10 cycles then restart  # eating up memory?
   group resque_workers

@@ -1,8 +1,9 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, 'coder'
+set :application, 'prudge'
 set :repo_url, 'git@github.com:ochko/prudge.git'
+set :user, 'prudge'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -82,9 +83,9 @@ namespace :deploy do
         filename = path.gsub('config/', '')
         upload! "config/examples/#{filename}", "#{shared_path}/config"
       end
-      execute "sed -i 's%/APPROOT%#{fetch(:deploy_to)}%g' #{shared_path}/config/monitrc"
-      execute "sed -i 's%/DEPLOYER%#{fetch(:user)}%g' #{shared_path}/config/monitrc"
-      execute "sed -i 's%/APPROOT%#{fetch(:deploy_to)}%g' #{shared_path}/config/sphinx.yml"
+      execute "sed -i 's%APPROOT%#{fetch(:deploy_to)}%g' #{shared_path}/config/monitrc"
+      execute "sed -i 's%DEPLOYER%#{fetch(:user)}%g' #{shared_path}/config/monitrc"
+      execute "sed -i 's%APPROOT%#{fetch(:deploy_to)}%g' #{shared_path}/config/sphinx.yml"
     end
   end
 
