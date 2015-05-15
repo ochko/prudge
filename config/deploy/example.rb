@@ -9,10 +9,6 @@ server 'your.server.com',
        primary: true,
        ssh_options: { forward_agent: true }
 
-set :default_env, {
-      'BASEDIR' => fetch(:deploy_to)
-    }
-
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.

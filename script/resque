@@ -7,6 +7,11 @@ if [ -z $BASEDIR ]; then
   export BASEDIR=/usr/local/apps/prudge
 fi
 
+if [ -z $USER ]; then
+  export USER=prudge
+fi
+
+PATH=/home/$USER/.rbenv/bin:/home/$USER/.rbenv/shims:/usr/local/bin:$PATH
 PID="${BASEDIR}/shared/tmp/pids/resque.pid"
 LOG="${BASEDIR}/shared/logs/resque.log"
 

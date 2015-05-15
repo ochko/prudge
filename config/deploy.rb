@@ -53,6 +53,8 @@ set :linked_dirs, fetch(:linked_dirs, []).push(
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
+set :default_env, { path: "/home/#{fetch :user}/.rbenv/shims:/home/#{fetch :user}/.rbenv/bin:/usr/local/bin:$PATH" }
+
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
@@ -72,7 +74,7 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "#{current_path}/script/unicorn restart"
+      execute "BASEDIR=#{fetch(:deploy_to)} #{current_path}/script/unicorn restart"
     end
   end
 

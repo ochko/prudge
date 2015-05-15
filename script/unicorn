@@ -4,6 +4,11 @@ if [ -z $BASEDIR ]; then
   export BASEDIR=/usr/local/apps/prudge
 fi
 
+if [ -z $USER ]; then
+  export USER=prudge
+fi
+
+PATH=/home/$USER/.rbenv/bin:/home/$USER/.rbenv/shims:/usr/local/bin:$PATH
 OPTS="-c ${BASEDIR}/current/config/unicorn.rb -E ${RAILS_ENV:-production} -D"
 PID="${BASEDIR}/shared/tmp/pids/unicorn.pid"
 
