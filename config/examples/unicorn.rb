@@ -1,4 +1,4 @@
-base_dir = File.expand_path('../..', __FILE__)
+base_dir = File.expand_path('../../..', __FILE__)
 shared_path = "#{base_dir}/shared"
 working_directory "#{base_dir}/current"
 # update monitrc if worker process nunmber changes
