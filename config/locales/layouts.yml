@@ -1,0 +1,9 @@
+mn:
+  layouts:
+    application:
+      contests: Contests
+      problems: Problems
+      blogs: Blogs
+      coders: Coders
+      login: Login
+      signup: Register
