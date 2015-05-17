@@ -206,7 +206,7 @@ mn:
       title: Бодолт илгээх
     edit:
       title: '%{subject} · Бодолт засварлах'
-      edit: Edit a Solution   
+      edit_a_solution: Edit a Solution   
       source: Source
       language: Language
       submit: Submit
