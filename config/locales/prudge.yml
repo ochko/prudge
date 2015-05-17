@@ -153,6 +153,7 @@ mn:
   problems:
     index:
       title: "Бодлогууд"
+      problems: Problems
     proposed:
       title: "Дэвшигдсэн бодлогууд"
       limits: "Хязгаарлалт"
