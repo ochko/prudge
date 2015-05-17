@@ -211,6 +211,8 @@ mn:
       language: Language
       submit: Submit
       cancel: Cancel
+    list:
+      submitted: Submitted
   user_session:
     new:
       title: Нэвтрэх
