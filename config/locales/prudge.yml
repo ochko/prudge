@@ -75,6 +75,7 @@ mn:
     index:
       new_post: New Post
       edit: Edit
+      posted_on: "Posted On"
     blog:
       title: Блог
     help:
