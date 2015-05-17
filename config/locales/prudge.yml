@@ -147,6 +147,9 @@ mn:
       <<: *tests-common
     new:
       title: Шинэ тэст
+      add_new_test: Add New Test
+      this_is_hidden_test: This is hidden test
+      save: Save
       <<: *tests-common
     edit:
       title: Тэстийг засварлах
