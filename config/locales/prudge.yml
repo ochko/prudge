@@ -74,6 +74,7 @@ mn:
   posts:
     index:
       new_post: New Post
+      edit: Edit
     blog:
       title: Блог
     help:
