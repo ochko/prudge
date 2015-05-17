@@ -206,6 +206,11 @@ mn:
       title: Бодолт илгээх
     edit:
       title: '%{subject} · Бодолт засварлах'
+      edit: Edit a Solution   
+      source: Source
+      language: Language
+      submit: Submit
+      cancel: Cancel
   user_session:
     new:
       title: Нэвтрэх
