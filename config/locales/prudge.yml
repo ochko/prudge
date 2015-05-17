@@ -82,6 +82,7 @@ mn:
       title: Тусламж
     show:
       title: "%{subject}"
+      posted_on: Posted On
     edit:
       title: "%{subject} · Засварлах"
   home:
