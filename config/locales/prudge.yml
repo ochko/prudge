@@ -213,6 +213,10 @@ mn:
       inform-new-contest: "Шинэ тэмцээн зохиогдоход мэдэгдэх"
     new:
       title: Бүртгүүлэх
+      create_your_account: Create Your Account
+      sign_in_using_social_network: Sign In Using Social Network
+      create_your_free_account: Create Your Free Account
+      register: Register
     edit:
       title: '%{subject} · Тохиргоог шинэчлэх'
       change-password: "Нууц үг солих"
