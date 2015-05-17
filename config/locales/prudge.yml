@@ -78,6 +78,7 @@ mn:
       posted_on: "Posted On"
     blog:
       title: Блог
+      read_more: Read More
     help:
       title: Тусламж
     show:
