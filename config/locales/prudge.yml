@@ -86,6 +86,8 @@ mn:
       posted_on: Posted On
     edit:
       title: "%{subject} · Засварлах"
+      save: Save
+      delete: Delete
   home:
     about:
       title: Сайтын тухай
