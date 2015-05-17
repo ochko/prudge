@@ -10,3 +10,7 @@ mn:
       about: About
       help: Help
       issues: Issues
+      account: Account
+      preferences: Preferences
+      dashboard: Dashboard
+      logout: Logout
