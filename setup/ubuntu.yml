@@ -146,7 +146,7 @@
     - name: Add Site Config
       when: nginxinstalled|success
       register: prudgestcfg
-      template: src=files/nginx.conf.j2 dest=/etc/nginx/sites-available/prudge.conf owner=root group=root
+      template: src=templates/nginx.conf.j2 dest=/etc/nginx/sites-available/prudge.conf owner=root group=root
 
     - name: Enable Site Config
       when: prudgestcfg|success
