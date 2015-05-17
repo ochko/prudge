@@ -248,6 +248,7 @@ mn:
   user_sessions:
     new:
       title: Нэвтрэх
+      sign_in_using_your_registered_: Please do Login
   twit:
     opening_announcement: >-
       %{name} тэмцээн зарлагдаа.
