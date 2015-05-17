@@ -152,6 +152,23 @@
       when: prudgestcfg|success
       file: src=/etc/nginx/sites-available/prudge.conf dest=/etc/nginx/sites-enabled/prudge.conf state=link
 
+    # Safeexec
+    - name: Safeexec | required packages
+      apt: name={{ item }} state=installed
+      with_items:
+        - cmake
+        - ruby
+    - name: Safeexec | checkout source
+      git: repo=https://github.com/ochko/safeexec.git dest=~/safeexec accept_hostkey=yes
+    - name: Safeexec | cmake
+      command: cmake . chdir=~/safeexec creates=~/safeexec/Makefile
+    - name: Safeexec | make
+      command: make chdir=~/safeexec creates=~/safeexec/safeexec
+    - name: Safeexec | install
+      command: make install chdir=~/safeexec creates=/usr/local/bin/safeexec
+      sudo_user: "root"
+      sudo: yes
+
   handlers:
     - name: Start postgresql
       service: name=postgresql state=started
