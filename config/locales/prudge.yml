@@ -249,6 +249,7 @@ mn:
     new:
       title: Нэвтрэх
       sign_in_using_your_registered_: Please do Login
+      sign_in: Log In
   twit:
     opening_announcement: >-
       %{name} тэмцээн зарлагдаа.
