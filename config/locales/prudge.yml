@@ -120,6 +120,8 @@ mn:
   password_resets:
     new:
       title: Нууц үг сэргээх хүсэлт
+      password_reset: Password Reset
+      enter_your_registered_email: Enter Your Registered Email
     edit:
       title: Нууц үгээ сэргээх
   problem_tests:
