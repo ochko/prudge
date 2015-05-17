@@ -72,6 +72,8 @@ mn:
       taken-points: Оноо
 
   posts:
+    index:
+      new_post: New Post
     blog:
       title: Блог
     help:
