@@ -100,6 +100,7 @@ mn:
       <<: *shared-problem
     index:
       title: "Тэмцээнүүд"
+      visit_contest: "Visit Contest"
     last:
       title: "Тэмцээн"
     show:
