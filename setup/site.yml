@@ -1,0 +1,12 @@
+- hosts: all
+
+  remote_user: "{{ user }}"
+  become: yes
+  become_user: root
+
+  tasks:
+    - name: Group by OS
+      group_by: key={{ansible_os_family}}
+
+- include: debian.yml
+- include: freebsd.yml

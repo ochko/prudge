@@ -1,0 +1,19 @@
+approot: /usr/local/apps/coda
+
+ruby_version: 1.9.3-p551
+
+prudge_server: prudge.test.com
+
+prudge_user: prudge
+prudge_user_pwd: $6$WIHr4pxGhBmo$.Acv7uyDe//qA6q.PJFz1eWH.ONJv/QYTGJ2OwbeyiEOLkPR2NJPKIzv9LSdbWeQFcdv0w7jnYdXpqR8Epmme/
+
+pgadmin_user: postgres
+prudge_db: prudge
+prudge_db_pass: change-me-now
+
+unicorn_workers: 2
+unicorn_listen: /tmp/unicorn-prudge.sock
+# unicorn_listen: 127.0.0.1:3000
+
+mail_delivery: sendmail
+# mail_delivery: smtp

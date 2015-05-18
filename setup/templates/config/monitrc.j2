@@ -1,0 +1,44 @@
+set pidfile {{ approot }}/shared/tmp/pids/monit.pid
+set statefile {{ approot }}/shared/tmp/pids/monit.state
+set daemon 60
+set httpd port 2812
+    allow localhost
+
+check process prudge_unicorn
+  with pidfile {{ approot }}/shared/tmp/pids/unicorn.pid
+  restart program = "{{ approot }}/current/script/unicorn restart"
+  start program = "{{ approot }}/current/script/unicorn start"
+  stop program = "{{ approot }}/current/script/unicorn stop"
+  if mem is greater than 300.0 MB for 1 cycles then restart
+  if cpu is greater than 50% for 2 cycles then alert
+  if cpu is greater than 80% for 3 cycles then restart
+  group unicorn
+
+{% for num in range(0, unicorn_workers) %}
+check process unicorn_coder_worker_{{ num }}
+  with pidfile {{ approot }}/shared/tmp/pids/unicorn.{{ num }}.pid
+  start program = "{{ true_binary_path.stdout }}"
+  stop program = "{{ approot }}/current/script/unicorn kill_worker {{ num }}"
+  if mem is greater than 300.0 MB for 1 cycles then restart
+  if cpu is greater than 80% for 3 cycles then restart
+
+  group unicorn_workers
+{% endfor %}
+
+check process prudge_searchd
+  with pidfile {{ approot }}/shared/tmp/pids/sphinx.pid
+  restart program = "{{ approot }}/current/script/sphinx restart"
+  start program = "{{ approot }}/current/script/sphinx start"
+  stop program = "{{ approot }}/current/script/sphinx stop"
+  if mem is greater than 200.0 MB for 1 cycles then restart
+  if cpu is greater than 50% for 2 cycles then alert
+  if cpu is greater than 80% for 3 cycles then restart
+  group searchd
+
+check process prudge_resque
+  with pidfile {{ approot }}/shared/tmp/pids/resque.pid
+  restart program = "{{ approot }}/current/script/resque restart"
+  start program = "{{ approot }}/current/script/resque start"
+  stop program = "{{ approot }}/current/script/resque stop"
+  if totalmem is greater than 300 MB for 10 cycles then restart
+  group resque_workers

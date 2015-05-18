@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+BASEDIR={{ approot }}
+HOME=/home/{{ prudge_user }}
+PATH=$HOME/.rbenv/bin:$HOME/.rbenv/shims:/usr/local/bin:$PATH
+
+bundle_exec_rake () {
+  CMD="bundle exec rake $1 RAILS_ENV=${RAILS_ENV:-production}"
+  cd ${BASEDIR}/current > /dev/null 2>&1 && $CMD
+}
+
+case "$1" in
+  start)
+      bundle_exec_rake ts:start
+      ;;
+  stop)
+      bundle_exec_rake ts:stop
+      ;;
+  restart)
+      bundle_exec_rake ts:restart
+      ;;
+  reload)
+      bundle_exec_rake ts:rebuild
+      ;;
+  *)
+      echo "Usage: sphinx {start|stop|restart|reload}" >&2
+      exit 1
+      ;;
+esac
+
+exit 0

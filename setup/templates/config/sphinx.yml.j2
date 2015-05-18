@@ -15,8 +15,8 @@ test:
 
 production:
   <<: *my_settings
-  pid_file: /usr/local/apps/prudge/shared/tmp/pids/sphinx.pid
-  config_file: /usr/local/apps/prudge/shared/config/sphinx.conf
-  searchd_file_path: /usr/local/apps/prudge/shared/sphinx
-  searchd_binary_name: /usr/bin/searchd
-  indexer_binary_name: /usr/bin/indexer
+  pid_file: {{ approot }}/shared/tmp/pids/sphinx.pid
+  config_file: {{ approot }}/shared/config/sphinx.conf
+  searchd_file_path: {{ approot }}/shared/sphinx
+  searchd_binary_name: {{ searchd_binary_path.stdout }}
+  indexer_binary_name: {{ indexer_binary_path.stdout }}

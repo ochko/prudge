@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+BASEDIR={{ approot }}
+HOME=/home/{{ prudge_user }}
+PATH=$HOME/.rbenv/bin:$HOME/.rbenv/shims:/usr/local/bin:$PATH
+OPTS="-c ${BASEDIR}/current/config/unicorn.rb -E ${RAILS_ENV:-production} -D"
+PID="${BASEDIR}/shared/tmp/pids/unicorn.pid"
+
+case "$1" in
+  start)
+      cd ${BASEDIR}/current && bundle exec unicorn_rails ${OPTS}
+      ;;
+  stop)
+      pkill -QUIT -F ${PID}
+      ;;
+  restart)
+      if [ -e ${PID} ]; then
+          pkill -USR2 -F ${PID}
+      else
+          cd ${BASEDIR}/current && bundle exec unicorn_rails ${OPTS}
+      fi
+      ;;
+  reload)
+      if [ -e ${PID} ]; then
+          pkill -HUP -F ${PID}
+      fi
+      ;;
+  kill_worker)
+      workerpid="${BASEDIR}/shared/pids/unicorn.$2.pid"
+      test -s "$workerpid" && pkill -QUIT -F $workerpid && exit 0
+      echo "Worker $2 not running" >&2
+      ;;
+  *)
+      echo "Usage: unicorn {start|stop|restart|reload}" >&2
+      exit 1
+      ;;
+esac
+
+exit 0

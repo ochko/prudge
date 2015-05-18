@@ -3,6 +3,6 @@ class ContestUpdateTwitJob < ContestTwitBaseJob
 
   def self.perform(id)
     contest = Contest.find(id)
-    Twitter.update(post_for :update_announcement, contest)
+    client.update(post_for :update_announcement, contest)
   end
 end

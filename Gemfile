@@ -2,7 +2,6 @@ source 'http://rubygems.org'
 
 gem 'rake', '>= 0.9.2'
 gem 'rails', '~>3.2'
-gem 'capistrano'
 gem 'unicorn'
 gem 'pg'
 gem 'mysql2', '~> 0.3.12b5' # for thinking-sphinx
@@ -21,18 +20,20 @@ gem 'kaminari'
 gem 'jquery-rails'
 gem 'wmd-rails'
 gem 'pry'
-gem 'foreman'
 gem 'coveralls', require: false
 gem 'pygments.rb', require: 'pygments'
 
 group :assets do
   gem 'sass-rails',   "~> 3.2"
-  gem 'coffee-rails', "~> 3.2"
   gem 'uglifier'
 end
 
 group :development do
   gem 'haml-i18n-extractor'
+  gem 'capistrano',         '~> 3.4'
+  gem 'capistrano-rbenv',   '~> 2.0'
+  gem 'capistrano-rails',   '~> 1.1'
+  gem 'capistrano-bundler', '~> 1.1'
 end
 
 group :test do

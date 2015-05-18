@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+BASEDIR={{ approot }}
+HOME=/home/{{ prudge_user }}
+PATH=$HOME/.rbenv/bin:$HOME/.rbenv/shims:/usr/local/bin:$PATH
+PID="${BASEDIR}/shared/tmp/pids/resque.pid"
+LOG="${BASEDIR}/shared/logs/resque.log"
+
+CMD="nohup bundle exec rake resque:work QUEUE=* RAILS_ENV=${RAILS_ENV:-production} PIDFILE=${PID} >> ${LOG} 2>&1 &"
+
+case "$1" in
+  start)
+      cd ${BASEDIR}/current && ${CMD}
+      ;;
+  stop)
+      # Wait for child to finish processing then exit
+      pkill -QUIT -F ${PID} && rm -f ${PID}
+      ;;
+  restart)
+      # Immediately kill child then exit
+      pkill -QUIT -F ${PID} && rm -f ${PID}
+      # Start
+      cd ${BASEDIR}/current && ${CMD}
+      ;;
+  *)
+      echo "Usage: resque {start|stop|restart}" >&2
+      exit 1
+      ;;
+esac
+
+exit 0
