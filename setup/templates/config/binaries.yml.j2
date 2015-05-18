@@ -1,0 +1,15 @@
+defaults: &defaults
+  git: "/usr/local/bin/git"
+  diff: "/usr/bin/diff -bBu"
+  runner: "/usr/local/bin/safeexec"
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  git: "{{ git_binary_path.stdout }}"
+  diff: "{{ diff_binary_path.stdout }} -bBu"
+  runner: "{{ safeexec_binary_path.stdout }}"

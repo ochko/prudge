@@ -1,0 +1,20 @@
+defaults: &defaults
+  adapter: postgresql
+  encoding: utf8
+  pool: 5
+  password:
+
+development:
+  <<: *defaults
+  database: prudge_dev
+  username: postgres
+
+test:
+  <<: *defaults
+  database: prudge_test
+  username: postgres
+
+production:
+  <<: *defaults
+  database: {{ prudge_db }}
+  username: {{ prudge_user }}

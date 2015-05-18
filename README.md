@@ -8,130 +8,121 @@ Prudge is an online programming contest judge system.
 
 # Installing
 
-There are two ways to install prudge -- Manual and Ansible.
+On your local development machine checkout the source. Of course you'll need ruby.
+
+* `git clone git://github.com/ochko/prudge.git`
+* `cd prudge`
+* `bundle install`
+
+There are two ways to install prudge -- Ansible or Manual.
 
 ## Install using Ansible
 
 Install [ansible](http://docs.ansible.com/intro_installation.html) on your local machine. Ansible is a simple automation tool for deployment. Ensure you have an ssh access to your server, and able to run commands as a root(sudo).
-Generate password hash with `$ mkpasswd --method=SHA-512` and update `prudge_user_pwd` attribute in `setup/ubuntu.yml`.
+Customize `setup/vars/common.yml`. Generate password hash with `$ mkpasswd --method=SHA-512` for `prudge_user_pwd`.
 Modify `setup/server` file with your own server's hostname.
 
-For Ubuntu/Debian:
-`$ ansible-playbook -i server -u ochko --become --ask-become-pass ubuntu.yml`
+And run this command replacing `yourlogin` with your ssh user's login:
+`$ ansible-playbook -i testing -u yourlogin --become --ask-become-pass site.yml --extra-vars "user=yourlogin"`
 
-For FreeBSD:
-`$ ansible-playbook -i server -u ochko --become --ask-become-pass freebsd.yml`
+## Manual install
 
-## Manual
+You can install prudge manually if ansible playbook is not available for your platform or simply you don't want to use ansible.
 
-When Ansible playbook is not available for your platform.
+### Dependencies
 
-### Required services
+During manual installation you'll install and configure these services for prudge.
+
 * Memcached for caching
-* Postgresql as database
 * Redis for background processing
 * Sphinx for full text search
-* [safeexec](https://github.com/ochko/safeexec) for testing code
+* Postgresql as database
+* Git for getting source codes
+* [safeexec](https://github.com/ochko/safeexec)
 
-### Installing on FreeBSD
-* cd /usr/ports/databases/memcached && make install clean
-* cd /usr/ports/databases/postgresql92-server && make install clean
-* cd /usr/ports/databases/redis && make install clean
-* cd /usr/ports/textproc/sphinxsearch && make install clean
+### Configuration files
 
-### Installing on OS X
-* brew install memcached
-* brew install postgresql
-* brew install redis
-* brew install sphinx
+Create a directory on your server. Lets say `/usr/local/apps/prudge`. Then create subdirectories:
+
+```
+/usr/local/apps/prudge/shared/config
+/usr/local/apps/prudge/shared/script
+
+```
+
+Copy configuration files from `config/examples`.
+Copy scripts from `setup/templates/script` removing `.j2` from filenames. Replace chunks like `{{ ... }}` with appropriate value.
+These shared files will be linked to application directory when you deploy.
 
 ### Ruby
-Recommends installing ruby via [rbenv](https://github.com/sstephenson/rbenv).
+
+Install ruby via [rbenv](https://github.com/sstephenson/rbenv).
 When your rbenv and ruby-build is ready do:
 
-* `$ rbenv install 1.9.3-p551`
+* `$ rbenv install 1.9.3-p551` or whatever ruby version specified in `.ruby-version` file.
 * `gem install bundler`
 
-### Running
-* `git clone git://github.com/ochko/prudge.git`
-* `cd prudge`
-* `bundle install`
-* `cp config/deploy/example.rb config/deploy/production.rb` edit production.rb
-* `bundle exec cap production deploy:check`
-* `bundle exec cap production deploy:setup`
-* `bundle exec cap production deploy`
+### Database
 
-> Please attent that you can meet some errors during bundling. If you see them, just cope the text of an error in Google and you will find the name of the package which you have to install to fix your issue.
+Install postgresql. And create user and database. Update database configuration in `config/database.yml`.
 
-* Create database and configure in `config/database.yml`
-
-> You will also have to create `config.yml`, `languages.yml`, `mail.yml`, `resque.yml`, `sphinx.yml`, `settings.yml` and `twitter.yml` files before entering the next step. Examples of these files can be found into the `examples` folder.
-
-* `bundle exec rake db:schema:load`
-* `bundle exec rails server` or `bundle exec foreman start`
-
-> When starting a server you can probably get some new errors. You should carefully read the output to get rid of them. You may be asked to create folders like `tmp`, `pids` an others and give them chmod 777 in order to make the script working fine.
-
-### Configuring Sphinx
+### Sphinx
 * `cp config/examples/sphinx.yml config/sphinx.yml`
 * See [Sphinx docs](http://sphinxsearch.com/docs/current.html) for additional configuration.
 
-### Configuring safeexec
-* Clone needed files from Github to any folder: `git clone https://github.com/ochko/safeexec.git`
+### Safeexec
 
-> If you're working with Debian Linux (ex. Ubuntu) please clone a fork of safeexec using `git clone https://github.com/cemc/safeexec.git`
+Prudge uses [safeexec](https://github.com/ochko/safeexec) for running user programs. You'll need `cmake` to build safeexec and also need root permission(sudo) to install it.
 
-* `cd safeexec && make`. After this you will have a compiled binary file called `safeexec`
-* Copy this file to the `prudge/judge` folder. Assuming the script is located in your home directory do this `mv safeexec ~/prudge/judge/ && cd ~/prudge/judge`
-* Give setuid root permission to the binary: `cd ../sandbox && sudo chown root safeexec && sudo chmod u+s safeexec`
+* `git clone https://github.com/ochko/safeexec.git && cd safeexec`
+* `cmake . && sudo make install`.
+* Now your should have a binary called `safeexec` -- `which safeexec`. Update `runner` path in `config/binaries.yml`.
 
-### Configuring Resque
-* `cp config/examples/resque.yml config/resque.yml`
-* Start workers `RAILS_ENV=production QUEUE=* bundle exec rake resque:work`
-* Or daemonize `nohup bundle exec rake resque:work QUEUE=* PIDFILE=tmp/pids/resque.pid & >> log/resque.log 2>&1`
+### Resque
 
-> Note that it is ok if you see nothing. It only means that workers are working as they are expected :)
+Prudge uses [resque](https://github.com/resque/resque) for background tasks such as checking submitted solutions, notifying users etc.
+Resque uses redis, so install redis and start it. Then run resque workers:
 
-## Making your site available from the Internet
-After you run the script you have to install Nginx or Apache and proxy call from your domain to the needed port and Unicorn.
+`nohup bundle exec rake resque:work RAILS_ENV=production QUEUE=* PIDFILE=tmp/pids/resque.pid > log/resque.log 2>&1 &`
 
-This is an example of the config which you should create:
-```
-upstream unicorn_prudge {
-  server unix:/tmp/unicorn-coder.sock fail_timeout=0;
-}
+### Binary executables
 
-server {
-  listen 80;
-  server_name YOUR_DOMAIN;
-  keepalive_timeout 5;
-  root PRUDGE_PUBLIC_FOLDER (for example /home/prudge/prudge/public);
-  try_files $uri/index.html $uri.html $uri @app;
+Prudge uses some external binaries -- safeexec, git and diff. Configure those in `config/binaries.yml`. Use `which` if don't know where is a binary, e.g `which safeexec`.
 
-  location @app {
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header Host $http_host;
-    proxy_redirect off;
-    proxy_pass http://unicorn_prudge;
-  }
+### Mail delivery
 
-  error_page 500 502 503 504 /500.html;
-  location = /500.html {
-    root PRUDGE_PUBLIC_FOLDER (for example /home/prudge/prudge/public);
-  }
-}
-```
+Prudge needs to send emails for resetting forgotten password, notifying new contest announcement etc. Configure mail delivery settings in `config/mail.yml`.
+See [Action Mailer docs](http://guides.rubyonrails.org/action_mailer_basics.html#example-action-mailer-configuration) for detail.
 
-### Configuring paths for binary executables
-* `cp config/examples/binaries.yml config/binaries.yml`
-* Look into `binaries.yml` and set correct paths
+### Deploying
 
-### Configuring mail delivery
-* `cp config/examples/mail.yml config/mail.yml`
-* Edit `mail.yml` with appropriate mail settings. See [Action Mailer docs](http://guides.rubyonrails.org/action_mailer_basics.html#example-action-mailer-configuration) for detail.
+Prudge uses [capistrano](http://capistranorb.com) for deployments.
+
+* `cp config/deploy/example.rb config/deploy/production.rb`. And update `production.rb` with your server's info.
+* `bundle exec cap production deploy`
+* `bundle exec cap production deploy:seed`
+
+You'll need to run `deploy:seed` task only once on your first deploy. Seeding creates minimal database records. See `db/seeds.rb` for details.
+
+### Web server
+
+It is time to open your shiny new site to the world. Install nginx. Put contents of `setup/templates/web/nginx.conf.j2` into `nginx/sites-available/prudge.conf`. Replace all `{% ... %}` and `{{ ... }}` with desired values.
 
 ## Contributing
+
 See [Technical Debts](https://github.com/ochko/prudge/blob/master/TechDebt.md) or [Open Issues](https://github.com/ochko/prudge/issues).
 * After making changes add spec, and please be sure that all specs pass
 * Send me pull request. Then it could be merged ;)
 * If you found any problems please report on [issues](https://github.com/ochko/prudge/issues) page. But don't post any security related issues there, send them privately.
+
+## License
+
+The MIT License (MIT)
+
+Copyright (c) Lkhagva Ochirkhuyag, 2009-2015
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

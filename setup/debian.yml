@@ -1,0 +1,256 @@
+- hosts: Debian
+  vars_files:
+    - "vars/common.yml"
+    - "vars/debian.yml"
+
+  tasks:
+    - debug: msg="ansible_os_family {{ ansible_os_family }}"
+
+    - name: Prudge | Add user
+      user: name={{ prudge_user }}
+            password={{ prudge_user_pwd }}
+            shell={{ user_shell }}
+            generate_ssh_key=yes
+
+    - name: Prudge | Create app directory
+      file: path={{ approot }} owner={{ prudge_user }} group={{ prudge_user }} mode=0755 recurse=yes state=directory
+    - name: Prudge | Create shared config directory
+      file: path={{ approot }}/shared/config owner={{ prudge_user }} group={{ prudge_user }} mode=0755 recurse=yes state=directory
+    - name: Prudge | Create shared script directory
+      file: path={{ approot }}/shared/script owner={{ prudge_user }} group={{ prudge_user }} mode=0755 recurse=yes state=directory
+
+    - name: Git | Install
+      apt: name=git state=installed
+      register: git_installed
+    - name: Git | path
+      command: which git
+      when: git_installed|success
+      register: git_binary_path
+
+    # Postgresql database
+    - name: Postgresql | Install
+      apt: name={{ item }} state=installed
+      with_items:
+        - postgresql
+        - postgresql-contrib
+        - libpq-dev
+        # py27-psycopg2 for macports
+        - python-psycopg2
+
+    - name: Postgresql | Create user
+      postgresql_user: name={{ prudge_user }} state=present
+      become: yes
+      become_user: "{{ pgadmin_user }}"
+
+    - name: Postgresql | Create database
+      postgresql_db: name={{ prudge_db }} owner={{ prudge_user }} state=present
+      become: yes
+      become_user: "{{ pgadmin_user }}"
+
+    - name: Postgresql | Update priviledges
+      postgresql_privs: db={{ prudge_db }} role={{ prudge_user }} privs=ALL type=database
+      become: yes
+      become_user: "{{ pgadmin_user }}"
+
+    # Rbenv
+    - name: Rbenv | Install required packages
+      apt: name={{ item }} state=installed
+      with_items:
+        - autoconf
+        - bison
+        - build-essential
+        - libssl-dev
+        - libyaml-dev
+        - libreadline6-dev
+        - zlib1g-dev
+        - libncurses5-dev
+        - libffi-dev
+        - libgdbm3
+        - libgdbm-dev
+
+    - name: Rbenv | Install
+      become_user: "{{ prudge_user }}"
+      become: yes
+      git: repo=https://github.com/sstephenson/rbenv.git dest=~{{ prudge_user }}/.rbenv accept_hostkey=true update=no
+
+    - name: Rbenv | Ensure fragments bash dir exists
+      become_user: "{{ prudge_user }}"
+      become: yes
+      file: dest=~{{ prudge_user }}/.bash.d/ state=directory
+
+    - name: Rbenv | Install rbenv bash file
+      copy: src=files/rbenv.bash dest=~{{ prudge_user }}/.bash.d/rbenv.bash mode=700 owner={{ prudge_user }}
+
+    - name: Rbenv | Source rbenv in .bash_profile
+      become_user: "{{ prudge_user }}"
+      become: yes
+      lineinfile: dest=~{{ prudge_user }}/.bash_profile regexp="^source ~/\.bash\.d/rbenv\.bash" insertafter=EOF line="source ~/.bash.d/rbenv.bash" create=yes
+
+    - name: Rbenv | Create plugin directory
+      file: path=~{{ prudge_user }}/.rbenv/plugins/ owner={{ prudge_user }} group={{ prudge_user }} mode=0755 state=directory
+
+    - name: Rbenv | Install ruby-build plugin
+      become_user: "{{ prudge_user }}"
+      become: yes
+      git: repo=git://github.com/sstephenson/ruby-build.git dest=~{{ prudge_user }}/.rbenv/plugins/ruby-build accept_hostkey=true update=no
+
+    - name: Rbenv | Get versions
+      shell: bash -lc "rbenv versions" chdir=~{{ prudge_user }}
+      register: rbenv_versions
+      become_user: "{{ prudge_user }}"
+      become: yes
+
+    - name: Rbenv | Copy .gemrc
+      copy: src=files/gemrc dest=~{{ prudge_user }}/.gemrc owner={{ prudge_user }} force=no
+
+    - name: Rbenv | Install ruby
+      shell: bash -lc "rbenv install {{ ruby_version }}" chdir=~{{ prudge_user }} creates=~{{ prudge_user }}/.rbenv/versions/{{ ruby_version }}
+      become_user: "{{ prudge_user }}"
+      become: yes
+      when: rbenv_versions.stdout.find(ruby_version) == -1
+
+    - name: Rbenv | Set global rbenv version
+      shell: bash -lc "rbenv global {{ ruby_version }}" chdir=~{{ prudge_user }}
+      become_user: "{{ prudge_user }}"
+      become: yes
+
+    - name: Rbenv | Install bundler
+      shell: bash -lc "rbenv local {{ ruby_version }} && (gem query --installed --name bundler || gem install bundler)" chdir=~{{ prudge_user }}
+      become_user: "{{ prudge_user }}"
+      become: yes
+
+    # Nginx
+    - name: Install Nginx
+      apt: name=nginx state=installed
+      register: nginxinstalled
+      notify:
+        - Start Nginx
+
+    - name: Add Site Config
+      when: nginxinstalled|success
+      register: prudgestcfg
+      template: src=templates/web/nginx.conf.j2 dest=/etc/nginx/sites-available/prudge.conf owner=root group=root
+
+    - name: Enable Site Config
+      when: prudgestcfg|success
+      file: src=/etc/nginx/sites-available/prudge.conf dest=/etc/nginx/sites-enabled/prudge.conf state=link
+
+    # Safeexec
+    - name: Safeexec | required packages
+      apt: name={{ item }} state=installed
+      with_items:
+        - cmake
+        - ruby
+    - name: Safeexec | checkout source
+      git: repo=https://github.com/ochko/safeexec.git dest=~/safeexec accept_hostkey=yes
+    - name: Safeexec | cmake
+      command: cmake . chdir=~/safeexec creates=~/safeexec/Makefile
+    - name: Safeexec | make
+      command: make chdir=~/safeexec creates=~/safeexec/safeexec
+    - name: Safeexec | install
+      command: make install chdir=~/safeexec creates=/usr/local/bin/safeexec
+      become_user: "root"
+      become: yes
+    - name: Safeexec | save path
+      command: which safeexec
+      register: safeexec_binary_path
+
+
+    # Nodejs is for rails assets compiling
+    - name: Install nodejs
+      apt: name=nodejs state=installed
+    # Memcache for rails cache
+    - name: Install memcached
+      apt: name=memcached state=installed
+    # Redis for resque workers
+    - name: Install redis
+      apt: name=redis-server state=installed
+    # Sphinx for fulltext search
+    - name: Sphinxsearch | Dependencies
+      apt: name={{ item }} state=installed
+      with_items:
+        - mysql-client
+        - mysql-server
+        - libmysqlclient-dev
+
+    - name: Sphinxsearch | Install
+      apt: name=sphinxsearch state=installed
+
+    - name: Sphinxsearch | searchd path
+      command: which searchd
+      register: searchd_binary_path
+
+    - name: Sphinxsearch | indexer path
+      command: which indexer
+      register: indexer_binary_path
+
+    - name: Sphinxsearch | Config
+      template: src=templates/config/sphinx.yml.j2 dest={{ approot }}/shared/config/sphinx.yml owner={{ prudge_user }} group={{ prudge_user }} mode=0640
+
+    - name: Unicorn | Config
+      template: src=templates/config/unicorn.rb.j2 dest={{ approot }}/shared/config/unicorn.rb owner={{ prudge_user }} group={{ prudge_user }} mode=0644
+      register: unicorn_configured
+    - name: Unicorn | Script
+      template: src=templates/script/unicorn.j2 dest={{ approot }}/shared/script/unicorn owner={{ prudge_user }} group={{ prudge_user }} mode=0750
+      when: unicorn_configured|success
+
+    - name: Resque | Script
+      template: src=templates/script/resque.j2 dest={{ approot }}/shared/script/resque owner={{ prudge_user }} group={{ prudge_user }} mode=0750
+
+    - name: Sphinx | Script
+      template: src=templates/script/sphinx.j2 dest={{ approot }}/shared/script/sphinx owner={{ prudge_user }} group={{ prudge_user }} mode=0750
+
+    - name: Monit | Install
+      apt: name=monit state=installed
+      register: monit_installed
+
+    - name: Monit | true binary path
+      command: which true
+      register: true_binary_path
+
+    - name: Monit | Config
+      when: monit_installed|success
+      register: monitcfg
+      template: src=templates/config/monitrc.j2 dest={{ approot }}/shared/config/monitrc owner={{ prudge_user }} group={{ prudge_user }} mode=0600
+
+    - name: Binaries | diff path
+      command: which diff
+      register: diff_binary_path
+
+    - name: Binaries | Config
+      when: monit_installed|success
+      template: src=templates/config/binaries.yml.j2 dest={{ approot }}/shared/config/binaries.yml owner={{ prudge_user }} group={{ prudge_user }} mode=0640
+
+    - name: Database | Config
+      template: src=templates/config/database.yml.j2 dest={{ approot }}/shared/config/database.yml owner={{ prudge_user }} group={{ prudge_user }} mode=0640
+
+    - name: Mail | Install dependency
+      apt: name='sendmail-bin' state=installed
+      when: mail_delivery == 'sendmail'
+
+    - name: Mail | Sendmail binary path
+      command: which sendmail
+      when: mail_delivery == 'sendmail'
+      register: sendmail_binary_path
+
+    - name: Mail | Config
+      template: src=templates/config/mail.yml.j2 dest={{ approot }}/shared/config/mail.yml owner={{ prudge_user }} group={{ prudge_user }} mode=0640
+
+    - name: Config | Copy templates
+      copy: src=templates/config/{{ item }} dest={{ approot }}/shared/config/ owner={{ prudge_user }} group={{ prudge_user }} mode=0640
+      with_items:
+        - config.yml
+        - languages.yml
+        - resque.yml
+        - settings.yml
+        - twitter.yml
+
+  handlers:
+    - name: Start postgresql
+      service: name=postgresql state=started
+    - name: Start memcached
+      service: name=memcached state=started
+    - name: Start redis
+      service: name=redis state=started
+    - name: Start Nginx
+      service: name=nginx state=started

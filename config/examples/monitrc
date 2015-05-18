@@ -1,24 +1,48 @@
+set pidfile /usr/local/apps/prudge/shared/tmp/pids/monit.pid
+set statefile /usr/local/apps/prudge/shared/tmp/pids/monit.state
+set daemon 60
+
 check process prudge_unicorn
-  with pidfile APPROOT/shared/tmp/pids/unicorn.pid
-  start program = "env BASEDIR=APPROOT APPROOT/current/script/unicorn start" as uid DEPLOYER and gid DEPLOYER
-  stop program = "env BASEDIR=APPROOT APPROOT/current/script/unicorn stop"
-  if mem is greater than 300.0 MB for 1 cycles then restart       # eating up memory?
-  if cpu is greater than 50% for 2 cycles then alert              # send an email to admin
-  if cpu is greater than 80% for 3 cycles then restart            # hung process?
+  with pidfile /usr/local/apps/prudge/shared/tmp/pids/unicorn.pid
+  restart program = "/usr/local/apps/prudge/current/script/unicorn restart"
+  start program = "/usr/local/apps/prudge/current/script/unicorn start"
+  stop program = "/usr/local/apps/prudge/current/script/unicorn stop"
+  if mem is greater than 300.0 MB for 1 cycles then restart
+  if cpu is greater than 50% for 2 cycles then alert
+  if cpu is greater than 80% for 3 cycles then restart
   group unicorn
 
+check process unicorn_coder_worker_0
+  with pidfile /usr/local/apps/prudge/shared/tmp/pids/unicorn.0.pid
+  start program = "/bin/true"
+  stop program = "/usr/local/apps/prudge/current/script/unicorn kill_worker 0"
+  if mem is greater than 300.0 MB for 1 cycles then restart
+  if cpu is greater than 80% for 3 cycles then restart
+
+  group unicorn_workers
+check process unicorn_coder_worker_1
+  with pidfile /usr/local/apps/prudge/shared/tmp/pids/unicorn.1.pid
+  start program = "/bin/true"
+  stop program = "/usr/local/apps/prudge/current/script/unicorn kill_worker 1"
+  if mem is greater than 300.0 MB for 1 cycles then restart
+  if cpu is greater than 80% for 3 cycles then restart
+
+  group unicorn_workers
+
 check process prudge_searchd
-  with pidfile APPROOT/shared/tmp/pids/sphinx.pid
-  start program = "env BASEDIR=APPROOT APPROOT/current/script/sphinx start" as uid DEPLOYER and gid DEPLOYER
-  stop program = "env BASEDIR=APPROOT APPROOT/current/script/sphinx stop"
-  if mem is greater than 200.0 MB for 1 cycles then restart       # eating up memory?
-  if cpu is greater than 50% for 2 cycles then alert              # send an email to admin
-  if cpu is greater than 80% for 3 cycles then restart            # hung process?
+  with pidfile /usr/local/apps/prudge/shared/tmp/pids/sphinx.pid
+  restart program = "/usr/local/apps/prudge/current/script/sphinx restart"
+  start program = "/usr/local/apps/prudge/current/script/sphinx start"
+  stop program = "/usr/local/apps/prudge/current/script/sphinx stop"
+  if mem is greater than 200.0 MB for 1 cycles then restart
+  if cpu is greater than 50% for 2 cycles then alert
+  if cpu is greater than 80% for 3 cycles then restart
   group searchd
 
 check process prudge_resque
-  with pidfile APPROOT/shared/tmp/pids/resque.pid
-  start program = "env BASEDIR=APPROOT APPROOT/current/script/resque start" as uid DEPLOYER and gid DEPLOYER
-  stop program = "env BASEDIR=APPROOT APPROOT/current/script/resque stop"
-  if totalmem is greater than 300 MB for 10 cycles then restart  # eating up memory?
+  with pidfile /usr/local/apps/prudge/shared/tmp/pids/resque.pid
+  restart program = "/usr/local/apps/prudge/current/script/resque restart"
+  start program = "/usr/local/apps/prudge/current/script/resque start"
+  stop program = "/usr/local/apps/prudge/current/script/resque stop"
+  if totalmem is greater than 300 MB for 10 cycles then restart
   group resque_workers

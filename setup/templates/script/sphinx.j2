@@ -1,17 +1,8 @@
 #!/usr/bin/env bash
 
-# USER=developer
-# PATH=/home/$USER/.rbenv/bin:/home/$USER/.rbenv/shims:$PATH
-
-if [ -z $BASEDIR ]; then
-  export BASEDIR=/usr/local/apps/prudge
-fi
-
-if [ -z $USER ]; then
-  export USER=prudge
-fi
-
-PATH=/home/$USER/.rbenv/bin:/home/$USER/.rbenv/shims:/usr/local/bin:$PATH
+BASEDIR={{ approot }}
+HOME=/home/{{ prudge_user }}
+PATH=$HOME/.rbenv/bin:$HOME/.rbenv/shims:/usr/local/bin:$PATH
 
 bundle_exec_rake () {
   CMD="bundle exec rake $1 RAILS_ENV=${RAILS_ENV:-production}"

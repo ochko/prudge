@@ -1,5 +1,9 @@
 upstream unicorn_prudge {
-  server unix:/tmp/unicorn-prudge.sock fail_timeout=0;
+{%- if 'sock' in unicorn_listen -%}
+  server unix:{{ unicorn_listen }} fail_timeout=0;
+{%- else -%}
+  server {{ unicorn_listen }} fail_timeout=0;
+{%- endif -%}
 }
 
 server {

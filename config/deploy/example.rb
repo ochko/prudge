@@ -1,7 +1,7 @@
 # Copy this file to production.rb and customize
 
 set :rails_env, 'production'
-set :deploy_to, '/usr/apps/prudge'
+set :deploy_to, '/usr/local/apps/prudge'
 
 server 'your.server.com',
        user: "prudge",

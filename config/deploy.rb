@@ -35,6 +35,9 @@ set :linked_files,
       'config/settings.yml',
       'config/sphinx.yml',
       'config/twitter.yml',
+      'script/unicorn',
+      'script/resque',
+      'script/sphinx',
       'config/monitrc',
       'config/unicorn.rb'
     )
@@ -45,6 +48,7 @@ set :linked_dirs, fetch(:linked_dirs, []).push(
       'judge/sandbox',
       'judge/solutions',
       'log',
+      'sphinx',
       'tmp/pids',
       'tmp/cache',
       'tmp/sockets',
@@ -52,7 +56,6 @@ set :linked_dirs, fetch(:linked_dirs, []).push(
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
-
 set :default_env, { path: "/home/#{fetch :user}/.rbenv/shims:/home/#{fetch :user}/.rbenv/bin:/usr/local/bin:$PATH" }
 
 # Default value for keep_releases is 5
@@ -70,28 +73,14 @@ set :conditionally_migrate, true
 set :bundle_jobs, 2
 
 namespace :deploy do
-
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "BASEDIR=#{fetch(:deploy_to)} #{current_path}/script/unicorn restart"
+      execute "monit -c #{current_path}/config/monitrc restart all"
     end
   end
 
-  desc 'Setup configurations'
-  task :setup do
-    on roles(:app), in: :sequence, wait: 5 do
-      fetch(:linked_files).each do |path|
-        filename = path.gsub('config/', '')
-        upload! "config/examples/#{filename}", "#{shared_path}/config"
-      end
-      execute "sed -i 's%APPROOT%#{fetch(:deploy_to)}%g' #{shared_path}/config/monitrc"
-      execute "sed -i 's%DEPLOYER%#{fetch(:user)}%g' #{shared_path}/config/monitrc"
-      execute "sed -i 's%APPROOT%#{fetch(:deploy_to)}%g' #{shared_path}/config/sphinx.yml"
-    end
-  end
-
-  desc 'Invoke a rake command on the remote server'
+  desc 'Load db schema and seed'
   task :seed => :set_rails_env do
     on primary(:app) do
       within current_path do
@@ -104,4 +93,5 @@ namespace :deploy do
   end
 
   after :publishing, :restart
+  before :restart, 'ts:config'
 end
