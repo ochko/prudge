@@ -94,17 +94,18 @@ Prudge uses some external binaries -- safeexec, git and diff. Configure those in
 Prudge needs to send emails for resetting forgotten password, notifying new contest announcement etc. Configure mail delivery settings in `config/mail.yml`.
 See [Action Mailer docs](http://guides.rubyonrails.org/action_mailer_basics.html#example-action-mailer-configuration) for detail.
 
-### Deploying
+## Deploying
 
 Prudge uses [capistrano](http://capistranorb.com) for deployments.
 
 * `cp config/deploy/example.rb config/deploy/production.rb`. And update `production.rb` with your server's info.
 * `bundle exec cap production deploy`
 * `bundle exec cap production deploy:seed`
+* `bundle exec cap production deploy:monit`
 
 You'll need to run `deploy:seed` task only once on your first deploy. Seeding creates minimal database records. See `db/seeds.rb` for details.
 
-### Web server
+## Web server
 
 It is time to open your shiny new site to the world. Install nginx. Put contents of `setup/templates/web/nginx.conf.j2` into `nginx/sites-available/prudge.conf`. Replace all `{% ... %}` and `{{ ... }}` with desired values.
 

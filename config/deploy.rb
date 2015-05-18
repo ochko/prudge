@@ -76,7 +76,7 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "monit -c #{current_path}/config/monitrc restart all"
+      execute "#{current_path}/script/unicorn restart"
     end
   end
 
@@ -92,6 +92,13 @@ namespace :deploy do
     end
   end
 
+  desc 'Start/Wake-up monit'
+  task :monit do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute "monit -c #{current_path}/config/monitrc"
+    end
+  end
+
   after :publishing, :restart
-  before :restart, 'ts:config'
+  before :restart, 'ts:index'
 end

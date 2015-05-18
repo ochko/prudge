@@ -38,7 +38,7 @@
         - python-psycopg2
 
     - name: Postgresql | Create user
-      postgresql_user: name={{ prudge_user }} state=present
+      postgresql_user: name={{ prudge_user }} password={{ prudge_db_pass }} state=present
       become: yes
       become_user: "{{ pgadmin_user }}"
 
@@ -142,7 +142,7 @@
         - cmake
         - ruby
     - name: Safeexec | checkout source
-      git: repo=https://github.com/ochko/safeexec.git dest=~/safeexec accept_hostkey=yes
+      git: repo=https://github.com/ochko/safeexec.git dest=~/safeexec accept_hostkey=yes update=no
     - name: Safeexec | cmake
       command: cmake . chdir=~/safeexec creates=~/safeexec/Makefile
     - name: Safeexec | make

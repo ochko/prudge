@@ -1,6 +1,8 @@
 set pidfile {{ approot }}/shared/tmp/pids/monit.pid
 set statefile {{ approot }}/shared/tmp/pids/monit.state
 set daemon 60
+set httpd port 2812
+    allow localhost
 
 check process prudge_unicorn
   with pidfile {{ approot }}/shared/tmp/pids/unicorn.pid
