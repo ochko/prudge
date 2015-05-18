@@ -190,6 +190,13 @@ mn:
       run-status: Ажилласан байдал
     show:
       title: Тэстийн үр дүн
+      coder: Coder
+      souce: Source
+      submitted: Submitted      
+      result: Result
+      program: Program
+      time: Time
+      memory: Memory
       input: Input 
       output: Output
     list:
