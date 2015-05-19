@@ -100,5 +100,4 @@ namespace :deploy do
   end
 
   after :publishing, :restart
-  before :restart, 'ts:index'
 end

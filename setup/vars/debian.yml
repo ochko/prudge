@@ -1,1 +1,3 @@
+pgadmin_user: postgres
 user_shell: /bin/bash
+nginx_config_root: /etc/nginx

@@ -4,8 +4,6 @@
     - "vars/debian.yml"
 
   tasks:
-    - debug: msg="ansible_os_family {{ ansible_os_family }}"
-
     - name: Prudge | Add user
       user: name={{ prudge_user }}
             password={{ prudge_user_pwd }}
@@ -34,7 +32,6 @@
         - postgresql
         - postgresql-contrib
         - libpq-dev
-        # py27-psycopg2 for macports
         - python-psycopg2
 
     - name: Postgresql | Create user

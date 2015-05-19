@@ -1,1 +1,3 @@
+pgadmin_user: pgsql
 user_shell: /usr/local/bin/bash
+nginx_config_root: /usr/local/etc/nginx

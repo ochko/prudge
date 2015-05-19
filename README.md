@@ -18,12 +18,13 @@ There are two ways to install prudge -- Ansible or Manual.
 
 ## Install using Ansible
 
-Install [ansible](http://docs.ansible.com/intro_installation.html) on your local machine. Ansible is a simple automation tool for deployment. Ensure you have an ssh access to your server, and able to run commands as a root(sudo).
+Install [ansible](http://docs.ansible.com/intro_installation.html) on your local machine.
+Install sudo and python on your server. Ensure you have an ssh access to your server, and able to run commands as a root.
 Customize `setup/vars/common.yml`. Generate password hash with `$ mkpasswd --method=SHA-512` for `prudge_user_pwd`.
-Modify `setup/server` file with your own server's hostname.
+Modify `setup/server.info` file with your own server's hostname.
 
 And run this command replacing `yourlogin` with your ssh user's login:
-`$ ansible-playbook -i testing -u yourlogin --become --ask-become-pass site.yml --extra-vars "user=yourlogin"`
+`$ ansible-playbook -i server.info -u yourlogin --become --ask-become-pass site.yml --extra-vars "user=yourlogin"`
 
 ## Manual install
 
@@ -101,6 +102,7 @@ Prudge uses [capistrano](http://capistranorb.com) for deployments.
 * `cp config/deploy/example.rb config/deploy/production.rb`. And update `production.rb` with your server's info.
 * `bundle exec cap production deploy`
 * `bundle exec cap production deploy:seed`
+* `bundle exec cap production deploy:ts:index`
 * `bundle exec cap production deploy:monit`
 
 You'll need to run `deploy:seed` task only once on your first deploy. Seeding creates minimal database records. See `db/seeds.rb` for details.
