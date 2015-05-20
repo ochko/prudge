@@ -111,6 +111,11 @@ You'll need to run `deploy:seed` task only once on your first deploy. Seeding cr
 
 It is time to open your shiny new site to the world. Install nginx. Put contents of `setup/templates/web/nginx.conf.j2` into `nginx/sites-available/prudge.conf`. Replace all `{% ... %}` and `{{ ... }}` with desired values.
 
+## Localization
+
+Want to run prudge in different language? Change `default_locale` in `config/config.yml`.
+If your language isn't available yet look into `config/locales` directory and create localizations for your language.
+
 ## Contributing
 
 See [Technical Debts](https://github.com/ochko/prudge/blob/master/TechDebt.md) or [Open Issues](https://github.com/ochko/prudge/issues).
