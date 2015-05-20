@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(:version => 20130907171847) do
   create_table "participants", :force => true do |t|
     t.integer "contest_id",                  :null => false
     t.integer "user_id",                     :null => false
-    t.integer "rank"
     t.float   "points",     :default => 0.0
   end
 
