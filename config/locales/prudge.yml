@@ -72,14 +72,22 @@ mn:
       taken-points: Оноо
 
   posts:
+    index:
+      new_post: New Post
+      edit: Edit
+      posted_on: "Posted On"
     blog:
       title: Блог
+      read_more: Read More
     help:
       title: Тусламж
     show:
       title: "%{subject}"
+      posted_on: Posted On
     edit:
       title: "%{subject} · Засварлах"
+      save: Save
+      delete: Delete
   home:
     about:
       title: Сайтын тухай
@@ -100,6 +108,7 @@ mn:
       <<: *shared-problem
     index:
       title: "Тэмцээнүүд"
+      visit_contest: "Visit Contest"
     last:
       title: "Тэмцээн"
     show:
@@ -119,6 +128,8 @@ mn:
   password_resets:
     new:
       title: Нууц үг сэргээх хүсэлт
+      password_reset: Password Reset
+      enter_your_registered_email: Enter Your Registered Email
     edit:
       title: Нууц үгээ сэргээх
   problem_tests:
@@ -138,6 +149,10 @@ mn:
       <<: *tests-common
     new:
       title: Шинэ тэст
+      add_new_test: Add New Test
+      new_test: New Test
+      this_is_hidden_test: This is hidden test
+      save: Save
       <<: *tests-common
     edit:
       title: Тэстийг засварлах
@@ -145,6 +160,7 @@ mn:
   problems:
     index:
       title: "Бодлогууд"
+      problems: Problems
     proposed:
       title: "Дэвшигдсэн бодлогууд"
       limits: "Хязгаарлалт"
@@ -174,9 +190,19 @@ mn:
       run-status: Ажилласан байдал
     show:
       title: Тэстийн үр дүн
+      coder: Coder
+      souce: Source
+      submitted: Submitted      
+      result: Result
+      program: Program
+      time: Time
+      memory: Memory
+      input: Input 
+      output: Output
     list:
       delete?: "Энэ бодолтыг нээрээ устгах уу?"
       wait-checking: "Please wait or solve other problems, your solution is being checked..."
+      compiler_output: Compiler Output
       <<: *shared-solution
       <<: *results-common
   search:
@@ -196,6 +222,13 @@ mn:
       title: Бодолт илгээх
     edit:
       title: '%{subject} · Бодолт засварлах'
+      edit_a_solution: Edit a Solution   
+      source: Source
+      language: Language
+      submit: Submit
+      cancel: Cancel
+    list:
+      submitted: Submitted
   user_session:
     new:
       title: Нэвтрэх
@@ -212,6 +245,10 @@ mn:
       inform-new-contest: "Шинэ тэмцээн зохиогдоход мэдэгдэх"
     new:
       title: Бүртгүүлэх
+      create_your_account: Create Your Account
+      sign_in_using_social_network: Sign In Using Social Network
+      create_your_free_account: Create Your Free Account
+      register: Register
     edit:
       title: '%{subject} · Тохиргоог шинэчлэх'
       change-password: "Нууц үг солих"
@@ -247,6 +284,8 @@ mn:
   user_sessions:
     new:
       title: Нэвтрэх
+      sign_in_using_your_registered_: Please do Login
+      sign_in: Log In
   twit:
     opening_announcement: >-
       %{name} тэмцээн зарлагдаа.
