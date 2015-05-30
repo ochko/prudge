@@ -2,7 +2,7 @@ approot: /usr/local/apps/coda
 
 ruby_version: 1.9.3-p551
 
-prudge_server: prudge.test.com
+prudge_server: prudge.ubuntu.dev
 
 prudge_user: prudge
 prudge_user_pwd: $6$WIHr4pxGhBmo$.Acv7uyDe//qA6q.PJFz1eWH.ONJv/QYTGJ2OwbeyiEOLkPR2NJPKIzv9LSdbWeQFcdv0w7jnYdXpqR8Epmme/
