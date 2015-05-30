@@ -1,26 +1,3 @@
-mn:
-  authlogic:
-    error_messages:
-      login_blank: хоосон байж болохгүй
-      login_not_found: олдсонгүй
-      login_invalid: зөвхөн үсэг, тоо, зай болон .-_@ тэмдэгт оруулна уу.
-      consecutive_failed_logins_limit_exceeded: дараалан амжилтгүй нэвтрэх оролдлогууд хийгдсэнээс, данс түгжигдлээ
-      email_invalid: имэйл хаяг шиг харагдахгүй байна
-      password_blank: хоосон байж болохгүй
-      password_invalid: буруу
-      not_active: Таны данс идэвхжээгүй байна
-      not_confirmed: Таны данс баталгаажаагүй байна
-      not_approved: Таны данс зөвшөөрөгдөөгүй байна
-      no_authentication_details: Нэвтрэх мэдээлэл оруулаагүй байна
-      general_credentials_error: "Нэвтрэх нэр, нууц үгийн хослол буруу байна"
-    models:
-      user_session: "Нэвтрэлт"
-    attributes:
-      user_session:
-        login: "Нэвтрэх нэр"
-        email: "Имэйл"
-        password: "Нууц үг"
-        remember_me: "Намайг сана"
 en:
   authlogic:
     error_messages:
@@ -44,3 +21,26 @@ en:
         email: "Email"
         password: "Password"
         remember_me: "Remember Me"
+mn:
+  authlogic:
+    error_messages:
+      login_blank: хоосон байж болохгүй
+      login_not_found: олдсонгүй
+      login_invalid: зөвхөн үсэг, тоо, зай болон .-_@ тэмдэгт оруулна уу.
+      consecutive_failed_logins_limit_exceeded: дараалан амжилтгүй нэвтрэх оролдлогууд хийгдсэнээс, данс түгжигдлээ
+      email_invalid: имэйл хаяг шиг харагдахгүй байна
+      password_blank: хоосон байж болохгүй
+      password_invalid: буруу
+      not_active: Таны данс идэвхжээгүй байна
+      not_confirmed: Таны данс баталгаажаагүй байна
+      not_approved: Таны данс зөвшөөрөгдөөгүй байна
+      no_authentication_details: Нэвтрэх мэдээлэл оруулаагүй байна
+      general_credentials_error: "Нэвтрэх нэр, нууц үгийн хослол буруу байна"
+    models:
+      user_session: "Нэвтрэлт"
+    attributes:
+      user_session:
+        login: "Нэвтрэх нэр"
+        email: "Имэйл"
+        password: "Нууц үг"
+        remember_me: "Намайг сана"
