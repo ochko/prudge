@@ -89,11 +89,13 @@ module ApplicationHelper
     User.where("school is not null and school != ''").order(:school).pluck(:school).uniq
   end
 
+  # TODO: rails 4 already has error_messages_for helper
   def error_messages_for(model)
     return unless model.errors.any?
-    content_tag(:ul,
-                model.errors.full_messages.reduce('') { |errors, msg|
-                  errors << content_tag(:li, msg)
-                })
+    messages = model.errors.full_messages.map {|msg| content_tag(:li, ERB::Util.html_escape(msg)) }
+    content = ''
+    content << content_tag(:button, '&times;'.html_safe, :type => "button", :class => "close", 'data-dismiss' => "alert")
+    content << content_tag(:ul, messages.join.html_safe)
+    content_tag(:div, content.html_safe, :class => 'alert alert-block')
   end
 end
