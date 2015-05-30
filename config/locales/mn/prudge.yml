@@ -77,16 +77,35 @@ mn:
       title: "%{subject} · Засварлах"
       save: Хадгал
       delete: Устга
+    new:
+      write_new_post: Write new post
+      save: Save
   home:
     about:
       title: Сайтын тухай
     dashboard:
       title: Удирдах самбар
+      dashboard: Dashboard
+      manage_the_site: Manage the site
       proposed_problems: "Дэвшигдсэн бодлогууд"
       latest_solutions: "Сүүлийн бодолтууд"
       new_post: "Шинэ блог пост"
       moderate_comments: "Хэлэлцүүлэг Хянах"
       new_contest: "Шинэ тэмцээн зарлах"
+    static:
+      contests: Contests
+      problems: Problems
+      blog: Blog
+      coders: Coders
+      account: Account
+      preferences: Preferences
+      dashboard: Dashboard
+      logout: Logout
+      login: Login
+      signup: Signup
+      about: About
+      help: Help
+      issues: Issues
   contests:
     common: &contest-common
       name: "Тэмцээний нэр"
@@ -121,6 +140,8 @@ mn:
       enter_your_registered_email: Бүртгүүлсэн имэйлээ оруул
     edit:
       title: Нууц үгээ сэргээх
+      reset_your_password: Reset your password
+      save_login: Save & Login
   problem_tests:
     common: &tests-common
       test: Тест
@@ -188,6 +209,7 @@ mn:
       memory: Санах ой
       input: Оролт
       output: Гаралт
+      correct: Correct
     list:
       delete?: "Энэ бодолтыг нээрээ устгах уу?"
       wait-checking: "Бодолтыг шалгаж байна. Энэ хооронд та өөр бодлого бодож байж болно..."
@@ -207,6 +229,14 @@ mn:
       <<: *solutions-common
     view:
       title: '%{subject} · Бодолт'
+      solution: Solution
+      coder: Coder
+      submitted: Submitted
+      time: Time
+      points: Points
+      compiler_output: Compiler output
+      tests: Tests
+      download_source: Download source
     new:
       title: Бодолт илгээх
     edit:
@@ -237,6 +267,8 @@ mn:
       create_your_account: Акаунт үүсгэх
       sign_in_using_social_network: Сошиэл нэтээр логин хийх
       create_your_free_account: Үнэгүй акаунт үүсгэх
+      login_with_twitter: Login with Twitter
+      login_with_facebook: Login with Facebook
       register: Бүртгүүлэх
     edit:
       title: '%{subject} · Тохиргоог шинэчлэх'
@@ -274,6 +306,10 @@ mn:
       title: Нэвтрэх
       sign_in_using_your_registered_: Логин хийнэ үү
       sign_in: Нэвтэр
+      login_with_twitter: Login with Twitter
+      login_with_facebook: Login with Facebook
+      sign_in_using_your_registered_: ! 'Sign in using your registered account:'
+      ! 'sign_in_using_social_network:': ! 'Sign in using social network:'
   twit:
     opening_announcement: >-
       %{name} тэмцээн зарлагдаа.
