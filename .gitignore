@@ -1,4 +1,5 @@
 .bundle
+.sass-cache
 log/*.log
 log/*.pid
 tmp/**/*

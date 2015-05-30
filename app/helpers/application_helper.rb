@@ -70,7 +70,7 @@ module ApplicationHelper
   end
 
   def markdown(text)
-    raw BlueCloth.new(text).to_html
+    raw MarkdownRenderer.render(text)
   end
 
   def squeeze(text, size)

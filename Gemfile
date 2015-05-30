@@ -18,10 +18,10 @@ gem 'dalli'
 gem 'paperclip', '~>3.0'
 gem 'kaminari'
 gem 'jquery-rails'
-gem 'wmd-rails'
 gem 'pry'
 gem 'coveralls', require: false
 gem 'pygments.rb', require: 'pygments'
+gem 'redcarpet'
 
 group :assets do
   gem 'sass-rails',   "~> 3.2"

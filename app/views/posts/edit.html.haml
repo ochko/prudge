@@ -1,22 +1,18 @@
-%h1 Edit post
+%h2 Edit post
 
 %section
   = form_for @post do |form|
     .row
-      .span6
+      .span8
         = error_messages_for @post
         = form.text_field :title, :class => 'input-block-level'
     .row
-      .span6
-        #editor-buttons
-    .row
-      .span6
-        = form.text_area(:body, :id => 'editor-input', :class => 'input-block-level')
+      .span8
+        = render partial: 'markdown/edit', locals: {object: 'post', attribute: 'body'}
+
         %button.btn.btn-primary{:type=> :submit}
           %i.icon-save
           = t('.save')
         = link_to @post, :confirm => 'Are you sure?', :method => :delete, :class => 'btn' do
           %i.icon-trash
           = t('.delete')
-      .span6
-        #editor-preview

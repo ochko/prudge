@@ -1,6 +1,8 @@
 Prudge::Application.routes.draw do
   match ':controller/list' => '#index'
 
+  resources :markdown, :only => :create
+
   resources :users do
     collection do
       get :account
