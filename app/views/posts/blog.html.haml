@@ -2,7 +2,7 @@
   %h2
     = link_to post.title, post
   .subhead
-    Posted on #{l post.updated_at, :format => :date}
+    Posted on #{l post.updated_at.to_date}
     by #{link_to post.author.login, post.author}
 
   %section

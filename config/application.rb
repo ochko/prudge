@@ -18,6 +18,7 @@ module Prudge
     config.encoding = 'utf-8'
 
     config.i18n.available_locales = [:mn, :en, :ru]
+    config.i18n.fallbacks = [:ru, :en, :mn]
 
     config.cache_store = :dalli_store, '127.0.0.1', { :namespace => 'prudge' }
 

@@ -43,14 +43,14 @@
         %i.icon-time.muted
       %dd
         %span.muted #{t '.joined'}
-        = l @user.created_at, :format => :date
+        = l @user.created_at.to_date
     %dl
       %dt
         %i.icon-eye-open.muted
       %dd
         %span.muted #{t '.last-seen'}
         - if submitted_at = @user.submitted_at
-          = l submitted_at, :format => :date
+          = l submitted_at.to_date
         - else
           = t '.never'
 
@@ -105,7 +105,7 @@
                 %td
                   %strong= standing(s.rank)
                   = link_to s.contest.name, s.contest
-                  %span.muted.pull-right= l s.contest.start, :format => :date
+                  %span.muted.pull-right= l s.contest.start.to_date
 
       .tab-pane#solved-problems
         %table.table.table-hover.table-striped.table-bordered#user-solutions

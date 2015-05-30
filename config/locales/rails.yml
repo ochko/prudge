@@ -10,3 +10,6 @@ mn:
         email: "Имэйл"
         password_confirmation: "Нууц үгний батлагаа"
         terms_of_service: "Хэрэглэх нөхцөл"
+  time:
+    formats:
+      compact: "%Y-%m-%d %H:%M"
