@@ -1,0 +1,347 @@
+mn:
+  title:
+    contest: Contest
+    post: Post
+    problem: Problem
+    solution: Solution
+    date: Date
+    user: User
+
+  label:
+    test:
+      passed: Accepted
+      failed: Failed
+    execution:
+      ok: "Accepted"
+      timeout: "Time Limit Exceeded"
+      memory: "Memory Limit Exceeded"
+      output: "Output"
+      invalid: "Wrong Answer"
+      return: "Returned an Error"
+      ng: "Unknown Error"
+    standing:
+      gold: "Gold"
+      silver: "Silver"
+      bronze: "Bronze"
+
+  button:
+    edit: Edit
+    save: Save
+    delete: Delete
+    download: Download
+    run: Run
+    submit: Sumbit
+    open: Open
+    send: Send
+    recheck: Rejudge
+
+  unit:
+    second: sec
+    kb: kb
+
+  shared:
+    common: &shared-common
+      delete?: "Really want to delete?"
+    problem: &shared-problem
+      date: "Date"
+      author: "Author"
+      source: "Source code"
+      problem-name: "Name"
+      points: "Points"
+      difficulty: "Difficulty"
+      time-limit: "Time Limit"
+      memory-limit: "Memory Limit"
+      test-count: "Number of Tests"
+      pass-try-ratio: "Accepted / All"
+    solution: &shared-solution
+      coder: Coder
+      source: Source Code
+      submitted: Submitted
+      avg-time: Time Taken
+      taken-points: Points
+
+  posts:
+    index:
+      new_post: New Post
+      edit: Edit
+      posted_on: "Posted On"
+    blog:
+      title: Blog
+      read_more: Read More
+    help:
+      title: Help
+    show:
+      title: "%{subject}"
+      posted_on: Posted On
+    edit:
+      title: "%{subject} · Edit"
+      save: Save
+      delete: Delete
+  home:
+    about:
+      title: About the Site
+    dashboard:
+      title: Dashboard
+      proposed_problems: "Proposed Problems"
+      latest_solutions: "Latest Solutions"
+      new_post: "New Posts"
+      moderate_comments: "Moderate comments"
+      new_contest: "New Contest"
+  contests:
+    common: &contest-common
+      name: "Name"
+      level: "Level"
+      start_time: "Start Time"
+      end_time: "End Time"
+      <<: *shared-common
+      <<: *shared-problem
+    index:
+      title: "Contest"
+      visit_contest: "Visit Contest"
+    last:
+      title: "Contest"
+    show:
+      title: "%{subject}"
+      unwatch: "You won't receive any updates"
+      watch: "You will receive contest updates"
+      problems: "Problems"
+      contestants: "Contestants"
+      submitted_passed: 'All / Accepted'
+      <<: *contest-common
+    new:
+      title: New Contest
+      <<: *contest-common
+    edit:
+      title: '%{subject} · Edit'
+      <<: *contest-common
+  password_resets:
+    new:
+      title: Restore Your Password
+      password_reset: Password Reset
+      enter_your_registered_email: Enter Your Registered Email
+    edit:
+      title: New Password
+  problem_tests:
+    common: &tests-common
+      test: Test
+      tests: Tests
+      delete?: "Really want to delete?"
+      input: Input
+      output: Output
+    index:
+      title: '%{subject}'
+      add-new-test: "Add New Test"
+      <<: *tests-common
+    show:
+      title: Test
+      other: Other Tests
+      <<: *tests-common
+    new:
+      title: Adding a Test
+      add_new_test: Add New Test
+      new_test: New Test
+      this_is_hidden_test: This is hidden test
+      save: Save
+      <<: *tests-common
+    edit:
+      title: Тэстийг засварлах
+      <<: *tests-common
+  problems:
+    index:
+      title: "All Problems"
+      problems: Problems
+    proposed:
+      title: "Proposed Problems"
+      limits: "Limits"
+      <<: *shared-problem
+    show:
+      title: '%{subject}'
+      author: 'from %{author}'
+      contest: 'brought to %{contest} by %{author}'
+      my_solution: "My Solution"
+      statement: "Statement"
+      submissions: "Submissions"
+      source: "Source Code: %{source}"
+    new:
+      title: "Submit a Solution"
+    edit:
+      title: '%{subject} · Edit'
+      problem_tests: 'Problem tests'
+    form:
+      contest: Contest
+      <<: *shared-problem
+    profile:
+      <<: *shared-problem
+  results:
+    common: &results-common
+      run-time: Time
+      run-memory: Memory
+      run-status: Status
+    show:
+      title: Solution
+      coder: Coder
+      souce: Source Code
+      submitted: Submitted
+      result: Result
+      program: Program
+      time: Time
+      memory: Memory
+      input: Input
+      output: Output
+    list:
+      delete?: "Really want to delete?"
+      wait-checking: "Please wait or solve other problems while your solution is being checked..."
+      compiler_output: Compiler Output
+      <<: *shared-solution
+      <<: *results-common
+  search:
+    index:
+      title: Search Results
+  solutions:
+    common: &solutions-common
+      solution: Solution
+    latest:
+      title: Latest solutions
+    show:
+      title: '%{subject} · Edit'
+      <<: *solutions-common
+    view:
+      title: '%{subject} · Edit'
+    new:
+      title: Submitting a Solution
+    edit:
+      title: '%{subject} · Edit'
+      edit_a_solution: Edit a Solution
+      source: Source Code
+      language: Language
+      submit: Submit
+      cancel: Cancel
+    list:
+      submitted: Submitted
+  user_session:
+    new:
+      title: Log In
+  users:
+    common: &user-common
+      change-gravatar: "You can change you avatar at Gravatar.com"
+      update-profile: "Update Profile"
+      login: "Login"
+      email: "Email"
+      twitter: "Twitter"
+      web: "Website"
+      repeat-password: "Repeat your password"
+      organization: "School/Univercity"
+      inform-new-contest: "Inform me about new contests"
+    new:
+      title: Registration
+      create_your_account: Create Your Account
+      sign_in_using_social_network: Sign In Using Social Network
+      create_your_free_account: Create Your Free Account
+      register: Register
+    edit:
+      title: '%{subject} · Editing Account'
+      change-password: "change Password"
+      <<: *user-common
+    index:
+      title: Coder
+    show:
+      title: '%{subject}'
+      medals: Medals
+      achievements: Achievments
+      contests: "Contests"
+      total-points: "Total points"
+      posted-solutions: "Posted solutions"
+      joined: Joined on
+      last-seen: Last seen
+      never: Never
+      connect: Connect
+      <<: *user-common
+    solution:
+      info: "Language: %{language} | Date: %{date} | Percents: %{percent}% | Points: %{point}"
+    problems:
+      new: "New Problem"
+      <<: *shared-problem
+  comments:
+    commentable:
+      add-comment: "Add a Comment"
+    index:
+      title: Comments
+      <<: *shared-common
+    moderate:
+      title: Moderate
+  user_sessions:
+    new:
+      title: Log In
+      sign_in_using_your_registered_: Please do Login
+      sign_in: Log In
+  twit:
+    opening_announcement: >-
+      Attention, new contest %{name}!
+      Start Date: %{start},
+      End Date: %{end}.
+      %{url}
+    update_announcement: >-
+      Contest %{name} was updated. Please note the changes.
+      Start Date: %{start},
+      End Date: %{end}.
+      %{url}
+  notifier:
+    password_reset_instructions:
+      subject: "Password Reset for[%{site}]"
+    password_reset_confirmation:
+      subject: "Password changed on [%{site}]"
+    release_notification:
+      subject: "New Version of [%{site}]!"
+    problem_selection:
+      subject: "Your problem was accepted!"
+    new_contest:
+      subject: "New Contest %{contest} on [%{site}]"
+    contest_update:
+      subject: "Contest %{contest} on [%{site}] Was Updated"
+  message:
+    login_required: "You need to log in in order to continue"
+    logout_required: "You need to log out in order to continue"
+    rate_limited: "You post too many comments! Please wait for 10 secinds."
+    search_result_empty: "Nothing found. Maybe you should change your query?"
+    search_syntax_error: >-
+      You were searching for: <strong>%{query}</strong><br/>
+      Syntax examples can be found <a href="http://sphinxsearch.com/docs/archives/1.10/extended-syntax.html">here</a>.
+    individual_submission: >-
+      You're going to submit a problem from a contest. Your result won't be recorded.
+      Please go here in order to participate: "%{page}"
+    password_reset_instructions: "We have sent you an email with password reset instructions."
+    user_not_found_by_email: "User with such Email was not found."
+    password_updated: "Your password was successfully updated!"
+    password_reset_not_found: >-
+      We can't find your request.
+      There is no such Email associated with this URL.
+      Please try to recover password again.
+    test:
+      saved: 'Test was saved.'
+      deleted: 'Test deleted.'
+      hidden: 'This is a hidden test'
+      frozen: 'This is a frozen test'
+      nodelete: 'You can\'t delete this test'
+    contests:
+      create: 'Contest created.'
+      update: 'Contest was updated.'
+      destroy: 'Contest was deleted.'
+    no_contestants: 'Nobody found!'
+    problems:
+      create: 'Problem added. Do you want to add some tests for it?'
+      update: 'Problem updated.'
+      destroy: 'Problem deleted.'
+      check: "All solutions were sent for rujudging."
+    solutions:
+      empty: 'You should add your solution'
+      create: 'Solution successfully uploaded.'
+      update: 'Solution was updated.'
+    user_sessions:
+      destroy: "You have logged out"
+    users:
+      create: "You have successfully registered!"
+      update: "Your profile was updated!"
+    access_denied: "Access denied: %{message}"
+    please_login: "Please log in in order to%{message}"
+  language:
+    unknown: 'Unknown'
