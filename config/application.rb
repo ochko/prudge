@@ -17,6 +17,7 @@ module Prudge
 
     config.encoding = 'utf-8'
 
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml')]
     config.i18n.available_locales = [:mn, :en, :ru]
     config.i18n.fallbacks = [:ru, :en, :mn]
 
