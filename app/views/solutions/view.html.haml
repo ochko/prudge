@@ -42,7 +42,7 @@
               %i.icon-plus-sign
             %dd
               %span.muted= t('.points')
-              = @solution.point
+              = show_point @solution.point
           = link_to download_solution_path(@solution), :class => 'btn btn-small pull-right' do
             %i.icon-download-alt
             = t('.download')

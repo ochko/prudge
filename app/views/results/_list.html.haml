@@ -55,7 +55,7 @@
           %i.icon-plus-sign
         %dd
           %span.muted= t '.taken-points'
-          = @solution.point
+          = show_point @solution.point
 
   - if @solution.judged?
     .row-fluid

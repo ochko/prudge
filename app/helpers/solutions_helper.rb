@@ -46,4 +46,16 @@ module SolutionsHelper
   def show_correctness(correct)
     content_tag(:i, nil, :class => correct ? 'icon-check' : 'icon-check-empty')
   end
+
+  def show_point(point)
+    point.round(2)
+  end
+
+  def solution_info(solution)
+    t('users.solution.info',
+      :language => solution.language.name,
+      :date => l(solution.source_updated_at, :format => :date),
+      :percent => show_point(solution.percent * 100.0),
+      :point => show_point(solution.point))
+  end
 end
