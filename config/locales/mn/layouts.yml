@@ -1,0 +1,16 @@
+mn:
+  layouts:
+    application:
+      contests: Contests
+      problems: Problems
+      blogs: Blogs
+      coders: Coders
+      login: Login
+      signup: Register
+      about: Сайтын тухай
+      help: Help
+      issues: Issues
+      account: Account
+      preferences: Preferences
+      dashboard: Dashboard
+      logout: Logout
