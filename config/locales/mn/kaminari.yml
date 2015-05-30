@@ -1,0 +1,8 @@
+mn:
+  views:
+    pagination:
+      first: "&#xf100;"
+      last: "&#xf101;"
+      previous: "&#xf104;"
+      next: "&#xf105;"
+      truncate: "..."
