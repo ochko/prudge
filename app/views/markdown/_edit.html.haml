@@ -1,0 +1,18 @@
+.markdown-editor
+  %ul.nav.nav-tabs
+    %li.active
+      %a{:href => "#editor-input", 'data-toggle' => "tab"}
+        %i.icon-pencil
+        Edit
+    %li
+      %a.markdown-preview{:href => "#editor-preview", 'data-toggle' => "tab"}
+        %i.icon-eye-open
+        Preview
+    %li.help-link
+      %span{:href => 'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'}
+        %i.icon-question-sign
+        Formatting Help
+  .tab-content
+    .tab-pane.active#editor-input
+      = text_area(object, attribute, :class => 'input-block-level')
+    .tab-pane#editor-preview

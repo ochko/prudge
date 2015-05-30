@@ -3,31 +3,26 @@
 %section
   = form_for @contest do |f|
     .row
-      .span6
+      .span8
         = error_messages_for @contest
         = f.text_field :name, :class => 'input-block-level'
-      .span6
+      .span8
         .input-prepend
           %span.add-on
             %i.icon-time
-          %input.span2{:name=>"contest[start]", :type=>"datetime", :placeholder => t('.start_time'), :value => @contest.start}
+          %input.span3{:name=>"contest[start]", :type=>"datetime", :placeholder => t('.start_time'), :value => @contest.start}
         %i.icon-double-angle-right
         .input-prepend
           %span.add-on
             %i.icon-time
-          %input.span2{:name=>"contest[end]", :type=>"datetime", :placeholder => t('.end_time'), :value => @contest.end}
+          %input.span3{:name=>"contest[end]", :type=>"datetime", :placeholder => t('.end_time'), :value => @contest.end}
     .row
-      .span6
-        #editor-buttons
-    .row
-      .span6
-        = text_area 'contest', 'description', :id => 'editor-input', :class => 'input-block-level'
+      .span8
+        = render partial: 'markdown/edit', locals: {object: 'contest', attribute: 'description'}
+
         %button.btn.btn-primary{:type=> :submit}
           %i.icon-save
           = t 'button.save'
         = link_to @contest, :confirm => t('.delete?'), :method => :delete, :class => 'btn' do
           %i.icon-trash
           = t 'button.delete'
-
-      .span6
-        #editor-preview

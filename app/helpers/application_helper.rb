@@ -62,7 +62,7 @@ module ApplicationHelper
   end
 
   def sec2milisec(sec)
-      "%0.3f" % (sec.to_f/1000)
+    (sec/1000.0).round(3)
   end
 
   def subsequent_dates(date1, date2, separator='~')
@@ -70,7 +70,7 @@ module ApplicationHelper
   end
 
   def markdown(text)
-    raw BlueCloth.new(text).to_html
+    raw MarkdownRenderer.render(text)
   end
 
   def squeeze(text, size)

@@ -20,6 +20,29 @@ $(function() {
         selector: "[data-toggle=tooltip]"
     });
 
+  $('.markdown-editor .help-link span').click(function(){
+    window.open($(this).attr('href'), '_blank');
+  });
+  $('.markdown-preview').click(function(){
+    var text = $('#editor-input textarea').val(),
+        preview = $('#editor-preview');
+
+    preview.html('<div class="icon-container"><i class="muted icon-spin icon-spinner x6"></i></div>');
+
+    $.ajax({
+      url: '/markdown',
+      type: 'POST',
+      dataType: 'html',
+      data: {text: text},
+      success: function(data) {
+        preview.html(data);
+      },
+      error: function(){
+        preview.html('<div class="icon-container"><i class="muted icon-warning-sign x6"></i></div>');
+      }
+    });
+  });
+
     // side bar
     setTimeout(function () {
         $('.prudge-sidenav').affix({

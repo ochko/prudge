@@ -7,18 +7,19 @@
 
       = text_field 'problem', 'name', :class => 'input-block-level'
 
-      %label= t('.contest')
-      - if @problem.contest && @problem.contest.finished?
-        = link_to @problem.contest.name, @problem.contest
-      - elsif judge?
-        = select("problem", "contest_id", Contest.pending.collect {|c| [ c.name, c.id ] }, { :include_blank => true })
+      .row
+        .span8
+          %span= t('.contest')
+          \:
+          - if @problem.contest && @problem.contest.finished?
+            = link_to @problem.contest.name, @problem.contest
+          - elsif judge?
+            = select("problem", "contest_id", Contest.pending.collect {|c| [ c.name, c.id ] }, { :include_blank => true })
 
       .row
-        .span6
-          #editor-buttons
-      .row
-        .span6
-          = text_area('problem', 'text', :class => 'input-block-level', :id => 'editor-input')
+        .span8
+          = render partial: 'markdown/edit', locals: {object: 'problem', attribute: 'text'}
+
       .row
         .span6
           .input-prepend.input-append
@@ -40,5 +41,3 @@
       %button.btn.btn-primary{:type=> :submit}
         %i.icon-save
         = t('button.save')
-
-      #editor-preview
