@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user_session, :current_user, :current_user?, :admin?, :judge?
 
+  before_filter :set_locale
+
   def current_ability
     @current_ability ||=
       if current_user.nil?
@@ -27,6 +29,21 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def set_locale
+    if params[:locale].present?
+      session[:locale] = params[:locale]
+    elsif session[:locale].blank?
+      session[:locale] = http_accept_language
+    end
+    I18n.locale = session[:locale] || I18n.default_locale
+  end
+
+  def http_accept_language
+    if lang = request.env['HTTP_ACCEPT_LANGUAGE']
+      lang.scan(/^[a-z]{2}/).first
+    end
+  end
 
   def message_for(name, options = {})
     name ||= "#{controller_name}.#{action_name}"
