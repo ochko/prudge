@@ -192,12 +192,12 @@ mn:
       title: Тэстийн үр дүн
       coder: Coder
       souce: Source
-      submitted: Submitted      
+      submitted: Submitted
       result: Result
       program: Program
       time: Time
       memory: Memory
-      input: Input 
+      input: Input
       output: Output
     list:
       delete?: "Энэ бодолтыг нээрээ устгах уу?"
@@ -222,7 +222,7 @@ mn:
       title: Бодолт илгээх
     edit:
       title: '%{subject} · Бодолт засварлах'
-      edit_a_solution: Edit a Solution   
+      edit_a_solution: Edit a Solution
       source: Source
       language: Language
       submit: Submit
@@ -354,3 +354,5 @@ mn:
       create: "Бүртгэл амжилттай"
       update: "Танй мэдээллийг амжилттай шинэчиллээ!"
     access_denied: "Хандах эрх байхгүй: %{message}"
+  language:
+    unknown: 'Мэдэхгүй'
