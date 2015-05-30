@@ -20,7 +20,13 @@ class SolutionsController < ApplicationController
 
   def show
     @solution = Solution.find(params[:id])
-    render :action => :show
+    if request.xhr?
+      if @solution.judged?
+        render :partial => 'results/list'
+      else
+        render :nothing => true
+      end
+    end
   end
 
   def submited

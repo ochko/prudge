@@ -30,12 +30,32 @@ $(function() {
         })
     }, 100);
 
-    if ($('#check-wait-link').length > 0){
-        setTimeout(function () {
-            var link = $('#check-wait-link').attr('href');
-            location.href = link;
-        }, 15000);
+  // polls submission check
+  function pollSolutionCheck() {
+    var checkWait = $('#check-wait-link'),
+        resultContent = $('#result-content');
+    if (checkWait.length > 0) {
+      $.ajax({
+        url: checkWait.attr('href'),
+        type: 'GET',
+        dataType: 'html',
+        success: function(data) {
+          if (data.length !== 0 && data.trim()){
+            resultContent.replaceWith(data);
+          }
+        },
+        complete: function(xhr, status){
+          if (!status.match(/error/)) {
+            setTimeout(pollSolutionCheck, 5000);
+          }
+        }
+      });
     }
+  }
+
+  if ($('#check-wait-link').length > 0){
+    setTimeout(pollSolutionCheck, 5000);
+  }
 
     $('#watch').click(function(e) {
         $(this).hide();

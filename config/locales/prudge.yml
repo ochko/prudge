@@ -201,7 +201,7 @@ mn:
       output: Output
     list:
       delete?: "Энэ бодолтыг нээрээ устгах уу?"
-      wait-checking: "Please wait or solve other problems, your solution is being checked..."
+      wait-checking: "Please wait or solve other problems while your solution is being checked..."
       compiler_output: Compiler Output
       <<: *shared-solution
       <<: *results-common
