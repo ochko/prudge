@@ -93,8 +93,8 @@ $(function() {
               target.html(data);
               var solutionsTable = $('#solutions-table');
               if (solutionsTable.length > 0) {
-                $('#solutions-table thead .toggler').click(function(e) {
-                    $('#solutions-table tbody tr.failed').toggle();
+                solutionsTable.find('thead .toggler').click(function(e) {
+                  solutionsTable.find('tbody tr.failed').toggle();
                     var klass = $(this).hasClass('icon-check-empty') ? 'icon-check' : 'icon-check-empty';
                     $(this).removeClass().addClass(klass);
                 });
