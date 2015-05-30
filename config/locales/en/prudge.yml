@@ -223,126 +223,125 @@ mn:
       title: Log In
   users:
     common: &user-common
-      change-gravatar: "Цээж зургаа Gravatar.com дээр өөрчлөх"
-      update-profile: "Профайл шинэчлэх"
-      login: "Нэвтрэх нэр"
-      email: "И-мэйл"
-      twitter: "Твитэр"
-      web: "Вэб хаяг"
-      repeat-password: "Нууц үгийг давт"
-      organization: "Сургууль/Байгаа газар"
-      inform-new-contest: "Шинэ тэмцээн зохиогдоход мэдэгдэх"
+      change-gravatar: "You can change you avatar at Gravatar.com"
+      update-profile: "Update Profile"
+      login: "Login"
+      email: "Email"
+      twitter: "Twitter"
+      web: "Website"
+      repeat-password: "Repeat your password"
+      organization: "School/Univercity"
+      inform-new-contest: "Inform me about new contests"
     new:
-      title: Бүртгүүлэх
+      title: Registration
       create_your_account: Create Your Account
       sign_in_using_social_network: Sign In Using Social Network
       create_your_free_account: Create Your Free Account
       register: Register
     edit:
-      title: '%{subject} · Тохиргоог шинэчлэх'
-      change-password: "Нууц үг солих"
+      title: '%{subject} · Editing Account'
+      change-password: "change Password"
       <<: *user-common
     index:
-      title: Кодерууд
+      title: Coder
     show:
       title: '%{subject}'
-      medals: Медалууд
-      achievements: Амжилт
-      contests: "Оролцсон тэмцээн"
+      medals: Medals
+      achievements: Achievments
+      contests: "Contests"
       total-points: "Total points"
       posted-solutions: "Posted solutions"
-      reached-level: Reached level
       joined: Joined on
       last-seen: Last seen
       never: Never
       connect: Connect
       <<: *user-common
     solution:
-      info: "%{language} хэл дээр %{date} -д %{percent}% бодож %{point} оноо авсан"
+      info: "Language: %{language} | Date: %{date} | Percents: %{percent}% | Points: %{point}"
     problems:
-      new: "Бодлого дэвшүүлэх"
+      new: "New Problem"
       <<: *shared-problem
   comments:
     commentable:
-      add-comment: "Сэтгэгдэл нэмэрлэх"
+      add-comment: "Add a Comment"
     index:
-      title: Сүүлд нэмэгдсэн бичээсүүд
+      title: Comments
       <<: *shared-common
     moderate:
-      title: Хянах
+      title: Moderate
   user_sessions:
     new:
-      title: Нэвтрэх
+      title: Log In
       sign_in_using_your_registered_: Please do Login
       sign_in: Log In
   twit:
     opening_announcement: >-
-      %{name} тэмцээн зарлагдаа.
-      Эхлэх: %{start},
-      Дуусах: %{end}.
+      Attention, new contest %{name}!
+      Start Date: %{start},
+      End Date: %{end}.
       %{url}
     update_announcement: >-
-      %{name} тэмцээны хугацаа өөрчлөгдөв.
-      Эхлэх: %{start},
-      Дуусах: %{end}.
+      Contest %{name} was updated. Please note the changes.
+      Start Date: %{start},
+      End Date: %{end}.
       %{url}
   notifier:
     password_reset_instructions:
-      subject: "[%{site}] Нууц үг шинэчлэх заавар"
+      subject: "Password Reset for[%{site}]"
     password_reset_confirmation:
-      subject: "[%{site}] Нууц үг тань шинэчлэгдэв"
+      subject: "Password changed on [%{site}]"
     release_notification:
-      subject: "[%{site}] Шинэчлэгдлээ"
+      subject: "New Version of [%{site}]!"
     problem_selection:
-      subject: "[%{site}] Таны дэвшүүлсэн бодлого тэмцээнд сонгогдлоо"
+      subject: "Your problem was accepted!"
     new_contest:
-      subject: "[%{site}] %{contest} зохиогдох гэж байна"
+      subject: "New Contest %{contest} on [%{site}]"
     contest_update:
-      subject: "[%{site}] %{contest} өөрчлөгдлөө"
+      subject: "Contest %{contest} on [%{site}] Was Updated"
   message:
-    login_required: "Ийшээ хандахын тулд нэвтэрсэн байх хэрэгтэй"
-    logout_required: "Энэ хуудас руу орохын тулд гарсан байх ёстой"
-    rate_limited: "Хэт хурдан байна, 10 Секунд хүлээгээд дахин илгээнэ үү?"
-    search_result_empty: "Хайлтаар юу ч олдсонгүй. Хайх үгээ арай богиносгох юм уу өөр үгээр хайна уу?"
+    login_required: "You need to log in in order to continue"
+    logout_required: "You need to log out in order to continue"
+    rate_limited: "You post too many comments! Please wait for 10 secinds."
+    search_result_empty: "Nothing found. Maybe you should change your query?"
     search_syntax_error: >-
-      Хайлтын синтакс буруу байна: <strong>%{query}</strong><br/>
-      Зааврыг <a href="http://sphinxsearch.com/docs/archives/1.10/extended-syntax.html">sphinx query syntax</a> хуудсаас үз.
+      You were searching for: <strong>%{query}</strong><br/>
+      Syntax examples can be found <a href="http://sphinxsearch.com/docs/archives/1.10/extended-syntax.html">here</a>.
     individual_submission: >-
-      Энэ бодолтыг тэмцээнд оруулахгүйгээр илгээх гэж байна.
-      Хэрэв тэмцээнд оролцохыг хүсвэл "%{page}" тэмцээний хуудаснаас орно уу?
-    password_reset_instructions: "Нууц үг сэргээх зааврыг и-мэйл рүү тань илгээв. Шалгана уу?"
-    user_not_found_by_email: "Ийм и-мэйлээр бүртгүүлсэн хэрэглэгч алга байна"
-    password_updated: "Нууц үгийг амжилттай шинэчиллээ"
+      You're going to submit a problem from a contest. Your result won't be recorded.
+      Please go here in order to participate: "%{page}"
+    password_reset_instructions: "We have sent you an email with password reset instructions."
+    user_not_found_by_email: "User with such Email was not found."
+    password_updated: "Your password was successfully updated!"
     password_reset_not_found: >-
-      Уучлаарай, таны бүртгэлийг олсонгүй.
-      И-мэйл дотроосоо URL ийг хуулж аваад хөтөч дээрээ ачаалж үз.
-      Эсвэл нууц үг сэргээх процессийг ахин хийж үзнэ үү?
+      We can't find your request.
+      There is no such Email associated with this URL.
+      Please try to recover password again.
     test:
-      saved: 'Тэстийг хадгалж авлаа.'
-      deleted: 'Тэстийг устгав.'
-      hidden: 'Тэстийг үзэж болохгүй.'
-      frozen: 'Тэст оруулж болохгүй.'
-      nodelete: 'Тэстийг устгаж болохгүй.'
+      saved: 'Test was saved.'
+      deleted: 'Test deleted.'
+      hidden: 'This is a hidden test'
+      frozen: 'This is a frozen test'
+      nodelete: 'You can\'t delete this test'
     contests:
-      create: 'Тэмцээнийг үүсгэлээ.'
-      update: 'Тэмцээнийг шинэчлэн хадгаллаа.'
-      destroy: 'Тэмцээнийг устгав.'
-    no_contestants: 'Оролцогч алга!'
+      create: 'Contest created.'
+      update: 'Contest was updated.'
+      destroy: 'Contest was deleted.'
+    no_contestants: 'Nobody found!'
     problems:
-      create: 'Бодлогыг хадгалав. Тэстүүдийг нь оруулна уу?'
-      update: 'Бодлогыг шинэчиллээ.'
-      destroy: 'Бодлогыг устгав'
-      check: "Бүх бодолтуудыг шалгалаа"
+      create: 'Problem added. Do you want to add some tests for it?'
+      update: 'Problem updated.'
+      destroy: 'Problem deleted.'
+      check: "All solutions were sent for rujudging."
     solutions:
-      empty: 'Энэ бодлогыг одоогоор нэг ч хүн бодоогүй байна'
-      create: 'Бодолтыг хадгалж авлаа.'
-      update: 'Бодолт шинэчлэгдлээ.'
+      empty: 'You should add your solution'
+      create: 'Solution successfully uploaded.'
+      update: 'Solution was updated.'
     user_sessions:
-      destroy: "Та системээс гарсан"
+      destroy: "You have logged out"
     users:
-      create: "Бүртгэл амжилттай"
-      update: "Танй мэдээллийг амжилттай шинэчиллээ!"
-    access_denied: "Хандах эрх байхгүй: %{message}"
-    please_login: "%{message} Логин хийнэ үү?"
+      create: "You have successfully registered!"
+      update: "Your profile was updated!"
+    access_denied: "Access denied: %{message}"
+    please_login: "Please log in in order to%{message}"
   language:
-    unknown: 'Мэдэхгүй'
+    unknown: 'Unknown'
