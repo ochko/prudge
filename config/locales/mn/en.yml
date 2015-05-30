@@ -9,21 +9,6 @@ mn:
     dashboard:
       dashboard: Dashboard
       manage_the_site: Manage the site
-  layouts:
-    application:
-      contests: Contests
-      problems: Problems
-      blogs: Blogs
-      coders: Coders
-      account: Account
-      preferences: Preferences
-      dashboard: Dashboard
-      logout: Logout
-      login: Login
-      signup: Signup
-      about: About
-      help: Help
-      issues: Issues
     static:
       contests: Contests
       problems: Problems
