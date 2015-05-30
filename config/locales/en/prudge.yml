@@ -96,48 +96,48 @@ mn:
       <<: *shared-common
       <<: *shared-problem
     index:
-      title: "Тэмцээнүүд"
+      title: "Contest"
       visit_contest: "Visit Contest"
     last:
-      title: "Тэмцээн"
+      title: "Contest"
     show:
       title: "%{subject}"
-      unwatch: "Энэ тэмцээний тухай мэдэгдэл ирэхгүй болгох"
-      watch: "Тэмцээнийн хугацаа өөрчлөгдөхөд надад мэдэгд"
-      problems: "Бодлогууд"
-      contestants: "Оролцогчид"
-      submitted_passed: 'Submitted/Passed'
+      unwatch: "You won't receive any updates"
+      watch: "You will receive contest updates"
+      problems: "Problems"
+      contestants: "Contestants"
+      submitted_passed: 'All / Accepted'
       <<: *contest-common
     new:
-      title: Тэмцээн зарлах
+      title: New Contest
       <<: *contest-common
     edit:
-      title: '%{subject} · Засварлах'
+      title: '%{subject} · Edit'
       <<: *contest-common
   password_resets:
     new:
-      title: Нууц үг сэргээх хүсэлт
+      title: Restore Your Password
       password_reset: Password Reset
       enter_your_registered_email: Enter Your Registered Email
     edit:
-      title: Нууц үгээ сэргээх
+      title: New Password
   problem_tests:
     common: &tests-common
-      test: Тест
-      tests: Тестүүд
-      delete?: "Тэстийг устгах уу?"
-      input: Оролт
-      output: Гаралт
+      test: Test
+      tests: Tests
+      delete?: "Really want to delete?"
+      input: Input
+      output: Output
     index:
       title: '%{subject}'
-      add-new-test: "Шинэ тест нэмэх"
+      add-new-test: "Add New Test"
       <<: *tests-common
     show:
-      title: Бодлогын тэст
-      other: Бусад тэстүүд
+      title: Test
+      other: Other Tests
       <<: *tests-common
     new:
-      title: Шинэ тэст
+      title: Adding a Test
       add_new_test: Add New Test
       new_test: New Test
       this_is_hidden_test: This is hidden test
@@ -148,39 +148,39 @@ mn:
       <<: *tests-common
   problems:
     index:
-      title: "Бодлогууд"
+      title: "All Problems"
       problems: Problems
     proposed:
-      title: "Дэвшигдсэн бодлогууд"
-      limits: "Хязгаарлалт"
+      title: "Proposed Problems"
+      limits: "Limits"
       <<: *shared-problem
     show:
       title: '%{subject}'
-      author: '%{author} дэвшүүлсэн'
-      contest: '%{contest}-д %{author} дэвшүүлсэн'
-      my_solution: "Миний бодолт"
-      statement: "Бодлого"
-      submissions: "Бодолтууд"
-      source: "Эх сурвалж: %{source}"
+      author: 'from %{author}'
+      contest: 'brought to %{contest} by %{author}'
+      my_solution: "My Solution"
+      statement: "Statement"
+      submissions: "Submissions"
+      source: "Source Code: %{source}"
     new:
-      title: "Бодлого дэвшүүлэх"
+      title: "Submit a Solution"
     edit:
-      title: '%{subject} · Засварлах'
-      problem_tests: 'Энэ бодлогын тестүүд'
+      title: '%{subject} · Edit'
+      problem_tests: 'Problem tests'
     form:
-      contest: Тэмцээн
+      contest: Contest
       <<: *shared-problem
     profile:
       <<: *shared-problem
   results:
     common: &results-common
-      run-time: Хугацаа
-      run-memory: Санах ой
-      run-status: Ажилласан байдал
+      run-time: Time
+      run-memory: Memory
+      run-status: Status
     show:
-      title: Тэстийн үр дүн
+      title: Solution
       coder: Coder
-      souce: Source
+      souce: Source Code
       submitted: Submitted
       result: Result
       program: Program
@@ -189,30 +189,30 @@ mn:
       input: Input
       output: Output
     list:
-      delete?: "Энэ бодолтыг нээрээ устгах уу?"
+      delete?: "Really want to delete?"
       wait-checking: "Please wait or solve other problems while your solution is being checked..."
       compiler_output: Compiler Output
       <<: *shared-solution
       <<: *results-common
   search:
     index:
-      title: Хайлт
+      title: Search Results
   solutions:
     common: &solutions-common
-      solution: Бодолт
+      solution: Solution
     latest:
-      title: Сүүлийн бодолтууд
+      title: Latest solutions
     show:
-      title: '%{subject} · Бодолт'
+      title: '%{subject} · Edit'
       <<: *solutions-common
     view:
-      title: '%{subject} · Бодолт'
+      title: '%{subject} · Edit'
     new:
-      title: Бодолт илгээх
+      title: Submitting a Solution
     edit:
-      title: '%{subject} · Бодолт засварлах'
+      title: '%{subject} · Edit'
       edit_a_solution: Edit a Solution
-      source: Source
+      source: Source Code
       language: Language
       submit: Submit
       cancel: Cancel
@@ -220,7 +220,7 @@ mn:
       submitted: Submitted
   user_session:
     new:
-      title: Нэвтрэх
+      title: Log In
   users:
     common: &user-common
       change-gravatar: "Цээж зургаа Gravatar.com дээр өөрчлөх"
