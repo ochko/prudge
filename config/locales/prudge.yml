@@ -354,5 +354,6 @@ mn:
       create: "Бүртгэл амжилттай"
       update: "Танй мэдээллийг амжилттай шинэчиллээ!"
     access_denied: "Хандах эрх байхгүй: %{message}"
+    please_login: "%{message} Логин хийнэ үү?"
   language:
     unknown: 'Мэдэхгүй'

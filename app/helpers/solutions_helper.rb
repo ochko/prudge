@@ -48,7 +48,7 @@ module SolutionsHelper
   end
 
   def show_point(point)
-    point.round(2)
+    point ? point.round(2) : 0
   end
 
   def solution_info(solution)

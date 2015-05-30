@@ -31,7 +31,7 @@
         %i.icon-dashboard.muted
       %dd
         %span.muted #{t '.total-points'}:
-        = @user.points.nil? ? 0 : ("%.2f" % @user.points)
+        = show_point @user.points
     %dl
       %dt
         %i.icon-cogs.muted

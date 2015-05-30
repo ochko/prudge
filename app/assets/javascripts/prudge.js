@@ -1,5 +1,5 @@
 $(function() {
-    var $window = $(window)
+    var $window = $(window);
 
     var searchHints;
 
@@ -90,20 +90,27 @@ $(function() {
             url: link,
             type: 'GET',
             success: function(data, status, xhr) {
-                target.html(data);
-
+              target.html(data);
+              var solutionsTable = $('#solutions-table');
+              if (solutionsTable.length > 0) {
                 $('#solutions-table thead .toggler').click(function(e) {
                     $('#solutions-table tbody tr.failed').toggle();
-                    klass = $(this).hasClass('icon-check-empty') ? 'icon-check' : 'icon-check-empty';
+                    var klass = $(this).hasClass('icon-check-empty') ? 'icon-check' : 'icon-check-empty';
                     $(this).removeClass().addClass(klass);
                 });
 
-                $("#solutions-table").tablesorter({headers: { 0: {sorter: false},
-                                                              1: {sorter: false}
-                                                            }});
+                solutionsTable.tablesorter({headers: { 0: {sorter: false},
+                                                       1: {sorter: false}
+                                                     }});
+              }
             },
-            error: function(xhr, status, message) {
-                target.html("Error");
+            error: function(xhr, message) {
+              if (xhr.status === 200 && message === 'parsererror') {
+                // response is text, but jquery is trying to convert to json or js
+                target.html(xhr.responseText);
+              }else{
+                target.html('AJAX Error');
+              }
             },
             complete: function(xhr, status){
                 icon.removeClass().addClass(iconClass);

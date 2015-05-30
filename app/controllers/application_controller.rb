@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
-      format.js { render :text => message_for(:access_denied, :message => exception.message) }
+      format.js { render :partial => 'access_denied', :object => exception }
       format.html { redirect_to root_url, :alert => exception.message }
     end
   end

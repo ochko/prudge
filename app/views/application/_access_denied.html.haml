@@ -1,0 +1,7 @@
+.alert
+  %button.close{'type' => "button", 'data-dismiss' => "alert"}
+    &times;
+  - if current_user
+    = t('message.access_denied', :message => access_denied.message)
+  - else
+    = t('message.please_login', :message => access_denied.message)

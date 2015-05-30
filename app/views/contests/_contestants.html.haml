@@ -13,7 +13,7 @@
           %tr
             %td.standing= standing(participant.rank)
             %td= link_to participant.user.login, participant.user
-            %td= "%.2f" % participant.points
+            %td= show_point participant.points
             %td
               = link_to contest_user_solutions_path(@contest, participant.user), :class => 'loader' do
                 %i.icon-refresh
