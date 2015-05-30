@@ -1,64 +1,64 @@
 mn:
   title:
-    contest: Тэмцээн
-    post: Пост
-    problem: Бодлого
-    solution: Бодолт
-    date: Огноо
-    user: Хэрэглэгч
+    contest: Contest
+    post: Post
+    problem: Problem
+    solution: Solution
+    date: Date
+    user: User
 
   label:
     test:
-      passed: Тест давсан
-      failed: Тест зөрсөн
+      passed: Accepted
+      failed: Failed
     execution:
-      ok: "Хэвийн ажиллав"
-      timeout: "Хугацаа хэтрэв"
-      memory: "Санах ой хэтрэв"
-      output: "Гаралт хэтрэв"
-      invalid: "Буруу үйлдэл"
-      return: "Алдаа буцаалаа"
-      ng: "Үл мэдэгдэх алдаа"
+      ok: "Accepted"
+      timeout: "Time Limit Exceeded"
+      memory: "Memory Limit Exceeded"
+      output: "Output"
+      invalid: "Wrong Answer"
+      return: "Returned an Error"
+      ng: "Unknown Error"
     standing:
-      gold: "Алт"
-      silver: "Мөнгө"
-      bronze: "Хүрэл"
+      gold: "Gold"
+      silver: "Silver"
+      bronze: "Bronze"
 
   button:
-    edit: Засвар
-    save: Хадгал
-    delete: Устга
-    download: Татаж авах
-    run: Шалга
-    submit: Илгээ
-    open: Нээ
-    send: Илгээ
-    recheck: Дахин шалга
+    edit: Edit
+    save: Save
+    delete: Delete
+    download: Download
+    run: Run
+    submit: Sumbit
+    open: Open
+    send: Send
+    recheck: Rejudge
 
   unit:
-    second: сек
-    kb: кб
+    second: sec
+    kb: kb
 
   shared:
     common: &shared-common
-      delete?: "Үнэхээр устгах уу?"
+      delete?: "Really want to delete?"
     problem: &shared-problem
-      date: "Огноо"
-      author: "Дэвшүүлсэн"
-      source: "Эх сурвалж"
-      problem-name: "Нэр"
-      points: "Оноо"
-      difficulty: "Чанар"
-      time-limit: "Хугацааны хязгаар"
-      memory-limit: "Санах ойн хязгаар"
-      test-count: "Тестийн тоо"
-      pass-try-ratio: "Зөв/Бүгд"
+      date: "Date"
+      author: "Author"
+      source: "Source code"
+      problem-name: "Name"
+      points: "Points"
+      difficulty: "Difficulty"
+      time-limit: "Time Limit"
+      memory-limit: "Memory Limit"
+      test-count: "Number of Tests"
+      pass-try-ratio: "Accepted / All"
     solution: &shared-solution
-      coder: Кодер
-      source: Соорс
-      submitted: Илгээсэн
-      avg-time: Хугацаа
-      taken-points: Оноо
+      coder: Coder
+      source: Source Code
+      submitted: Submitted
+      avg-time: Time Taken
+      taken-points: Points
 
   posts:
     index:
@@ -66,33 +66,33 @@ mn:
       edit: Edit
       posted_on: "Posted On"
     blog:
-      title: Блог
+      title: Blog
       read_more: Read More
     help:
-      title: Тусламж
+      title: Help
     show:
       title: "%{subject}"
       posted_on: Posted On
     edit:
-      title: "%{subject} · Засварлах"
+      title: "%{subject} · Edit"
       save: Save
       delete: Delete
   home:
     about:
-      title: Сайтын тухай
+      title: About the Site
     dashboard:
       title: Dashboard
-      proposed_problems: "Дэвшигдсэн бодлогууд"
-      latest_solutions: "Сүүлийн бодолтууд"
-      new_post: "Шинэ блог пост"
-      moderate_comments: "Хэлэлцүүлэг Хянах"
-      new_contest: "Шинэ тэмцээн зарлах"
+      proposed_problems: "Proposed Problems"
+      latest_solutions: "Latest Solutions"
+      new_post: "New Posts"
+      moderate_comments: "Moderate comments"
+      new_contest: "New Contest"
   contests:
     common: &contest-common
-      name: "Тэмцээний нэр"
-      level: "Түвшин"
-      start_time: "Эхлэх цаг"
-      end_time: "Дуусах цаг"
+      name: "Name"
+      level: "Level"
+      start_time: "Start Time"
+      end_time: "End Time"
       <<: *shared-common
       <<: *shared-problem
     index:
