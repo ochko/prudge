@@ -44,46 +44,46 @@ mn:
       - December
     abbr_month_names:
       - "~"
-      - 1 сар
-      - 2 сар
-      - 3 сар
-      - 4 сар
-      - 5 сар
-      - 6 сар
-      - 7 сар
-      - 8 сар
-      - 9 сар
-      - 10 сар
-      - 11 сар
-      - 12 сар
+      - Jan
+      - Feb
+      - Mar
+      - Apr
+      - May
+      - Jun
+      - Jul
+      - Aug
+      - Sep
+      - Oct
+      - Nov
+      - Dec
     standalone_month_names:
       - "~"
-      - 1 сар
-      - 2 сар
-      - 3 сар
-      - 4 сар
-      - 5 сар
-      - 6 сар
-      - 7 сар
-      - 8 сар
-      - 9 сар
-      - 10 сар
-      - 11 сар
-      - 12 сар
+      - January
+      - February
+      - March
+      - April
+      - May
+      - June
+      - July
+      - August
+      - September
+      - October
+      - November
+      - December
     standalone_abbr_month_names:
       - "~"
-      - 1сар
-      - 2сар
-      - 3сар
-      - 4сар
-      - 5сар
-      - 6сар
-      - 7сар
-      - 8сар
-      - 9сар
-      - 10сар
-      - 11сар
-      - 12сар
+      - Jan
+      - Feb
+      - Mar
+      - Apr
+      - May
+      - Jun
+      - Jul
+      - Aug
+      - Sep
+      - Oct
+      - Nov
+      - Dec
     order:
       - :year
       - :month
@@ -124,102 +124,102 @@ mn:
         format: "%n %u"
         units:
           byte:
-            one: "байт"
-            few: "байт"
-            many: "байт"
-            other: "байт"
-          kb: "КБ"
-          mb: "МБ"
-          gb: "ГБ"
-          tb: "ТБ"
+            one: "byte"
+            few: "bytes"
+            many: "bytes"
+            other: "bytes"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"
   datetime:
     distance_in_words:
-      half_a_minute: "хагас минут"	
+      half_a_minute: "half a minute"	
       less_than_x_seconds:
-        one: "%{count} секундээс бага"
-        other: "%{count} секундээс бага"
+        one: "%{count} second"
+        other: "%{count} seconds"
       x_seconds:
-        one: "%{count} секунд"
-        other: "%{count} секунд"
+        one: "%{count} second"
+        other: "%{count} seconds"
       less_than_x_minutes:
-        one: "%{count} минутаас бага"
-        other: "%{count} минутаас бага"
+        one: "%{count} minute"
+        other: "%{count} minutes"
       x_minutes:
-        one: "%{count} минут"
-        other: "%{count} минут"
+        one: "%{count} minute"
+        other: "%{count} minutes"
       about_x_hours:
-        one: "%{count} цаг орчим"
-        other: "%{count} цаг орчим"
+        one: "%{count} hour"
+        other: "%{count} hours"
       x_days:
-        one: "%{count} өдөр"
-        other: "%{count} өдөр"
+        one: "%{count} day"
+        other: "%{count} days"
       about_x_months:
-        one: "%{count} сар орчим"
-        other: "%{count} сар орчим"
+        one: "%{count} month"
+        other: "%{count} months"
       x_months:
-        one: "%{count} сар"
-        other: "%{count} сар"
+        one: "%{count} month"
+        other: "%{count} months"
       about_x_years:
-        one: "%{count} жил орчим"
-        other: "%{count} жил орчим"
+        one: "%{count} year"
+        other: "%{count} years"
       over_x_years:
-        one: "%{count} жилээс илүү"
+        one: "%{count} year"
     prompts:
-      year: "Жил"
-      month: "Сар"
-      day: "Өдөр"
-      hour: "Цаг"
-      minute: "Минут"
-      second: "Секунд"
+      year: "year"
+      month: "month"
+      day: "day"
+      hour: "hour"
+      minute: "minute"
+      second: "second"
   activerecord:
     errors:
       template:
         header:
-          one: "%{model}-д алдаа байна"
-          other: "%{model}-д алдаа байна"
-        body: "Дараах хэсгүүдэд алдаа гарлаа:"
+          one: "%{model}"
+          other: "%{model}"
+        body: "There is a problem:"
       messages:
-        inclusion: "жагсаалтад алга байна"
-        exclusion: "бол ашиглахад хориотой"
-        invalid: "буруу байна"
-        confirmation: "адилгүй байна"
-        accepted: "хүлээн зөвшөөрөгдсөн байх ёстой"
-        empty: "байхгүй байж болохгүй"
-        blank: "хоосон байж болохгүй"
-        too_long: "хэт урт байна (хамгийн уртдаа %{count} тэмдэгт)"
-        too_short: "хэт богино байна (хамгийн багадаа %{count} тэмдэгт)"
-        wrong_length: "урт нь буруу байна (%{count} тэмдэгт байх ёстой)"
-        taken: "аль хэдийн авчихсан байна"
-        not_a_number: "тоо биш байна"
-        greater_than: "%{count}-с их байх ёстой"
-        greater_than_or_equal_to: "%{count}-с их юмуу тэнцүү байх ёстой"
-        equal_to: "%{count}-тэй тэнцүү байх ёстой"
-        less_than: "%{count}-с бага байх ёстой"
-        less_than_or_equal_to: "%{count}-с бага юмуу тэнцүү байх ёстой"
-        odd: "сонгой байх ёстой"
-        even: "тэгш байх ёстой"
-        record_invalid: "Шалгалт амжилтгүй: %{errors}"
-        should look like an email address: "имэйл хаяг шиг харагдах ёстой"
+        inclusion: "inclusion"
+        exclusion: "exclusion"
+        invalid: "is invalid"
+        confirmation: "confirmation"
+        accepted: "accepted"
+        empty: "is empty"
+        blank: "can't be blank"
+        too_long: "too long (should be %{count})"
+        too_short: "too short (should be %{count})"
+        wrong_length: "wrong length (should be %{count})"
+        taken: "taken"
+        not_a_number: "not a number"
+        greater_than: "should be greater than %{count}"
+        greater_than_or_equal_to: "should be greater than or equal to %{count}"
+        equal_to: "should be equal to %{count}"
+        less_than: "should be less than %{count}"
+        less_than_or_equal_to: "should be less or equal to %{count}"
+        odd: "odd"
+        even: "even"
+        record_invalid: "There are some errors: %{errors}"
+        should look like an email address: "Should look like an Email"
       full_messages:
         format: "%{attribute} %{message}"
     models:
-      user: "Хэрэглэгч"
-      card: "Карт"
-      user session: Нэвтрэлт
+      user: "User"
+      card: "Card"
+      user session: Login
     attributes:
       user:
-        login: "Нэвтрэх нэр"
-        password: "Нууц үг"
-        email: "Имэйл"
-        password_confirmation: "Нууц үгний батлагаа"
-        terms_of_service: "Хэрэглэх нөхцөл"
+        login: "Login"
+        password: "Password"
+        email: "Email"
+        password_confirmation: "Password confirmation"
+        terms_of_service: "Terms of Service"
       card:
-        front: Асуулт
-        back: Хариулт
+        front: Front
+        back: Back
   support:
     array:
-      sentence_connector: "бөгөөд"
+      sentence_connector: " "
       skip_last_comma: true
       words_connector: ", "
-      two_words_connector: " болон "
-      last_word_connector: " болон "
+      two_words_connector: " and "
+      last_word_connector: " and "
