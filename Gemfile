@@ -22,6 +22,7 @@ gem 'pry'
 gem 'coveralls', require: false
 gem 'pygments.rb', require: 'pygments'
 gem 'redcarpet'
+gem 'rails-i18n', '~> 3.0.0'
 
 group :assets do
   gem 'sass-rails',   "~> 3.2"

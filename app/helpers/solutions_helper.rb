@@ -54,7 +54,7 @@ module SolutionsHelper
   def solution_info(solution)
     t('users.solution.info',
       :language => (language = solution.language) ? language.name : t('language.unknown'),
-      :date => l(solution.source_updated_at, :format => :date),
+      :date => l(solution.source_updated_at.to_date),
       :percent => show_point(solution.percent * 100.0),
       :point => show_point(solution.point))
   end

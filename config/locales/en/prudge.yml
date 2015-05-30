@@ -1,4 +1,4 @@
-mn:
+en:
   title:
     contest: Contest
     post: Post
@@ -15,8 +15,8 @@ mn:
       ok: "Accepted"
       timeout: "Time Limit Exceeded"
       memory: "Memory Limit Exceeded"
-      output: "Output"
-      invalid: "Wrong Answer"
+      output: "Output Limit Exceeded"
+      invalid: "Invalid Operation"
       return: "Returned an Error"
       ng: "Unknown Error"
     standing:
@@ -45,14 +45,14 @@ mn:
     problem: &shared-problem
       date: "Date"
       author: "Author"
-      source: "Source code"
+      source: "Source"
       problem-name: "Name"
       points: "Points"
       difficulty: "Difficulty"
       time-limit: "Time Limit"
       memory-limit: "Memory Limit"
       test-count: "Number of Tests"
-      pass-try-ratio: "Accepted / All"
+      pass-try-ratio: "Accepted/All"
     solution: &shared-solution
       coder: Coder
       source: Source Code
@@ -84,7 +84,7 @@ mn:
       title: Dashboard
       proposed_problems: "Proposed Problems"
       latest_solutions: "Latest Solutions"
-      new_post: "New Posts"
+      new_post: "New Post"
       moderate_comments: "Moderate comments"
       new_contest: "New Contest"
   contests:
@@ -102,11 +102,11 @@ mn:
       title: "Contest"
     show:
       title: "%{subject}"
-      unwatch: "You won't receive any updates"
-      watch: "You will receive contest updates"
+      unwatch: "Don't send me notifications for this contest"
+      watch: "Send me notifications when contest time changes"
       problems: "Problems"
       contestants: "Contestants"
-      submitted_passed: 'All / Accepted'
+      submitted_passed: 'All/Accepted'
       <<: *contest-common
     new:
       title: New Contest
@@ -120,12 +120,12 @@ mn:
       password_reset: Password Reset
       enter_your_registered_email: Enter Your Registered Email
     edit:
-      title: New Password
+      title: Restore my password
   problem_tests:
     common: &tests-common
       test: Test
       tests: Tests
-      delete?: "Really want to delete?"
+      delete?: "Really want to delete the test?"
       input: Input
       output: Output
     index:
@@ -161,9 +161,9 @@ mn:
       my_solution: "My Solution"
       statement: "Statement"
       submissions: "Submissions"
-      source: "Source Code: %{source}"
+      source: "Source: %{source}"
     new:
-      title: "Submit a Solution"
+      title: "Propose a problem"
     edit:
       title: '%{subject} · Edit'
       problem_tests: 'Problem tests'
@@ -178,7 +178,7 @@ mn:
       run-memory: Memory
       run-status: Status
     show:
-      title: Solution
+      title: Test result
       coder: Coder
       souce: Source Code
       submitted: Submitted
@@ -211,7 +211,7 @@ mn:
       title: Submitting a Solution
     edit:
       title: '%{subject} · Edit'
-      edit_a_solution: Edit a Solution
+      edit_a_solution: Edit Solution
       source: Source Code
       language: Language
       submit: Submit
@@ -230,7 +230,7 @@ mn:
       twitter: "Twitter"
       web: "Website"
       repeat-password: "Repeat your password"
-      organization: "School/Univercity"
+      organization: "School or Location"
       inform-new-contest: "Inform me about new contests"
     new:
       title: Registration
@@ -239,11 +239,11 @@ mn:
       create_your_free_account: Create Your Free Account
       register: Register
     edit:
-      title: '%{subject} · Editing Account'
-      change-password: "change Password"
+      title: '%{subject} · Edit settings'
+      change-password: "Change Password"
       <<: *user-common
     index:
-      title: Coder
+      title: Coders
     show:
       title: '%{subject}'
       medals: Medals
@@ -257,15 +257,15 @@ mn:
       connect: Connect
       <<: *user-common
     solution:
-      info: "Language: %{language} | Date: %{date} | Percents: %{percent}% | Points: %{point}"
+      info: "On %{date} using %{language} language, solved %{percent}% and got %{point} points"
     problems:
-      new: "New Problem"
+      new: "Propose a problem"
       <<: *shared-problem
   comments:
     commentable:
       add-comment: "Add a Comment"
     index:
-      title: Comments
+      title: Latest Comments
       <<: *shared-common
     moderate:
       title: Moderate
@@ -276,52 +276,52 @@ mn:
       sign_in: Log In
   twit:
     opening_announcement: >-
-      Attention, new contest %{name}!
-      Start Date: %{start},
-      End Date: %{end}.
+      Attention, new contest %{name} announcement!
+      Start time: %{start},
+      End time: %{end}.
       %{url}
     update_announcement: >-
-      Contest %{name} was updated. Please note the changes.
-      Start Date: %{start},
-      End Date: %{end}.
+      Contest %{name} was updated. Please note the time changes.
+      Start time: %{start},
+      End time: %{end}.
       %{url}
   notifier:
     password_reset_instructions:
-      subject: "Password Reset for[%{site}]"
+      subject: "[%{site}] Password Reset instruction"
     password_reset_confirmation:
-      subject: "Password changed on [%{site}]"
+      subject: "[%{site}] Your Password Changed"
     release_notification:
-      subject: "New Version of [%{site}]!"
+      subject: "[%{site}] New Version Released!"
     problem_selection:
-      subject: "Your problem was accepted!"
+      subject: "[%{site}] Your proposed problem was accepted!"
     new_contest:
-      subject: "New Contest %{contest} on [%{site}]"
+      subject: "[%{site}] New Contest %{contest}"
     contest_update:
-      subject: "Contest %{contest} on [%{site}] Was Updated"
+      subject: "[%{site}] Contest %{contest} was updated"
   message:
-    login_required: "You need to log in in order to continue"
+    login_required: "You need to log in order to continue"
     logout_required: "You need to log out in order to continue"
-    rate_limited: "You post too many comments! Please wait for 10 secinds."
+    rate_limited: "You post too many comments! Please wait for 10 seconds."
     search_result_empty: "Nothing found. Maybe you should change your query?"
     search_syntax_error: >-
-      You were searching for: <strong>%{query}</strong><br/>
+      You search has sytax error: <strong>%{query}</strong><br/>
       Syntax examples can be found <a href="http://sphinxsearch.com/docs/archives/1.10/extended-syntax.html">here</a>.
     individual_submission: >-
-      You're going to submit a problem from a contest. Your result won't be recorded.
-      Please go here in order to participate: "%{page}"
-    password_reset_instructions: "We have sent you an email with password reset instructions."
-    user_not_found_by_email: "User with such Email was not found."
+      You're going to submit a problem without a contest.
+      Please go to %{page} in order to participate.
+    password_reset_instructions: "We have sent you an email with password reset instructions. Please check your email."
+    user_not_found_by_email: "User with such email was not found."
     password_updated: "Your password was successfully updated!"
     password_reset_not_found: >-
-      We can't find your request.
-      There is no such Email associated with this URL.
-      Please try to recover password again.
+      We can't find your password reset request.
+      Please try copying the URL from email and load in your web browser.
+      Or please restart password reset process.
     test:
       saved: 'Test was saved.'
       deleted: 'Test deleted.'
-      hidden: 'This is a hidden test'
-      frozen: 'This is a frozen test'
-      nodelete: 'You can\'t delete this test'
+      hidden: "You can't see this test"
+      frozen: 'Adding test is not allowd'
+      nodelete: "You can't delete this test"
     contests:
       create: 'Contest created.'
       update: 'Contest was updated.'
@@ -331,9 +331,9 @@ mn:
       create: 'Problem added. Do you want to add some tests for it?'
       update: 'Problem updated.'
       destroy: 'Problem deleted.'
-      check: "All solutions were sent for rujudging."
+      check: "All solutions were sent for rejudging."
     solutions:
-      empty: 'You should add your solution'
+      empty: 'Noone solved this problem for now'
       create: 'Solution successfully uploaded.'
       update: 'Solution was updated.'
     user_sessions:
@@ -342,6 +342,6 @@ mn:
       create: "You have successfully registered!"
       update: "Your profile was updated!"
     access_denied: "Access denied: %{message}"
-    please_login: "Please log in in order to%{message}"
+    please_login: "Please login in order to %{message}"
   language:
     unknown: 'Unknown'

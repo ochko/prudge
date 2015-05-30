@@ -24,7 +24,10 @@ Customize `setup/vars/common.yml`. Generate password hash with `$ mkpasswd --met
 Modify `setup/server.info` file with your own server's hostname.
 
 And run this command replacing `yourlogin` with your ssh user's login:
-`$ ansible-playbook -i server.info -u yourlogin --become --ask-become-pass site.yml --extra-vars "user=yourlogin"`
+```
+$ cd setup
+$ ansible-playbook -i server.info -u yourlogin --become --ask-become-pass site.yml --extra-vars "user=yourlogin"
+```
 
 ## Manual install
 

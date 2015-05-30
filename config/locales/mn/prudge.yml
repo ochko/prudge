@@ -62,26 +62,26 @@ mn:
 
   posts:
     index:
-      new_post: New Post
-      edit: Edit
-      posted_on: "Posted On"
+      new_post: Шинэ пост
+      edit: Засварлах
+      posted_on: "Илгээсэн"
     blog:
       title: Блог
-      read_more: Read More
+      read_more: Цааш унших
     help:
       title: Тусламж
     show:
       title: "%{subject}"
-      posted_on: Posted On
+      posted_on: Илгээсэн
     edit:
       title: "%{subject} · Засварлах"
-      save: Save
-      delete: Delete
+      save: Хадгал
+      delete: Устга
   home:
     about:
       title: Сайтын тухай
     dashboard:
-      title: Dashboard
+      title: Удирдах самбар
       proposed_problems: "Дэвшигдсэн бодлогууд"
       latest_solutions: "Сүүлийн бодолтууд"
       new_post: "Шинэ блог пост"
@@ -97,7 +97,7 @@ mn:
       <<: *shared-problem
     index:
       title: "Тэмцээнүүд"
-      visit_contest: "Visit Contest"
+      visit_contest: "Тэмцээнийг үзэх"
     last:
       title: "Тэмцээн"
     show:
@@ -106,7 +106,7 @@ mn:
       watch: "Тэмцээнийн хугацаа өөрчлөгдөхөд надад мэдэгд"
       problems: "Бодлогууд"
       contestants: "Оролцогчид"
-      submitted_passed: 'Submitted/Passed'
+      submitted_passed: 'Илгээсэн/Чадсан'
       <<: *contest-common
     new:
       title: Тэмцээн зарлах
@@ -117,8 +117,8 @@ mn:
   password_resets:
     new:
       title: Нууц үг сэргээх хүсэлт
-      password_reset: Password Reset
-      enter_your_registered_email: Enter Your Registered Email
+      password_reset: Нууц үг сэргээх
+      enter_your_registered_email: Бүртгүүлсэн имэйлээ оруул
     edit:
       title: Нууц үгээ сэргээх
   problem_tests:
@@ -138,10 +138,10 @@ mn:
       <<: *tests-common
     new:
       title: Шинэ тэст
-      add_new_test: Add New Test
-      new_test: New Test
-      this_is_hidden_test: This is hidden test
-      save: Save
+      add_new_test: Шинэ тэст нэмэх
+      new_test: Шинэ тэст
+      this_is_hidden_test: Энэ бол харагдахгүй тэст
+      save: Хадгал
       <<: *tests-common
     edit:
       title: Тэстийг засварлах
@@ -149,7 +149,7 @@ mn:
   problems:
     index:
       title: "Бодлогууд"
-      problems: Problems
+      problems: Бодлогууд
     proposed:
       title: "Дэвшигдсэн бодлогууд"
       limits: "Хязгаарлалт"
@@ -179,24 +179,24 @@ mn:
       run-status: Ажилласан байдал
     show:
       title: Тэстийн үр дүн
-      coder: Coder
-      souce: Source
-      submitted: Submitted
-      result: Result
-      program: Program
-      time: Time
-      memory: Memory
-      input: Input
-      output: Output
+      coder: Кодер
+      souce: Соорс
+      submitted: Илгээсэн
+      result: Үр дүн
+      program: Програм
+      time: Хугацаа
+      memory: Санах ой
+      input: Оролт
+      output: Гаралт
     list:
       delete?: "Энэ бодолтыг нээрээ устгах уу?"
-      wait-checking: "Please wait or solve other problems while your solution is being checked..."
-      compiler_output: Compiler Output
+      wait-checking: "Бодолтыг шалгаж байна. Энэ хооронд та өөр бодлого бодож байж болно..."
+      compiler_output: Компайлерийн үр дүн
       <<: *shared-solution
       <<: *results-common
   search:
     index:
-      title: Хайлт
+      title: Хайлтын үр дүн
   solutions:
     common: &solutions-common
       solution: Бодолт
@@ -212,12 +212,12 @@ mn:
     edit:
       title: '%{subject} · Бодолт засварлах'
       edit_a_solution: Edit a Solution
-      source: Source
-      language: Language
-      submit: Submit
-      cancel: Cancel
+      source: Соорс
+      language: Хэл
+      submit: Хадгал
+      cancel: Болих
     list:
-      submitted: Submitted
+      submitted: Илгээсэн
   user_session:
     new:
       title: Нэвтрэх
@@ -234,10 +234,10 @@ mn:
       inform-new-contest: "Шинэ тэмцээн зохиогдоход мэдэгдэх"
     new:
       title: Бүртгүүлэх
-      create_your_account: Create Your Account
-      sign_in_using_social_network: Sign In Using Social Network
-      create_your_free_account: Create Your Free Account
-      register: Register
+      create_your_account: Акаунт үүсгэх
+      sign_in_using_social_network: Сошиэл нэтээр логин хийх
+      create_your_free_account: Үнэгүй акаунт үүсгэх
+      register: Бүртгүүлэх
     edit:
       title: '%{subject} · Тохиргоог шинэчлэх'
       change-password: "Нууц үг солих"
@@ -249,13 +249,12 @@ mn:
       medals: Медалууд
       achievements: Амжилт
       contests: "Оролцсон тэмцээн"
-      total-points: "Total points"
-      posted-solutions: "Posted solutions"
-      reached-level: Reached level
-      joined: Joined on
-      last-seen: Last seen
-      never: Never
-      connect: Connect
+      total-points: "Нийт оноо"
+      posted-solutions: "Илгээсэн бодолтууд"
+      joined: Элссэн
+      last-seen: Сүүлд орсон
+      never: Хэзээ ч
+      connect: Холбогдох
       <<: *user-common
     solution:
       info: "%{language} хэл дээр %{date} -д %{percent}% бодож %{point} оноо авсан"
@@ -273,8 +272,8 @@ mn:
   user_sessions:
     new:
       title: Нэвтрэх
-      sign_in_using_your_registered_: Please do Login
-      sign_in: Log In
+      sign_in_using_your_registered_: Логин хийнэ үү
+      sign_in: Нэвтэр
   twit:
     opening_announcement: >-
       %{name} тэмцээн зарлагдаа.
@@ -341,7 +340,7 @@ mn:
       destroy: "Та системээс гарсан"
     users:
       create: "Бүртгэл амжилттай"
-      update: "Танй мэдээллийг амжилттай шинэчиллээ!"
+      update: "Таны мэдээллийг амжилттай шинэчиллээ!"
     access_denied: "Хандах эрх байхгүй: %{message}"
     please_login: "%{message} Логин хийнэ үү?"
   language:

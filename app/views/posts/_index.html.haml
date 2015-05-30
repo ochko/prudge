@@ -14,7 +14,7 @@
             = link_to post.title, post
           %span.muted
             = t('.posted_on')
-            = l post.updated_at, :format => :date
+            = l post.updated_at.to_date
           = link_to edit_post_path(post), :class => 'btn btn-mini pull-right' do
             %i.icon-pencil
             = t('.edit')

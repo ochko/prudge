@@ -1,16 +1,16 @@
 mn:
   layouts:
     application:
-      contests: Contests
-      problems: Problems
-      blogs: Blogs
-      coders: Coders
-      login: Login
-      signup: Register
+      contests: Тэмцээн
+      problems: Бодлого
+      blogs: Блог
+      coders: Кодерууд
+      login: Логин
+      signup: Бүртгүүлэх
       about: Сайтын тухай
-      help: Help
-      issues: Issues
-      account: Account
-      preferences: Preferences
-      dashboard: Dashboard
-      logout: Logout
+      help: Тусламж
+      issues: Асуудал
+      account: Акаунт
+      preferences: Тохиргоо
+      dashboard: Хянах самбар
+      logout: Гарах

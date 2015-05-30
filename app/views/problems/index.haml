@@ -22,7 +22,7 @@
               .muted{:title => 'Success rate'} #{problem.success_rate}%
             %td
               = link_to problem.name, problem
-              .muted= l problem.created_at, :format=>:date
+              .muted= l problem.created_at.to_date
             %td
               .magnify.muted= problem_solution_state problem
     = paginate @problems

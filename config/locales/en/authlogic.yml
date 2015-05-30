@@ -1,13 +1,13 @@
 en:
   authlogic:
     error_messages:
-      login_blank: "Login can't be blank"
-      login_not_found: Login not found
-      login_invalid: "You can use only letters, numbers and ., _, @ symbols in your login"
-      consecutive_failed_logins_limit_exceeded: "You have tried to login too many times. Please wait a little."
-      email_invalid: "Sorry, but we can't find such Email"
-      password_blank: "Password can't be blank"
-      password_invalid: Your password is wrong
+      login_blank: "can't be blank"
+      login_not_found: not found
+      login_invalid: "use only letters, numbers and ., _, @ symbols in your login"
+      consecutive_failed_logins_limit_exceeded: "account locked because you did too many times failed login attems"
+      email_invalid: "it doesn't look like an email"
+      password_blank: "can't be blank"
+      password_invalid: is wrong
       not_active: Your account is not active
       not_confirmed: Your account was not confirmed
       not_approved: Your account was not approved

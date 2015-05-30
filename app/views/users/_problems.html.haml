@@ -19,11 +19,11 @@
       %tr
         %td= p.id
         %td= link_to p.name, p
-        %td.center= '%.3f' % p.point
+        %td.center= show_point p.point
         %td.center
           = p.time
           = t('unit.second')
         %td.center
           = p.memory
           = t('unit.kb')
-        %td= l p.created_at
+        %td= l p.created_at, format: :compact
