@@ -17,8 +17,9 @@ module Prudge
 
     config.encoding = 'utf-8'
 
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml')]
     config.i18n.available_locales = [:mn, :en, :ru]
-    config.i18n.fallbacks = [:ru, :en, :mn]
+    config.i18n.fallbacks = [:en, :mn]
 
     config.cache_store = :dalli_store, '127.0.0.1', { :namespace => 'prudge' }
 
