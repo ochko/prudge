@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe "AdminAbility" do
   let(:admin) { Fabricate :admin }
 

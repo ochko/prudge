@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe "BaseAbility" do
   subject(:ability) {BaseAbility.new(nil)}
 

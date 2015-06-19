@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe "CoderAbility" do
   let(:coder) { Fabricate :coder }
 
@@ -131,7 +133,7 @@ describe "CoderAbility" do
 
   describe "solution" do
     before do
-      Solution.any_instance.stub(:save_attached_files) {true}
+      allow_any_instance_of(Solution).to receive(:save_attached_files).and_return true
     end
 
     context "contest is not started" do
@@ -169,7 +171,7 @@ describe "CoderAbility" do
       end
 
       context "problem is not owned" do
-        before { problem.user.should_not == coder }
+        before { expect(problem.user).not_to eq(coder) }
         it{ should be_able_to(:create, solution) }
       end
     end
@@ -181,20 +183,20 @@ describe "CoderAbility" do
       it{ should be_able_to(:read, solution) }
 
       context "is updated" do
-        before { solution.stub(:updated?){true} }
+        before { allow(solution).to receive(:updated?).and_return true }
         it{ should be_able_to(:check, solution) }
       end
       context "is not updated" do
-        before { solution.stub(:updated?){false} }
+        before { allow(solution).to receive(:updated?).and_return false }
         it{ should_not be_able_to(:check, solution) }
       end
       context "is not open" do
-        before { solution.stub(:open?){false} }
+        before { allow(solution).to receive(:open?).and_return false }
         it{ should_not be_able_to(:update, solution) }
         it{ should_not be_able_to(:destroy, solution) }
       end
       context "is open" do
-        before { solution.stub(:open?){true} }
+        before { allow(solution).to receive(:open?).and_return true }
         it{ should be_able_to(:update, solution) }
         it{ should be_able_to(:destroy, solution) }
       end
@@ -221,7 +223,7 @@ describe "CoderAbility" do
 
         context "already solved by coder" do
           before do
-            coder.stub(:solved?, solution.problem) {true}
+            allow(coder).to receive(:solved?).with(solution.problem).and_return true
           end
           it{ should be_able_to(:read, solution) }
           it{ should_not be_able_to(:check, solution) }
@@ -230,7 +232,7 @@ describe "CoderAbility" do
         end
         context "not yet solved by coder" do
           before do
-            coder.stub(:solved?, solution.problem) {false}
+            allow(coder).to receive(:solved?).with(solution.problem).and_return false
           end
           it{ should_not be_able_to(:read, solution) }
           it{ should_not be_able_to(:check, solution) }
