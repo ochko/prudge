@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe "JudgeAbility" do
   let(:judge) { Fabricate :judge }
 
@@ -39,7 +41,7 @@ describe "JudgeAbility" do
       end
 
       context "problem is not owned" do
-        before { problem.user.should_not == judge }
+        before { expect(problem.user).not_to eq(judge) }
         it{ should be_able_to(:create, solution) }
       end
     end

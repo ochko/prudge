@@ -44,24 +44,24 @@ describe Language do
     end
     context 'when interpreted' do
       it 'returns executable path' do
-        ruby.stub(:exe, 'program') {'program path'}
-        ruby.compile('program').should == 'program path'
+        allow(ruby).to receive(:exe).with('program').and_return('program path')
+        expect(ruby.compile 'program').to eq('program path')
       end
     end
     context 'when compiled' do
       before do
-        c.stub(:command, program) {'command'}
+        allow(c).to receive(:command).with(program).and_return('command')
       end
       it 'returns compiled program path' do
-        Kernel.should_receive(:system).with('command') { true }
+        allow(Kernel).to receive(:system).with('command').and_return(true)
         c.compile(program)
       end
       it 'returns compiled program path' do
-        Kernel.should_receive(:system).with('command') { true }
-        c.compile(program).should == '/program/path/exe'
+        allow(Kernel).to receive(:system).with('command').and_return(true)
+        expect(c.compile program).to eq('/program/path/exe')
       end
       it 'raises error if compilation failed' do
-        Kernel.should_receive(:system).with('command') { false }
+        allow(Kernel).to receive(:system).with('command').and_return(false)
         expect { c.compile(program) }.to raise_error
       end
     end
@@ -70,7 +70,7 @@ describe Language do
   describe "#command" do
     describe 'for c' do
       it 'is c compiler with arguments' do
-        c.command(program).should == '/usr/bin/gcc -x c -lm /program/path/name.c -o /program/path/exe 2> /tmp/error.log'
+        expect(c.command program).to eq('/usr/bin/gcc -x c -lm /program/path/name.c -o /program/path/exe 2> /tmp/error.log')
       end
     end
 
@@ -83,7 +83,7 @@ describe Language do
                :error => '/tmp/error.log' ) }
 
       it 'is java compiler with arguments' do
-        java.command(program).should == "/usr/bin/gcj /program/full/Solution.java -o /program/full/Solution --main=Solution -lm 2> /tmp/error.log"
+        expect(java.command program).to eq("/usr/bin/gcj /program/full/Solution.java -o /program/full/Solution --main=Solution -lm 2> /tmp/error.log")
       end
     end
 
@@ -96,73 +96,73 @@ describe Language do
                :error => '/tmp/error.log' ) }
 
       it 'is go compiler with arguments' do
-        go.command(program).should == "/opt/go/bin build -o /program/full/solve /program/full/solve.go 2> /tmp/error.log"
+        expect(go.command program).to eq("/opt/go/bin build -o /program/full/solve /program/full/solve.go 2> /tmp/error.log")
       end
     end
   end
 
   describe '#invalid?' do
     it 'is true if compiler neither interpreter is given' do
-      english.should be_invalid
+      expect(english).to be_invalid
     end
   end
 
   describe '#exe' do
     context 'when interpreted' do
       it 'is interpreter with program as a argument' do
-        program.stub(:fullname) { '/program/full/name.rb' }
-        ruby.exe(program).should == '/opt/ruby/bin/ruby /program/full/name.rb'
+        allow(program).to receive(:fullname).and_return '/program/full/name.rb'
+        expect(ruby.exe program).to eq('/opt/ruby/bin/ruby /program/full/name.rb')
       end
     end
     context 'when compiled' do
       it 'is executable program path' do
-        c.exe(program).should == '/program/path/exe'
+        expect(c.exe program).to eq('/program/path/exe')
       end
     end
   end
 
   describe 'memory' do
     it 'is 0 default' do
-      c.memory.should == 0
+      expect(c.memory).to eq(0)
     end
     it 'is memory size' do
-      ruby.memory.should == 60000
+      expect(ruby.memory).to eq(60000)
     end
   end
 
   describe 'time' do
     it 'is 0 default' do
-      c.time.should == 0
+      expect(c.time).to eq(0)
     end
     it 'is memory size' do
-      ruby.time.should == 2
+      expect(ruby.time).to eq(2)
     end
   end
 
   describe 'processes' do
     it 'is 0 default' do
-      c.processes.should == 0
+      expect(c.processes).to eq(0)
     end
     it 'is memory size' do
-      ruby.processes.should == 3
+      expect(ruby.processes).to eq(3)
     end
   end
 
   describe 'extension' do
     it 'is lowercase of name by default' do
-      c.extension.should == '.c'
+      expect(c.extension).to eq('.c')
     end
     it 'is given extension' do
-      ruby.extension.should == '.rb'
+      expect(ruby.extension).to eq('.rb')
     end
   end
 
   describe 'compiled?' do
     it 'is true if compiler is not blank' do
-      c.should be_compiled
+      expect(c).to be_compiled
     end
     it 'is false if language is compiled' do
-      ruby.should_not be_compiled
+      expect(ruby).not_to be_compiled
     end
   end
 end

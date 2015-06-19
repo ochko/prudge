@@ -5,9 +5,9 @@ describe Usage do
     let(:usage) {Usage.new('')}
 
     it 'is unknown' do
-      usage.state.should == 0
-      usage.time.should == nil
-      usage.memory.should == nil
+      expect(usage.state).to eq(0)
+      expect(usage.time).to eq(nil)
+      expect(usage.memory).to eq(nil)
     end
   end
 
@@ -15,9 +15,9 @@ describe Usage do
     let(:usage) {Usage.new(nil)}
 
     it 'is unknown' do
-      usage.state.should == 0
-      usage.time.should == nil
-      usage.memory.should == nil
+      expect(usage.state).to eq(0)
+      expect(usage.time).to eq(nil)
+      expect(usage.memory).to eq(nil)
     end
   end
 
@@ -31,9 +31,9 @@ ___
                            )}
 
     it 'is non-zero' do
-      usage.state.should == 2**5
-      usage.time.should == 0
-      usage.memory.should == 1424
+      expect(usage.state).to eq(2**5)
+      expect(usage.time).to eq(0)
+      expect(usage.memory).to eq(1424)
     end
   end
 
@@ -47,9 +47,9 @@ ___
                            )}
 
     it 'is non-zero' do
-      usage.state.should == 4
-      usage.time.should == 416
-      usage.memory.should == 32884
+      expect(usage.state).to eq(4)
+      expect(usage.time).to eq(416)
+      expect(usage.memory).to eq(32884)
     end
   end
 
@@ -63,9 +63,9 @@ ___
                            )}
 
     it 'is time limit' do
-      usage.state.should == 2
-      usage.time.should == 1000
-      usage.memory.should == 1480
+      expect(usage.state).to eq(2)
+      expect(usage.time).to eq(1000)
+      expect(usage.memory).to eq(1480)
     end
   end
 
@@ -79,9 +79,9 @@ ___
                            )}
 
     it 'is time limit' do
-      usage.state.should == 2
-      usage.time.should == 0
-      usage.memory.should == 1424
+      expect(usage.state).to eq(2)
+      expect(usage.time).to eq(0)
+      expect(usage.memory).to eq(1424)
     end
   end
 
@@ -95,9 +95,9 @@ ___
                            )}
 
     it 'is ok' do
-      usage.state.should == 1
-      usage.time.should == 10
-      usage.memory.should == 64
+      expect(usage.state).to eq(1)
+      expect(usage.time).to eq(10)
+      expect(usage.memory).to eq(64)
     end
   end
 
