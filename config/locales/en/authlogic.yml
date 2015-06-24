@@ -1,23 +1,23 @@
 en:
   authlogic:
+    attributes:
+      user_session:
+        email: "Email"
+        login: "Login"
+        password: "Password"
+        remember_me: "Remember Me"
     error_messages:
+      consecutive_failed_logins_limit_exceeded: "account locked because you did too many times failed login attems"
+      email_invalid: "it doesn't look like an email"
+      general_credentials_error: Your login and password are incorrect
       login_blank: "can't be blank"
       login_not_found: not found
       login_invalid: "use only letters, numbers and ., _, @ symbols in your login"
-      consecutive_failed_logins_limit_exceeded: "account locked because you did too many times failed login attems"
-      email_invalid: "it doesn't look like an email"
-      password_blank: "can't be blank"
-      password_invalid: is wrong
       not_active: Your account is not active
       not_confirmed: Your account was not confirmed
       not_approved: Your account was not approved
       no_authentication_details: Please specify your login and password
-      general_credentials_error: Your login and password are incorrect
+      password_blank: "can't be blank"
+      password_invalid: is wrong
     models:
       user_session: "Login"
-    attributes:
-      user_session:
-        login: "Login"
-        email: "Email"
-        password: "Password"
-        remember_me: "Remember Me"
