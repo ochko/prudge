@@ -1,41 +1,40 @@
 en:
   unauthorized:
-    read:
-      problem: "You're not logged in, or this problem is not ready to solve"
-      problem_test: "Not authorized to view the test."
-      result: "You can see only your own tests"
-    manage:
-      all: "Not authorized to %{action} %{subject}."
-      user: "Not allowed to manage other's account."
-    update:
-      solution: "Not allowed to edit this solution."
-      problem: "Not allowed to edit this problem"
-    read:
+    check:
       solution: >-
-        You're not allowed to view other's solutions until the contest ends.
-        And you can see other's solutions only after you've successfully solved the problem.
-    destroy:
-      problem_test: "Not allowed to delete the test."
-    modify:
-      solution: >-
-        Not allowed to edit problem once contest is over.
-        You're not allowed to update your solution after viewing other's solution.
-        You also can't edit other user's solution.
-      lesson: "Only original author is allowed to edit blog post."
+        You can't check your solution if there is no test, or no hidden test.
+        Also it isn't allowed to check other user's solution.
+        And once check is completed, you can't check again until you update the solution.
+    contestants:
+      contest: "Not authorized to see contestants."
     create:
       problem_test: "Not allowed to add test"
       solution: >-
         You can submit a solution to your problem only after contest is over.
         If problem is included in contest, you can solve the problem only after the contest is started.
         You can't submit a solution if you've viewed other user's solution.
-    check:
-      solution: >-
-        You can't check your solution if there is no test, or no hidden test.
-        Also it isn't allowed to check other user's solution.
-        And once check is completed, you can't check again until you update the solution.
+    destroy:
+      problem_test: "Not allowed to delete the test."
     input:
       problem_test: "Not allowed to see test"
+    manage:
+      all: "Not authorized to %{action} %{subject}."
+      user: "Not allowed to manage other's account."
+    modify:
+      lesson: "Only original author is allowed to edit blog post."
+      solution: >-
+        Not allowed to edit problem once contest is over.
+        You're not allowed to update your solution after viewing other's solution.
+        You also can't edit other user's solution.
     output:
       problem_test: "Not allowed to see test"
-    contestants:
-      contest: "Not authorized to see contestants."
+    read:
+      problem: "You're not logged in, or this problem is not ready to solve"
+      problem_test: "Not authorized to view the test."
+      result: "You can see only your own tests"
+      solution: >-
+        You're not allowed to view other's solutions until the contest ends.
+        And you can see other's solutions only after you've successfully solved the problem.
+    update:
+      solution: "Not allowed to edit this solution."
+      problem: "Not allowed to edit this problem"
