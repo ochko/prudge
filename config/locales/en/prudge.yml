@@ -1,65 +1,160 @@
 en:
-  title:
-    contest: Contest
-    post: Post
-    problem: Problem
-    solution: Solution
-    date: Date
-    user: User
-
-  label:
-    test:
-      passed: Accepted
-      failed: Failed
-    execution:
-      ok: "Accepted"
-      timeout: "Time Limit Exceeded"
-      memory: "Memory Limit Exceeded"
-      output: "Output Limit Exceeded"
-      invalid: "Invalid Operation"
-      return: "Returned an Error"
-      ng: "Unknown Error"
-    standing:
-      gold: "Gold"
-      silver: "Silver"
-      bronze: "Bronze"
-
   button:
-    edit: Edit
-    save: Save
     delete: Delete
     download: Download
-    run: Run
-    submit: Sumbit
+    edit: Edit
     open: Open
-    send: Send
     recheck: Rejudge
-
-  unit:
-    second: sec
-    kb: kb
-
-  shared:
-    common: &shared-common
-      delete?: "Really want to delete?"
-    problem: &shared-problem
-      date: "Date"
-      author: "Author"
-      source: "Source"
-      problem-name: "Name"
-      points: "Points"
-      difficulty: "Difficulty"
-      time-limit: "Time Limit"
-      memory-limit: "Memory Limit"
-      test-count: "Number of Tests"
-      pass-try-ratio: "Accepted/All"
-    solution: &shared-solution
-      coder: Coder
-      source: Source Code
-      submitted: Submitted
-      avg-time: Time Taken
-      taken-points: Points
-
+    run: Run
+    save: Save
+    send: Send
+    submit: Sumbit
+  comments:
+    commentable:
+      add-comment: "Add a Comment"
+    index:
+      title: Latest Comments
+      <<: *shared-common
+    moderate:
+      title: Moderate
+  contests:
+    common: &contest-common
+      end_time: "End Time"
+      level: "Level"
+      name: "Name"
+      start_time: "Start Time"
+      <<: *shared-common
+      <<: *shared-problem
+    edit:
+      title: '%{subject} · Edit'
+      <<: *contest-common
+    index:
+      title: "Contest"
+      visit_contest: "Visit Contest"
+    last:
+      title: "Contest"
+    new:
+      title: New Contest
+      <<: *contest-common
+    show:
+      contestants: "Contestants"
+      problems: "Problems"
+      submitted_passed: 'All/Accepted'
+      title: "%{subject}"
+      unwatch: "Don't send me notifications for this contest"
+      watch: "Send me notifications when contest time changes"
+      <<: *contest-common
+  home:
+    about:
+      title: About the Site
+    dashboard:
+      dashboard: Dashboard
+      latest_solutions: "Latest Solutions"
+      manage_the_site: Manage the site
+      moderate_comments: "Moderate comments"
+      new_contest: "New Contest"
+      new_post: "New Post"
+      proposed_problems: "Proposed Problems"
+      title: Dashboard
+    static:
+      about: About
+      account: Account
+      blog: Blog
+      coders: Coders
+      contests: Contests
+      dashboard: Dashboard
+      help: Help
+      issues: Issues
+      login: Login
+      logout: Logout
+      problems: Problems
+      preferences: Preferences
+      signup: Signup
+  label:
+    execution:
+      invalid: "Invalid Operation"
+      memory: "Memory Limit Exceeded"
+      ng: "Unknown Error"
+      ok: "Accepted"
+      output: "Output Limit Exceeded"
+      return: "Returned an Error"
+      timeout: "Time Limit Exceeded"
+    standing:
+      bronze: "Bronze"
+      gold: "Gold"
+      silver: "Silver"
+    test:
+      failed: Failed
+      passed: Accepted
+  language:
+    unknown: 'Unknown'
+  message:
+    login_required: "You need to log in order to continue"
+    logout_required: "You need to log out in order to continue"
+    rate_limited: "You post too many comments! Please wait for 10 seconds."
+    search_result_empty: "Nothing found. Maybe you should change your query?"
+    search_syntax_error: >-
+      You search has sytax error: <strong>%{query}</strong><br/>
+      Syntax examples can be found <a href="http://sphinxsearch.com/docs/archives/1.10/extended-syntax.html">here</a>.
+    individual_submission: >-
+      You're going to submit a problem without a contest.
+      Please go to %{page} in order to participate.
+    password_reset_instructions: "We have sent you an email with password reset instructions. Please check your email."
+    user_not_found_by_email: "User with such email was not found."
+    password_updated: "Your password was successfully updated!"
+    password_reset_not_found: >-
+      We can't find your password reset request.
+      Please try copying the URL from email and load in your web browser.
+      Or please restart password reset process.
+    test:
+      saved: 'Test was saved.'
+      deleted: 'Test deleted.'
+      hidden: "You can't see this test"
+      frozen: 'Adding test is not allowd'
+      nodelete: "You can't delete this test"
+    contests:
+      create: 'Contest created.'
+      update: 'Contest was updated.'
+      destroy: 'Contest was deleted.'
+    no_contestants: 'Nobody found!'
+    problems:
+      create: 'Problem added. Do you want to add some tests for it?'
+      update: 'Problem updated.'
+      destroy: 'Problem deleted.'
+      check: "All solutions were sent for rejudging."
+    solutions:
+      empty: 'Noone solved this problem for now'
+      create: 'Solution successfully uploaded.'
+      update: 'Solution was updated.'
+    user_sessions:
+      destroy: "You have logged out"
+    users:
+      create: "You have successfully registered!"
+      update: "Your profile was updated!"
+    access_denied: "Access denied: %{message}"
+    please_login: "Please login in order to %{message}"
+  notifier:
+    password_reset_instructions:
+      subject: "[%{site}] Password Reset instruction"
+    password_reset_confirmation:
+      subject: "[%{site}] Your Password Changed"
+    release_notification:
+      subject: "[%{site}] New Version Released!"
+    problem_selection:
+      subject: "[%{site}] Your proposed problem was accepted!"
+    new_contest:
+      subject: "[%{site}] New Contest %{contest}"
+    contest_update:
+      subject: "[%{site}] Contest %{contest} was updated"
+  password_resets:
+    new:
+      title: Restore Your Password
+      password_reset: Password Reset
+      enter_your_registered_email: Enter Your Registered Email
+    edit:
+      title: Restore my password
+      reset_your_password: Reset your password
+      save_login: Save & Login
   posts:
     index:
       new_post: New Post
@@ -80,68 +175,6 @@ en:
     new:
       write_new_post: Write new post
       save: Save
-  home:
-    about:
-      title: About the Site
-    dashboard:
-      title: Dashboard
-      dashboard: Dashboard
-      manage_the_site: Manage the site
-      proposed_problems: "Proposed Problems"
-      latest_solutions: "Latest Solutions"
-      new_post: "New Post"
-      moderate_comments: "Moderate comments"
-      new_contest: "New Contest"
-    static:
-      contests: Contests
-      problems: Problems
-      blog: Blog
-      coders: Coders
-      account: Account
-      preferences: Preferences
-      dashboard: Dashboard
-      logout: Logout
-      login: Login
-      signup: Signup
-      about: About
-      help: Help
-      issues: Issues
-  contests:
-    common: &contest-common
-      name: "Name"
-      level: "Level"
-      start_time: "Start Time"
-      end_time: "End Time"
-      <<: *shared-common
-      <<: *shared-problem
-    index:
-      title: "Contest"
-      visit_contest: "Visit Contest"
-    last:
-      title: "Contest"
-    show:
-      title: "%{subject}"
-      unwatch: "Don't send me notifications for this contest"
-      watch: "Send me notifications when contest time changes"
-      problems: "Problems"
-      contestants: "Contestants"
-      submitted_passed: 'All/Accepted'
-      <<: *contest-common
-    new:
-      title: New Contest
-      <<: *contest-common
-    edit:
-      title: '%{subject} · Edit'
-      <<: *contest-common
-  password_resets:
-    new:
-      title: Restore Your Password
-      password_reset: Password Reset
-      enter_your_registered_email: Enter Your Registered Email
-    edit:
-      title: Restore my password
-      reset_your_password: Reset your password
-      save_login: Save & Login
   problem_tests:
     common: &tests-common
       test: Test
@@ -219,6 +252,26 @@ en:
   search:
     index:
       title: Search Results
+  shared:
+    common: &shared-common
+      delete?: "Really want to delete?"
+    problem: &shared-problem
+      date: "Date"
+      author: "Author"
+      source: "Source"
+      problem-name: "Name"
+      points: "Points"
+      difficulty: "Difficulty"
+      time-limit: "Time Limit"
+      memory-limit: "Memory Limit"
+      test-count: "Number of Tests"
+      pass-try-ratio: "Accepted/All"
+    solution: &shared-solution
+      coder: Coder
+      source: Source Code
+      submitted: Submitted
+      avg-time: Time Taken
+      taken-points: Points
   solutions:
     common: &solutions-common
       solution: Solution
@@ -248,9 +301,38 @@ en:
       cancel: Cancel
     list:
       submitted: Submitted
+  title:
+    contest: Contest
+    post: Post
+    problem: Problem
+    solution: Solution
+    date: Date
+    user: User
+  twit:
+    opening_announcement: >-
+      Attention, new contest %{name} announcement!
+      Start time: %{start},
+      End time: %{end}.
+      %{url}
+    update_announcement: >-
+      Contest %{name} was updated. Please note the time changes.
+      Start time: %{start},
+      End time: %{end}.
+      %{url}
+  unit:
+    second: sec
+    kb: kb
   user_session:
     new:
       title: Log In
+  user_sessions:
+    new:
+      title: Log In
+      sign_in_using_your_registered_: Please do Login
+      sign_in: Log In
+      login_with_facebook: Login with Facebook
+      sign_in_using_your_registered_: ! 'Sign in using your registered account:'
+      ! 'sign_in_using_social_network:': ! 'Sign in using social network:'
   users:
     common: &user-common
       change-gravatar: "You can change you avatar at Gravatar.com"
@@ -293,90 +375,3 @@ en:
     problems:
       new: "Propose a problem"
       <<: *shared-problem
-  comments:
-    commentable:
-      add-comment: "Add a Comment"
-    index:
-      title: Latest Comments
-      <<: *shared-common
-    moderate:
-      title: Moderate
-  user_sessions:
-    new:
-      title: Log In
-      sign_in_using_your_registered_: Please do Login
-      sign_in: Log In
-      login_with_facebook: Login with Facebook
-      sign_in_using_your_registered_: ! 'Sign in using your registered account:'
-      ! 'sign_in_using_social_network:': ! 'Sign in using social network:'
-  twit:
-    opening_announcement: >-
-      Attention, new contest %{name} announcement!
-      Start time: %{start},
-      End time: %{end}.
-      %{url}
-    update_announcement: >-
-      Contest %{name} was updated. Please note the time changes.
-      Start time: %{start},
-      End time: %{end}.
-      %{url}
-  notifier:
-    password_reset_instructions:
-      subject: "[%{site}] Password Reset instruction"
-    password_reset_confirmation:
-      subject: "[%{site}] Your Password Changed"
-    release_notification:
-      subject: "[%{site}] New Version Released!"
-    problem_selection:
-      subject: "[%{site}] Your proposed problem was accepted!"
-    new_contest:
-      subject: "[%{site}] New Contest %{contest}"
-    contest_update:
-      subject: "[%{site}] Contest %{contest} was updated"
-  message:
-    login_required: "You need to log in order to continue"
-    logout_required: "You need to log out in order to continue"
-    rate_limited: "You post too many comments! Please wait for 10 seconds."
-    search_result_empty: "Nothing found. Maybe you should change your query?"
-    search_syntax_error: >-
-      You search has sytax error: <strong>%{query}</strong><br/>
-      Syntax examples can be found <a href="http://sphinxsearch.com/docs/archives/1.10/extended-syntax.html">here</a>.
-    individual_submission: >-
-      You're going to submit a problem without a contest.
-      Please go to %{page} in order to participate.
-    password_reset_instructions: "We have sent you an email with password reset instructions. Please check your email."
-    user_not_found_by_email: "User with such email was not found."
-    password_updated: "Your password was successfully updated!"
-    password_reset_not_found: >-
-      We can't find your password reset request.
-      Please try copying the URL from email and load in your web browser.
-      Or please restart password reset process.
-    test:
-      saved: 'Test was saved.'
-      deleted: 'Test deleted.'
-      hidden: "You can't see this test"
-      frozen: 'Adding test is not allowd'
-      nodelete: "You can't delete this test"
-    contests:
-      create: 'Contest created.'
-      update: 'Contest was updated.'
-      destroy: 'Contest was deleted.'
-    no_contestants: 'Nobody found!'
-    problems:
-      create: 'Problem added. Do you want to add some tests for it?'
-      update: 'Problem updated.'
-      destroy: 'Problem deleted.'
-      check: "All solutions were sent for rejudging."
-    solutions:
-      empty: 'Noone solved this problem for now'
-      create: 'Solution successfully uploaded.'
-      update: 'Solution was updated.'
-    user_sessions:
-      destroy: "You have logged out"
-    users:
-      create: "You have successfully registered!"
-      update: "Your profile was updated!"
-    access_denied: "Access denied: %{message}"
-    please_login: "Please login in order to %{message}"
-  language:
-    unknown: 'Unknown'
