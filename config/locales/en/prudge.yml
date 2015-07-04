@@ -336,42 +336,42 @@ en:
   users:
     common: &user-common
       change-gravatar: "You can change you avatar at Gravatar.com"
-      update-profile: "Update Profile"
-      login: "Login"
       email: "Email"
-      twitter: "Twitter"
-      web: "Website"
-      repeat-password: "Repeat your password"
-      organization: "School or Location"
       inform-new-contest: "Inform me about new contests"
-    new:
-      title: Registration
-      create_your_account: Create Your Account
-      sign_in_using_social_network: Sign In Using Social Network
-      create_your_free_account: Create Your Free Account
-      login_with_twitter: Login with Twitter
-      login_with_facebook: Login with Facebook
-      register: Register
+      login: "Login"
+      organization: "School or Location"
+      repeat-password: "Repeat your password"
+      twitter: "Twitter"
+      update-profile: "Update Profile"
+      web: "Website"
     edit:
-      title: '%{subject} · Edit settings'
       change-password: "Change Password"
+      title: '%{subject} · Edit settings'
       <<: *user-common
     index:
       title: Coders
-    show:
-      title: '%{subject}'
-      medals: Medals
-      achievements: Achievments
-      contests: "Contests"
-      total-points: "Total points"
-      posted-solutions: "Posted solutions"
-      joined: Joined on
-      last-seen: Last seen
-      never: Never
-      connect: Connect
-      <<: *user-common
-    solution:
-      info: "On %{date} using %{language} language, solved %{percent}% and got %{point} points"
+    new:
+      create_your_account: Create Your Account
+      create_your_free_account: Create Your Free Account
+      login_with_facebook: Login with Facebook
+      login_with_twitter: Login with Twitter
+      register: Register
+      sign_in_using_social_network: Sign In Using Social Network
+      title: Registration
     problems:
       new: "Propose a problem"
       <<: *shared-problem
+    show:
+      achievements: Achievments
+      connect: Connect
+      contests: "Contests"
+      joined: Joined on
+      last-seen: Last seen
+      medals: Medals
+      never: Never
+      posted-solutions: "Posted solutions"
+      title: '%{subject}'
+      total-points: "Total points"
+      <<: *user-common
+    solution:
+      info: "On %{date} using %{language} language, solved %{percent}% and got %{point} points"
