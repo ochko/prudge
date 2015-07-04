@@ -134,54 +134,57 @@ en:
       create: "You have successfully registered!"
       update: "Your profile was updated!"
   notifier:
-    password_reset_instructions:
-      subject: "[%{site}] Password Reset instruction"
-    password_reset_confirmation:
-      subject: "[%{site}] Your Password Changed"
-    release_notification:
-      subject: "[%{site}] New Version Released!"
-    problem_selection:
-      subject: "[%{site}] Your proposed problem was accepted!"
-    new_contest:
-      subject: "[%{site}] New Contest %{contest}"
     contest_update:
       subject: "[%{site}] Contest %{contest} was updated"
+    new_contest:
+      subject: "[%{site}] New Contest %{contest}"
+    password_reset_confirmation:
+      subject: "[%{site}] Your Password Changed"
+    password_reset_instructions:
+      subject: "[%{site}] Password Reset instruction"
+    problem_selection:
+      subject: "[%{site}] Your proposed problem was accepted!"
+    release_notification:
+      subject: "[%{site}] New Version Released!"
   password_resets:
-    new:
-      title: Restore Your Password
-      password_reset: Password Reset
-      enter_your_registered_email: Enter Your Registered Email
     edit:
-      title: Restore my password
       reset_your_password: Reset your password
+      title: Restore my password
       save_login: Save & Login
+    new:
+      enter_your_registered_email: Enter Your Registered Email
+      password_reset: Password Reset
+      title: Restore Your Password
   posts:
-    index:
-      new_post: New Post
-      edit: Edit
-      posted_on: "Posted On"
     blog:
-      title: Blog
       read_more: Read More
+      title: Blog
+    edit:
+      delete: Delete
+      save: Save
+      title: "%{subject} · Edit"
     help:
       title: Help
-    show:
-      title: "%{subject}"
-      posted_on: Posted On
-    edit:
-      title: "%{subject} · Edit"
-      save: Save
-      delete: Delete
+    index:
+      edit: Edit
+      new_post: New Post
+      posted_on: "Posted On"
     new:
-      write_new_post: Write new post
       save: Save
+      write_new_post: Write new post
+    show:
+      posted_on: Posted On
+      title: "%{subject}"
   problem_tests:
     common: &tests-common
+      delete?: "Really want to delete the test?"
       test: Test
       tests: Tests
-      delete?: "Really want to delete the test?"
       input: Input
       output: Output
+    edit:
+      title: Тэстийг засварлах
+      <<: *tests-common
     index:
       title: '%{subject}'
       add-new-test: "Add New Test"
@@ -196,9 +199,6 @@ en:
       new_test: New Test
       this_is_hidden_test: This is hidden test
       save: Save
-      <<: *tests-common
-    edit:
-      title: Тэстийг засварлах
       <<: *tests-common
   problems:
     index:
