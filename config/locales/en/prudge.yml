@@ -275,38 +275,38 @@ en:
   solutions:
     common: &solutions-common
       solution: Solution
+    edit:
+      cancel: Cancel
+      edit_a_solution: Edit Solution
+      language: Language
+      source: Source Code
+      submit: Submit
+      title: '%{subject} · Edit'
     latest:
       title: Latest solutions
+    list:
+      submitted: Submitted
+    new:
+      title: Submitting a Solution
     show:
       title: '%{subject} · Edit'
       <<: *solutions-common
     view:
-      title: '%{subject} · Edit'
-      solution: Solution
       coder: Coder
-      submitted: Submitted
-      time: Time
-      points: Points
       compiler_output: Compiler output
-      tests: Tests
       download_source: Download source
-    new:
-      title: Submitting a Solution
-    edit:
-      title: '%{subject} · Edit'
-      edit_a_solution: Edit Solution
-      source: Source Code
-      language: Language
-      submit: Submit
-      cancel: Cancel
-    list:
+      solution: Solution
       submitted: Submitted
+      points: Points
+      tests: Tests
+      time: Time
+      title: '%{subject} · Edit'
   title:
     contest: Contest
+    date: Date
     post: Post
     problem: Problem
     solution: Solution
-    date: Date
     user: User
   twit:
     opening_announcement: >-
@@ -320,19 +320,19 @@ en:
       End time: %{end}.
       %{url}
   unit:
-    second: sec
     kb: kb
+    second: sec
   user_session:
     new:
       title: Log In
   user_sessions:
     new:
-      title: Log In
-      sign_in_using_your_registered_: Please do Login
-      sign_in: Log In
       login_with_facebook: Login with Facebook
+      sign_in: Log In
+      sign_in_using_your_registered_: Please do Login
       sign_in_using_your_registered_: ! 'Sign in using your registered account:'
       ! 'sign_in_using_social_network:': ! 'Sign in using social network:'
+      title: Log In
   users:
     common: &user-common
       change-gravatar: "You can change you avatar at Gravatar.com"
