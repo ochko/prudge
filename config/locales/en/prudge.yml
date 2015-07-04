@@ -89,50 +89,50 @@ en:
   language:
     unknown: 'Unknown'
   message:
-    login_required: "You need to log in order to continue"
-    logout_required: "You need to log out in order to continue"
-    rate_limited: "You post too many comments! Please wait for 10 seconds."
-    search_result_empty: "Nothing found. Maybe you should change your query?"
-    search_syntax_error: >-
-      You search has sytax error: <strong>%{query}</strong><br/>
-      Syntax examples can be found <a href="http://sphinxsearch.com/docs/archives/1.10/extended-syntax.html">here</a>.
+    access_denied: "Access denied: %{message}"
+    contests:
+      create: 'Contest created.'
+      destroy: 'Contest was deleted.'
+      update: 'Contest was updated.'
     individual_submission: >-
       You're going to submit a problem without a contest.
       Please go to %{page} in order to participate.
+    login_required: "You need to log in order to continue"
+    logout_required: "You need to log out in order to continue"
+    no_contestants: 'Nobody found!'
     password_reset_instructions: "We have sent you an email with password reset instructions. Please check your email."
-    user_not_found_by_email: "User with such email was not found."
-    password_updated: "Your password was successfully updated!"
     password_reset_not_found: >-
       We can't find your password reset request.
       Please try copying the URL from email and load in your web browser.
       Or please restart password reset process.
-    test:
-      saved: 'Test was saved.'
-      deleted: 'Test deleted.'
-      hidden: "You can't see this test"
-      frozen: 'Adding test is not allowd'
-      nodelete: "You can't delete this test"
-    contests:
-      create: 'Contest created.'
-      update: 'Contest was updated.'
-      destroy: 'Contest was deleted.'
-    no_contestants: 'Nobody found!'
+    password_updated: "Your password was successfully updated!"
+    please_login: "Please login in order to %{message}"
     problems:
       create: 'Problem added. Do you want to add some tests for it?'
-      update: 'Problem updated.'
-      destroy: 'Problem deleted.'
       check: "All solutions were sent for rejudging."
+      destroy: 'Problem deleted.'
+      update: 'Problem updated.'
+    rate_limited: "You post too many comments! Please wait for 10 seconds."
+    search_result_empty: "Nothing found. Maybe you should change your query?"
     solutions:
-      empty: 'Noone solved this problem for now'
       create: 'Solution successfully uploaded.'
+      empty: 'Noone solved this problem for now'
       update: 'Solution was updated.'
+    search_syntax_error: >-
+      You search has sytax error: <strong>%{query}</strong><br/>
+      Syntax examples can be found <a href="http://sphinxsearch.com/docs/archives/1.10/extended-syntax.html">here</a>.
+    test:
+      deleted: 'Test deleted.'
+      frozen: 'Adding test is not allowed'
+      hidden: "You can't see this test"
+      nodelete: "You can't delete this test"
+      saved: 'Test was saved.'
+    user_not_found_by_email: "User with such email was not found."
     user_sessions:
       destroy: "You have logged out"
     users:
       create: "You have successfully registered!"
       update: "Your profile was updated!"
-    access_denied: "Access denied: %{message}"
-    please_login: "Please login in order to %{message}"
   notifier:
     password_reset_instructions:
       subject: "[%{site}] Password Reset instruction"
