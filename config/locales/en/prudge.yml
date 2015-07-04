@@ -178,77 +178,77 @@ en:
   problem_tests:
     common: &tests-common
       delete?: "Really want to delete the test?"
-      test: Test
-      tests: Tests
       input: Input
       output: Output
+      test: Test
+      tests: Tests
     edit:
       title: Тэстийг засварлах
       <<: *tests-common
     index:
-      title: '%{subject}'
       add-new-test: "Add New Test"
+      title: '%{subject}'
       <<: *tests-common
     show:
-      title: Test
       other: Other Tests
+      title: Test
       <<: *tests-common
     new:
-      title: Adding a Test
       add_new_test: Add New Test
       new_test: New Test
-      this_is_hidden_test: This is hidden test
       save: Save
+      title: Adding a Test
+      this_is_hidden_test: This is hidden test
       <<: *tests-common
   problems:
+    edit:
+      problem_tests: 'Problem tests'
+      title: '%{subject} · Edit'
+    form:
+      contest: Contest
+      <<: *shared-problem
     index:
-      title: "All Problems"
       problems: Problems
+      title: "All Problems"
+    new:
+      title: "Propose a problem"
+    profile:
+      <<: *shared-problem
     proposed:
       title: "Proposed Problems"
       limits: "Limits"
       <<: *shared-problem
     show:
-      title: '%{subject}'
       author: 'from %{author}'
       contest: 'brought to %{contest} by %{author}'
       my_solution: "My Solution"
+      source: "Source: %{source}"
       statement: "Statement"
       submissions: "Submissions"
-      source: "Source: %{source}"
-    new:
-      title: "Propose a problem"
-    edit:
-      title: '%{subject} · Edit'
-      problem_tests: 'Problem tests'
-    form:
-      contest: Contest
-      <<: *shared-problem
-    profile:
-      <<: *shared-problem
+      title: '%{subject}'
   results:
     common: &results-common
-      run-time: Time
       run-memory: Memory
       run-status: Status
-    show:
-      title: Test result
-      coder: Coder
-      souce: Source Code
-      submitted: Submitted
-      result: Result
-      program: Program
-      time: Time
-      memory: Memory
-      input: Input
-      output: Output
-      correct: Correct
+      run-time: Time
     list:
+      compiler_output: Compiler Output
       delete?: "Really want to delete?"
       wait-checking: "Please wait or solve other problems while your solution is being checked..."
-      compiler_output: Compiler Output
       <<: *shared-solution
       <<: *results-common
+    show:
+      coder: Coder
+      correct: Correct
+      input: Input
+      memory: Memory
+      output: Output
+      program: Program
+      result: Result
+      souce: Source Code
+      submitted: Submitted
+      time: Time
+      title: Test result
   search:
     index:
       title: Search Results
@@ -256,21 +256,21 @@ en:
     common: &shared-common
       delete?: "Really want to delete?"
     problem: &shared-problem
-      date: "Date"
       author: "Author"
-      source: "Source"
-      problem-name: "Name"
-      points: "Points"
+      date: "Date"
       difficulty: "Difficulty"
-      time-limit: "Time Limit"
       memory-limit: "Memory Limit"
-      test-count: "Number of Tests"
+      points: "Points"
       pass-try-ratio: "Accepted/All"
+      problem-name: "Name"
+      source: "Source"
+      test-count: "Number of Tests"
+      time-limit: "Time Limit"
     solution: &shared-solution
+      avg-time: Time Taken
       coder: Coder
       source: Source Code
       submitted: Submitted
-      avg-time: Time Taken
       taken-points: Points
   solutions:
     common: &solutions-common
