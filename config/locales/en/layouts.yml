@@ -1,16 +1,16 @@
 en:
   layouts:
     application:
-      contests: Contests
-      problems: Problems
+      about: About
+      account: Account
       blogs: Blogs
       coders: Coders
-      login: Login
-      signup: Register
-      about: About
+      contests: Contests
+      dashboard: Dashboard
       help: Help
       issues: Issues
-      account: Account
-      preferences: Preferences
-      dashboard: Dashboard
+      login: Login
       logout: Logout
+      preferences: Preferences
+      problems: Problems
+      signup: Register
