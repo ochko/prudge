@@ -13,18 +13,27 @@ en:
     commentable:
       add-comment: "Add a Comment"
     index:
+      delete?: "Really want to delete?"
       title: Latest Comments
-      <<: *shared-common
     moderate:
       title: Moderate
   contests:
     common: &contest-common
+      author: "Author"
+      date: "Date"
+      delete?: "Really want to delete?"
+      difficulty: "Difficulty"
       end_time: "End Time"
       level: "Level"
+      memory-limit: "Memory Limit"
       name: "Name"
+      points: "Points"
+      pass-try-ratio: "Accepted/All"
+      problem-name: "Name"
+      source: "Source"
       start_time: "Start Time"
-      <<: *shared-common
-      <<: *shared-problem
+      test-count: "Number of Tests"
+      time-limit: "Time Limit"
     edit:
       title: '%{subject} · Edit'
       <<: *contest-common
@@ -205,19 +214,46 @@ en:
       problem_tests: 'Problem tests'
       title: '%{subject} · Edit'
     form:
+      author: "Author"
       contest: Contest
-      <<: *shared-problem
+      date: "Date"
+      difficulty: "Difficulty"
+      memory-limit: "Memory Limit"
+      points: "Points"
+      pass-try-ratio: "Accepted/All"
+      problem-name: "Name"
+      source: "Source"
+      test-count: "Number of Tests"
+      time-limit: "Time Limit"
     index:
       problems: Problems
       title: "All Problems"
     new:
       title: "Propose a problem"
     profile:
-      <<: *shared-problem
+      author: "Author"
+      date: "Date"
+      difficulty: "Difficulty"
+      memory-limit: "Memory Limit"
+      points: "Points"
+      pass-try-ratio: "Accepted/All"
+      problem-name: "Name"
+      source: "Source"
+      test-count: "Number of Tests"
+      time-limit: "Time Limit"
     proposed:
-      title: "Proposed Problems"
+      author: "Author"
+      date: "Date"
+      difficulty: "Difficulty"
       limits: "Limits"
-      <<: *shared-problem
+      memory-limit: "Memory Limit"
+      points: "Points"
+      pass-try-ratio: "Accepted/All"
+      problem-name: "Name"
+      source: "Source"
+      test-count: "Number of Tests"
+      time-limit: "Time Limit"
+      title: "Proposed Problems"
     show:
       author: 'from %{author}'
       contest: 'brought to %{contest} by %{author}'
@@ -232,10 +268,14 @@ en:
       run-status: Status
       run-time: Time
     list:
+      avg-time: Time Taken
+      coder: Coder
       compiler_output: Compiler Output
       delete?: "Really want to delete?"
+      source: Source Code
+      submitted: Submitted
+      taken-points: Points
       wait-checking: "Please wait or solve other problems while your solution is being checked..."
-      <<: *shared-solution
       <<: *results-common
     show:
       coder: Coder
@@ -289,8 +329,8 @@ en:
     new:
       title: Submitting a Solution
     show:
+      solution: Solution
       title: '%{subject} · Edit'
-      <<: *solutions-common
     view:
       coder: Coder
       compiler_output: Compiler output
@@ -359,8 +399,17 @@ en:
       sign_in_using_social_network: Sign In Using Social Network
       title: Registration
     problems:
+      author: "Author"
+      date: "Date"
+      difficulty: "Difficulty"
+      memory-limit: "Memory Limit"
       new: "Propose a problem"
-      <<: *shared-problem
+      points: "Points"
+      pass-try-ratio: "Accepted/All"
+      problem-name: "Name"
+      source: "Source"
+      test-count: "Number of Tests"
+      time-limit: "Time Limit"
     show:
       achievements: Achievments
       connect: Connect
