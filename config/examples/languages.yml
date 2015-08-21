@@ -35,3 +35,9 @@
   name: Go
   compiler: /opt/go/bin build -o %{output} %{source}
   description: go version go1.4.2
+-
+  name: 'Mono'
+  compiler: gmcs -out:Program.exe -target:exe %{source} && mkbundle Program.exe --deps --static -o Program.c -oo Program.o -c && cc -ggdb -o %{output} -Wall Program.c -I/usr/include/mono-2.0 -L/usr/lib -lmono-2.0 -lm Program.o
+  extension: '.cs'
+  memory: 14000
+  description: "Mono compiler"
