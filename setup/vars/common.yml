@@ -14,5 +14,7 @@ unicorn_workers: 2
 unicorn_listen: /tmp/unicorn-prudge.sock
 # unicorn_listen: 127.0.0.1:3000
 
-mail_delivery: sendmail
-# mail_delivery: smtp
+# mail_delivery: sendmail
+mail_delivery: smtp
+mail_user_name: your-app@gmail.com
+mail_password: your-password

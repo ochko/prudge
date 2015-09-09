@@ -12,6 +12,6 @@ smtp_settings:
   port: 587
   authentication: plain
   enable_starttls_auto: true
-  user_name: example@gmail.com
-  password: secret
+  user_name: {{ mail_user_name }}
+  password: {{ mail_password }}
 {%- endif -%}
