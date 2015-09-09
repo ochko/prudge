@@ -29,6 +29,14 @@ $ cd setup
 $ ansible-playbook -i server.info -u yourlogin --become --ask-become-pass site.yml --extra-vars "user=yourlogin"
 ```
 
+### Troubleshooting
+
+If you got `/usr/bin/python: not found` error then set python interpreter like:
+```
+ansible-playbook -i server.info -u yourlogin --become --ask-become-pass site.yml -e "user=yourlogin" -e "ansible_python_interpreter=/usr/local/bin/python2"
+```
+
+
 ## Manual install
 
 You can install prudge manually if ansible playbook is not available for your platform or simply you don't want to use ansible.
