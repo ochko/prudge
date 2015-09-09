@@ -48,7 +48,7 @@ set :linked_dirs, fetch(:linked_dirs, []).push(
       'judge/sandbox',
       'judge/solutions',
       'log',
-      'sphinx',
+      'db/sphinx',
       'tmp/pids',
       'tmp/cache',
       'tmp/sockets',
@@ -71,6 +71,7 @@ set :conditionally_migrate, true
 
 # capistrano-bundler
 set :bundle_jobs, 2
+set :bundle_path, '/usr/local/apps/gems/'
 
 namespace :deploy do
   desc 'Restart application'
